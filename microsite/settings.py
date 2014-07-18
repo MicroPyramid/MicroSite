@@ -43,9 +43,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'micropyramidcom.urls'
+ROOT_URLCONF = 'microsite.urls'
 
-WSGI_APPLICATION = 'micropyramidcom.wsgi.application'
+WSGI_APPLICATION = 'microsite.wsgi.application'
 
 
 # Database
