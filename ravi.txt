@@ -1,4 +1,0 @@
-0. hi this is collaborative development
-1. this is for testing
-2. testing 2.
-3.django
