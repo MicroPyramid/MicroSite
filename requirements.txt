@@ -1,0 +1,5 @@
+Django==1.6.5
+Pillow==2.5.1
+argparse==1.2.1
+sorl-thumbnail==11.12
+wsgiref==0.1.2
