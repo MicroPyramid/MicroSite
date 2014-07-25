@@ -1,0 +1,60 @@
+{
+  "name": "postcss",
+  "version": "1.0.0",
+  "description": "Framework for CSS postprocessors with full source map support",
+  "keywords": [
+    "css",
+    "parser",
+    "postproccessor",
+    "source map"
+  ],
+  "author": {
+    "name": "Andrey Sitnik",
+    "email": "andrey@sitnik.ru"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ai/postcss.git"
+  },
+  "dependencies": {
+    "source-map": "~0.1.34",
+    "base64-js": "~0.0.7"
+  },
+  "devDependencies": {
+    "fs-extra": "0.9.1",
+    "gonzales": "1.0.7",
+    "rework": "1.0.0",
+    "should": "4.0.4",
+    "mocha": "1.20.1",
+    "cssom": "0.3.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "main": "lib/postcss",
+  "bugs": {
+    "url": "https://github.com/ai/postcss/issues"
+  },
+  "homepage": "https://github.com/ai/postcss",
+  "_id": "postcss@1.0.0",
+  "_shasum": "fae1baba117e3811f4a7f0a97658fd9db57db1da",
+  "_from": "postcss@~1.0.0",
+  "_npmVersion": "1.4.10",
+  "_npmUser": {
+    "name": "ai",
+    "email": "andrey@sitnik.ru"
+  },
+  "maintainers": [
+    {
+      "name": "ai",
+      "email": "andrey@sitnik.ru"
+    }
+  ],
+  "dist": {
+    "shasum": "fae1baba117e3811f4a7f0a97658fd9db57db1da",
+    "tarball": "http://registry.npmjs.org/postcss/-/postcss-1.0.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/postcss/-/postcss-1.0.0.tgz"
+}
