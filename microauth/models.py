@@ -16,11 +16,10 @@ USER_ROLES = (
               ('Developer', 'Developer'),
               ('Employee', 'Employee'), # Employee
               )
-    
-    
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
-        
+
         if not email:
             raise ValueError('Users must have an email address')
         c = ContactDetails.objects.create(address='')
@@ -30,14 +29,14 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password):
-        
+
         user = self.create_user(email, password=password)
         user.is_admin = True
         user.is_active = True
         user.save(using=self._db)
         return user
 
-    
+
 class User(AbstractBaseUser):
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True, db_index=True,)
     user_roles = models.CharField(choices=USER_ROLES, max_length=10)
@@ -61,19 +60,18 @@ class User(AbstractBaseUser):
     website = models.URLField(default='',null=True)
     phones = models.TextField(max_length=100, default='',null=True)
     pincode = models.TextField(max_length=50, default='',null=True)
-    
-    
+
     groups = models.ManyToManyField(Group, verbose_name=_('groups'), 
         related_name='user_groups',
         blank=True, help_text=_('The groups this user belongs to. A user will '
                                 'get all permissions granted to each of '
                                 'his/her group.'))
-    
+
     user_permissions = models.ManyToManyField(Permission,
         verbose_name=_('user permissions'), blank=True,
         related_name='user_permissions',
         help_text='Specific permissions for this user.')
-    
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -101,6 +99,6 @@ class User(AbstractBaseUser):
     class Meta:
         permissions = (
             ("blog_moderator", "Can enable or disable blog posts"),
-            ("blogger", "Can write blog posts"),            
+            ("blogger", "Can write blog posts"),
         )
 
