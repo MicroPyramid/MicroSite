@@ -26,7 +26,6 @@ INSTALLED_APPS = (
     'pages',
     'payroll',
     'south',
-    'pillow',
     'sorl.thumbnail',
 )
 
