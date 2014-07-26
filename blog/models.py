@@ -14,7 +14,8 @@ class Post(models.Model):
 					('P','Published'),
 					('T','Trash'),
 					)
-	title = models.CharField(max_length=150)
+
+	title = models.CharField(max_length=100)
 	slug = models.SlugField()
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateField(auto_now = True)
