@@ -1,0 +1,11 @@
+Gulp GULP
+
+   Main aim of gulp is task runner. it reduces the human effort.
+
+   by gulp u can combine all javascript, jquery, to single file and u can find any mistacs in ur file.
+
+   Gulp also convert less files to css files.. etc..
+
+   we can do all this by assigning the tasks to gulp
+
+   gulp need pluggins to run the tasks so u have to first install all those pluggins using npm command. this pluggins automatically strored in node_modules folder
