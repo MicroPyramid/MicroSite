@@ -1,23 +1,15 @@
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -26,12 +18,15 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mpadmin',
+    'microauth',
     'microsite',
+    'projects',
     'blog',
-    'docs',
+    'pykb',
     'pages',
+    'payroll',
     'south',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -46,10 +41,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'microsite.urls'
 
 WSGI_APPLICATION = 'microsite.wsgi.application'
+AUTH_USER_MODEL = 'microauth.User'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -58,8 +51,6 @@ DATABASES = {
     }
 }
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -71,8 +62,5 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
