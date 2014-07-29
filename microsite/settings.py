@@ -22,7 +22,7 @@ INSTALLED_APPS = (
     'microsite',
     'projects',
     'blog',
-    'pykb',
+    'microkb',
     'pages',
     'payroll',
     'south',
