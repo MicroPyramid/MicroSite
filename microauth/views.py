@@ -32,4 +32,4 @@ def out(request):
 		return HttpResponse('')
 
 	logout(request)
-	return HttpResponseRedirect('/administrator/')
+	return HttpResponseRedirect('/portal/')

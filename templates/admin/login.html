@@ -34,7 +34,7 @@
                     <!-- Login Form Starts Here -->
                     <div class="panel panel-default login-form">
                       <div class="panel-body">
-                        <form id="loginform" role="form" action="/administrator/">{% csrf_token %}
+                        <form id="loginform" role="form" action="/portal/">{% csrf_token %}
                           <div class="form-group">
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
                           </div>
@@ -108,7 +108,7 @@ printer took a galley of type and scrambled it. </p>
 
 $(".login").click(function(e) {
   e.preventDefault();
-  $.post("/administrator/", $("form#loginform").serialize(), function(data) {
+  $.post("/portal/", $("form#loginform").serialize(), function(data) {
     if (data.error){
       $("p.error").remove();
       $("#error").prepend("<p class='error'>"+data.message+"</p>");
