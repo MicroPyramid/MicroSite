@@ -22,8 +22,7 @@ class UserManager(BaseUserManager):
 
         if not email:
             raise ValueError('Users must have an email address')
-        c = ContactDetails.objects.create(address='')
-        user = self.model(email=EUserManager.normalize_email(email))
+        user = self.model(email=UserManager.normalize_email(email))
         user.set_password(password)
         user.save(using=self._db)
         return user

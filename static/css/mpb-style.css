@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0px;
+	padding:0px;
+	font-size:14px;
+	color:#fff;
+	font-family: 'Lato', sans-serif;
+	background: #2b95d1;
+	height:100%;
+	}
+.fn12{
+	font-size:12px;
+	font-weight:normal;
+	}
+.fn13{
+	font-size:13px;
+	font-weight:normal;
+	}
+.fn14{
+	font-size:14px;
+	font-weight:normal;
+	}
+.fb12{
+	font-size:12px;
+	font-weight:bold;
+	}
+.fb13{
+	font-size:13px;
+	font-weight:bold;
+	}
+.fb14{
+	font-size:14px;
+	font-weight:bold;
+	}
+.fb15{
+	font-size:15px;
+	font-weight:bold;
+	}
+.tup{
+	text-transform:uppercase;
+	}
+.pull-right{
+	float:right;
+	}
+.pull-left{
+	float:left;
+	}
+img, img.scale-with-grid {
+	outline: 0;
+	max-width: 100%;
+	height: auto;
+	}
+#wrapper{}
+.row{width:100%;}
+.marl{margin-left:0px;
+margin-right:0px;
+}
+.logo-row{
+	background:#3d464b;
+	padding:8px 0px;	
+}
+.logo-row .logo{
+	font-weight:bold;
+	color:White;
+	font-size:30px;
+	text-shadow:1px 3px 6px #222;
+	}
+.logo-row .logo span{
+	display:inline-block;
+	color:#2b95d2;
+}
+.logo-row .date-det{
+	text-align:right;
+	font-weight:600;
+	font-size:12px;	
+	padding-top:12px;
+}
+.logo-row .date-det .tdy-date{
+	margin-left:13px;
+	}
