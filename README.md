@@ -1,8 +1,9 @@
-### MicroSite
+MicroSite
+=========
 
 Full featured and completely customizable django site for organizations.
 
-# This is intended to host the following in the site
+#### This is intended to host the following in the site
 1. Static Pages.
 2. Configurable Menu.
 3. Blog.
