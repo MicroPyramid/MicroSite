@@ -30,5 +30,5 @@ def out(request):
 	if not request.user.is_authenticated():
 		return HttpResponse('')
 
-def logout(request)
+	logout(request)
 	return HttpResponseRedirect('/')
