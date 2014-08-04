@@ -9,6 +9,8 @@ from microsite.settings import BASE_DIR
 #@csrf_protect
 def index(request):
 	if request.user.is_authenticated():
+		print reverse('blogindex')
+		print 'x'
 		return render_to_response('admin/index.html')
 	if request.method=="POST":
 		user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
