@@ -18,7 +18,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'microauth',
+    'microadmin',
     'microsite',
     'projects',
     'blog',
@@ -41,7 +41,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'microsite.urls'
 
 WSGI_APPLICATION = 'microsite.wsgi.application'
-AUTH_USER_MODEL = 'microauth.User'
+AUTH_USER_MODEL = 'microadmin.User'
 
 
 DATABASES = {
