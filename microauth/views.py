@@ -3,9 +3,10 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
 from django.contrib.auth import login, authenticate, logout
 import json
+from microsite.settings import BASE_DIR
 
 
-@csrf_protect
+#@csrf_protect
 def index(request):
 	if request.user.is_authenticated():
 		return render_to_response('admin/index.html')
@@ -21,9 +22,9 @@ def index(request):
 			data = {'error':True,'message':"The username and password were incorrect."}
 		return HttpResponse(json.dumps(data))
 	else:
-    	data = {}
-    	data.update(csrf(request))
-    	return render_to_response('site/login.html',data)
+	    	data = {}
+	    	data.update(csrf(request))
+	    	return render_to_response('admin/login.html',data)
 
 
 def out(request):
@@ -31,4 +32,4 @@ def out(request):
 		return HttpResponse('')
 
 	logout(request)
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/portal/')

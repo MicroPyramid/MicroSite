@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 
 
-class Technology(models.Model)
+class Technology(models.Model):
 	name = models.CharField(max_length=100)
 
 class Project(models.Model):
@@ -11,9 +11,9 @@ class Project(models.Model):
 	slug = models.SlugField()
 	notes = models.TextField()
 	technologies = models.ManyToManyField(Technology)
-	team_members = models.ManyToManyField(settings.AUTH_USER_MODEL)
+	team_members = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='team_member')
 	start_date = models.DateField()
 	end_date = models.DateField()
-	project_lead = models.ManyToManyField(settings.AUTH_USER_MODEL)
-	created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+	project_lead = models.ManyToManyField(settings.AUTH_USER_MODEL,related_name='project_lead')
+	created_by = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='created_by')
 

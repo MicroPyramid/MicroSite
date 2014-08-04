@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+ 
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px)  {
+
+
+ }
+@media (min-width: 992px)  and (max-width :1199px) { 
+
+}
+	
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width :991px) { 
+
+}
+
+@media (min-width: 481px) and (max-width: 767px){
+.logo-row{
+	padding:0px;	
+}
+.logo-row .container{
+	padding:0px;	
+}
+.logo-row .logo{
+	display:block;
+	text-align:center;	
+	padding:4px 0px;
+}
+.logo-row .date-det{
+	display:block;
+	text-align:center;	
+	background:#333b3f;
+	padding:0px;
+	padding:12px 0px;
+	margin-top:6px;
+}
+}

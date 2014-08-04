@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Micro Pyramid Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
+        <link type="text/css" href="/static/css/mpbi-style.css" rel="stylesheet"/>
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        
+</head>
+
+<body>
+  
+    <!-- Body Starts Here -->
+    <div id="wrapper">
+          <!-- Login Row Starts Here -->
+          <div class="row marl login-row">
+              <!-- Login left Starts Here -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 login-left">
+                    
+                    <div class="logo">Micro <span>Pyramid</span></div>
+                    <div class="form-heading">Company Employee Login</div>
+                    <div id="error">
+                    </div>
+
+                    <!-- Login Form Starts Here -->
+                    <div class="panel panel-default login-form">
+                      <div class="panel-body">
+                        <form id="loginform" role="form" action="/portal/">{% csrf_token %}
+                          <div class="form-group">
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                          </div>
+                          <div class="form-group">
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                          </div>
+                          <div class="forgot-submit">
+                          <span class="forgot"><a href="#">Forgot Password?</a></span>
+                          <span class="submit"><a class='login' href="#">Sign In</a></span>
+                          </div>
+                       </form>
+                      </div>
+                    </div>
+                    <!-- Login Form ends Here -->
+                   
+              </div>
+              <!-- Login left ends Here -->
+              
+              <!-- Login right Starts Here -->
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 login-right">
+              <!-- Login right blocks starts Here -->
+              <div id="login-r8-blocks">
+                  <div class="panel panel-default login-r8-block">
+                      <div class="panel-body">
+                        <div class="login-r8-icon"><i class="fa fa-money"></i></div>
+                        <div class="login-r8-head-desc">
+                          <h4 class="tup">Payroll</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+has been the industry's standard dummy text ever since the 1500s, when an unknown 
+printer took a galley of type and scrambled it to make a type specimen book. I into electronic
+typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    
+                    <div class="panel panel-default login-r8-block">
+                      <div class="panel-body">
+                        <div class="login-r8-icon"><i class="fa fa-file-text"></i> </div>
+                        <div class="login-r8-head-desc">
+                          <h4 class="tup">Knowledge base</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+has been the industry's standard dummy text ever since the 1500s,  it to make a type specimen book. I into electronic
+typesetting, remaining essentially unchanged. </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default login-r8-block">
+                      <div class="panel-body">
+                        <div class="login-r8-icon"><i class="fa fa-bar-chart-o"></i> </div>
+                        <div class="login-r8-head-desc">
+                          <h4 class="tup">Projects</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+has been the industry's standard dummy text ever since the 1500s, when an unknown 
+printer took a galley of type and scrambled it. </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                </div>
+             <!-- Login right blocks ends Here -->  
+            </div>
+             <!-- Login right ends Here -->
+            
+          </div>
+          <!-- Login Row Starts Here -->
+    </div>
+  <!-- Body Ends Here -->
+
+<script type="text/javascript">
+
+$(".login").click(function(e) {
+  e.preventDefault();
+  $.post("/portal/", $("form#loginform").serialize(), function(data) {
+    if (data.error){
+      $("p.error").remove();
+      $("#error").prepend("<p class='error'>"+data.message+"</p>");
+    }else{
+      window.location = '.' ; 
+    }
+    
+    
+  }, 'json');
+  
+});
+
+</script>
+
+    
+    
+</body>
