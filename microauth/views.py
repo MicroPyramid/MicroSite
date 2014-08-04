@@ -22,9 +22,9 @@ def index(request):
 			data = {'error':True,'message':"The username and password were incorrect."}
 		return HttpResponse(json.dumps(data))
 	else:
-	    	data = {}
-	    	data.update(csrf(request))
-	    	return render_to_response('admin/login.html',data)
+		data = {}
+		data.update(csrf(request))
+		return render_to_response('admin/login.html',data)
 
 
 def out(request):
