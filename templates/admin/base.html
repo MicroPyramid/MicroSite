@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> MicroPyramid </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
+<link type="text/css" href="/static/admin/css/style.css" rel="stylesheet"/>
+<link type="text/css" href="/static/admin/css/mobile.css" rel="stylesheet"/>
+<link type="text/css" href="/static/admin/css/responsive.css" rel="stylesheet"/>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<div id="wrapper">
+    <header>
+      <div class="row marl logo-sign-row">
+        <div class="container">
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">MicroPyramid</a>
+              </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/portal/">Home</a></li>
+                  <li><a href="/portal/users/">Users</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/portal/menu/">Menu</a></li>
+                      <li><a href="/portal/pages/">Pages</a></li>
+                      <li><a href="/portal/jobs/">Jobs</a></li>
+                      <li><a href="/portal/contacts/">Contacts</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="/portal/projects">Projects</a></li>
+                  <li><a href="/portal/blog/">Blog</a></li>
+                  <li><a href="/portal/staffzone/">Staff Zone</a></li>
+                  <li><a href="/portal/kb/">KB</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Profile</a></li>
+                      <li><a href="#">Settings</a></li>
+                      <li><a href="#">Change Password</a></li>
+                      <li><a href="/portal/out/">Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </div>
+      </div>
+    </header>
+
+{% block stage %}
+{% endblock %}
+
+  </div>
+</body>
+</html>
