@@ -22,7 +22,7 @@ class Doc(models.Model):
 	class Meta:
 		unique_together = ('slug', 'category')
 
-    
+
 # class Resources(models.Model):
 # 	name
 # 	res_type
