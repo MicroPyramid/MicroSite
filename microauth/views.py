@@ -32,3 +32,17 @@ def out(request):
 
 	logout(request)
 	return HttpResponseRedirect('/')
+def permission(request):
+	permission = Permission.objects.get(codename='change_content'.name='changecontent')
+    user.User_permissions.add(permission)
+    if request.User.user_roles=='Admin':
+		if request.User.has_perm(microauth.blog_moderator_User):
+			return HttpResponse('moderator')
+		elif request.User.has_perm(microauth.blogger_User):
+			return HttpResponse('BLOGGER')
+		elif request.User.has_perm(microauth.can write bllog posts_User):
+			return HttpResponse('POSTS')
+		elif request.User.has_perm(microauth.can enable or disable blog posts_User):
+			return HttpResponse('super')
+	elif request.User.user_roles=='Employee':
+				
