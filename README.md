@@ -44,23 +44,40 @@ view it in browser
 Introduction to gulpjs
 
 Gulp GULP
+  
+   To install Gulp using npm:
+   		'$sudo npm install gulp'
 
-   Gulp is task runner.
-
-   by gulp u can combine all javascript, jquery, to single file and u can find any mistakes in ur file.
-
-   Gulp also convert less files to css files.. etc..
-
-   we can do all this by assigning the tasks to gulp
-
-   gulp need pluggins to run the tasks so u have to first install all those pluggins using npm command. this pluggins automatically strored in node_modules folder
-
-   install Gulp using npm:
-   		npm install gulp
+   If u want to install gulp in vertual environment just remove sudo in above command
+         '$npm install gulp'
    
    To install Gulp pluggines use
    		
-   		npm install pluggin_name
-   		ex: npm install gulp-minify-css.
+   		'$npm install pluggin_name'
+   		ex: 'npm install gulp-minify-css'
 
-   
+   To include gulp in gulpfile.js
+
+      // Including gulp
+         var gulp = require('gulp'); 
+
+   To include gulpluggines in gulpfile.js
+
+         var pluggin_name = require('pluggin_name');
+
+         ex: var concat = require('gulp-concat');
+
+   To define task in gulpfile.js;
+
+      gulp.task('scripts', function() {
+         #your code here
+
+      )}
+
+   To run gulp default task;
+      '$ gulp'
+
+   to run specific task;
+      '$ gulp task_name'
+      ex: '$gulp css'
+
