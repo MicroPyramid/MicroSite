@@ -6,15 +6,14 @@
       <div class="row marl">
       	<div class="container">
 			<div class="row marl prof-table site-table">
-            	<div class="prop-count"><span><a href="{% url 'blog:new' %}"><i class="fa fa-plus"></i> Create Blog Post</a></span></div>
+            	<div class="prop-count"><span><a href="{% url 'pages:new' %}"><i class="fa fa-plus"></i> Add New Page </a></span></div>
                 <div class="table-responsive">
                         <table class="table table-striped">
                               <thead>
                                 <tr>
                                   <th>No.</th>
                                   <th>Title</th>
-                                  <th class="hidden-xs">Author</th>
-                                  <th class="hidden-xs">Published</th>
+                                  <th class="hidden-xs">Slug</th>
                                   <th>Status</th>
                                   <th>Edit / Delete</th>
                                 </tr>
@@ -24,7 +23,6 @@
                                   <td>1</td>
                                   <td><a href="#" class="prop-name">Title</a></td>
                                   <td class="hidden-xs">Author</td>
-                                  <td class="hidden-xs">Pub Datetime</td>
                                   <td><a href="#" class="prop-name">Status</a></td>
                                   <td><a href="#" class="prop-edit"><i class="fa fa-pencil-square-o"></i> </a> / <a href="#" class="prop-del"><i class="fa fa-trash-o"></i>  </a></td>
                                 </tr>

@@ -69,6 +69,15 @@ STATICFILES_DIRS = (BASE_DIR + '/static',)
 
 TEMPLATE_DIRS = (BASE_DIR +'/templates',)
 
+TEMPLATE_LOADERS = (
+    ("django.template.loaders.cached.Loader", (
+        "django.template.loaders.filesystem.Loader",
+        "django.template.loaders.app_directories.Loader",
+    )),
+)
+
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

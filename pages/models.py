@@ -1,11 +1,29 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 class page(models.Model):
 	title = models.CharField(max_length=100, null=True, blank=True)
 	content = models.TextField(max_length=20000)
 	category = models.CharField(max_length=50)
+	status = models.CharField(max_length=5, default="on", blank=True)
 	slug = models.SlugField()
+
+	def save(self, *args, **kwargs):
+		tempslug = slugify(self.title)
+		slugcount = 0
+		while True:
+			try:
+				page.objects.get(slug = tempslug)
+				slugcount = slugcount + 1
+				tempslug = slugify(self.title) + '-' + str(slugcount)
+			except:
+				self.slug = tempslug
+				break
+				
+		super(page, self).save(*args, **kwargs)
+
+
 
 class contact(models.Model):
 	CONTACT_TYPES = (
@@ -52,3 +70,14 @@ class contact(models.Model):
 	enquery_type = models.CharField(max_length=100, choices=ENQUERY_TYPES)
 	callback_time = models.DateTimeField()
 	timezone = models.CharField(max_length=10)
+
+
+class Menu(models.Model):
+    parent = models.ForeignKey('self', blank=True, null=True)
+    title = models.CharField(max_length=255)
+    url = models.URLField(max_length=255)
+    target = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add = True)
+    updated = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=5, default="on", blank=True)
+    lvl = models.IntegerField()
