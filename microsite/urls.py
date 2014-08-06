@@ -2,8 +2,9 @@ from django.conf.urls import patterns, include, url
 
 
 urlpatterns = patterns('',
-    url(r'^blog/', include('blog.urls', namespace='blog')),
+    
     url(r'^portal/', include('microadmin.urls', namespace='microadmin')),
+    url(r'^proposal/blog/', include('blog.urls', namespace='blog')),
     url(r'^portal/pages/', include('pages.urls', namespace='pages')),
     url(r'^portal/projects/', include('projects.urls', namespace='projects')),
     url(r'^portal/staff/', include('payroll.urls', namespace='payroll')),

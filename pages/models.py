@@ -6,10 +6,21 @@ class page(models.Model):
 	title = models.CharField(max_length=100, null=True, blank=True)
 	content = models.TextField(max_length=20000)
 	category = models.CharField(max_length=50)
+	status = models.CharField(max_length=5, default="on", blank=True)
 	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(self.title)
+		tempslug = slugify(self.title)
+		slugcount = 0
+		while True:
+			try:
+				page.objects.get(slug = tempslug)
+				slugcount = slugcount + 1
+				tempslug = slugify(self.title) + '-' + str(slugcount)
+			except:
+				self.slug = tempslug
+				break
+				
 		super(page, self).save(*args, **kwargs)
 
 

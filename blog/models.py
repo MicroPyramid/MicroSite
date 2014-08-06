@@ -3,10 +3,10 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 
 class Category(models.Model):
-	name = models.CharField(max_length=20)
+	name = models.CharField(max_length=20, unique = True)
 
 class Tags(models.Model):
-	name = models.CharField(max_length=20)
+	name = models.CharField(max_length=20, unique = True)
 
 class Post(models.Model):
 	STATUS_CHOICE = (
@@ -34,6 +34,17 @@ class Post(models.Model):
 	    return self.user.google_plus_url
 
 	def save(self, *args, **kwargs):
-		self.slug = slugify(self.title)
+		tempslug = slugify(self.title)
+		slugcount = 0
+		while True:
+			try:
+				Post.objects.get(slug = tempslug)
+				slugcount = slugcount + 1
+				tempslug = slugify(self.title) + '-' + str(slugcount)
+			except:
+				self.slug = tempslug
+				break
+				
 		super(Post, self).save(*args, **kwargs)
+
 	
