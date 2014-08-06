@@ -16,7 +16,7 @@ class Post(models.Model):
 					)
 
 	title = models.CharField(max_length=100)
-	slug = models.SlugField()
+	slug = models.SlugField(max_length=100)
 	created_on = models.DateTimeField(auto_now_add=True)
 	updated_on = models.DateField(auto_now = True)
 	user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -33,7 +33,7 @@ class Post(models.Model):
 	def set_slug(self, slugtext):
 	    return self.user.google_plus_url
 
-	@property
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
-		# finish this function with proper slug
+		super(Post, self).save(*args, **kwargs)
+	

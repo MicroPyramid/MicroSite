@@ -1,6 +1,5 @@
 from django.shortcuts import render_to_response
+from django.http.response import HttpResponse
 
-
-
-def index(request):
-	return render_to_response('docs/index.html')
+def knowledgebase(request):
+	return HttpResponse('no design')
