@@ -2,37 +2,42 @@
 
 {% block stage %}
 
-      <div class="row marl top-row">
-      <div class="row marl">
-      	<div class="container">
-			<div class="row marl prof-table site-table">
-            	<div class="prop-count"><span><a href="/portal/blog/new/"><i class="fa fa-plus"></i> Create Blog Post</a></span></div>
-                <div class="table-responsive">
-                        <table class="table table-striped">
-                              <thead>
-                                <tr>
-                                  <th>No.</th>
-                                  <th>Title</th>
-                                  <th class="hidden-xs">Author</th>
-                                  <th class="hidden-xs">Published</th>
-                                  <th>Status</th>
-                                  <th>Edit / Delete</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td><a href="#" class="prop-name">Title</a></td>
-                                  <td class="hidden-xs">Author</td>
-                                  <td class="hidden-xs">Pub Datetime</td>
-                                  <td><a href="#" class="prop-name">Status</a></td>
-                                  <td><a href="#" class="prop-edit"><i class="fa fa-pencil-square-o"></i> </a> / <a href="#" class="prop-del"><i class="fa fa-trash-o"></i>  </a></td>
-                                </tr>
-                              </tbody>
-                            </table>
-               </div>
-            </div>
-		</div>
+  <div class="row marl top-row">
+    <div class="row marl">
+      <div class="container">
+        <div class="row marl prof-table site-table">
+          <div class="prop-count">
+            <span><a href="/portal/blog/new/"><i class="fa fa-plus"></i> Create Blog Post</a></span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Title</th>
+                  <th class="hidden-xs">Author</th>
+                  <th class="hidden-xs">Published</th>
+                  <th>Status</th>
+                  <th>Edit / Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in blog_list %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td><a href="#" class="prop-name">{{i.title}}</a></td>
+                  <td class="hidden-xs">{{i.user.email}}</td>
+                  <td class="hidden-xs">{{i.created_on|date:"F j, Y," }}{{i.created_on|time:"H:i A" }}</td>
+                  <td><a href="{{i.status}}" class="prop-name">{{i.status}}</a></td>
+                  <td><a href="#" class="prop-edit"><i class="fa fa-pencil-square-o"></i> </a> / <a href="#" class="prop-del"><i class="fa fa-trash-o"></i>  </a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
 {% endblock %}
