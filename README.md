@@ -40,3 +40,26 @@ Finally, deploy
 view it in browser
 `$heroku open`
 
+=========================================================
+Gulp:
+  
+To install Gulp using npm:
+   		'$sudo npm install gulp'
+
+To install gulp in vertual environment.
+         '$npm install gulp'
+   
+To install Gulp pluggines
+   		'$npm install pluggin_name'
+   		ex: 'npm install gulp-minify-css
+
+Pluggines used in this gulpfile.js are
+      gulp-concat, gulp-util, gulp-less, path, gulp-minify-css
+
+To run gulp default task;
+      '$ gulp'
+
+To run specific task;
+      '$ gulp task_name'
+      ex: '$gulp css'
+
