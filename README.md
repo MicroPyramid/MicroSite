@@ -41,43 +41,25 @@ view it in browser
 `$heroku open`
 
 =========================================================
-Introduction to gulpjs
-
-Gulp GULP
+Gulp:
   
-   To install Gulp using npm:
+To install Gulp using npm:
    		'$sudo npm install gulp'
 
-   If u want to install gulp in vertual environment just remove sudo in above command
+To install gulp in vertual environment.
          '$npm install gulp'
    
-   To install Gulp pluggines use
-   		
+To install Gulp pluggines
    		'$npm install pluggin_name'
-   		ex: 'npm install gulp-minify-css'
+   		ex: 'npm install gulp-minify-css
 
-   To include gulp in gulpfile.js
+Pluggines used in this gulpfile.js are
+      gulp-concat, gulp-util, gulp-less, path, gulp-minify-css
 
-      // Including gulp
-         var gulp = require('gulp'); 
-
-   To include gulpluggines in gulpfile.js
-
-         var pluggin_name = require('pluggin_name');
-
-         ex: var concat = require('gulp-concat');
-
-   To define task in gulpfile.js;
-
-      gulp.task('scripts', function() {
-         #your code here
-
-      )}
-
-   To run gulp default task;
+To run gulp default task;
       '$ gulp'
 
-   to run specific task;
+To run specific task;
       '$ gulp task_name'
       ex: '$gulp css'
 
