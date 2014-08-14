@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from pages.models import *
 from django.views.decorators.csrf import csrf_exempt
 from pages.forms import *
+
+
 @login_required
 def pages(request):
 	pagelist=page.objects.all()
@@ -18,7 +20,6 @@ def new(request):
 	if request.method=='GET':
 		return render_to_response('admin/page/new.html')
 	else:
-		print "hai"
 		validate_page = PageForm(request.POST)
 		if validate_page.is_valid():
 			new_page = validate_page.save(commit = False)
@@ -26,12 +27,13 @@ def new(request):
 			new_page.save()
 		data={"error":False}
 		return HttpResponse(json.dumps(data))
-	
+
 
 @login_required
 def deletepage(request, pk):
 	page.objects.get(pk = pk).delete()
 	return HttpResponseRedirect('/portal/pages/')
+
 
 @login_required
 def editpage(request, pk):
@@ -50,18 +52,6 @@ def editpage(request, pk):
 		return HttpResponse(json.dumps(data))
 		
 
-# @login_required
-# @csrf_exempt
-# def storepage(request, pk):
-# 	s=page.objects.get(pk=pk)
-# 	if request.method=='POST':
-# 		s.title=request.POST.get('title1')
-# 		s.content=request.POST.get('content1')
-# 		s.save()
-# 	else:
-# 		print ""
-# 	return HttpResponseRedirect('/portal/pages/')
-
 @login_required
 def statuspage(request, pk):
 	s=page.objects.get(pk = pk)
@@ -73,10 +63,12 @@ def statuspage(request, pk):
 		s.save()
 	return HttpResponseRedirect('/portal/pages/')
 
+
 @login_required
 def deletemenu(request, pk):
 	Menu.objects.get(pk = pk).delete()
 	return HttpResponseRedirect('/portal/menu/')
+
 
 @login_required
 def statusmenu(request, pk):
@@ -89,18 +81,18 @@ def statusmenu(request, pk):
 		s.save()
 	return HttpResponseRedirect('/portal/menu/')
 
+
 @login_required
 def menu(request):
 	menulist=Menu.objects.all()
 	return render_to_response('admin/page/menuindex.html',{'menu_list':menulist})
 
+
 @login_required
 def addmenuitem(request):
-	print "hello"
 	if request.method=='GET':
 		return render_to_response('admin/page/newmenuitem.html')
 	else:
-		print "hai"
 		validate_page = MenuForm(request.POST)
 		if validate_page.is_valid():
 			new_page = validate_page.save(commit = False)
@@ -115,8 +107,7 @@ def editmenu(request, pk):
 	if request.method=='GET':
 		s=Menu.objects.get(pk=pk)
 		return render_to_response('admin/page/editmenu.html',{'s1':s})
-	else:
-		print "hello"
+	else:		
 		a=Menu.objects.get(pk=pk)
 		val_form=MenuForm(request.POST,instance=a)
 		if val_form.is_valid():
