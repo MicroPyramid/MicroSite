@@ -77,7 +77,7 @@ class Menu(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=255)
     target = models.CharField(max_length=255)
-    created = models.DateTimeField(auto_now_add = True)
+    created = models.DateTimeField(auto_now = True)
     updated = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=5, default="on", blank=True)
     lvl = models.IntegerField()
