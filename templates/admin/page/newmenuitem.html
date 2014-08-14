@@ -1,0 +1,43 @@
+{% extends 'admin/base.html' %}
+
+{% block stage %}
+
+
+
+      <div class="row marl top-row">
+      <div class="row marl">
+      	<div class="container">
+			<div class="row marl prof-table site-table">
+                <div class="table-responsive">
+                <form name="f2"  id="f2" method="POST" action="/portal/menu/addmenuitem/">
+                <h3> newpage </h3>
+                <br>
+                <br>
+                title <input type="text" name="title" value=""><br><br>
+                level <input type="text" name="lvl" value=""><br><br>
+                updated<textarea name="updated"></textarea><br><br>
+                <input type="submit" name="submit"/>
+               </form>
+               </div>
+            </div>
+		</div>
+      </div>
+<script>
+$(document).ready(function(){
+  $("#f2").submit(function(e){
+    e.preventDefault();
+    $.post(".",$("#f2").serialize(),function(data){
+      console.log(data)
+      if (data.error == false)
+      {
+        alert("details are taken successfully");
+      }
+      else{
+        console.log(data)
+      }
+      
+    },'json');
+  });
+});
+</script>
+{% endblock %}

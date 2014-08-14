@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %}
+
+{% block stage %}
+
+      <div class="row marl top-row">
+      <div class="row marl">
+      	<div class="container">
+			<div class="row marl prof-table site-table">
+            	<div class="prop-count"><span><a href="{% url 'addmenuitem' %}"><i class="fa fa-plus"></i> Add Menu Item</a></span></div>
+                <div class="table-responsive">
+                        <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>Title</th>
+                                  <th class="hidden-xs">Url</th>
+                                  <th class="hidden-xs">Created</th>
+                                  <th>Status</th>
+                                  <th>Edit / Delete</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for i in menu_list %}
+                                <tr>
+                                  <td>{{ forloop.counter }}</td>
+                                  <td><a href="#" class="prop-name">{{ i.title }}</a></td>
+                                  <td class="hidden-xs">{{ i.url }}</td>
+                                  <td class="hidden-xs">{{ i.created }}</td>
+                                  <td><a href="/portal/menu/{{i.id}}/status/" class="prop-name">{{ i.status }}</a></td>
+                                  <td><a href="/portal/menu/{{i.id}}/edit/" class="prop-edit"><i class="fa fa-pencil-square-o"></i> </a> / <a href="/portal/menu/{{i.id}}/delete/" class="prop-del"><i class="fa fa-trash-o"></i>  </a></td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+               </div>
+            </div>
+		</div>
+      </div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admin/base.html' %}
+
+{% block stage %}
+
+						<form name="f" method="POST" action="/portal/menu/{{ s1.id }}/edit/">
+						<h2 style="background-color:#CCFFCC;">edit page</h2><br><br>
+						<h3 style="background-color:#CCFFCC;font-size:20px;">title</h3>
+						<input type="text" name="title" value={{ s1.title}}>
+						<h3 style="background-color:#CCFFCC;font-size:20px;">lvl</h3>
+						<input type="text" name="title" value={{ s1.lvl}}>
+						<h3 style="background-color:#CCFFCC;font-size:20px;">updated</h3>
+						<textarea name="content">
+						</textarea>
+						<br>
+						<br>
+						<center>
+						<input type="submit" name="submit" value="submit" >
+						</center>
+						</form>
+				
+<script>
+$(document).ready(function(){
+  $("#f").submit(function(e){
+    e.preventDefault();
+    $.post("/portal/menu/{{ s1.id }}/edit/",$("#f").serialize(),function(data){
+      console.log(data)
+      if (data.error == false)
+      {
+      	alert("details are modified successfully");
+      }
+      else{
+      	console.log(data)
+      }
+      /*if (title.value==""||slug.value==""||content.value==||):
+        alert("enter the details");
+      alert("Data: " + data + "\nStatus: " + status);*/
+    },'json');
+  });
+});
+</script>
+{% endblock %}

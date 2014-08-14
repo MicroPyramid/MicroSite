@@ -4,7 +4,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth import login, authenticate, logout
 import json
 from microsite.settings import BASE_DIR
-
+from django.contrib.auth.decorators import login_required
 
 #@csrf_protect
 def index(request):
@@ -34,3 +34,14 @@ def out(request):
 	logout(request)
 	return HttpResponseRedirect('/portal/')
 
+@login_required
+def users(request):
+	return HttpResponse('no design available')
+
+@login_required
+def contacts(request):
+	return HttpResponse('no design available')
+
+@login_required
+def jobs(request):
+	return HttpResponse('no design available')

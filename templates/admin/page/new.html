@@ -1,0 +1,52 @@
+{% extends 'admin/base.html' %}
+
+{% block stage %}
+
+
+      <div class="row marl top-row">
+      <div class="row marl">
+      	<div class="container">
+			<div class="row marl prof-table site-table">
+                <div class="table-responsive">
+                <form name="f1"  id="f1" method="POST" action="/portal/pages/newpage/">
+                <h3>new page </h3>
+                <br>
+                <br>
+                title <input type="text" name="title" value=""><br><br>
+                slug <input type="text" name="slug" value=""><br><br>
+                content <textarea name="content"></textarea><br><br>
+                <input type="submit" name="submit"/>
+               </form>
+               </div>
+            </div>
+		</div>
+      </div>
+
+<script>
+$(document).ready(function(){
+  $("#f1").submit(function(e){
+    e.preventDefault();
+    $.post(".",$("#f1").serialize(),function(data){
+      console.log(data)
+      if (data.error == false)
+      {
+        alert("details are taken successfully");
+      }
+      else{
+        console.log(data)
+      }
+      
+          },'json');
+  });
+});
+/*$(document).ready(function()
+{
+    $("#submit").click(function()
+    {
+        if $("form:first").value=="":
+          alert("enter title");
+        $("#f2").submit();
+    });
+  });  */
+</script>
+{% endblock %}

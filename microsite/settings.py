@@ -32,7 +32,6 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -68,6 +67,15 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
 TEMPLATE_DIRS = (BASE_DIR +'/templates',)
+
+TEMPLATE_LOADERS = (
+    ("django.template.loaders.cached.Loader", (
+        "django.template.loaders.filesystem.Loader",
+        "django.template.loaders.app_directories.Loader",
+    )),
+)
+
+
 
 LOGGING = {
     'version': 1,
