@@ -19,7 +19,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'microadmin',
-    'microsite',
     'projects',
     'pages',
     'blog',

@@ -29,9 +29,9 @@ class Post(models.Model):
 	def google_author(self):
 	    return self.user.google_plus_url
 
-	@property
 	def set_slug(self, slugtext):
-	    return self.user.google_plus_url
+	    self.slug = slugtext
+	    self.save()
 
 	def save(self, *args, **kwargs):
 		tempslug = slugify(self.title)
@@ -44,7 +44,6 @@ class Post(models.Model):
 			except:
 				self.slug = tempslug
 				break
-				
+
 		super(Post, self).save(*args, **kwargs)
 
-	
