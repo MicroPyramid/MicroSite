@@ -15,8 +15,9 @@ def pages(request):
 	pagelist=page.objects.all()
 	return render_to_response('admin/page/index.html',{'page_list': pagelist})
 
+
 @login_required
-def new(request):
+def new_page(request):
 	if request.method=='GET':
 		return render_to_response('admin/page/new.html')
 	else:
@@ -30,18 +31,17 @@ def new(request):
 
 
 @login_required
-def deletepage(request, pk):
+def delete_page(request, pk):
 	page.objects.get(pk = pk).delete()
 	return HttpResponseRedirect('/portal/pages/')
 
 
 @login_required
-def editpage(request, pk):
+def edit_page(request, pk):
 	if request.method=='GET':
 		s=page.objects.get(pk=pk)
 		return render_to_response('admin/page/edit.html',{'s1':s})
 	else:
-		
 		print request.POST
 		a=page.objects.get(pk=pk)
 		val_form=PageForm(request.POST,instance=a)
@@ -50,10 +50,10 @@ def editpage(request, pk):
 			new_page=val_form.save()
 		data={"error":False}
 		return HttpResponse(json.dumps(data))
-		
+
 
 @login_required
-def statuspage(request, pk):
+def status_page(request, pk):
 	s=page.objects.get(pk = pk)
 	if s.status=="on":
 		s.status="off"
@@ -65,13 +65,13 @@ def statuspage(request, pk):
 
 
 @login_required
-def deletemenu(request, pk):
+def delete_menu(request, pk):
 	Menu.objects.get(pk = pk).delete()
 	return HttpResponseRedirect('/portal/menu/')
 
 
 @login_required
-def statusmenu(request, pk):
+def status_menu(request, pk):
 	s=Menu.objects.get(pk = pk)
 	if s.status=="on":
 		s.status="off"
@@ -89,7 +89,7 @@ def menu(request):
 
 
 @login_required
-def addmenuitem(request):
+def add_menu_item(request):
 	if request.method=='GET':
 		return render_to_response('admin/page/newmenuitem.html')
 	else:
@@ -103,11 +103,11 @@ def addmenuitem(request):
 
 
 @login_required
-def editmenu(request, pk):
+def edit_menu(request, pk):
 	if request.method=='GET':
 		s=Menu.objects.get(pk=pk)
 		return render_to_response('admin/page/editmenu.html',{'s1':s})
-	else:		
+	else:
 		a=Menu.objects.get(pk=pk)
 		val_form=MenuForm(request.POST,instance=a)
 		if val_form.is_valid():
@@ -116,3 +116,4 @@ def editmenu(request, pk):
 			print "else"
 		data={"error":False}
 		return HttpResponse(json.dumps(data))
+

@@ -38,28 +38,28 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="{% url 'microadmin:index' %}">Home</a></li>
-                  <li><a href="{% url 'microadmin:users' %}">Users</a></li>
+                  <li><a href="{% url 'micro_admin:index' %}">Home</a></li>
+                  <li><a href="{% url 'micro_admin:users' %}">Users</a></li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="{% url 'menu' %}">Menu</a></li>
                       <li><a href="{% url 'pages:pages' %}">Pages</a></li>
-                      <li><a href="{% url 'microadmin:jobs' %}">Jobs</a></li>
-                      <li><a href="{% url 'microadmin:contacts' %}">Contacts</a></li>
+                      <li><a href="{% url 'micro_admin:jobs' %}">Jobs</a></li>
+                      <li><a href="{% url 'micro_admin:contacts' %}">Contacts</a></li>
                     </ul>
                   </li>
                   <li><a href="{% url 'projects:projects' %}">Projects</a></li>
-                  <li><a href="{% url 'blog:blogindex' %}">Blog</a></li>
+                  <li><a href="{% url 'micro_blog:blog_index' %}">Blog</a></li>
                   <li><a href="{% url 'payroll:staff' %}">Staff Zone</a></li>
-                  <li><a href="{% url 'microkb:knowledgebase' %}">KB</a></li>
+                  <li><a href="{% url 'micro_kb:knowledgebase' %}">KB</a></li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="#">Profile</a></li>
                       <li><a href="#">Settings</a></li>
                       <li><a href="#">Change Password</a></li>
-                      <li><a href="{% url 'microadmin:out' %}">Logout</a></li>
+                      <li><a href="{% url 'micro_admin:out' %}">Logout</a></li>
                     </ul>
                   </li>
                 </ul>
