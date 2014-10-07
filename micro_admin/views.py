@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 import json
 from microsite.settings import BASE_DIR
 from django.contrib.auth.decorators import login_required
+from django.core.context_processors import csrf
 
 #@csrf_protect
 def index(request):
