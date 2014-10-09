@@ -26,8 +26,8 @@ class Post(models.Model):
 	status = models.CharField(max_length=2, choices=STATUS_CHOICE)
 
 	@property
-	def google_author(self):
-	    return self.user.google_plus_url
+	def author(self):
+	    return self.user.first_name + ' ' + self.user.last_name
 
 	def set_slug(self, slugtext):
 	    self.slug = slugtext
