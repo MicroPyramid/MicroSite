@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+
+{% block stage %}
+
+
+        <!-- main content starts here-->
+         <div class="row marl main-content">
+         <h4>Blog Post Viewer <small style="color:#fff;"> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
+         <div class="row marl blog-form">
+         <fieldset>
+         <legend>Blog Posts</legend>
+                  <div class="save-btn">
+                    <a href="{% url 'micro_blog:new_post' %}">Add New</a>
+                  </div>
+                        <div class="table-responsive table-bordered">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
+                        <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Author</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Featured Post</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Comments</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for post in blog_posts %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{post.title}}</td>
+                        <td class="sec-col">{{post.author}}</td>
+                        <td><a href="{% url 'micro_blog:change_featured_state' blog_slug=post.slug %}">
+                        	{% ifequal post.featured_post 'on' %}
+                        	<i class="fa fa-circle status-color-g"></i>
+                        	{% else %}
+                        	<i class="fa fa-circle status-color"></i>
+                        	{% endifequal %}
+                        	</a>
+                        </td>
+                        <td>{% ifequal post.status 'D' %}Drafted{% endifequal %}
+                        	{% ifequal post.status 'P' %}Published{% endifequal %}
+                        	{% ifequal post.status 'R' %}Rejected{% endifequal %}
+                        </td>
+                        <td><a href="{% url 'micro_blog:edit_post' blog_slug=post.slug %}"><i class="fa fa-pencil-square-o edit-color"></i></a></td>
+                        <td>{{ post.blogcomments_set.all.count }}</td>
+                        <td><a href="{% url 'micro_blog:delete_post' blog_slug=post.slug %}"><i class="fa fa-trash-o trash-color"></i></a></td>
+                      </tr>
+                      {% endfor %}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+                                
+                </fieldset>
+         </div> 
+         </div> 
+         <!-- main content ends here-->
+         
+{% endblock %}

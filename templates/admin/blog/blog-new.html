@@ -1,0 +1,89 @@
+{% extends 'admin/base.html' %}
+{% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <h4>Blog Post Creation</h4>
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>New Blog Post</legend>
+      <form action="/portal/blog/new/" method="POST" id="blogform">{% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="Text" class="form-control" id="title" name="title" >
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Category</label>
+          <select class="form-control" id="category" name="category">
+          	{% for category in categories %}
+	                    <option value="{{category.id}}">{{category.name}}</option>
+	        {% endfor %}
+    	  </select>
+        </div>
+        <div class="row marl text-editor">
+          <div>
+            <div class="">
+              <p>
+                <label class="control-label" for="html">Blog Post Description</label>
+                <br/>
+              <div class="control-group">
+                <div class="controls" id="content">
+                  <input type="hidden" name="content">
+                  <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tags-block">
+          <p><label>Tags Creation</label>
+            <input id="tags_1" type="text" class="tags" name="tags" value="" />
+          </p>
+        </div>
+        <div class="draft-box">
+          <input type="checkbox" name="status" value="D"> <label>Save As Draft</label>
+        </div>
+        <div class="draft-box">
+          <input type="checkbox" name="featured_post" value="on"> <label>Featured Post</label>
+        </div>
+
+        <div class="save-btn">
+          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+        </div>
+      </form>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+<script src="/static/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+  CKEDITOR.config.allowedContent = true;
+  	var editor = CKEDITOR.replace( 'textareacontents',{
+  		filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
+         	filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
+         } );
+</script>
+
+<script type="text/javascript">
+	$ = jQuery;
+
+	$("form#blogform").submit(function(e) {
+		e.preventDefault();
+		//var htmldata = CKEDITOR.instances.Editor.document.getBody().getHtml();
+		console.log(CKEDITOR.instances.textareacontents.getData());
+		$("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+		$.post(".", $("form#blogform").serialize(), function(msg) {
+			if (msg.error) {
+				$('p.failure').remove();
+				for (var key in msg.response){
+					$('#'+key).after('<p class="failure">'+msg.response[key]+'</p>');
+				}
+			} else {
+				window.location = '/portal/blog/';
+			}
+		}, 'json');
+	});
+</script>
+
+
+{% endblock %}
