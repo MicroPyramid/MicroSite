@@ -3,3 +3,5 @@
 db.sqlite3
 static/site
 templates/site
+.project
+.pydevproject

@@ -1,9 +1,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
-from django.contrib.auth import login, authenticate, logout
 import json
-from microsite.settings import BASE_DIR
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Image_File, Category, Tags, Post
@@ -21,32 +19,31 @@ def upload_photos(request):
     stores it in the database and returns all the files'''
     
     if request.FILES.get("upload"):
-        f = request.FILES.get("upload")
-        obj = Image_File.objects.create(upload=f, is_image=True)
+        uploaded_file = request.FILES.get("upload")
+        stored_image = Image_File.objects.create(upload=uploaded_file, is_image=True)
         size = (128, 128)
-        x = f.name
-        z = 'thumb'+f.name
-        y=open(x,'w')
-        for i in f.chunks():
-            y.write(i)
-        y.close()
-        im = Image.open(x)
+        file_name = uploaded_file.name
+        thumb_file_name = 'thumb'+uploaded_file.name
+        temp_file=open(file_name,'w')
+        for i in uploaded_file.chunks():
+            temp_file.write(i)
+        temp_file.close()
+        im = Image.open(file_name)
         im.thumbnail(size)
-        im.save(z)
-        imdata = open(z)
+        im.save(thumb_file_name)
+        imdata = open(thumb_file_name)
         
-        obj.thumbnail.save(z,fle(imdata) )
+        stored_image.thumbnail.save(thumb_file_name,fle(imdata) )
         imdata.close()
         
-        #obj.thumbnail = imdata
-        os.remove(x)
-        os.remove(z) 
-        upurl = default_storage.url(obj.upload.url)
-    upurl = '/'+upurl
+        os.remove(file_name)
+        os.remove(thumb_file_name) 
+        uploaded_url = default_storage.url(stored_image.upload.url)
+    uploaded_url = '/'+uploaded_url
     return HttpResponse("""
     <script type='text/javascript'>
         window.parent.CKEDITOR.tools.callFunction({0}, '{1}');
-    </script>""".format(request.GET['CKEditorFuncNum'], upurl)
+    </script>""".format(request.GET['CKEditorFuncNum'], uploaded_url)
 )
 
 @csrf_exempt
@@ -55,9 +52,9 @@ def recent_photos(request):
     
     imgs = []
     for obj in Image_File.objects.filter(is_image=True).order_by("-date_created"):
-        upurl = default_storage.url(obj.upload.url)
+        uploaded_url = default_storage.url(obj.upload.url)
         thumburl = default_storage.url(obj.thumbnail.url)
-        imgs.append({'src':upurl,'thumb': thumburl,
+        imgs.append({'src':uploaded_url,'thumb': thumburl,
                 'is_image': True})
     return render_to_response('admin/browse.html',{'files':imgs})
 
@@ -71,7 +68,7 @@ def new_category(request):
     if request.method == 'POST':
         validate_blogcategory = BlogCategoryForm(request.POST)
         if validate_blogcategory.is_valid():
-            blog_category = validate_blogcategory.save()
+            validate_blogcategory.save()
             data = {'error':False,'response':'Blog category created'}
         else:
             data = {'error':True,'response':validate_blogcategory.errors}
@@ -86,7 +83,7 @@ def edit_category(request,category_slug):
         category = Category.objects.get(slug = category_slug)
         validate_blogcategory = BlogCategoryForm(request.POST,instance = category)
         if validate_blogcategory.is_valid():
-            blog_category = validate_blogcategory.save()
+            validate_blogcategory.save()
             data = {'error':False,'response':'Blog category updated'}
         else:
             data = {'error':True,'response':validate_blogcategory.errors}
@@ -102,8 +99,6 @@ def delete_category(request,category_slug):
     category.delete()
     return HttpResponseRedirect('/portal/blog/category-list/')
 
-
-
 @login_required
 def index(request):
 	blog_posts = Post.objects.all()
@@ -116,6 +111,7 @@ def new(request):
 		if validate_blog.is_valid():
 			blog_post = validate_blog.save(commit=False)
 			blog_post.user=request.user
+            
 			if request.POST.get('status',''):
 				blog_post.status='D'
 			else:
@@ -145,7 +141,6 @@ def new(request):
 	c = {}
 	c.update(csrf(request))
 	return render_to_response('admin/blog/blog-new.html',{'categories':categories,'csrf_token':c['csrf_token']})
-
 
 @login_required
 def edit_blog_post(request,blog_slug):
@@ -182,8 +177,6 @@ def edit_blog_post(request,blog_slug):
 			data = {'error':True,'response':validate_blog.errors}
 		return HttpResponse(json.dumps(data))
 	
-	
-	
 	blog_post = Post.objects.get(slug=blog_slug)
 	categories = Category.objects.all()
 	c = {}
@@ -205,21 +198,3 @@ def delete_post(request,blog_slug):
     blog_post = Post.objects.get(slug=blog_slug)
     blog_post.delete()
     return HttpResponseRedirect('/portal/blog/')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
