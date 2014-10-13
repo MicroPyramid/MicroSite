@@ -6,9 +6,13 @@ import json
 from microsite.settings import BASE_DIR
 from django.contrib.auth.decorators import login_required
 
-@login_required
-def index(request):
-	return render_to_response('admin/blog/index.html')
+
+def blog_index(request):
+	return render_to_response('site/blog/index.html')
+
+
+def blog_article(request, slug):
+	return render_to_response('site/blog/article.html')
 
 @login_required
 def new(request):
