@@ -1,0 +1,69 @@
+{% extends 'admin/base.html' %}
+{% load recurse %}
+{% load range %}
+
+{% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+    <h4>Menu Item Creation</h4>
+    <div class="row marl blog-form">
+        <fieldset>
+            <legend>New Menu Item</legend>
+            <form action="." method="POST" id="menuform">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input type="Text" class="form-control" id="title" name="title" >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Parent</label>
+                    <select class="form-control" id="parent" name="parent">
+                        <option value="">Top Level</option>
+	                    {% recurse menu.menu_set.all|dictsort:"lvl"  with parent as menu %}
+		                	{% loop %}
+							<option value="{{ menu.id }}">
+								{% for i in level|add:"-1"|get_range %}----{% endfor %}{{menu.title}}</option>
+							{% child %}
+							{% endloop %}
+	                	{% endrecurse %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+			         <label for="exampleInputPassword1">URL</label>
+			         <input type="text" class="form-control" id="url" name="url">
+			         <span class="slug-text">Please include http:// before url.</span>
+		         </div>
+                
+                
+                <div class="draft-box">
+                    <input type="checkbox" name="status" value="on"> <label>Active</label>
+                </div>
+                
+                <div class="save-btn">
+                    <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</div>
+<!-- main content ends here-->
+
+<script type="text/javascript">
+    $ = jQuery;
+    
+    $("form#menuform").submit(function(e) {
+    	e.preventDefault();
+    	$.post(".", $("form#menuform").serialize(), function(msg) {
+    		if (msg.error) {
+    			$('p.failure').remove();
+    			for (var key in msg.response){
+    				$('#'+key).after('<p class="failure">'+msg.response[key]+'</p>');
+    			}
+    		} else {
+    			window.location = '/portal/content/menu/';
+    		}
+    	}, 'json');
+    });
+</script>
+{% endblock %}
