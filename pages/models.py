@@ -1,28 +1,33 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
+def create_slug(tempslug):
+	slugcount = 0
+	while True:
+		try:
+			page.objects.get(slug = tempslug)
+			slugcount = slugcount + 1
+			tempslug = tempslug + '-' + str(slugcount)
+		except:
+			return tempslug
+			break
+
 # Create your models here.
 class page(models.Model):
-	title = models.CharField(max_length=100, null=True, blank=True)
+	title = models.CharField(max_length=100)
 	content = models.TextField(max_length=20000)
-	category = models.CharField(max_length=50)
-	status = models.CharField(max_length=5, default="on", blank=True)
 	slug = models.SlugField()
 
 	def save(self, *args, **kwargs):
 		tempslug = slugify(self.title)
-		slugcount = 0
-		while True:
-			try:
-				page.objects.get(slug = tempslug)
-				slugcount = slugcount + 1
-				tempslug = slugify(self.title) + '-' + str(slugcount)
-			except:
-				self.slug = tempslug
-				break
-				
-		super(page, self).save(*args, **kwargs)
+		if self.id:
+			existed_page = page.objects.get(pk=self.id)
+			if existed_page.title != self.title:
+				self.slug = create_slug(tempslug)
+		else:
+			self.slug = create_slug(tempslug)
 
+		super(page, self).save(*args, **kwargs)
 
 
 class contact(models.Model):
@@ -76,8 +81,7 @@ class Menu(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True)
     title = models.CharField(max_length=255)
     url = models.URLField(max_length=255)
-    target = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now = True)
     updated = models.DateTimeField(auto_now = True)
-    status = models.CharField(max_length=5, default="on", blank=True)
+    status = models.CharField(max_length=5, default="off", blank=True)
     lvl = models.IntegerField()

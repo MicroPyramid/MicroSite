@@ -66,6 +66,9 @@ STATICFILES_DIRS = (BASE_DIR + '/static',)
 
 TEMPLATE_DIRS = (BASE_DIR +'/templates',)
 
+MEDIA_ROOT = BASE_DIR
+
+
 TEMPLATE_LOADERS = (
     ("django.template.loaders.cached.Loader", (
         "django.template.loaders.filesystem.Loader",
