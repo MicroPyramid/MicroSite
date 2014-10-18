@@ -3,5 +3,6 @@
 db.sqlite3
 static/site
 templates/site
+microsite_front
 .project
 .pydevproject

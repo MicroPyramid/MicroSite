@@ -64,6 +64,13 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
+BLOG_IMAGES = BASE_DIR + '/static/blog/' 
+TEAM_IMAGES = BASE_DIR + '/static/team/'
+CLIENT_IMAGES = BASE_DIR + '/static/client/'
+TRAINER_IMAGES = BASE_DIR + '/static/trainer/'
+COURSE_IMAGES = BASE_DIR + '/static/course/'
+QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
+
 TEMPLATE_DIRS = (BASE_DIR +'/templates',)
 
 MEDIA_ROOT = BASE_DIR

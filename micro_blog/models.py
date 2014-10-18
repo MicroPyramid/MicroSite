@@ -18,13 +18,14 @@ class Category(models.Model):
 	name = models.CharField(max_length=20, unique = True)
 	slug = models.CharField(max_length=20, unique = True)
 	description = models.CharField(max_length=500)
-	
+
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
 		super(Category, self).save(*args, **kwargs)
 
 class Tags(models.Model):
 	name = models.CharField(max_length=20, unique = True)
+	slug = models.CharField(max_length=20, unique = True)
 
 class Post(models.Model):
 	STATUS_CHOICE = (
@@ -41,6 +42,7 @@ class Post(models.Model):
 	content = models.TextField(max_length=10000)
 	category = models.ForeignKey(Category)
 	tags = models.ManyToManyField(Tags,blank=True,null=True)
+	featured_image = models.CharField(max_length=400, blank=True, null=True)
 	featured_post = models.CharField(max_length=4, default='off',blank=True)
 	status = models.CharField(max_length=2, choices=STATUS_CHOICE,blank=True)
 
