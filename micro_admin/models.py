@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, Permission, _user_has_perm, Group)
-import hashlib
-import time
 
 GENDER_TYPES = (
     ('M', 'Male'),
@@ -49,7 +47,6 @@ class User(AbstractBaseUser):
     tw_profile = models.URLField(default='')
     ln_profile = models.URLField(default='')
     google_plus_url = models.URLField(default='')
-
     about = models.CharField(max_length=2000, default='', null=True, blank=True)
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
