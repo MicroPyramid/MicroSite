@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+@media (min-width: 240px) and (max-width: 480px) { 
+.tabs-style nav a {
+	padding-top: 30px;
+}
+	.tabs nav i {
+	font-size: 17px;
+	height: 40px;
+	width: 40px;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	line-height: 40px;
+
+}	
+.tabs nav i:hover {
+	font-size: 17px;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	}
+	 /* Section Homepage General CSS starts */
+    .section_container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .section_container .hgroup .heading_cover {
+        text-align: center;
+        width: 100%;
+    }
+    .section_container .hgroup .skew_holder { display: none }
+    .section_container .hgroup h2 {
+        border-bottom: 2px solid #999999;
+        display: inline-block;
+        font-size: 22px;
+        padding-bottom: 10px;
+        line-height: 22px;
+        overflow: hidden;
+    }
+    .section_container .hgroup h3 {
+        font-size: 13px;
+        line-height: 18px;
+    }
+    /* Section Homepage General CSS ends */
+	/* .service_single starts */
+    .service_single {
+        margin-bottom: 44px;
+        overflow: hidden;
+        text-align: center;
+    }
+    .service_single .icon_holder {
+        float: none;
+        margin: 0 auto 20px;
+        width: 122px;
+    }
+    .service_single .icon_holder .icon_shape { }
+    .service_single .icon_holder .icon_shape i {
+        font-size: 40px;
+        line-height: 120px;
+    }
+    .service_single .service_right {
+        float: none;
+        margin: 0 auto;
+        /*width: 440px;*/
+    }
+    /* .service_single ends */
+}

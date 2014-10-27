@@ -64,8 +64,7 @@ class Post(models.Model):
 class BlogComments(models.Model):
     post = models.ForeignKey(Post, blank=True, null=True)
     name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    website = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255)
     message = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
     status = models.CharField(max_length=3,default="off", blank=True)

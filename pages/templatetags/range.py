@@ -23,3 +23,8 @@ def get_range( value ):
     Instead of 3 one may use the variable set in the views
     """
     return range( value )
+
+@register.filter
+def get_past_six_months( value ):
+  print value
+  return value
