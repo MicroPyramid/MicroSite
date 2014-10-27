@@ -173,4 +173,16 @@
 	width: 60px;
 	line-height: 60px;
 	}
+#about-holder{
+	background:none;	
+}
+#about-holder .about-left-col{
+	background: #31383e;
+}
+#about-holder .about-img{
+	text-align:center;	
+}
+#about-holder .container{
+	padding:0px;	
+}
 }
