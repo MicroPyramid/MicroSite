@@ -1,0 +1,3 @@
+Uri: http://templates.everislabs.com/erato/images/slider/Banner-11.jpg
+File Name: c:\sites\erato\templates.everislabs.com\erato\images\slider\Banner-11.jpg
+Content Type: image/jpeg
