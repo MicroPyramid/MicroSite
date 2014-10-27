@@ -1,0 +1,112 @@
+{% extends 'site/blog/base.html' %}
+
+{% block blogcontent %}
+
+<div class="col-sm-12 col-md-8" id="block-posts">
+            
+            <div class="row">
+              <div class="col-xs-12 posts  wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">
+
+                <h1><a href="#">{{post.title}}</a></h1>
+
+                <div class="post-info">
+                  <div class="entry-meta">
+                    Posted <a href="#" title="#">{{ post.created_on|date:"d F" }}</a> by <a href="#" title="John Doe">{{ post.user.email }} </a>&nbsp; — &nbsp;<a href="#">{{ post.category.name }}</a>        
+                  </div>
+                  <div class="comments-link"><a href="#" title="#">&nbsp; &nbsp; {{ comments.count }} comments</a></div>
+                </div>
+
+                {% if post.featured_image %}
+                    <div class="post-img"><img class="replace-2x" src="{{ post.featured_image }}" width="620" height="370" alt=""></div>
+                {% endif %}
+
+                {{post.content|safe}}
+
+              </div><!-- andPosts -->
+
+              <!-- COMMENTS -->
+              <div class="col-xs-12  wow fadeInUp animated animated animated_visible" id="comments" style="visibility: visible; -webkit-animation: fadeInUp;">
+
+                <h2 class="comments-title">Comments<span class="comment-count"> ({{ comments.count}})</span></h2>
+
+                <ul>
+                    {% for comment in comments %}
+
+                    <li class="wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">  
+                        <img class="avatar" alt="" src="images/avatar-default.png" height="70" width="70">
+                          <div class="meta">
+                            <cite>{{comment.name}}</cite>-
+                            <time>{{comment.created|date:"d F"}} at {{comment.created|date:"P"}}</time>
+                            <a href="#">Reply</a>
+                          </div> 
+                          <p>
+                            {{comment.message}}
+                          </p>    
+                    </li>
+                    {% endfor %}
+                  </ul>
+
+                    
+                    
+                    
+                  
+                <div id="respond" class="comment-respond  ">
+                  <h3 id="reply-title" class="comment-reply-title">Leave a Comment</h3>
+                  <form action="/blog/{{post.slug}}/add-comment/" id="comment-ajax" method="POST">
+                  {% csrf_token %}
+                    <div id="success"></div>
+                    <div class="row">
+
+                      <div class="col-xs-12">
+                        <div class="row">
+
+                          <div class="col-xs-12 col-sm-6 form-field fix-left wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">
+                            <input type="text" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'">
+                          </div>
+                          <div class="col-xs-12 col-sm-6 form-field fix-right wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">
+                            <input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <div class="col-xs-12 form-field wow fadeInUp animated animated_visible animated" style="visibility: visible; -webkit-animation: fadeInUp;">
+                        <textarea class="form-control" name="message" cols="30" rows="4" placeholder="Comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comment'" style="width:100%;"></textarea>
+                      </div>
+
+                      <div class="col-xs-12 form-field wow fadeInUp animated animated_visible animated" style="visibility: visible; -webkit-animation: fadeInUp;">
+                        <button id="submit" class="btn-default">Submit</button>
+                      </div>
+
+                    </div>
+                  </form>
+                                  
+                </div><!-- #respond -->
+
+                
+              </div><!-- /comments -->
+
+            </div> <!-- /row -->
+           
+          </div>
+
+<script type="text/javascript">
+    $('form#comment-ajax').submit(function(e){
+        e.preventDefault();
+        $.post($(this).attr('action'), $(this).serialize(), function(data){
+            if(data.error)
+            {
+                alert(data.response);
+            }
+            else
+            {
+                alert(data.response);
+                window.location = '.';
+            }
+            
+        },'json');
+    });
+    
+</script>
+
+{% endblock %}

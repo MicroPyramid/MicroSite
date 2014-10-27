@@ -1,0 +1,352 @@
+{% load recurse %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <title>MicroPyramid | Django Web Development | Mobile App Development</title>
+      <meta name="description" content="MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails"/>
+      <meta name="keywords" content="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails"/>
+      <meta name="author" content="micropyramid"/>
+      <meta name="robots" content="index, follow" >
+      <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails Development Company - Hyderabad, India &raquo; Feed" href="http://www.micropyramid.com.com/rss.xml" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="/static/favicon.ico" >
+
+      <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,700,600,800,900' rel='stylesheet' type='text/css'>
+      <link href="/static/site/css/bootstrap.css" rel="stylesheet">
+      <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+      <link href="/static/site/css/plugin.css" rel="stylesheet">
+      <link href="/static/site/css/style.css" rel="stylesheet">
+      <link href="/static/site/css/mobile.css" rel="stylesheet">
+      <link href="/static/site/css/responsive.css" rel="stylesheet">
+      <link href="/static/site/css/animation.css" rel="stylesheet">
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function(){
+         $(".sliding-top-control").click(function(e) {
+         e.preventDefault();
+         $('#top-panel .top-slider').slideToggle();
+         $('.sliding-top-control i').toggleClass('fa-chevron-down');
+         });
+         });
+      </script>
+   </head>
+   <body>
+      <div id="wrap">
+         <!-- header starts here-->
+         <header id="header">
+            <!-- sliding top-starts here-->
+            <div id="top-panel">
+               <div class="top-slider">
+                  <section class="top-pull-row  row marl">
+                     <div class="container foot-container" style="padding:30px 0px;">
+                        <div class="row marl">
+                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left adrress-col fontawesome-social-widget clr">
+                              <div class="address-head">Intresting links</div>
+                              <ul class="color flat" style="margin:0px;padding:0px;">
+                                 <li class="social-widget-facebook">
+                                    <a href="https://www.facebook.com/MicroPyramid">
+                                    <span style="float:left;"><i class="fa fa-facebook"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Facebook</span></span>
+                                    </a>
+                                 </li>
+                                 <li class="social-widget-google-plus">
+                                    <a href="http://google.com/+Micropyramid/">
+                                    <span style="float:left;"><i class="fa fa-google-plus"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Google+</span></span>
+                                    </a>
+                                 </li>
+                                 <li class="social-widget-linkedin">
+                                    <a href="https://www.linkedin.com/company/micropyramid">
+                                    <span style="float:left;"><i class="fa fa-linkedin"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Linkedin</span></span>
+                                    </a>
+                                 </li>
+                                 <li class="social-widget-twitter">
+                                    <a href="https://twitter.com/micropyramid">
+                                    <span style="float:left;"><i class="fa fa-twitter"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Twitter</span></span>
+                                    </a>
+                                 </li>
+                                 <li class="social-widget-youtube-play">
+                                    <a href="https://www.youtube.com/user/TheMicropyramid">
+                                    <span style="float:left;"><i class="fa fa-youtube-play"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Youtube</span></span>
+                                    </a>
+                                 </li>
+                                 <li class="social-widget-github">
+                                    <a href="https://github.com/micropyramid">
+                                    <span style="float:left;"><i class="fa fa-github"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Github</span></span>
+                                    </a>
+                                 </li>
+                                 <li class="social-widget-rss">
+                                    <a href="http://micropyramid.com/rss.xml">
+                                    <span style="float:left;"><i class="fa fa-rss"></i> </span>
+                                    <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on RSS</span></span>
+                                    </a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left useful-links">
+                              <div class="row marl news-part">
+                                 <div class="address-head">Latest News</div>
+                                 <ul>
+                                    {% for post in latest_posts %}
+                                      <li>
+                                         <a href="#">
+                                         <span class="news-thumb"><img width="36" height="36" src="images/testi-img-3.jpg" class="post-image" alt="Healthy Hair"></span>
+                                         <strong class="news-headline">{{ post.title }}<span class="news-time">{{ post.created_on|date:"F d, Y - P" }}</span></strong>
+                                         </a>
+                                      </li>
+                                     {% endfor %}
+                                 </ul>
+                              </div>
+                           </div>
+                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left login-block">
+                              <div class=" row marl">
+                                 <div class="address-head" >Employee Login</div>
+                                 <div id="error"></div>
+                                 <form role="form" id="adminloginform">
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail1">Email address</label>
+                                       <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputPassword1">Password</label>
+                                       <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+                                    <input class="button button-arrow" type="submit" value="Submit Now">
+                                    <span class="forgot"><a href="#">Forgot Password?</a></span>
+                                 </form>
+                              </div>
+                           </div>
+                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left adrress-col contact-block">
+                              <div class="address-head">Contact Us</div>
+                              <address>
+                                 <strong>Address :</strong><br>
+                                 HIG499, Viswa sai dham appartment,<br>
+                                 behind anupama hospital, <br>
+                                 6th phase KPHB, Hyderabad - 72<br>
+                              </address>
+                              <address>
+                                 <strong>Phone Number :</strong><br>
+                                 +91-40-6599-6999<br>
+                              </address>
+                              <address>
+                                 <strong>Email Address :</strong><br>
+                                 <a href="#">Email : hello@micropyramid.com</a><br>
+                              </address>
+                           </div>
+                        </div>
+                     </div>
+                  </section>
+               </div>
+               <a href="#" class="sliding-top-control"><span><i class="fa fa-chevron-up fa-chevron-down"></i></span></a>
+            </div>
+            <!--sliding top ends here-->
+            <div id="topbar">
+               <div class="container">
+                  <div class="row">
+                     <div id="callus" class="col-md-6 col-sm-5">
+                        <div class="clearfix hidden-xs">
+                           <span><i class="fa fa-phone icon-left"></i>Call us: +91-40-6599-6999</span>
+                           <span class="hidden-sm"><i class="fa fa-envelope icon-left"></i>Email: <a class="__cf_email__" href="#">hello@micropyramid.com</a></span>
+                        </div>
+                     </div>
+                     <div id="social" class="col-md-6 col-sm-7 hidden-xs">
+                        <ul class="social bottom-0 list-unstyled clearfix">
+                           <li class="facebook"><a href="https://www.facebook.com/MicroPyramid" data-placement="bottom" data-toggle="tooltip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                           <li class="linkedin"><a href="https://www.linkedin.com/company/micropyramid" data-placement="bottom" data-toggle="tooltip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                           <li class="youtube"><a href="https://www.youtube.com/user/TheMicropyramid" data-placement="bottom" data-toggle="tooltip" title="Youtube"><i class="fa fa-youtube-play"></i></a></li>
+                           <li class="rss"><a href="http://micropyramid.com/rss.xml" data-placement="bottom" data-toggle="tooltip" title="Rss"><i class="fa fa-rss"></i></a></li>
+                           <li class="googleplus"><a href="http://google.com/+Micropyramid/" data-placement="bottom" data-toggle="tooltip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+                           <li class="twitter"><a href="https://twitter.com/micropyramid" data-placement="bottom" data-toggle="tooltip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                           <li class="github"><a href="https://github.com/micropyramid" data-placement="bottom" data-toggle="tooltip" title="Github"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                     </div>
+                     <div class="visible-xs col-xs-12">
+                        <span class="topbar">Call us: +91-40-6599-6999 &nbsp; Email: <a class="#">hello@micropyramid.com</a></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="mainheader" class="fixedheader">
+               <div class="container">
+                  <div class="logo-area">
+                     <h1 class="logo">
+                        <a href="#"><img src="/static/site/images/logo.png" alt="" width="186" height="20"></a>
+                     </h1>
+                     <span class="descriptions">Site Desc</span>
+                  </div>
+                  <div class="site-menu right-menu visible-lg visible-md ">
+                     <nav>
+                           {% recurse category.headerlinks_set.all with menu_list as category %}
+                           <ul class="sf-menu bottom-0 list-unstyled clearfix" id="head-nav">
+                              {% loop %}
+                                 <li class="menu-normal">
+                                 <a href="{{category.url}}">
+                                 {{category.title}}</a></li>
+                                 {% child %}
+                              {% endloop %}
+                           </ul>
+                           {% endrecurse %}
+                     </nav>
+                  </div>
+                  <a href="#mobile-menu" class="reponsive-menu visible-xs button pull-right color"><i class="fa fa-bars"></i></a>
+               </div>
+            </div>
+            <!-- mobile menu side bar starts here-->
+            <div id="mobile-menu">
+               <span class="menu-content"></span>
+            </div>
+            <!-- mobile menu side bar ends here-->
+         </header>
+         <!-- header ends here-->
+         {% block stage %}
+         {% endblock %}
+         
+         <!-- footer starts here -->
+         <footer class="footer-row">
+            <div class="container foot-container" style="padding:30px 0px;">
+               <div class="row marl">
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left adrress-col fontawesome-social-widget clr flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
+                     <div class="address-head">Intresting links</div>
+                     <span class="intrest">Bellow are some interesting links for you! Enjoy your stay :)</span>
+                     <ul class="color flat" style="margin:0px;padding:0px;">
+                        <li class="social-widget-facebook">
+                           <a href="https://www.facebook.com/MicroPyramid">
+                           <span style="float:left;"><i class="fa fa-facebook"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Facebook</span></span>
+                           </a>
+                        </li>
+                        <li class="social-widget-google-plus">
+                           <a href="http://google.com/+Micropyramid/">
+                           <span style="float:left;"><i class="fa fa-google-plus"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Google+</span></span>
+                           </a>
+                        </li>
+                        <li class="social-widget-linkedin">
+                           <a href="https://www.linkedin.com/company/micropyramid">
+                           <span style="float:left;"><i class="fa fa-linkedin"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Linkedin</span></span>
+                           </a>
+                        </li>
+                        <li class="social-widget-twitter">
+                           <a href="https://twitter.com/micropyramid">
+                           <span style="float:left;"><i class="fa fa-twitter"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Twitter</span></span>
+                           </a>
+                        </li>
+                        <li class="social-widget-youtube-play">
+                           <a href="https://www.youtube.com/user/TheMicropyramid">
+                           <span style="float:left;"><i class="fa fa-youtube-play"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Youtube</span></span>
+                           </a>
+                        </li>
+                        <li class="social-widget-github">
+                           <a href="https://github.com/micropyramid">
+                           <span style="float:left;"><i class="fa fa-github"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on Github</span></span>
+                           </a>
+                        </li>
+                        <li class="social-widget-rss">
+                           <a href="http://micropyramid.com/rss.xml">
+                           <span style="float:left;"><i class="fa fa-rss"></i> </span>
+                           <span class="social-follow"><strong>Follow Us </strong> <span class="on-social">on RSS</span></span>
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left useful-links flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
+                     <div class="row marl news-part">
+                        <div class="address-head">Latest News</div>
+                        <ul>
+                           {% for post in latest_posts %}
+                           <li>
+                              <a href="#">
+                              <span class="news-thumb"><img width="36" height="36" src="images/testi-img-3.jpg" class="post-image"></span>
+                              <strong class="news-headline">{{ post.title }}<span class="news-time">{{ post.created_on|date:"F d, Y - P" }}</span></strong>
+                              </a>
+                           </li>
+                          {% endfor %}
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left address-col flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
+                     <div class="tag-block row marl">
+                        <div class="address-head" style="color:#ddd !important;">Tags</div>
+                        {% for tag in tags %}
+                          <a href="/blog/tag/{{tag.slug}}" class="tag-link-19" title="" style="font-size: 13px;">{{tag.name}}</a>
+                        {% endfor %}
+                     </div>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left adrress-col flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
+                     <div class="address-head">Contact Us</div>
+                     <address>
+                        <strong>Address :</strong><br>
+                        HIG499, Viswa sai dham appartment,<br>
+                        behind anupama hospital, <br>
+                        6th phase KPHB, Hyderabad - 72<br>
+                     </address>
+                     <address>
+                        <strong>Phone Number :</strong><br>
+                        +91-40-6599-6999<br>
+                     </address>
+                     <address>
+                        <strong>Email Address :</strong><br>
+                        Email : hello@micropyramid.com<br>
+                     </address>
+                  </div>
+               </div>
+            </div>
+         </footer>
+         <footer class="last-row">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <h5 class="copy_right">Developed by <a href="http://micropyramid.com/">Micropyramid.com</a> using Djanog, bootstrap and mysql</h5>
+                  </div>
+                  <div class="col-sm-6 foot-menu">
+                  {% recurse menu_item.headerlinks_set.all with menu_list as menu_item %}
+                     <ul class="use-links" id="head-nav">
+                        {% loop %}
+                           <li>
+                           <a href="{{menu_item.url}}">
+                           {{menu_item.title}}</a></li>
+                           {% child %}
+                        {% endloop %}
+                     </ul>
+                  {% endrecurse %}
+                  </div>
+               </div>
+            </div>
+         </footer>
+         <!-- footer ends here -->
+      </div>
+      <script src="/static/site/js/superfish.js"></script>
+      <script src="/static/site/js/bootstrap.js"></script>
+      <script src="/static/site/js/mmenu.js"></script>
+      <script src="/static/site/js/functions.js"></script>
+       <script src="/static/site/js/animation.js"></script>
+      <script type='text/javascript'  src="/static/site/js/wow.min.js"></script>
+      <script type='text/javascript' src="/static/site/js/main.js"></script>
+
+      <script type="text/javascript">
+      $("form#adminloginform").submit(function(e) {
+         e.preventDefault();
+         $.post("/portal/", $("form#adminloginform").serialize(), function(data) {
+          if (data.error){
+            $("p.error").remove();
+            $("#error").prepend("<p class='error'>"+data.message+"</p>");
+          }else{
+            window.location = '/portal/' ;
+          }
+         }, 'json');
+      });
+      </script>
+   </body>
+</html>

@@ -4,14 +4,17 @@ from django.core.context_processors import csrf
 import json
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Image_File, Category, Tags, Post
+from micro_blog.models import Image_File, Category, Tags, Post, BlogComments
+from pages.models import Menu
 from PIL import Image
 import os
+import math
 from django.core.files.storage import default_storage
 from django.core.files.base import File as fle
-from micro_blog.forms import BlogpostForm, BlogCategoryForm
+from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
-from datetime import datetime
+import datetime
+
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with 
@@ -19,7 +22,7 @@ def store_image(img,location):
     
     uploaded_file = img
     filename = uploaded_file.name
-    now_str = str(datetime.now())
+    now_str = str(datetime.datetime.now())
     now = now_str.replace(' ', '-')
     title_str = filename.split(".")[-0]
     title = title_str.replace(' ', '-')
@@ -130,25 +133,210 @@ def delete_category(request,category_slug):
 
 
 def blog_index(request):
-	return render_to_response('site/blog/index.html')
+    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    blog_posts = Post.objects.filter(status='P')
+    categories = Category.objects.all()
+    tags = Tags.objects.all()
+    current_date = datetime.date.today()
+    archives = []
+    for i in range(-4,1):
+        archives.append(current_date + datetime.timedelta(i*365/12))
+    print archives
+
+    items_per_page = 6
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+
+    no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+
+    blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+
+    if page <= 5:
+        start_page = 1
+    else:
+        start_page = page-5 
+
+    if no_pages <= 10:
+        end_page = no_pages
+    else:
+        end_page = start_page + 10
+        if end_page > no_pages:
+            end_page=no_pages
+
+    pages = range(start_page, end_page+1)
+
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+
+
+
+    return render_to_response('site/blog/index.html',{'posts':blog_posts})
 
 
 def blog_article(request, slug):
-	return render_to_response('site/blog/article.html')
+    blog_post = Post.objects.get(slug=slug)
+    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    blog_posts = Post.objects.filter(status='P')[:3]
+    categories = Category.objects.all()
+    tags = Tags.objects.all()
+    comments = BlogComments.objects.filter(status="on",post=blog_post)
+    current_date = datetime.date.today()
+    archives = []
+    for i in range(-4,1):
+        archives.append(current_date + datetime.timedelta(i*365/12))
+    
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
 
 
-def blog_tag(request, tag):
-    return render_to_response('site/blog/index.html')
+def blog_tag(request, slug):
+    tag = Tags.objects.get(slug=slug)
+    blog_posts = Post.objects.filter(tags__in=[tag],status="P")
+    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    categories = Category.objects.all()
+    tags = Tags.objects.all()
+    current_date = datetime.date.today()
+    archives = []
+    for i in range(-4,1):
+        archives.append(current_date + datetime.timedelta(i*365/12))
+    print archives
+
+    items_per_page = 6
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+
+    no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+
+    blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+
+    if page <= 5:
+        start_page = 1
+    else:
+        start_page = page-5 
+
+    if no_pages <= 10:
+        end_page = no_pages
+    else:
+        end_page = start_page + 10
+        if end_page > no_pages:
+            end_page=no_pages
+
+    pages = range(start_page, end_page+1)
+
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
-def blog_category(request, tag):
-    return render_to_response('site/blog/category.html')
+
+def blog_category(request, slug):
+    category = Category.objects.get(slug=slug)
+    blog_posts = Post.objects.filter(category=category,status="P")
+    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    categories = Category.objects.all()
+    tags = Tags.objects.all()
+    current_date = datetime.date.today()
+    archives = []
+    for i in range(-4,1):
+        archives.append(current_date + datetime.timedelta(i*365/12))
+    print archives
+
+    items_per_page = 6
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+
+    no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+
+    blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+
+    if page <= 5:
+        start_page = 1
+    else:
+        start_page = page-5 
+
+    if no_pages <= 10:
+        end_page = no_pages
+    else:
+        end_page = start_page + 10
+        if end_page > no_pages:
+            end_page=no_pages
+
+    pages = range(start_page, end_page+1)
+
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+
+
+def add_blog_comment(request, slug):
+    if request.method == "POST":
+        
+        validate_blog_comment = CommentForm(request.POST)
+
+        if validate_blog_comment.is_valid():
+            comment = validate_blog_comment.save(commit = False)
+            blog_post = Post.objects.get(slug=slug)
+            comment.post = blog_post
+            comment.status='on'
+            comment.save()
+            data = {'error':False,'response':'comment posted successfully'}
+            return HttpResponse(json.dumps(data))
+        else:
+            data = {'error':True,'response':'all the fields are required'}
+        return HttpResponse(json.dumps(data))
+
+def archive_posts(request, year, month):
+    blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month)
+    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    categories = Category.objects.all()
+    tags = Tags.objects.all()
+    current_date = datetime.date.today()
+    archives = []
+    for i in range(-4,1):
+        archives.append(current_date + datetime.timedelta(i*365/12))
+    print archives
+
+    items_per_page = 6
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+
+    no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+
+    blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+
+    if page <= 5:
+        start_page = 1
+    else:
+        start_page = page-5 
+
+    if no_pages <= 10:
+        end_page = no_pages
+    else:
+        end_page = start_page + 10
+        if end_page > no_pages:
+            end_page=no_pages
+
+    pages = range(start_page, end_page+1)
+
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 @login_required
 def index(request):
-	blog_posts = Post.objects.all()
-	return render_to_response('admin/blog/blog-posts.html',{'blog_posts':blog_posts})
+    blog_posts = Post.objects.all()
+    return render_to_response('admin/blog/blog-posts.html',{'blog_posts':blog_posts})
 
 
 @login_required

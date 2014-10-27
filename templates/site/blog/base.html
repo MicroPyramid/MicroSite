@@ -1,0 +1,96 @@
+{% extends 'site/base.html' %}
+
+{% block stage %}
+        <!-- blog list starts here -->
+            <div class="row marl blog-banner">
+        
+       <div class="container">
+                    <article>
+                        <div class="hgroup">
+                            <div class="heading_cover">
+                                <h2>MicroPyramid <span>Blog</span></h2>
+                            </div>
+                            
+                        </div>
+                    </article>
+                </div>
+        </div>
+      <div class="container" id="blog">
+      
+      
+      
+        <div class="row">
+
+          {% block blogcontent %}
+          {% endblock %}
+
+          <div class="col-sm-hidden col-md-1"></div>
+
+          <div class="col-sm-12 col-md-3" id="right-sidebar">
+            
+            <div class="row">
+
+              <div class="col-xs-12">
+                <form role="search" method="get" id="searchform" class="searchform" action="#">
+                <div>
+                  <input type="text" value="" name="s" id="s" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
+                  <input type="submit" id="searchsubmit" value="Search">
+                </div>
+              </form>
+              </div> <!-- / widget -->
+
+              <div class="col-xs-12 widget">
+                <h3>Categories</h3>
+                <ul>
+                {% for category in categories %}
+                  <li><a href="/blog/category/{{category.slug}}/">{{category.name}}</li>
+                {% endfor %}
+                </ul>
+              </div><!-- / widget -->
+
+              <div class="col-xs-12 widget">
+                <h3>Arhives</h3>
+                <ul>
+                {% for archive in archives %}
+                  <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}/">{{archive|date:"F Y"}}</a></li>
+                {% endfor %}
+                </ul>
+              </div><!-- / widget -->
+
+              <div class="col-xs-12 widget tags">
+                <h3>Tags</h3>
+                <ul>
+                {% for tag in tags %}
+                  <li><a href="/blog/tag/{{tag.slug}}/">{{tag.name}}</a></li>
+                {% endfor %}
+                </ul>
+              </div><!-- / widget -->
+
+              <div class="col-xs-12 widget widget-recent-entries">
+                <h3>Recent posts</h3>
+                <ul>
+                {% for post in posts|slice:"3" %}
+                  <li>
+                    <a href="/blog/{{post.slug}}/">{{post.title}}</a>
+                    <span class="post-date">{{post.created_on|date:"F Y"}}</span>
+                  </li>
+                 {% endfor %}
+                </ul>
+              </div><!-- / widget -->
+
+              <div class="clearfix"></div>
+
+
+
+              
+              
+              </div><!-- / widget widget-text -->
+
+            </div><!-- /row -->
+          </div><!-- / right-sidebar -->
+
+        </div><!-- /row -->
+      </div>
+        <!-- blog list ends here-- >
+        
+{% endblock %}
