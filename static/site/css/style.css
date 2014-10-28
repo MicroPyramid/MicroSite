@@ -1154,7 +1154,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31383e', end
 	}
 	/* .stats_single starts */
 		.mp_d_curve_bg3{
-		background-image:url(../images/home_bg_3.png);
+		background-image:url(/static/site/images/i-bg-dark.png);
 	}
 .mp_curve_container .micro_stats { margin: 195px 0 185px }
 .stats_single { text-align: center }
@@ -1163,7 +1163,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#31383e', end
     margin-bottom: 11px;
 }
 .stats_single .stats_icon {
-    background: url(../images/stats_icon_circle_red.png) no-repeat center center;
     background-color: transparent;
     border-radius: 100px;
     -moz-border-radius: 100px;
@@ -1433,7 +1432,6 @@ font-weight:bold; }
 
 /* ------------------------- top-blog-block -----------------------*/
  .blog-banner{
-	background:url(../images/blog-bg.jpg) no-repeat;
 	padding:100px 0px;
 }
 
@@ -1478,7 +1476,6 @@ margin: 0;
 	margin-top: -2%;
 }
 .background-topslider {
-	background-image: url(../images/slider/slide-1.jpg);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -1773,7 +1770,6 @@ padding-left: 60px;
 	width: 100%;
 }
 #searchform input[type="submit"] {
-	background-image: url(../images/search.svg);
 	background-position: center;
 	background-repeat: no-repeat;
 	border-left: none !important;
@@ -2132,5 +2128,7 @@ table#wp-calendar {
 }
 #blog .comments-link a {
 }
-
-
+#feature-tabs ul{
+    text-align: left;
+    color: white;
+}

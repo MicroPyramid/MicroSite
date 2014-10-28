@@ -1,3 +1,0 @@
-Uri: http://templates.everislabs.com/erato/images/demo/post-1x70x70.jpg
-File Name: c:\sites\erato\templates.everislabs.com\erato\images\demo\post-1x70x70.jpg
-Content Type: image/jpeg

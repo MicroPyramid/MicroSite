@@ -1,3 +1,0 @@
-Uri: http://templates.everislabs.com/erato/images/demo/cilent-5.png
-File Name: c:\sites\erato\templates.everislabs.com\erato\images\demo\cilent-5.png
-Content Type: image/png
