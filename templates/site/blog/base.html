@@ -2,34 +2,26 @@
 
 {% block stage %}
         <!-- blog list starts here -->
-            <div class="row marl blog-banner">
-        
+            <div class="row marl blog-banner" style="display:none;">
        <div class="container">
                     <article>
                         <div class="hgroup">
                             <div class="heading_cover">
                                 <h2>MicroPyramid <span>Blog</span></h2>
                             </div>
-                            
                         </div>
                     </article>
                 </div>
         </div>
       <div class="container" id="blog">
-      
-      
-      
         <div class="row">
 
           {% block blogcontent %}
           {% endblock %}
 
           <div class="col-sm-hidden col-md-1"></div>
-
           <div class="col-sm-12 col-md-3" id="right-sidebar">
-            
             <div class="row">
-
               <div class="col-xs-12">
                 <form role="search" method="get" id="searchform" class="searchform" action="#">
                 <div>
@@ -77,20 +69,11 @@
                  {% endfor %}
                 </ul>
               </div><!-- / widget -->
-
               <div class="clearfix"></div>
-
-
-
-              
-              
               </div><!-- / widget widget-text -->
-
             </div><!-- /row -->
           </div><!-- / right-sidebar -->
-
         </div><!-- /row -->
       </div>
         <!-- blog list ends here-- >
-        
 {% endblock %}

@@ -17,9 +17,9 @@ import datetime
 
 
 def store_image(img,location):
-    ''' takes the image file and stores that in the local file storage returns file name with 
+    ''' takes the image file and stores that in the local file storage returns file name with
     adding of timestamp to its name'''
-    
+
     uploaded_file = img
     filename = uploaded_file.name
     now_str = str(datetime.datetime.now())
@@ -34,9 +34,6 @@ def store_image(img,location):
         y.write(i)
     y.close()
     return filename + '.' + ext
-
-
-
 
 
 @csrf_exempt
@@ -88,13 +85,13 @@ def recent_photos(request):
 
 
 @login_required
-def blog_category_list(request):
+def admin_category_list(request):
     blog_categories = Category.objects.all()
     return render_to_response('admin/blog/blog-category-list.html',{'blog_categories':blog_categories})
 
 
 @login_required
-def new_category(request):
+def new_blog_category(request):
     if request.method == 'POST':
         validate_blogcategory = BlogCategoryForm(request.POST)
         if validate_blogcategory.is_valid():
@@ -129,10 +126,10 @@ def edit_category(request,category_slug):
 def delete_category(request,category_slug):
     category = Category.objects.get(slug=category_slug)
     category.delete()
-    return HttpResponseRedirect('/portal/blog/category-list/')
+    return HttpResponseRedirect('/blog/category-list/')
 
 
-def blog_index(request):
+def site_blog_home(request):
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     blog_posts = Post.objects.filter(status='P')
     categories = Category.objects.all()
@@ -141,7 +138,6 @@ def blog_index(request):
     archives = []
     for i in range(-4,1):
         archives.append(current_date + datetime.timedelta(i*365/12))
-    print archives
 
     items_per_page = 6
     if "page" in request.GET:
@@ -156,7 +152,7 @@ def blog_index(request):
     if page <= 5:
         start_page = 1
     else:
-        start_page = page-5 
+        start_page = page-5
 
     if no_pages <= 10:
         end_page = no_pages
@@ -172,10 +168,6 @@ def blog_index(request):
     return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
-
-    return render_to_response('site/blog/index.html',{'posts':blog_posts})
-
-
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
@@ -187,7 +179,6 @@ def blog_article(request, slug):
     archives = []
     for i in range(-4,1):
         archives.append(current_date + datetime.timedelta(i*365/12))
-    
     c = {}
     c.update(csrf(request))
     return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
@@ -203,7 +194,6 @@ def blog_tag(request, slug):
     archives = []
     for i in range(-4,1):
         archives.append(current_date + datetime.timedelta(i*365/12))
-    print archives
 
     items_per_page = 6
     if "page" in request.GET:
@@ -218,7 +208,7 @@ def blog_tag(request, slug):
     if page <= 5:
         start_page = 1
     else:
-        start_page = page-5 
+        start_page = page-5
 
     if no_pages <= 10:
         end_page = no_pages
@@ -234,7 +224,6 @@ def blog_tag(request, slug):
     return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
-
 def blog_category(request, slug):
     category = Category.objects.get(slug=slug)
     blog_posts = Post.objects.filter(category=category,status="P")
@@ -245,7 +234,6 @@ def blog_category(request, slug):
     archives = []
     for i in range(-4,1):
         archives.append(current_date + datetime.timedelta(i*365/12))
-    print archives
 
     items_per_page = 6
     if "page" in request.GET:
@@ -260,7 +248,7 @@ def blog_category(request, slug):
     if page <= 5:
         start_page = 1
     else:
-        start_page = page-5 
+        start_page = page-5
 
     if no_pages <= 10:
         end_page = no_pages
@@ -278,7 +266,6 @@ def blog_category(request, slug):
 
 def add_blog_comment(request, slug):
     if request.method == "POST":
-        
         validate_blog_comment = CommentForm(request.POST)
 
         if validate_blog_comment.is_valid():
@@ -302,7 +289,6 @@ def archive_posts(request, year, month):
     archives = []
     for i in range(-4,1):
         archives.append(current_date + datetime.timedelta(i*365/12))
-    print archives
 
     items_per_page = 6
     if "page" in request.GET:
@@ -317,7 +303,7 @@ def archive_posts(request, year, month):
     if page <= 5:
         start_page = 1
     else:
-        start_page = page-5 
+        start_page = page-5
 
     if no_pages <= 10:
         end_page = no_pages
@@ -334,98 +320,99 @@ def archive_posts(request, year, month):
 
 
 @login_required
-def index(request):
+def admin_post_list(request):
     blog_posts = Post.objects.all()
     return render_to_response('admin/blog/blog-posts.html',{'blog_posts':blog_posts})
 
 
 @login_required
-def new(request):
-	if request.method == 'POST':
-		validate_blog = BlogpostForm(request.POST)
-		if validate_blog.is_valid():
-			blog_post = validate_blog.save(commit=False)
-			blog_post.user=request.user
+def admin_new_post(request):
+    if request.method == 'POST':
+        validate_blog = BlogpostForm(request.POST)
+        if validate_blog.is_valid():
+            blog_post = validate_blog.save(commit=False)
+            blog_post.user=request.user
 
-			if request.POST.get('status',''):
-				blog_post.status='D'
-			else:
-				blog_post.status='P'
+            if request.POST.get('status',''):
+                blog_post.status='D'
+            else:
+                blog_post.status='P'
 
-			if request.POST.get('featured_post',''):
-				blog_post.featured_post=request.POST.get('featured_post')
-            
-            		if 'featuredimage' in request.FILES:
-                        	print 'hi'
-                		blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
+            if request.POST.get('featured_post',''):
+                blog_post.featured_post=request.POST.get('featured_post')
+                if 'featuredimage' in request.FILES:
+                    blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
+                else:
+                    blog_post.featured_image=''
 
-			blog_post.save()
-			if request.POST.get('tags',''):
-				tags = request.POST.get('tags')
-				tags = tags.split(',')
-				for tag in tags:
-					blog_tag = Tags.objects.filter(name=tag)
-					if blog_tag:
-						blog_tag = blog_tag[0]
-					else:
-						blog_tag = Tags.objects.create(name=tag)
+            blog_post.save()
+            if request.POST.get('tags',''):
+                tags = request.POST.get('tags')
+                tags = tags.split(',')
+                for tag in tags:
+                    blog_tag = Tags.objects.filter(name=tag)
+                    if blog_tag:
+                        blog_tag = blog_tag[0]
+                    else:
+                        blog_tag = Tags.objects.create(name=tag)
 
-					blog_post.tags.add(blog_tag)
-			data = {'error':False,'response':'Blog Post created'}
-		else:
-			data = {'error':True,'response':validate_blog.errors}
-		return HttpResponse(json.dumps(data))
-	categories = Category.objects.all()
-	c = {}
-	c.update(csrf(request))
-	return render_to_response('admin/blog/blog-new.html',{'categories':categories,'csrf_token':c['csrf_token']})
+                    blog_post.tags.add(blog_tag)
+            data = {'error':False,'response':'Blog Post created'}
+        else:
+            data = {'error':True,'response':validate_blog.errors}
+        return HttpResponse(json.dumps(data))
+    categories = Category.objects.all()
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('admin/blog/blog-new.html',{'categories':categories,'csrf_token':c['csrf_token']})
 
 
 @login_required
 def edit_blog_post(request,blog_slug):
-	if request.method == 'POST':
-		current_post = Post.objects.get(slug = blog_slug)
-		validate_blog = BlogpostForm(request.POST,instance=current_post)
-		if validate_blog.is_valid():
-			blog_post = validate_blog.save(commit=False)
-			blog_post.user=request.user
-			if request.POST.get('status'):
-				blog_post.status='D'
-			else:
-				blog_post.status='P'
+    if request.method == 'POST':
+        current_post = Post.objects.get(slug = blog_slug)
+        validate_blog = BlogpostForm(request.POST,instance=current_post)
+        if validate_blog.is_valid():
+            blog_post = validate_blog.save(commit=False)
+            blog_post.user=request.user
+            if request.POST.get('status'):
+                blog_post.status='D'
+            else:
+                blog_post.status='P'
 
-			if request.POST.get('featured_post',''):
-				blog_post.featured_post==request.POST.get('featured_post')
+            if request.POST.get('featured_post',''):
+                blog_post.featured_post==request.POST.get('featured_post')
 
-			if 'featuredimage' in request.FILES:
-				os.remove(BLOG_IMAGES + current_post.featured_image)
-				blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
+            if 'featuredimage' in request.FILES:
+                if current_post.featured_image:
+                    os.remove(BLOG_IMAGES + current_post.featured_image)
+                blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
 
-			blog_post.save()
+            blog_post.save()
 
-			if request.POST.get('tags',''):
-				for tag in blog_post.tags.all():
-					blog_post.tags.remove(tag)
-				tags = request.POST.get('tags')
-				tags = tags.split(',')
-				for tag in tags:
-					blog_tag = Tags.objects.filter(name=tag)
-					if blog_tag:
-						blog_tag = blog_tag[0]
-					else:
-						blog_tag = Tags.objects.create(name=tag)
+            if request.POST.get('tags',''):
+                for tag in blog_post.tags.all():
+                    blog_post.tags.remove(tag)
+                tags = request.POST.get('tags')
+                tags = tags.split(',')
+                for tag in tags:
+                    blog_tag = Tags.objects.filter(name=tag)
+                    if blog_tag:
+                        blog_tag = blog_tag[0]
+                    else:
+                        blog_tag = Tags.objects.create(name=tag)
 
-					blog_post.tags.add(blog_tag)
-			data = {'error':False,'response':'Blog Post created'}
-		else:
-			data = {'error':True,'response':validate_blog.errors}
-		return HttpResponse(json.dumps(data))
+                    blog_post.tags.add(blog_tag)
+            data = {'error':False,'response':'Blog Post created'}
+        else:
+            data = {'error':True,'response':validate_blog.errors}
+        return HttpResponse(json.dumps(data))
 
-	blog_post = Post.objects.get(slug=blog_slug)
-	categories = Category.objects.all()
-	c = {}
-	c.update(csrf(request))
-	return render_to_response('admin/blog/blog-edit.html',{'blog_post':blog_post,'categories':categories,'csrf_token':c['csrf_token']})
+    blog_post = Post.objects.get(slug=blog_slug)
+    categories = Category.objects.all()
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('admin/blog/blog-edit.html',{'blog_post':blog_post,'categories':categories,'csrf_token':c['csrf_token']})
 
 
 @login_required
@@ -436,12 +423,12 @@ def change_featured_state(request,blog_slug):
     else:
         blog_post.featured_post = 'on'
     blog_post.save()
-    return HttpResponseRedirect('/portal/blog/')
+    return HttpResponseRedirect('/blog/admin/list/')
 
 
 @login_required
 def delete_post(request,blog_slug):
     blog_post = Post.objects.get(slug=blog_slug)
     blog_post.delete()
-    return HttpResponseRedirect('/portal/blog/')
+    return HttpResponseRedirect('/blog/admin/list/')
 

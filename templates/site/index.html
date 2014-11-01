@@ -1,8 +1,66 @@
 {% extends 'site/base.html' %}
 {% block stage %}
 <!-- banner starts here-->
+<link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
 <div class="row marl banner-row">
+  <div class="slideshow" id="slideshow">
+    <ol class="slides">
+      <li class="current" data-effect-out="moveDownOut">
+        <div class="description">
+          <h2>Website Designing</h2>
+          <p>Our web designing team develop all designs with own care and commitment to the brand's nature and target users. By usig photoshop, GIMP, bootstrap, jquery, angularjs, fontawesome, We have developed amazing designs, layouts and interfaces.</p>
+        </div>
+        <div class="tiltview col">
+          <a href="#">
+            <img src="/static/site/images/responsive.png">
+          </a>
+        </div>
+      </li>
+      <li data-effect-in="slideDownIn" >
+        <div class="description">
+          <h2>Cloud Computing</h2>
+          <p>With 5 Years of experience on Amazon web services we have proven expertise on developing and managing applications on cloud services. Amazon Web Services : EC2, SES, SNS, RDS, Route53, S3, CloudFront, Beanstalk
+          </p>
+        </div>
+        <div class="tiltview row">
+          <a href="#">
+            <img src="/static/site/images/1-c-n.png">
+          </a>
+        </div>
+      </li>
+      <li>
+        <div class="description">
+          <h2>Social apps development and integration</h2>
+          <p>We can offer facebook, twitter, google+, github, linkedin, stackoverflow integrations as of now and our learning never stops to enhance your products or services.</p>
+        </div>
+        <div class="tiltview col">
+          <a href="#">
+            <img src="/static/site/images/social.png">
+          </a>
+        </div>
+      </li>
+      <li>
+        <div class="description">
+          <h2>Server Management</h2>
+          <p>MicroPyramid can manage your server to harden security to withstand DDoS attacks and other attacks based on exploits in your applications.</p>
+        </div>
+        <div class="tiltview row">
+          <a href="#">
+            <img src="/static/site/images/server.png">
+          </a>
+        </div>
+      </li>
+    </ol>
+  </div>
 </div>
+<script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="/static/site/js/classie.js"></script>
+<script type="text/javascript" src="/static/site/js/tiltSlider.js"></script>
+<script>
+  new TiltSlider( document.getElementById( 'slideshow' ) );
+</script>
 <!-- banner ends here-->
 <!-- sec-about starts -->
 <section id="about-holder">
@@ -39,7 +97,7 @@
             </div>
             <div class="about_right">
               <h4>Methods</h4>
-              <p>We attain quality by implementating our own coding practices tailored with ever learning and experience. Our QA is gets better every day.</p>
+              <p>We attain quality by implementating our own coding practices tailored with ever learning and experience. Our quality gets better every day.</p>
             </div>
           </div>
           <!-- about_single ends -->
@@ -119,12 +177,12 @@
                 <!--======= TAB 3 =========-->
                 <section id="tab-3">
                   <h3>Web application development and maintenance</h3>
-                  <p>We develop apps with passion and our web applications will show extreme performance and security. Our development and production flow makes sure that every line of code is precise. Our development stack include python, django, django-rest-framework, mongodb, mysql, postgresql, sentry, pillow, celery, redis, haystack, bootstrap, jquery, angularjs, php, wordpress.
+                  <p>We develop apps with passion and our web applications will show extreme performance and security. Our development and production flow makes sure that every line of code is precise. Our development stack include python, django, django-rest-framework, mongodb, mysql, postgresql, sentry, pillow, celery, redis, haystack, bootstrap, jquery, angularjs, php, symfony, codeigniter, cakephp, wordpress.
                   </p>
                 </section>
                 <!--======= TAB 4 =========-->
                 <section id="tab-4">
-                  <h3>Server management</h3>
+                  <h3>Server Management</h3>
                   <p>MicroPyramid can manage your server to harden security to withstand DDoS attacks and other attacks based on exploits in your applications. We do have 24 x 7 monitoring solutions to narrow cause of the situation and not to mention that we have a fault tolerant system available as always. We optimize your server to its fullest because we value milliseconds.
                   </p>
                 </section>
@@ -144,12 +202,12 @@
               <!--======= TAB NAV =========-->
               <nav>
                 <ul>
-                  <li class="feature-tab-li tab-current"><a href="#tab-1" class="tab-scroll"><span><i class="fa fa-cloud"></i></span></a></li>
-                  <li class="feature-tab-li"><a href="#tab-2" class="tab-scroll"><span><i class="fa fa-paint-brush"></i></span></a></li>
-                  <li class="feature-tab-li"><a href="#tab-3" class="tab-scroll"><span><i class="fa fa-cubes"></i></span></a></li>
-                  <li class="feature-tab-li"><a href="#tab-4" class="tab-scroll"><span><i class="fa fa-tasks"></i></span></a></li>
-                  <li class="feature-tab-li"><a href="#tab-5" class="tab-scroll"><span><i class="fa fa-share-alt-square"></i></span></a></li>
-                  <li class="feature-tab-li"><a href="#tab-6" class="tab-scroll"><span><i class="fa fa-life-bouy"></i></span></a></li>
+                  <li class="feature-tab-li tab-current"><a href="#tab-1" class="tab-scroll" data-placement="bottom" data-toggle="tooltip" title="Cloud Computing"><span><i class="fa fa-cloud"></i></span></a></li>
+                  <li class="feature-tab-li"><a href="#tab-2" class="tab-scroll" data-placement="bottom" data-toggle="tooltip" title="Web Designing"><span><i class="fa fa-paint-brush"></i></span></a></li>
+                  <li class="feature-tab-li"><a href="#tab-3" class="tab-scroll" data-placement="bottom" data-toggle="tooltip" title="Web Development and Maintenance"><span><i class="fa fa-cubes"></i></span></a></li>
+                  <li class="feature-tab-li"><a href="#tab-4" class="tab-scroll" data-placement="bottom" data-toggle="tooltip" title="Server Management"><span><i class="fa fa-tasks"></i></span></a></li>
+                  <li class="feature-tab-li"><a href="#tab-5" class="tab-scroll" data-placement="bottom" data-toggle="tooltip" title="Social Apps Integration and Development"><span><i class="fa fa-share-alt-square"></i></span></a></li>
+                  <li class="feature-tab-li"><a href="#tab-6" class="tab-scroll" data-placement="bottom" data-toggle="tooltip" title="Customer Support"><span><i class="fa fa-life-bouy"></i></span></a></li>
                 </ul>
               </nav>
               <!--======= TAB NAV =========-->
@@ -256,14 +314,9 @@
     <div class="row">
       <article>
         <div class="hgroup">
-          <div class="col-xs-3 heading_cover">
-            <h2 class="wow bounceInRight animated">Contact Us</h2>
-          </div>
-          <!--<div class="col-xs-1 skew_holder">
-            <div class="skew_shape"></div>
-            </div>-->
-          <div class="col-xs-8 heading_cover">
-            <h3 class="wow swap animated animated animated">We are always ready to help you with our innovative solutions. Get in touch via the form below or you can email or call us.</h3>
+          <div class="col-xs-12 ">
+           <h3>Contact Us</h3>
+              <p>We are always ready to help you with our innovative solutions. Get in touch via the form below or you can email or call us.</p>
           </div>
         </div>
       </article>
@@ -325,12 +378,4 @@
   </div>
 </section>
 <!-- sec-contact ends -->
-<section>
-  <!-- section map -->
-  <div class="row" style="margin: 0px 0px;">
-    <style>.embed-container { position: relative; padding-bottom: 30%; height: 0; overflow: hidden; max-width: 100%; height: auto; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
-    <div class='embed-container'><iframe src="https://maps.google.com/maps/ms?msa=0&amp;msid=210829915793356214359.0004e1064128922a332ae&amp;hl=en&amp;ie=UTF8&amp;ll=17.438873,78.398279&amp;spn=0,0&amp;t=m&amp;iwloc=0004e106412a8edf7b4a2&amp;output=embed" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
-  </div>
-</section>
-<!-- end of section map -->
 {% endblock %}

@@ -3,7 +3,6 @@
 {% block blogcontent %}
 
 <div class="col-sm-12 col-md-8" id="block-posts">
-            
             <div class="row">
               <div class="col-xs-12 posts  wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">
 
@@ -11,7 +10,7 @@
 
                 <div class="post-info">
                   <div class="entry-meta">
-                    Posted <a href="#" title="#">{{ post.created_on|date:"d F" }}</a> by <a href="#" title="John Doe">{{ post.user.email }} </a>&nbsp; — &nbsp;<a href="#">{{ post.category.name }}</a>        
+                    Posted on <a href="#" title="#">{{ post.created_on|date:"d F" }}</a> — <a href="#">{{ post.category.name }}</a>
                   </div>
                   <div class="comments-link"><a href="#" title="#">&nbsp; &nbsp; {{ comments.count }} comments</a></div>
                 </div>
@@ -32,24 +31,20 @@
                 <ul>
                     {% for comment in comments %}
 
-                    <li class="wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">  
+                    <li class="wow fadeInUp animated animated animated_visible" style="visibility: visible; -webkit-animation: fadeInUp;">
                         <img class="avatar" alt="" src="images/avatar-default.png" height="70" width="70">
                           <div class="meta">
                             <cite>{{comment.name}}</cite>-
                             <time>{{comment.created|date:"d F"}} at {{comment.created|date:"P"}}</time>
                             <a href="#">Reply</a>
-                          </div> 
+                          </div>
                           <p>
                             {{comment.message}}
-                          </p>    
+                          </p>
                     </li>
                     {% endfor %}
                   </ul>
 
-                    
-                    
-                    
-                  
                 <div id="respond" class="comment-respond  ">
                   <h3 id="reply-title" class="comment-reply-title">Leave a Comment</h3>
                   <form action="/blog/{{post.slug}}/add-comment/" id="comment-ajax" method="POST">
@@ -80,14 +75,9 @@
 
                     </div>
                   </form>
-                                  
                 </div><!-- #respond -->
-
-                
               </div><!-- /comments -->
-
             </div> <!-- /row -->
-           
           </div>
 
 <script type="text/javascript">
@@ -103,10 +93,8 @@
                 alert(data.response);
                 window.location = '.';
             }
-            
         },'json');
     });
-    
 </script>
 
 {% endblock %}
