@@ -6,7 +6,7 @@
     <div class="row marl blog-form">
         <fieldset>
             <legend>New Blog Post</legend>
-            <form action="/blog/new/" method="POST" id="blogform" enctype="multipart/form-data">
+            <form action="{% url 'micro_blog:admin_new_post' %}" method="POST" id="blogform" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
@@ -70,15 +70,14 @@
 <script type="text/javascript">
     $ = jQuery;
 
-    $(document).ready(function() { 
+    $(document).ready(function() {
             $('form#blogform').ajaxForm({
-                beforeSerialize: function() 
+                beforeSerialize: function()
                 {
                     $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
                 },
 
                    dataType:  'json',
-                     
                    success:  function(data){
                            if(data.error)
                            {
@@ -89,17 +88,12 @@
                            }
                            else
                            {
-                                   
-                                   window.location='/portal/blog/';
+                                   window.location="{% url 'micro_blog:admin_post_list' %}";
                            }
-                           
                    }
                    });
 
             });
 
-
-    
-    
 </script>
 {% endblock %}

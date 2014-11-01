@@ -2,17 +2,15 @@
 {% block stage %}
 <!-- main content starts here-->
 <div class="row marl main-content">
-    <h4>Blog Post Creation</h4>
     <div class="row marl blog-form">
         <fieldset>
-            <legend>New Blog Post</legend>
+            <legend>New Page</legend>
             <form action="." method="POST" id="pageform">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
                     <input type="Text" class="form-control" id="title" name="title" >
                 </div>
-                
                 <div class="row marl text-editor">
                     <div>
                         <div class="">
@@ -29,7 +27,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="save-btn">
                     <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
                 </div>

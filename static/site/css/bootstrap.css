@@ -358,9 +358,9 @@ button.close {
 .nopull{
   float: none !important
 }
-.hide {
+/*.hide {
   display: none !important;
-}
+}*/
 .show {
   display: block !important;
 }
