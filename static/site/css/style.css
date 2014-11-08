@@ -1269,7 +1269,7 @@ h5.copy_right i {
 }
 /* Section Homepage General CSS starts */
 /*.banner-row{
-    background:#f1f1f1; 
+    background:#f1f1f1;
 }*/
 .section_container {
     padding-top: 80px;
@@ -2137,7 +2137,7 @@ blockquote span {
     margin-left: -38px;
 }
 
-.pagination>li:first-child>a, 
+.pagination>li:first-child>a,
 .pagination>li:first-child>span,
 .pagination {
     border-radius: 2px;

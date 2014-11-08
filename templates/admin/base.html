@@ -1,139 +1,146 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Micro Site Admin</title>
-	<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
-	<link type="text/css" href="/static/admin/css/mpb-style.css" rel="stylesheet"/>
-	<link type="text/css" href="/static/admin/css/mpb-mobile.css" rel="stylesheet"/>
-	<link type="text/css" href="/static/admin/css/mpb-responsive.css" rel="stylesheet"/>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Micro Site Admin</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
+  <link type="text/css" href="/static/admin/css/mpb-style.css" rel="stylesheet" />
+  <link type="text/css" href="/static/admin/css/mpb-mobile.css" rel="stylesheet" />
+  <link type="text/css" href="/static/admin/css/mpb-responsive.css" rel="stylesheet" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://malsup.github.com/jquery.form.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" />
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/static/admin/css/jquery.tagsinput.css" />
-	<script type="text/javascript" src="/static/admin/js/jquery.tagsinput.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" />
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/jquery.tagsinput.css" />
+  <script type="text/javascript" src="/static/admin/js/jquery.tagsinput.js"></script>
   <script src="//cdn.ckeditor.com/4.4.5/standard/ckeditor.js"></script>
 
-     	    
-	<script type="text/javascript">
-		
-		$(function() {
+  <script type="text/javascript">
+  $(function() {
 
-			$('#tags_1').tagsInput({width:'auto'});
-			$('#tags_2').tagsInput({
-				width: 'auto',
-				onChange: function(elem, elem_tags)
-				{
-					var languages = ['php','ruby','javascript'];
-					$('.tag', elem_tags).each(function()
-					{
-						if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
-							$(this).css('background-color', 'yellow');
-					});
-				}
-			});
-			$('#tags_3').tagsInput({
-				width: 'auto',
+    $('#tags_1').tagsInput({
+      width: 'auto'
+    });
+    $('#tags_2').tagsInput({
+      width: 'auto',
+      onChange: function(elem, elem_tags) {
+        var languages = ['php', 'ruby', 'javascript'];
+        $('.tag', elem_tags).each(function() {
+          if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+            $(this).css('background-color', 'yellow');
+        });
+      }
+    });
+    $('#tags_3').tagsInput({
+      width: 'auto',
 
-				//autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
-				autocomplete_url:'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
-			});
-			
+      //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
+      autocomplete_url: 'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
+    });
+    // Uncomment this line to see the callback functions in action
+    //      $('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
 
-// Uncomment this line to see the callback functions in action
-//			$('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});		
-
-// Uncomment this line to see an input with no interface for adding new tags.
-//			$('input.tags').tagsInput({interactive:false});
-		});
-	
-	</script>
-      
-      
-      
+    // Uncomment this line to see an input with no interface for adding new tags.
+    //      $('input.tags').tagsInput({interactive:false});
+  });
+  </script>
 </head>
 
 <body>
-<div id="wrapper">
-         <!-- top-header starts here-->
-         <header class="top-header"> 
-      
-        <div class="row marl logo-sign-row">
-          <div class="container">
-              <nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><img src="/static/admin/images/logo.png"></a>
-    </div>
+  <div id="wrapper">
+    <!-- top-header starts here-->
+    <header class="top-header">
+      <div class="row marl logo-sign-row">
+        <div class="container">
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                  <img src="/static/admin/images/logo.png">
+                </a>
+              </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                  <li><a href="{% url 'micro_admin:index' %}">Home</a></li>
-                  <li><a href="{% url 'micro_admin:users' %}">Users</a></li>
+                  <li><a href="{% url 'micro_admin:index' %}">Home</a>
+                  </li>
+                  <li><a href="{% url 'micro_admin:users' %}">Users</a>
+                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li><a href="{% url 'pages:menu' %}">Menu</a></li>
-                      <li><a href="{% url 'pages:pages' %}">Pages</a></li>
-                      <li><a href="{% url 'micro_admin:jobs' %}">Jobs</a></li>
-                      <li><a href="{% url 'micro_admin:contacts' %}">Contacts</a></li>
+                      <li><a href="{% url 'pages:menu' %}">Menu</a>
+                      </li>
+                      <li><a href="{% url 'pages:pages' %}">Pages</a>
+                      </li>
+                      <li><a href="{% url 'micro_admin:jobs' %}">Jobs</a>
+                      </li>
+                      <li><a href="{% url 'micro_admin:contacts' %}">Contacts</a>
+                      </li>
                     </ul>
                   </li>
-                  <li><a href="{% url 'projects:projects' %}">Projects</a></li>
+                  <li><a href="{% url 'projects:projects' %}">Projects</a>
+                  </li>
                   <li class="dropdown">
-                  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog<b class="caret"></b></a>
-                  	<ul class="dropdown-menu">
-                      <li><a href="{% url 'micro_blog:admin_category_list' %}">Categories</a></li>
-                      <li><a href="{% url 'micro_blog:admin_post_list' %}">Posts</a></li>
-                      <li><a href="#">Comments</a></li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{% url 'micro_blog:admin_category_list' %}">Categories</a>
+                      </li>
+                      <li><a href="{% url 'micro_blog:admin_post_list' %}">Posts</a>
+                      </li>
+                      <li><a href="#">Comments</a>
+                      </li>
                     </ul>
                   </li>
-                  <li><a href="{% url 'payroll:staff' %}">Staff Zone</a></li>
-                  <li><a href="{% url 'micro_kb:knowledgebase' %}">KB</a></li>
+                  <li><a href="{% url 'payroll:staff' %}">Staff Zone</a>
+                  </li>
+                  <li><a href="{% url 'micro_kb:knowledgebase' %}">KB</a>
+                  </li>
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#">Profile</a></li>
-                      <li><a href="#">Settings</a></li>
-                      <li><a href="{% url 'micro_admin:change_password' %}">Change Password</a></li>
-                      <li><a href="{% url 'micro_admin:out' %}">Logout</a></li>
+                      <li><a href="#">Profile</a>
+                      </li>
+                      <li><a href="#">Settings</a>
+                      </li>
+                      <li><a href="{% url 'micro_admin:change_password' %}">Change Password</a>
+                      </li>
+                      <li><a href="{% url 'micro_admin:out' %}">Logout</a>
+                      </li>
                     </ul>
                   </li>
                 </ul>
-              </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+              </div>
+              <!-- /.navbar-collapse -->
             </div>
+            <!-- /.container-fluid -->
+          </nav>
         </div>
-      </header>
-         <!-- top-header ends here-->    
-         <div class="row marl">
-         <div class="container">
-         <!-- menu strats here-->
-          
-         <!-- menu ends here-->
-         <!-- main content starts here-->
-        {% block stage %}
-        {% endblock %}
-
-         <!-- main content ends here-->
-         </div>
-         </div>
-         </div>
       </div>
-   
+    </header>
+    <!-- top-header ends here-->
+    <div class="row marl">
+      <div class="container">
+        <!-- main content starts here-->
+        {% block stage %} {% endblock %}
+        <!-- main content ends here-->
+      </div>
+    </div>
+  </div>
+  </div>
 </body>
+
 </html>
