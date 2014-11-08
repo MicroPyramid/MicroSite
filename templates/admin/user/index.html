@@ -1,0 +1,36 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>Users List</legend>
+      <div class="save-btn">
+        <a href="{% url 'micro_admin:new_user' %}">New User</a>
+      </div>
+      <div class="table-responsive table-bordered">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Name</th>
+              <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Blogs</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Leaves</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{user.first_name}} {{user.last_name}}</td>
+              <td class="sec-col"></td>
+              <td></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+{% endblock %}

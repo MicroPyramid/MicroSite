@@ -9,7 +9,7 @@ urlpatterns = patterns('micro_blog.views',
     url(r'^admin/list/$', 'admin_post_list', name='admin_post_list'),
     url(r'^admin/new/$', 'admin_new_post', name='admin_new_post'),
     url(r'^edit/(?P<blog_slug>[-\w]+)/$', 'edit_blog_post', name='edit_post'),
-    
+
     url(r'^category-list/$', 'admin_category_list', name='admin_category_list'),
     url(r'^new-category/$', 'new_blog_category', name='new_blog_category'),
 
