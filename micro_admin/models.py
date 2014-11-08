@@ -12,7 +12,6 @@ USER_ROLES = (
               ('PM', 'Project Manager'),
               ('Designer', 'Designer'),
               ('Developer', 'Developer'),
-              ('Employee', 'Employee'), # Employee
               )
 
 class UserManager(BaseUserManager):
