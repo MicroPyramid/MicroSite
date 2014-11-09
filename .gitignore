@@ -1,6 +1,6 @@
+db.sqlite3
 *.pyc
 *~
-db.sqlite3
 .project
 .pydevproject
 static/blog

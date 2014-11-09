@@ -1,7 +1,8 @@
+import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.conf import settings
-import datetime
+
 
 def create_slug(tempslug):
     slugcount = 0
@@ -14,6 +15,7 @@ def create_slug(tempslug):
             return tempslug
             break
 
+
 class Category(models.Model):
     name = models.CharField(max_length=20, unique = True)
     slug = models.CharField(max_length=20, unique = True)
@@ -23,6 +25,7 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
+
 class Tags(models.Model):
     name = models.CharField(max_length=20, unique = True)
     slug = models.CharField(max_length=20, unique = True)
@@ -30,6 +33,7 @@ class Tags(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Tags, self).save(*args, **kwargs)
+
 
 class Post(models.Model):
     STATUS_CHOICE = (
@@ -43,7 +47,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now = True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    content = models.TextField(max_length=10000)
+    content = models.TextField()
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags,blank=True,null=True)
     featured_image = models.CharField(max_length=400, blank=True, null=True)
@@ -65,6 +69,11 @@ class Post(models.Model):
 
         super(Post, self).save(*args, **kwargs)
 
+    @property
+    def get_url(self):
+        return settings.SITE_BLOG_URL + self.slug
+
+
 class BlogComments(models.Model):
     post = models.ForeignKey(Post, blank=True, null=True)
     name = models.CharField(max_length=255)
@@ -72,6 +81,7 @@ class BlogComments(models.Model):
     message = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
     status = models.CharField(max_length=3,default="off", blank=True)
+
 
 class Image_File(models.Model):
     upload = models.FileField(upload_to="static/uploads/%Y/%m/%d/")

@@ -131,7 +131,7 @@ def delete_category(request,category_slug):
 
 def site_blog_home(request):
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    blog_posts = Post.objects.filter(status='P')
+    latest_posts = Post.objects.filter(status='P').order_by('created_on')[:5]
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
@@ -145,9 +145,9 @@ def site_blog_home(request):
     else:
         page = 1
 
-    no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+    no_pages = int(math.ceil(float(Post.objects.filter(status='P').count()) / items_per_page))
 
-    blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+    blog_posts = Post.objects.filter(status='P')[(page - 1) * items_per_page:page * items_per_page]
 
     if page <= 5:
         start_page = 1
@@ -165,11 +165,12 @@ def site_blog_home(request):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
+    latest_posts = Post.objects.filter(status='P').order_by('created_on')[:5]
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     blog_posts = Post.objects.filter(status='P')[:3]
     categories = Category.objects.all()
@@ -181,7 +182,7 @@ def blog_article(request, slug):
         archives.append(current_date + datetime.timedelta(i*365/12))
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
+    return render_to_response('site/blog/article.html',{'latest_posts':latest_posts, 'csrf_token':c['csrf_token'],'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
 
 
 def blog_tag(request, slug):
@@ -371,6 +372,7 @@ def admin_new_post(request):
 def edit_blog_post(request,blog_slug):
     if request.method == 'POST':
         current_post = Post.objects.get(slug = blog_slug)
+        print len(request.POST.get('content'))
         validate_blog = BlogpostForm(request.POST,instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
