@@ -24,6 +24,8 @@
   <link href="/static/site/css/mobile.css" rel="stylesheet">
   <link href="/static/site/css/responsive.css" rel="stylesheet">
   <link href="/static/site/css/animation.css" rel="stylesheet">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
@@ -116,14 +118,14 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left useful-links">
                   <div class="row marl news-part">
-                    <div class="address-head">Latest News</div>
+                    <div class="address-head">Latest Posts</div>
                     <ul>
                       {% for post in latest_posts %}
                       <li>
-                        <a href="#">
-                          <span class="news-thumb">
+                        <a href="{{ post.get_url }}">
+                          <!-- <span class="news-thumb">
                             <img width="36" height="36" src="images/testi-img-3.jpg" class="post-image" alt="Healthy Hair">
-                          </span>
+                          </span> -->
                           <strong class="news-headline">{{ post.title }}
                             <span class="news-time">{{ post.created_on|date:"F d, Y - P" }}</span>
                           </strong>
@@ -328,14 +330,14 @@
           </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left useful-links flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
             <div class="row marl news-part">
-              <div class="address-head">Latest News</div>
+              <div class="address-head">Latest Posts</div>
               <ul>
                 {% for post in latest_posts %}
                 <li>
-                  <a href="#">
-                    <span class="news-thumb">
+                  <a href="{{ post.get_url }}">
+                    <!-- <span class="news-thumb">
                       <img width="36" height="36" src="images/testi-img-3.jpg" class="post-image">
-                    </span>
+                    </span> -->
                     <strong class="news-headline">{{ post.title }}
                       <span class="news-time">{{ post.created_on|date:"F d, Y - P" }}</span>
                     </strong>
@@ -406,6 +408,7 @@
   <script src="/static/site/js/animation.js"></script>
   <script type='text/javascript' src="/static/site/js/wow.min.js"></script>
   <script type='text/javascript' src="/static/site/js/main.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
 
   <script type="text/javascript">
   $("form#adminloginform").submit(function(e) {

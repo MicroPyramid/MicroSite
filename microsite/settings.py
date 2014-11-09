@@ -74,7 +74,7 @@ QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
 TEMPLATE_DIRS = (BASE_DIR +'/templates',)
 
 MEDIA_ROOT = BASE_DIR
-
+SITE_BLOG_URL = "/blog/"
 
 TEMPLATE_LOADERS = (
     ("django.template.loaders.cached.Loader", (
