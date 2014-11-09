@@ -29,7 +29,6 @@ def index(request):
         data.update(csrf(request))
         return render_to_response('admin/login.html',data)
 
-
 def out(request):
     if not request.user.is_authenticated():
         return HttpResponse('')
@@ -61,7 +60,6 @@ def users(request):
 
 @login_required
 def new_user(request):
-
     if request.method == 'POST':
         validate_user = UserForm(request.POST)
         if validate_user.is_valid():
@@ -148,7 +146,6 @@ def delete_user(request,pk):
     user = User.objects.get(pk=pk)
     user.delete()
     return HttpResponseRedirect("/portal/users/")
-
 
 @login_required
 def contacts(request):
