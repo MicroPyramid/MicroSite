@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
+
 def create_slug(tempslug):
 	slugcount = 0
 	while True:
@@ -12,11 +13,12 @@ def create_slug(tempslug):
 			return tempslug
 			break
 
-# Create your models here.
-class page(models.Model):
+
+class Page(models.Model):
 	title = models.CharField(max_length=100)
 	content = models.TextField(max_length=20000)
 	slug = models.SlugField()
+	is_active = models.BooleanField(default=True)
 
 	def save(self, *args, **kwargs):
 		tempslug = slugify(self.title)
@@ -30,7 +32,7 @@ class page(models.Model):
 		super(page, self).save(*args, **kwargs)
 
 
-class contact(models.Model):
+class Contact(models.Model):
 	CONTACT_TYPES = (
 					('Hire','Hire Us'),
 					('Contact','Contact Us'),

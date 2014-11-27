@@ -131,7 +131,7 @@ def delete_category(request,category_slug):
 
 def site_blog_home(request):
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    latest_posts = Post.objects.filter(status='P').order_by('created_on')[:5]
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
@@ -147,7 +147,7 @@ def site_blog_home(request):
 
     no_pages = int(math.ceil(float(Post.objects.filter(status='P').count()) / items_per_page))
 
-    blog_posts = Post.objects.filter(status='P')[(page - 1) * items_per_page:page * items_per_page]
+    blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
 
     if page <= 5:
         start_page = 1
@@ -170,7 +170,7 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
-    latest_posts = Post.objects.filter(status='P').order_by('created_on')[:5]
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     blog_posts = Post.objects.filter(status='P')[:3]
     categories = Category.objects.all()
@@ -187,8 +187,9 @@ def blog_article(request, slug):
 
 def blog_tag(request, slug):
     tag = Tags.objects.get(slug=slug)
-    blog_posts = Post.objects.filter(tags__in=[tag],status="P")
+    blog_posts = Post.objects.filter(tags__in=[tag],status="P").order_by('-created_on')
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
@@ -222,12 +223,13 @@ def blog_tag(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
     category = Category.objects.get(slug=slug)
-    blog_posts = Post.objects.filter(category=category,status="P")
+    blog_posts = Post.objects.filter(category=category,status="P").order_by('-created_on')
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     categories = Category.objects.all()
     tags = Tags.objects.all()
@@ -262,7 +264,7 @@ def blog_category(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def add_blog_comment(request, slug):
@@ -282,8 +284,9 @@ def add_blog_comment(request, slug):
         return HttpResponse(json.dumps(data))
 
 def archive_posts(request, year, month):
-    blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month)
+    blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month).order_by('-created_on')
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
@@ -317,7 +320,7 @@ def archive_posts(request, year, month):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 @login_required

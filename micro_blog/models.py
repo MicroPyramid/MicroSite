@@ -25,6 +25,10 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
+    @property
+    def get_url(self):
+        return settings.SITE_BLOG_URL + "category/" + self.slug
+
 
 class Tags(models.Model):
     name = models.CharField(max_length=20, unique = True)
@@ -53,6 +57,11 @@ class Post(models.Model):
     featured_image = models.CharField(max_length=400, blank=True, null=True)
     featured_post = models.CharField(max_length=4, default='off',blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE,blank=True)
+
+
+    def __unicode__(self):
+        return self.title
+
 
     @property
     def author(self):

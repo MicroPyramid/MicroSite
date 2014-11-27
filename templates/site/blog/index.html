@@ -1,39 +1,45 @@
-{% extends 'site/blog/base.html' %}
+{% extends 'site/blog/base.html' %} {% block blogcontent %}
 
-{% block blogcontent %}
+<div class="col-sm-12 col-md-8 wow fadeInUp animated animated animated_visible" id="block-posts" style="visibility: visible; -webkit-animation: fadeInUp;">
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-xs-12 posts  wow fadeInUp animated animated_visible animated" style="visibility: visible; -webkit-animation: fadeInUp;">
 
-          <div class="col-sm-12 col-md-8 wow fadeInUp animated animated animated_visible" id="block-posts" style="visibility: visible; -webkit-animation: fadeInUp;">
-            <div class="row">
-              {% for post in posts %}
-                  <div class="col-xs-12 posts  wow fadeInUp animated animated_visible animated" style="visibility: visible; -webkit-animation: fadeInUp;">
+      <h1><a href="/blog/{{post.slug}}/">{{post.title}}</a>
+      </h1>
 
-                    <h1><a href="/blog/{{post.slug}}/">{{post.title}}</a></h1>
+      <div class="post-info">
+        <div class="entry-meta">
+          Posted on <a href="#" title="#">{{ post.created_on|date:"d F" }}</a> — <a href="{{ post.category.get_url }}">{{ post.category.name }}</a>
+        </div>
+        <!-- <div class="comments-link"><a href="#" title="#"> — 1 comment</a></div> -->
+      </div>
+      {% if post.featured_image != '' %}
+      <div class="post-img">
+        <img class="replace-2x" src="{{ post.featured_image }}" width="620" height="370" alt="">
+      </div>
+      {% endif %}
+      <p>{{post.content|safe|truncatewords_html:100}}</p>
+      <a class="btn-default" href="/blog/{{post.slug}}/">Read more<i class="fa fa-angle-right"></i></a>
+    </div>
+    {% endfor %}
 
-                    <div class="post-info">
-                      <div class="entry-meta">
-                        Posted on <a href="#" title="#">{{ post.created_on|date:"d F" }}</a> — <a href="#">{{ post.category.name }}</a>
-                      </div>
-                      <div class="comments-link"><a href="#" title="#"> — 1 comment</a></div>
-                    </div>
-                    {% if post.featured_image != '' %}
-                        <div class="post-img"><img class="replace-2x" src="{{ post.featured_image }}" width="620" height="370" alt=""></div>
-                    {% endif %}
-                    <p>{{post.content|safe|truncatewords_html:100}}</p>
-                    <button class="btn-default">Read more<i class="fa fa-angle-right"></i></button>
-                  </div>
-              {% endfor %}
-
-              <div class="col-xs-12 ">
-                <div class="pagination-box">
-                  <ul class="pagination">
-                    <li><a href="/blog/?page=1">First</a></li>
-                    {% for s in pages %}
-                    <li {% ifequal s current_page %} class="active" {% endifequal %} ><a href="/blog/?page={{s}}">{{s}}</a></li>
-                    {% endfor %}
-                    <li><a href="/blog/?page={{last_page}}">Last</a></li>
-                </ul>
-                </div>
-              </div>
-            </div> <!-- /row -->
-          </div><!-- /block-posts -->
+    <div class="col-xs-12 ">
+      <div class="pagination-box">
+        <ul class="pagination">
+          <li><a href="/blog/?page=1">First</a>
+          </li>
+          {% for s in pages %}
+          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}">{{s}}</a>
+          </li>
+          {% endfor %}
+          <li><a href="/blog/?page={{last_page}}">Last</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /row -->
+</div>
+<!-- /block-posts -->
 {% endblock %}

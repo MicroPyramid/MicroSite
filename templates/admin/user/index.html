@@ -11,19 +11,17 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
               <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Full Name</th>
               <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Email</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Role</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Posts</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
-              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
             </tr>
           </thead>
           <tbody>
             {% for user in users %}
             <tr>
-              <td>{{forloop.counter}}</td>
               <td>{{user.get_full_name}}</td>
               <td class="sec-col">{{user.email}}</td>
               <td>{{user.user_roles}}</td>
@@ -37,10 +35,11 @@
                   {% endif %}
                   </a>
               </td>
-
-              <td><a href="{% url 'micro_admin:edit_user' pk=user.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+              <td>
+                {{ user.total_posts}} / {{ user.drafted_posts }}
               </td>
-              <td><a href="{% url 'micro_admin:delete_user' pk=user.id %}"><i class="fa fa-trash-o trash-color"></i></a>
+              <td>
+                  <a href="{% url 'micro_admin:edit_user' pk=user.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
               </td>
             </tr>
             {% endfor %}

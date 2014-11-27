@@ -13,7 +13,7 @@ from django.db.models.aggregates import Max
 
 @login_required
 def pages(request):
-    pagelist=page.objects.all()
+    pagelist=Page.objects.all()
     return render_to_response('admin/content/page/page-list.html',{'pages': pagelist})
 
 
@@ -35,14 +35,14 @@ def new_page(request):
 
 @login_required
 def delete_page(request, pk):
-    page.objects.get(pk = pk).delete()
+    Page.objects.get(pk = pk).delete()
     return HttpResponseRedirect('/portal/content/page/')
 
 
 @login_required
 def edit_page(request, pk):
     if request.method=='POST':
-        page_instance = page.objects.get(pk=pk)
+        page_instance = Page.objects.get(pk=pk)
         validate_page = PageForm(request.POST, instance=page_instance)
         if validate_page.is_valid():
             validate_page.save()
@@ -53,7 +53,7 @@ def edit_page(request, pk):
 
     c = {}
     c.update(csrf(request))
-    current_page = page.objects.get(pk=pk)
+    current_page = Page.objects.get(pk=pk)
     return render_to_response('admin/content/page/edit-page.html',{'page':current_page,'csrf_token':c['csrf_token']})
 
 

@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, Permission, _user_has_perm, Group)
+from micro_blog.models import Post
+
 
 GENDER_TYPES = (
     ('M', 'Male'),
@@ -90,6 +92,14 @@ class User(AbstractBaseUser):
 
         # Otherwise we need to check the backends.
         return _user_has_perm(self, perm, obj)
+
+    def total_posts(self):
+        return Post.objects.filter(user=self).count()
+
+
+    def drafted_posts(self):
+        return Post.objects.filter(user=self, status="D").count()
+
 
     class Meta:
         permissions = (
