@@ -10,5 +10,7 @@ urlpatterns = patterns('',
     url(r'^portal/projects/', include('projects.urls', namespace='projects')),
     url(r'^portal/staff/', include('payroll.urls', namespace='payroll')),
     url(r'^portal/kb/', include('micro_kb.urls', namespace='micro_kb')),
-    
+
+    url(r'^rss.xml$', 'microsite_front.xml.rss' ),
+    url(r'^sitemap.xml$', 'microsite_front.xml.sitemap'),
 )

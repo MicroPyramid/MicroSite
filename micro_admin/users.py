@@ -103,7 +103,7 @@ def edit_user(request,pk):
         c.update(csrf(request))
         current_user = User.objects.get(pk = pk)
         user_roles = USER_ROLES
-        return render_to_response('admin/useraccount/user-edit.html',{'role_list':user_roles,'edit_user':current_user,'csrf_token':c['csrf_token']})
+        return render_to_response('admin/user/edit.html',{'role_list':user_roles,'edit_user':current_user,'csrf_token':c['csrf_token']})
 
 
 @login_required
@@ -116,11 +116,3 @@ def change_state(request,pk):
 
     user.save()
     return HttpResponseRedirect("/portal/users/")
-
-
-@login_required
-def delete_user(request,pk):
-    user = User.objects.get(pk=pk)
-    user.delete()
-    return HttpResponseRedirect("/portal/users/")
-

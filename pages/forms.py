@@ -1,16 +1,15 @@
 from django import forms
-from pages.models import page, Menu
+from pages.models import Page, Menu
 
 class PageForm(forms.ModelForm):
 
 	class Meta:
-		model = page
+		model = Page
 		exclude = ('slug',)
 
 
 class MenuForm(forms.ModelForm):
-	
+
 	class Meta:
 		model = Menu
-		exclude = ('lvl',)	
-		
+		exclude = ('lvl',)

@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
+from django.template import RequestContext
 from django.contrib.auth.hashers import check_password
 import json
 from microsite.settings import BASE_DIR
@@ -29,7 +30,7 @@ def index(request):
     else:
         data = {}
         data.update(csrf(request))
-        return render_to_response('admin/login.html',data)
+        return render_to_response('admin/login.html',data,context_instance=RequestContext(request))
 
 
 def out(request):
