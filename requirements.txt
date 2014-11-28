@@ -1,3 +1,4 @@
+# required packages
 Django==1.7
 Pillow==2.5.1
 South==1.0
