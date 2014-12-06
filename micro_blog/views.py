@@ -5,7 +5,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Image_File, Category, Tags, Post, BlogComments
-from pages.models import Menu
+from pages.models import Menu,Page
 from PIL import Image
 import os
 import math
@@ -130,13 +130,17 @@ def delete_category(request,category_slug):
 
 
 def site_blog_home(request):
+    
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
+    comments = BlogComments.objects.filter(status="on")[:4]
+    page_list=Page.objects.all()
+
     archives = []
-    for i in range(-4,1):
+    for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
 
     items_per_page = 6
@@ -165,7 +169,7 @@ def site_blog_home(request):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts,'pagelist':page_list, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'comments':comments,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_article(request, slug):
@@ -177,12 +181,23 @@ def blog_article(request, slug):
     tags = Tags.objects.all()
     comments = BlogComments.objects.filter(status="on",post=blog_post)
     current_date = datetime.date.today()
+    page_list=Page.objects.all()[:4]
+
     archives = []
-    for i in range(-4,1):
+    print blog_post.featured_image
+    for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'latest_posts':latest_posts, 'csrf_token':c['csrf_token'],'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
+    return render_to_response('site/blog/article.html',{'latest_posts':latest_posts, 'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
+
+#def blogreply_comments(request):
+#    name=request.user.email
+ #   print name
+
+def page_view(request,slug):
+    post=Page.objects.get(slug=slug)
+    return render_to_response('site/blog/article.html',{'post':post})
 
 
 def blog_tag(request, slug):
@@ -193,8 +208,11 @@ def blog_tag(request, slug):
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
+    comments = BlogComments.objects.filter(status="on")[:4]
+    page_list=Page.objects.all()
+
     archives = []
-    for i in range(-4,1):
+    for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
 
     items_per_page = 6
@@ -223,7 +241,7 @@ def blog_tag(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts,'comments':comments,'pagelist':page_list, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -234,8 +252,11 @@ def blog_category(request, slug):
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
+    comments = BlogComments.objects.filter(status="on")[:4]
+    page_list=Page.objects.all()
+
     archives = []
-    for i in range(-4,1):
+    for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
 
     items_per_page = 6
@@ -264,7 +285,7 @@ def blog_category(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'pagelist':page_list,'comments':comments,'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def add_blog_comment(request, slug):
@@ -283,6 +304,25 @@ def add_blog_comment(request, slug):
             data = {'error':True,'response':'all the fields are required'}
         return HttpResponse(json.dumps(data))
 
+
+# def reply_blog_comment(request, slug):
+#     if request.method == "POST":
+#         validate_blog_comment = CommentForm(request.POST)
+
+#         if validate_blog_comment.is_valid():
+#             comment = validate_blog_comment.save(commit = False)
+#             blog_post = Post.objects.get(slug=slug)
+#             comment.post = blog_post
+#             comment.status='on'
+#             comment.save()
+#             data = {'error':False,'response':'comment posted successfully'}
+#             return HttpResponse(json.dumps(data))
+#         else:
+#             data = {'error':True,'response':'all the fields are required'}
+#         return HttpResponse(json.dumps(data))
+
+
+
 def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month).order_by('-created_on')
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
@@ -290,8 +330,11 @@ def archive_posts(request, year, month):
     categories = Category.objects.all()
     tags = Tags.objects.all()
     current_date = datetime.date.today()
+    comments = BlogComments.objects.filter(status="on")[:4]
+    page_list=Page.objects.all()
+
     archives = []
-    for i in range(-4,1):
+    for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
 
     items_per_page = 6
@@ -320,7 +363,7 @@ def archive_posts(request, year, month):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts,'pagelist':page_list,'comments':comments, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 @login_required

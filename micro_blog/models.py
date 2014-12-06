@@ -82,6 +82,10 @@ class Post(models.Model):
     def get_url(self):
         return settings.SITE_BLOG_URL + self.slug
 
+    def get_comment_count(self):
+        c=BlogComments.objects.filter(status='on',post=self).count()
+        return c
+
 
 class BlogComments(models.Model):
     post = models.ForeignKey(Post, blank=True, null=True)
@@ -90,6 +94,11 @@ class BlogComments(models.Model):
     message = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
     status = models.CharField(max_length=3,default="off", blank=True)
+
+# class ReplyComments(models.Model):
+#      replypost=models.()
+#      created=models.DateTimeField(auto_now_add = True)
+#      status= models.CharField(max_length=3,default="off",blank=True)
 
 
 class Image_File(models.Model):

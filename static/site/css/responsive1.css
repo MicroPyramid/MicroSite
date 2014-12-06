@@ -1,0 +1,212 @@
+@media screen (min-width: 240px) and (max-width: 480px) { 
+		.tabs-style nav a {
+	padding-top: 30px;
+}
+	.tabs nav i {
+	font-size: 17px;
+	height: 40px;
+	width: 40px;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	line-height: 40px;
+
+}	
+.tabs nav i:hover {
+	font-size: 17px;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	}
+	
+}
+@media screen  and (max-width: 767px) { 
+    .row.portfolio-filter,
+    .portfolio-page .portfolio-filter { margin-right: -15px }
+    .bottom-sm-30 { margin-bottom: 30px!important }
+    .bottom-sm-20 { margin-bottom: 20px!important }
+    .bottom-sm-10 { margin-bottom: 10px!important }
+    .bottom-xs-60 { margin-bottom: 60px!important }
+    .bottom-xs-30 { margin-bottom: 30px!important }
+    .bottom-xs-20 { margin-bottom: 20px!important }
+    .bottom-xs-10 { margin-bottom: 10px!important }
+    .top-xs-30 { margin-top: 30px!important }
+    .top-xs-20 { margin-top: 20px!important }
+    .top-xs-10 { margin-top: 10px!important }
+    .top-sm-30 { margin-top: 30px!important }
+    .top-sm-20 { margin-top: 20px!important }
+    .top-sm-10 { margin-top: 10px!important }
+    .text-sm-center { text-align: center!important }
+    .text-sm-left { text-align: left!important }
+    .text-sm-right { text-align: right!important }
+    .text-xs-center { text-align: center!important }
+    .text-xs-left { text-align: left!important }
+    .text-xs-right { text-align: right!important }
+    .pricing-item { margin-top: 0px }
+    .pricing-item .badge { right: 10px }
+    .blog-timeline:before { display: none }
+    .blog-timeline>li .timeline-time {
+        width: 100%;
+        position: relative;
+        padding: 0 0 20px 0;
+    }
+    .blog-timeline>li .timeline-time span { text-align: left }
+    .blog-timeline>li .timeline-content {
+        margin: 0 0 30px 0;
+        padding: 20px;
+        font-weight: 400;
+        font-size: 95%;
+    }
+    .blog-timeline>li .timeline-content:after {
+        right: auto;
+        left: 20px;
+        border-right-color: transparent;
+        border-bottom-color: #3594cb;
+        top: -20px;
+    }
+    .blog-timeline>li:nth-child(odd) .timeline-content:after {
+        border-right-color: transparent;
+        border-bottom-color: #6cbfee;
+    }
+    .blog-timeline>li .timeline-icon {
+        position: relative;
+        float: right;
+        left: auto;
+        margin: -70px 0px 0 0px;
+    }
+    .pagenavi.offset { padding-left: 0 }
+    .tabs-side.right .tabNavigation,
+    .tabs-side .tabNavigation {
+        width: auto;
+        float: none;
+    }
+    .tabs-side.right .tabs-container,
+    .tabs-side .tabs-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .tabs-side.right .tabNavigation { text-align: left }
+    .tabs-side.right .tabNavigation li i.fa-arrow-circle-left { float: right }
+    .tabs-side .tabNavigation li i:before { content: '\f13a' }
+    .tabs-side.right .tabNavigation li i { margin: 4px 0 0 0 }
+    .callout-action { float: none!important }
+    .posts .blog-meta span { display: block }
+    .prenex-post .previous-post,
+    .prenex-post .next-post { text-align: center }
+    #header #mainheader.fixedheader.affix {
+        position: relative;
+        padding: 30px 0;
+        background: #fff;
+    }
+    .portfolio-content:after,
+    .portfolio-content:before { display: none }
+    .credit { text-align: center }
+    #sidebar-content #content,
+    #sidebar-content #sidebar { float: none }
+    .portfolio-filter-nav-hr li {
+        float: none;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .portfolio-filter-nav-hr li a {
+        display: block;
+        padding: 5px 30px;
+        border: 2px solid #f1f1f1;
+    }
+    .portfolio-filter-nav-hr li a i {
+        position: absolute;
+        left: 13px;
+        top: 13px;
+    }
+    .icon-list.icon-right i,
+    .icon-list.icon-left i {
+        float: none;
+        display: inline-block;
+        margin: 0;
+    }
+	.tabs-style nav a {
+	padding-top: 30px;
+}
+		.tabs nav i {
+	font-size: 20px;
+	height: 60px;
+	width: 60px;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	line-height: 60px;
+
+}	
+.tabs nav i:hover {
+	font-size: 20px;
+	height: 60px;
+	width: 60px;
+	line-height: 60px;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) { 
+    .bottom-sm-30 { margin-bottom: 30px!important }
+    .bottom-sm-20 { margin-bottom: 20px!important }
+    .bottom-sm-10 { margin-bottom: 10px!important }
+    .text-sm-center { text-align: center!important }
+    .text-sm-left { text-align: left!important }
+    .text-sm-right { text-align: right!important }
+    .blog-timeline:before { display: none }
+    .blog-timeline>li .timeline-time {
+        width: 100%;
+        position: relative;
+        padding: 0 0 20px 0;
+    }
+    .blog-timeline>li .timeline-time span { text-align: left }
+    .blog-timeline>li .timeline-content {
+        margin: 0 0 30px 0;
+        padding: 20px;
+        font-weight: 400;
+        font-size: 95%;
+    }
+    .blog-timeline>li .timeline-content:after {
+        right: auto;
+        left: 20px;
+        border-right-color: transparent;
+        border-bottom-color: #3594cb;
+        top: -20px;
+    }
+    .blog-timeline>li:nth-child(odd) .timeline-content:after {
+        border-right-color: transparent;
+        border-bottom-color: #6cbfee;
+    }
+    .blog-timeline>li .timeline-icon {
+        position: relative;
+        float: right;
+        left: auto;
+        margin: -70px 0px 0 0px;
+    }
+    .pagenavi.offset { padding-left: 0 }
+	.tabs nav i {
+	font-size: 20px;
+	height: 50px;
+	width: 50px;
+	color: #fff;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	line-height: 50px;
+
+}	
+.tabs nav i:hover {
+	font-size: 20px;
+	height: 50px;
+	width: 50px;
+	line-height:50px;
+	}
+}
+@media (min-width: 992px) and (max-width: 1199px) { 
+    .bottom-md-30 { margin-bottom: 30px!important }
+    .bottom-md-20 { margin-bottom: 20px!important }
+    .bottom-md-10 { margin-bottom: 10px!important }
+    .infolink { padding: 20px }
+}
+@media (min-width: 1200px) { 
+    .bottom-lg-30 { margin-bottom: 30px!important }
+    .bottom-lg-20 { margin-bottom: 20px!important }
+    .bottom-lg-10 { margin-bottom: 10px!important }
+}

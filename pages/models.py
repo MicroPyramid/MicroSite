@@ -29,7 +29,7 @@ class Page(models.Model):
 		else:
 			self.slug = create_slug(tempslug)
 
-		super(page, self).save(*args, **kwargs)
+		super(Page, self).save(*args, **kwargs)
 
 
 class Contact(models.Model):

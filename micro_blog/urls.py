@@ -18,6 +18,9 @@ urlpatterns = patterns('micro_blog.views',
 
     url(r'^(?P<slug>[-\w]+)/$','blog_article'),
     url(r'^(?P<slug>[-\w]+)/add-comment/$','add_blog_comment'),
+
+    url(r'^pageview/(?P<slug>[-\w]+)/$','page_view'),
+
     url(r'^(?P<year>\w{0,})/(?P<month>\w{0,})/$','archive_posts'),
 
     url(r'^change/featured-state/(?P<blog_slug>[-\w]+)/$', 'change_featured_state', name='change_featured_state'),
@@ -28,4 +31,5 @@ urlpatterns = patterns('micro_blog.views',
 
     url(r"^ajax/photos/upload/$", "upload_photos",name = "upload_photos"),
     url(r"^ajax/photos/recent/$", "recent_photos",name = "recent_photos"),
+
 )

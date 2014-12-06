@@ -1,7 +1,7 @@
 from django import forms
 from pages.models import Page, Menu
 
-class PageForm(forms.ModelForm):
+class  PageForm(forms.ModelForm):
 
 	class Meta:
 		model = Page

@@ -1,0 +1,3 @@
+Uri: http://templates.everislabs.com/erato/css/plugin.css
+File Name: c:\sites\erato\templates.everislabs.com\erato\css\plugin.css
+Content Type: text/css
