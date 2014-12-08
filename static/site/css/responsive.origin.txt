@@ -1,3 +1,0 @@
-Uri: http://templates.everislabs.com/erato/css/responsive.css
-File Name: c:\sites\erato\templates.everislabs.com\erato\css\responsive.css
-Content Type: text/css

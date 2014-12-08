@@ -1,3 +1,0 @@
-Uri: http://templates.everislabs.com/erato/js/twitter/tweet.js
-File Name: c:\sites\erato\templates.everislabs.com\erato\js\twitter\tweet.js
-Content Type: application/javascript

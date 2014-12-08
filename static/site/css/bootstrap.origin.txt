@@ -1,3 +1,0 @@
-Uri: http://templates.everislabs.com/erato/css/bootstrap.css
-File Name: c:\sites\erato\templates.everislabs.com\erato\css\bootstrap.css
-Content Type: text/css
