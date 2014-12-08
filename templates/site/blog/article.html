@@ -19,17 +19,13 @@
                     </div>
                   </div>
                 </div>
-                <!--<div class="person-img-div"><a href="#"><img src="/static/blog/{{ post.featured_image }}"></a></div>-->
+               
                 {% if post.featured_image %}
                 <div class="post-img"><a class="fancybox replace-2x" rel="" href="images/portfolio/06/01.jpg" title="Img Title!">
                 <img class="replace-2x" src="/static/blog/{{ post.featured_image }}" width="620" height="370" alt=""></a></div>{% endif %}
-                <!-- <p class="bold-text">{{ post.content|safe }}</p> -->
+                
                 <p class="proveb">{{post.content|safe}}</p>
-                <!--<ul class="square-bullet">
-                  <li>{{post.content|safe}}</li>
-                   <li>{{post.content|safe}}</li>
-                </ul> -->
-                <!-- <p>{{post.content|safe}}</p> -->
+                
             
                 <h5>Tags</h5>
                 <div class="tag-div">
@@ -52,16 +48,7 @@
                     <li><a href="#" class="you-tube-icon"><i class="fa fa-youtube"></i></a></li>
                   </ul>
                 </div>
-                <!-- <div class="proveb mar-btm-0">
-                {% if post.featured_image %}
-                  <img src="/staic/blog/{{ post.featured_image }}">
-                  {% endif %}
-                  <div class="name-des-div">
-                    <h5>{{post.users.first_name}}</h5>
-                    <p>{{post.content|safe}}</p>
-                  </div> 
-                  <br clear="all">
-                </div>-->
+                
                 <!-- andPosts -->
                 <!-- COMMENTS -->
                 <div class="col-xs-12  wow fadeInUp animated" id="comments">
@@ -70,14 +57,12 @@
                     <li class=" wow fadeInUp animated">
                       <div>
                       {% for comment in comments %}
-                      <!-- {% if post.featured_image %}
-                        <div class="coment-img-div"><img class="avatar" alt="" src="/static/blog/{{ post.featured_image }}" height="70" width="70"></div>
-                        {% endif %} -->
+                      
                         <div class="bg-clr-div">
                           <div class="meta">
                             <cite>{{ comment.name }}</cite><br>
                             <time>{{ comment.created|date:"d F" }} at {{comment.created|date:"P"}}</time>
-                            <!-- <span class="reply"><a href="#">Reply</a></span> -->
+                            
                           </div>
                           <p>
                             {{ comment.message }}
@@ -85,24 +70,7 @@
                         </div>
                         {% endfor %}
                       </div>
-                      <!-- <ul class="children">
-                        <li  class=" wow fadeInUp animated">
-                          <div>
-                            <div class="coment-img-div"><img class="avatar" alt="" src="images/testi-img-3.jpg" height="70" width="70"></div>
-                            <div class="bg-clr-div">
-                              <div class="meta">
-                                <cite>John Doe</cite><br>
-                                <time>September 14, 2014 at 9:25 am</time>
-                               <span class="reply"><a href="#">Reply</a></span>
-                              </div>
-                              <p>
-                                {{ comment.message}}
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul> -->
+                      
                   <div id="respond" class="comment-respond ">
                     <h5 id="reply-title" class="comment-reply-title">Leave a Reply</h5>
                     <form id="contactform" method="POST" action="/blog/{{post.slug}}/add-comment/">

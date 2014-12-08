@@ -63,7 +63,7 @@
               <div class="col-xs-12 ">
                 <div class="pagination-box">
                   <ul class="pagination">
-                    <!-- <li class="disabled"><a href="#"><i class="fa fa-angle-left"></i> Prev</a></li> -->
+                    
                     {% for s in pages %}
                      <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}">{{s}}</a>
                      </li>
@@ -80,109 +80,7 @@
           </div>
       <!-- sec-about ends -->
 
-<script>
 
-var arr = [];
-
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '464918096908788', // App ID
-      channelUrl : '//www.micropyramid.com/', // Channel File
-      status     : true, // check login status
-      cookie     : true, // enable cookies to allow the server to access the session
-      xfbml      : true  // parse XFBML
-    });
-
-    function updateButton(response) {
-        
-        if (response.authResponse) {
-            FB.api('/me', function(info) {
-                login(response, info);
-            });
-            
-            $('a#flogout').click(function(e){
-              e.preventDefault();
-                FB.logout(function(response) {
-          //clear user info
-          userlogin=false;
-          $.post('/logout/',{},function(){
-            location.reload();  
-          });
-          
-                });
-            });
-        } else {
-            //user is not connected to app or logged out
-            userlogin=false;
-          $('#sp-uinfo').hide();
-          $('#sp-flgn').show();
-            $('a.faceBtn').click(function(e) {
-              e.preventDefault();
-                FB.login(function(response) {
-                    if (response.authResponse) {
-                        FB.api('/me', function(info) {
-                            login(response, info);
-                        });
-                        FB.api('/me/friends', {fields:'name,first_name,gender'}, function(response) {
-                          return; 
-                        });
-                        
-                        
-                    } else {
-                        //user cancelled login or did not grant authorization
-                    }
-                }, {scope:'offline_access,email,user_about_me,user_location, publish_actions'});    
-            });
-        }
-    }
-    
-    // run once with current status and whenever the status changes
-    FB.getLoginStatus(updateButton);
-    FB.Event.subscribe('auth.statusChange', updateButton);
-  };
-
-  // Load the SDK Asynchronously
-  (function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-
-  
-  function login(response, info)
-  {
-    if (response.authResponse) {
-      $.post('/fblogin/',{},function(d){
-        
-      });
-      
-      $('#uimg').attr('src','//graph.facebook.com/' + info.id + '/picture?width=30&height=30');
-      $('#uname').html(info.first_name);
-      userlogin=true;
-      $('#sp-uinfo').show();
-      $('#sp-flgn').hide();
-      
-    }
-  }
-  
-  function invite_friends(){
-    FB.ui({
-    method: 'apprequests',
-    message: 'Try Study Signal'
-    });
-  } 
-  
-  function send_requests(arr){
-    FB.ui({
-      method: 'apprequests',
-      message: 'Try StudySignal!!!',
-      to:arr.join(',')
-    });
-    } 
-
-</script>
 
 
 {% endblock %}      

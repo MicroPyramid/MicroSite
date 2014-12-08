@@ -2977,6 +2977,8 @@ font-size: 13px;
 .item .blog-columns{
 	width:100%;	
 }
-.blog-image{
-min-width:247px;
+.blog-image {
+  min-width: 247px;
+
 }
+

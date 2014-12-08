@@ -1,7 +1,6 @@
 # required packages
 Django==1.7
 Pillow==2.5.1
-South==1.0
 argparse==1.2.1
 dj-database-url==0.3.0
 dj-static==0.0.6

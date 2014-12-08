@@ -105,7 +105,7 @@
                   <h3 class="widget-title"><span>Recent Comments</span></h3>
                   <ul id="recentcomments">
                   {% for comment in comments %}
-                     <li class="recentcomments">{{comment.name}} &thinsp; <a href="/blog/{{post.slug}}/add-comment">{{comment.created|date:"M d Y"}}</a></li>
+                     <li class="recentcomments">{{comment.name}} &thinsp; <a href="/blog/{{comment.post.slug}}/">{{comment.created|date:"M d Y"}}</a></li>
                   {% endfor %}   
                   </ul> 
                </div>
