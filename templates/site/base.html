@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="/static/favicon.ico">
 
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,700,600,800,900' rel='stylesheet' type='text/css'>
-  <link href="/static/site/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="/static/site/css/plugin.css" rel="stylesheet">
   <link href="/static/site/css/style.css" rel="stylesheet">
@@ -26,7 +26,9 @@
   <link href="/static/site/css/animation.css" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
 
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="/static/site/js/jquery.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
     $(".sliding-top-control").click(function(e) {
@@ -401,14 +403,23 @@
     </footer>
     <!-- footer ends here -->
   </div>
+ 
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+  <script src="/static/site/js/jquery.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+  <script src="/static/site/js/modernizr.custom.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <script src="/static/site/js/superfish.js"></script>
-  <script src="/static/site/js/bootstrap.js"></script>
+  <script src="/static/site/js/classie.js"></script>
+  <script src="/static/site/js/scrollreveal.js"></script>
   <script src="/static/site/js/mmenu.js"></script>
   <script src="/static/site/js/functions.js"></script>
   <script src="/static/site/js/animation.js"></script>
-  <script type='text/javascript' src="/static/site/js/wow.min.js"></script>
+  <script type='text/javascript' src="http://isotope.metafizzy.co/isotope.pkgd.js"></script>
+  <script type='text/javascript'  src="/static/site/js/wow.min.js"></script>
   <script type='text/javascript' src="/static/site/js/main.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+
+
 
   <script type="text/javascript">
   $("form#adminloginform").submit(function(e) {
@@ -442,6 +453,32 @@
     ga('send', 'pageview');
 
   </script>
+
+  <script>
+      $(document).ready(function(){
+           $(".sliding-top-control").click(function(e) {
+           e.preventDefault();
+           $('#top-panel .top-slider').slideToggle();
+           $('.sliding-top-control i').toggleClass('fa-chevron-down');
+           });
+      
+           });
+      // Portfolio
+    </script>
+    <script>
+      $(document).ready(function(){
+            $('.isotope').isotope({
+      itemSelector: '.item',
+      Masonry: {
+        layout: 'vertical',
+        liquid: false,
+        columnWidth: 200, // Force columns to 200px wide
+      }
+      });
+           });
+      // Portfolio
+    </script>
+
 </body>
 
 </html>
