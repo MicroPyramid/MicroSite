@@ -261,7 +261,7 @@ input[type="reset"]:active {
   color: #fff;
   height: 0;
   border-style: solid;
-  border-width: 0 45px 45px 0;
+  border-width: 0 45px 42px 0;
   border-color: transparent transparent transparent transparent;
   position: absolute;
   z-index: 801;
@@ -2980,4 +2980,6 @@ font-size: 13px;
 .blog-image {
   min-width: 247px;
 }
-
+.mar-btm-0{
+  margin-bottom: 0px !important;
+}

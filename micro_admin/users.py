@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.contrib.auth.hashers import check_password
 import json
-
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
 
@@ -52,8 +51,7 @@ def new_user(request):
 
             if request.POST.get('is_active',False):
                 user.is_active = True
-            else:
-                user.is_active = False
+            
 
             user.save()
             print "user saved"
@@ -88,8 +86,6 @@ def edit_user(request,pk):
 
             if request.POST.get('is_active',False):
                 current_user.is_active = True
-            else:
-                current_user.is_active = False
 
             current_user.save()
             print current_user

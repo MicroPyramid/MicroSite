@@ -191,9 +191,7 @@ def blog_article(request, slug):
     c.update(csrf(request))
     return render_to_response('site/blog/article.html',{'latest_posts':latest_posts, 'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
 
-#def blogreply_comments(request):
-#    name=request.user.email
- #   print name
+
 
 def page_view(request,slug):
     post=Page.objects.get(slug=slug)
@@ -304,22 +302,6 @@ def add_blog_comment(request, slug):
             data = {'error':True,'response':'all the fields are required'}
         return HttpResponse(json.dumps(data))
 
-
-# def reply_blog_comment(request, slug):
-#     if request.method == "POST":
-#         validate_blog_comment = CommentForm(request.POST)
-
-#         if validate_blog_comment.is_valid():
-#             comment = validate_blog_comment.save(commit = False)
-#             blog_post = Post.objects.get(slug=slug)
-#             comment.post = blog_post
-#             comment.status='on'
-#             comment.save()
-#             data = {'error':False,'response':'comment posted successfully'}
-#             return HttpResponse(json.dumps(data))
-#         else:
-#             data = {'error':True,'response':'all the fields are required'}
-#         return HttpResponse(json.dumps(data))
 
 
 
