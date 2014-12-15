@@ -42,7 +42,7 @@
                         <h3><a href="/blog/{{post.slug}}/" title="{{post.title}}">{{post.title}}</a></h3>
                       </div>
                       <!-- end title -->
-                      <p>{{post.content|safe|truncatewords:100}}</p>
+                      <p>{{post.content|safe|truncatewords:50}}</p>
                       <div class="post_meta">
                         <span><i class="fa fa-calendar"></i> {{post.created_on|date:"d M  y"}}</span>
                         <span>
@@ -83,12 +83,13 @@
                     {% for s in pages %}
                      <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}">{{s}}</a>
                      </li>
-                    
+                     {% endfor %}
                     <li class="disabled"><a href="/blog/?page={{s}}">...</a></li>
                     <li><a href="/blog/?page={{last_page}}">last</a></li>
-                    <li><a href="/blog/?page={{s}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
+                    <li><a href="/blog/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
                     </li>
-                    {% endfor %}
+                   
+                    
                   </ul>
                 </div>
               </div>
