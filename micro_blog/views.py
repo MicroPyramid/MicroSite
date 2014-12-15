@@ -130,11 +130,10 @@ def delete_category(request,category_slug):
 
 
 def site_blog_home(request):
-    
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
-    tags = Tags.objects.all()
+    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on")[:4]
     page_list=Page.objects.all()
@@ -166,6 +165,7 @@ def site_blog_home(request):
             end_page=no_pages
 
     pages = range(start_page, end_page+1)
+    print pages
 
     c = {}
     c.update(csrf(request))
@@ -178,7 +178,7 @@ def blog_article(request, slug):
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     blog_posts = Post.objects.filter(status='P')[:3]
     categories = Category.objects.all()
-    tags = Tags.objects.all()
+    tags = Tags.objects.all().order_by('-id')[:20]
     comments = BlogComments.objects.filter(status="on",post=blog_post)
     current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
@@ -192,19 +192,13 @@ def blog_article(request, slug):
     return render_to_response('site/blog/article.html',{'latest_posts':latest_posts, 'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'menu_list':menu_list,'categories':categories,'tags':tags,'archives':archives,'comments':comments,'posts':blog_posts})
 
 
-
-def page_view(request,slug):
-    post=Page.objects.get(slug=slug)
-    return render_to_response('site/blog/article.html',{'post':post})
-
-
 def blog_tag(request, slug):
     tag = Tags.objects.get(slug=slug)
     blog_posts = Post.objects.filter(tags__in=[tag],status="P").order_by('-created_on')
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
-    tags = Tags.objects.all()
+    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on")[:4]
     page_list=Page.objects.all()
@@ -248,7 +242,7 @@ def blog_category(request, slug):
     latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     categories = Category.objects.all()
-    tags = Tags.objects.all()
+    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on")[:4]
     page_list=Page.objects.all()
@@ -303,14 +297,12 @@ def add_blog_comment(request, slug):
         return HttpResponse(json.dumps(data))
 
 
-
-
 def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month).order_by('-created_on')
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
     categories = Category.objects.all()
-    tags = Tags.objects.all()
+    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on")[:4]
     page_list=Page.objects.all()
