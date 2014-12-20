@@ -105,7 +105,14 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a href="{% url 'payroll:staff' %}">Staff Zone</a>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">StaffZone <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{% url 'employee:reports_list' %}">Reports</a>
+                      </li>
+                      <li><a href="{% url 'pages:pages' %}">Leaves</a>
+                      </li>
+                    </ul>
                   </li>
                   <li><a href="{% url 'micro_kb:knowledgebase' %}">KB</a>
                   </li>

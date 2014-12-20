@@ -1,0 +1,38 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>Staff Reports</legend>
+      <div class="save-btn">
+        <a href="{% url 'employee:new_report' %}">Add New</a>
+      </div>
+      <div class="table-responsive table-bordered">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Employee</th>
+              <th class="col-lg-4 col-md-4 col-sm-4 col-xs-6">Project</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for report in reports %}
+            <tr>
+              <td>{{report.employee.email}}</td>
+              <td class="sec-col">{{report.project.name}}</td>
+              <td><a href="/portal/staff/reports/edit/{{report.id}}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+              </td>
+              <td><a href="/portal/staff/reports/delete/{{report.id}}"><i class="fa fa-trash-o trash-color"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+{% endblock %}
