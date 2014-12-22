@@ -23,7 +23,7 @@ INSTALLED_APPS = (
     'pages',
     'micro_blog',
     'micro_kb',
-    'payroll',
+    'employee',
     'sorl.thumbnail',
 )
 

@@ -16,6 +16,10 @@ class Employee(models.Model):
 	designation = models.ForeignKey(Designations)
 	skills = models.ManyToManyField(Skills)
 
+	@property
+	def author(self):
+		return self.user.first_name + ' ' + self.user.last_name
+
 
 class Leaves(models.Model):
 	date = models.DateField()
