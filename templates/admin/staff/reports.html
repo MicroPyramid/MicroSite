@@ -12,7 +12,8 @@
           <thead>
             <tr>
               <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Employee</th>
-              <th class="col-lg-4 col-md-4 col-sm-4 col-xs-6">Project</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Project</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Date and Time</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
             </tr>
@@ -22,6 +23,7 @@
             <tr>
               <td>{{report.employee.email}}</td>
               <td class="sec-col">{{report.project.name}}</td>
+              <td class="sec-col">{{report.created_on}}</td>
               <td><a href="/portal/staff/reports/edit/{{report.id}}"><i class="fa fa-pencil-square-o edit-color"></i></a>
               </td>
               <td><a href="/portal/staff/reports/delete/{{report.id}}"><i class="fa fa-trash-o trash-color"></i></a>
