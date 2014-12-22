@@ -52,16 +52,18 @@ $(document).ready(function() {
     },
 
     dataType: 'json',
-    success: function(data) {
-      if (data.error) {
-        $('p.failure').remove();
-        for (var key in data.response) {
-          $('#' + key).after('<p class="failure">' + data.message[key] + '</p>');
-        }
-      } else {
+    success: function(data){
+       if (data.error == false)
+       {
+         alert(data.response);
+         window.location = "/portal/staff/";
+       }
+       else
+       {
+        alert(data.response);
         window.location = "/portal/staff/";
-      }
-    }
+         }
+       }
   });
 
 });

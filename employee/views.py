@@ -23,7 +23,7 @@ def new_report(request):
 			new_report = validate_report.save(commit=False)
 			new_report.employee = request.user
 			new_report.save()
-			data = {'error':False,'response':'Report created'}
+			data = {'error':False,'response':'Report created successfully'}
 		else:
 			data = {'error':True,'response':validate_blog.errors}
 		return HttpResponse(json.dumps(data))
@@ -37,16 +37,18 @@ def new_report(request):
 def edit_report(request,pk):
     if request.method == 'POST':
         current_report = DailyReport.objects.get(id=pk)
-        validate_report = DailyReportForm(request.POST,instance=current_report)
-        if validate_report.is_valid():
-            new_report = validate_report.save(commit=False)
-            new_report.user=request.user
-            new_report.save()
-            data = {'error':False,'response':'Report edited'}
+        if current_report.employee == request.user:
+            validate_report = DailyReportForm(request.POST,instance=current_report)
+            if validate_report.is_valid():
+                new_report = validate_report.save(commit=False)
+                new_report.user=request.user
+                new_report.save()
+                data = {'error':False,'response':'Report updated successfully'}
+            else:
+                data = {'error':True,'response':validate_report.errors}
         else:
-            data = {'error':True,'response':validate_report.errors}
+            data = {'error':True,'response':'You cannot edit this report' }
         return HttpResponse(json.dumps(data))
-
     new_report = DailyReport.objects.get(id=pk)
     c = {}
     c.update(csrf(request))
