@@ -87,3 +87,10 @@ class Menu(models.Model):
     updated = models.DateTimeField(auto_now = True)
     status = models.CharField(max_length=5, default="off", blank=True)
     lvl = models.IntegerField()
+
+class simplecontact(models.Model):
+	full_name=models.CharField(max_length=100)
+	message=models.TextField()
+	email=models.EmailField()
+	phone=models.IntegerField(blank=True,null=True)
+	contacted_on=models.DateField(auto_now=True)

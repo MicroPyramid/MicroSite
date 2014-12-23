@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, Permission, _user_has_perm, Group)
 from micro_blog.models import Post
+from django.template.defaultfilters import slugify
 
 
 GENDER_TYPES = (
@@ -106,4 +107,22 @@ class User(AbstractBaseUser):
             ("blog_moderator", "Can enable or disable blog posts"),
             ("blogger", "Can write blog posts"),
         )
+class career(models.Model):
+    title=models.CharField(max_length=100)
+    slug=models.SlugField()
+    applicant_name=models.CharField(max_length=100)
+    experience=models.CharField(max_length=100)
+    skills=models.CharField(max_length=100)
+    description=models.TextField()
+    featured_image=models.CharField(max_length=100,blank=True,null=True)
+    num_of_opening=models.IntegerField(default=True)
+    posted_on=models.DateField(auto_now=True)
+    created_on=models.DateTimeField(auto_now_add=True)
+    is_active=models.BooleanField(default=True)
+
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(career, self).save(*args, **kwargs)
+
 

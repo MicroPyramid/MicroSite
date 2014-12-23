@@ -154,4 +154,21 @@
   font-weight: 800;
   line-height:71px;
 }
+.job-ban-right{
+  display:none;
+  }
+.career-banner h2{
+  font-size:25px;
+  line-height:30px; 
+}
+.job-ban-desc, .job-techs{
+  text-align:center;  
+}
+.car-ban-contact a{
+  display:block;
+  line-height:20px; 
+}
+.mp_d_curve_bg3{
+  background-size:cover;  
+}
 }

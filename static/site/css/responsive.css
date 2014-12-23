@@ -110,6 +110,20 @@
 .item {
   width:50%;
 }
+.career-banner h2{
+  font-size:30px; 
+}
+.job-ban-right{
+  text-align:center;
+  }
+.car-ban-contact a{
+  display:block;
+  line-height:20px; 
+}
+.job-post .post-desc{
+  padding:0px;
+  margin-top:15px;  
+}
 }
 
 @media (min-width: 481px) and (max-width: 767px) { 
@@ -404,5 +418,40 @@
 }
 .item {
   width:50%;
+}
+.job-ban-right{
+  display:none;
+  }
+.career-banner h2{
+  font-size:25px; 
+}
+.job-ban-desc, .job-techs{
+  text-align:center;  
+}
+.car-ban-contact a{
+  display:block;
+  line-height:20px; 
+}
+.job-post .web-des{
+  padding:0px;  
+}
+.job-post .date-post{
+  padding:0px;
+  margin-top:5px;
+}
+.date-post .date-details{
+  min-height:60px;  
+  padding:0px;
+}
+.job-post .date-post span{
+  display:inline-block;
+  margin:0px 20px;
+}
+.job-post .post-desc{
+  margin-top:5px;
+  padding:0px;  
+}
+.mp_d_curve_bg3{
+  background-size:cover;  
 }
 }

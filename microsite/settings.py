@@ -25,6 +25,7 @@ INSTALLED_APPS = (
     'micro_kb',
     'payroll',
     'sorl.thumbnail',
+    'microsite_front',
 )
 
 MIDDLEWARE_CLASSES = (
