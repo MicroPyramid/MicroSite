@@ -61,11 +61,8 @@ def new_job(request):
             validate_blogcareer = validate_blogcareer.save(commit=False)
             if 'featured_image' in request.FILES:
                 validate_blogcareer.featured_image=store_image(request.FILES.get('featured_image'),BLOG_IMAGES)
-                print validate_blogcareer.featured_image
             else:
                 validate_blogcareer.featured_image=''
-
-            
             validate_blogcareer.save()
             data={'error':False,'response':'jobs are created'}
         else:
@@ -84,19 +81,14 @@ def edit_job(request,career_slug):
         if validate_blogcareer.is_valid():
             validate_blogcareer = validate_blogcareer.save(commit=False)
             if 'featured_image' in request.FILES:
-                print 'img'
                 if current_careers.featured_image:
-                    print 'hai'
                     os.remove(BLOG_IMAGES + current_careers.featured_image)
                 validate_blogcareer.featured_image=store_image(request.FILES.get('featured_image'),BLOG_IMAGES)
             else:
-                print 'elseimg'
                 validate_blogcareer.featured_image=''
-
             validate_blogcareer.save()
-            data={'error':False,'response':'job blog updated'}
+            data={'error':False,'response':'job fields updated'}
         else:
-            print validate_blogcareer.errors
             data={'error':True,'response':validate_blogcareer.errors}
         return HttpResponse(json.dumps(data))
     else:
