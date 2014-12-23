@@ -1,0 +1,505 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"csr",
+				"csrf_exempt"
+			],
+			[
+				"addre",
+				"address"
+			],
+			[
+				"Model",
+				"ModelForm	ModelForm"
+			],
+			[
+				"new",
+				"new_tutor"
+			],
+			[
+				"F",
+				"False"
+			],
+			[
+				"L",
+				"Lesson"
+			],
+			[
+				"re",
+				"render_to_response"
+			],
+			[
+				"T",
+				"True"
+			],
+			[
+				"user",
+				"user_type"
+			],
+			[
+				"auto",
+				"auto_now_add"
+			],
+			[
+				"U",
+				"URLField"
+			],
+			[
+				"u",
+				"unique"
+			],
+			[
+				"modl",
+				"models"
+			],
+			[
+				"For",
+				"ForeignKey"
+			],
+			[
+				"C",
+				"CharField"
+			],
+			[
+				"ma",
+				"max_length"
+			],
+			[
+				"Ht",
+				"HttpResponse"
+			],
+			[
+				"for",
+				"formData"
+			],
+			[
+				"su",
+				"submit"
+			],
+			[
+				"po",
+				"portal"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"vali",
+				"validate_blog"
+			],
+			[
+				"va",
+				"validate_blog"
+			],
+			[
+				"v",
+				"validate_blog"
+			],
+			[
+				"PO",
+				"POST"
+			],
+			[
+				"ta",
+				"Tags"
+			],
+			[
+				"P",
+				"Post"
+			],
+			[
+				"o",
+				"objects"
+			],
+			[
+				"mos",
+				"models"
+			],
+			[
+				"User",
+				"USER"
+			],
+			[
+				"htt",
+				"HttpResponse"
+			],
+			[
+				"Htt",
+				"HttpResponseRedirect"
+			],
+			[
+				"blo",
+				"blog"
+			],
+			[
+				"blog",
+				"blog_list"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/rakesh/Desktop/feast/feastui/admin.py",
+			"settings":
+			{
+				"buffer_size": 63,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 75.0,
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 521.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/rakesh/Desktop/PMT/pmt/pmt_auth/views.py",
+		"/home/rakesh/Desktop/PMT/pmt/db.sqlite3",
+		"/home/rakesh/Desktop/PMT/pmt/products/migrations/__init__.py",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_auth/migrations/__init__.py",
+		"/home/rakesh/Desktop/PMT/pmt/templates/admin/tutors.html",
+		"/home/rakesh/Desktop/PMT/pmt/templates/admin/newcategory.html",
+		"/home/rakesh/Desktop/PMT/pmt/static/admin/css/style.css",
+		"/home/rakesh/Desktop/PMT/pmt/templates/admin/base.html",
+		"/home/rakesh/Desktop/PMT/pmt/templates/site/base.html",
+		"/home/rakesh/Desktop/PMT/pmt/templates/admin/index.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/blog/forms.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/pages/views.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/blog/views.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/blog/edit.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/blog/new.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/blog/index.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/blog/urls.py",
+		"/home/rakesh/Desktop/PMT/pmt/pmt/settings.py",
+		"/home/rakesh/Desktop/PMT/pmt/templates/site/index.html~",
+		"/home/rakesh/Desktop/PMT/pmt/templates/site/index.html",
+		"/home/rakesh/Desktop/PMT/pmt/templates/site/base.html~",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_admin/views.py",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_admin/froms.py",
+		"/home/rakesh/Desktop/PMT/pmt/static/admin/css/allstars.css",
+		"/home/rakesh/Desktop/PMT/pmt/static/admin/css/flexslider.css",
+		"/home/rakesh/Desktop/PMT/pmt/static/admin/css/demo.css",
+		"/home/rakesh/Desktop/PMT/pmt/static/admin/css/font-awesome.min.css",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_site/views.py",
+		"/home/rakesh/Desktop/PMT/pmt/pmt/urls.py",
+		"/home/rakesh/.config/sublime-text-3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_admin/urls.py",
+		"/home/rakesh/Desktop/PMT/pmt/billing/models.py",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_auth/models.py",
+		"/home/rakesh/Desktop/PMT/pmt/templates/admin/login.html",
+		"/home/rakesh/Desktop/PMT/pmt/products/models.py",
+		"/home/rakesh/Desktop/PMT/pmt/billing/2checkout.py",
+		"/home/rakesh/Desktop/PMT/pmt/site/models.py",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_site/models.py",
+		"/home/rakesh/Desktop/PMT/pmt/requirements.txt",
+		"/home/rakesh/Desktop/PMT/pmt/pmt_billing/__init__.py",
+		"/var/www/html/maincode/maincode_5/osbcode/classes/product.php",
+		"/home/rakesh/Desktop/Php_task/Registration.html",
+		"/home/rakesh/Desktop/Php_task/css/file.css",
+		"/home/rakesh/Desktop/Php_task/css/default.css",
+		"/home/rakesh/Desktop/Php_task/reg.html",
+		"/home/rakesh/Desktop/Php_task/Registration.jsp",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/base.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/static/admin/css/les.css",
+		"/home/rakesh/Desktop/MicroSite/microsite/static/admin/css/demo.css",
+		"/home/rakesh/Desktop/MicroSite/microsite/microadmin/views.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/blog/models.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microsite/settings.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/login.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/microadmin/models.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microsite/urls.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/blog/templates/blogindex.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/db.sqlite3",
+		"/home/rakesh/Desktop/MicroSite/microsite/blogsite/models.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microadmin/urls.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microadmin/blogbackend.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microadmin/blogging.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microadmin/admin.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/blogsite/urls.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/blogsite/admin.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/index.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/admin/forgot.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/docs/index.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/site/foot.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/site/page.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/site/head.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/templates/site/index.html",
+		"/home/rakesh/Desktop/MicroSite/microsite/README.md",
+		"/home/rakesh/Desktop/MicroSite/microsite/wsgi.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/requirements.txt",
+		"/home/rakesh/Desktop/MicroSite/microsite/.gitignore",
+		"/home/rakesh/Desktop/MicroSite/microsite/pages/models.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/microauth/models.py",
+		"/home/rakesh/Desktop/MicroSite/microsite/projects/views.py"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"frm1",
+			"FeastForm",
+			"senddetails",
+			"formData",
+			"admin",
+			"nav",
+			"top-menu",
+			"hover",
+			"col-lg-9 top-menu",
+			"row marl header-bg",
+			"hover",
+			"nav",
+			"mainhead",
+			"-->\n",
+			"'",
+			".')",
+			"'",
+			"520",
+			"POST",
+			"created_on"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/rakesh/Desktop/feast/feastui/admin.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 63,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								63,
+								63
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "urls.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/workspace/feast/feast/settings.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 264.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,51 @@
+{% extends 'admin/base.html' %}
+
+{% block stage %}
+<div class="row marl top-row">
+  <div class="row marl">
+    <div class="container">
+			<div class="row marl prof-table site-table">
+        <div class="table-responsive">
+        <form name="create_post" id="form" method="post" action="/portal/blog/{{blog_list.id}}/edit/">
+          <h3>Edit blogpost</h3>
+          <p>Title:<input type="text" name="title" value="{{blog_list.title}}"/></p>
+          <p>User:
+          <select name="user">
+            {%for i in user_list%}
+            <option value="{{i.id}}" {% if blog_list.user == i %}selected{% endif %}>{{i.email}}</option>
+            {% endfor %}
+          </select>
+          </p>
+          <p>Content:<textarea name="content">{{blog_list.content}}</textarea></p>
+          <p>Category:
+          <select name="category">
+            {% for i in category_list%}
+            <option value="{{i.id}}" {% if blog_list.category == i %}selected{% endif %}>{{i.name}}</option>
+            {% endfor %}
+          </select>
+          </p>
+          <p>Tag:
+          {% for i in tag_list%}
+
+          <input type="checkbox" value="{{i.id}}" name="tags" {% if i in blog_list.tags.all %}checked{% endif %}>{{i.name}}<br>
+          {% endfor %}
+          </p>
+          <input type="submit" value="SUMBIT">
+        </form>
+        </div>
+      </div>
+		</div>
+  </div>
+</div>
+<script>
+  $("#form").submit(function(e){
+    e.preventDefault()
+    var formData = $("#form").serialize();
+    $.post(".",formData,function(formData){
+      alert(data.data);
+      window.location = '/portal/blog/';
+    });
+  });
+</script>
+
+{% endblock %}

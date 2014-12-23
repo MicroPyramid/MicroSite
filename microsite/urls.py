@@ -9,7 +9,7 @@ urlpatterns = patterns('',
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^portal/projects/', include('projects.urls', namespace='projects')),
-    url(r'^portal/staff/', include('payroll.urls', namespace='payroll')),
+    url(r'^portal/staff/', include('employee.urls', namespace='employee')),
     url(r'^portal/kb/', include('micro_kb.urls', namespace='micro_kb')),
 
     url(r'^rss.xml$', 'microsite_front.xml.rss' ),
