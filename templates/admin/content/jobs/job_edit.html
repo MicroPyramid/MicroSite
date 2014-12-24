@@ -13,15 +13,11 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Experience</label>
-          <textarea class="form-control" id="experience" name="experience" rows="10" placeholder="HTML code of this email">
-            {{blog_career.experience}}
-          </textarea>
+          <textarea class="form-control" id="experience" name="experience" rows="10" placeholder="HTML code of this email">{{blog_career.experience}}</textarea>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Skills</label>
-          <textarea class="form-control" id="skills" name="skills" rows="10" placeholder="HTML code of this email">
-            {{blog_career.skills}}
-          </textarea>
+          <textarea class="form-control" id="skills" name="skills" rows="10" >{{blog_career.skills}}</textarea>
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Number of openings</label>
@@ -30,9 +26,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email">
-            {{blog_career.description}}
-          </textarea>
+          <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email">{{blog_career.description}}</textarea>
         </div>
         <div class="tags-block">
           <p>
@@ -40,6 +34,10 @@
             <input type="file" name="featured_image" />
           </p>
         </div>
+        <div class="draft-box">
+          <input type="checkbox" name="is_active"  checked />
+          <lable>Active</lable>
+          </div>
         <div class="save-btn">
           <i class="fa fa-floppy-o"></i>
           <input type="submit" value="Save" class="save" id="search_lessons">
@@ -49,10 +47,10 @@
   </div>
 </div>
 <script type="text/javascript">
-
+$(document).ready(function(){ 
      $('form').ajaxForm({
        dataType: 'json',
-       data : $('#form').serialize(),
+       data : $('#careerform').serialize(),
        type: "POST",
        success: function(data){
          if (data.error == false)
@@ -73,9 +71,10 @@
        })
    
 
-   $('#senddetails').click(function(e){
+   $('.save').click(function(e){
     e.preventDefault();
-   $('#form').submit();
+   $('#careerform').submit();
+   });
    });
 </script>
 

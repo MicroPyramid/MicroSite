@@ -34,7 +34,7 @@ def index(request):
 		return HttpResponse(json.dumps(errors))
 
 def career_page(request):
-	jobs=career.objects.all()
+	jobs=career.objects.filter(is_active=True).order_by('created_on')
 	menu_list=Menu.objects.filter(parent=None).order_by('lvl')
 	tags=Tags.objects.all().order_by('-id')[:20]
 	latest_posts=Post.objects.filter(status='P').order_by('created_on')[:5]

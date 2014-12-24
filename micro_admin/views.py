@@ -12,6 +12,7 @@ from micro_admin.forms import ChangePasswordForm, UserForm,CareerForm
 from microsite.settings import BLOG_IMAGES 
 from micro_blog.views import store_image
 import os
+from pages.models import simplecontact
 
 #@csrf_protect
 def index(request):
@@ -44,7 +45,8 @@ def out(request):
 
 @login_required
 def contacts(request):
-    return HttpResponse('no design available')
+    contacts=simplecontact.objects.all()
+    return render_to_response('admin/content/contacts/simplecontact.html',{'contacts':contacts})
 
 
 @login_required
@@ -87,7 +89,7 @@ def edit_job(request,career_slug):
             else:
                 validate_blogcareer.featured_image=''
             validate_blogcareer.save()
-            data={'error':False,'response':'job fields updated'}
+            data={'error':False,'response':'job updated successfully'}
         else:
             data={'error':True,'response':validate_blogcareer.errors}
         return HttpResponse(json.dumps(data))
@@ -103,4 +105,15 @@ def delete_job(request,career_slug):
     careers=career.objects.get(slug=career_slug)
     careers.delete()
     return HttpResponseRedirect('/portal/jobs/')
+
+@login_required
+def job_state(request, pk):
+   job = career.objects.get(pk=pk)
+   if job.is_active:
+       job.is_active = False
+   else:
+       job.is_active = True
+    
+   job.save()
+   return HttpResponseRedirect('/portal/jobs/')
 

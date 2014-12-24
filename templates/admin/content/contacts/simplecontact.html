@@ -1,0 +1,33 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>Simple Contact</legend>
+      <div class="table-responsive table-bordered">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Name</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Email</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for contact in contacts %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{contact.full_name}}</td>
+              <td>{{contact.email}}</td>
+              <td>{{contact.message|truncatewords:10}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+{% endblock %}
