@@ -16,4 +16,4 @@ class CareerForm(forms.ModelForm):
 
 	class Meta:
 		model = career
-		exclude = ['featured_image','slug','applicant_name','created_on']
+		exclude = ['featured_image','slug','created_on']

@@ -110,7 +110,6 @@ class User(AbstractBaseUser):
 class career(models.Model):
     title=models.CharField(max_length=100)
     slug=models.SlugField()
-    applicant_name=models.CharField(max_length=100)
     experience=models.CharField(max_length=100)
     skills=models.CharField(max_length=100)
     description=models.TextField()
