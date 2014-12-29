@@ -171,4 +171,7 @@
 .mp_d_curve_bg3{
   background-size:cover;  
 }
+.blogs .blog-list .blog-left .blog-upic-details{
+  left:-3px;  
+}
 }
