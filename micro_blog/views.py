@@ -135,7 +135,7 @@ def site_blog_home(request):
     categories = Category.objects.all()
     tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
-    comments = BlogComments.objects.filter(status="on")[:4]
+    comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
 
     archives = []
@@ -179,7 +179,7 @@ def blog_article(request, slug):
     blog_posts = Post.objects.filter(status='P')[:3]
     categories = Category.objects.all()
     tags = Tags.objects.all().order_by('-id')[:20]
-    comments = BlogComments.objects.filter(status="on",post=blog_post)
+    comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
     current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
 
@@ -200,7 +200,7 @@ def blog_tag(request, slug):
     categories = Category.objects.all()
     tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
-    comments = BlogComments.objects.filter(status="on")[:4]
+    comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
 
     archives = []
@@ -244,7 +244,7 @@ def blog_category(request, slug):
     categories = Category.objects.all()
     tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
-    comments = BlogComments.objects.filter(status="on")[:4]
+    comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
 
     archives = []
@@ -304,7 +304,7 @@ def archive_posts(request, year, month):
     categories = Category.objects.all()
     tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
-    comments = BlogComments.objects.filter(status="on")[:4]
+    comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
 
     archives = []

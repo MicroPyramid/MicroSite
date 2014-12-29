@@ -93,6 +93,8 @@ class BlogComments(models.Model):
     message = models.TextField()
     created = models.DateTimeField(auto_now_add = True)
     status = models.CharField(max_length=3,default="off", blank=True)
+    weburl=models.CharField(max_length=50)
+    phonenumber=models.IntegerField(blank=True,null=True)
 
 
 class Image_File(models.Model):

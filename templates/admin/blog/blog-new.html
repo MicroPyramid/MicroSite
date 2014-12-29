@@ -74,7 +74,7 @@ var editor = CKEDITOR.replace('textareacontents', {
 <script type="text/javascript">
 $ = jQuery;
 
-$(document).ready(function() {
+
   $('form#blogform').ajaxForm({
     beforeSerialize: function() {
       $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
@@ -93,6 +93,6 @@ $(document).ready(function() {
     }
   });
 
-});
+
 </script>
 {% endblock %}

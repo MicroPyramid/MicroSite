@@ -1,6 +1,7 @@
 {% extends 'site/base.html' %}
 {% block stage %}
 <!-- banner starts here-->
+
 <link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
@@ -353,7 +354,8 @@
       </div>
       <!-- contact_info ends -->
       <div class="contact_form animated" data-animdelay="0.2s" data-animspeed="1s" data-animrepeat="0" data-animtype="fadeInRight">
-        <form novalidate  method="post" action="http://micromp.kraftives.com/demo/html_straight/index.html">
+        <form id="contactform" method="post">
+        {% csrf_token %}
           <div class="col-sm-6">
             <span class="field_single">
             <input type="text" placeholder="Full Name" value="" name="full_name">
@@ -378,4 +380,39 @@
   </div>
 </section>
 <!-- sec-contact ends -->
+
+<script>
+     $('#contactform').ajaxForm({
+
+       dataType: 'json',
+       data : $('#contactform').serialize(),
+       type: "POST",
+       success: function(data){
+         if (data.error == false)
+         {
+           alert(data.data);
+           window.location ='/';
+         }
+         else
+         {
+         $('.error').text('');
+            $('.error').show();
+           $.each( data, function( key, value ) {
+          $('#'+key).text(value);
+          });
+           }
+         }
+
+       });
+  
+   $('#senddetails').click(function(e){
+    e.preventDefault();
+   $('#contactform').submit();
+   });
+   
+         
+         
+       
+
+</script>
 {% endblock %}
