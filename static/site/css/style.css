@@ -319,7 +319,7 @@ img{
   color: #9ea7ae;
   font-size: 13px;
   float: left;
-  width: 75%;
+  width: 100%;
   font-size: 12px;
   padding-left: 10px;
   font-weight: normal;
@@ -2901,11 +2901,14 @@ font-size: 13px;
 	color:#fff;
 	font-size:18px;
 	font-weight:bold;	
+  word-break: break-all;
 }
 #blog p{
 	font-size:13px;
 	line-height:20px;
 	margin-top:10px;
+  text-align: justify;
+  word-break: break-all;
 }
 #blog .blog-content p{
 	font-size:13px;
