@@ -89,6 +89,17 @@ def blog_comments(request):
 
 
 @login_required
+def comment_status(request, comment_id):
+    comment=BlogComments.objects.get(id=comment_id)
+    if comment.status=="on":
+        comment.status="off"
+    else:
+        comment.status="on"
+    comment.save()
+    return HttpResponseRedirect('/blog/blog-comments/')
+
+
+@login_required
 def delete_blog_comments(request,comment_id):
     blog_comment = BlogComments.objects.get(id=comment_id)
     blog_comment.delete()
