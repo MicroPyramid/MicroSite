@@ -15,7 +15,6 @@ from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
 import datetime
 
-
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
     adding of timestamp to its name'''
@@ -83,6 +82,29 @@ def recent_photos(request):
                 'is_image': True})
     return render_to_response('admin/browse.html',{'files':imgs})
 
+@login_required
+def blog_comments(request):
+    blog_comments = BlogComments.objects.all()
+    return render_to_response('admin/blog/blog-comments.html',{'blog_comments':blog_comments})
+
+
+@login_required
+def comment_status(request, comment_id):
+    comment=BlogComments.objects.get(id=comment_id)
+    if comment.status=="on":
+        comment.status="off"
+    else:
+        comment.status="on"
+    comment.save()
+    return HttpResponseRedirect('/blog/blog-comments/')
+
+
+@login_required
+def delete_blog_comments(request,comment_id):
+    blog_comment = BlogComments.objects.get(id=comment_id)
+    blog_comment.delete()
+    return HttpResponseRedirect('/blog/blog-comments/')
+
 
 @login_required
 def admin_category_list(request):
@@ -131,7 +153,7 @@ def delete_category(request,category_slug):
 
 def site_blog_home(request):
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
     categories = Category.objects.all()
     tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
@@ -142,7 +164,7 @@ def site_blog_home(request):
     for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
 
-    items_per_page = 6
+    items_per_page = 10
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
@@ -174,7 +196,7 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
     menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     blog_posts = Post.objects.filter(status='P')[:3]
     categories = Category.objects.all()
@@ -293,8 +315,8 @@ def add_blog_comment(request, slug):
             data = {'error':False,'response':'comment posted successfully'}
             return HttpResponse(json.dumps(data))
         else:
-            data = {'error':True,'response':'all the fields are required'}
-        return HttpResponse(json.dumps(data))
+            data = {'error':True,'response':validate_blog_comment.errors}
+            return HttpResponse(json.dumps(data))
 
 
 def archive_posts(request, year, month):
