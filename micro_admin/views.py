@@ -9,7 +9,7 @@ import json
 from microsite.settings import BASE_DIR
 from micro_admin.models import USER_ROLES, User,career
 from micro_admin.forms import ChangePasswordForm, UserForm,CareerForm
-from microsite.settings import BLOG_IMAGES 
+from microsite.settings import BLOG_IMAGES
 from micro_blog.views import store_image
 import os
 from pages.models import simplecontact
