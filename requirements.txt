@@ -1,6 +1,7 @@
 Django==1.7
 Pillow==2.5.1
 argparse==1.2.1
-pytz==2014.7
+haystack==0.15
+python-ptrace==0.8.1
 sorl-thumbnail==11.12.1b
 wsgiref==0.1.2
