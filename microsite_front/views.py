@@ -41,3 +41,11 @@ def career_page(request):
 	return render_to_response('site/careers.html',{'menu_list':menu_list, 'tags': tags,'latest_posts':latest_posts,'jobs':jobs})
 
 
+def services(request):
+	jobs=career.objects.filter(is_active=True).order_by('created_on')
+	menu_list=Menu.objects.filter(parent=None).order_by('lvl')
+	tags=Tags.objects.all().order_by('-id')[:20]
+	latest_posts=Post.objects.filter(status='P').order_by('created_on')[:5]
+	return render_to_response('site/services.html',{'menu_list':menu_list, 'tags': tags,'latest_posts':latest_posts,'jobs':jobs})
+
+
