@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     'employee',
     'sorl.thumbnail',
     'microsite_front',
+    'haystack'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,3 +121,29 @@ LOGGING = {
 }
 
 
+from urlparse import urlparse
+
+es = urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
+
+port = es.port or 80
+
+# import elasticstack
+# from haystack.backends.elasticsearch_backend import *
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:8983/solr',        
+        'INDEX_NAME': 'documents',
+    },
+}
+
+
+if es.username:
+    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+DEBUG = True
+
+ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'

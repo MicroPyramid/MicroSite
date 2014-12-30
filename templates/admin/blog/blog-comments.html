@@ -1,0 +1,40 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>Blog Comments</legend>
+      <div class="table-responsive table-bordered">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Blog Title</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Name</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Email</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Message</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for comments in blog_comments %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{comments.post.title}}</td>
+              <td>{{comments.name}}</td>
+              <td>{{comments.email}}</td>
+              <td>{{comments.message}}</td>
+              <td><a href="/blog/comment-status/{{comments.id}}">{{comments.status}}</a></td>
+              <td><a href="/blog/delete-comments/{{comments.id}}/"><i class="fa fa-trash-o trash-color"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+{% endblock %}
