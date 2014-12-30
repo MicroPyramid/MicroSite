@@ -1,7 +1,11 @@
 Django==1.7
+Jinja2==2.7.3
+MarkupSafe==0.23
 Pillow==2.5.1
+Pygments==2.0.1
+Sphinx==1.2.3
 argparse==1.2.1
-haystack==0.15
-python-ptrace==0.8.1
+docutils==0.12
+pytz==2014.7
 sorl-thumbnail==11.12.1b
 wsgiref==0.1.2
