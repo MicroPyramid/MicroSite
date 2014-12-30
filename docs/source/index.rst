@@ -12,6 +12,7 @@ Modules used:
 	* Pillow
 	* Haystack with elasticsearch
 	* Sorl
+	* Akismet
 
 
 Installation procedure

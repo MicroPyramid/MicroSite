@@ -14,6 +14,8 @@ from django.core.files.base import File as fle
 from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
 import datetime
+import requests
+
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -307,16 +309,24 @@ def add_blog_comment(request, slug):
         validate_blog_comment = CommentForm(request.POST)
 
         if validate_blog_comment.is_valid():
-            comment = validate_blog_comment.save(commit = False)
-            blog_post = Post.objects.get(slug=slug)
-            comment.post = blog_post
-            comment.status='on'
-            comment.save()
-            data = {'error':False,'response':'comment posted successfully'}
-            return HttpResponse(json.dumps(data))
+            payload = {'secret': '6Le-1P8SAAAAADOJhIl8UlI7qM0fsPmSIh1edQuA',
+                    'response': request.POST.get('g-recaptcha-response'),
+                    'remoteip':  request.META.get('REMOTE_ADDR')}
+            r = requests.get('https://www.google.com/recaptcha/api/siteverify', params=payload)
+
+            if json.loads(r.text)['success']==True:
+                comment = validate_blog_comment.save(commit = False)
+                blog_post = Post.objects.get(slug=slug)
+                comment.post = blog_post
+                comment.status='on'
+                comment.save()
+                data = {'error':False,'response':'comment posted successfully'}
+            else:
+                data = {'error':True,'response':'Captcha failed'}
         else:
             data = {'error':True,'response':validate_blog_comment.errors}
-            return HttpResponse(json.dumps(data))
+
+        return HttpResponse(json.dumps(data))
 
 
 def archive_posts(request, year, month):

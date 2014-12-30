@@ -41,6 +41,3 @@ def career_page(request):
 	return render_to_response('site/careers.html',{'menu_list':menu_list, 'tags': tags,'latest_posts':latest_posts,'jobs':jobs})
 
 
-	
-
-
