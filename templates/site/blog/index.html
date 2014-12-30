@@ -30,7 +30,7 @@
             {% if post.featured_image %}
             <span class="upic"><img src="/static/blog/{{post.featured_image}}" /></span>    
             {% endif %}
-            <span class="uname">{{ post.user.first_name}}</span>
+            <span class="uname">{{ post.user.get_full_name}}</span>
             <span class="udate-time">{{post.created_on}}</span>  
           </div>
           <h3 class="title"><a href="/blog/{{post.slug}}/">{{post.title}}</a></h3>
@@ -44,35 +44,16 @@
               {% endfor %}    
             </ul>
           </div>
-          <div class="read"><a href="#">Readmore</a></div>
+          <div class="read"><a href="/blog/{{post.slug}}/">Readmore</a></div>
         </div>
         <div class="blog-right">
           <div class="blog-content-social">
             <ul>
-              <li>
-                <a href="https://twitter.com/share" class="twit-icon" data-url="{{ curr_url }}" data-count="horizontal" data-lang="en"><i class="fa fa-twitter"></i></a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </li>
-              <li>
-                <div class="linkedin">
-                  <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-                  <script type="IN/Share" data-url="{{ curr_url }}" data-counter="right"></script>
-                </div>
-              </li>
-              <li>
-                <a class="fb-icon" name="fb_share" type="button_count" share_url="{{ curr_url }}"></a>
-                <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
-              </li>
-              <li>
-                <div class="g-plus-icon" data-action="share" data-annotation="none"></div>
-                <script type="text/javascript">
-                  (function() {
-                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                    po.src = 'https://apis.google.com/js/platform.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                  })();
-                </script>        
-              </li>
+            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                                         <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+                                                        <li><a href="#" class="skype"><i class="fa fa-skype"></i></a></li>
+                                                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>            
             </ul>
           </div>
         </div>
@@ -97,5 +78,34 @@
     </div>
   </div>
 </div>
+<script>
+
+(function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+
+function postToFeed() {
+  var obj = {
+      method: 'feed',
+      link: window.location.href,
+      picture: 'http://www.radiostring.com/static/images/fblogo.png',
+      name: 'Listening to ' + rurl['Radio'] + ' - RadioString',
+      caption: 'Online Radio made simple',
+      description: 'Hundreds of radio stations grouped by language, genre and country. All in one place.'
+    };
+
+  FB.ui(obj, function(response){});
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function(e){
+  e.preventDefault();
+  $('.facebook').click(function(){postToFeed();});
+});
+</script>
 <!-- sec-about ends -->
 {% endblock %}
