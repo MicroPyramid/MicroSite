@@ -1,4 +1,6 @@
+db.sqlite3
 *.pyc
 *~
-db.sqlite3
-node_modules
+.project
+.pydevproject
+static/blog

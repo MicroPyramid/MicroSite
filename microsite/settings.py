@@ -18,30 +18,38 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'microadmin',
-    'microsite',
+    'micro_admin',
     'projects',
-    'blog',
-    'microkb',
     'pages',
-    'payroll',
-    'south',
+    'micro_blog',
+    'micro_kb',
+    'employee',
     'sorl.thumbnail',
+    'microsite_front',
+    'haystack'
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+    'django.core.context_processors.media',
+)
+
+
 ROOT_URLCONF = 'microsite.urls'
 
 WSGI_APPLICATION = 'microsite.wsgi.application'
-AUTH_USER_MODEL = 'microadmin.User'
+AUTH_USER_MODEL = 'micro_admin.User'
 
 
 DATABASES = {
@@ -60,14 +68,33 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
+BLOG_IMAGES = BASE_DIR + '/static/blog/' 
+TEAM_IMAGES = BASE_DIR + '/static/team/'
+CLIENT_IMAGES = BASE_DIR + '/static/client/'
+TRAINER_IMAGES = BASE_DIR + '/static/trainer/'
+COURSE_IMAGES = BASE_DIR + '/static/course/'
+QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
+
 TEMPLATE_DIRS = (BASE_DIR +'/templates',)
+
+MEDIA_ROOT = BASE_DIR
+SITE_BLOG_URL = "/blog/"
+
+TEMPLATE_LOADERS = (
+    ("django.template.loaders.cached.Loader", (
+        "django.template.loaders.filesystem.Loader",
+        "django.template.loaders.app_directories.Loader",
+    )),
+)
+
+
 
 LOGGING = {
     'version': 1,
@@ -94,3 +121,29 @@ LOGGING = {
 }
 
 
+from urlparse import urlparse
+
+es = urlparse(os.environ.get('SEARCHBOX_URL') or 'http://127.0.0.1:9200/')
+
+port = es.port or 80
+
+# import elasticstack
+# from haystack.backends.elasticsearch_backend import *
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:8983/solr',        
+        'INDEX_NAME': 'documents',
+    },
+}
+
+
+if es.username:
+    HAYSTACK_CONNECTIONS['default']['KWARGS'] = {"http_auth": es.username + ':' + es.password}
+
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+DEBUG = True
+
+ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'

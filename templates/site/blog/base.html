@@ -1,0 +1,109 @@
+{% extends 'site/base.html' %}
+
+{% block stage %}
+
+{% block banner %}
+{% endblock %}
+          <div class="container" id="blog">
+        <div class="row">
+          
+{% block blogcontent %}
+{% endblock %}
+          
+          <!-- /block-posts -->
+
+          <div class="col-sm-hidden col-md-1"></div>
+          <div class="col-sm-12 col-md-3 blog-colors" id="right-sidebar">
+            <div class="row">
+               <div class="col-xs-12 search-padding">
+                  <form role="search" method="get" id="searchform" class="searchform" action="#">
+                     <div>
+                        <input type="text" value="" name="s" id="s" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
+                        <input type="submit" id="searchsubmit" value="Search">
+                     </div>
+                  </form>
+               </div>
+                             <!-- / widget -->
+              <div class="col-xs-12 widget" id="tag-blue">
+                  <h3><span>Categories</span></h3>
+                  <ul>
+                  {% for category in categories %}
+                     <li><a href="/blog/category/{{category.slug}}">{{ category.name }}</a></li>
+                  {% endfor %}
+                     
+                  </ul>
+                  
+               </div>
+              <!-- / widget -->
+              <div class="col-xs-12 widget" id="green">
+                  <h3><span>Archives</span></h3>
+                  <ul>
+                  {% for archive in archives %}
+                     <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
+                     </li>
+                  {% endfor %}
+                     
+                  </ul>
+                  
+               </div>
+              <!-- / widget -->
+             <div class="col-xs-12 widget tags" id="pink">
+                  <h3><span>Tags</span></h3>
+                  <ul>
+                  {% for tag in tags %}
+                     <li><a href="/blog/tag/{{tag.slug}}"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
+                  {% endfor %}
+                     
+                  </ul>
+                  
+               </div>
+              <!-- / widget -->
+              <div class="col-xs-12 widget widget-recent-entries" id="yellow">
+                  <h3><span>Recent posts</span></h3>
+                  <ul>
+                  {% for post in latest_posts %}
+                     <li>
+                     <div class="preview-img">
+                     {% if post.featured_image %}
+
+                      <img src="/static/blog/{{ post.featured_image }}" alt="">
+                     {% endif %}
+                     </div>
+                     <a href="/blog/{{ post.slug }}">{{post.title}} </a>
+                     <span class="post-date">{{post.created_on|date:"F Y"}}</span>
+                     </li>
+                  {% endfor %}   
+                  </ul>
+               </div>
+              <!-- / widget -->
+              <div class="clearfix"></div>
+              <div class="col-xs-12 widget" id="blue">
+                  <h3 class="widget-title"><span>Custom menu</span></h3>
+                  {% for menu in menu_list%}
+                  <ul class="menu">
+                     <li><a href="/blog/">{{menu.title}}</a></li>
+                     
+                  </ul>
+                  {% endfor %}
+               </div>
+              <!-- / widget widget-meta -->
+              <div class="col-xs-12 widget widget-recent-comments" id="tag-blue">
+                  <h3 class="widget-title"><span>Recent Comments</span></h3>
+                  <ul id="recentcomments">
+                  {% for comment in comments %}
+                     <li class="recentcomments"><a href="/blog/{{comment.post.slug}}/"> {{comment.name}} &thinsp; {{comment.created|date:"M d Y"}}</a></li>
+                  {% endfor %}   
+                  </ul> 
+               </div>
+              <!-- / widget widget-recent-comments -->
+            </div>
+            <!-- / widget widget-text -->
+          </div>
+          <!-- /row -->
+        </div>
+        <!-- / right-sidebar -->
+      </div>
+    <!-- blog list ends here-- >
+
+
+{% endblock %}

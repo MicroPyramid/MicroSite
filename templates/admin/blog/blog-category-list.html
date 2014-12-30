@@ -1,0 +1,38 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>Blog Categories</legend>
+      <div class="save-btn">
+        <a href="{% url 'micro_blog:new_blog_category' %}">Add New</a>
+      </div>
+      <div class="table-responsive table-bordered">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
+              <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for category in blog_categories %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{category.name}}</td>
+              <td><a href="{% url 'micro_blog:edit_blog_category' category_slug=category.slug %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+              </td>
+              <td><a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}"><i class="fa fa-trash-o trash-color"></i></a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+{% endblock %}

@@ -1,14 +1,38 @@
 from django.db import models
-from django.template import RequestContext
+from django.template.defaultfilters import slugify
 
-# Create your models here.
-class page(models.Model):
-	title = models.CharField(max_length=100, null=True, blank=True)
+
+def create_slug(tempslug):
+	slugcount = 0
+	while True:
+		try:
+			page.objects.get(slug = tempslug)
+			slugcount = slugcount + 1
+			tempslug = tempslug + '-' + str(slugcount)
+		except:
+			return tempslug
+			break
+
+
+class Page(models.Model):
+	title = models.CharField(max_length=100)
 	content = models.TextField(max_length=20000)
-	category = models.CharField(max_length=50)
 	slug = models.SlugField()
+	is_active = models.BooleanField(default=True)
 
-class contact(models.Model):
+	def save(self, *args, **kwargs):
+		tempslug = slugify(self.title)
+		if self.id:
+			existed_page = page.objects.get(pk=self.id)
+			if existed_page.title != self.title:
+				self.slug = create_slug(tempslug)
+		else:
+			self.slug = create_slug(tempslug)
+
+		super(Page, self).save(*args, **kwargs)
+
+
+class Contact(models.Model):
 	CONTACT_TYPES = (
 					('Hire','Hire Us'),
 					('Contact','Contact Us'),
@@ -53,3 +77,20 @@ class contact(models.Model):
 	enquery_type = models.CharField(max_length=100, choices=ENQUERY_TYPES)
 	callback_time = models.DateTimeField()
 	timezone = models.CharField(max_length=10)
+
+
+class Menu(models.Model):
+    parent = models.ForeignKey('self', blank=True, null=True)
+    title = models.CharField(max_length=255)
+    url = models.URLField(max_length=255)
+    created = models.DateTimeField(auto_now = True)
+    updated = models.DateTimeField(auto_now = True)
+    status = models.CharField(max_length=5, default="off", blank=True)
+    lvl = models.IntegerField()
+
+class simplecontact(models.Model):
+	full_name=models.CharField(max_length=100)
+	message=models.TextField()
+	email=models.EmailField()
+	phone=models.IntegerField(blank=True,null=True)
+	contacted_on=models.DateField(auto_now=True)

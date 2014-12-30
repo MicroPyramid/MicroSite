@@ -1,0 +1,85 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <h4>Job Description</h4>
+  <div class="row marl blog-form">
+    <fieldset>
+      <legend>New Jobs</legend>
+      <form method="POST" id="careerform" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="Text" class="form-control" id="name" name="title">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail">Experience</label>
+          <textarea class="form-control" id="experience" name="experience" rows="10" placeholder="HTML code of this email"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail">Skills</label>
+          <textarea class="form-control" id="skills" name="skills" rows="10" ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail">Number Of Openings</label>
+          <input type="text" style="width:41px;" class="form-control" id="num of opening" name="num_of_opening" >
+          </input>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email"></textarea>
+        </div>
+        <div class="tags-block">
+          <p>
+            <label>Featured Image</label>
+            <input type="file" name="featured_image" />
+          </p>
+        </div>
+        <div class="draft-box">
+          <input type="checkbox" name="is_active" checked />
+          <lable>Active</lable>
+          </div>
+        <div class="save-btn">
+          <i class="fa fa-floppy-o"></i>
+          <input type="submit" value="Save" class="save" id="search_lessons">
+        </div>
+      </form>
+    </fieldset>
+  </div>
+</div>
+<script type="text/javascript">
+
+</script>
+
+<script>
+$(document).ready(function(){
+     $('form').ajaxForm({
+       dataType: 'json',
+       data : $('#careerform').serialize(),
+       type: "POST",
+       success: function(data){
+         if (data.error == false)
+         {
+           alert(data.response);
+           window.location ='/portal/jobs/';
+         }
+         else
+         {
+         $('.error').text('');
+            $('.error').show();
+           $.each( data, function( key, value ) {
+          $('#'+key).text(value);
+          });
+           }
+         }
+
+       });
+   
+
+   $('.save').click(function(e){
+    e.preventDefault();
+   $('#careerform').submit();
+   });
+
+   });
+</script>
+{% endblock %}
