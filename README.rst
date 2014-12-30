@@ -10,6 +10,7 @@ Full featured and completely customizable django site for organizations.
    :target: https://readthedocs.org/projects/microsite/?badge=latest
    :alt: Documentation Status
 
+head to http://microsite.readthedocs.org/ for latest documentation
 
 This is intended to host the following in the site.
    * Static Pages.
