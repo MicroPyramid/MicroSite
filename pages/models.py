@@ -23,7 +23,7 @@ class Page(models.Model):
 	def save(self, *args, **kwargs):
 		tempslug = slugify(self.title)
 		if self.id:
-			existed_page = page.objects.get(pk=self.id)
+			existed_page = Page.objects.get(pk=self.id)
 			if existed_page.title != self.title:
 				self.slug = create_slug(tempslug)
 		else:

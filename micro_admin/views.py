@@ -53,7 +53,6 @@ def contacts(request):
 def jobs(request):
     jobs=career.objects.all()
     return render_to_response('admin/content/jobs/job_list.html',{'jobs':jobs})
-    
 
 @login_required
 def new_job(request):

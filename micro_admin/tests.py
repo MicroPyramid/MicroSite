@@ -18,7 +18,7 @@ class Modelforms_test(TestCase):
 
 class Views_test(TestCase):
 	'''
-		below code For when user without login it directly redirects to login page that shows 302(redirect)
+	user without login it directly redirects login page 302(redirect)
 	'''
 
 	def test_views(self):
@@ -46,7 +46,7 @@ class Views_test(TestCase):
 
 class test_portal(TestCase):
 	'''
-		in this code first creating user and "login" with user so it directly shows 200 pages
+	setup user and "login" with user
 	'''
 	def setUp(self):
 		self.client = Client()
@@ -57,18 +57,23 @@ class test_portal(TestCase):
 		self.assertTrue(user_login)
 		response = self.client.get('/portal/contacts/')
 		self.assertEqual(response.status_code, 200)
+		self.assertTemplateUsed(response,'admin/content/contacts/simplecontact.html')
 
 		resp = self.client.get('/portal/jobs/')
 		self.assertEqual(resp.status_code, 200)
+		self.assertTemplateUsed(resp,'admin/content/jobs/job_list.html')
 
 		resp = self.client.post('/portal/new_jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
 		self.assertEqual(resp.status_code, 200)
 
+
 		resp = self.client.post('/portal/edit_jobs/python-developer/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
 		self.assertEqual(resp.status_code, 200)
 
+
 		resp = self.client.get('/portal/delete_jobs/python-developer/')
 		self.assertEqual(resp.status_code, 302)
+
 
 
 class user_test(TestCase):
@@ -80,3 +85,4 @@ class user_test(TestCase):
 	def test_views_user(self):
 		user_login=self.client.login(email='micro@mp.com', password='micro')
 		self.assertTrue(user_login)
+
