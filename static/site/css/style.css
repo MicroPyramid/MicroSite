@@ -3252,7 +3252,7 @@ font-size: 13px;
 
 .blogs .blog-list .blog-left{
   display:table-cell; 
-  width:90%;
+  width:94%;
 }
 .blogs .blog-list .blog-right{
   display:table-cell; 
@@ -3261,7 +3261,7 @@ font-size: 13px;
 }
 .blogs .blog-list .blog-left .blog-upic-details{
   position:relative;
-  left:-53px;
+  left:-10px;
 }
 .blog-left .blog-upic-details span{
   display:inline-block; 
