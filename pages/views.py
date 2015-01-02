@@ -9,6 +9,8 @@ from pages.models import *
 from django.views.decorators.csrf import csrf_exempt
 from pages.forms import *
 from django.db.models.aggregates import Max
+from micro_blog.models import Image_File, Category, Tags, Post, BlogComments
+
 
 
 @login_required
@@ -149,4 +151,15 @@ def edit_menu(request, pk):
     c = {}
     c.update(csrf(request))
     return render_to_response('admin/content/menu/edit-menu-item.html',{'csrf_token':c['csrf_token'],'current_menu':current_menu,'parent':parent})
+
+
+def site_page(request,slug):
+    print slug
+    print 'enter'
+    page= Page.objects.get(slug=slug)
+    print page.title
+    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
+    tags = Tags.objects.all().order_by('-id')[:20]
+    return render_to_response('site/site-page.html',{ 'page':page,'latest_posts':latest_posts,'tags':tags, 'menu_list':menu_list})
 
