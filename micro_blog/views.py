@@ -17,6 +17,11 @@ import datetime
 import requests
 
 
+menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
+categories = Category.objects.all()
+tags = Tags.objects.all().order_by('-id')[:20]
+
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
     adding of timestamp to its name'''
@@ -154,10 +159,6 @@ def delete_category(request,category_slug):
 
 
 def site_blog_home(request):
-    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
-    categories = Category.objects.all()
-    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
@@ -198,11 +199,7 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
-    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
     blog_posts = Post.objects.filter(status='P')[:3]
-    categories = Category.objects.all()
-    tags = Tags.objects.all().order_by('-id')[:20]
     comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
     current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
@@ -219,10 +216,6 @@ def blog_article(request, slug):
 def blog_tag(request, slug):
     tag = Tags.objects.get(slug=slug)
     blog_posts = Post.objects.filter(tags__in=[tag],status="P").order_by('-created_on')
-    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
-    categories = Category.objects.all()
-    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
@@ -263,10 +256,6 @@ def blog_tag(request, slug):
 def blog_category(request, slug):
     category = Category.objects.get(slug=slug)
     blog_posts = Post.objects.filter(category=category,status="P").order_by('-created_on')
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
-    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    categories = Category.objects.all()
-    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
@@ -331,10 +320,6 @@ def add_blog_comment(request, slug):
 
 def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month).order_by('-created_on')
-    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-    latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:5]
-    categories = Category.objects.all()
-    tags = Tags.objects.all().order_by('-id')[:20]
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()

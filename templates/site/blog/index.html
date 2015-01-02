@@ -49,11 +49,11 @@
         <div class="blog-right">
           <div class="blog-content-social">
             <ul>
-            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                                                         <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
-                                                        <li><a href="#" class="skype"><i class="fa fa-skype"></i></a></li>
-                                                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>            
+              <li><a href="#" class="facebook" ><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+              <li><a href="#" class="google"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="#" class="skype"><i class="fa fa-skype"></i></a></li>
+              <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
             </ul>
           </div>
         </div>
@@ -78,34 +78,5 @@
     </div>
   </div>
 </div>
-<script>
-
-(function(d){
-     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js";
-     ref.parentNode.insertBefore(js, ref);
-   }(document));
-
-function postToFeed() {
-  var obj = {
-      method: 'feed',
-      link: window.location.href,
-      picture: 'http://www.radiostring.com/static/images/fblogo.png',
-      name: 'Listening to ' + rurl['Radio'] + ' - RadioString',
-      caption: 'Online Radio made simple',
-      description: 'Hundreds of radio stations grouped by language, genre and country. All in one place.'
-    };
-
-  FB.ui(obj, function(response){});
-}
-</script>
-<script type="text/javascript">
-$(document).ready(function(e){
-  e.preventDefault();
-  $('.facebook').click(function(){postToFeed();});
-});
-</script>
 <!-- sec-about ends -->
 {% endblock %}
