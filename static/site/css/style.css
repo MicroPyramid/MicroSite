@@ -4,6 +4,9 @@ body {
   background-color: #fff;
   color: #999;
 }
+.error{
+  color:#fff;
+}
 
 h1,
 h2,
