@@ -154,11 +154,8 @@ def edit_menu(request, pk):
 
 
 def site_page(request,slug):
-    print slug
-    print 'enter'
     page= Page.objects.get(slug=slug)
-    print page.title
-    menu_list = Menu.objects.filter(parent = None).order_by('lvl')
+    menu_list = Menu.objects.filter(parent = None, status = 'on').order_by('lvl')
     latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
     tags = Tags.objects.all().order_by('-id')[:20]
     return render_to_response('site/site-page.html',{ 'page':page,'latest_posts':latest_posts,'tags':tags, 'menu_list':menu_list})

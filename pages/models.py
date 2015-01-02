@@ -88,6 +88,14 @@ class Menu(models.Model):
     status = models.CharField(max_length=5, default="off", blank=True)
     lvl = models.IntegerField()
 
+    def menu_state(self):
+    	if self.status == 'on':
+    		return True
+
+    	else:
+    		return False
+
+
 class simplecontact(models.Model):
 	full_name=models.CharField(max_length=100)
 	message=models.TextField()
