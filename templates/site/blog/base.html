@@ -1,5 +1,5 @@
 {% extends 'site/base.html' %}
-{% load menu %}
+{%load menu%}
 {% block stage %}
 
 {% block banner %}
@@ -27,6 +27,7 @@
               <div class="col-xs-12 widget" id="tag-blue">
                   <h3><span>Categories</span></h3>
                   <ul>
+                  {% get_categories as categories %}
                   {% for category in categories %}
                      <li><a href="/blog/category/{{category.slug}}">{{ category.name }}</a></li>
                   {% endfor %}
@@ -50,6 +51,7 @@
              <div class="col-xs-12 widget tags" id="pink">
                   <h3><span>Tags</span></h3>
                   <ul>
+                  {% get_tags as tags %}
                   {% for tag in tags %}
                      <li><a href="/blog/tag/{{tag.slug}}"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
                   {% endfor %}
@@ -61,6 +63,7 @@
               <div class="col-xs-12 widget widget-recent-entries" id="yellow">
                   <h3><span>Recent posts</span></h3>
                   <ul>
+                  {% get_latest_posts as latest_posts %}
                   {% for post in latest_posts %}
                      <li>
                      <div class="preview-img">
@@ -79,6 +82,7 @@
               <div class="clearfix"></div>
               <div class="col-xs-12 widget" id="blue">
                   <h3 class="widget-title"><span>Custom menu</span></h3>
+                  {% get_menus as menu_list %}
                   {% for menu in menu_list%}
                   <ul class="menu">
                      <li><a href="/blog/">{{menu.title}}</a></li>

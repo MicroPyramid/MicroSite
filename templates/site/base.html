@@ -1,7 +1,10 @@
 {% load recurse %}
+{% load menu %}
 <!DOCTYPE html>
 <html lang="en">
-
+{%for i in menu_list%}
+{{i}}
+{%endfor%}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -123,6 +126,7 @@
                   <div class="row marl news-part">
                     <div class="address-head">Latest Posts</div>
                     <ul>
+                     {% get_latest_posts as latest_posts %}
                       {% for post in latest_posts %}
                       <li>
                         <a href="{{ post.get_url }}">
@@ -336,6 +340,7 @@
             <div class="row marl news-part">
               <div class="address-head">Latest Posts</div>
               <ul>
+              {% get_latest_posts as latest_posts %}
                 {% for post in latest_posts %}
                 <li>
                   <a href="{{ post.get_url }}">
@@ -354,6 +359,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left address-col flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
             <div class="tag-block row marl">
               <div class="address-head" style="color:#ddd !important;">Tags</div>
+              {% get_tags as tags %}
               {% for tag in tags %}
               <a href="/blog/tag/{{tag.slug}}" class="tag-link-19" title="" style="font-size: 13px;">{{tag.name}}</a>
               {% endfor %}
