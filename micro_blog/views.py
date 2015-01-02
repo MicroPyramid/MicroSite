@@ -17,10 +17,6 @@ import datetime
 import requests
 
 
-menu_list = Menu.objects.filter(parent = None).order_by('lvl')
-latest_posts = Post.objects.filter(status='P').order_by('-created_on')[:10]
-categories = Category.objects.all()
-tags = Tags.objects.all().order_by('-id')[:20]
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
