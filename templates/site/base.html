@@ -1,7 +1,7 @@
 {% load recurse %}
+{% load menu %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +42,7 @@
 
 <body>
   <div id="wrap">
+<a href="https://github.com/MicroPyramid/MicroSite"><img style="position: absolute; top: 0; left: 0; border: 0;z-index:99999999;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
     <!-- header starts here-->
     <header id="header">
       <!-- sliding top-starts here-->
@@ -122,6 +123,7 @@
                   <div class="row marl news-part">
                     <div class="address-head">Latest Posts</div>
                     <ul>
+                     {% get_latest_posts as latest_posts %}
                       {% for post in latest_posts %}
                       <li>
                         <a href="{{ post.get_url }}">
@@ -192,6 +194,7 @@
           <div class="row">
             <div id="callus" class="col-md-6 col-sm-5">
               <div class="clearfix hidden-xs">
+
                 <span><i class="fa fa-phone icon-left"></i>Call us: +91-40-6599-6999</span>
                 <span class="hidden-sm"><i class="fa fa-envelope icon-left"></i>Email: <a class="__cf_email__" href="#">hello@micropyramid.com</a>
                 </span>
@@ -234,6 +237,7 @@
           </div>
           <div class="site-menu right-menu visible-lg visible-md ">
             <nav>
+              {% get_menus as menu_list%}
               {% recurse category.headerlinks_set.all with menu_list as category %}
               <ul class="sf-menu bottom-0 list-unstyled clearfix" id="head-nav">
                 {% loop %}
@@ -334,6 +338,7 @@
             <div class="row marl news-part">
               <div class="address-head">Latest Posts</div>
               <ul>
+              {% get_latest_posts as latest_posts %}
                 {% for post in latest_posts %}
                 <li>
                   <a href="{{ post.get_url }}">
@@ -352,6 +357,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 pull-left address-col flipInX wow animated" data-wow-duration="1s" data-wow-delay="1s">
             <div class="tag-block row marl">
               <div class="address-head" style="color:#ddd !important;">Tags</div>
+              {% get_tags as tags %}
               {% for tag in tags %}
               <a href="/blog/tag/{{tag.slug}}" class="tag-link-19" title="" style="font-size: 13px;">{{tag.name}}</a>
               {% endfor %}
@@ -429,6 +435,8 @@
         $("p.error").remove();
         $("#error").prepend("<p class='error'>" + data.message + "</p>");
       } else {
+        $("p.error").remove();
+        $("#error").prepend("<p class='error'>" + 'Successfully loggedin ' + "</p>");
         window.location = '/portal/';
       }
     }, 'json');
