@@ -1,3 +1,4 @@
+import simplejson
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
@@ -15,8 +16,8 @@ from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
 import datetime
 import requests
-
-
+import urllib2, json
+import urllib 
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -199,14 +200,40 @@ def blog_article(request, slug):
     comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
     current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
-
+    fb=requests.get('http://graph.facebook.com/?id=http://micropyramid.com/blog/'+slug)
+    tw=requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com/blog/'+slug)
+    # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
+    ln=requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
+    linkedin={}
+    linkedin.update(ln.json()) 
+    facebook={}
+    facebook.update(fb.json())
+    twitter={}
+    twitter.update(tw.json())
+    fbshare_count = 0
+    twshare_count = 0
+    lnshare_count = 0
+    try:
+        if facebook['shares']:
+            fbshare_count = x['shares']
+    except:
+        pass
+    try:
+        if twitter['count']:
+            twshare_count = x['count']
+    except:
+        pass
+    try:
+        if linkedin['count']:
+            lnshare_count = x['count']
+    except:
+        pass
     archives = []
-    print blog_post.featured_image
     for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'archives':archives,'comments':comments,'posts':blog_posts})
+    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,'twshare_count':twshare_count,'lnshare_count':lnshare_count})
 
 
 def blog_tag(request, slug):
@@ -215,7 +242,6 @@ def blog_tag(request, slug):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
     archives = []
     for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
@@ -467,6 +493,3 @@ def delete_post(request,blog_slug):
     blog_post.delete()
     return HttpResponseRedirect('/blog/admin/list/')
 
-
-def handle_xmlrpc(request):
-    return HttpResponse("")

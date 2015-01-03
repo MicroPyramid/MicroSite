@@ -50,34 +50,14 @@
         </ul>
       </div>
       <h5>Share this blog post:</h5>
-      <div class="share-icon-div">
-        <div class="share ">
-          <div class="twitter" style="float:left;width:10%;">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ curr_url }}" data-count="horizontal" data-lang="en">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-          </div>
-          <div   style="float:left;width:10%;padding-left:20px;">
-            <div class="google">
-              <div class="g-plus" data-action="share" data-annotation="none"></div>
-              <script type="text/javascript">
-                (function() {
-                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                  po.src = 'https://apis.google.com/js/platform.js';
-                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                })();
-              </script>
-            </div>
-          </div>
-          <div   style="float:left;width:10%;padding-left:10px;">
-            <div class="facebook">
-              <a class="fb_share" name="fb_share" type="button_count" share_url="{{ curr_url }}"></a>
-              <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
-            </div>
-          </div>
-          <div class="linkedin" style="float:left;width:15%;padding-left:30px;">
-            <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-            <script type="IN/Share" data-url="{{ curr_url }}" data-counter="right"></script>
-          </div>
+      <div class="">
+        <div class="share-icon-div">
+          <ul>
+              <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://micropyramid.com/blog/{{post.slug}}/&t={{ post.title }}" class="social-share facebook"><i class="fa fa-facebook"></i></a><span class="share-count">{{fbshare_count}}</span></li>
+              <li><a href="https://plus.google.com/share?hl=en-US&url=http://micropyramid.com/blog/{{post.slug}}/" class="social-share google"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="https://twitter.com/intent/tweet?text={{ post.title }}&url=http://micropyramid.com/blog/{{post.slug}}/&via=MicroPyramid" class="social-share twitter"><i class="fa fa-twitter"></i></a><span class="share-count">{{twshare_count}}</span></li>
+              <li><a href="https://www.linkedin.com/cws/share?url=http://micropyramid.com/blog/{{post.slug}}/&token=&isFramed=true" class="social-share linkedin"><i class="fa fa-linkedin"></i></a><span class="share-count">{{lnshare_count}}</span></li>
+            </ul>
         </div>
       </div>
       <!-- andPosts -->
