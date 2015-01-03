@@ -15,7 +15,8 @@ install:
 # command to run tests
 script:
   - python manage.py test
-  - coverage run manage.py test
+  - coverage run manage.py test micro_admin micro_blog micro_kb microsite_front pages payroll projects employee
+
 
 
 after_success:
