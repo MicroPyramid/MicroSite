@@ -2872,11 +2872,11 @@ font-size: 13px;
 }
 .blog-content-social ul{
 	margin:0px;
-	padding:0px;	
+	padding:0px;
 }
 .blog-content-social ul li{
 	list-style:none;
-	margin-bottom:3px;	
+	margin-bottom:3px;
 }
 .blog-content-social ul li a{
 	color:#fff;
@@ -2892,20 +2892,18 @@ font-size: 13px;
 .blog-content .title a{
 	color:#fff;
 	font-size:18px;
-	font-weight:bold;	
-  word-break: break-all;
+	font-weight:bold;
 }
 #blog p{
 	font-size:13px;
 	line-height:20px;
 	margin-top:10px;
   text-align: justify;
-  word-break: break-all;
 }
 #blog .blog-content p{
 	font-size:13px;
 	line-height:20px;
-	color:#fff;	
+	color:#fff;
 	margin-top:10px;
 }
 #blog .post_meta{
@@ -3234,6 +3232,7 @@ font-size: 13px;
 .blogs .blog-list .blog-left{
   display:table-cell; 
   width:94%;
+  padding-right: 4%;
 }
 .blogs .blog-list .blog-right{
   display:table-cell; 
@@ -3288,16 +3287,16 @@ font-size: 13px;
 }
 .blog-content-social ul li{
   list-style:none;
-  margin-bottom:3px;  
+  margin-bottom:10px;
 }
 .blog-content-social ul li a{
-  text-align:center;
-  font-size:13px;
-  border-radius:50%;
-  width:25px;
-  height:25px;
-  padding-top:3px;
-  display:inline-block;
+  text-align: center;
+  font-size: 25px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding-top: 3px;
+  display: inline-block;
 }
 .blog-content-social ul li a.facebook{
   background:#325c94;

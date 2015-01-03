@@ -26,5 +26,5 @@ urlpatterns = patterns('micro_blog.views',
     url(r'^delete-category/(?P<category_slug>[-\w]+)/$', 'delete_category', name='delete_blog_category'),
     url(r"^ajax/photos/upload/$", "upload_photos",name = "upload_photos"),
     url(r"^ajax/photos/recent/$", "recent_photos",name = "recent_photos"),
-
+    url(r'^xmlrpc/$', 'handle_xmlrpc', name='xmlrpc'),
 )

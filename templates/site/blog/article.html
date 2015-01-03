@@ -4,6 +4,11 @@
     {{ post.title }} - {{ block.super }}
 {% endblock %}
 
+{% block extra-head %}
+  <link rel="canonical" href='http://micropyramid.com/blog/{{ post.slug }}/'/>
+  <link rel="pingback" href="http://micropyramid.com/blog/xmlrpc/"/>
+{% endblock %}
+
 {% block blogcontent %}
 <!-- header ends here-->
 <!-- blog list starts here -->
@@ -39,7 +44,7 @@
       <div class="tag-div">
         <ul>
           {% for tag in post.tags.all %}
-          <li><a href="#"><i class="fa fa-tag"></i>{{ tag.name }}</a>
+          <li><a href="/blog/tag/{{tag.slug}}/"><i class="fa fa-tag"></i>{{tag.name}}</a>
           </li>
           {% endfor %}
         </ul>
@@ -48,8 +53,8 @@
       <div class="share-icon-div">
         <div class="share ">
           <div class="twitter" style="float:left;width:10%;">
-            <a href="https://twitter.com/share" data-url="{{ curr_url }}" data-count="horizontal" data-lang="en">Tweet</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");</script>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ curr_url }}" data-count="horizontal" data-lang="en">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </div>
           <div   style="float:left;width:10%;padding-left:20px;">
             <div class="google">

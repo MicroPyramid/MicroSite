@@ -246,7 +246,7 @@ def blog_tag(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -467,3 +467,6 @@ def delete_post(request,blog_slug):
     blog_post.delete()
     return HttpResponseRedirect('/blog/admin/list/')
 
+
+def handle_xmlrpc(request):
+    return HttpResponse("")
