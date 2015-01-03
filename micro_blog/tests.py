@@ -114,7 +114,7 @@ class micro_blog_post_data(TestCase):
 		self.assertEqual(response.status_code, 200)
 
 		response = self.client.post('/blog/edit/python-introduction/', {'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
-		#self.assertEqual(response.status_code, 200)
+		self.assertEqual(response.status_code, 200)
 		self.assertTrue('Blog Post created' in response.content)
 
 		response = self.client.post('/blog/new-category/',{'name':'django form','description':'django'})
