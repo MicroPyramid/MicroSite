@@ -10,6 +10,7 @@ env:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - coverage run --source=micro_admin,micro_blog,employee,microsite_front manage.py test
 
 # command to run tests
 script:
