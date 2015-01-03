@@ -10,6 +10,9 @@ Full featured and completely customizable django site for organizations.
    :target: https://readthedocs.org/projects/microsite/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://coveralls.io/repos/MicroPyramid/MicroSite/badge.png?branch=master
+   :target: https://coveralls.io/r/MicroPyramid/MicroSite?branch=master
+
 head to http://microsite.readthedocs.org/ for latest documentation
 
 This is intended to host the following in the site.
