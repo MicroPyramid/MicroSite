@@ -1,3 +1,4 @@
+BeautifulSoup==3.2.1
 Django==1.7.2
 Jinja2==2.7.3
 MarkupSafe==0.23
@@ -12,5 +13,6 @@ haystack==0.15
 python-ptrace==0.8.1
 pytz==2014.10
 requests==2.5.1
+simplejson==3.6.5
 sorl-thumbnail==12.2
 wsgiref==0.1.2
