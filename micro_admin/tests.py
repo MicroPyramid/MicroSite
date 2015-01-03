@@ -113,3 +113,7 @@ class user_test(TestCase):
 		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
 		self.assertEqual(response.status_code,200)
 		self.assertTrue('updated successfully' in response.content)
+
+		response = self.client.post('/portal/user/change-password/',{'oldpassword':'micro123', 'newpassword':'pwd', 'retypepassword':'pwd'})
+		self.assertEqual(response.status_code,200)
+		self.assertTrue('Password changed' in response.content)
