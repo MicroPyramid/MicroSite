@@ -467,3 +467,6 @@ def delete_post(request,blog_slug):
     blog_post.delete()
     return HttpResponseRedirect('/blog/admin/list/')
 
+
+def handle_xmlrpc(request):
+    return HttpResponse("")

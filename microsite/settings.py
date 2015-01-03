@@ -26,7 +26,9 @@ INSTALLED_APPS = (
     'employee',
     'sorl.thumbnail',
     'microsite_front',
-    'haystack'
+    'haystack',
+    'pingback',
+    'django_xmlrpc',
 )
 
 MIDDLEWARE_CLASSES = (

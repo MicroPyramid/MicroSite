@@ -1,21 +1,32 @@
-{% extends 'site/blog/base.html' %} {% block blogcontent %}
+{% extends 'site/blog/base.html' %}
+
+{% block title %}
+    {{ post.title }} - {{ block.super }}
+{% endblock %}
+
+{% block extra-head %}
+  <link rel="canonical" href='http://micropyramid.com/blog/{{ post.slug }}/'/>
+  <link rel="pingback" href="http://micropyramid.com/blog/xmlrpc/"/>
+{% endblock %}
+
+{% block blogcontent %}
 <!-- header ends here-->
 <!-- blog list starts here -->
 <div class="col-sm-12 col-md-8" id="block-posts">
   <div class="row">
     <div class="col-xs-12 posts wow fadeIn animated">
       <div class="width-left">
-        <h1><a href="#">{{post.title}}</a></h1>
+        <h1><a href="#">{{ post.title }}</a></h1>
         <div class="post-info">
           <div class="entry-meta">
             <ul>
               <li><a href="#" class="blue-clr">{{ post.created_on|date:"d F" }}</a>
               </li>
-              <li><a href="#" class="pink-clr">{{post.user.get_full_name}}</a>
+              <li><a href="#" class="pink-clr">{{ post.user.get_full_name }}</a>
               </li>
-              <li><a href="#" class="yellow-clr">Comments : {{ comments.count}}</a>
+              <li><a href="#" class="yellow-clr">Comments : {{ comments.count }}</a>
               </li>
-              <li><a href="#" class="green-clr">Category : {{post.category.name}}</a>
+              <li><a href="#" class="green-clr">Category : {{ post.category.name }}</a>
               </li>
             </ul>
           </div>
@@ -28,7 +39,7 @@
         </a>
       </div>
       {% endif %}
-      <p class="proveb">{{post.content|safe}}</p>
+      <p class="proveb">{{ post.content|safe }}</p>
       <h5>Tags</h5>
       <div class="tag-div">
         <ul>
@@ -44,7 +55,6 @@
           <div class="twitter" style="float:left;width:10%;">
             <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ curr_url }}" data-count="horizontal" data-lang="en">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
           </div>
           <div   style="float:left;width:10%;padding-left:20px;">
             <div class="google">
@@ -82,7 +92,7 @@
               <div class="meta">
                 <cite>{{ comment.name }}</cite>
                 <br>
-                <time>{{ comment.created|date:"d F" }} at {{comment.created|date:"P"}}</time>
+                <time>{{ comment.created|date:"d F" }} at {{ comment.created|date:"P" }}</time>
               </div>
               <p>
                 {{ comment.message }}
@@ -92,7 +102,7 @@
           </div>
           <div id="respond" class="comment-respond ">
             <h5 id="reply-title" class="comment-reply-title">Leave a Reply</h5>
-            <form id="contactform" method="POST" action="/blog/{{post.slug}}/add-comment/">
+            <form id="contactform" method="POST" action="/blog/{{ post.slug }}/add-comment/">
               {% csrf_token %}
               <div id="success"></div>
               <div class="row">
