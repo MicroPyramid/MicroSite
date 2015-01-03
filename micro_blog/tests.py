@@ -102,7 +102,6 @@ class micro_blog_post_data(TestCase):
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, featured_post = 'on', status = 'D')
-		
 
 	def test_blog_post(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
@@ -115,16 +114,16 @@ class micro_blog_post_data(TestCase):
 		self.assertEqual(response.status_code, 200)
 
 		response = self.client.post('/blog/edit/python-introduction/', {'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
-		self.assertEqual(response.status_code, 200)
+		#self.assertEqual(response.status_code, 200)
+		self.assertTrue('Blog Post created' in response.content)
 
 		response = self.client.post('/blog/new-category/',{'name':'django form','description':'django'})
 		self.assertEqual(response.status_code, 200)
+		self.assertTrue('Blog category created' in response.content)
 
 		response = self.client.get('/blog/edit-category/django/',{'name':'django form','description':'django'})
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/blog/edit-category/django/',{'name':'django form','description':'django'})
+		response = self.client.post('/blog/edit-category/django-form/',{'name':'django new','description':'django'})
 		self.assertEqual(response.status_code, 200)
-
-
-
+		self.assertTrue('Blog category updated' in response.content)

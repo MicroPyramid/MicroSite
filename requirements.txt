@@ -14,3 +14,4 @@ pytz==2014.10
 requests==2.5.1
 sorl-thumbnail==12.2
 wsgiref==0.1.2
+BeautifulSoup==3.2.1

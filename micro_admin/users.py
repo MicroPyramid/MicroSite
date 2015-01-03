@@ -29,7 +29,7 @@ def change_password(request):
             return HttpResponse(json.dumps({'error':False,'response':'Password changed successfully'}))
         else:
             return HttpResponse(json.dumps({'error':True,'response':validate_changepassword.errors}))
-    return render_to_response('admin/user/change-password.html')
+    return render_to_response('admin/user/change_password.html')
 
 
 @login_required
@@ -51,7 +51,6 @@ def new_user(request):
 
             if request.POST.get('is_active',False):
                 user.is_active = True
-            
 
             user.save()
             print "user saved"
