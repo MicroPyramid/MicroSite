@@ -15,7 +15,7 @@ Full featured and completely customizable django site for organizations.
 
 head to http://microsite.readthedocs.org/ for latest documentation
 
-This is intended to host the following in the site.
+This project contains the following modules.
    * Static Pages.
    * Configurable Menu.
    * Blog.
