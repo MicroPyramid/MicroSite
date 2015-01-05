@@ -200,8 +200,8 @@ def blog_article(request, slug):
     comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
     current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
-    fb=requests.get('http://graph.facebook.com/?id=http://micropyramid.com/blog/'+slug)
-    tw=requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com/blog/'+slug)
+    fb=requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
+    tw=requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
     ln=requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
     linkedin={}
@@ -215,17 +215,17 @@ def blog_article(request, slug):
     lnshare_count = 0
     try:
         if facebook['shares']:
-            fbshare_count = x['shares']
+            fbshare_count = facebook['shares']
     except:
         pass
     try:
         if twitter['count']:
-            twshare_count = x['count']
+            twshare_count = twitter['count']
     except:
         pass
     try:
         if linkedin['count']:
-            lnshare_count = x['count']
+            lnshare_count = linkedin['count']
     except:
         pass
     archives = []
@@ -431,40 +431,42 @@ def admin_new_post(request):
 def edit_blog_post(request,blog_slug):
     if request.method == 'POST':
         current_post = Post.objects.get(slug = blog_slug)
-        print len(request.POST.get('content'))
         validate_blog = BlogpostForm(request.POST,instance=current_post)
         if validate_blog.is_valid():
-            blog_post = validate_blog.save(commit=False)
-            blog_post.user=request.user
-            if request.POST.get('status'):
-                blog_post.status='D'
+            if request.user == current_post.user or request.user.is_admin:
+                blog_post = validate_blog.save(commit=False)
+                blog_post.user=request.user
+                if request.POST.get('status'):
+                    blog_post.status='D'
+                else:
+                    blog_post.status='P'
+
+                if request.POST.get('featured_post',''):
+                    blog_post.featured_post==request.POST.get('featured_post')
+
+                if 'featuredimage' in request.FILES:
+                    if current_post.featured_image:
+                        os.remove(BLOG_IMAGES + current_post.featured_image)
+                    blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
+
+                blog_post.save()
+
+                if request.POST.get('tags',''):
+                    for tag in blog_post.tags.all():
+                        blog_post.tags.remove(tag)
+                    tags = request.POST.get('tags')
+                    tags = tags.split(',')
+                    for tag in tags:
+                        blog_tag = Tags.objects.filter(name=tag)
+                        if blog_tag:
+                            blog_tag = blog_tag[0]
+                        else:
+                            blog_tag = Tags.objects.create(name=tag)
+
+                        blog_post.tags.add(blog_tag)
+                data = {'error':False,'response':'Blog Post created'}
             else:
-                blog_post.status='P'
-
-            if request.POST.get('featured_post',''):
-                blog_post.featured_post==request.POST.get('featured_post')
-
-            if 'featuredimage' in request.FILES:
-                if current_post.featured_image:
-                    os.remove(BLOG_IMAGES + current_post.featured_image)
-                blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
-
-            blog_post.save()
-
-            if request.POST.get('tags',''):
-                for tag in blog_post.tags.all():
-                    blog_post.tags.remove(tag)
-                tags = request.POST.get('tags')
-                tags = tags.split(',')
-                for tag in tags:
-                    blog_tag = Tags.objects.filter(name=tag)
-                    if blog_tag:
-                        blog_tag = blog_tag[0]
-                    else:
-                        blog_tag = Tags.objects.create(name=tag)
-
-                    blog_post.tags.add(blog_tag)
-            data = {'error':False,'response':'Blog Post created'}
+                data = {'error':True,'response':'admin or owner can edit blog post'}
         else:
             data = {'error':True,'response':validate_blog.errors}
         return HttpResponse(json.dumps(data))
@@ -489,7 +491,12 @@ def change_featured_state(request,blog_slug):
 
 @login_required
 def delete_post(request,blog_slug):
-    blog_post = Post.objects.get(slug=blog_slug)
-    blog_post.delete()
-    return HttpResponseRedirect('/blog/admin/list/')
-
+    if request.user == current_post.user or request.user.is_admin:
+        blog_post = Post.objects.get(slug=blog_slug)
+        blog_post.delete()
+        data = {'error':False,'response':'Blog Post Deleted'}
+        return HttpResponseRedirect('/blog/admin/list/')
+    else:
+        data = {'error':True,'response':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))
+     
