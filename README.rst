@@ -13,6 +13,10 @@ Full featured and completely customizable django site for organizations.
 .. image:: https://coveralls.io/repos/MicroPyramid/MicroSite/badge.png?branch=master
    :target: https://coveralls.io/r/MicroPyramid/MicroSite?branch=master
 
+.. image:: https://landscape.io/github/MicroPyramid/MicroSite/master/landscape.svg
+   :target: https://landscape.io/github/MicroPyramid/MicroSite/master
+   :alt: Code Health
+
 head to http://microsite.readthedocs.org/ for latest documentation
 
 This project contains the following modules.
