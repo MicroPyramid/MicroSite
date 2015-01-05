@@ -18,7 +18,6 @@ import datetime
 import requests
 import urllib2, json
 import urllib 
-from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 
 def store_image(img,location):
