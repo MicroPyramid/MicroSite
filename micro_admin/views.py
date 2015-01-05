@@ -97,13 +97,14 @@ def edit_job(request,career_slug):
         c={}
         c.update(csrf(request))
         return render_to_response('admin/content/jobs/job_edit.html',{'blog_career':blog_career,'csrf_token':c['csrf_token']})
-    
-    
+
+
 @login_required
 def delete_job(request,career_slug):
     careers=career.objects.get(slug=career_slug)
     careers.delete()
     return HttpResponseRedirect('/portal/jobs/')
+
 
 @login_required
 def job_state(request, pk):
@@ -112,7 +113,6 @@ def job_state(request, pk):
        job.is_active = False
    else:
        job.is_active = True
-    
+
    job.save()
    return HttpResponseRedirect('/portal/jobs/')
-

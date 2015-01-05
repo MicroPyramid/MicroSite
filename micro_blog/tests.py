@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 from micro_blog.forms import BlogpostForm, CommentForm, BlogCategoryForm
-from micro_blog.models import Category, Post
+from micro_blog.models import Category, Post, BlogComments
 from micro_admin.models import User
 
 
@@ -34,6 +34,7 @@ class micro_blogviews_get(TestCase):
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, featured_post = 'on', status = 'D')
+		comment = BlogComments.objects.create(name='john',email='ravi@mp.com',message='good post')
 
 
 	def test_blog_get(self):
@@ -78,6 +79,10 @@ class micro_blogviews_get(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'site/blog/index.html')
 
+		response = self.client.get('/blog/2014/12/?page=1')
+		self.assertEqual(response.status_code, 200)
+		self.assertTemplateUsed(response,'site/blog/index.html')
+
 		response = self.client.get('/blog/change/featured-state/python-introduction/')
 		self.assertEqual(response.status_code, 302)
 
@@ -90,6 +95,31 @@ class micro_blogviews_get(TestCase):
 
 		response = self.client.get('/blog/delete-category/django/')
 		self.assertEqual(response.status_code, 302)
+
+		response = self.client.get('/blog/blog-comments/')
+		self.assertEqual(response.status_code, 200)
+
+		##To activate comment
+		response = self.client.get('/blog/comment-status/1/')
+		self.assertEqual(response.status_code, 302)
+
+
+		##to deactivate comment
+		response = self.client.get('/blog/comment-status/1/')
+		self.assertEqual(response.status_code, 302)
+
+		response = self.client.get('/blog/delete-comments/1/')
+		self.assertEqual(response.status_code,302)
+
+		#sending correct data
+		response = self.client.post('/blog/python-introduction/add-comment/',{'name':'john','email':'ravi@mp.com','message':'good post','weburl':'micropyramid.com'})
+		self.assertEqual(response.status_code,200)
+		self.assertFalse('comment posted successfully' in response.content)
+
+		#sending wrong data
+		response = self.client.post('/blog/python-introduction/add-comment/',{})
+		self.assertEqual(response.status_code,200)
+
 
 class micro_blog_post_data(TestCase):
 
@@ -110,20 +140,43 @@ class micro_blog_post_data(TestCase):
 		response = self.client.get('/blog/')
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.post('/blog/admin/new/',{'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
+		response = self.client.get('/blog/?page=1')
+		self.assertEqual(response.status_code, 200)
+
+		# with correct input
+		response = self.client.post('/blog/admin/new/',{'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D', 'tags':'django'})
+		self.assertEqual(response.status_code, 200)
+
+		# with wrong input
+		response = self.client.post('/blog/admin/new/',{'content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
 		self.assertEqual(response.status_code, 200)
 
 		response = self.client.post('/blog/edit/python-introduction/', {'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
 		self.assertEqual(response.status_code, 200)
 		self.assertTrue('Blog Post created' in response.content)
 
+		response = self.client.post('/blog/edit/python-introduction/', {'content':'This is content','category':self.c.id, 'featured_post':'on','status':'D', 'tags':'python'})
+		self.assertEqual(response.status_code, 200)
+		self.assertFalse('Blog Post created' in response.content)
+
 		response = self.client.post('/blog/new-category/',{'name':'django form','description':'django'})
 		self.assertEqual(response.status_code, 200)
 		self.assertTrue('Blog category created' in response.content)
 
-		response = self.client.get('/blog/edit-category/django/',{'name':'django form','description':'django'})
+		response = self.client.post('/blog/new-category/',{'description':'django'})
+		self.assertEqual(response.status_code, 200)
+		self.assertFalse('Blog category created' in response.content)
+
+		response = self.client.get('/blog/edit-category/django/')
 		self.assertEqual(response.status_code, 200)
 
 		response = self.client.post('/blog/edit-category/django-form/',{'name':'django new','description':'django'})
 		self.assertEqual(response.status_code, 200)
 		self.assertTrue('Blog category updated' in response.content)
+
+		response = self.client.post('/blog/edit-category/django-new/',{'description':'django'})
+		self.assertEqual(response.status_code, 200)
+		self.assertFalse('Blog category updated' in response.content)
+
+		response = self.client.get('/blog/tag/django/')
+		self.assertEqual(response.status_code,200)

@@ -67,5 +67,14 @@ class pages_views_test(TestCase):
 		response = self.client.post('/portal/content/menu/add_menu_item/', {'title':'main', 'url':'micro.in', 'status':'on'})
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/portal/content/menu/1/status')
-		self.assertEqual(response.status_code, 301)
+		response = self.client.get('/portal/content/menu/1/status/')
+		self.assertEqual(response.status_code, 302)
+
+		response = self.client.get('/portal/content/menu/1/edit')
+		self.assertTrue(response.status_code,200)
+
+		response = self.client.post('/portal/content/menu/1/edit', {'title':'main2', 'url':'micro.in', 'status':'on'})
+		self.assertTrue(response.status_code,200)
+
+		response = self.client.get('/portal/content/menu/1/delete')
+		self.assertTrue(response.status_code,200)
