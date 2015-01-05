@@ -246,7 +246,7 @@ def blog_tag(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'latest_posts':latest_posts,'comments':comments,'pagelist':page_list, 'menu_list':menu_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'categories':categories,'tags':tags,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -438,7 +438,7 @@ def edit_blog_post(request,blog_slug):
                         blog_tag = Tags.objects.create(name=tag)
 
                     blog_post.tags.add(blog_tag)
-            data = {'error':False,'response':'Blog Post created'}
+            data = {'error':False,'response':'Blog Post edited'}
         else:
             data = {'error':True,'response':validate_blog.errors}
         return HttpResponse(json.dumps(data))

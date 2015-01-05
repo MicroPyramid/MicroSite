@@ -4,6 +4,7 @@ from django.forms.models import ModelForm
 import unittest
 from employee.forms import *
 from django.test import Client
+from micro_admin.models import User
 
 
 
@@ -21,7 +22,9 @@ class Modelforms_test(TestCase):
         form = DailyReportForm(data = {'employee': 'ravi@mp.com', 'project': 'ravi', 'report':'Sample report'})
         self.assertTrue(form.is_valid())
 
-
+'''
+Employee without login
+'''
 class Views_test(TestCase):
 
 	def test_employee_report(self):
@@ -36,4 +39,49 @@ class Views_test(TestCase):
 		self.assertEqual(resp.status_code, 302)
 
 		resp = c.get('/portal/staff/reports/delete/1/')
+		self.assertEqual(resp.status_code, 302)
+
+class test_employee(TestCase):
+
+	def setUp(self):
+		self.client = Client()
+		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+
+	def test_views_user(self):
+		user_login=self.client.login(email='mp@mp.com', password='mp')
+		self.assertTrue(user_login)
+
+		response = self.client.get('/portal/staff/')
+		self.assertEqual(response.status_code, 200)
+
+		##with right input
+		resp = self.client.post('/portal/staff/reports/new/',{'employee': 'mp@mp.com', 'project': 'MicoPyramid', 'report':'Sample report'})
+		self.assertEqual(resp.status_code, 200)
+		self.assertTrue('Report created successfully' in resp.content)
+
+		## with wrong input
+		resp = self.client.get('/portal/staff/reports/new/',{'project': 'MicoPyramid', 'report':'Sample report'})
+		self.assertEqual(resp.status_code, 200)
+		self.assertFalse('Report created successfully' in resp.content)
+
+
+		resp = self.client.get('/portal/staff/reports/new/')
+		self.assertEqual(resp.status_code, 200)
+
+		resp = self.client.post('/portal/staff/reports/edit/1/')
+		self.assertEqual(resp.status_code, 200)
+
+		##wirth right input
+		resp = self.client.post('/portal/staff/reports/edit/1/',{'project': 'MicoPyramid','project': 'MicoPyramid', 'report':'Sample report'})
+		self.assertEqual(resp.status_code, 200)
+		self.assertTrue('successfully' in resp.content)
+
+
+		##with wrong input
+		resp = self.client.get('/portal/staff/reports/edit/1/',{'project': 'MicoPyramid','project': 'MicoPyramid', 'report':'Sample report'})
+		self.assertEqual(resp.status_code, 200)
+		self.assertFalse('successfully' in resp.content)
+
+
+		resp = self.client.post('/portal/staff/reports/delete/1/')
 		self.assertEqual(resp.status_code, 302)

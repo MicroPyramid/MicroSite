@@ -71,6 +71,10 @@ class micro_blogviews_get(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'site/blog/index.html')
 
+		response = self.client.get('/blog/category/django/?page=1')
+		self.assertEqual(response.status_code, 200)
+		self.assertTemplateUsed(response,'site/blog/index.html')
+
 		response = self.client.get('/blog/python-introduction/')
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'site/blog/article.html')
@@ -146,18 +150,22 @@ class micro_blog_post_data(TestCase):
 		# with correct input
 		response = self.client.post('/blog/admin/new/',{'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D', 'tags':'django'})
 		self.assertEqual(response.status_code, 200)
+		self.assertTrue('Blog Post created' in response.content)
+
 
 		# with wrong input
 		response = self.client.post('/blog/admin/new/',{'content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
 		self.assertEqual(response.status_code, 200)
+		self.assertFalse('Blog Post created' in response.content)
+
 
 		response = self.client.post('/blog/edit/python-introduction/', {'title':'python introduction','content':'This is content','category':self.c.id, 'featured_post':'on','status':'D'})
 		self.assertEqual(response.status_code, 200)
-		self.assertTrue('Blog Post created' in response.content)
+		self.assertTrue('Blog Post edited' in response.content)
 
 		response = self.client.post('/blog/edit/python-introduction/', {'content':'This is content','category':self.c.id, 'featured_post':'on','status':'D', 'tags':'python'})
 		self.assertEqual(response.status_code, 200)
-		self.assertFalse('Blog Post created' in response.content)
+		self.assertFalse('Blog Post edited' in response.content)
 
 		response = self.client.post('/blog/new-category/',{'name':'django form','description':'django'})
 		self.assertEqual(response.status_code, 200)
@@ -179,4 +187,7 @@ class micro_blog_post_data(TestCase):
 		self.assertFalse('Blog category updated' in response.content)
 
 		response = self.client.get('/blog/tag/django/')
+		self.assertEqual(response.status_code,200)
+
+		response = self.client.get('/blog/tag/django/?page=1')
 		self.assertEqual(response.status_code,200)
