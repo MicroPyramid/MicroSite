@@ -18,6 +18,8 @@ import datetime
 import requests
 import urllib2, json
 import urllib 
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -328,6 +330,14 @@ def add_blog_comment(request, slug):
             if json.loads(r.text)['success']==True:
                 comment = validate_blog_comment.save(commit = False)
                 blog_post = Post.objects.get(slug=slug)
+                subject = 'Your comment for blog post'+blog_post.title
+                Message = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
+                from_email, to = 'nikhila@micropyramid.com', blog_post.user.email
+                text_content = 'You posted this comment for blog post'+blog_post.title +' is '+request.POST.get('message')
+                html_content = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
                 comment.post = blog_post
                 comment.status='on'
                 comment.save()
@@ -433,40 +443,38 @@ def edit_blog_post(request,blog_slug):
         current_post = Post.objects.get(slug = blog_slug)
         validate_blog = BlogpostForm(request.POST,instance=current_post)
         if validate_blog.is_valid():
-            if request.user == current_post.user or request.user.is_admin:
-                blog_post = validate_blog.save(commit=False)
-                blog_post.user=request.user
-                if request.POST.get('status'):
-                    blog_post.status='D'
-                else:
-                    blog_post.status='P'
-
-                if request.POST.get('featured_post',''):
-                    blog_post.featured_post==request.POST.get('featured_post')
-
-                if 'featuredimage' in request.FILES:
-                    if current_post.featured_image:
-                        os.remove(BLOG_IMAGES + current_post.featured_image)
-                    blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
-
-                blog_post.save()
-
-                if request.POST.get('tags',''):
-                    for tag in blog_post.tags.all():
-                        blog_post.tags.remove(tag)
-                    tags = request.POST.get('tags')
-                    tags = tags.split(',')
-                    for tag in tags:
-                        blog_tag = Tags.objects.filter(name=tag)
-                        if blog_tag:
-                            blog_tag = blog_tag[0]
-                        else:
-                            blog_tag = Tags.objects.create(name=tag)
-
-                        blog_post.tags.add(blog_tag)
-                data = {'error':False,'response':'Blog Post created'}
+            blog_post = validate_blog.save(commit=False)
+            blog_post.user=request.user
+            if request.POST.get('status'):
+                blog_post.status='D'
             else:
-                data = {'error':True,'response':'admin or owner can edit blog post'}
+                blog_post.status='P'
+
+            if request.POST.get('featured_post',''):
+                blog_post.featured_post==request.POST.get('featured_post')
+
+            if 'featuredimage' in request.FILES:
+                if current_post.featured_image:
+                    os.remove(BLOG_IMAGES + current_post.featured_image)
+                blog_post.featured_image=store_image(request.FILES.get('featuredimage'),BLOG_IMAGES)
+
+            blog_post.save()
+
+            if request.POST.get('tags',''):
+                for tag in blog_post.tags.all():
+                    blog_post.tags.remove(tag)
+                tags = request.POST.get('tags')
+                tags = tags.split(',')
+                for tag in tags:
+                    blog_tag = Tags.objects.filter(name=tag)
+                    if blog_tag:
+                        blog_tag = blog_tag[0]
+                    else:
+                        blog_tag = Tags.objects.create(name=tag)
+
+                    blog_post.tags.add(blog_tag)
+                data = {'error':False,'response':'Blog Post created'}
+        
         else:
             data = {'error':True,'response':validate_blog.errors}
         return HttpResponse(json.dumps(data))
@@ -491,14 +499,55 @@ def change_featured_state(request,blog_slug):
 
 @login_required
 def delete_post(request,blog_slug):
-    if request.user == current_post.user or request.user.is_admin:
-        blog_post = Post.objects.get(slug=blog_slug)
+    blog_post = Post.objects.get(slug=blog_slug)
+    if request.user == blog_post.user or request.user.is_admin:
         blog_post.delete()
-        data = {'error':False,'response':'Blog Post Deleted'}
-        return HttpResponseRedirect('/blog/admin/list/')
+        data = {"error":False,'message':'Blog Post Deleted'}
     else:
-        data = {'error':True,'response':'admin or owner can delete blog post'}
+        data = {"error":True,'message':'admin or owner can delete blog post'}
     return HttpResponse(json.dumps(data))
+
 
 def handle_xmlrpc(request):
     return HttpResponse("")
+
+
+@login_required
+def edit_post(request,blog_slug):
+    blog_post = Post.objects.get(slug=blog_slug)
+    if request.user == blog_post.user or request.user.is_admin:
+        data = {"error":False,'response':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'response':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))
+
+
+@login_required
+def view_post(request,blog_slug):
+    blog_post = Post.objects.get(slug=blog_slug)
+    blog_post_comments = BlogComments.objects.filter(post=blog_post)
+    return render_to_response('admin/blog/view_post.html',{'post':blog_post,'blog_comments':blog_post_comments})
+
+@login_required
+def delete_comment(request,comment_id):
+    comment_post = BlogComments.objects.get(pk=comment_id)
+    if request.user == comment_post.post.user or request.user.is_admin:
+        comment_post.delete()
+        data = {"error":False,'message':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'message':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))
+
+@login_required
+def edit_comment(request,comment_id):
+    comment_post = BlogComments.objects.get(pk=comment_id)
+    if request.user == comment_post.post.user or request.user.is_admin:
+        if comment.status=="on":
+            comment.status="off"
+        else:
+            comment.status="on"
+        comment.save()
+        data = {"error":False,'response':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'response':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))

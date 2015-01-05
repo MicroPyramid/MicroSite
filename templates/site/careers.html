@@ -1,92 +1,90 @@
 {% extends 'site/base.html' %}
-   {% block stage %}
-         <!-- banner starts here-->
-         <div class="row marl career-banner">
-            <div class="container">
-               <h2>Come and join For Research & Development</h2>
-               <div class="job-ban-content">
-                  <div class="row marl">
-                     <div class="job-ban-left col-lg-8 col-md-7 col-sm-8 col-xs-12">
-                        <div class="job-techs">
-                           <ul class="technologies list-inline">
-                              <li class="grapefruit">Jquery</li>
-                              <li class="bittersweet">Javascript</li>
-                              <li class="sunflower">Angularjs</li>
-                              <li class="grass">JSON</li>
-                              <li class="pinkrose">REST</li>
-                              <li class="grapefruit-d">Html5</li>
-                              <li class="bittersweet-d">Css3</li>
-                              <li class="sunflower-d">Photoshop</li>
-                              <li class="grass-d">GIMP</li>
-                              <li class="pinkrose-d">MongoDB</li>
-                              <li class="grapefruit">Django</li>
-                              <li class="bittersweet">Wordpress</li>
-                              <li class="sunflower">Symfony</li>
-                              <li class="grass">Laravel</li>
-                              <li class="pinkrose">Amazon web services</li>
-                              <li class="grapefruit-d">Mysql</li>
-                              <li class="bittersweet-d">Android</li>
-                              <li class="sunflower-d">IOS</li>
-                              <li class="grass-d">Celery</li>
-                              <li class="pinkrose-d">Linux</li>
-                              <li class="grapefruit">Haystack</li>
-                              <li class="bittersweet"> Elastic Search</li>
-                           </ul>
-                        </div>
-                        <ul class="job-ban-desc">
-                           <li class="ban-bg1">You have searched long and hard for that perfect job</li>
-                           <li class="ban-bg2">An environment which offers a feel of home away from </li>
-                           <li class="ban-bg3">An opportunity where there is scope for learning and </li>
-                           <li class="ban-bg4">A place with people who work as team and believe in </li>
-                        </ul>
-                     </div>
-                     <div class="job-ban-right col-lg-4 col-md-5 col-sm-4 col-xs-12">
-                        <img src="/static/blog/join.png" />
-                     </div>
-                  </div>
-                  <div class="car-ban-contact"><a href="#">And now you have found it! So, what you gonna do? We suggest you click that apply button and let us contact you</a></div>
-               </div>
-            </div>
-         </div>
-         <!-- banner ends here-->
-         
-         <!-- current openings starts here -->
-         <div class="row marl current-opngs">
-         	<div class="container ">
-            		<h4>Current Openings</h4>
-               <div class="current-openings">
-                    {% for job in jobs %}
-                    <!-- single job post starts here-->
-                  <div class="row marl job-post">
-                    	<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 web-des ">
-                     {% if job.featured_image %}
-                        <div class="designer-pic {% cycle job-yellow,job-light-grn %}"><img src="/static/blog/{{job.featured_image}}" /></div>
-                     {% endif %} 
-                     </div>	
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 date-post">
-                        	<div class="date-details {% cycle job-blue-grn,job-violet %}">
-                            	<span class="cur-opng-head">Current Openings</span>
-                                <span class="cur-opng-count">{{job.num_of_opening}}</span>
-                                <span class="cur-opng-date">{{job.posted_on}}</span>
-                                <span class="cur-opng-view"><a href="#">View</a></span>
-                           </div>
-                        </div>	
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 post-desc">
-                        	<div class="description">
-                        		<span class="description-title">{{job.title}}</span>
-                                <span class="description-exp">Exp:{{job.experience}}</span>
-                                <span class="description-skills">Skills:{{job.skills}} </span>
-                                <span class="description-desc"><p>{{job.description}}</p></span>
-                                <span class="description-apply"><a href="#"> <i class="fa fa-paper-plane"></i> Apply Now</a></span>
-                           </div>
-                        </div>	
-                    
-                    </div>
-                    {% endfor %}
-                  </div>  
-            	</div>
-            </div>
-         <!-- current opening ends here -->
-         
-        
- {% endblock %}
+{% block stage %}
+<!-- banner starts here-->
+<div class="row marl career-banner">
+  <div class="container">
+    <h2>Come and join For Research & Development</h2>
+    <div class="job-ban-content">
+      <div class="row marl">
+        <div class="job-ban-left col-lg-8 col-md-7 col-sm-8 col-xs-12">
+          <div class="job-techs">
+            <ul class="technologies list-inline">
+              <li class="grapefruit">Jquery</li>
+              <li class="bittersweet">Javascript</li>
+              <li class="sunflower">Angularjs</li>
+              <li class="grass">JSON</li>
+              <li class="pinkrose">REST</li>
+              <li class="grapefruit-d">Html5</li>
+              <li class="bittersweet-d">Css3</li>
+              <li class="sunflower-d">Photoshop</li>
+              <li class="grass-d">GIMP</li>
+              <li class="pinkrose-d">MongoDB</li>
+              <li class="grapefruit">Django</li>
+              <li class="bittersweet">Wordpress</li>
+              <li class="sunflower">Symfony</li>
+              <li class="grass">Laravel</li>
+              <li class="pinkrose">Amazon web services</li>
+              <li class="grapefruit-d">Mysql</li>
+              <li class="bittersweet-d">Android</li>
+              <li class="sunflower-d">IOS</li>
+              <li class="grass-d">Celery</li>
+              <li class="pinkrose-d">Linux</li>
+              <li class="grapefruit">Haystack</li>
+              <li class="bittersweet"> Elastic Search</li>
+            </ul>
+          </div>
+          <ul class="job-ban-desc">
+            <li class="ban-bg1">You have searched long and hard for that perfect job</li>
+            <li class="ban-bg2">An environment which offers a feel of home away from </li>
+            <li class="ban-bg3">An opportunity where there is scope for learning and </li>
+            <li class="ban-bg4">A place with people who work as team and believe in </li>
+          </ul>
+        </div>
+        <div class="job-ban-right col-lg-4 col-md-5 col-sm-4 col-xs-12">
+          <img src="/static/blog/join.png" />
+        </div>
+      </div>
+      <div class="car-ban-contact"><a href="#">And now you have found it! So, what you gonna do? We suggest you click that apply button and let us contact you</a></div>
+    </div>
+  </div>
+</div>
+<!-- banner ends here-->
+<!-- current openings starts here -->
+<div class="row marl current-opngs">
+  <div class="container ">
+    <h4>Current Openings</h4>
+    <div class="current-openings">
+      {% for job in jobs %}
+      <!-- single job post starts here-->
+      <div class="row marl job-post">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 web-des ">
+          {% if job.featured_image %}
+          <div class="designer-pic {% cycle job-yellow,job-light-grn %}"><img src="/static/blog/{{job.featured_image}}" /></div>
+          {% endif %} 
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 date-post">
+          <div class="date-details {% cycle job-blue-grn,job-violet %}">
+            <span class="cur-opng-head">Current Openings</span>
+            <span class="cur-opng-count">{{job.num_of_opening}}</span>
+            <span class="cur-opng-date">{{job.posted_on}}</span>
+            <span class="cur-opng-view"><a href="#">View</a></span>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 post-desc">
+          <div class="description">
+            <span class="description-title">{{job.title}}</span>
+            <span class="description-exp">Exp:{{job.experience}}</span>
+            <span class="description-skills">Skills:{{job.skills}} </span>
+            <span class="description-desc">
+              <p>{{job.description}}</p>
+            </span>
+            <span class="description-apply"><a href="#"> <i class="fa fa-paper-plane"></i> Apply Now</a></span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- current opening ends here -->
+{% endblock %}

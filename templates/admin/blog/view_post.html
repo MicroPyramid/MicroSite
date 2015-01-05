@@ -1,0 +1,111 @@
+{% extends 'admin/base.html' %}
+{% block stage %}
+<div class="row marl top-row">
+  <div class="row marl">
+    <div class="container">
+      <div class="row marl prof-table site-table">
+        <div class="table-responsive">
+          <h3>view blogpost</h3>
+          <div class="row marl main-content">
+            <div class="row marl blog-form">
+              <fieldset>
+                <legend>Blog Post</legend>
+                <div class="table-responsive table-bordered">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Blog Title</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">User</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Content</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Category</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Tag</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{post.title}}</td>
+                        <td>{{post.user.email}}</td>
+                        <td><div class="post-content" style="word-wrap:break-word;height:200px;overflow-y:scroll;">
+                        {{post.content}}</div></td>
+                        <td>{{post.category.name}}</td>
+                        <td>{% for i in post.tags.all%}
+                                  {{i.name}},<br>
+                            {% endfor %}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+            <div class="row marl blog-form">
+              <fieldset>
+                <legend>Blog Comments</legend>
+                <div class="table-responsive table-bordered">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+                        <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Blog Title</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Name</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Email</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Message</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
+                        <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for comments in blog_comments %}
+                      <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{comments.post.title}}</td>
+                        <td>{{comments.name}}</td>
+                        <td>{{comments.email}}</td>
+                        <td>{{comments.message}}</td>
+                        <td><a href="" value="{{comments.id}}" class="edit_status">{{comments.status}}</a></td>
+                        <td><a href="" value="{{comments.id}}" class="del_comment"><i class="fa fa-trash-o trash-color"></i></a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+    $('.edit_status').click(function(data){
+      var slug = $(this).attr('value');
+      $.post('/blog/edit-comment-status/'+$(this).attr('value')+'/',function(data){
+      if(data.error)
+      {
+        alert(data.response);
+      }
+      else{
+        window.location ='/blog/blog-comments/';
+      }
+    },"json")
+    })
+    $('.del_comment').click(function(data){
+      $.post('/blog/delete/blog-comment/'+$(this).attr('value')+'/',function(data){
+      if(data.error)
+      {
+        alert(data.message);
+      }
+      else{
+        window.location ='/blog/blog-comments/';
+      }
+    },"json")
+    })
+    });
+</script>>
+{% endblock %}
