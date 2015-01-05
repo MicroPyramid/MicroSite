@@ -499,4 +499,6 @@ def delete_post(request,blog_slug):
     else:
         data = {'error':True,'response':'admin or owner can delete blog post'}
     return HttpResponse(json.dumps(data))
-     
+
+def handle_xmlrpc(request):
+    return HttpResponse("")
