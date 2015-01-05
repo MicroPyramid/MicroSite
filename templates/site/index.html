@@ -1,10 +1,12 @@
 {% extends 'site/base.html' %}
 {% block stage %}
 <!-- banner starts here-->
-
+{% load compress %}
+{% compress css %}
 <link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
+{% endcompress %}
 <div class="row marl banner-row">
   <div class="slideshow" id="slideshow">
     <ol class="slides">
@@ -15,7 +17,7 @@
         </div>
         <div class="tiltview col">
           <a href="#">
-            <img src="/static/site/images/responsive.png">
+          <img src="/static/site/images/responsive.png">
           </a>
         </div>
       </li>
@@ -27,7 +29,7 @@
         </div>
         <div class="tiltview row">
           <a href="#">
-            <img src="/static/site/images/1-c-n.png">
+          <img src="/static/site/images/1-c-n.png">
           </a>
         </div>
       </li>
@@ -38,7 +40,7 @@
         </div>
         <div class="tiltview col">
           <a href="#">
-            <img src="/static/site/images/social.png">
+          <img src="/static/site/images/social.png">
           </a>
         </div>
       </li>
@@ -49,19 +51,21 @@
         </div>
         <div class="tiltview row">
           <a href="#">
-            <img src="/static/site/images/server.png">
+          <img src="/static/site/images/server.png">
           </a>
         </div>
       </li>
     </ol>
   </div>
 </div>
+{% compress js %}
 <script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="/static/site/js/classie.js"></script>
 <script type="text/javascript" src="/static/site/js/tiltSlider.js"></script>
 <script>
   new TiltSlider( document.getElementById( 'slideshow' ) );
 </script>
+{% endcompress %}
 <!-- banner ends here-->
 <!-- sec-about starts -->
 <section id="about-holder">
@@ -167,12 +171,12 @@
                 <section id="tab-2">
                   <h3>Designing</h3>
                   <p>Our web designing team develop all designs with own care and commitment to the brand's nature and target users. By usig photoshop, GIMP, bootstrap, jquery, angularjs, fontawesome, We have developed amazing designs, layouts and interfaces
-                    <ul>
-                      <li>responsive web designs</li>
-                      <li>responsive email templates</li>
-                      <li>wordpress themes</li>
-                      <li>mobile UI</li>
-                    </ul>
+                  <ul>
+                    <li>responsive web designs</li>
+                    <li>responsive email templates</li>
+                    <li>wordpress themes</li>
+                    <li>mobile UI</li>
+                  </ul>
                   </p>
                 </section>
                 <!--======= TAB 3 =========-->
@@ -316,8 +320,8 @@
       <article>
         <div class="hgroup">
           <div class="col-xs-12 ">
-           <h3>Contact Us</h3>
-              <p>We are always ready to help you with our innovative solutions. Get in touch via the form below or you can email or call us.</p>
+            <h3>Contact Us</h3>
+            <p>We are always ready to help you with our innovative solutions. Get in touch via the form below or you can email or call us.</p>
           </div>
         </div>
       </article>
@@ -355,7 +359,7 @@
       <!-- contact_info ends -->
       <div class="contact_form animated" data-animdelay="0.2s" data-animspeed="1s" data-animrepeat="0" data-animtype="fadeInRight">
         <form id="contactform" method="post">
-        {% csrf_token %}
+          {% csrf_token %}
           <div class="col-sm-6">
             <span class="field_single">
             <input type="text" placeholder="Full Name" value="" name="full_name">
@@ -380,39 +384,38 @@
   </div>
 </section>
 <!-- sec-contact ends -->
-
 <script>
-     $('#contactform').ajaxForm({
-
-       dataType: 'json',
-       data : $('#contactform').serialize(),
-       type: "POST",
-       success: function(data){
-         if (data.error == false)
-         {
-           alert(data.data);
-           window.location ='/';
-         }
-         else
-         {
-         $('.error').text('');
-            $('.error').show();
-           $.each( data, function( key, value ) {
-          $('#'+key).text(value);
-          });
-           }
-         }
-
-       });
+  $('#contactform').ajaxForm({
   
-   $('#senddetails').click(function(e){
-    e.preventDefault();
-   $('#contactform').submit();
-   });
-   
-         
-         
-       
-
+    dataType: 'json',
+    data : $('#contactform').serialize(),
+    type: "POST",
+    success: function(data){
+      if (data.error == false)
+      {
+        alert(data.data);
+        window.location ='/';
+      }
+      else
+      {
+      $('.error').text('');
+         $('.error').show();
+        $.each( data, function( key, value ) {
+       $('#'+key).text(value);
+       });
+        }
+      }
+  
+    });
+  
+  $('#senddetails').click(function(e){
+  e.preventDefault();
+  $('#contactform').submit();
+  });
+  
+      
+      
+    
+  
 </script>
 {% endblock %}
