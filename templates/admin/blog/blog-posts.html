@@ -23,23 +23,24 @@
           <tbody>
             {% for post in blog_posts %}
             <tr>
-              <td>{{post.title}}</td>
+              <td><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></td>
               <td class="sec-col">{{post.author}}</td>
               <td><a href="{% url 'micro_blog:change_featured_state' blog_slug=post.slug %}">
-                    {% ifequal post.featured_post 'on' %}
-                    <i class="fa fa-circle status-color-g"></i>
-                    {% else %}
-                    <i class="fa fa-circle status-color"></i>
-                    {% endifequal %}
-                  </a>
+                {% ifequal post.featured_post 'on' %}
+                <i class="fa fa-circle status-color-g"></i>
+                {% else %}
+                <i class="fa fa-circle status-color"></i>
+                {% endifequal %}
+                </a>
               </td>
               <td>{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}
               </td>
-              <td><a href="{% url 'micro_blog:edit_post' blog_slug=post.slug %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+              <td><a href="" class="edit_post" value="{{post.slug}}"><i class="fa fa-pencil-square-o edit-color"></i></a>
               </td>
               <td>{{ post.blogcomments_set.all.count }}</td>
-              <td><a href="{% url 'micro_blog:delete_post' blog_slug=post.slug %}"><i class="fa fa-trash-o trash-color"></i></a>
+              <td><a href="" class="delete_post" value="{{post.slug}}"><i class="fa fa-trash-o trash-color"></i></a>
               </td>
+              <p class="active"></p>
             </tr>
             {% endfor %}
           </tbody>
@@ -48,5 +49,33 @@
     </fieldset>
   </div>
 </div>
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+    $('.edit_post').click(function(data){
+      var slug = $(this).attr('value');
+      $.post('/blog/edit-blog-post/'+$(this).attr('value')+'/',function(data){
+      if(data.error)
+      {
+        alert(data.response);
+      }
+      else{
+        window.location ='/blog/edit/'+slug+'/';
+      }
+    },"json")
+    })
+    $('.delete_post').click(function(data){
+      $.post('/blog/delete/blog-post/'+$(this).attr('value')+'/',function(data){
+      if(data.error)
+      {
+        alert(data.message);
+      }
+      else{
+        window.location ='/blog/admin/list/';
+      }
+    },"json")
+    })
+    });
+</script>>
 <!-- main content ends here-->
 {% endblock %}

@@ -1,12 +1,13 @@
 from django import template
 from micro_blog.models import *
 from pages.models import *
+from django.db.models import Count
 
 register = template.Library()
 
 @register.assignment_tag(takes_context=True)
 def get_tags(context):
-	return Tags.objects.all().order_by('-id')[:20]
+	return Tags.objects.annotate(Num=Count('rel_posts')).filter(Num__gt = 0)[:20]
 
 
 @register.assignment_tag(takes_context=True)

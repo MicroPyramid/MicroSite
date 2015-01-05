@@ -10,9 +10,16 @@ Full featured and completely customizable django site for organizations.
    :target: https://readthedocs.org/projects/microsite/?badge=latest
    :alt: Documentation Status
 
+.. image:: https://coveralls.io/repos/MicroPyramid/MicroSite/badge.png?branch=master
+   :target: https://coveralls.io/r/MicroPyramid/MicroSite?branch=master
+
+.. image:: https://landscape.io/github/MicroPyramid/MicroSite/master/landscape.svg
+   :target: https://landscape.io/github/MicroPyramid/MicroSite/master
+   :alt: Code Health
+
 head to http://microsite.readthedocs.org/ for latest documentation
 
-This is intended to host the following in the site.
+This project contains the following modules.
    * Static Pages.
    * Configurable Menu.
    * Blog.

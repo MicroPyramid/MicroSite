@@ -26,7 +26,10 @@ INSTALLED_APPS = (
     'employee',
     'sorl.thumbnail',
     'microsite_front',
-    'haystack'
+    'haystack',
+    'pingback',
+    'django_xmlrpc',
+    'compressor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -75,6 +78,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
+COMPRESS_ROOT=BASE_DIR + '/static/'
 BLOG_IMAGES = BASE_DIR + '/static/blog/' 
 TEAM_IMAGES = BASE_DIR + '/static/team/'
 CLIENT_IMAGES = BASE_DIR + '/static/client/'
@@ -93,8 +97,14 @@ TEMPLATE_LOADERS = (
         "django.template.loaders.app_directories.Loader",
     )),
 )
+COMPRESS_ENABLED=True
 
-
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 LOGGING = {
     'version': 1,

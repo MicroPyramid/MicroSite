@@ -4,4 +4,5 @@ db.sqlite3
 .project
 .pydevproject
 static/blog
+static/CACHE
 .coverage

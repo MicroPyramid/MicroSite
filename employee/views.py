@@ -16,21 +16,23 @@ def reports_list(request):
 
 @login_required
 def new_report(request):
-	if request.method == 'POST':
-		validate_report = DailyReportForm(request.POST)
-		errors = {}
-		if validate_report.is_valid():
-			new_report = validate_report.save(commit=False)
-			new_report.employee = request.user
-			new_report.save()
-			data = {'error':False,'response':'Report created successfully'}
-		else:
-			data = {'error':True,'response':validate_blog.errors}
-		return HttpResponse(json.dumps(data))
-	projects = Project.objects.all()
-	c = {}
-	c.update(csrf(request))
-	return render_to_response('admin/staff/new_report.html',{'projects':projects,'csrf_token':c['csrf_token']})
+    if request.method == 'POST':
+        validate_report = DailyReportForm(request.POST)
+        errors = {}
+        if validate_report.is_valid():
+            new_report = validate_report.save(commit=False)
+            new_report.employee = request.user
+            project=Project.objects.get(pk=request.POST.get('project'))
+            new_report.project = project
+            new_report.save()
+            data = {'error':False,'response':'Report created successfully'}
+        else:
+            data = {'error':True,'response':validate_blog.errors}
+        return HttpResponse(json.dumps(data))
+    projects = Project.objects.all()
+    c = {}
+    c.update(csrf(request))
+    return render_to_response('admin/staff/new_report.html',{'projects':projects,'csrf_token':c['csrf_token']})
 
 
 @login_required
@@ -50,9 +52,10 @@ def edit_report(request,pk):
             data = {'error':True,'response':'You cannot edit this report' }
         return HttpResponse(json.dumps(data))
     new_report = DailyReport.objects.get(id=pk)
+    project = Project.objects.all()
     c = {}
     c.update(csrf(request))
-    return render_to_response('admin/staff/edit_report.html',{'new_report':new_report,'csrf_token':c['csrf_token']})
+    return render_to_response('admin/staff/edit_report.html',{'projects':project,'new_report':new_report,'csrf_token':c['csrf_token']})
 
 
 @login_required

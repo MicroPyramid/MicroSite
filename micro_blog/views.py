@@ -1,3 +1,4 @@
+import simplejson
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
@@ -15,8 +16,9 @@ from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
 import datetime
 import requests
-
-
+import urllib2, json
+import urllib 
+from django.core.mail import EmailMultiAlternatives
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -199,14 +201,40 @@ def blog_article(request, slug):
     comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
     current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
-
+    fb=requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
+    tw=requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
+    # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
+    ln=requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
+    linkedin={}
+    linkedin.update(ln.json()) 
+    facebook={}
+    facebook.update(fb.json())
+    twitter={}
+    twitter.update(tw.json())
+    fbshare_count = 0
+    twshare_count = 0
+    lnshare_count = 0
+    try:
+        if facebook['shares']:
+            fbshare_count = facebook['shares']
+    except:
+        pass
+    try:
+        if twitter['count']:
+            twshare_count = twitter['count']
+    except:
+        pass
+    try:
+        if linkedin['count']:
+            lnshare_count = linkedin['count']
+    except:
+        pass
     archives = []
-    print blog_post.featured_image
     for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'archives':archives,'comments':comments,'posts':blog_posts})
+    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,'twshare_count':twshare_count,'lnshare_count':lnshare_count})
 
 
 def blog_tag(request, slug):
@@ -215,7 +243,6 @@ def blog_tag(request, slug):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
     archives = []
     for i in reversed(range(-4,1)):
         archives.append(current_date + datetime.timedelta(i*365/12))
@@ -246,7 +273,8 @@ def blog_tag(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+
+    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -302,6 +330,14 @@ def add_blog_comment(request, slug):
             if json.loads(r.text)['success']==True:
                 comment = validate_blog_comment.save(commit = False)
                 blog_post = Post.objects.get(slug=slug)
+                subject = 'Your comment for blog post'+blog_post.title
+                Message = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
+                from_email, to = 'nikhila@micropyramid.com', blog_post.user.email
+                text_content = 'You posted this comment for blog post'+blog_post.title +' is '+request.POST.get('message')
+                html_content = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
                 comment.post = blog_post
                 comment.status='on'
                 comment.save()
@@ -405,7 +441,6 @@ def admin_new_post(request):
 def edit_blog_post(request,blog_slug):
     if request.method == 'POST':
         current_post = Post.objects.get(slug = blog_slug)
-        print len(request.POST.get('content'))
         validate_blog = BlogpostForm(request.POST,instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
@@ -464,6 +499,54 @@ def change_featured_state(request,blog_slug):
 @login_required
 def delete_post(request,blog_slug):
     blog_post = Post.objects.get(slug=blog_slug)
-    blog_post.delete()
-    return HttpResponseRedirect('/blog/admin/list/')
+    if request.user == blog_post.user or request.user.is_admin:
+        blog_post.delete()
+        data = {"error":False,'message':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'message':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))
 
+
+def handle_xmlrpc(request):
+    return HttpResponse("")
+
+
+@login_required
+def edit_post(request,blog_slug):
+    blog_post = Post.objects.get(slug=blog_slug)
+    if request.user == blog_post.user or request.user.is_admin:
+        data = {"error":False,'response':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'response':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))
+
+
+@login_required
+def view_post(request,blog_slug):
+    blog_post = Post.objects.get(slug=blog_slug)
+    blog_post_comments = BlogComments.objects.filter(post=blog_post)
+    return render_to_response('admin/blog/view_post.html',{'post':blog_post,'blog_comments':blog_post_comments})
+
+@login_required
+def delete_comment(request,comment_id):
+    comment_post = BlogComments.objects.get(pk=comment_id)
+    if request.user == comment_post.post.user or request.user.is_admin:
+        comment_post.delete()
+        data = {"error":False,'message':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'message':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))
+
+@login_required
+def edit_comment(request,comment_id):
+    comment_post = BlogComments.objects.get(pk=comment_id)
+    if request.user == comment_post.post.user or request.user.is_admin:
+        if comment.status=="on":
+            comment.status="off"
+        else:
+            comment.status="on"
+        comment.save()
+        data = {"error":False,'response':'Blog Post Deleted'}
+    else:
+        data = {"error":True,'response':'admin or owner can delete blog post'}
+    return HttpResponse(json.dumps(data))

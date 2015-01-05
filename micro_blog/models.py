@@ -53,7 +53,7 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
     category = models.ForeignKey(Category)
-    tags = models.ManyToManyField(Tags,blank=True,null=True)
+    tags = models.ManyToManyField(Tags,related_name='rel_posts', blank=True,null=True)
     featured_image = models.CharField(max_length=400, blank=True, null=True)
     featured_post = models.CharField(max_length=4, default='off',blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE,blank=True)
