@@ -3,6 +3,10 @@ from django.test import Client
 from micro_blog.forms import BlogpostForm, CommentForm, BlogCategoryForm
 from micro_blog.models import Category, Post, BlogComments
 from micro_admin.models import User
+from micro_blog.views import store_image, upload_photos, recent_photos
+import unittest
+from microsite.settings import BASE_DIR
+from django.core.files import File
 
 
 class micro_blog_forms_test(TestCase):
@@ -91,7 +95,7 @@ class micro_blogviews_get(TestCase):
 		self.assertEqual(response.status_code, 302)
 
 		response = self.client.get('/blog/delete/blog-post/python-introduction/')
-		self.assertEqual(response.status_code, 302)
+		self.assertEqual(response.status_code, 200)
 
 		response = self.client.get('/blog/edit-category/django/')
 		self.assertEqual(response.status_code, 200)
@@ -191,3 +195,11 @@ class micro_blog_post_data(TestCase):
 
 		response = self.client.get('/blog/tag/django/?page=1')
 		self.assertEqual(response.status_code,200)
+
+
+# class image_upload(unittest.TestCase):
+# 	def test_img(self):
+# 		img = open(BASE_DIR + '/static/blog/Screenshot.png')
+# 		img = File(img)
+# 		resp=store_image(img,'')
+# 		self.assertTrue(resp)

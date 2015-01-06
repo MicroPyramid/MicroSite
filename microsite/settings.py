@@ -143,7 +143,7 @@ port = es.port or 80
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:8983/solr',        
+        'URL': 'http://127.0.0.1:8983/solr',
         'INDEX_NAME': 'documents',
     },
 }

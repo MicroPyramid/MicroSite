@@ -206,7 +206,7 @@ def blog_article(request, slug):
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
     ln=requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
     linkedin={}
-    linkedin.update(ln.json()) 
+    linkedin.update(ln.json())
     facebook={}
     facebook.update(fb.json())
     twitter={}

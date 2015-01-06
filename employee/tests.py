@@ -2,6 +2,7 @@ from django.test import TestCase
 from django import forms
 from django.forms.models import ModelForm
 import unittest
+from projects.models import Project
 from employee.forms import *
 from django.test import Client
 from micro_admin.models import User
@@ -46,6 +47,9 @@ class test_employee(TestCase):
 	def setUp(self):
 		self.client = Client()
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.project = Project.objects.create(name='Microsite',client='Ravi',slug='micro', notes='simple_site', start_date='2014-10-12',end_date='2014-10-10', created_by=self.user)
+
+
 
 	def test_views_user(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
@@ -55,7 +59,7 @@ class test_employee(TestCase):
 		self.assertEqual(response.status_code, 200)
 
 		##with right input
-		resp = self.client.post('/portal/staff/reports/new/',{'employee': 'mp@mp.com', 'project': 'MicoPyramid', 'report':'Sample report'})
+		resp = self.client.post('/portal/staff/reports/new/',{'employee': 'mp@mp.com', 'project':self.project.id, 'report':'Sample report'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertTrue('Report created successfully' in resp.content)
 
