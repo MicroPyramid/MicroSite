@@ -137,35 +137,16 @@ def site_blog_home(request):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
     items_per_page = 10
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(Post.objects.filter(status='P').count()) / items_per_page))
-
     blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-    print pages
-
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'comments':comments, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages,'posts':blog_posts,'comments':comments, 'csrf_token':c['csrf_token']})
 
 
 def blog_article(request, slug):
@@ -213,34 +194,16 @@ def blog_tag(request, slug):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
-
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -249,34 +212,16 @@ def blog_category(request, slug):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
-
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments, 'current_page':page,'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
 
 
 def add_blog_comment(request, slug):
@@ -322,28 +267,11 @@ def archive_posts(request, year, month):
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
-
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,'last_page':no_pages,'posts':blog_posts,'csrf_token':c['csrf_token']})
 
 
 @login_required
