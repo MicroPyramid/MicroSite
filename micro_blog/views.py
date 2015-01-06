@@ -206,7 +206,7 @@ def blog_article(request, slug):
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
     ln=requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
     linkedin={}
-    linkedin.update(ln.json()) 
+    linkedin.update(ln.json())
     facebook={}
     facebook.update(fb.json())
     twitter={}
@@ -273,6 +273,7 @@ def blog_tag(request, slug):
 
     c = {}
     c.update(csrf(request))
+
     return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
@@ -472,8 +473,7 @@ def edit_blog_post(request,blog_slug):
                         blog_tag = Tags.objects.create(name=tag)
 
                     blog_post.tags.add(blog_tag)
-                data = {'error':False,'response':'Blog Post created'}
-        
+            data = {'error':False,'response':'Blog Post edited'}
         else:
             data = {'error':True,'response':validate_blog.errors}
         return HttpResponse(json.dumps(data))
