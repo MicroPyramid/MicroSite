@@ -9,7 +9,7 @@ from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 from micro_blog.models import Image_File, Tags, Post, BlogComments
 
-
+# pylint: disable=W0613,E1120
 
 @login_required
 def pages(request):

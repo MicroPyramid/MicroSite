@@ -8,6 +8,8 @@ import json
 from pages.forms import ContactForm
 from micro_admin.models import career
 
+# pylint: disable=W0613,E1120
+
 def index(request):
 	if request.method=="GET":
 		latest_featured_posts = {} #Post.objects.filter(status = 'P',featured_post = 'on').order_by('-created_on')[:2]

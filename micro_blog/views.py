@@ -17,6 +17,8 @@ import requests
 import json
 from django.core.mail import EmailMultiAlternatives
 
+
+# pylint: disable=W0613,E1120
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
     adding of timestamp to its name'''
