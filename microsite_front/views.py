@@ -1,3 +1,4 @@
+# pylint: disable=W0613,E1120,E1123,E1101
 from django.shortcuts import render_to_response
 from pages.models import simplecontact
 from micro_blog.models import Post
@@ -8,7 +9,6 @@ import json
 from pages.forms import ContactForm
 from micro_admin.models import career
 
-# pylint: disable=W0613,E1120
 
 def index(request):
 	if request.method=="GET":

@@ -1,3 +1,4 @@
+# pylint: disable=W0613,E1120,E1123,E1101
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate, logout

@@ -1,3 +1,4 @@
+# pylint: disable=W0613,E1120,E1123,E1101
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
@@ -9,7 +10,6 @@ from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 from micro_blog.models import Image_File, Tags, Post, BlogComments
 
-# pylint: disable=W0613,E1120
 
 @login_required
 def pages(request):

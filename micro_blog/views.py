@@ -18,7 +18,6 @@ import json
 from django.core.mail import EmailMultiAlternatives
 
 
-# pylint: disable=W0613,E1120
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
     adding of timestamp to its name'''
@@ -191,7 +190,7 @@ def site_blog_home(request):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages, 
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages,
                                 'pages':pages,'posts':blog_posts,'comments':comments,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
@@ -235,7 +234,8 @@ def blog_article(request, slug):
     c = {}
     c.update(csrf(request))
     return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post,
-                                 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,'twshare_count':twshare_count,'lnshare_count':lnshare_count})
+                                 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,
+                                 'twshare_count':twshare_count,'lnshare_count':lnshare_count})
 
 
 def blog_tag(request, slug):
@@ -389,7 +389,8 @@ def archive_posts(request, year, month):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,
+        'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 @login_required

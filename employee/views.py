@@ -1,3 +1,4 @@
+# pylint: disable=W0613,E1120,E1123,E1101
 from django.http.response import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
@@ -8,7 +9,6 @@ from projects.models import Project
 from employee.forms import DailyReportForm
 
 
-# pylint: disable=W0613,E1120
 
 @login_required
 def reports_list(request):
