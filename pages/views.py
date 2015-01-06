@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
-from micro_blog.models import BlogComments
 
 
 @login_required

@@ -416,8 +416,8 @@ def view_post(request,blog_slug):
 
 @login_required
 def delete_comment(request,comment_id):
-    comment = BlogComments.objects.get(pk=comment_id)
-    if request.user == comment.post.user or request.user.is_admin:
+    comment_post = BlogComments.objects.get(pk=comment_id)
+    if request.user == comment_post.post.user or request.user.is_admin:
         comment_post.delete()
         data = {"error":False,'message':'Blog Post Deleted'}
     else:
