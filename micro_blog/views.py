@@ -85,29 +85,6 @@ def recent_photos(request):
                 'is_image': True})
     return render_to_response('admin/browse.html',{'files':imgs})
 
-@login_required
-def blog_comments(request):
-    blog_comments = BlogComments.objects.all()
-    return render_to_response('admin/blog/blog-comments.html',{'blog_comments':blog_comments})
-
-
-@login_required
-def comment_status(request, comment_id):
-    comment=BlogComments.objects.get(id=comment_id)
-    if comment.status=="on":
-        comment.status="off"
-    else:
-        comment.status="on"
-    comment.save()
-    return HttpResponseRedirect('/blog/blog-comments/')
-
-
-@login_required
-def delete_blog_comments(request,comment_id):
-    blog_comment = BlogComments.objects.get(id=comment_id)
-    blog_comment.delete()
-    return HttpResponseRedirect('/blog/blog-comments/')
-
 
 @login_required
 def admin_category_list(request):
@@ -158,40 +135,17 @@ def site_blog_home(request):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
-    archives = []
-    for i in reversed(range(-4,1)):
-        archives.append(current_date + datetime.timedelta(i*365/12))
-
     items_per_page = 10
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(Post.objects.filter(status='P').count()) / items_per_page))
-
     blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-    print pages
-
     c = {}
     c.update(csrf(request))
     return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages,
-                                'pages':pages,'posts':blog_posts,'comments':comments,'archives':archives, 'csrf_token':c['csrf_token']})
+                            'posts':blog_posts,'comments':comments, 'csrf_token':c['csrf_token']})
 
 
 def blog_article(request, slug):
@@ -228,14 +182,12 @@ def blog_article(request, slug):
             lnshare_count = linkedin['count']
     except:
         pass
-    archives = []
-    for i in reversed(range(-4,1)):
-        archives.append(current_date + datetime.timedelta(i*365/12))
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post,
-                                 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,
-                                 'twshare_count':twshare_count,'lnshare_count':lnshare_count})
+
+    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,
+                            'post':blog_post,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,
+                            'twshare_count':twshare_count,'lnshare_count':lnshare_count})
 
 
 def blog_tag(request, slug):
@@ -244,39 +196,18 @@ def blog_tag(request, slug):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-    archives = []
-    for i in reversed(range(-4,1)):
-        archives.append(current_date + datetime.timedelta(i*365/12))
-
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
-
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-
     c = {}
     c.update(csrf(request))
 
     return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,
-                                'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+                                'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -285,39 +216,18 @@ def blog_category(request, slug):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
-    archives = []
-    for i in reversed(range(-4,1)):
-        archives.append(current_date + datetime.timedelta(i*365/12))
-
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
-
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments, 'current_page':page,
-        'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,
+                            'current_page':page,'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
 
 
 def add_blog_comment(request, slug):
@@ -358,39 +268,18 @@ def archive_posts(request, year, month):
     current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
-
-    archives = []
-    for i in reversed(range(-4,1)):
-        archives.append(current_date + datetime.timedelta(i*365/12))
-
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
     else:
         page = 1
-
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
-
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
-
-    if page <= 5:
-        start_page = 1
-    else:
-        start_page = page-5
-
-    if no_pages <= 10:
-        end_page = no_pages
-    else:
-        end_page = start_page + 10
-        if end_page > no_pages:
-            end_page=no_pages
-
-    pages = range(start_page, end_page+1)
-
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,
-        'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,'last_page':no_pages,
+                                                        'posts':blog_posts,'csrf_token':c['csrf_token']})
 
 
 @login_required

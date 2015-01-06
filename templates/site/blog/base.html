@@ -1,5 +1,6 @@
 {% extends 'site/base.html' %}
 {%load menu%}
+{% load blog_tags%}
 {% block stage %}
 {% block banner %}
 {% endblock %}
@@ -33,6 +34,7 @@
         <div class="col-xs-12 widget" id="green">
           <h3><span>Archives</span></h3>
           <ul>
+            {% get_archives as archives %}
             {% for archive in archives %}
             <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
             </li>
