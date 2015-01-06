@@ -4,17 +4,6 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 
 
-def create_slug(tempslug):
-    slugcount = 0
-    while True:
-        try:
-            Post.objects.get(slug = tempslug)
-            slugcount = slugcount + 1
-            tempslug = tempslug + '-' + str(slugcount)
-        except:
-            return tempslug
-            break
-
 
 class Category(models.Model):
     name = models.CharField(max_length=20, unique = True)
@@ -24,6 +13,9 @@ class Category(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name
 
     @property
     def get_url(self):
@@ -37,6 +29,9 @@ class Tags(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Tags, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -84,7 +79,7 @@ class Post(models.Model):
 
     def get_comment_count(self):
         return BlogComments.objects.filter(status='on',post=self).count()
-        
+
 
 class BlogComments(models.Model):
     post = models.ForeignKey(Post, blank=True, null=True)
@@ -96,9 +91,26 @@ class BlogComments(models.Model):
     weburl=models.CharField(max_length=50)
     phonenumber=models.IntegerField(blank=True,null=True)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Image_File(models.Model):
     upload = models.FileField(upload_to="static/uploads/%Y/%m/%d/")
     date_created = models.DateTimeField(default=datetime.datetime.now)
     is_image = models.BooleanField(default=True)
     thumbnail = models.FileField(upload_to="static/uploads/%Y/%m/%d/",blank=True,null=True)
+
+    def __unicode__(self):
+        return self.date_created
+
+
+def create_slug(tempslug):
+    slugcount = 0
+    while True:
+        try:
+            Post.objects.get(slug = tempslug)
+            slugcount = slugcount + 1
+            tempslug = tempslug + '-' + str(slugcount)
+        except:
+            return tempslug

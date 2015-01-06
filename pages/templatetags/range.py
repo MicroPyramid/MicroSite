@@ -25,5 +25,4 @@ def get_range( value ):
 
 @register.filter
 def get_past_six_months( value ):
-  print value
-  return value
+    return value
