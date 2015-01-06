@@ -15,7 +15,7 @@ install:
 # command to run tests
 script:
   - python manage.py test
-  - coverage run --source=micro_admin,micro_blog,employee,microsite_front,pages,micro_kb,projects manage.py test
+  - coverage run --source=micro_admin,micro_blog,employee,microsite_front,pages,micro_kb manage.py test
 
 
 
