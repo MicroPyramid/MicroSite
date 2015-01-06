@@ -1,13 +1,13 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
-from django.contrib.auth import login, logout
+from django.contrib.auth import login
 import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
-from micro_blog.models import Image_File, Tags, Post, BlogComments
+from micro_blog.models import Image_File, BlogComments
 
 
 @login_required

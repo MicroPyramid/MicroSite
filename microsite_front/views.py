@@ -1,6 +1,4 @@
 from django.shortcuts import render_to_response
-from pages.models import simplecontact
-from micro_blog.models import Post
 from django.core.mail import send_mail
 from django.core.context_processors import csrf
 from django.http.response import HttpResponse

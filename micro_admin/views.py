@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.template import RequestContext
 import json
-from micro_admin.models import User, career
-from micro_admin.forms import ChangePasswordForm, CareerForm
+from micro_admin.models import career
+from micro_admin.forms import CareerForm
 from microsite.settings import BLOG_IMAGES
 from micro_blog.views import store_image
 import os

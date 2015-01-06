@@ -132,7 +132,6 @@ def delete_category(request,category_slug):
 
 
 def site_blog_home(request):
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 10
@@ -152,7 +151,6 @@ def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
     comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
-    current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
     fb=requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
     tw=requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
@@ -193,7 +191,6 @@ def blog_article(request, slug):
 def blog_tag(request, slug):
     tag = Tags.objects.get(slug=slug)
     blog_posts = Post.objects.filter(tags__in=[tag],status="P").order_by('-created_on')
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 6
@@ -213,7 +210,6 @@ def blog_tag(request, slug):
 def blog_category(request, slug):
     category = Category.objects.get(slug=slug)
     blog_posts = Post.objects.filter(category=category,status="P").order_by('-created_on')
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 6
@@ -265,7 +261,6 @@ def add_blog_comment(request, slug):
 
 def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month).order_by('-created_on')
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 6
