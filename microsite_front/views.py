@@ -1,4 +1,3 @@
-# pylint: disable=W0613,E1120,E1123,E1101
 from django.shortcuts import render_to_response
 from pages.models import simplecontact
 from micro_blog.models import Post
