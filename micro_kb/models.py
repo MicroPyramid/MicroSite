@@ -29,7 +29,7 @@ class Doc(models.Model):
 		unique_together = ('slug', 'category')
 
 	def __unicode__(self):
-		return self.name
+		return self.title
 
 
 # class Resources(models.Model):

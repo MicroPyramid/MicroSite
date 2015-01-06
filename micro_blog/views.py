@@ -236,11 +236,10 @@ def add_blog_comment(request, slug):
                     'remoteip':  request.META.get('REMOTE_ADDR')}
             r = requests.get('https://www.google.com/recaptcha/api/siteverify', params=payload)
 
-            if json.loads(r.text)['success']==True:
+            if json.loads(r.text)['success']:
                 comment = validate_blog_comment.save(commit = False)
                 blog_post = Post.objects.get(slug=slug)
                 subject = 'Your comment for blog post'+blog_post.title
-                Message = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
                 from_email, to = 'nikhila@micropyramid.com', blog_post.user.email
                 text_content = 'You posted this comment for blog post'+blog_post.title +' is '+request.POST.get('message')
                 html_content = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
@@ -417,7 +416,7 @@ def view_post(request,blog_slug):
 
 @login_required
 def delete_comment(request,comment_id):
-    comment_post = BlogComments.objects.get(pk=comment_id)
+    comment = BlogComments.objects.get(pk=comment_id)
     if request.user == comment.post.user or request.user.is_admin:
         comment_post.delete()
         data = {"error":False,'message':'Blog Post Deleted'}
