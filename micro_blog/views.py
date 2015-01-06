@@ -425,7 +425,7 @@ def delete_comment(request,comment_id):
 @login_required
 def edit_comment(request,comment_id):
     comment = BlogComments.objects.get(pk=comment_id)
-    if request.user == comment_post.post.user or request.user.is_admin:
+    if request.user == comment.post.user or request.user.is_admin:
         if comment.status=="on":
             comment.status="off"
         else:
