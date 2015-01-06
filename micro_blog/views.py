@@ -1,12 +1,10 @@
-import simplejson
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
-import json
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Image_File, Category, Tags, Post, BlogComments
-from pages.models import Menu,Page
+from pages.models import Page
 from PIL import Image
 import os
 import math
@@ -16,8 +14,7 @@ from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
 import datetime
 import requests
-import urllib2, json
-import urllib 
+import json
 from django.core.mail import EmailMultiAlternatives
 
 def store_image(img,location):
@@ -192,7 +189,8 @@ def site_blog_home(request):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'comments':comments,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages, 
+                                'pages':pages,'posts':blog_posts,'comments':comments,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_article(request, slug):
@@ -234,7 +232,8 @@ def blog_article(request, slug):
         archives.append(current_date + datetime.timedelta(i*365/12))
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post, 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,'twshare_count':twshare_count,'lnshare_count':lnshare_count})
+    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post,
+                                 'archives':archives,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,'twshare_count':twshare_count,'lnshare_count':lnshare_count})
 
 
 def blog_tag(request, slug):
@@ -274,7 +273,8 @@ def blog_tag(request, slug):
     c = {}
     c.update(csrf(request))
 
-    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,
+                                'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
@@ -314,7 +314,8 @@ def blog_category(request, slug):
 
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments, 'current_page':page,'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments, 'current_page':page,
+        'last_page':no_pages, 'pages':pages,'posts':blog_posts,'archives':archives, 'csrf_token':c['csrf_token']})
 
 
 def add_blog_comment(request, slug):
@@ -451,7 +452,7 @@ def edit_blog_post(request,blog_slug):
                 blog_post.status='P'
 
             if request.POST.get('featured_post',''):
-                blog_post.featured_post==request.POST.get('featured_post')
+                blog_post.featured_post=request.POST.get('featured_post')
 
             if 'featuredimage' in request.FILES:
                 if current_post.featured_image:
@@ -530,7 +531,7 @@ def view_post(request,blog_slug):
 @login_required
 def delete_comment(request,comment_id):
     comment_post = BlogComments.objects.get(pk=comment_id)
-    if request.user == comment_post.post.user or request.user.is_admin:
+    if request.user == comment.post.user or request.user.is_admin:
         comment_post.delete()
         data = {"error":False,'message':'Blog Post Deleted'}
     else:
@@ -539,8 +540,8 @@ def delete_comment(request,comment_id):
 
 @login_required
 def edit_comment(request,comment_id):
-    comment_post = BlogComments.objects.get(pk=comment_id)
-    if request.user == comment_post.post.user or request.user.is_admin:
+    comment = BlogComments.objects.get(pk=comment_id)
+    if request.user == comment.post.user or request.user.is_admin:
         if comment.status=="on":
             comment.status="off"
         else:

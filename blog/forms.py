@@ -1,6 +1,5 @@
 from django import forms
-from blog.models import *
-
+from micro_blog.models import Post
 
 
 class BlogForm(forms.ModelForm):

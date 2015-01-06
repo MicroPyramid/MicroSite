@@ -124,4 +124,7 @@ class career(models.Model):
         self.slug = slugify(self.title)
         super(career, self).save(*args, **kwargs)
 
+    def __unicode__(self):
+        return self.title
+
 

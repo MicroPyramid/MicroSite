@@ -7,8 +7,14 @@ class Category(models.Model):
 	parent = models.ForeignKey('self', blank=True, null=True)
 	content = models.TextField()
 
+	def __unicode__(self):
+		return self.name
+
 class Tag(models.Model):
 	name = models.CharField(max_length=20)
+
+	def __unicode__(self):
+		return self.name
 
 class Doc(models.Model):
 	title = models.CharField(max_length=100)
@@ -21,6 +27,9 @@ class Doc(models.Model):
 
 	class Meta:
 		unique_together = ('slug', 'category')
+
+	def __unicode__(self):
+		return self.name
 
 
 # class Resources(models.Model):

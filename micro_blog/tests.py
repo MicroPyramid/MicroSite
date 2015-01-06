@@ -198,8 +198,13 @@ class micro_blog_post_data(TestCase):
 
 
 # class image_upload(unittest.TestCase):
-# 	def test_img(self):
-# 		img = open(BASE_DIR + '/static/blog/Screenshot.png')
+# 	def setUp(self):
+# 		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
 # 		img = File(img)
+
+# 	def test_img(self):
 # 		resp=store_image(img,'')
 # 		self.assertTrue(resp)
+
+	# def test_upload(self):
+	# 	img = open()

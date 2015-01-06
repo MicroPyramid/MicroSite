@@ -1,13 +1,11 @@
 from django.shortcuts import render_to_response
-from pages.models import Menu,simplecontact
-from micro_blog.models import Tags, Post
+from pages.models import simplecontact
+from micro_blog.models import Post
 from django.core.mail import send_mail
 from django.core.context_processors import csrf
 from django.http.response import HttpResponse
 import json
-import os
 from pages.forms import ContactForm
-import datetime
 from micro_admin.models import career
 
 def index(request):
@@ -18,13 +16,14 @@ def index(request):
 		return render_to_response('site/index.html',{'latest_featured_posts':latest_featured_posts,'csrf_token':c['csrf_token']})
 	else:
 		validate_contact=ContactForm(request.POST)
+		errors = {}
 		if validate_contact.is_valid:
 			contacts=validate_contact.save()
 			try:
 				send_mail(contacts.full_name,contacts.message,contacts.email,[contacts.email,'hello@micropyramid.com'],fail_silently=False)
 				return HttpResponse(json.dumps({"data": 'Thank you,  For Ur Message.!', "error": False}))
 			except Exception:
-			 	return HttpResponse(json.dumps({"data": 'Server Error.!', "error": False}))
+				return HttpResponse(json.dumps({"data": 'Server Error.!', "error": False}))
 		else:
 			for k in validate_contact.errors:
 				errors[k] = validate_contact.errors[k][0]

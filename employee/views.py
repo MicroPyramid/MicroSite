@@ -8,6 +8,8 @@ from projects.models import Project
 from employee.forms import DailyReportForm
 
 
+# pylint: disable=W0613,E1120
+
 @login_required
 def reports_list(request):
     reports = DailyReport.objects.all()
@@ -18,7 +20,6 @@ def reports_list(request):
 def new_report(request):
     if request.method == 'POST':
         validate_report = DailyReportForm(request.POST)
-        errors = {}
         if validate_report.is_valid():
             new_report = validate_report.save(commit=False)
             new_report.employee = request.user
@@ -27,7 +28,7 @@ def new_report(request):
             new_report.save()
             data = {'error':False,'response':'Report created successfully'}
         else:
-            data = {'error':True,'response':validate_blog.errors}
+            data = {'error':True,'response':validate_report.errors}
         return HttpResponse(json.dumps(data))
     projects = Project.objects.all()
     c = {}
@@ -40,7 +41,7 @@ def edit_report(request,pk):
     if request.method == 'POST':
         current_report = DailyReport.objects.get(id=pk)
         if current_report.employee == request.user:
-            validate_report = DailyReportForm(request.POST,instance=current_report)
+            validate_report = DailyReportForm(request.POST, instance=current_report)
             if validate_report.is_valid():
                 new_report = validate_report.save(commit=False)
                 new_report.user=request.user
