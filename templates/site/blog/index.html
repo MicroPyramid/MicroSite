@@ -1,4 +1,5 @@
 {% extends 'site/blog/base.html' %}
+{% load blog_tags %}
 {% block banner %} 
 <div class="row marl blog-banner">
   <div class="container">
@@ -65,9 +66,9 @@
     <div class="col-xs-12 ">
       <div class="pagination-box">
         <ul class="pagination">
+          {% get_page current_page last_page as pages %}
           {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}">{{s}}</a>
-          </li>
+          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}">{{s}}</a></li>
           {% endfor %}
           <li class="disabled"><a href="/blog/?page={{s}}">...</a></li>
           <li><a href="/blog/?page={{last_page}}">last</a></li>

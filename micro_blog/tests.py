@@ -38,8 +38,8 @@ class micro_blogviews_get(TestCase):
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, featured_post = 'on', status = 'D')
-		comment = BlogComments.objects.create(name='john',email='ravi@mp.com',message='good post')
-
+		comment = BlogComments.objects.create(name='john', post=self.p, email='ravi@mp.com',message='good post')
+		print comment.id
 
 	def test_blog_get(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
@@ -104,20 +104,18 @@ class micro_blogviews_get(TestCase):
 		response = self.client.get('/blog/delete-category/django/')
 		self.assertEqual(response.status_code, 302)
 
-		response = self.client.get('/blog/blog-comments/')
-		self.assertEqual(response.status_code, 200)
-
+		
 		##To activate comment
-		response = self.client.get('/blog/comment-status/1/')
-		self.assertEqual(response.status_code, 302)
+		response = self.client.get('/blog/edit-comment-status/1')
+		self.assertEqual(response.status_code, 301)
 
 
 		##to deactivate comment
-		response = self.client.get('/blog/comment-status/1/')
-		self.assertEqual(response.status_code, 302)
+		response = self.client.get('/blog/edit-comment-status/1')
+		self.assertEqual(response.status_code, 301)
 
-		response = self.client.get('/blog/delete-comments/1/')
-		self.assertEqual(response.status_code,302)
+		response = self.client.get('/blog/delete/blog-comment/1')
+		self.assertEqual(response.status_code,301)
 
 		#sending correct data
 		response = self.client.post('/blog/python-introduction/add-comment/',{'name':'john','email':'ravi@mp.com','message':'good post','weburl':'micropyramid.com'})
