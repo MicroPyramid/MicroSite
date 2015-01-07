@@ -5,14 +5,26 @@ import json
 from django.contrib.auth.decorators import login_required
 from employee.models import DailyReport
 from projects.models import Project
+from micro_admin.models import User
 from employee.forms import DailyReportForm
 
 
 @login_required
 def reports_list(request):
-    reports = DailyReport.objects.all()
-    return render_to_response('admin/staff/reports.html',{'reports':reports})
+    print request.user
+    if request.user.is_admin:
+        reports = User.objects.all()
+        return render_to_response('admin/staff/all_reports.html',{'reports':reports})
+    else:
+        user=User.objects.get(email=request.user.email)
+        reports = DailyReport.objects.filter(employee=user)
+        return render_to_response('admin/staff/reports.html',{'reports':reports})
 
+@login_required
+def employee_report(request,email):
+    user=User.objects.get(pk=email)
+    reports = DailyReport.objects.filter(employee=user)
+    return render_to_response('admin/staff/reports.html',{'reports':reports})
 
 @login_required
 def new_report(request):
@@ -20,10 +32,12 @@ def new_report(request):
         validate_report = DailyReportForm(request.POST)
         errors = {}
         if validate_report.is_valid():
-            new_report = validate_report.save(commit=False)
-            new_report.employee = request.user
-            project=Project.objects.get(pk=request.POST.get('project'))
-            new_report.project = project
+            new_report = DailyReport.objects.create(report=request.POST.get('report'),employee=request.user)
+            if request.POST.getlist('project'):
+                for i in request.POST.getlist('project'):
+                    project=Project.objects.get(pk=i)
+                    new_report.project.add(project)
+                    new_report.save()
             new_report.save()
             data = {'error':False,'response':'Report created successfully'}
         else:

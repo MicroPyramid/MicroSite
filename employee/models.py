@@ -28,7 +28,7 @@ class Leaves(models.Model):
 
 class DailyReport(models.Model):
 	employee = models.ForeignKey(settings.AUTH_USER_MODEL)
-	project = models.ForeignKey(Project, blank=True, null=True)
+	project = models.ManyToManyField(Project,null=True,blank=True)
 	created_on = models.DateTimeField(auto_now_add=True)
 	report = models.TextField(max_length=10000)
 

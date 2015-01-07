@@ -5,15 +5,14 @@
     <fieldset>
       <legend>Staff Reports</legend>
       <div class="save-btn">
-        <a href="{% url 'employee:new_report' %}">Add New</a>
       </div>
       <div class="table-responsive table-bordered">
         <table class="table table-bordered">
           <thead>
             <tr>
               <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Employee</th>
-              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Project</th>
-              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Date and Time</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Name</th>
+              <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Role</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
               <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
             </tr>
@@ -21,10 +20,9 @@
           <tbody>
             {% for report in reports %}
             <tr>
-              <td>{{report.employee.email}}</td>
-              <td class="sec-col">{%for proj in report.project.all%}{{proj.name}}, {% empty %}No Projects!
-{% endfor %}</td>
-              <td class="sec-col">{{report.created_on}}</td>
+              <td><a href="/portal/staff/reports/{{report.id}}/">{{report.email}}</a></td>
+              <td class="sec-col">{{report.first_name}}</td>
+              <td class="sec-col">{{report.user_roles}}</td>
               <td><a href="/portal/staff/reports/edit/{{report.id}}"><i class="fa fa-pencil-square-o edit-color"></i></a>
               </td>
               <td><a href="/portal/staff/reports/delete/{{report.id}}"><i class="fa fa-trash-o trash-color"></i></a>
