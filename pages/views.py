@@ -1,16 +1,11 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
-from django.contrib.auth import login, authenticate, logout
 import json
-from microsite.settings import BASE_DIR
 from django.contrib.auth.decorators import login_required
-from pages.models import *
-from django.views.decorators.csrf import csrf_exempt
-from pages.forms import *
+from pages.models import Page, Menu
+from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
-from micro_blog.models import Image_File, Category, Tags, Post, BlogComments
-
 
 
 @login_required

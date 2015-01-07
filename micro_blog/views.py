@@ -1,12 +1,10 @@
-import simplejson
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
-import json
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Image_File, Category, Tags, Post, BlogComments
-from pages.models import Menu,Page
+from pages.models import Page
 from PIL import Image
 import os
 import math
@@ -16,9 +14,9 @@ from micro_blog.forms import BlogpostForm, BlogCategoryForm, CommentForm
 from microsite.settings import BLOG_IMAGES
 import datetime
 import requests
-import urllib2, json
-import urllib 
+import json
 from django.core.mail import EmailMultiAlternatives
+
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -134,7 +132,6 @@ def delete_category(request,category_slug):
 
 
 def site_blog_home(request):
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 10
@@ -146,14 +143,14 @@ def site_blog_home(request):
     blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages,'posts':blog_posts,'comments':comments, 'csrf_token':c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages,
+                            'posts':blog_posts,'comments':comments, 'csrf_token':c['csrf_token']})
 
 
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
     comments = BlogComments.objects.filter(status="on",post=blog_post).order_by('-id')[:5]
-    current_date = datetime.date.today()
     page_list=Page.objects.all()[:4]
     fb=requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
     tw=requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
@@ -185,13 +182,15 @@ def blog_article(request, slug):
         pass
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,'post':blog_post,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,'twshare_count':twshare_count,'lnshare_count':lnshare_count})
+
+    return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,
+                            'post':blog_post,'comments':comments,'posts':blog_posts,'fbshare_count':fbshare_count,
+                            'twshare_count':twshare_count,'lnshare_count':lnshare_count})
 
 
 def blog_tag(request, slug):
     tag = Tags.objects.get(slug=slug)
     blog_posts = Post.objects.filter(tags__in=[tag],status="P").order_by('-created_on')
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 6
@@ -203,13 +202,14 @@ def blog_tag(request, slug):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
+
+    return render_to_response('site/blog/index.html', {'comments':comments,'pagelist':page_list,'current_page':page,
+                                'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
 
 
 def blog_category(request, slug):
     category = Category.objects.get(slug=slug)
     blog_posts = Post.objects.filter(category=category,status="P").order_by('-created_on')
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 6
@@ -221,7 +221,9 @@ def blog_category(request, slug):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments, 'current_page':page,'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
+
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,
+                            'current_page':page,'last_page':no_pages,'posts':blog_posts, 'csrf_token':c['csrf_token']})
 
 
 def add_blog_comment(request, slug):
@@ -234,11 +236,10 @@ def add_blog_comment(request, slug):
                     'remoteip':  request.META.get('REMOTE_ADDR')}
             r = requests.get('https://www.google.com/recaptcha/api/siteverify', params=payload)
 
-            if json.loads(r.text)['success']==True:
+            if json.loads(r.text)['success']:
                 comment = validate_blog_comment.save(commit = False)
                 blog_post = Post.objects.get(slug=slug)
                 subject = 'Your comment for blog post'+blog_post.title
-                Message = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
                 from_email, to = 'nikhila@micropyramid.com', blog_post.user.email
                 text_content = 'You posted this comment for blog post'+blog_post.title +' is '+request.POST.get('message')
                 html_content = 'You posted this comment for blog post'+blog_post.title +'  is  '+request.POST.get('message')
@@ -259,7 +260,6 @@ def add_blog_comment(request, slug):
 
 def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P",created_on__year=year,created_on__month=month).order_by('-created_on')
-    current_date = datetime.date.today()
     comments = BlogComments.objects.filter(status="on").order_by('-id')[:5]
     page_list=Page.objects.all()
     items_per_page = 6
@@ -271,7 +271,9 @@ def archive_posts(request, year, month):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,'last_page':no_pages,'posts':blog_posts,'csrf_token':c['csrf_token']})
+
+    return render_to_response('site/blog/index.html', {'pagelist':page_list,'comments':comments,'current_page':page,'last_page':no_pages,
+                                                        'posts':blog_posts,'csrf_token':c['csrf_token']})
 
 
 @login_required
@@ -336,7 +338,7 @@ def edit_blog_post(request,blog_slug):
                 blog_post.status='P'
 
             if request.POST.get('featured_post',''):
-                blog_post.featured_post==request.POST.get('featured_post')
+                blog_post.featured_post=request.POST.get('featured_post')
 
             if 'featuredimage' in request.FILES:
                 if current_post.featured_image:

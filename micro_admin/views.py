@@ -4,11 +4,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.template import RequestContext
-from django.contrib.auth.hashers import check_password
 import json
-from microsite.settings import BASE_DIR
-from micro_admin.models import USER_ROLES, User,career
-from micro_admin.forms import ChangePasswordForm, UserForm,CareerForm
+from micro_admin.models import career
+from micro_admin.forms import CareerForm
 from microsite.settings import BLOG_IMAGES
 from micro_blog.views import store_image
 import os
@@ -108,11 +106,11 @@ def delete_job(request,career_slug):
 
 @login_required
 def job_state(request, pk):
-   job = career.objects.get(pk=pk)
-   if job.is_active:
-       job.is_active = False
-   else:
-       job.is_active = True
+    job = career.objects.get(pk=pk)
+    if job.is_active:
+        job.is_active = False
+    else:
+        job.is_active = True
 
-   job.save()
-   return HttpResponseRedirect('/portal/jobs/')
+    job.save()
+    return HttpResponseRedirect('/portal/jobs/')

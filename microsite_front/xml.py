@@ -35,7 +35,11 @@ def rss(request):
                 <channel>
                 <atom:link href="http://micropyramid.com/rss.xml" rel="self" type="application/rss+xml" />
                 <title>MicroPyramid | Web Development | Mobile App Development</title>
-                <description>MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
+                <description>MicroPyramid python development company.
+                 Our ambit of service encompasses and is as vivid as e-commerce,
+                  web applications, news portals, community and job portals design &amp;
+                   development. We work on Python, Django, Mongodb, Responsive web design, CSS3,
+                    JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
                 <link>http://micropyramid.com</link>
                 <category domain="micropyramid.com">
                 MicroPyramid | Web Development | Mobile App Development
@@ -46,7 +50,11 @@ def rss(request):
                 <url>http://micropyramid.com/static/site/images/logo.png</url>
                 <title>MicroPyramid | Web Development | Mobile App Development</title>
                 <link>http://micropyramid.com</link>
-                <description>MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
+                <description>MicroPyramid python development company.
+                 Our ambit of service encompasses and is as vivid as e-commerce,
+                 web applications, news portals, community and job portals design &amp;
+                  development. We work on Python, Django, Mongodb, Responsive web design, CSS3,
+                   JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
                 </image>
                     '''
 

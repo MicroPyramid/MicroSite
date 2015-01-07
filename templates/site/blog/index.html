@@ -44,7 +44,7 @@
             <span class="uname">{{ post.user.get_full_name }}</span>
             <span class="udate-time">{{ post.created_on }}</span>
           </div>
-          <h3 class="title"><a href="/blog/{{post.slug}}/">{{ post.title }}</a></h3>
+          <h3 class="title"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></h3>
           <div class="desc">
             <p>{{post.content|safe|truncatewords:50}}</p>
           </div>
@@ -57,7 +57,6 @@
           </div>
           <div class="read"><a href="/blog/{{post.slug}}/">Readmore</a></div>
         </div>
-        
       </li>
       {% endfor %}
     </ul>
@@ -81,3 +80,4 @@
 </div>
 <!-- sec-about ends -->
 {% endblock %}
+

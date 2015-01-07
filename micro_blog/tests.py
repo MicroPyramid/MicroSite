@@ -39,7 +39,6 @@ class micro_blogviews_get(TestCase):
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, featured_post = 'on', status = 'D')
 		comment = BlogComments.objects.create(name='john', post=self.p, email='ravi@mp.com',message='good post')
-		print comment.id
 
 	def test_blog_get(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
@@ -196,8 +195,13 @@ class micro_blog_post_data(TestCase):
 
 
 # class image_upload(unittest.TestCase):
-# 	def test_img(self):
-# 		img = open(BASE_DIR + '/static/blog/Screenshot.png')
+# 	def setUp(self):
+# 		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
 # 		img = File(img)
+
+# 	def test_img(self):
 # 		resp=store_image(img,'')
 # 		self.assertTrue(resp)
+
+	# def test_upload(self):
+	# 	img = open()

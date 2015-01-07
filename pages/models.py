@@ -2,18 +2,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 
 
-def create_slug(tempslug):
-	slugcount = 0
-	while True:
-		try:
-			page.objects.get(slug = tempslug)
-			slugcount = slugcount + 1
-			tempslug = tempslug + '-' + str(slugcount)
-		except:
-			return tempslug
-			break
-
-
 class Page(models.Model):
 	title = models.CharField(max_length=100)
 	content = models.TextField(max_length=20000)
@@ -30,6 +18,9 @@ class Page(models.Model):
 			self.slug = create_slug(tempslug)
 
 		super(Page, self).save(*args, **kwargs)
+
+	def __unicode__(self):
+		return self.title
 
 
 class Contact(models.Model):
@@ -78,22 +69,28 @@ class Contact(models.Model):
 	callback_time = models.DateTimeField()
 	timezone = models.CharField(max_length=10)
 
+	def __unicode__(self):
+		return self.name
+
 
 class Menu(models.Model):
-    parent = models.ForeignKey('self', blank=True, null=True)
-    title = models.CharField(max_length=255)
-    url = models.URLField(max_length=255)
-    created = models.DateTimeField(auto_now = True)
-    updated = models.DateTimeField(auto_now = True)
-    status = models.CharField(max_length=5, default="off", blank=True)
-    lvl = models.IntegerField()
+	parent = models.ForeignKey('self', blank=True, null=True)
+	title = models.CharField(max_length=255)
+	url = models.URLField(max_length=255)
+	created = models.DateTimeField(auto_now = True)
+	updated = models.DateTimeField(auto_now = True)
+	status = models.CharField(max_length=5, default="off", blank=True)
+	lvl = models.IntegerField()
 
-    def menu_state(self):
-    	if self.status == 'on':
-    		return True
+	def menu_state(self):
+		if self.status == 'on':
+			return True
 
-    	else:
-    		return False
+		else:
+			return False
+
+	def __unicode__(self):
+		return self.title
 
 
 class simplecontact(models.Model):
@@ -102,3 +99,17 @@ class simplecontact(models.Model):
 	email=models.EmailField()
 	phone=models.IntegerField(blank=True,null=True)
 	contacted_on=models.DateField(auto_now=True)
+
+	def __unicode__(self):
+		return self.full_name
+
+
+def create_slug(tempslug):
+	slugcount = 0
+	while True:
+		try:
+			Page.objects.get(slug = tempslug)
+			slugcount = slugcount + 1
+			tempslug = tempslug + '-' + str(slugcount)
+		except:
+			return tempslug

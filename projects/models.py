@@ -5,6 +5,9 @@ from django.conf import settings
 class Technology(models.Model):
 	name = models.CharField(max_length=100)
 
+	def __unicode__(self):
+		return self.name
+
 
 class Project(models.Model):
 	name =  models.CharField(max_length=100)
@@ -19,12 +22,18 @@ class Project(models.Model):
 	created_by = models.ForeignKey(settings.AUTH_USER_MODEL,related_name='created_by')
 	daily_reports = models.BooleanField(default=False) # show daily reports to clients
 
+	def __unicode__(self):
+		return self.name
+
 
 class MileStone(models.Model):
 	name = models.CharField(max_length=50)
 	project = models.ForeignKey(Project, null=True, blank=True)
 	deadline = models.DateField()
 	desctrion = models.CharField(max_length=2000)
+
+	def __unicode__(self):
+		return self.name
 
 
 class Ticket(models.Model):
@@ -38,6 +47,9 @@ class Ticket(models.Model):
 	finished_on = models.DateTimeField(blank=True, null=True)
 	status = models.CharField(max_length=10) # Closed, Finished, Active
 
+	def __unicode__(self):
+		return self.title
+
 
 class Comment(models.Model):
 	ticket = models.ForeignKey(Ticket)
@@ -45,5 +57,8 @@ class Comment(models.Model):
 	created_on = models.DateTimeField(auto_now_add=True)
 	comments = models.CharField(max_length=2000)
 	attachment = models.CharField(max_length=150)
+
+	def __unicode__(self):
+		return self.ticket.title
 
 
