@@ -24,7 +24,7 @@
               </li>
               <li><a href="#" class="pink-clr">{{ post.user.get_full_name }}</a>
               </li>
-              <li><a href="#" class="yellow-clr">Comments : {{ comments.count }}</a>
+              <li><a href="{{ SITE_URL }}/blog/{{ post.slug }}/#disqus_thread" class="yellow-clr">Comments : </a>
               </li>
               <li><a href="#" class="green-clr">Category : {{ post.category.name }}</a>
               </li>
@@ -53,71 +53,32 @@
       <div class="">
         <div class="share-icon-div">
           <ul>
-              <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://micropyramid.com/blog/{{post.slug}}/&t={{ post.title }}" class="social-share facebook"><i class="fa fa-facebook"></i></a><span class="share-count">{{fbshare_count}}</span></li>
-              <li><a href="https://plus.google.com/share?hl=en-US&url=http://micropyramid.com/blog/{{post.slug}}/" class="social-share google"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="https://twitter.com/intent/tweet?text={{ post.title }}&url=http://micropyramid.com/blog/{{post.slug}}/&via=MicroPyramid" class="social-share twitter"><i class="fa fa-twitter"></i></a><span class="share-count">{{twshare_count}}</span></li>
-              <li><a href="https://www.linkedin.com/cws/share?url=http://micropyramid.com/blog/{{post.slug}}/&token=&isFramed=true" class="social-share linkedin"><i class="fa fa-linkedin"></i></a><span class="share-count">{{lnshare_count}}</span></li>
-            </ul>
+            <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://micropyramid.com/blog/{{post.slug}}/&t={{ post.title }}" class="social-share facebook"><i class="fa fa-facebook"></i></a><span class="share-count">{{fbshare_count}}</span></li>
+            <li><a href="https://plus.google.com/share?hl=en-US&url=http://micropyramid.com/blog/{{post.slug}}/" class="social-share google"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://twitter.com/intent/tweet?text={{ post.title }}&url=http://micropyramid.com/blog/{{post.slug}}/&via=MicroPyramid" class="social-share twitter"><i class="fa fa-twitter"></i></a><span class="share-count">{{twshare_count}}</span></li>
+            <li><a href="https://www.linkedin.com/cws/share?url=http://micropyramid.com/blog/{{post.slug}}/&token=&isFramed=true" class="social-share linkedin"><i class="fa fa-linkedin"></i></a><span class="share-count">{{lnshare_count}}</span></li>
+          </ul>
         </div>
       </div>
       <!-- andPosts -->
       <!-- COMMENTS -->
-      <div class="col-xs-12  wow fadeInUp animated" id="comments">
+      <div class="col-xs-12" id="comments">
         <h5 class="comments-title">Latest Comments</h5>
-        <ul>
-        <li class=" wow fadeInUp animated">
-          <div>
-            {% for comment in comments %}
-            <div class="bg-clr-div">
-              <div class="meta">
-                <cite>{{ comment.name }}</cite>
-                <br>
-                <time>{{ comment.created|date:"d F" }} at {{ comment.created|date:"P" }}</time>
-              </div>
-              <p>
-                {{ comment.message }}
-              </p>
-            </div>
-            {% endfor %}
-          </div>
-          <div id="respond" class="comment-respond ">
-            <h5 id="reply-title" class="comment-reply-title">Leave a Reply</h5>
-            <form id="contactform" method="POST" action="/blog/{{ post.slug }}/add-comment/">
-              {% csrf_token %}
-              <div id="success"></div>
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-6 form-field fix-left">
-                      <span class="error" id="name"></span>
-                      <input type="text" name="name" placeholder="Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Name'">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 form-field fix-right">
-                      <span class="error" id="email"></span>
-                      <input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 form-field fix-left">
-                      <span class="error" id="weburl"></span>
-                      <input type="text" name="weburl" placeholder="WEBSITE URL" onfocus="this.placeholder = ''" onblur="this.placeholder='Website Url'">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 form-field fix-right">
-                      <span class="error" id="phonenumber"></span>
-                      <input type="text" name="phonenumber" placeholder="PHONE NUMBER" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone Number'">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-12 form-field">
-                  <span class="error" id="message"></span>
-                  <textarea class="form-control" name="message" cols="30" rows="4" placeholder="Comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comment'" style='width:100%;'></textarea>
-                </div>
-                <div class="col-xs-12 form-field wow fadeInUp animated">
-                  <div class="g-recaptcha" data-sitekey="6Le-1P8SAAAAAHG8QDdLDhufFZK4JYMYmeXnLnsE"></div>
-                  <button id="submit" class="btn-default">Submit</button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <!-- #respond -->
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'micropyramid'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
       </div>
       <!-- /comments -->
     </div>
