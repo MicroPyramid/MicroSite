@@ -41,7 +41,7 @@ def new_report(request):
             new_report.save()
             data = {'error':False,'response':'Report created successfully'}
         else:
-            data = {'error':True,'response':validate_blog.errors}
+            data = {'error':True,'response':validate_report.errors}
         return HttpResponse(json.dumps(data))
     projects = Project.objects.all()
     c = {}

@@ -32,7 +32,6 @@ INSTALLED_APPS = (
     'pingback',
     'django_xmlrpc',
     'compressor',
-
 )
 
 import djcelery
