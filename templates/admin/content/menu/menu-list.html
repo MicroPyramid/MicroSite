@@ -36,8 +36,10 @@
                             </td>
                             <td class="menu-swap">
                                 <div class="inner-swap-wid" style="width:30px;">
-                                    <span class="caret-wid" id=""><a href="#"><i class="fa fa-caret-down"></i></a></span>
-                                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-up"></i>
+                                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
+                                    id="{{menu.id}}"></i></a></span>
+                                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
+                                    id="{{menu.id}}"></i>
                                     </a></span>
                                 </div>
                             </td>
@@ -57,14 +59,19 @@
   $(document).ready(function() {
     $('.fa-caret-down').click(function(data){
         alert("down");
+        alert($(this).attr('id'))
         var thisRow = $(this).closest('tr');
         var nextRow = thisRow.next();
         if (nextRow.length) {
             nextRow.after(thisRow);
         }
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',mode="down",function(data){
+            alert("hello");
+        });
     });
     $('.fa-caret-up').click(function(data){
         alert("up");
+        alert($(this).attr('id'))
         var thisRow = $(this).closest('tr');
         var prevRow = thisRow.prev();
         if (prevRow.length) {

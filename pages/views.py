@@ -152,3 +152,6 @@ def site_page(request,slug):
     page= Page.objects.get(slug=slug)
     return render_to_response('site/site-page.html',{ 'page':page})
 
+def menu_order(request,pk):
+    print "hello"
+    print request.POST
