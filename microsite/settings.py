@@ -67,6 +67,15 @@ DATABASES = {
     }
 }
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'micropyramid'
+EMAIL_HOST_PASSWORD = 'wiej4djs3o5s'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_USER = "micropyramid"
+SENDGRID_PASSWORD = "wiej4djs3o5s"
 
 LANGUAGE_CODE = 'en-us'
 
