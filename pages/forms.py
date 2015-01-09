@@ -12,7 +12,7 @@ class MenuForm(forms.ModelForm):
 
 	class Meta:
 		model = Menu
-		exclude = ('lvl',)
+		exclude = ('lvl','order',)
 
 class ContactForm(forms.ModelForm):
 	class Meta:

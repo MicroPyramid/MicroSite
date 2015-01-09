@@ -15,6 +15,7 @@
                             <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
                             <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">URL</th>
                             <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
+                            <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">swaping</th>
                             <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Edit</th>
                             <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Delete</th>
                         </tr>
@@ -33,7 +34,13 @@
                                 {% endifequal %}
                                 </a>
                             </td>
-                            
+                            <td class="menu-swap">
+                                <div class="inner-swap-wid" style="width:30px;">
+                                    <span class="caret-wid" id=""><a href="#"><i class="fa fa-caret-down"></i></a></span>
+                                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-up"></i>
+                                    </a></span>
+                                </div>
+                            </td>
                             <td><a href="{% url 'pages:edit_menu' pk=menu.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a></td>
                             <td><a href="{% url 'pages:delete_menu' pk=menu.id %}"><i class="fa fa-trash-o trash-color"></i></a></td>
                         </tr>
@@ -45,4 +52,25 @@
     </div>
 </div>
 <!-- main content ends here-->
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+    $('.fa-caret-down').click(function(data){
+        alert("down");
+        var thisRow = $(this).closest('tr');
+        var nextRow = thisRow.next();
+        if (nextRow.length) {
+            nextRow.after(thisRow);
+        }
+    });
+    $('.fa-caret-up').click(function(data){
+        alert("up");
+        var thisRow = $(this).closest('tr');
+        var prevRow = thisRow.prev();
+        if (prevRow.length) {
+            prevRow.before(thisRow);
+        }
+    });
+});
+</script>
 {% endblock %}
