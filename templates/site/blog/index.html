@@ -45,6 +45,7 @@
             <span class="udate-time">{{ post.created_on }}</span>
           </div>
           <h3 class="title"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></h3>
+          <h3 class="title"><a href="{{ SITE_URL }}/blog/{{post.slug}}/#disqus_thread">{{ post.title }}</a></h3>
           <div class="desc">
             <p>{{post.content|safe|truncatewords:50}}</p>
           </div>
@@ -80,4 +81,3 @@
 </div>
 <!-- sec-about ends -->
 {% endblock %}
-

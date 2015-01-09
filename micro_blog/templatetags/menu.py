@@ -20,4 +20,4 @@ def get_latest_posts(context):
 
 @register.assignment_tag(takes_context=True)
 def get_menus(context):
-	return Menu.objects.filter(parent = None).order_by('lvl')
+	return Menu.objects.filter(parent = None,status='on').order_by('lvl')

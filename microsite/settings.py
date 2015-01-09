@@ -10,6 +10,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+BROKER_URL = 'redis://localhost:6379/0'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -18,6 +19,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
     'micro_admin',
     'projects',
     'pages',
@@ -31,6 +33,9 @@ INSTALLED_APPS = (
     'django_xmlrpc',
     'compressor',
 )
+
+import djcelery
+djcelery.setup_loader()
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,6 +67,15 @@ DATABASES = {
     }
 }
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'micropyramid'
+EMAIL_HOST_PASSWORD = 'wiej4djs3o5s'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = "sgbackend.SendGridBackend"
+SENDGRID_USER = "micropyramid"
+SENDGRID_PASSWORD = "wiej4djs3o5s"
 
 LANGUAGE_CODE = 'en-us'
 
@@ -105,6 +119,20 @@ STATICFILES_FINDERS = (
     # other finders..
     'compressor.finders.CompressorFinder',
 )
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+from celery.schedules import crontab
+from datetime import timedelta
+
+CELERYBEAT_SCHEDULE = {
+    # Executes every Monday morning at 7:30 A.M
+    'add-every-30-seconds': {
+        'task': 'micro_blog.tasks.scraper_example',
+        'schedule':timedelta(seconds=30),
+        'args': (),
+    },
+}
+
+
 
 LOGGING = {
     'version': 1,

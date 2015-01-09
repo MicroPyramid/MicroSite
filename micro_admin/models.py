@@ -107,6 +107,7 @@ class User(AbstractBaseUser):
             ("blog_moderator", "Can enable or disable blog posts"),
             ("blogger", "Can write blog posts"),
         )
+        
 class career(models.Model):
     title=models.CharField(max_length=100)
     slug=models.SlugField()

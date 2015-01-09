@@ -549,7 +549,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice
     top: 4px;
     font-size: 1px;
     outline: none;
-    background: url('../img/select2.png') right top no-repeat;
+    background: url('/static/admin/images/select2.png') right top no-repeat;
 }
 html[dir="rtl"] .select2-search-choice-close {
     right: auto;

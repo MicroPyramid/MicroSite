@@ -85,8 +85,8 @@ def add_menu(request):
             new_menu = validate_menu.save(commit = False)
             if request.POST.get('status',''):
                 new_menu.status = 'on'
-
             menu_count = Menu.objects.filter(parent=new_menu.parent).count()
+            new_menu.order = menu_count + 1
             new_menu.lvl = menu_count + 1
             if new_menu.url[-1]!='/':
                 new_menu.url = new_menu.url+'/'
@@ -152,3 +152,6 @@ def site_page(request,slug):
     page= Page.objects.get(slug=slug)
     return render_to_response('site/site-page.html',{ 'page':page})
 
+def menu_order(request,pk):
+    print "hello"
+    print request.POST

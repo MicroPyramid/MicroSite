@@ -77,6 +77,7 @@ class Menu(models.Model):
 	parent = models.ForeignKey('self', blank=True, null=True)
 	title = models.CharField(max_length=255)
 	url = models.URLField(max_length=255)
+	order = models.IntegerField(default=0)
 	created = models.DateTimeField(auto_now = True)
 	updated = models.DateTimeField(auto_now = True)
 	status = models.CharField(max_length=5, default="off", blank=True)

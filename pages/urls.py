@@ -11,5 +11,6 @@ urlpatterns = patterns('pages.views',
     url(r'^menu/(?P<pk>[a-zA-Z0-9_-]+)/delete/$', 'delete_menu', name='delete_menu'),
     url(r'^menu/(?P<pk>[a-zA-Z0-9_-]+)/status/$', 'change_menu_status', name='change_menu_status'),
     url(r'^menu/(?P<pk>[a-zA-Z0-9_-]+)/edit/$', 'edit_menu', name='edit_menu'),
+	url(r'^menu/(?P<pk>[a-zA-Z0-9_-]+)/order/$', 'menu_order', name='menu_order'),
 
 )
