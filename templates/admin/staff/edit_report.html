@@ -9,7 +9,7 @@
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Project</label>
-          <select class="form-control select2 wid-60" id="project" name="project" multiple="multiple">
+          <select class="form-control" id="project" name="project">
             {% for project in projects %}
             <option value="{{project.id}}" {% ifequal new_report.project project %}selected{% endifequal %}>{{project.name}}</option>
             {% endfor %}
