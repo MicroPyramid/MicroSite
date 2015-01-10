@@ -157,3 +157,5 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 DEBUG = True
 
 ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
+
+SITE_URL = "http://micropyramid.com"

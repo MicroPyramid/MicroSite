@@ -7,11 +7,11 @@
       <legend>New Report</legend>
       <form action="{% url 'employee:new_report' %}" method="POST" id="blogform" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="form-group">
+        <div class="form-group select2-wrapper">
           <label for="exampleInputEmail1">Project</label>
-          <select class="form-control" id="project" name="project">
+          <select class="form-control select2 wid-60" id="project" name="project" multiple="multiple">
             {% for project in projects %}
-            <option value="{{project.id}}">{{project.name}}</option>
+            <option value="{{project.id}}" id="{{project.name}}">{{project.name}}</option>
             {% endfor %}
           </select>
         </div>
@@ -41,6 +41,7 @@
 </div>
 <!-- main content ends here-->
 <script type="text/javascript">
+
 CKEDITOR.config.allowedContent = true;
 var editor = CKEDITOR.replace('textareacontents');
 $ = jQuery;
@@ -49,8 +50,9 @@ $(document).ready(function() {
   $('form#blogform').ajaxForm({
     beforeSerialize: function() {
       $("input[name='report']").val(CKEDITOR.instances.textareacontents.getData());
+      $("input[name='projects']").val($(".form-control").val());
+      console.log($(".form-control").val());
     },
-
     dataType: 'json',
     success: function(data){
        if (data.error == false)
@@ -69,4 +71,21 @@ $(document).ready(function() {
 });
 
 </script>
+<script src="/static/admin/js/select2.js"></script>
+      <script>
+         $( ".select2" ).select2( { placeholder: "Select here", maximumSelectionSize: 6 } );
+         
+         $( ":checkbox" ).on( "click", function() {
+          $( this ).parent().nextAll( "select" ).select2( "enable", this.checked );
+         });
+         
+         $( "#demonstrations" ).select2( { placeholder: "Select2 version", minimumResultsForSearch: -1 } ).on( "change", function() {
+          document.location = $( this ).find( ":selected" ).val();
+         } );
+         
+         $( "button[data-select2-open]" ).click( function() {
+          $( "#" + $( this ).data( "select2-open" ) ).select2( "open" );
+         });
+      </script>
+
 {% endblock %}
