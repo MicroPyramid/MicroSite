@@ -150,5 +150,5 @@ def edit_menu(request, pk):
 
 def site_page(request,slug):
     page= Page.objects.get(slug=slug)
-    return render_to_response('site/site-page.html',{ 'page':page})
+    return render_to_response('site/page.html',{ 'page':page})
 
