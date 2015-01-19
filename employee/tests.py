@@ -23,10 +23,11 @@ class Modelforms_test(TestCase):
         form = DailyReportForm(data = {'employee': 'ravi@mp.com', 'project': 'ravi', 'report':'Sample report'})
         self.assertTrue(form.is_valid())
 
-'''
-Employee without login
-'''
 class Views_test(TestCase):
+
+	'''
+	Employee without login
+	'''
 
 	def test_employee_report(self):
 		c = Client()
@@ -42,7 +43,7 @@ class Views_test(TestCase):
 		resp = c.get('/portal/staff/reports/delete/1/')
 		self.assertEqual(resp.status_code, 302)
 
-class test_employee(TestCase):
+class test_employee_as_admin(TestCase):
 
 	def setUp(self):
 		self.client = Client()
@@ -89,3 +90,26 @@ class test_employee(TestCase):
 
 		resp = self.client.post('/portal/staff/reports/delete/1/')
 		self.assertEqual(resp.status_code, 302)
+
+
+class test_employee(TestCase):
+
+	def setUp(self):
+		self.client = Client()
+		self.user = User.objects.create_user('micro@mp.com', 'mp')
+		self.project = Project.objects.create(name='Microsite',client='Ravi',slug='micro', notes='simple_site', start_date='2014-10-12',end_date='2014-10-10', created_by=self.user)
+
+	def test_user(self):
+		self.client = Client()
+		user_login=self.client.login(email='micro@mp.com', password='mp')
+		self.assertTrue(user_login)
+
+		response = self.client.get('/portal/staff/')
+		self.assertEqual(response.status_code, 200)
+
+		response = self.client.get('/portal/staff/')
+		self.assertEqual(response.status_code, 200)
+
+		response = self.client.get('/portal/staff/reports/1/')
+		self.assertEqual(response.status_code, 200)
+

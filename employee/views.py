@@ -12,7 +12,6 @@ from employee.forms import DailyReportForm
 
 @login_required
 def reports_list(request):
-    print request.user
     if request.user.is_admin:
         reports = User.objects.all()
         return render_to_response('admin/staff/all_reports.html',{'reports':reports})
