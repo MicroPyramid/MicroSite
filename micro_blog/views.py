@@ -16,6 +16,9 @@ import datetime
 import requests
 import json
 from django.core.mail import EmailMultiAlternatives
+import logging
+from django_inbound_email.signals import email_received
+
 
 
 def store_image(img,location):
@@ -437,3 +440,15 @@ def edit_comment(request,comment_id):
     else:
         data = {"error":True,'response':'admin or owner can delete blog post'}
     return HttpResponse(json.dumps(data))
+
+
+def success(request):
+    print request.POST
+    print request.POST.get('from')
+    print request.POST.get('attachments')
+    print request.POST.get('subject')
+    print request.POST.get('text')
+    print "hello nikhila"
+    rep = DailyReport.objects.create(employee,report=request.POST.get('text'))
+# pass dispatch_uid to prevent duplicates:
+# https://docs.djangoproject.com/en/dev/topics/signals/

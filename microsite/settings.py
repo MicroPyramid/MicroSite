@@ -20,6 +20,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djcelery',
+    'django_inbound_email',
     'micro_admin',
     'projects',
     'pages',
@@ -127,7 +128,7 @@ CELERYBEAT_SCHEDULE = {
     # Executes every Monday morning at 7:30 A.M
     'add-every-30-seconds': {
         'task': 'micro_blog.tasks.scraper_example',
-        'schedule':timedelta(seconds=30),
+        'schedule':timedelta(seconds=30000000),
         'args': (),
     },
 }
@@ -187,3 +188,13 @@ DEBUG = True
 ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
 SITE_URL = "http://micropyramid.com"
+
+# the fully-qualified path to the provider's backend parser
+INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'
+
+# if True (default=False) then log the contents of each inbound request
+INBOUND_EMAIL_LOG_REQUESTS = True
+
+# if True (default=True) then always return HTTP status of 200 (may be required by provider)
+INBOUND_EMAIL_RESPONSE_200 = True
+
