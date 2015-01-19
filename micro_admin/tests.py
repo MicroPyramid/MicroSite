@@ -52,9 +52,14 @@ class test_portal_admin(TestCase):
 		self.client = Client()
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
 
+	def test_user_index(self):
+		user = self.client.post('/portal/', {'email': 'mp@mp.com', 'password': 'mp'})
+		self.assertEqual(user.status_code,200)
+
 	def test_views_user(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
 		self.assertTrue(user_login)
+
 		response = self.client.get('/portal/contacts/')
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'admin/content/contacts/simplecontact.html')
@@ -123,7 +128,7 @@ class user_test(TestCase):
 		self.assertTemplateUsed(response,'admin/user/change_password.html')
 
 
-		response = self.client.post('/portal/users/new/',{'first_name':'Micro', 'last_name':'Pyramid', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
+		response = self.client.post('/portal/users/new/',{'first_name':'Micro', 'last_name':'Pyramid', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False})
 		self.assertEqual(response.status_code,200)
 		self.assertTrue('created successfully' in response.content)
 
@@ -135,13 +140,21 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 
 
-		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
+		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False})
 		self.assertEqual(response.status_code,200)
 		self.assertTrue('updated successfully' in response.content)
 
 		response = self.client.post('/portal/users/edit/1/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
+
+		response = self.client.post('/portal/user/change-password/',{'oldpassword':'micro12', 'newpassword':'pwd', 'retypepassword':'pwd'})
+		self.assertEqual(response.status_code,200)
+		self.assertFalse('Password changed' in response.content)
+
+		response = self.client.post('/portal/user/change-password/',{'oldpassword':'micro123', 'newpassword':'pwd', 'retypepassword':'pw'})
+		self.assertEqual(response.status_code,200)
+		self.assertFalse('Password changed' in response.content)
 
 		response = self.client.post('/portal/user/change-password/',{'oldpassword':'micro123', 'newpassword':'pwd', 'retypepassword':'pwd'})
 		self.assertEqual(response.status_code,200)
@@ -150,6 +163,9 @@ class user_test(TestCase):
 		response = self.client.post('/portal/user/change-password/',{'newpassword':'pwd', 'retypepassword':'pwd'})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('Password changed' in response.content)
+
+		response = self.client.post('/portal/users/change-state/1/')
+		self.assertEqual(response.status_code,302)
 
 		response = self.client.post('/portal/users/change-state/1/')
 		self.assertEqual(response.status_code,302)

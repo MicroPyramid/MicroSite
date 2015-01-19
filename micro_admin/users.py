@@ -53,10 +53,8 @@ def new_user(request):
                 user.is_active = True
 
             user.save()
-            print "user saved"
             data = {'error':False, 'response':'created successfully'}
         else:
-            #print "erros" + validate_user.errors
             data = {'error':True, 'response':validate_user.errors}
         return HttpResponse(json.dumps(data))
     else:
@@ -87,7 +85,6 @@ def edit_user(request,pk):
                 current_user.is_active = True
 
             current_user.save()
-            print current_user
 
             data = {'error':False, 'message':'updated successfully'}
         else:

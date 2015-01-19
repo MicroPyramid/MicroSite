@@ -61,6 +61,10 @@ class micro_blogviews_get(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'admin/blog/blog-edit.html')
 
+		response = self.client.post('/blog/view-post/python-introduction/')
+		self.assertEqual(response.status_code,200)
+
+
 		response = self.client.get('/blog/category-list/')
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'admin/blog/blog-category-list.html')
@@ -93,28 +97,23 @@ class micro_blogviews_get(TestCase):
 		response = self.client.get('/blog/change/featured-state/python-introduction/')
 		self.assertEqual(response.status_code, 302)
 
-		response = self.client.get('/blog/delete/blog-post/python-introduction/')
-		self.assertEqual(response.status_code, 200)
 
 		response = self.client.get('/blog/edit-category/django/')
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'admin/blog/blog-category-edit.html')
 
-		response = self.client.get('/blog/delete-category/django/')
-		self.assertEqual(response.status_code, 302)
-
 		
 		##To activate comment
-		response = self.client.get('/blog/edit-comment-status/1')
-		self.assertEqual(response.status_code, 301)
+		response = self.client.get('/blog/edit-comment-status/1/')
+		self.assertEqual(response.status_code, 200)
 
 
 		##to deactivate comment
-		response = self.client.get('/blog/edit-comment-status/1')
-		self.assertEqual(response.status_code, 301)
+		response = self.client.get('/blog/edit-comment-status/1/')
+		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/blog/delete/blog-comment/1')
-		self.assertEqual(response.status_code,301)
+		response = self.client.get('/blog/delete/blog-comment/1/')
+		self.assertEqual(response.status_code,200)
 
 		#sending correct data
 		response = self.client.post('/blog/python-introduction/add-comment/',{'name':'john','email':'ravi@mp.com','message':'good post','weburl':'micropyramid.com'})
@@ -124,6 +123,17 @@ class micro_blogviews_get(TestCase):
 		#sending wrong data
 		response = self.client.post('/blog/python-introduction/add-comment/',{})
 		self.assertEqual(response.status_code,200)
+
+		response = self.client.get('/blog/delete/blog-post/python-introduction/')
+		self.assertEqual(response.status_code, 200)
+
+		# response = self.client.post('/blog/view-post/python-introduction/')
+		# self.assertEqual(response.status_code,200)
+
+		response = self.client.get('/blog/delete-category/django/')
+		self.assertEqual(response.status_code, 302)
+
+
 
 
 class micro_blog_post_data(TestCase):
@@ -193,15 +203,50 @@ class micro_blog_post_data(TestCase):
 		response = self.client.get('/blog/tag/django/?page=1')
 		self.assertEqual(response.status_code,200)
 
+		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
+		img = File(img)
 
-# class image_upload(unittest.TestCase):
-# 	def setUp(self):
-# 		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
-# 		img = File(img)
+		# response = self.client.get('/blog/ajax/photos/upload/')
+		# self.assertEqual(response.status_code,200)
 
-# 	def test_img(self):
-# 		resp=store_image(img,'')
-# 		self.assertTrue(resp)
+		# response = self.client.post('/blog/ajax/photos/upload/',{'upload':img})
+		# self.assertEqual(response.status_code,200)
+
+		# response = self.client.get('/blog/ajax/photos/recent/')
+		# self.assertEqual(response.status_code,200)
+
+
+
+
+class image_upload(unittest.TestCase):
+	def setUp(self):
+		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
+		img = File(img)
+
+	def test_img(self):
+		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
+		img = File(img)
+		# resp=store_image(img,'')
+		# self.assertTrue(resp)
 
 	# def test_upload(self):
-	# 	img = open()
+	# 	img = upload_photos('')
+	# 	print img
+
+
+class micro_user_test(TestCase):
+
+	def setUp(self):
+		self.client = Client()
+		self.user = User.objects.create_user('ravi@mp.com', 'ravi')
+		self.c=Category.objects.create(name='django', description='django desc')
+		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, featured_post = 'on', status = 'D')
+		comment = BlogComments.objects.create(name='john', post=self.p, email='ravi@mp.com',message='good post')
+
+	def test_blog_without_user(self):
+
+		user_login=self.client.login(email='ravi@mp.com', password='ravi')
+		self.assertTrue(user_login)
+
+		response = self.client.get('/blog/delete/blog-comment/1/')
+		self.assertEqual(response.status_code,200)
