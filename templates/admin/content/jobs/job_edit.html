@@ -5,7 +5,7 @@
   <div class="row marl blog-form">
     <fieldset>
       <legend>New Jobs</legend>
-      <form action="." method="POST" id="careerform">
+      <form action="/portal/edit_jobs/{{blog_career.slug}}/" method="POST" id="editcareerform" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
@@ -13,20 +13,21 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Experience</label>
-          <textarea class="form-control" id="experience" name="experience" rows="10" placeholder="HTML code of this email">{{blog_career.experience}}</textarea>
+          <input type="Text" class="form-control" id="experience" name="experience"  placeholder="HTML code of this email" value="{{blog_career.experience}}">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Skills</label>
-          <textarea class="form-control" id="skills" name="skills" rows="10" >{{blog_career.skills}}</textarea>
+          <input type="Text" class="form-control" id="skills" name="skills" value="{{blog_career.skills}}">
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Number of openings</label>
           <input type="text" style="width:41px;" class="form-control" id="num of opening" name="num_of_opening" value="{{blog_career.num_of_opening}}" >
           </input>
         </div>
-        <div class="form-group">
+        <div class="form-group" id="description">
           <label for="exampleInputEmail">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email">{{blog_career.description}}</textarea>
+          <input type="hidden" name="description">
+          <textarea class="form-control" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">{{blog_career.description}}</textarea>
         </div>
         <div class="tags-block">
           <p>
@@ -46,36 +47,38 @@
     </fieldset>
   </div>
 </div>
+<script type="text/javascript"></script>
 <script type="text/javascript">
-$(document).ready(function(){ 
-     $('form').ajaxForm({
-       dataType: 'json',
-       data : $('#careerform').serialize(),
-       type: "POST",
-       success: function(data){
-         if (data.error == false)
-         {
-           alert(data.response);
-           window.location ='/portal/jobs/';
-         }
-         else
-         {
-         $('.error').text('');
-            $('.error').show();
-           $.each( data, function( key, value ) {
-          $('#'+key).text(value);
-          });
-           }
-         }
+    CKEDITOR.config.allowedContent = true;
+      var editor = CKEDITOR.replace( 'textareacontents',{
+        filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
+        filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
+           } );
+</script>
+<script type="text/javascript">
 
-       })
-   
+ $ = jQuery;
 
-   $('.save').click(function(e){
-    e.preventDefault();
-   $('#careerform').submit();
-   });
-   });
+
+  $('form#editcareerform').ajaxForm({
+    beforeSerialize: function() {
+      
+      $("input[name='description']").val(CKEDITOR.instances.textareacontents.getData());
+    },
+
+    dataType: 'json',
+    success: function(data) {
+      if (data.error) {
+        $('p.failure').remove();
+        for (var key in data.response) {
+          $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
+        }
+      } else {
+        window.location = "/portal/jobs/";
+      }
+    }
+  });
+ </script>
 </script>
 
 {% endblock %}

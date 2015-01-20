@@ -86,7 +86,7 @@ $(document).ready(function() {
       if (data.error) {
         $('p.failure').remove();
         for (var key in data.response) {
-          $('#' + key).after('<p class="failure">' + data.message[key] + '</p>');
+          $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
         }
       } else {
         window.location = "{% url 'micro_blog:admin_post_list' %}";
