@@ -83,8 +83,6 @@ def edit_job(request,career_slug):
                 if current_careers.featured_image:
                     os.remove(BLOG_IMAGES + current_careers.featured_image)
                 validate_blogcareer.featured_image=store_image(request.FILES.get('featured_image'),BLOG_IMAGES)
-            else:
-                validate_blogcareer.featured_image=''
             validate_blogcareer.save()
             data={'error':False,'response':'job updated successfully'}
         else:

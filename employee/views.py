@@ -9,9 +9,9 @@ from micro_admin.models import User
 from employee.forms import DailyReportForm
 
 
+
 @login_required
 def reports_list(request):
-    print request.user
     if request.user.is_admin:
         reports = User.objects.all()
         return render_to_response('admin/staff/all_reports.html',{'reports':reports})
@@ -30,7 +30,6 @@ def employee_report(request,email):
 def new_report(request):
     if request.method == 'POST':
         validate_report = DailyReportForm(request.POST)
-        errors = {}
         if validate_report.is_valid():
             new_report = DailyReport.objects.create(report=request.POST.get('report'),employee=request.user)
             new_report.save()
@@ -49,7 +48,7 @@ def edit_report(request,pk):
     if request.method == 'POST':
         current_report = DailyReport.objects.get(id=pk)
         if current_report.employee == request.user:
-            validate_report = DailyReportForm(request.POST,instance=current_report)
+            validate_report = DailyReportForm(request.POST, instance=current_report)
             if validate_report.is_valid():
                 new_report = validate_report.save(commit=False)
                 new_report.user=request.user

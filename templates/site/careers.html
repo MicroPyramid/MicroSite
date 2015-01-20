@@ -41,7 +41,7 @@
           </ul>
         </div>
         <div class="job-ban-right col-lg-4 col-md-5 col-sm-4 col-xs-12">
-          <img src="/static/blog/join.png" />
+          <img src="/static/site/images/join.png" />
         </div>
       </div>
       <div class="car-ban-contact"><a href="#">And now you have found it! So, what you gonna do? We suggest you click that apply button and let us contact you</a></div>
@@ -76,7 +76,7 @@
             <span class="description-exp">Exp:{{job.experience}}</span>
             <span class="description-skills">Skills:{{job.skills}} </span>
             <span class="description-desc">
-              <p>{{job.description}}</p>
+              <p>{{job.description|safe}}</p>
             </span>
             <span class="description-apply"><a href="{{job.url}}"> <i class="fa fa-paper-plane"></i> Apply Now</a></span>
           </div>
