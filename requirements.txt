@@ -18,4 +18,6 @@ sorl-thumbnail==12.2
 wsgiref==0.1.2
 python-coveralls==2.4.3
 django-compressor==1.4
-
+sendgrid==0.5.1
+sendgrid-django==1.1.0
+django-inbound-email==0.6.1

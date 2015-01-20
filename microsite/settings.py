@@ -118,7 +118,7 @@ CELERYBEAT_SCHEDULE = {
     # Executes every Monday morning at 7:30 A.M
     'add-every-day-evening': {
         'task': 'tasks.add',
-        'schedule': crontab(hour=5, minute=30, day_of_week=mon,tue,wed,thu,fri,sat),
+        'schedule': crontab(hour=5, minute=30, day_of_week='mon,tue,wed,thu,fri,sat'),
     },
 }
 
