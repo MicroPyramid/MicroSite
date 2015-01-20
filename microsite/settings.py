@@ -128,12 +128,13 @@ CELERYBEAT_SCHEDULE = {
     # Executes every Monday morning at 7:30 A.M
     'add-every-30-seconds': {
         'task': 'micro_blog.tasks.scraper_example',
-        'schedule':timedelta(seconds=30000000),
+        'schedule':timedelta(seconds=30),
         'args': (),
     },
 }
 
-
+SG_USER = os.getenv('SG_USER'),
+SG_PWD =  os.getenv('SG_PWD')
 
 LOGGING = {
     'version': 1,

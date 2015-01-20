@@ -10,7 +10,7 @@ from micro_admin.forms import CareerForm
 from microsite.settings import BLOG_IMAGES
 from micro_blog.views import store_image
 import os
-from pages.models import simplecontact
+from pages.models import simplecontact,Menu
 
 #@csrf_protect
 def index(request):

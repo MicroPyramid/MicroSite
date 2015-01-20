@@ -8,12 +8,6 @@
       <form action="{% url 'employee:new_report' %}" method="POST" id="blogform" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group select2-wrapper">
-          <label for="exampleInputEmail1">Project</label>
-          <select class="form-control select2 wid-60" id="project" name="project" multiple="multiple">
-            {% for project in projects %}
-            <option value="{{project.id}}" id="{{project.name}}">{{project.name}}</option>
-            {% endfor %}
-          </select>
         </div>
         <div class="row marl text-editor">
           <div>

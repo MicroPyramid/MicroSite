@@ -65,7 +65,7 @@
         if (nextRow.length) {
             nextRow.after(thisRow);
         }
-        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',mode="down",function(data){
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
             alert("hello");
         });
     });
@@ -77,6 +77,9 @@
         if (prevRow.length) {
             prevRow.before(thisRow);
         }
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'up'},function(data){
+            alert("hello");
+        });
     });
 });
 </script>

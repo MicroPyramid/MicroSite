@@ -18,8 +18,9 @@ import json
 from django.core.mail import EmailMultiAlternatives
 import logging
 from django_inbound_email.signals import email_received
-
-
+from micro_admin.models import User
+from ast import literal_eval
+from employee.models import DailyReport
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -443,12 +444,10 @@ def edit_comment(request,comment_id):
 
 
 def success(request):
-    print request.POST
-    print request.POST.get('from')
-    print request.POST.get('attachments')
-    print request.POST.get('subject')
-    print request.POST.get('text')
-    print "hello nikhila"
-    rep = DailyReport.objects.create(employee,report=request.POST.get('text'))
-# pass dispatch_uid to prevent duplicates:
-# https://docs.djangoproject.com/en/dev/topics/signals/
+    dict={}
+    dict=request.POST.get('envelope')
+    my_dict = literal_eval(dict)
+    usr=User.objects.get(email='nikhila@micropyramid.com')
+    user=User.objects.get(email=my_dict['from'])
+    rep = DailyReport.objects.create(employee=user,report=request.POST.get('text'))
+    rep.save()

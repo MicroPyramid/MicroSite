@@ -11,7 +11,6 @@ urlpatterns = patterns('micro_admin',
     url(r'^users/change-state/(?P<pk>\w{0,})/$', 'change_state', name='change_state'),
     url(r'^users/edit/(?P<pk>\w{0,})/$', 'edit_user', name='edit_user'),
     url(r'^out/$', 'views.out', name='out'),
-
     url(r'^users/$', 'users', name='users'),
     url(r'^users/new/$', 'new_user', name='new_user'),
 

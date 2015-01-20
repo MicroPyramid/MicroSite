@@ -67,7 +67,7 @@
             <span class="cur-opng-head">Current Openings</span>
             <span class="cur-opng-count">{{job.num_of_opening}}</span>
             <span class="cur-opng-date">{{job.posted_on}}</span>
-            <span class="cur-opng-view"><a href="#">View</a></span>
+            <span class="cur-opng-view"><a href="{{job.url}}">View</a></span>
           </div>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 post-desc">
@@ -78,7 +78,7 @@
             <span class="description-desc">
               <p>{{job.description}}</p>
             </span>
-            <span class="description-apply"><a href="#"> <i class="fa fa-paper-plane"></i> Apply Now</a></span>
+            <span class="description-apply"><a href="{{job.url}}"> <i class="fa fa-paper-plane"></i> Apply Now</a></span>
           </div>
         </div>
       </div>
