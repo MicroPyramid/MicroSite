@@ -112,11 +112,12 @@ CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 from celery.schedules import crontab
 from datetime import timedelta
 
+from celery.schedules import crontab
 
 CELERYBEAT_SCHEDULE = {
     # Executes every Monday morning at 7:30 A.M
     'add-every-day-evening': {
-        'task': 'tasks.add',
+        'task': 'micro_blog.tasks.daily_report',
         'schedule': crontab(hour=5, minute=30, day_of_week='mon,tue,wed,thu,fri,sat'),
     },
 }

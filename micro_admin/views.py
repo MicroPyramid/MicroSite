@@ -10,7 +10,7 @@ from micro_admin.forms import CareerForm
 from microsite.settings import BLOG_IMAGES
 from micro_blog.views import store_image
 import os
-from pages.models import simplecontact,Menu
+from pages.models import simplecontact, Menu
 
 #@csrf_protect
 def index(request):
@@ -73,9 +73,9 @@ def new_job(request):
         return render_to_response('admin/content/jobs/job.html',{'jobs':jobs,'csrf_token':c['csrf_token']})
 
 @login_required
-def edit_job(request,career_slug):
+def edit_job(request,pk):
     if request.method=="POST":
-        current_careers=career.objects.get(slug=career_slug)
+        current_careers=career.objects.get(pk=pk)
         validate_blogcareer=CareerForm(request.POST,instance=current_careers)
         if validate_blogcareer.is_valid():
             validate_blogcareer = validate_blogcareer.save(commit=False)
@@ -89,15 +89,15 @@ def edit_job(request,career_slug):
             data={'error':True,'response':validate_blogcareer.errors}
         return HttpResponse(json.dumps(data))
     else:
-        blog_career=career.objects.get(slug=career_slug)
+        blog_career=career.objects.get(pk=pk)
         c={}
         c.update(csrf(request))
         return render_to_response('admin/content/jobs/job_edit.html',{'blog_career':blog_career,'csrf_token':c['csrf_token']})
 
 
 @login_required
-def delete_job(request,career_slug):
-    careers=career.objects.get(slug=career_slug)
+def delete_job(request,pk):
+    careers=career.objects.get(pk=pk)
     careers.delete()
     return HttpResponseRedirect('/portal/jobs/')
 

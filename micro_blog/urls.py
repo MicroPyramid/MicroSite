@@ -6,7 +6,6 @@ urlpatterns = patterns('micro_blog.views',
     url(r'^$', 'site_blog_home', name='site_blog_home'),
 
     #backend urls
-   
     url(r'^admin/list/$', 'admin_post_list', name='admin_post_list'),
     url(r'^admin/new/$', 'admin_new_post', name='admin_new_post'),
     url(r'^edit/(?P<blog_slug>[-\w]+)/$', 'edit_blog_post', name='edit_blog_post'),

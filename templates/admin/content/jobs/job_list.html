@@ -22,9 +22,9 @@
             <tr>
               <td>{{forloop.counter}}</td>
               <td>{{job.title}}</td>
-               <td><a href="/portal/edit_jobs/{{job.slug}}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+               <td><a href="/portal/edit_jobs/{{job.id}}"><i class="fa fa-pencil-square-o edit-color"></i></a>
               </td>
-              <td><a href="/portal/delete_jobs/{{job.slug}}"><i class="fa fa-trash-o trash-color"></i></a>
+              <td><a href="/portal/delete_jobs/{{job.id}}"><i class="fa fa-trash-o trash-color"></i></a>
               </td>
             </tr>
             {% endfor %}

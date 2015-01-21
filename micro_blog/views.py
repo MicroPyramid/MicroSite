@@ -16,8 +16,6 @@ import datetime
 import requests
 import json
 from django.core.mail import EmailMultiAlternatives
-import logging
-from django_inbound_email.signals import email_received
 from micro_admin.models import User
 from ast import literal_eval
 from employee.models import DailyReport
@@ -443,7 +441,7 @@ def edit_comment(request,comment_id):
     return HttpResponse(json.dumps(data))
 
 
-def success(request):
+def report(request):
     dict={}
     dict=request.POST.get('envelope')
     my_dict = literal_eval(dict)
@@ -451,3 +449,4 @@ def success(request):
     user=User.objects.get(email=my_dict['from'])
     rep = DailyReport.objects.create(employee=user,report=request.POST.get('text'))
     rep.save()
+    return "daily report saved"
