@@ -16,7 +16,9 @@ import datetime
 import requests
 import json
 from django.core.mail import EmailMultiAlternatives
-
+from micro_admin.models import User
+from ast import literal_eval
+from employee.models import DailyReport
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -437,3 +439,14 @@ def edit_comment(request,comment_id):
     else:
         data = {"error":True,'response':'admin or owner can delete blog post'}
     return HttpResponse(json.dumps(data))
+
+
+def report(request):
+    dict={}
+    dict=request.POST.get('envelope')
+    my_dict = literal_eval(dict)
+    usr=User.objects.get(email='nikhila@micropyramid.com')
+    user=User.objects.get(email=my_dict['from'])
+    rep = DailyReport.objects.create(employee=user,report=request.POST.get('text'))
+    rep.save()
+    return "daily report saved"

@@ -8,12 +8,6 @@
       <form action="#" method="POST" id="blogform">
         {% csrf_token %}
         <div class="form-group">
-          <label for="exampleInputEmail1">Project</label>
-          <select class="form-control" id="project" name="project">
-            {% for project in projects %}
-            <option value="{{project.id}}" {% ifequal new_report.project project %}selected{% endifequal %}>{{project.name}}</option>
-            {% endfor %}
-          </select>
         </div>
         <div class="row marl text-editor">
           <div>

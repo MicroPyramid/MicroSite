@@ -32,11 +32,6 @@ def new_report(request):
         validate_report = DailyReportForm(request.POST)
         if validate_report.is_valid():
             new_report = DailyReport.objects.create(report=request.POST.get('report'),employee=request.user)
-            if request.POST.getlist('project'):
-                for i in request.POST.getlist('project'):
-                    project=Project.objects.get(pk=i)
-                    new_report.project.add(project)
-                    new_report.save()
             new_report.save()
             data = {'error':False,'response':'Report created successfully'}
         else:

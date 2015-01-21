@@ -12,7 +12,7 @@ class Modelforms_test(TestCase):
 		self.assertTrue(form.is_valid())
 
 	def test_CareerForm(self):
-		form = CareerForm(data={'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
+		form = CareerForm(data={'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertTrue(form.is_valid())
 
 
@@ -68,29 +68,29 @@ class test_portal_admin(TestCase):
 		self.assertEqual(resp.status_code, 200)
 		self.assertTemplateUsed(resp,'admin/content/jobs/job_list.html')
 
-		resp = self.client.post('/portal/new_jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
+		resp = self.client.post('/portal/new_jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertTrue('created' in resp.content)
 
-		resp = self.client.post('/portal/new_jobs/', {'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
+		resp = self.client.post('/portal/new_jobs/', {'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertFalse('created' in resp.content)
 
 		resp = self.client.get('/portal/new_jobs/')
 		self.assertEqual(resp.status_code, 200)
 
-		resp = self.client.get('/portal/edit_jobs/python-developer/')
+		resp = self.client.get('/portal/edit_jobs/1/')
 		self.assertEqual(resp.status_code, 200)
 
-		resp = self.client.post('/portal/edit_jobs/python-developer/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
+		resp = self.client.post('/portal/edit_jobs/1/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertTrue('updated successfully' in resp.content)
 
-		resp = self.client.post('/portal/edit_jobs/python-developer/',{'title':'Python developer', 'experience':1, 'skills': '', 'description':''})
+		resp = self.client.post('/portal/edit_jobs/1/',{'title':'Python developer', 'experience':1, 'skills': '', 'description':''})
 		self.assertEqual(resp.status_code, 200)
 		self.assertFalse('updated successfully' in resp.content)
 
-		resp = self.client.get('/portal/delete_jobs/python-developer/')
+		resp = self.client.get('/portal/delete_jobs/1/')
 		self.assertEqual(resp.status_code, 302)
 
 		resp = self.client.post('/portal/',{'email':'mp@mp.com','password':'mp'})

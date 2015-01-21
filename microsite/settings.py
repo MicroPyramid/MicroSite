@@ -18,6 +18,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
+    'django_inbound_email',
     'micro_admin',
     'projects',
     'pages',
@@ -106,6 +108,23 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
+from celery.schedules import crontab
+from datetime import timedelta
+
+from celery.schedules import crontab
+
+CELERYBEAT_SCHEDULE = {
+    # Executes every Monday morning at 7:30 A.M
+    'add-every-day-evening': {
+        'task': 'micro_blog.tasks.daily_report',
+        'schedule': crontab(hour=5, minute=30, day_of_week='mon,tue,wed,thu,fri,sat'),
+    },
+}
+
+SG_USER = os.getenv('SG_USER'),
+SG_PWD =  os.getenv('SG_PWD')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -159,3 +178,13 @@ DEBUG = True
 ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
 SITE_URL = "http://micropyramid.com"
+
+# the fully-qualified path to the provider's backend parser
+INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'
+
+# if True (default=False) then log the contents of each inbound request
+INBOUND_EMAIL_LOG_REQUESTS = True
+
+# if True (default=True) then always return HTTP status of 200 (may be required by provider)
+INBOUND_EMAIL_RESPONSE_200 = True
+
