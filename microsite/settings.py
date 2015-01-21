@@ -122,8 +122,8 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-SG_USER = os.getenv('SG_USER'),
-SG_PWD =  os.getenv('SG_PWD')
+SG_USER = os.getenv('sguser'),
+SG_PWD =  os.getenv('sgpwd')
 
 LOGGING = {
     'version': 1,
