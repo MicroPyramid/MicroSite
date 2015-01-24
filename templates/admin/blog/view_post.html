@@ -1,0 +1,32 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- menu strats here-->
+<!-- menu ends here-->
+<!-- main content starts here-->
+<div class="row marl main-content">
+<h4>Blog Post Detail Page<small> -To View complete blog post Details & Description</small></h4>
+<div class="row marl blog-form blog-new">
+  <div class="panel panel-default blog-list">
+    <div class="panel-body">
+      <div class="blog-left">
+        <div class="blog-upic-details">
+          <span class="uname">{{post.user.email}}</span>
+          <span class="udate-time">{{post.updated_on}}</span>
+        </div>
+        <h3 class="title"><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></h3>
+        <div class="desc">
+          {{post.content|safe}}
+        </div>
+        <div class="tags">
+          <ul>
+            {% for tag in post.tags.all %}
+            <li><a href="#"><i class="fa fa-tag"></i>{{tag.name}}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+<!-- main content ends here-->

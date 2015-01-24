@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media (min-width: 1200px) {
+	.md-hid{
+		display:none;
+	}
+}
+
+@media (min-width: 992px) {
+	.md-hid{
+		display:none;
+	}
+}
+
+@media (min-width: 992px)  and (max-width :1199px) {
+	.md-hid{
+		display:none;
+	}
+}
+
+@media (min-width: 768px) and (max-width :991px) {
+		.xs-hid{
+	display:none;
+}
+.services-description{
+		text-align:center !important;
+}
+#sec-services .section-services .description-txtalign{
+	text-align:center !important;
+}
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.xs-hid{
+	display:none;
+}
+.services-description{
+		text-align:center !important;
+}
+#sec-services .section-services .description-txtalign{
+	text-align:center !important;
+}
+}
+
+@media (min-width: 240px) and (max-width: 480px) {
+	.xs-hid{
+	display:none;
+}
+.services-description{
+		text-align:center !important;
+}
+#sec-services .section-services .description-txtalign{
+	text-align:center !important;
+}
+}
+
+@media (min-width: 240px) and (max-width: 480px) { 
+.xs-hid{
+	display:none;
+}
+.services-description{
+		text-align:center !important;
+}
+#sec-services .section-services .description-txtalign{
+	text-align:center !important;
+}
+}

@@ -1,0 +1,74 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <h4>Menu Viewer <small> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
+  <div class="row marl blog-form">
+    <div class="table-responsive table-bordered">
+      <div class="panel panel-default">
+        <div class="panel-heading"><a href="{% url 'pages:add_menu' %}"><button type="button" class="btn btn-success">Add Menu</button></a></div>
+        <div class="panel-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" /></th>
+                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
+                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
+                <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">URL</th>
+                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
+                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for menu in menu_list %}
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>{{forloop.counter}}</td>
+                <td>{{menu.title}}</td>
+                <td class="sec-col">{{menu.url}}</td>
+                <td><a href="{% url 'pages:change_menu_status' pk=menu.id %}">
+                  {% ifequal menu.status 'on' %}
+                  <i class="fa fa-circle status-color-g"></i>
+                  {% else %}
+                  <i class="fa fa-circle status-color"></i>
+                  {% endifequal %}
+                  </a>
+                </td>
+                <td><a href="{% url 'pages:edit_menu' pk=menu.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+                  <a href="{% url 'pages:delete_menu' pk=menu.id %}"><i class="fa fa-trash-o trash-color"></i></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+    $('.fa-caret-down').click(function(data){
+        var thisRow = $(this).closest('tr');
+        var nextRow = thisRow.next();
+        if (nextRow.length) {
+            nextRow.after(thisRow);
+        }
+        $.post('/admin/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
+            alert("hello");
+        });
+    });
+    $('.fa-caret-up').click(function(data){
+        var thisRow = $(this).closest('tr');
+        var prevRow = thisRow.prev();
+        if (prevRow.length) {
+            prevRow.before(thisRow);
+        }
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'up'},function(data){
+        });
+    });
+  });
+</script>
+<!-- main content ends here-->
+{% endblock %}
+<!-- main content ends here-->

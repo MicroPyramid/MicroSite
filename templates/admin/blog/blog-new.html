@@ -1,0 +1,133 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- menu strats here-->
+<!-- menu ends here-->
+<!-- main content starts here-->
+<div class="row marl main-content">
+<h4>Blog Post Creation <small> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
+<div class="row marl blog-form blog-new">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="{% url 'micro_blog:admin_new_post' %}" method="POST" id="blogform" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="Text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Slug</label>
+          <input type="text" class="form-control" id="slug" name="slug">
+          <span class="slug-text">Do not mix form groups directly with input groups. Instead, nest the input group inside of the form group.</span>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Category</label>
+          <select class="form-control" id="category" name="category">
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="row marl text-editor">
+          <div>
+            <div class="">
+              <p>
+                <label class="control-label" for="html">Blog Post Description</label>
+                <br/>
+              <div class="control-group">
+                <div class="controls" id="content">
+                  <input type="hidden" name="content">
+                  <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tags-block">
+          <p><label>Tags Creation</label>
+            <input id="tags_1" type="text" class="tags" name="tags" value="" />
+          </p>
+        </div>
+        <div class="tags-block">
+          <p>
+            <label>Featured Image</label>
+            <input type="file" name="featuredimage" />
+          </p>
+        </div>
+        <div class="draft-box">
+          <input type="checkbox"> <label>Save As Draft</label>
+        </div>
+        <div class="draft-box">
+          <input type="checkbox" name="featured_post" value="on">
+          <label>Featured Post</label>
+        </div>
+        <div class="save-btn">
+          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- main content ends here-->
+<script type="text/javascript">
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+  function onChangeTag(input,tag) {
+    alert("Changed a tag: " + tag);
+  }
+  $(function() {
+    $('#tags_1').tagsInput({width:'auto'});
+    $('#tags_2').tagsInput({
+      width: 'auto',
+      onChange: function(elem, elem_tags)
+      {
+        var languages = ['php','ruby','javascript'];
+        $('.tag', elem_tags).each(function()
+        {
+          if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+            $(this).css('background-color', 'yellow');
+        });
+      }
+    });
+    $('#tags_3').tagsInput({
+      width: 'auto',
+      //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
+      autocomplete_url:'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
+    });
+  // Uncomment this line to see the callback functions in action
+  //      $('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
+  // Uncomment this line to see an input with no interface for adding new tags.
+  //      $('input.tags').tagsInput({interactive:false});
+  });
+</script>
+<script type="text/javascript">
+  CKEDITOR.config.allowedContent = true;
+  var editor = CKEDITOR.replace('textareacontents', {
+    filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
+    filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
+  });
+</script>
+<script type="text/javascript">
+  $ = jQuery;
+    $('form#blogform').ajaxForm({
+      beforeSerialize: function() {
+        console.log(CKEDITOR.instances.textareacontents.getData())
+        $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+      },
+      dataType: 'json',
+      success: function(data) {
+        if (data.error) {
+          $('p.failure').remove();
+          for (var key in data.response) {
+            $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
+          }
+        } else {
+          window.location = "{% url 'micro_blog:admin_post_list' %}";
+        }
+      }
+    });
+</script>
+{% endblock %}

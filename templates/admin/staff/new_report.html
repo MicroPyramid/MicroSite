@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- menu strats here-->
+<!-- menu ends here-->
+<!-- main content starts here-->
+<div class="row marl main-content">
+<h4>Blog Report Creation <small> -To Add,Delete,Edit your Menu</small></h4>
+<div class="row marl blog-form blog-new">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form action="{% url 'employee:new_report' %}" method="POST" id="blogform" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group select2-wrapper">
+      </div>
+      <div class="row marl text-editor">
+        <div>
+          <div class="">
+            <p>
+              <label class="control-label" for="html">Blog Post Description</label>
+              <br/>
+            <div class="control-group">
+              <div class="controls" id="report">
+                <input type="hidden" name="report">
+                <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
+                </textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tags-block">
+    </form>
+    </div>
+  </div>
+</div>
+<!-- main content ends here-->
+<script type="text/javascript">
+  CKEDITOR.config.allowedContent = true;
+  var editor = CKEDITOR.replace('textareacontents', {
+    filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
+    filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
+  });
+</script>
+<script type="text/javascript">
+  $ = jQuery;
+    $('form#blogform').ajaxForm({
+      beforeSerialize: function() {
+        console.log(CKEDITOR.instances.textareacontents.getData())
+        $("input[name='report']").val(CKEDITOR.instances.textareacontents.getData());
+      },
+      dataType: 'json',
+      success: function(data) {
+        if (data.error) {
+          $('p.failure').remove();
+          for (var key in data.response) {
+            $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
+          }
+        } else {
+          window.location = "{% url 'employee:reports_list' %}";
+        }
+      }
+    });
+</script>
+{% endblock %}

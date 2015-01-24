@@ -1,0 +1,10 @@
+db.sqlite3
+*.pyc
+*~
+.project
+.pydevproject
+#static/blog
+#static/CACHE
+#static/site/images/*
+#static/admin/images/*
+.coverage

@@ -1,0 +1,106 @@
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px)  {
+
+
+ }
+@media (min-width: 992px)  and (max-width :1199px) { 
+.login-r8-block .login-r8-icon{
+	margin: 0px 25px 0px 0px;
+	font-size:75px;
+	width:20%;
+}
+}
+	
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width :991px) { 
+.login-r8-block .login-r8-icon{
+	margin: 0px 25px 0px 0px;
+	font-size:60px;
+	width:20%;
+}
+.login-r8-block .login-r8-head-desc{
+	float:left;
+	width:70%;
+	diusplay:inline-block;
+}
+.login-r8-head-desc h4{
+	font-size:14px;
+	font-weight:bold;
+	margin-bottom:3px;
+	}
+.login-r8-head-desc p{
+	font-weight:300;
+	line-height:21px;
+	font-size:13px;	
+	text-align:justify;
+}
+
+}
+
+@media (min-width: 481px) and (max-width: 767px){ 
+body{
+	background:#e5e9ec;	
+}
+.login-row .login-left{
+	background:#3c464c;
+	height:100%;
+	padding:0% 10%;
+	padding-bottom:50px;
+	}
+.login-row .login-right{
+	background:#2b95d2;
+	height:100%;
+	padding:0% 2.5%;
+	}
+header.top-header .inner-logo{
+	text-align:center;
+}
+header.top-header .dates{
+	text-align:center;
+	padding-top:0px;	
+}
+ .logo-sign-row {
+        padding: 10px 0px;
+        border: none;
+        border-bottom: 3px solid #edf0f2;
+    }
+    .navbar-default .navbar-nav>li>a:hover { border-radius: 0px }
+    .navbar-nav>li>.dropdown-menu {
+        border-radius: 0px;
+        padding: 0px;
+        border: 1px solid #d1d1d1;
+    }
+    .dropdown-menu>li>a {
+        color: #fff !important;
+        background: #009ddc;
+    }
+    .dropdown-menu>li>a:hover {
+        background: #fff;
+        color: #009ddc !important;
+    }
+    .navbar-default .navbar-nav>.open>a,
+    .navbar-default .navbar-nav>.open>a:hover,
+    .navbar-default .navbar-nav>.open>a:focus {
+        border-radius: 0px;
+        color: #fff;
+        background: #fdb53f;
+    }
+    .navbar-default .navbar-toggle { border: none }
+    .navbar-default .navbar-toggle:hover {
+        border: 1px solid  #99cc00;
+        background: none;
+    }
+    .navbar-default .navbar-toggle .icon-bar { background: #99cc00 !important }
+    .table-responsive {
+        margin-top: 20px;
+        border: none;
+    }
+	/*.blog-form .table-bordered{
+			border:1px solid #ddd;
+	}*/
+}
