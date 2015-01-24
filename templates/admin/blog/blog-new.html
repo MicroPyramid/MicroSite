@@ -7,7 +7,7 @@
 <div class="row marl blog-form blog-new">
   <div class="panel panel-default">
     <div class="panel-body">
-      <form action="{% url 'micro_blog:admin_new_post' %}" method="POST" id="blogform" enctype="multipart/form-data">
+      <form action="{% url 'micro_blog:new_post' %}" method="POST" id="blogform" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
