@@ -26,7 +26,6 @@ INSTALLED_APPS = (
     'micro_kb',
     'employee',
     'sorl.thumbnail',
-    'microsite_front',
     'haystack',
     'compressor',
 )
