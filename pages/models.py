@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 
 class Page(models.Model):
 	title = models.CharField(max_length=100)
-	content = models.TextField(max_length=20000)
+	content = models.TextField()
 	slug = models.SlugField()
 	is_active = models.BooleanField(default=True)
 

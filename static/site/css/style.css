@@ -1844,7 +1844,12 @@ h5.copy_right i {
 .content-wrap section {
   display: none;
   margin: 0 auto;
+  color: #fff;
   text-align: center;
+}
+
+.content-wrap section ul li{
+  list-style: none;
 }
 
 .content-wrap section.content-current {
