@@ -10,7 +10,7 @@
 	height: 500px;
 	width: 100%;
 	overflow: hidden;
-	background:url(../images/slide5.png);
+	background:url(/static/site/images/slide5.jpg);
 	color: #333;
 }
 

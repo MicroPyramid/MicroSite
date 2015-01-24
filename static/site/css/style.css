@@ -1558,7 +1558,7 @@ h5.copy_right i {
 }
 	/* .stats_single starts */
 .mp_d_curve_bg3 {
-  background: url(../images/facts.png) no-repeat;
+  background: url(/static/site/images/facts.jpg) no-repeat;
   background-position-y: 50% 50%;
 }
 

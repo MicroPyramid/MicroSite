@@ -57,12 +57,7 @@
       {% for job in jobs %}
       <!-- single job post starts here-->
       <div class="row marl job-post">
-       {#  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 web-des ">
-          {% if job.featured_image %}
-          <div class="designer-pic {% cycle job-yellow,job-light-grn %}"><img src="/static/blog/{{job.featured_image}}" /></div>
-          {% endif %} 
-        </div> #}
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 date-post">
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12 date-post">
           <div class="date-details {% cycle job-blue-grn,job-violet %}">
             <span class="cur-opng-head">Current Openings</span>
             <span class="cur-opng-count">{{job.num_of_opening}}</span>

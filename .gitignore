@@ -3,8 +3,8 @@ db.sqlite3
 *~
 .project
 .pydevproject
-#static/blog
-#static/CACHE
-#static/site/images/*
-#static/admin/images/*
+static/blog
+static/CACHE
+static/site/images/*
+static/admin/images/*
 .coverage
