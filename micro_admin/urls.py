@@ -13,6 +13,6 @@ urlpatterns = patterns('micro_admin',
     url(r'^out/$', 'views.out', name='out'),
     url(r'^users/$', 'users', name='users'),
     url(r'^users/new/$', 'new_user', name='new_user'),
-
+    url(r'^content/menu/(?P<pk>\w{0,})/order/$', 'views.menu_order', name='order'),
     url(r'^user/change-password/$', 'change_password', name='change_password'),
 )

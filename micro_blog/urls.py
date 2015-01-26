@@ -5,7 +5,6 @@ urlpatterns = patterns('micro_blog.views',
     #frontend urls
     url(r'^$', 'site_blog_home', name='site_blog_home'),
     url(r'^tag/(?P<slug>[-\w]+)/$','blog_tag'),
-    url(r'^(?P<year>\w{0,})/(?P<month>\w{0,})/$','archive_posts'),
 
     #backend urls
     url(r'^list/$', 'admin_post_list', name='admin_post_list'),
@@ -16,6 +15,7 @@ urlpatterns = patterns('micro_blog.views',
     url(r'^new-category/$', 'new_blog_category', name='new_blog_category'),
     url(r'^category/(?P<slug>[-\w]+)/$','blog_category'),
     url(r'^(?P<slug>[-\w]+)/$','blog_article'),
+    url(r'^(?P<year>\w{0,})/(?P<month>\w{0,})/$','archive_posts'),
     url(r'^delete-post/(?P<blog_slug>[-\w]+)/$', 'delete_post', name='delete_post'),
     url(r'^edit-category/(?P<category_slug>[-\w]+)/$', 'edit_category', name='edit_blog_category'),
     url(r'^delete-category/(?P<category_slug>[-\w]+)/$', 'delete_category', name='delete_blog_category'),

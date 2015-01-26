@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
-
+import itertools
 
 @login_required
 def pages(request):
@@ -73,8 +73,9 @@ def change_menu_status(request, pk):
 
 @login_required
 def menu(request):
+    iterator=itertools.count()
     menu_list=Menu.objects.all()
-    return render_to_response('admin/content/menu/menu-list.html',{'menu_list':menu_list})
+    return render_to_response('admin/content/menu/menu-list.html',{'menu_list':menu_list,'iterator':iterator})
 
 
 @login_required

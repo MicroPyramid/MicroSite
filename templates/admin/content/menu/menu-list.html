@@ -14,17 +14,27 @@
                 <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
                 <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
                 <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">URL</th>
+                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Swap</th>
                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Actions</th>
               </tr>
             </thead>
             <tbody>
               {% for menu in menu_list %}
+              {% with count=iterator.next  %}
               <tr>
                 <td><input type="checkbox" /></td>
-                <td>{{forloop.counter}}</td>
+                <td>{{count}}</td>
                 <td>{{menu.title}}</td>
                 <td class="sec-col">{{menu.url}}</td>
+                <td class="menu-swap">
+                  <div class="inner-swap-wid" style="width:30px;">
+                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
+                      id="{{menu.id}}"></i></a></span>
+                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
+                      id="{{menu.id}}"></i></a></span>
+                  </div>
+                </td>
                 <td><a href="{% url 'pages:change_menu_status' pk=menu.id %}">
                   {% ifequal menu.status 'on' %}
                   <i class="fa fa-circle status-color-g"></i>
@@ -37,6 +47,7 @@
                   <a href="{% url 'pages:delete_menu' pk=menu.id %}"><i class="fa fa-trash-o trash-color"></i></a>
                 </td>
               </tr>
+              {% endwith %}
               {% endfor %}
             </tbody>
           </table>
