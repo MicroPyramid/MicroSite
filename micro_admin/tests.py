@@ -37,10 +37,10 @@ class Views_test(TestCase):
 		resp = c.get('/portal/jobs/')
 		self.assertEqual(resp.status_code, 302)
 
-		resp = c.post('/portal/new_jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5})
+		resp = c.post('/portal/new-jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 302)
 
-		resp = c.get('/portal/edit_jobs/python-developer/')
+		resp = c.get('/portal/edit-jobs/python-developer/')
 		self.assertEqual(resp.status_code, 302)
 
 
@@ -68,29 +68,29 @@ class test_portal_admin(TestCase):
 		self.assertEqual(resp.status_code, 200)
 		self.assertTemplateUsed(resp,'admin/content/jobs/job_list.html')
 
-		resp = self.client.post('/portal/new_jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		resp = self.client.post('/portal/new-jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertTrue('created' in resp.content)
 
-		resp = self.client.post('/portal/new_jobs/', {'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		resp = self.client.post('/portal/new-jobs/', {'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertFalse('created' in resp.content)
 
-		resp = self.client.get('/portal/new_jobs/')
+		resp = self.client.get('/portal/new-jobs/')
 		self.assertEqual(resp.status_code, 200)
 
-		resp = self.client.get('/portal/edit_jobs/1/')
+		resp = self.client.get('/portal/edit-jobs/1/')
 		self.assertEqual(resp.status_code, 200)
 
-		resp = self.client.post('/portal/edit_jobs/1/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		resp = self.client.post('/portal/edit-jobs/1/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertTrue('updated successfully' in resp.content)
 
-		resp = self.client.post('/portal/edit_jobs/1/',{'title':'Python developer', 'experience':1, 'skills': '', 'description':''})
+		resp = self.client.post('/portal/edit-jobs/1/',{'title':'Python developer', 'experience':1, 'skills': '', 'description':''})
 		self.assertEqual(resp.status_code, 200)
 		self.assertFalse('updated successfully' in resp.content)
 
-		resp = self.client.get('/portal/delete_jobs/1/')
+		resp = self.client.get('/portal/delete-jobs/1/')
 		self.assertEqual(resp.status_code, 302)
 
 		resp = self.client.post('/portal/',{'email':'mp@mp.com','password':'mp'})
@@ -136,15 +136,15 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('created successfully' in response.content)
 
-		response = self.client.get('/portal/users/edit/1/')
+		response = self.client.get('/portal/users/edit/8/')
 		self.assertEqual(response.status_code,200)
 
 
-		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False})
+		response = self.client.post('/portal/users/edit/8/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False})
 		self.assertEqual(response.status_code,200)
 		self.assertTrue('updated successfully' in response.content)
 
-		response = self.client.post('/portal/users/edit/1/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
+		response = self.client.post('/portal/users/edit/8/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 
@@ -164,8 +164,8 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('Password changed' in response.content)
 
-		response = self.client.post('/portal/users/change-state/1/')
+		response = self.client.post('/portal/users/change-state/8/')
 		self.assertEqual(response.status_code,302)
 
-		response = self.client.post('/portal/users/change-state/1/')
+		response = self.client.post('/portal/users/change-state/8/')
 		self.assertEqual(response.status_code,302)

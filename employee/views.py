@@ -20,8 +20,8 @@ def reports_list(request):
         return render_to_response('admin/staff/reports.html',{'reports':reports})
 
 @login_required
-def employee_report(request,email):
-    user=User.objects.get(pk=email)
+def employee_report(request,pk):
+    user=User.objects.get(pk=pk)
     reports = DailyReport.objects.filter(employee=user)
     return render_to_response('admin/staff/reports.html',{'reports':reports})
 
@@ -36,10 +36,9 @@ def new_report(request):
         else:
             data = {'error':True,'response':validate_report.errors}
         return HttpResponse(json.dumps(data))
-    projects = Project.objects.all()
     c = {}
     c.update(csrf(request))
-    return render_to_response('admin/staff/new_report.html',{'projects':projects,'csrf_token':c['csrf_token']})
+    return render_to_response('admin/staff/new_report.html',{'csrf_token':c['csrf_token']})
 
 
 @login_required
@@ -59,10 +58,9 @@ def edit_report(request,pk):
             data = {'error':True,'response':'You cannot edit this report' }
         return HttpResponse(json.dumps(data))
     new_report = DailyReport.objects.get(id=pk)
-    project = Project.objects.all()
     c = {}
     c.update(csrf(request))
-    return render_to_response('admin/staff/edit_report.html',{'projects':project,'new_report':new_report,'csrf_token':c['csrf_token']})
+    return render_to_response('admin/staff/edit_report.html',{'new_report':new_report,'csrf_token':c['csrf_token']})
 
 
 @login_required

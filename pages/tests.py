@@ -60,71 +60,71 @@ class pages_views_test(TestCase):
 		response = self.client.get('/portal/content/menu')
 		self.assertEqual(response.status_code, 301)
 
-		response = self.client.get('/portal/content/menu/add_menu_item/')
+		response = self.client.get('/portal/content/menu/new/')
 		self.assertEqual(response.status_code, 200)
 
 		## With right input
-		response = self.client.post('/portal/content/menu/add_menu_item/', {'title':'main', 'url':'micro.in/m', 'status':'on'})
+		response = self.client.post('/portal/content/menu/new/', {'title':'main', 'url':'micro.in/m', 'status':'on'})
 		self.assertEqual(response.status_code, 200)
 
 		##with wrong input
-		response = self.client.post('/portal/content/menu/add_menu_item/', {'url':'micro.in/m', 'status':'on'})
+		response = self.client.post('/portal/content/menu/new/', {'url':'micro.in/m', 'status':'on'})
 		self.assertEqual(response.status_code, 200)
 		self.assertFalse('successfully' in response.content)
 
-		response = self.client.get('/portal/content/page/1/edit/')
+		response = self.client.get('/portal/content/page/edit/1/')
 		self.assertEqual(response.status_code, 200)
 
 		response = self.client.get('/portal/content/menu/')
 		self.assertEqual(response.status_code, 200)
 
 
-		response = self.client.post('/portal/content/page/1/edit/',{'title':'Page', 'content': 'page_content'})
+		response = self.client.post('/portal/content/page/edit/1/',{'title':'Page', 'content': 'page_content'})
 		self.assertEqual(response.status_code, 200)
 		self.assertTrue('successfully' in response.content)
 
 
-		response = self.client.post('/portal/content/page/1/edit/',{'content': 'page_content'})
+		response = self.client.post('/portal/content/page/edit/1/',{'content': 'page_content'})
 		self.assertEqual(response.status_code, 200)
 		self.assertFalse('successfully' in response.content)
 
 
 		##chnage menu status to off
-		response = self.client.get('/portal/content/menu/1/status/')
+		response = self.client.get('/portal/content/menu/status/1/')
 		self.assertEqual(response.status_code, 302)
 
 		##change menu status to on
-		response = self.client.get('/portal/content/menu/1/status/')
+		response = self.client.get('/portal/content/menu/status/1/')
 		self.assertEqual(response.status_code, 302)
 
-		response = self.client.get('/portal/content/menu/1/edit/')
+		response = self.client.get('/portal/content/menu/edit/1/')
 		self.assertTrue(response.status_code,200)
 
-		response = self.client.post('/portal/content/menu/1/edit/', {'title':'main2', 'url':'micro.in/menu', 'status':'on'})
+		response = self.client.post('/portal/content/menu/edit/1/', {'title':'main2', 'url':'micro.in/menu', 'status':'on'})
 		self.assertTrue(response.status_code,200)
 		self.assertTrue('updated successfully' in response.content)
 
 
-		response = self.client.post('/portal/content/menu/1/edit/', {'title':'main2', 'url':'micro.in/menu', 'status':'on','parent':1})
+		response = self.client.post('/portal/content/menu/edit/1/', {'title':'main2', 'url':'micro.in/menu', 'status':'on','parent':1})
 		self.assertTrue(response.status_code,200)
 		self.assertTrue('can not choose the same as parent' in response.content)
 
-		response = self.client.post('/portal/content/menu/1/edit/', {'title':'main2', 'url':'micro.in/menu', 'status':'on','parent':2})
+		response = self.client.post('/portal/content/menu/edit/1/', {'title':'main2', 'url':'micro.in/menu', 'status':'on','parent':2})
 		self.assertTrue(response.status_code,200)
 		#self.assertTrue('can not choose the same as parent' in response.content)
 
 
-		response = self.client.post('/portal/content/menu/1/edit/', {'url':'micro.in', 'status':'on'})
+		response = self.client.post('/portal/content/menu/edit/1/', {'url':'micro.in', 'status':'on'})
 		self.assertTrue(response.status_code,200)
 		self.assertFalse('successfully' in response.content)
 
 
-		response = self.client.get('/portal/content/menu/1/delete/')
+		response = self.client.get('/portal/content/menu/delete/1/')
 		self.assertTrue(response.status_code,200)
 
 
 		response = self.client.get('/page2/')
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/portal/content/page/1/delete/')
+		response = self.client.get('/portal/content/page/delete/1/')
 		self.assertEqual(response.status_code, 302)

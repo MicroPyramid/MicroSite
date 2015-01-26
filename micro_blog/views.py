@@ -90,7 +90,6 @@ def recent_photos(request):
 
 @login_required
 def admin_category_list(request):
-    print "hello....."
     blog_categories = Category.objects.all()
     return render_to_response('admin/blog/blog-category-list.html',{'blog_categories':blog_categories})
 
