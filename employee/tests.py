@@ -19,7 +19,7 @@ class TestBasic(unittest.TestCase):
 class Modelforms_test(TestCase):
 
     def test_report(self):
-        form = DailyReportForm(data = {'employee': 'ravi@mp.com', 'report':'Sample report'})
+        form = DailyReportForm(data = {'employee': 'test@micropyramid.com', 'report':'Sample report'})
         self.assertTrue(form.is_valid())
 
 class Views_test(TestCase):

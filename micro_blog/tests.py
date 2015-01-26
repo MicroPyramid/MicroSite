@@ -207,11 +207,11 @@ class micro_user_test(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_user('ravi@mp.com', 'ravi')
+		self.user = User.objects.create_user('test@micropyramid.com', 'test')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'D')
 
 	def test_blog_without_user(self):
 
-		user_login=self.client.login(email='ravi@mp.com', password='ravi')
+		user_login=self.client.login(email='test@micropyramid.com', password='test')
 		self.assertTrue(user_login)
