@@ -172,8 +172,8 @@ class micro_blog_post_data(TestCase):
 		response = self.client.get('/blog/tag/django/?page=1')
 		self.assertEqual(response.status_code,200)
 
-		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
-		img = File(img)
+		# img = open(BASE_DIR + '/static/site/images/1-c-n.png')
+		# img = File(img)
 
 		# response = self.client.get('/blog/ajax/photos/upload/')
 		# self.assertEqual(response.status_code,200)
@@ -187,14 +187,14 @@ class micro_blog_post_data(TestCase):
 
 
 
-class image_upload(unittest.TestCase):
-	def setUp(self):
-		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
-		img = File(img)
+# class image_upload(unittest.TestCase):
+# 	def setUp(self):
+# 		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
+# 		img = File(img)
 
-	def test_img(self):
-		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
-		img = File(img)
+# 	def test_img(self):
+# 		img = open(BASE_DIR + '/static/site/images/1-c-n.png')
+# 		img = File(img)
 		# resp=store_image(img,'')
 		# self.assertTrue(resp)
 
