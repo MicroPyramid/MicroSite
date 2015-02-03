@@ -68,6 +68,8 @@
   </div>
 </div>
 <!-- main content ends here-->
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   function onAddTag(tag) {
     alert("Added a tag: " + tag);
@@ -125,10 +127,10 @@
             $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
           }
         } else {
-          alert("hello");
           window.location = "{% url 'micro_blog:admin_post_list' %}";
         }
       }
     });
 </script>
+{% endcompress %}
 {% endblock %}

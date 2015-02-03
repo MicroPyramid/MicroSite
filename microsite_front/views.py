@@ -5,7 +5,6 @@ from django.http.response import HttpResponse
 import json
 from pages.forms import ContactForm
 from micro_admin.models import career
-from memoize import memoize, delete_memoized, delete_memoized_verhash
 
 def index(request):
 	if request.method=="GET":

@@ -99,7 +99,8 @@
     <!-- Login Row Starts Here -->
   </div>
   <!-- Body Ends Here -->
-
+{% load compress %}
+{% compress js %}
   <script type="text/javascript">
   $(document).ready(function() {
     $("a.login").click(function(e) {
@@ -115,7 +116,7 @@
     });
   });
   </script>
-
+{% endcompress %}
 
 
 </body>
