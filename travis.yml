@@ -6,7 +6,11 @@ python:
 env:
   -DJANGO=1.7 DB=mysql
   -DJANGO=1.7 DB=sqlite3
-
+  -MICROSITEDBNAME='mp'
+  -MICROSITEDBUSER='root'
+  -MICROSITEDBPASS='root'
+  -SGUSER="mp"
+  -SGPWD="mp"
 # command to install dependencies
 install:
   - pip install -r requirements.txt
