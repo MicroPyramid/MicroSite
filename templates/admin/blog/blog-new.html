@@ -125,6 +125,7 @@
             $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
           }
         } else {
+          alert("hello");
           window.location = "{% url 'micro_blog:admin_post_list' %}";
         }
       }

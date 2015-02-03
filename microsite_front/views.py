@@ -5,7 +5,7 @@ from django.http.response import HttpResponse
 import json
 from pages.forms import ContactForm
 from micro_admin.models import career
-
+from memoize import memoize, delete_memoized, delete_memoized_verhash
 
 def index(request):
 	if request.method=="GET":
@@ -27,6 +27,7 @@ def index(request):
 			for k in validate_contact.errors:
 				errors[k] = validate_contact.errors[k][0]
 		return HttpResponse(json.dumps(errors))
+
 
 def career_page(request):
 	jobs=career.objects.filter(is_active=True).order_by('created_on')

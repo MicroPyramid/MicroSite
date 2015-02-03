@@ -149,7 +149,6 @@ def site_blog_home(request):
 
 
 def blog_article(request, slug):
-    print "hello"
     blog_post = Post.objects.get(slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
     page_list=Page.objects.all()[:4]
@@ -238,7 +237,6 @@ def archive_posts(request, year, month):
     return render_to_response('site/blog/index.html', {'pagelist':page_list,'current_page':page,'last_page':no_pages,
                                                         'posts':blog_posts,'csrf_token':c['csrf_token']})
 
-
 @login_required
 def admin_post_list(request):
     items_per_page = 10
@@ -264,7 +262,6 @@ def new_post(request):
             else:
                 blog_post.status='P'
             blog_post.save()
-            print request.POST.get('tags')
             if request.POST.get('tags',''):
                 tags = request.POST.get('tags')
                 tags = tags.split(',')
