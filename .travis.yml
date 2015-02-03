@@ -6,7 +6,7 @@ python:
 env:
   -DJANGO=1.7 DB=mysql
   -DJANGO=1.7 DB=sqlite3
-  -MICROSITEDBNAME=mp
+  -MICROSITEDBNAME=test
   -MICROSITEDBUSER=root
   -MICROSITEDBPASS=root
   -SGUSER=mp
