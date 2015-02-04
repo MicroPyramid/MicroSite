@@ -85,6 +85,8 @@
     <!-- /row -->
   </div>
 </div>
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   $('#contactform').submit(function(e) {
     e.preventDefault();
@@ -109,4 +111,5 @@
      });
      }
 </script>
+{% endcompress %}
 {% endblock %}

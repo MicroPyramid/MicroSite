@@ -6,7 +6,6 @@ import json
 from pages.forms import ContactForm
 from micro_admin.models import career
 
-
 def index(request):
 	if request.method=="GET":
 		latest_featured_posts = {} #Post.objects.filter(status = 'P',featured_post = 'on').order_by('-created_on')[:2]
@@ -27,6 +26,7 @@ def index(request):
 			for k in validate_contact.errors:
 				errors[k] = validate_contact.errors[k][0]
 		return HttpResponse(json.dumps(errors))
+
 
 def career_page(request):
 	jobs=career.objects.filter(is_active=True).order_by('created_on')

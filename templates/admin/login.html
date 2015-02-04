@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css" />
   {% load compress %}
+  {% compress css %}
   <link type="text/css" href="/static/admin/css/mpbi-style.css" rel="stylesheet" />
+  {% endcompress %}
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
@@ -97,7 +99,8 @@
     <!-- Login Row Starts Here -->
   </div>
   <!-- Body Ends Here -->
-
+{% load compress %}
+{% compress js %}
   <script type="text/javascript">
   $(document).ready(function() {
     $("a.login").click(function(e) {
@@ -113,7 +116,7 @@
     });
   });
   </script>
-
+{% endcompress %}
 
 
 </body>

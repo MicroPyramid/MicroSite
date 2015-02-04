@@ -49,6 +49,8 @@
   </div>
 </div>
 <!-- main content ends here-->
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   $(document).ready(function(){
   $("form#userform").submit(function(e) {
@@ -66,4 +68,5 @@
   });
   });
 </script>
+{% endcompress %}
 {% endblock %}

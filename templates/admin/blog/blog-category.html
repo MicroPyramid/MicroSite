@@ -29,9 +29,10 @@
   </div>
 </div>
 <!-- main content ends here-->
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   $ = jQuery;
-  
   $("form#blogcategoryform").submit(function(e) {
     e.preventDefault();
     $.post(".", $("form#blogcategoryform").serialize(), function(msg) {
@@ -45,5 +46,6 @@
       }
     }, 'json');
   });
-</script>    
+</script>
+{% endcompress %}
 {% endblock %}

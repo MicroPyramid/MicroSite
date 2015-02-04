@@ -68,6 +68,8 @@
   </div>
 </div>
 <!-- main content ends here-->
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   function onAddTag(tag) {
     alert("Added a tag: " + tag);
@@ -130,4 +132,5 @@
       }
     });
 </script>
+{% endcompress %}
 {% endblock %}

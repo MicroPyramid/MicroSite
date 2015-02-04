@@ -7,4 +7,5 @@ static/blog
 static/CACHE
 static/site/images/*
 static/admin/images/*
+static/uploads
 .coverage

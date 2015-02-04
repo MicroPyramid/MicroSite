@@ -28,16 +28,22 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'haystack',
     'compressor',
+    'cachalot',
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
 )
 
+
+HTML_MINIFY = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -162,3 +168,12 @@ INBOUND_EMAIL_LOG_REQUESTS = True
 # if True (default=True) then always return HTTP status of 200 (may be required by provider)
 INBOUND_EMAIL_RESPONSE_200 = True
 
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter','compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+COMPRESS_REBUILD_TIMEOUT=5
+
+query_cache_type=0
+
+CACHALOT_ENABLED=True
+CACHALOT_CACHE_RANDOM=True
