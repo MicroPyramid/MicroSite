@@ -1,12 +1,6 @@
 {% extends 'site/base.html' %}
 {% block stage %}
 <!-- banner starts here-->
-{% load compress %}
-{% compress css %}
-<link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
-<link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
-<link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
-{% endcompress %}
 <div class="row marl banner-row">
   <div class="slideshow" id="slideshow">
     <ol class="slides">
@@ -364,6 +358,12 @@
   </div>
 </section>
 <!-- sec-contact ends -->
+{% load compress %}
+{% compress css %}
+<link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
+{% endcompress %}
 {% compress js %}
 <script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="/static/site/js/classie.js"></script>

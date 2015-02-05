@@ -20,34 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block extra-head %}
     {% endblock %}
-    {% load compress %}
-    <link rel="shortcut icon" href="/static/favicon.ico">
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,700,600,800,900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    {% compress css %}
-    <link href="/static/site/css/style.css" rel="stylesheet">
-    <link href="/static/site/css/plugin.css" rel="stylesheet">
-    <link href="/static/site/css/mobile.css" rel="stylesheet">
-    <link href="/static/site/css/responsive.css" rel="stylesheet">
-    <link href="/static/site/css/animation.css" rel="stylesheet">
-    {% endcompress %}
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
-    {% compress js %}
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $(".sliding-top-control").click(function(e) {
-          e.preventDefault();
-          $('#top-panel .top-slider').slideToggle();
-          $('.sliding-top-control i').toggleClass('fa-chevron-down');
-        });
-      });
-    </script>
-    {% endcompress %}
   </head>
   <body>
     <div id="wrap">
@@ -415,6 +387,34 @@
       </footer>
       <!-- footer ends here -->
     </div>
+    {% load compress %}
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,700,600,800,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    {% compress css %}
+    <link href="/static/site/css/style.css" rel="stylesheet">
+    <link href="/static/site/css/plugin.css" rel="stylesheet">
+    <link href="/static/site/css/mobile.css" rel="stylesheet">
+    <link href="/static/site/css/responsive.css" rel="stylesheet">
+    <link href="/static/site/css/animation.css" rel="stylesheet">
+    {% endcompress %}
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    {% compress js %}
+    <script src="/static/site/js/jquery.form.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(".sliding-top-control").click(function(e) {
+          e.preventDefault();
+          $('#top-panel .top-slider').slideToggle();
+          $('.sliding-top-control i').toggleClass('fa-chevron-down');
+        });
+      });
+    </script>
+    {% endcompress %}
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
