@@ -131,7 +131,6 @@ def menu_order(request,pk):
             down_link.lvl = down_link.lvl-1
             curr_link.save()
             down_link.save()
-            return HttpResponseRedirect('/portal/content/menu/')
         else:
             link_parent = Menu.objects.get(pk=pk).parent
             curr_link = Menu.objects.get(pk=pk)
@@ -140,4 +139,3 @@ def menu_order(request,pk):
             up_link.lvl = up_link.lvl+1
             curr_link.save()
             up_link.save()
-            return HttpResponseRedirect('/portal/content/menu/')
