@@ -126,18 +126,28 @@ def menu_order(request,pk):
             if lvlmax == curr_link.lvl:
                 data = {'error':True,'message':'you cant move down'}
                 return HttpResponseRedirect('/portal/content/menu/')
-            down_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl+1)
-            curr_link.lvl = curr_link.lvl+1
-            down_link.lvl = down_link.lvl-1
-            curr_link.save()
-            down_link.save()
+            count=Menu.objects.all().count()
+            if count ==curr_link.lvl:
+                data = {'error':True,'message':'you cant move down'}
+                return HttpResponseRedirect('/portal/content/menu/')
+            else:
+                down_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl+1)
+                curr_link.lvl = curr_link.lvl+1
+                down_link.lvl = down_link.lvl-1
+                curr_link.save()
+                down_link.save()
 
         else:
             link_parent = Menu.objects.get(pk=pk).parent
             curr_link = Menu.objects.get(pk=pk)
-            up_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl-1)
-            curr_link.lvl = curr_link.lvl-1
-            up_link.lvl = up_link.lvl+1
-            curr_link.save()
-            up_link.save()
+            count=Menu.objects.all().count()
+            if curr_link.lvl == 1:
+                data = {'error':True,'message':'you cant move down'}
+                return HttpResponseRedirect('/portal/content/menu/')
+            else:
+                up_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl-1)
+                curr_link.lvl = curr_link.lvl-1
+                up_link.lvl = up_link.lvl+1
+                curr_link.save()
+                up_link.save()
         return HttpResponse(json.dumps(data))
