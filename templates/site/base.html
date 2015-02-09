@@ -18,6 +18,8 @@
     <meta name="robots" content="index, follow">
     <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails Development Company - Hyderabad, India &raquo; Feed" href="http://www.micropyramid.com.com/rss.xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extra-head %}
+    {% endblock %}
     {% load compress %}
     <link rel="shortcut icon" href="/static/favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,700,600,800,900' rel='stylesheet' type='text/css'>
@@ -32,6 +34,7 @@
     {% endcompress %}
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     {% compress js %}
@@ -45,15 +48,6 @@
       });
     </script>
     {% endcompress %}
-    <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
-    {% block js %}
-    {% endblock %}
-    {% block extra-head %}
-    {% endblock %}
-
   </head>
   <body>
     <div id="wrap">
@@ -421,6 +415,12 @@
       </footer>
       <!-- footer ends here -->
     </div>
+    <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
+    {% block js %}
+    {% endblock %}
     {% compress js %}
     <script src="/static/site/js/modernizr.custom.js"></script>
     <script src="/static/site/js/superfish.js"></script>
@@ -463,10 +463,8 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
       ga('create', 'UA-11720509-1', 'auto');
       ga('send', 'pageview');
-      
     </script>
     {% endcompress %}
   </body>
