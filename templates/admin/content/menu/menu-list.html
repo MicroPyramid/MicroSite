@@ -56,6 +56,8 @@
     </div>
   </div>
 </div>
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   $ = jQuery;
   $(document).ready(function() {
@@ -65,8 +67,7 @@
         if (nextRow.length) {
             nextRow.after(thisRow);
         }
-        $.post('/admin/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
-            alert("hello");
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
         });
     });
     $('.fa-caret-up').click(function(data){
@@ -80,6 +81,8 @@
     });
   });
 </script>
+{% endcompress %}
+
 <!-- main content ends here-->
 {% endblock %}
 <!-- main content ends here-->

@@ -2,10 +2,11 @@
 {% block stage %}
 <!-- banner starts here-->
 {% load compress %}
-
+{% compress css %}
 <link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
+{% endcompress %}
 <div class="row marl banner-row">
   <div class="slideshow" id="slideshow">
     <ol class="slides">
@@ -57,14 +58,6 @@
     </ol>
   </div>
 </div>
-{% compress js %}
-<script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
-<script type="text/javascript" src="/static/site/js/classie.js"></script>
-<script type="text/javascript" src="/static/site/js/tiltSlider.js"></script>
-<script>
-  new TiltSlider( document.getElementById( 'slideshow' ) );
-</script>
-{% endcompress %}
 <!-- banner ends here-->
 <!-- sec-about starts -->
 <section id="about-holder">
@@ -222,18 +215,6 @@
     </div>
   </div>
 </section>
-<script type="text/javascript">
-  $('a.tab-scroll').click(function(e){
-     e.preventDefault();
-     $('#feature-tabs section').hide();
-     $('.feature-tab-li').removeClass('tab-current');
-  
-     $('section' + $(this).attr('href')).show().addClass('wow').addClass('animated').addClass('bounceIn');
-     $(this).parent().addClass('tab-current')
-  
-  });
-    
-</script>
 <!-- features ends here !-->
 <!-- mp_para_container micro_stats starts -->
 <section class="parallex_wrapper mp_para_container bottom_grey">
@@ -383,9 +364,24 @@
   </div>
 </section>
 <!-- sec-contact ends -->
+{% compress js %}
+<script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="/static/site/js/classie.js"></script>
+<script type="text/javascript" src="/static/site/js/tiltSlider.js"></script>
+<script>
+  new TiltSlider( document.getElementById( 'slideshow' ) );
+</script>
+<script type="text/javascript">
+  $('a.tab-scroll').click(function(e){
+     e.preventDefault();
+     $('#feature-tabs section').hide();
+     $('.feature-tab-li').removeClass('tab-current');
+     $('section' + $(this).attr('href')).show().addClass('wow').addClass('animated').addClass('bounceIn');
+     $(this).parent().addClass('tab-current')
+  });
+</script>
 <script>
   $('#contactform').ajaxForm({
-  
     dataType: 'json',
     data : $('#contactform').serialize(),
     type: "POST",
@@ -404,17 +400,12 @@
        });
         }
       }
-  
     });
-  
+
   $('#senddetails').click(function(e){
   e.preventDefault();
   $('#contactform').submit();
   });
-  
-      
-      
-    
-  
 </script>
+{% endcompress %}
 {% endblock %}

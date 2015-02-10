@@ -28,3 +28,9 @@ This project contains the following modules.
    * Internal knowledge base.
    * Projects the company is dealing.
 
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/MicroPyramid/microsite/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+

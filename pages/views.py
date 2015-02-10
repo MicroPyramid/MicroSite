@@ -74,7 +74,7 @@ def change_menu_status(request, pk):
 @login_required
 def menu(request):
     iterator=itertools.count()
-    menu_list=Menu.objects.all()
+    menu_list=Menu.objects.filter().order_by('lvl')
     return render_to_response('admin/content/menu/menu-list.html',{'menu_list':menu_list,'iterator':iterator})
 
 

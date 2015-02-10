@@ -7,8 +7,6 @@ from employee.models import DailyReport
 from micro_admin.models import User
 from employee.forms import DailyReportForm
 
-
-
 @login_required
 def reports_list(request):
     if request.user.is_admin:
@@ -19,11 +17,13 @@ def reports_list(request):
         reports = DailyReport.objects.filter(employee=user)
         return render_to_response('admin/staff/reports.html',{'reports':reports})
 
+
 @login_required
 def employee_report(request,pk):
     user=User.objects.get(pk=pk)
     reports = DailyReport.objects.filter(employee=user)
     return render_to_response('admin/staff/reports.html',{'reports':reports})
+
 
 @login_required
 def new_report(request):

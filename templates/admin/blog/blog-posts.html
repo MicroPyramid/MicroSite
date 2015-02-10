@@ -56,6 +56,8 @@
     </div>
   </div>
 </div>
+{% load compress %}
+{% compress js %}
 <script type="text/javascript">
   $ = jQuery;
   $(document).ready(function() {
@@ -77,5 +79,6 @@
     })
     });
 </script>>
+{% endcompress %}
 <!-- main content ends here-->
 {% endblock %}

@@ -11,6 +11,7 @@ from microsite.settings import BLOG_IMAGES
 from micro_blog.views import store_image
 import os
 from pages.models import simplecontact, Menu
+from django.db.models.aggregates import Max
 
 #@csrf_protect
 def index(request):
@@ -52,6 +53,7 @@ def jobs(request):
     jobs=career.objects.all()
     return render_to_response('admin/content/jobs/job_list.html',{'jobs':jobs})
 
+
 @login_required
 def new_job(request):
     if request.method=="POST":
@@ -71,6 +73,7 @@ def new_job(request):
         c={}
         c.update(csrf(request))
         return render_to_response('admin/content/jobs/job.html',{'jobs':jobs,'csrf_token':c['csrf_token']})
+
 
 @login_required
 def edit_job(request,pk):
@@ -123,18 +126,28 @@ def menu_order(request,pk):
             if lvlmax == curr_link.lvl:
                 data = {'error':True,'message':'you cant move down'}
                 return HttpResponseRedirect('/portal/content/menu/')
-            down_link = Menu.objects.get(parent=pk,lvl=curr_link.lvl+1)
-            curr_link.lvl = curr_link.lvl+1
-            down_link.lvl = down_link.lvl-1
-            curr_link.save()
-            down_link.save()
+            count=Menu.objects.all().count()
+            if count ==curr_link.lvl:
+                data = {'error':True,'message':'you cant move down'}
+                return HttpResponseRedirect('/portal/content/menu/')
+            else:
+                down_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl+1)
+                curr_link.lvl = curr_link.lvl+1
+                down_link.lvl = down_link.lvl-1
+                curr_link.save()
+                down_link.save()
 
         else:
             link_parent = Menu.objects.get(pk=pk).parent
             curr_link = Menu.objects.get(pk=pk)
-            up_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl-1)
-            curr_link.lvl = curr_link.lvl-1
-            up_link.lvl = up_link.lvl+1
-            curr_link.save()
-            up_link.save()
-        return HttpResponse(json.dumps(data)) 
+            count=Menu.objects.all().count()
+            if curr_link.lvl == 1:
+                data = {'error':True,'message':'you cant move down'}
+                return HttpResponseRedirect('/portal/content/menu/')
+            else:
+                up_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl-1)
+                curr_link.lvl = curr_link.lvl-1
+                up_link.lvl = up_link.lvl+1
+                curr_link.save()
+                up_link.save()
+        return HttpResponse(json.dumps(data))
