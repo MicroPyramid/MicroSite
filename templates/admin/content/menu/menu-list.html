@@ -67,8 +67,7 @@
         if (nextRow.length) {
             nextRow.after(thisRow);
         }
-        $.post('/admin/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
-            alert("hello");
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
         });
     });
     $('.fa-caret-up').click(function(data){

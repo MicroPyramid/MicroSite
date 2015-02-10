@@ -43,7 +43,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 
-HTML_MINIFY = True
+# HTML_MINIFY = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -171,7 +171,7 @@ INBOUND_EMAIL_RESPONSE_200 = True
 COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter','compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-COMPRESS_REBUILD_TIMEOUT=5
+COMPRESS_REBUILD_TIMEOUT=5400
 
 query_cache_type=0
 

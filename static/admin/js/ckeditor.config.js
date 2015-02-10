@@ -29,4 +29,9 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+	config.extraPlugins = 'fontawesome';
+	config.contentsCss = 'http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+	config.allowedContent = true; 
+
+
 };
