@@ -107,6 +107,6 @@ class test_employee(TestCase):
 		response = self.client.get('/portal/employee/')
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/portal/employee/reports/4/')
+		response = self.client.get('/portal/employee/reports/1/')
 		self.assertEqual(response.status_code, 200)
 
