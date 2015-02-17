@@ -78,13 +78,13 @@ class Post(models.Model):
     def get_comment_count(self):
         return BlogComments.objects.filter(status='on',post=self).count()
 
-    def  is_editable_by(self, user):
-        if self.user==user or user.is_admin:
+    def is_editable_by(self, user_obj):
+        if self.user==user_obj or user_obj.is_admin:
             return True
         return False
 
-    def is_deletable_by(self, user):
-        if self.user==user or user.is_admin:
+    def is_deletable_by(self, user_obj):
+        if self.user==user_obj or user_obj.is_admin:
             return True
         return False
 

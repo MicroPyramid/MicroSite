@@ -444,3 +444,18 @@ padding:-1px 0px;
 .inner-swap-wid{width:30px;}
 .caret-wid{display:block;width:30px;}
 .caret-wid a{font-size:16px;color:green;}
+.profile-part{
+	margin-top: 20px;
+}
+.profile-right{
+	background: white;
+}
+.profile-right span{
+	display: block;
+	color: #838383;
+	padding:8px 0px;
+	border-bottom:1px dashed #ddd;
+}
+.input-xlarge{
+	width:100%;
+}

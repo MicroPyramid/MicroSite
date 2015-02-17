@@ -4,7 +4,8 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
 
     url(r'^$', 'microsite_front.views.index'),
-    url(r'^reply/$','micro_blog.views.report'),
+    url(r'^report/$','micro_blog.views.report'),
+    url(r'^contact/$','micro_blog.views.contact'),
     url(r'^careers/$','microsite_front.views.career_page'),
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),

@@ -71,6 +71,17 @@ margin-right:0px;
 	height:100%;
 	padding:0% 10%;
 	}
+.login-row .login-left .save{
+	color: #fff;
+	display: inline-block;
+	padding: 6px 15px;
+	font-weight: bold;
+	border: none;
+	background: #1b7da2;
+}
+.login-row .login-left .submit:hover{
+
+}
 .login-row .login-right{
 /*	background:#2b95d2;*/
 	height:100%;

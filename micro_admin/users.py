@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
@@ -6,12 +6,14 @@ from django.contrib.auth.hashers import check_password
 import json
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
-
+from micro_blog.models import Image_File, Category, Tags, Post
+from employee.models import DailyReport,Dailyreport_files,Leaves
+import math
 
 @login_required
 def users(request):
     users = User.objects.all()
-    return render_to_response('admin/user/index.html', {'users': users})
+    return render(request,'admin/user/index.html', {'users': users})
 
 
 @login_required
@@ -42,7 +44,17 @@ def new_user(request):
             user.first_name = request.POST.get('first_name')
             user.last_name = request.POST.get('last_name')
             user.gplus_url = request.POST.get('gplus_url')
-            user.user_roles = request.POST.get('user_roles')
+            user.fb_profile = request.POST.get('fb_profile')
+            user.tw_profile = request.POST.get('tw_profile')
+            user.ln_profile = request.POST.get('ln_profile')
+            user.about = request.POST.get('about')
+            user.state = request.POST.get('state')
+            user.city = request.POST.get('city')
+            user.address = request.POST.get('address')
+            user.mobile = request.POST.get('mobile')
+            user.phones = request.POST.get('phones')
+            user.pincode = request.POST.get('pincode')
+
             if request.POST.get('user_roles') == 'Admin':
                 user.is_admin = True
 
@@ -108,3 +120,47 @@ def change_state(request,pk):
 
     user.save()
     return HttpResponseRedirect("/portal/users/")
+
+
+def user_info(request,pk):
+    user = User.objects.get(pk = pk)
+    blog_posts = Post.objects.filter(user=user)
+    daily_reports = DailyReport.objects.filter(employee=user)
+    leaves = Leaves.objects.filter(user=user)
+    return render(request,'admin/user/view_userinfo.html',{'leaves':leaves,'daily_reports':daily_reports,'blog_posts':blog_posts,'user':user})
+
+
+def blogposts(request,pk):
+    user = User.objects.get(pk = pk)
+    items_per_page = 10
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+    no_pages = int(math.ceil(float(Post.objects.filter(user=user).count()) / items_per_page))
+    blog_posts = Post.objects.filter(user=user)[(page - 1) * items_per_page:page * items_per_page]
+    return render(request,'admin/user/blogposts.html',{'user':user,'blog_posts':blog_posts,'current_page':page,'last_page':no_pages})
+
+
+def reports(request,pk):
+    user = User.objects.get(pk = pk)
+    items_per_page = 10
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+    no_pages = int(math.ceil(float(Post.objects.filter(user=user).count()) / items_per_page))
+    reports = DailyReport.objects.filter(employee=user)[(page - 1) * items_per_page:page * items_per_page]
+    return render(request,'admin/user/reports.html',{'user':user,'reports':reports,'current_page':page,'last_page':no_pages})
+
+
+def leaves(request,pk):
+    user = User.objects.get(pk = pk)
+    items_per_page = 10
+    if "page" in request.GET:
+        page = int(request.GET.get('page'))
+    else:
+        page = 1
+    no_pages = int(math.ceil(float(Post.objects.filter(user=user).count()) / items_per_page))
+    leaves = Leaves.objects.filter(user=user)[(page - 1) * items_per_page:page * items_per_page]
+    return render(request,'admin/user/leaves.html',{'user':user,'leaves':leaves,'current_page':page,'last_page':no_pages})

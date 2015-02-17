@@ -7,6 +7,17 @@
 	}
 }
 
+@media (max-width: 1221px) and (min-width: 992px){
+.wrapper-icon-div {
+width: 25%!important;
+text-align: center!important;
+height: 200px;
+padding-left: 0;
+padding-right: 0;
+padding: 50px 26px;
+}
+}
+
 @media (min-width: 992px) {
 	.md-hid{
 		display:none;
