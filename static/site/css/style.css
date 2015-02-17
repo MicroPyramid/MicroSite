@@ -2,7 +2,7 @@ body {
   font-family: 'Raleway', sans-serif;
   font-size: 13.5px;
   background-color: #fff;
-  color: #999;
+  color: #888;
 }
 img {
 max-width: 100%;
@@ -21,6 +21,13 @@ h6 {
   color: #555;
   margin: 0 0 15px;
   font-weight: 800;
+}
+ul{
+  margin:0 !important;
+}
+
+#callus i{
+  margin-right:6px;
 }
 
 h1.thin,
@@ -346,7 +353,7 @@ input[type="reset"]:active {
   margin-bottom: 10px;
 }
 
-.login-block .form-control {
+.login-block .form-control{
   background: #9ea7ae;
   height: 40px;
   color: #fff;
@@ -1558,7 +1565,7 @@ h5.copy_right i {
 }
 	/* .stats_single starts */
 .mp_d_curve_bg3 {
-  background: url(/static/site/images/facts.jpg) no-repeat;
+  background: url(/static/site/images/facts.png) no-repeat;
   background-position-y: 50% 50%;
 }
 
@@ -3363,8 +3370,8 @@ background:#64a2a1;
 /*services 30-12-2014*/
 /*services 21-1-2015*/
 .wrapper-icon-div{
-	height:250px;
-	padding:67px 42px;
+	height:200px;
+	padding:50px 42px;
 }
 .wrapper-icon-div span{
 	position:absolute;
@@ -3415,6 +3422,7 @@ font-size: 13px;
 .career-banner .job-ban-right{
   padding:0px;  
   text-align:right;
+  padding-bottom: 20px;
 }
 .job-ban-desc{
   margin:0px;
@@ -3637,6 +3645,7 @@ font-size: 13px;
 .career-banner .job-ban-right{
   padding:0px;  
   text-align:right;
+  padding-bottom: 20px;
 }
 .job-ban-desc{
   margin:0px;

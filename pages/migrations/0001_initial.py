@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=100)),
-                ('content', models.TextField(max_length=20000)),
+                ('content', models.TextField()),
                 ('slug', models.SlugField()),
                 ('is_active', models.BooleanField(default=True)),
             ],

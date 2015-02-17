@@ -26,7 +26,7 @@ def index(request):
             else:
                 data = {'error':True,'message':"The password is valid, but the account has been disabled!"}
         else:
-            data = {'error':True,'message':"The username and password were incorrect."}
+            data = {'error':True,'message':"The username and password are incorrect."}
         return HttpResponse(json.dumps(data))
     else:
         data = {}

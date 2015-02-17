@@ -1,0 +1,66 @@
+{% extends 'admin/base.html' %} {% block stage %}
+{% load blog_tags %}
+<div class="row marl">
+  {% include 'admin/user/leftmenu.html' %}
+  <div class="col-lg-9">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" /></th>
+          <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Employee</th>
+          <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Name</th>
+          <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Role</th>
+          <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for report in reports %}
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td><a href="{% url 'employee:view_report' pk=report.id %}">{{report.employee.email}}</a></td>
+          <input type="hidden" id="user_id" name="user_id" value="{{ new_report.employee.id }}">
+          <td class="sec-col">{{report.employee.first_name}}</td>
+          <td class="sec-col">{{report.employee.user_roles}}</td>
+          <td><a href="{% url 'employee:edit_report' pk=report.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+            <a href="{% url 'employee:delete_report' pk=report.id %}" class="delete_report" value="{{report.id}}"><i class="fa fa-trash-o trash-color"></i></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <nav>
+      <ul class="pagination">
+        {% get_page current_page last_page as pages %}
+        {% for s in pages %}
+        <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/users/reports/{{user.id}}/?page={{s}}">{{s}}</a></li>
+        {% endfor %}
+        <li class="disabled"><a href="/portal/users/reports/{{user.id}}/?page={{s}}">...</a></li>
+        <li><a href="/portal/users/reports/{{user.id}}/?page={{last_page}}">last</a></li>
+        <li><a href="/portal/users/reports/{{user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+    $('.delete_report').click(function(e){
+      var value =$('#user_id').val();
+      e.preventDefault();
+      if (!confirm('Do you want to delete report?'))
+        return;
+      $.post('/portal/employee/reports/delete/'+$(this).attr('value')+'/',function(data){
+        if(data.error)
+        {
+          alert(data.message);
+        }
+        else{
+          window.location ='.';
+        }
+  
+    },'json');
+    })
+    });
+</script>
+{% endblock %}

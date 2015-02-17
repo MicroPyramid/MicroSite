@@ -23,6 +23,17 @@ class Page(models.Model):
 		return self.title
 
 
+class simplecontact(models.Model):
+	full_name=models.CharField(max_length=100)
+	message=models.TextField()
+	email=models.EmailField()
+	phone=models.BigIntegerField(blank=True,null=True)
+	contacted_on=models.DateField(auto_now=True)
+
+	def __unicode__(self):
+		return self.full_name
+
+
 class Contact(models.Model):
 	CONTACT_TYPES = (
 					('Hire','Hire Us'),
@@ -46,28 +57,21 @@ class Contact(models.Model):
 					('general' , 'Request For Services'),
 					('partnership' ,'Partnership Queries'),
 					('media', 'Media Queries'),
-					('general', 'General Queries'),
+					('general queries', 'General Queries'),
 					('feedback', 'Website Feedback'),
 					('others', 'Others'),
 					)
 
 	category = models.CharField(max_length=100, choices=CONTACT_TYPES)
-	name = models.CharField(max_length=100)
-	company = models.CharField(max_length=100)
-	email = models.CharField(max_length=100)
-	mobile = models.CharField(max_length=20)
+	domain = models.CharField(max_length=100)
+	domain_url = models.URLField(max_length=200)
+	contact_info = models.ForeignKey(simplecontact)
 	skype = models.CharField(max_length=50)
 	country = models.CharField(max_length=100)
 	budget = models.IntegerField()
 	technology = models.CharField(max_length=100)
 	requirements = models.CharField(max_length=200, choices=CONTACT_REQUIREMENTS)
-	website = models.URLField(max_length=200)
-	content = models.CharField(max_length=2000)
-	ip = models.CharField(max_length=15)
-	contacted_on = models.DateTimeField(auto_now_add=True)
 	enquery_type = models.CharField(max_length=100, choices=ENQUERY_TYPES)
-	callback_time = models.DateTimeField()
-	timezone = models.CharField(max_length=10)
 
 	def __unicode__(self):
 		return self.name
@@ -91,17 +95,6 @@ class Menu(models.Model):
 
 	def __unicode__(self):
 		return self.title
-
-
-class simplecontact(models.Model):
-	full_name=models.CharField(max_length=100)
-	message=models.TextField()
-	email=models.EmailField()
-	phone=models.IntegerField(blank=True,null=True)
-	contacted_on=models.DateField(auto_now=True)
-
-	def __unicode__(self):
-		return self.full_name
 
 
 def create_slug(tempslug):

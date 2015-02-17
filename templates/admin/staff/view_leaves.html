@@ -1,0 +1,23 @@
+
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- menu strats here-->
+<!-- menu ends here-->
+<!-- main content starts here-->
+<div class="row marl main-content">
+<h4>Blog Post Detail Page<small> -To View complete blog post Details & Description</small></h4>
+<div class="row marl blog-form blog-new">
+  <div class="panel panel-default blog-list">
+    <div class="panel-body">
+      <div class="blog-left">
+        <div class="blog-upic-details">
+          <span class="uname">{{leaves.user.email}}</span>
+        </div>
+        <div class="desc">
+          {{leaves.reason|safe}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+<!-- main content ends here-->

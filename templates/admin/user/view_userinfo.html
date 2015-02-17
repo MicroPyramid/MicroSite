@@ -1,0 +1,23 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<!-- main content starts here-->
+<div class="row marl profile-part">
+  {% include 'admin/user/leftmenu.html' %}
+  <div class="col-lg-9 profile-right">
+    <span>first name{{user.first_name}}</span>
+    <span>last {{user.last_name}}</span>
+    <span>{{user.user_roles}}</span>
+    <span>{{user.address}}</span>
+    <span>{{user.state}}</span>
+    <span>{{user.fb_profile}}</span>
+    <span>{{user.tw_profile}}</span>
+    <span>{{user.ln_profile}}</span>
+    <span>{{user.about}}</span>
+    <span>{{user.city}}</span>
+    <span>{{user.phones}}</span>
+    <span>{{user.mobile}}</span>
+    <span>{{user.pincode}}</span>
+  </div>
+</div>
+<!-- main content ends here-->
+{% endblock %}
+<!-- main content ends here-->

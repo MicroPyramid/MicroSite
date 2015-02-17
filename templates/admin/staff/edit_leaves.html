@@ -18,10 +18,10 @@
               <label class="control-label" for="html">Report Description</label>
               <br/>
             <div class="control-group">
-              <div class="controls" id="report">
-                <input type="hidden" name="report">
-                <input type="hidden" id="user_id" name="user_id" value="{{ new_report.employee.id }}">
-                <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">{{new_report.report|safe}}
+              <div class="controls" id="reason">
+                <input type="hidden" name="reason">
+                <input type="hidden" id="user_id" name="user_id" value="{{ new_leave.id }}">
+                <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">{{new_leave.reason|safe}}
                 </textarea>
               </div>
             </div>
@@ -48,19 +48,19 @@
   $(document).ready(function() {
     $('form#blogform').ajaxForm({
       beforeSerialize: function() {
-        $("input[name='report']").val(CKEDITOR.instances.textareacontents.getData());
+        $("input[name='reason']").val(CKEDITOR.instances.textareacontents.getData());
       },
       dataType: 'json',
       success: function(data){
          if (data.error == false)
          {
            alert(data.response);
-           window.location = '/portal/employee/reports/'+value+'/';
+           window.location = '/portal/employee/leaves/';
          }
          else
          {
           alert(data.response);
-          window.location = '/portal/employee/reports/'+value+'/';
+          window.location = '/portal/employee/leaves/';
            }
          }
     });

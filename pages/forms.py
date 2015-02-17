@@ -1,5 +1,5 @@
 from django import forms
-from pages.models import Page, Menu,simplecontact
+from pages.models import Page, Menu,simplecontact,Contact
 
 class  PageForm(forms.ModelForm):
 
@@ -14,7 +14,12 @@ class MenuForm(forms.ModelForm):
 		model = Menu
 		exclude = ('lvl',)
 
+class SimpleContactForm(forms.ModelForm):
+	class Meta:
+		model = simplecontact
+		fields = ('full_name','message','email','phone')
+
 class ContactForm(forms.ModelForm):
 	class Meta:
-		model=simplecontact
-		fields=('full_name','message','email','phone')
+		model = Contact
+		exclude = ('full_name','message','email','phone','contact_info')

@@ -2,60 +2,43 @@
 {% block stage %}
 <!-- banner starts here-->
 {% load compress %}
-{% compress css %}
-<link rel="stylesheet" type="text/css" href="/static/site/css/normalize.css" />
-<link rel="stylesheet" type="text/css" href="/static/site/css/demo.css" />
-<link rel="stylesheet" type="text/css" href="/static/site/css/component.css" />
-{% endcompress %}
 <div class="row marl banner-row">
-  <div class="slideshow" id="slideshow">
-    <ol class="slides">
-      <li class="current" data-effect-out="moveDownOut">
-        <div class="description">
-          <h2>Website Designing</h2>
-          <p>Our web designing team develop all designs with own care and commitment to the brand's nature and target users. By usig photoshop, GIMP, bootstrap, jquery, angularjs, fontawesome, We have developed amazing designs, layouts and interfaces.</p>
-        </div>
-        <div class="tiltview col">
-          <a href="#">
-          <img src="/static/site/images/responsive.png">
-          </a>
-        </div>
-      </li>
-      <li data-effect-in="slideDownIn" >
-        <div class="description">
-          <h2>Cloud Computing</h2>
-          <p>With 5 Years of experience on Amazon web services we have proven expertise on developing and managing applications on cloud services. Amazon Web Services : EC2, SES, SNS, RDS, Route53, S3, CloudFront, Beanstalk
-          </p>
-        </div>
-        <div class="tiltview row">
-          <a href="#">
-          <img src="/static/site/images/1-c-n.png">
-          </a>
-        </div>
-      </li>
-      <li>
-        <div class="description">
-          <h2>Social apps development and integration</h2>
-          <p>We can offer facebook, twitter, google+, github, linkedin, stackoverflow integrations as of now and our learning never stops to enhance your products or services.</p>
-        </div>
-        <div class="tiltview col">
-          <a href="#">
-          <img src="/static/site/images/social.png">
-          </a>
-        </div>
-      </li>
-      <li>
-        <div class="description">
-          <h2>Server Management</h2>
-          <p>MicroPyramid can manage your server to harden security to withstand DDoS attacks and other attacks based on exploits in your applications.</p>
-        </div>
-        <div class="tiltview row">
-          <a href="#">
-          <img src="/static/site/images/server.png">
-          </a>
-        </div>
-      </li>
-    </ol>
+  <div class="sequence-theme" style="position:relative;">
+    <div id="sequence">
+      <img class="sequence-prev" src="/static/site/images/bt-prev.png" alt="Previous Frame" />
+      <img class="sequence-next" src="/static/site/images/bt-next.png" alt="Next Frame" />
+      <ul class="sequence-canvas">
+        <li class="animate-in">
+          <h2 class="title">Website Desiging</h2>
+          <h3 class="subtitle">With 5 Years of experience on Amazon web services we have proven expertise on developing and managing applications on cloud services. Amazon Web Services : EC2, SES, SNS, RDS, Route53, S3, CloudFront, Beanstalk</h3>
+          <img class="model" src="/static/site/images/responsive.png" alt="Model 1" />
+        </li>
+        <li>
+          <h2 class="title">Cloud Computing</h2>
+          <h3 class="subtitle">Our web designing team develop all designs with own care
+            and commitment to the brand's nature and target users. By usig photoshop,
+            GIMP, bootstrap, jquery, angularjs, fontawesome, We have developed amazing designs, layouts and interfaces.
+          </h3>
+          <img class="model" src="/static/site/images/1-c-n.png" alt="Model 2" />
+        </li>
+        <li>
+          <h2 class="title">Social apps development and integration</h2>
+          <h3 class="subtitle">We can offer facebook, twitter, google+, github, linkedin, stackoverflow integrations as of now and our learning never stops to enhance your products or services.</h3>
+          <img class="model" src="/static/site/images/social.png" alt="Model 3" />
+        </li>
+        <li>
+          <h2 class="title">Server Management</h2>
+          <h3 class="subtitle">MicroPyramid can manage your server to harden security to withstand DDoS attacks and other attacks based on exploits in your applications..</h3>
+          <img class="model" src="/static/site/images/server.png" alt="Model 4" />
+        </li>
+      </ul>
+      <!--<ul class="sequence-pagination">
+        <li><img src="images/tn-model1.png" alt="Model 1" /></li>
+        <li><img src="images/tn-model2.png" alt="Model 2"></li>
+        <li><img src="images/tn-model3.png" alt="Model 3" /></li>
+                  
+        </ul>-->
+    </div>
   </div>
 </div>
 <!-- banner ends here-->
@@ -94,7 +77,7 @@
             </div>
             <div class="about_right">
               <h4>Methods</h4>
-              <p>We attain quality by implementating our own coding practices tailored with ever learning and experience. Our quality gets better every day.</p>
+              <p>We attain quality by implementing our own coding practices tailored with ever learning and experience. Our quality gets better every day.</p>
             </div>
           </div>
           <!-- about_single ends -->
@@ -105,7 +88,7 @@
             </div>
             <div class="about_right">
               <h4>Commitment</h4>
-              <p>We are commited to dleiver high quality code in terms of best coding practices, performance, security, user interface and stability. We are commited to give 24/7 support.</p>
+              <p>We are committed to deliever high quality code in terms of best coding practices, performance, security, user interface and stability. We are committed to give 24/7 support.</p>
             </div>
           </div>
           <!-- about_single ends -->
@@ -116,15 +99,9 @@
             </div>
             <div class="about_right">
               <h4>Environment</h4>
-              <p>Our developoment environment and client relations are flexible and friction less. We are developing CI server to seemless integrations.</p>
+              <p>Our development environment and client relations are flexible and friction less. We are developing CI server to seamless integrations.</p>
             </div>
           </div>
-          <!-- about_single ends -->
-          <!-- learn_more_about us link starts -->
-          <div class="col-sm-12 learn_more_about  wow  flipInX animated" data-wow-duration="5s" data-wow-delay="1s" >
-            <a href="javascript:void(0);" class="folio-link-url">Learn More About Us <i class="fa fa-long-arrow-right"></i></a>
-          </div>
-          <!-- learn_more_about us link ends -->
         </div>
       </div>
     </div>
@@ -150,11 +127,11 @@
                 <!--======= TAB 1 =========-->
                 <section id="tab-1" class="content-current wow animated  bounceIn">
                   <h3>Cloud Development and management</h3>
-                  <p>With 5 Years of experience on Amazon web services we have proven expertise on developing and managing applications on cloud services.
+                  <p>With 5 Years of experience in Amazon web services we have proven expertise on developing and managing applications on cloud services.
                   <ul>
                     <li>Amazon Web Services : EC2, SES, SNS, RDS, Route53, S3, CloudFront, Beanstalk</li>
                     <li>Heroku</li>
-                    <li>Rackspace : cloud servers, load balacing, auto scaling</li>
+                    <li>Rackspace : cloud servers, load balancing, auto scaling</li>
                     <li>Servers : apache, nginx, cpanel, uwsgi, cacti, munin</li>
                   </ul>
                   </p>
@@ -321,7 +298,7 @@
         <div class="contact_info align_center">
           <i class="fa fa-map-marker"></i>
           <h4 class="contact_title">Office Location</h4>
-          <p class="contact_description">HIG499, Viswa sai dham appartment,<br>
+          <p class="contact_description">HIG499, Viswa sai dham apartment,<br>
             behind anupama hospital, <br>
             6th phase KPHB, Hyderabad - 72
           </p>
@@ -338,22 +315,22 @@
       </div>
       <!-- contact_info ends -->
       <div class="contact_form animated" data-animdelay="0.2s" data-animspeed="1s" data-animrepeat="0" data-animtype="fadeInRight">
-        <form id="contactform" method="post">
+        <form id="contactform" name="contactform" method="post">
           {% csrf_token %}
           <div class="col-sm-6">
             <span class="field_single">
-            <input type="text" placeholder="Full Name" value="" name="full_name">
+            <input type="text" placeholder="Full Name" id ="full_name" name="full_name">
             </span>
             <span class="field_single">
-            <input type="email" placeholder="Email" value="" name="email">
+            <input type="email" placeholder="Email" id ="email" name="email">
             </span>
             <span class="field_single">
-            <input type="tel" placeholder="Phone" value="" name="phone">
+            <input type="tel" placeholder="Phone" id="phone" name="phone">
             </span>
           </div>
           <div class="col-sm-6">
             <span class="field_single">
-            <textarea placeholder="Comments" name="message"></textarea>
+            <textarea placeholder="Comments" id="message" name="message"></textarea>
             </span>
             <!--<a href="javascript:void(0);" class="button button-arrow">Submit <i class="fa fa-long-arrow-right"></i></a>-->
             <input class="button button-arrow" type="submit" value="Submit Now">
@@ -364,13 +341,7 @@
   </div>
 </section>
 <!-- sec-contact ends -->
-{% compress js %}
 <script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
-<script type="text/javascript" src="/static/site/js/classie.js"></script>
-<script type="text/javascript" src="/static/site/js/tiltSlider.js"></script>
-<script>
-  new TiltSlider( document.getElementById( 'slideshow' ) );
-</script>
 <script type="text/javascript">
   $('a.tab-scroll').click(function(e){
      e.preventDefault();
@@ -380,32 +351,4 @@
      $(this).parent().addClass('tab-current')
   });
 </script>
-<script>
-  $('#contactform').ajaxForm({
-    dataType: 'json',
-    data : $('#contactform').serialize(),
-    type: "POST",
-    success: function(data){
-      if (data.error == false)
-      {
-        alert(data.data);
-        window.location ='/';
-      }
-      else
-      {
-      $('.error').text('');
-         $('.error').show();
-        $.each( data, function( key, value ) {
-       $('#'+key).text(value);
-       });
-        }
-      }
-    });
-
-  $('#senddetails').click(function(e){
-  e.preventDefault();
-  $('#contactform').submit();
-  });
-</script>
-{% endcompress %}
 {% endblock %}

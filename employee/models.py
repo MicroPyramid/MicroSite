@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-
 class Skills(models.Model):
 	name = models.CharField(max_length=100)
 
@@ -30,7 +29,8 @@ class Employee(models.Model):
 
 
 class Leaves(models.Model):
-	date = models.DateField()
+	user = models.ForeignKey(settings.AUTH_USER_MODEL)
+	date = models.DateField(null=True,blank=True)
 	reason = models.CharField(max_length=2000)
 
 	def __unicode__(self):
@@ -39,8 +39,13 @@ class Leaves(models.Model):
 
 class DailyReport(models.Model):
 	employee = models.ForeignKey(settings.AUTH_USER_MODEL)
-	created_on = models.DateTimeField(auto_now_add=True)
-	report = models.TextField(max_length=10000)
+	created_on = models.DateField(auto_now_add=True)
+	report = models.TextField()
 
 	def __unicode__(self):
 		return self.employee.email
+
+class Dailyreport_files(models.Model):
+	dailyreport=models.ForeignKey(DailyReport)
+	attachments = models.FileField(upload_to='static/dailyreports/')
+

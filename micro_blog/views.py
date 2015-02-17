@@ -4,7 +4,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Image_File, Category, Tags, Post
-from pages.models import Page
+from pages.models import Page,simplecontact,Contact
 from PIL import Image
 import os
 import math
@@ -18,7 +18,9 @@ import json
 from django.core.mail import EmailMultiAlternatives
 from micro_admin.models import User
 from ast import literal_eval
-from employee.models import DailyReport
+from employee.models import DailyReport,Dailyreport_files
+from django.core.mail import send_mail
+from pages.forms import SimpleContactForm,ContactForm
 
 def store_image(img,location):
     ''' takes the image file and stores that in the local file storage returns file name with
@@ -342,8 +344,33 @@ def report(request):
     dict={}
     dict=request.POST.get('envelope')
     my_dict = literal_eval(dict)
-    usr=User.objects.get(email='nikhila@micropyramid.com')
     user=User.objects.get(email=my_dict['from'])
     rep = DailyReport.objects.create(employee=user,report=request.POST.get('text'))
+    if request.POST.get('attachment-info'):
+        my_dict1 = literal_eval(request.POST.get('attachment-info'))
+        for key in my_dict1.keys():
+            Dailyreport_files.objects.create(dailyreport=rep,attachments=my_dict1[key]['filename'])
     rep.save()
-    return "daily report saved"
+    return HttpResponseRedirect('/portal/')
+
+def contact(request):
+    validate_simplecontact = SimpleContactForm(request.POST)
+    validate_contact = ContactForm(request.POST)
+    if 'category' in request.POST.keys():
+        if validate_simplecontact.is_valid() and validate_contact.is_valid():
+            issue =Contact.objects.create(contact_info=contact,category=request.POST.get('category'),domain=request.POST.get('category'),domain_url=request.POST.get('doamin_url'),skype=request.POST.get('skype'),country=request.POST.get('country'),budget=request.POST.get('budget'),technology=request.POST.get('technology'),requirements=request.POST.get('requirements'),enquery_type=request.POST.get('enquery_type'))
+        else:
+            errors = {}
+            errors=dict((validate_simplecontact.errors).items() + (validate_contact.errors).items())
+            data = {'error':True, 'errinfo':errors}
+            return HttpResponse(json.dumps(data))
+    if validate_simplecontact.is_valid():
+        contact = simplecontact.objects.create(full_name=request.POST.get('full_name'),message=request.POST.get('message'),email=request.POST.get('email'),phone=request.POST.get('phone'))
+    else:
+        errors = {}
+        errors=dict((validate_simplecontact.errors).items())
+        data = {'error':True, 'errinfo':errors}
+        return HttpResponse(json.dumps(data))
+    send_mail('Thank u for ur message', request.POST.get('message'),request.POST.get('email') ,[request.POST.get('email')], fail_silently=False)
+    data = {'error':False, 'response': 'submitted successfully'}
+    return HttpResponse(json.dumps(data))

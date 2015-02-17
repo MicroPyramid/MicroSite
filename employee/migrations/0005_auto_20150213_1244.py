@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0001_initial'),
+        ('employee', '0004_leaves_user'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='page',
-            name='content',
-            field=models.TextField(),
+            model_name='leaves',
+            name='date',
+            field=models.DateField(null=True, blank=True),
             preserve_default=True,
         ),
     ]

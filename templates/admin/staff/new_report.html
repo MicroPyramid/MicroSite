@@ -3,7 +3,7 @@
 <!-- menu ends here-->
 <!-- main content starts here-->
 <div class="row marl main-content">
-<h4>Blog Report Creation <small> -To Add,Delete,Edit your Menu</small></h4>
+<h4>Report Creation <small> -To Add,Delete,Edit your Report</small></h4>
 <div class="row marl blog-form blog-new">
 <div class="panel panel-default">
   <div class="panel-body">
@@ -15,11 +15,12 @@
         <div>
           <div class="">
             <p>
-              <label class="control-label" for="html">Blog Post Description</label>
+              <label class="control-label" for="html">Report Description</label>
               <br/>
             <div class="control-group">
               <div class="controls" id="report">
                 <input type="hidden" name="report">
+                <input type="hidden" id="user_id" name="user_id" value="{{ request.user.id }}">
                 <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
                 </textarea>
               </div>
@@ -27,9 +28,11 @@
           </div>
         </div>
       </div>
-      <div class="tags-block">
+      <div class="tags-block"></div>
+      <div class="save-btn">
+          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+        </div>
     </form>
-    </div>
   </div>
 </div>
 <!-- main content ends here-->
@@ -44,6 +47,7 @@
 </script>
 <script type="text/javascript">
   $ = jQuery;
+    var value =$('#user_id').val();
     $('form#blogform').ajaxForm({
       beforeSerialize: function() {
         console.log(CKEDITOR.instances.textareacontents.getData())
@@ -57,7 +61,7 @@
             $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
           }
         } else {
-          window.location = "{% url 'employee:reports_list' %}";
+          window.location ='/portal/employee/reports/'+value+'/';
         }
       }
     });
