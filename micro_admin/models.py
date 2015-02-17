@@ -97,6 +97,7 @@ class User(AbstractBaseUser):
     def total_posts(self):
         return Post.objects.filter(user=self).count()
 
+
     def drafted_posts(self):
         return Post.objects.filter(user=self, status="D").count()
 
