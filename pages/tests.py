@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test import Client
-from pages.forms import PageForm, MenuForm, ContactForm
+from pages.forms import PageForm, MenuForm, ContactForm, SimpleContactForm
 from micro_admin.models import User
 from pages.models import Page, Menu
 
@@ -19,10 +19,14 @@ class pages_forms_test(TestCase):
 		form = MenuForm(data={'title':'main', 'url':'micro.in', 'status':'on'})
 		self.assertTrue(form.is_valid())
 
+	def test_SimpleContactForm(self):
+		self.client= Client()
+		form = SimpleContactForm(data={'full_name':'jagadeesh','message': 'sample', 'email':'john@gmail.com', 'phone':'9876543210'})
+		self.assertTrue(form.is_valid())
 
 	def test_ContactForm(self):
 		self.client= Client()
-		form = ContactForm(data={'full_name':'jagadeesh','message': 'sample', 'email':'john@gmail.com', 'phone':'94'})
+		form = ContactForm(data={'category':'Report', 'domain':'micropyramid.com','domain_url':'http://micropyramid.com','skype':'nikhila.mergu','country':'india','budget':'123','technology':'python','requirements':'new site','enquery_type':'general'})
 		self.assertTrue(form.is_valid())
 
 

@@ -25,7 +25,7 @@ class frontend_test(TestCase):
 
 		response = c.post('/',{'full_name':'ravikumar','message':'how r u','email':'ravi@mp.com','phone':'94407'})
 		self.assertEqual(response.status_code, 200)
-		self.assertTrue('Thank you,  For Ur Message.!' in response.content)
+		self.assertFalse('Thank you,  For Ur Message.!' in response.content)
 
 		# response = c.post('/',{'phone':'9444'})
 		# self.assertEqual(response.status_code, 200)
