@@ -106,10 +106,12 @@ def new_blog_category(request):
         else:
             data = {'error':True,'response':validate_blogcategory.errors}
         return HttpResponse(json.dumps(data))
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('admin/blog/blog-category.html',{'csrf_token':c['csrf_token']})
-
+    if request.user.is_admin:
+        c = {}
+        c.update(csrf(request))
+        return render_to_response('admin/blog/blog-category.html',{'csrf_token':c['csrf_token']})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def edit_category(request,category_slug):
@@ -122,11 +124,13 @@ def edit_category(request,category_slug):
         else:
             data = {'error':True,'response':validate_blogcategory.errors}
         return HttpResponse(json.dumps(data))
-    blog_category = Category.objects.get(slug=category_slug)
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('admin/blog/blog-category-edit.html',{'blog_category':blog_category, 'csrf_token':c['csrf_token']})
-
+    if request.user.is_admin:
+        blog_category = Category.objects.get(slug=category_slug)
+        c = {}
+        c.update(csrf(request))
+        return render_to_response('admin/blog/blog-category-edit.html',{'blog_category':blog_category, 'csrf_token':c['csrf_token']})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def delete_category(request,category_slug):
@@ -184,7 +188,7 @@ def blog_article(request, slug):
         pass
     c = {}
     c.update(csrf(request))
-
+    print post.name
     return render_to_response('site/blog/article.html',{'csrf_token':c['csrf_token'],'pagelist':page_list,
                             'post':blog_post,'posts':blog_posts,'fbshare_count':fbshare_count,
                             'twshare_count':twshare_count,'lnshare_count':lnshare_count})
@@ -315,13 +319,14 @@ def edit_blog_post(request,blog_slug):
         else:
             data = {'error':True,'response':validate_blog.errors}
         return HttpResponse(json.dumps(data))
-
-    blog_post = Post.objects.get(slug=blog_slug)
-    categories = Category.objects.all()
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('admin/blog/blog-edit.html',{'blog_post':blog_post,'categories':categories,'csrf_token':c['csrf_token']})
-
+        blog_post = Post.objects.get(slug=blog_slug)
+        categories = Category.objects.all()
+    if request.user.is_admin or blog_post.user ==request.user :
+        c = {}
+        c.update(csrf(request))
+        return render_to_response('admin/blog/blog-edit.html',{'blog_post':blog_post,'categories':categories,'csrf_token':c['csrf_token']})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def delete_post(request,blog_slug):
@@ -341,6 +346,7 @@ def view_post(request,blog_slug):
 
 
 def report(request):
+    print "HTTP/1.1 200 OK"
     dict={}
     dict=request.POST.get('envelope')
     my_dict = literal_eval(dict)

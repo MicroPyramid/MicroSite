@@ -24,11 +24,12 @@ def new_page(request):
         else:
             data={"error":True,'response':validate_page.errors}
         return HttpResponse(json.dumps(data))
-
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('admin/content/page/new-page.html',{'csrf_token':c['csrf_token']})
-
+    if request.user.is_admin:
+        c = {}
+        c.update(csrf(request))
+        return render_to_response('admin/content/page/new-page.html',{'csrf_token':c['csrf_token']})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def delete_page(request, pk):
@@ -47,11 +48,13 @@ def edit_page(request, pk):
         else:
             data={"error":True,'response':validate_page.errors}
         return HttpResponse(json.dumps(data))
-
-    c = {}
-    c.update(csrf(request))
-    current_page = Page.objects.get(pk=pk)
-    return render_to_response('admin/content/page/edit-page.html',{'page':current_page,'csrf_token':c['csrf_token']})
+    if request.user.is_admin:
+        c = {}
+        c.update(csrf(request))
+        current_page = Page.objects.get(pk=pk)
+        return render_to_response('admin/content/page/edit-page.html',{'page':current_page,'csrf_token':c['csrf_token']})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 
 @login_required
@@ -98,10 +101,13 @@ def add_menu(request):
             data={"error":True,'response':validate_menu.errors}
         return HttpResponse(json.dumps(data))
 
-    c = {}
-    c.update(csrf(request))
-    parent = Menu.objects.filter(parent=None).order_by('lvl')
-    return render_to_response('admin/content/menu/new-menu-item.html',{'parent':parent,'csrf_token':c['csrf_token']})
+    if request.user.is_admin:
+        c = {}
+        c.update(csrf(request))
+        parent = Menu.objects.filter(parent=None).order_by('lvl')
+        return render_to_response('admin/content/menu/new-menu-item.html',{'parent':parent,'csrf_token':c['csrf_token']})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 
 @login_required
@@ -141,13 +147,14 @@ def edit_menu(request, pk):
         else:
             data = {'error':True, 'response':validate_menu.errors}
         return HttpResponse(json.dumps(data))
-
-    parent = Menu.objects.filter(parent=None).order_by('lvl')
-    current_menu = Menu.objects.get(pk = pk)
-    c = {}
-    c.update(csrf(request))
-    return render_to_response('admin/content/menu/edit-menu-item.html',{'csrf_token':c['csrf_token'],'current_menu':current_menu,'parent':parent})
-
+    if request.user.is_admin:
+        parent = Menu.objects.filter(parent=None).order_by('lvl')
+        current_menu = Menu.objects.get(pk = pk)
+        c = {}
+        c.update(csrf(request))
+        return render_to_response('admin/content/menu/edit-menu-item.html',{'csrf_token':c['csrf_token'],'current_menu':current_menu,'parent':parent})
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 def site_page(request,slug):
     page= Page.objects.get(slug=slug)

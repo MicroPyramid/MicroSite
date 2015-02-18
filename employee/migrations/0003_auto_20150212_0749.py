@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='dailyreport',
             name='created_on',
-            field=models.DateField(auto_now_add=True, unique=True),
+            field=models.DateField(auto_now_add=True, blank=True),
             preserve_default=True,
         ),
     ]

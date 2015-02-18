@@ -10,7 +10,6 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" /></th>
                 <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
                 <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
                 <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">URL</th>
@@ -23,7 +22,6 @@
               {% for menu in menu_list %}
               {% with count=iterator.next  %}
               <tr>
-                <td><input type="checkbox" /></td>
                 <td>{{count}}</td>
                 <td>{{menu.title}}</td>
                 <td class="sec-col">{{menu.url}}</td>
