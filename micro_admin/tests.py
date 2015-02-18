@@ -140,7 +140,7 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 
 
-		response = self.client.post('/portal/users/edit/8/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False,'state':'Ap','address':'ap','country':'india','phones':'9876543210','pincode':'505301','fb_profile':'http://facebook.com/maheshbabu','tw_profile':'http:twitter.com/maheshbabu','ln_profile':'http:linkedin.com/maheshbabu','about':' alot','mobile':'9876543210','google_plus_url':'http://gmail.com/mp'})
+		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False,'state':'Ap','address':'ap','country':'india','phones':'9876543210','pincode':'505301','fb_profile':'http://facebook.com/maheshbabu','tw_profile':'http:twitter.com/maheshbabu','ln_profile':'http:linkedin.com/maheshbabu','about':' alot','mobile':'9876543210','google_plus_url':'http://gmail.com/mp'})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 
