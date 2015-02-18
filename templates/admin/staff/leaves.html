@@ -21,9 +21,9 @@
               {% for leave in leaves %}
               <tr>
                 <td><a href="{% url 'employee:view_leaves' pk=leave.id %}">{{leave.user.email}}</a></td>
-                <input type="hidden" id="user_id" name="user_id" value="{{ leaves.user.id }}">
-                <td class="sec-col">{{leaves.user.first_name}}</td>
-                <td class="sec-col">{{leaves.user.user_roles}}</td>
+                <input type="hidden" id="user_id" name="user_id" value="{{ leave.user.id }}">
+                <td class="sec-col">{{leave.user.first_name}}</td>
+                <td class="sec-col">{{leave.user.user_roles}}</td>
                 <td><a href="{% url 'employee:edit_leaves' pk=leave.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
                   <a href="{% url 'employee:delete_leaves' pk=leave.id %}" class="delete_report" value="{{leave.id}}"><i class="fa fa-trash-o trash-color"></i></a>
                 </td>

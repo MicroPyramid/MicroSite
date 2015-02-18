@@ -47,6 +47,18 @@ def contacts(request):
     contacts=simplecontact.objects.all()
     return render_to_response('admin/content/contacts/simplecontact.html',{'contacts':contacts})
 
+@login_required
+def delete_contact(request,pk):
+    print "hello"
+    contact = simplecontact.objects.get(pk=pk)
+    if request.user.is_admin:
+        contact.delete()
+        print "hello"
+        data={'error':False,'response':'contact deleted successfully'}
+        return HttpResponse(json.dumps(data))
+    else:
+        return render_to_response('admin/accessdenied.html')
+
 
 @login_required
 def jobs(request):
@@ -105,9 +117,11 @@ def edit_job(request,pk):
 @login_required
 def delete_job(request,pk):
     careers=career.objects.get(pk=pk)
-    careers.delete()
-    return HttpResponseRedirect('/portal/jobs/')
-
+    if request.user.is_admin:
+        careers.delete()
+        return HttpResponseRedirect('/portal/jobs/')
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def job_state(request, pk):

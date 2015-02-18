@@ -113,6 +113,7 @@ def new_blog_category(request):
     else:
         return render_to_response('admin/accessdenied.html')
 
+
 @login_required
 def edit_category(request,category_slug):
     if request.method == 'POST':
@@ -132,11 +133,15 @@ def edit_category(request,category_slug):
     else:
         return render_to_response('admin/accessdenied.html')
 
+
 @login_required
 def delete_category(request,category_slug):
     category = Category.objects.get(slug=category_slug)
-    category.delete()
-    return HttpResponseRedirect('/blog/category-list/')
+    if request.user.is_admin:
+        category.delete()
+        return HttpResponseRedirect('/blog/category-list/')
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 
 def site_blog_home(request):

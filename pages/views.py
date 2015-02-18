@@ -31,10 +31,14 @@ def new_page(request):
     else:
         return render_to_response('admin/accessdenied.html')
 
+
 @login_required
 def delete_page(request, pk):
-    Page.objects.get(pk = pk).delete()
-    return HttpResponseRedirect('/portal/content/page/')
+    if request.user.is_admin:
+        Page.objects.get(pk = pk).delete()
+        return HttpResponseRedirect('/portal/content/page/')
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 
 @login_required
@@ -59,8 +63,11 @@ def edit_page(request, pk):
 
 @login_required
 def delete_menu(request, pk):
-    Menu.objects.get(pk = pk).delete()
-    return HttpResponseRedirect('/portal/content/menu/')
+    if request.user.is_admin:
+        Menu.objects.get(pk = pk).delete()
+        return HttpResponseRedirect('/portal/content/menu/')
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 
 @login_required

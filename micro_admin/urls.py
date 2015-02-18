@@ -4,6 +4,7 @@ urlpatterns = patterns('micro_admin',
 
     url(r'^$', 'views.index', name='index'),
     url(r'^contacts/$', 'views.contacts', name='contacts'),
+    url(r'^contacts/(?P<pk>[-\w]+)/$', 'views.delete_contact', name='delete_contact'),
     url(r'^jobs/$', 'views.jobs', name='jobs'),
     url(r'^new-jobs/$','views.new_job', name='new_job'),
     url(r'^edit-jobs/(?P<pk>[-\w]+)/$','views.edit_job', name='edit_job'),

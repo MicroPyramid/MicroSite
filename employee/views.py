@@ -82,9 +82,13 @@ def edit_report(request,pk):
 @login_required
 def delete_report(request,pk):
     report = DailyReport.objects.get(id=pk)
-    report.delete()
-    data = {'error':False,'response':'report deleted' }
-    return HttpResponse(json.dumps(data))
+    if request.user.is_admin or request.user == report.employee:
+        report.delete()
+        data = {'error':False,'response':'report deleted' }
+        return HttpResponse(json.dumps(data))
+    else:
+        return render_to_response('admin/accessdenied.html')
+
 
 @login_required
 def new_leave(request):
@@ -119,10 +123,12 @@ def leaves_list(request):
 @login_required
 def delete_leaves(request,pk):
     leave = Leaves.objects.get(id=pk)
-    leave.delete()
-    data = {'error':False,'response':'report deleted' }
-    return HttpResponse(json.dumps(data))
-
+    if request.user.is_admin or request.user == leave.user:
+        leave.delete()
+        data = {'error':False,'response':'report deleted' }
+        return HttpResponse(json.dumps(data))
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def edit_leaves(request,pk):
