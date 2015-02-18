@@ -12,8 +12,8 @@ env:
   -SGUSER=mp
   -SGPWD=mp
 # command to install dependencies
-before_install:
-  - mysql -e "create database IF NOT EXISTS test;" -uroot
+# before_install:
+#   - mysql -e "create database IF NOT EXISTS test;" -uroot
 
 install:
   - pip install -r requirements.txt

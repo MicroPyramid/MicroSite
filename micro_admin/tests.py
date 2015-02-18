@@ -136,7 +136,7 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('created successfully' in response.content)
 
-		response = self.client.get('/portal/users/edit/8/')
+		response = self.client.get('/portal/users/edit/1/')
 		self.assertEqual(response.status_code,200)
 
 
@@ -144,7 +144,7 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 
-		response = self.client.post('/portal/users/edit/8/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
+		response = self.client.post('/portal/users/edit/1/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 
@@ -164,8 +164,8 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('Password changed' in response.content)
 
-		response = self.client.post('/portal/users/change-state/8/')
+		response = self.client.post('/portal/users/change-state/1/')
 		self.assertEqual(response.status_code,302)
 
-		response = self.client.post('/portal/users/change-state/8/')
+		response = self.client.post('/portal/users/change-state/1/')
 		self.assertEqual(response.status_code,302)
