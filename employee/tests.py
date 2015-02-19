@@ -87,7 +87,7 @@ class test_employee_as_admin(TestCase):
 
 
 		resp = self.client.post('/portal/employee/reports/delete/1/')
-		self.assertEqual(resp.status_code, 302)
+		self.assertEqual(resp.status_code, 200)
 
 
 class test_employee(TestCase):

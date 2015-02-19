@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test import Client
-from pages.forms import PageForm, MenuForm, ContactForm
+from pages.forms import PageForm, MenuForm, ContactForm, SimpleContactForm
 from micro_admin.models import User
 from pages.models import Page, Menu
 
@@ -22,7 +22,7 @@ class pages_forms_test(TestCase):
 
 	def test_ContactForm(self):
 		self.client= Client()
-		form = ContactForm(data={'full_name':'jagadeesh','message': 'sample', 'email':'john@gmail.com', 'phone':'94'})
+		form = SimpleContactForm(data={'full_name':'jagadeesh','message': 'sample', 'email':'john@gmail.com', 'phone':'94'})
 		self.assertTrue(form.is_valid())
 
 
