@@ -65,8 +65,10 @@ BROKER_URL = 'redis://localhost:6379/0'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'micro',
+        'USER': 'root',
+        'PASSWORD': 'root',
     }
 }
 
@@ -181,3 +183,15 @@ query_cache_type=0
 
 CACHALOT_ENABLED=True
 CACHALOT_CACHE_RANDOM=True
+
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.mysql',
+            'NAME':     'test',
+            'USER':     'root',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
