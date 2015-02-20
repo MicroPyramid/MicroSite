@@ -2,7 +2,9 @@ language: python
 python:
   - "2.7"
 
+services: mysql
 #Django & Database
+
 env:
   -DJANGO=1.7 DB=mysql
   -DJANGO=1.7 DB=sqlite3
@@ -15,19 +17,20 @@ env:
 # before_install:
 #   - mysql -e "create database IF NOT EXISTS micro;" -u root -p "root"
 
-before_script:
-  - mysql -e 'create database test;'
-
 install:
   - pip install -r requirements.txt
   - pip install coveralls
+  - pip install mysql-python --use-mirrors
+
+#mysql db creation
+before_script:
+  - mysql -e 'create database test;'
+  - python manage.py syncdb --noinput
 
 # command to run tests
 script:
   - python manage.py test
   - coverage run --source=micro_admin,micro_blog,employee,microsite_front,pages,micro_kb manage.py test
-
-
 
 after_success:
   coveralls
