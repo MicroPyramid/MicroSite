@@ -24,9 +24,7 @@ install:
 
 #mysql db creation
 before_script:
-  - mysql -e 'create database test;'
-  - python manage.py syncdb --noinput
-
+  - mysql -e 'create database test;' -u root
 # command to run tests
 script:
   - python manage.py test
