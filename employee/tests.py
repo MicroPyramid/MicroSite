@@ -49,7 +49,6 @@ class test_employee_as_admin(TestCase):
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
 
 
-
 	def test_views_user(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
 		self.assertTrue(user_login)
@@ -96,6 +95,6 @@ class test_employee(TestCase):
 		response = self.client.get('/portal/employee/')
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/portal/employee/reports/1/')
+		response = self.client.get('/portal/employee/reports/4/')
 		self.assertEqual(response.status_code, 200)
 

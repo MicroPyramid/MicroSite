@@ -185,3 +185,15 @@ query_cache_type=0
 
 CACHALOT_ENABLED=True
 CACHALOT_CACHE_RANDOM=True
+
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.mysql',
+            'NAME':     'test',
+            'USER':     'root',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
