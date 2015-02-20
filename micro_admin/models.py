@@ -118,7 +118,7 @@ class career(models.Model):
     created_on=models.DateTimeField(auto_now_add=True)
     is_active=models.BooleanField(default=True)
     url=models.URLField(default='')
-    
+        
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(career, self).save(*args, **kwargs)
