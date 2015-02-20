@@ -15,11 +15,11 @@ def daily_report():
 	api_user =settings.SG_USER
 	api_key =settings.SG_PWD
 	user = User.objects.all()
+	sg = sendgrid.SendGridClient(api_user,api_key)
 	for usr in user:
-		sg = sendgrid.SendGridClient(api_user,api_key)
 		message = sendgrid.Mail()
 		message.add_to(usr.email)
-		message.set_from("report@micropyramid.com")
+		message.set_from("report@micropyramid.bymail.in")
 		message.set_subject("Your Daily Report")
 		message.set_html("Please provide your daily report")
 		message.set_text('Daily Report')

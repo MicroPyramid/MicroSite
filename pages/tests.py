@@ -26,7 +26,7 @@ class pages_forms_test(TestCase):
 
 	def test_ContactForm(self):
 		self.client= Client()
-		form = ContactForm(data={'category':'Report', 'domain':'micropyramid.com','domain_url':'http://micropyramid.com','skype':'nikhila.mergu','country':'india','budget':'123','technology':'python','requirements':'new site','enquery_type':'general'})
+		form = SimpleContactForm(data={'full_name':'jagadeesh','message': 'sample', 'email':'john@gmail.com', 'phone':'94'})
 		self.assertTrue(form.is_valid())
 
 

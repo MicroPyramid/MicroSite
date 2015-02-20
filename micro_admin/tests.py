@@ -8,8 +8,9 @@ from micro_admin.models import User
 
 class Modelforms_test(TestCase):
 	def test_userform(self):
-		form = UserForm(data={'first_name':'Micro', 'last_name':'Pyramid','google_plus_url':'http://gmail.com/mp', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin','state':'Ap','address':'andhrapradesh','country':'india','phones':'9876543210','pincode':'505301','fb_profile':'http://facebook.com/maheshbabu','tw_profile':'http:twitter.com/maheshbabu','ln_profile':'http:linkedin.com/maheshbabu','about':'alot','mobile':'9876543210'})
-		self.assertFalse(form.is_valid())
+		form = UserForm(data={'first_name':'Micro', 'last_name':'Pyramid', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+								'fb_profile': 'www.fb.com','last_login':'1970-01-01' ,'date_of_birth': '1970-01-01', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile':123456, 'phones': 123456, 'pincode': 502286})
+		self.assertTrue(form.is_valid())
 
 	def test_CareerForm(self):
 		form = CareerForm(data={'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
@@ -128,7 +129,9 @@ class user_test(TestCase):
 		self.assertTemplateUsed(response,'admin/user/change_password.html')
 
 
-		response = self.client.post('/portal/users/new/',{'first_name':'Micro', 'last_name':'Pyramid', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False,'state':'Ap','address':'ap','country':'india','phones':'9876543210','pincode':'505301','fb_profile':'http://facebook.com/maheshbabu','tw_profile':'http:twitter.com/maheshbabu','ln_profile':'http:linkedin.com/maheshbabu','about':' alot','mobile':'9876543210','google_plus_url':'http://gmail.com/mp'})
+
+		response = self.client.post('/portal/users/new/',{'first_name':'Micro', 'last_name':'Pyramid', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+										'fb_profile': 'www.fb.com','last_login':'1970-01-01' ,'date_of_birth': '1970-01-01', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile':123456, 'phones': 123456, 'pincode': 502286})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('created successfully' in response.content)
 
@@ -140,7 +143,8 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 
 
-		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False,'state':'Ap','address':'ap','country':'india','phones':'9876543210','pincode':'505301','fb_profile':'http://facebook.com/maheshbabu','tw_profile':'http:twitter.com/maheshbabu','ln_profile':'http:linkedin.com/maheshbabu','about':' alot','mobile':'9876543210','google_plus_url':'http://gmail.com/mp'})
+		response = self.client.post('/portal/users/edit/1/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+										'fb_profile': 'www.fb.com','last_login':'1970-01-01' ,'date_of_birth': '1970-01-01', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile':123456, 'phones': 123456, 'pincode': 502286})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 

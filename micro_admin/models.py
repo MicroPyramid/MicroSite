@@ -35,7 +35,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-
 class User(AbstractBaseUser):
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True, db_index=True,)
     user_roles = models.CharField(choices=USER_ROLES, max_length=10)
@@ -119,7 +118,7 @@ class career(models.Model):
     created_on=models.DateTimeField(auto_now_add=True)
     is_active=models.BooleanField(default=True)
     url=models.URLField(default='')
-        
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(career, self).save(*args, **kwargs)

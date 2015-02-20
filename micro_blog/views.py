@@ -350,7 +350,6 @@ def view_post(request,blog_slug):
 
 
 def report(request):
-    print "HTTP/1.1 200 OK"
     dict={}
     dict=request.POST.get('envelope')
     my_dict = literal_eval(dict)
@@ -359,8 +358,9 @@ def report(request):
     if request.POST.get('attachment-info'):
         my_dict1 = literal_eval(request.POST.get('attachment-info'))
         for key in my_dict1.keys():
-            Dailyreport_files.objects.create(dailyreport=rep,attachments=my_dict1[key]['filename'])
+            Dailyreport_files.objects.create(dailyreport=rep,attachments=my_dict1[key]['filename'],date=datetime.datetime.now().date())
     rep.save()
+    print "HTTP/1.1 200 OK"
     return HttpResponseRedirect('/portal/')
 
 def contact(request):
