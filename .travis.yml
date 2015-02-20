@@ -6,11 +6,11 @@ python:
 env:
   -DJANGO=1.7 DB=mysql
   -DJANGO=1.7 DB=sqlite3
-  -MICROSITEDBNAME= test
-  -MICROSITEDBUSER= root
-  -MICROSITEDBPASS= root
-  -SGUSER=mp
-  -SGPWD=mp
+  # -MICROSITEDBNAME= test
+  # -MICROSITEDBUSER= root
+  # -MICROSITEDBPASS= root
+  # -SGUSER=mp
+  # -SGPWD=mp
 # command to install dependencies
 # before_install:
 #   - mysql -e "create database IF NOT EXISTS micro;" -u root -p "root"
