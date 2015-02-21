@@ -70,44 +70,53 @@ def new_user(request):
             data = {'error':True, 'response':validate_user.errors}
         return HttpResponse(json.dumps(data))
     else:
-        c = {}
-        c.update(csrf(request))
-        user_roles = USER_ROLES
-        return render_to_response('admin/user/new.html',{'user_roles':user_roles,'csrf_token':c['csrf_token']})
+        if request.user.is_admin:
+            c = {}
+            c.update(csrf(request))
+            user_roles = USER_ROLES
+            return render_to_response('admin/user/new.html',{'user_roles':user_roles,'csrf_token':c['csrf_token']})
+        else:
+            return render_to_response('admin/accessdenied.html')
 
 
 @login_required
 def edit_user(request,pk):
     '''does the corresponding form validation and stores the edited details of administrator'''
+    current_user = User.objects.get(pk = pk)
     if request.method == 'POST':
-        current_user = User.objects.get(pk = pk)
-        validate_user = UserForm(request.POST,instance = current_user)
-        old_password = current_user.password
-        if validate_user.is_valid():
-            if old_password != request.POST.get('password'):
-                current_user.set_password(request.POST.get('password'))
-            current_user.user_roles = request.POST.get('user_roles')
-            if request.POST.get('user_roles') == 'Admin':
-                current_user.is_admin = True
+        if request.user.is_admin and request.user == current_user:
+            validate_user = UserForm(request.POST,instance = current_user)
+            old_password = current_user.password
+            if validate_user.is_valid():
+                if old_password != request.POST.get('password'):
+                    current_user.set_password(request.POST.get('password'))
+                current_user.user_roles = request.POST.get('user_roles')
+                if request.POST.get('user_roles') == 'Admin':
+                    current_user.is_admin = True
 
-            if request.POST.get('google_plus_url',False):
-                current_user.google_plus_url = request.POST.get('google_plus_url')
+                if request.POST.get('google_plus_url',False):
+                    current_user.google_plus_url = request.POST.get('google_plus_url')
 
-            if request.POST.get('is_active',False):
-                current_user.is_active = True
+                if request.POST.get('is_active',False):
+                    current_user.is_active = True
 
-            current_user.save()
+                current_user.save()
 
-            data = {'error':False, 'message':'updated successfully'}
+                data = {'error':False, 'message':'updated successfully'}
+            else:
+                data = {'error':True, 'message':validate_user.errors}
+            return HttpResponse(json.dumps(data))
         else:
-            data = {'error':True, 'message':validate_user.errors}
-        return HttpResponse(json.dumps(data))
+            print "not able to edit"
     else:
-        c = {}
-        c.update(csrf(request))
-        current_user = User.objects.get(pk = pk)
-        user_roles = USER_ROLES
-        return render_to_response('admin/user/edit.html',{'role_list':user_roles,'edit_user':current_user,'csrf_token':c['csrf_token']})
+        if request.user.is_admin:
+            c = {}
+            c.update(csrf(request))
+            current_user = User.objects.get(pk = pk)
+            user_roles = USER_ROLES
+            return render_to_response('admin/user/edit.html',{'role_list':user_roles,'edit_user':current_user,'csrf_token':c['csrf_token']})
+        else:
+            return render_to_response('admin/accessdenied.html')
 
 
 @login_required

@@ -47,6 +47,18 @@ def contacts(request):
     contacts=simplecontact.objects.all()
     return render_to_response('admin/content/contacts/simplecontact.html',{'contacts':contacts})
 
+@login_required
+def delete_contact(request,pk):
+    print "hello"
+    contact = simplecontact.objects.get(pk=pk)
+    if request.user.is_admin:
+        contact.delete()
+        print "hello"
+        data={'error':False,'response':'contact deleted successfully'}
+        return HttpResponse(json.dumps(data))
+    else:
+        return render_to_response('admin/accessdenied.html')
+
 
 @login_required
 def jobs(request):
@@ -70,10 +82,12 @@ def new_job(request):
             data={'error':True,'response':validate_blogcareer.errors}
         return HttpResponse(json.dumps(data))
     else:
-        c={}
-        c.update(csrf(request))
-        return render_to_response('admin/content/jobs/job.html',{'jobs':jobs,'csrf_token':c['csrf_token']})
-
+        if request.user.is_admin:
+            c={}
+            c.update(csrf(request))
+            return render_to_response('admin/content/jobs/job.html',{'jobs':jobs,'csrf_token':c['csrf_token']})
+        else:
+            return render_to_response('admin/accessdenied.html')
 
 @login_required
 def edit_job(request,pk):
@@ -92,18 +106,22 @@ def edit_job(request,pk):
             data={'error':True,'response':validate_blogcareer.errors}
         return HttpResponse(json.dumps(data))
     else:
-        blog_career=career.objects.get(pk=pk)
-        c={}
-        c.update(csrf(request))
-        return render_to_response('admin/content/jobs/job_edit.html',{'blog_career':blog_career,'csrf_token':c['csrf_token']})
-
+        if request.user.is_admin:
+            blog_career=career.objects.get(pk=pk)
+            c={}
+            c.update(csrf(request))
+            return render_to_response('admin/content/jobs/job_edit.html',{'blog_career':blog_career,'csrf_token':c['csrf_token']})
+        else:
+            return render_to_response('admin/accessdenied.html')
 
 @login_required
 def delete_job(request,pk):
     careers=career.objects.get(pk=pk)
-    careers.delete()
-    return HttpResponseRedirect('/portal/jobs/')
-
+    if request.user.is_admin:
+        careers.delete()
+        return HttpResponseRedirect('/portal/jobs/')
+    else:
+        return render_to_response('admin/accessdenied.html')
 
 @login_required
 def job_state(request, pk):

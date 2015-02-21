@@ -19,6 +19,10 @@ class pages_forms_test(TestCase):
 		form = MenuForm(data={'title':'main', 'url':'micro.in', 'status':'on'})
 		self.assertTrue(form.is_valid())
 
+	def test_SimpleContactForm(self):
+		self.client= Client()
+		form = SimpleContactForm(data={'full_name':'jagadeesh','message': 'sample', 'email':'john@gmail.com', 'phone':'9876543210'})
+		self.assertTrue(form.is_valid())
 
 	def test_ContactForm(self):
 		self.client= Client()

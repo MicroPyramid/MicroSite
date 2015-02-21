@@ -3,7 +3,7 @@
 <!-- menu ends here-->
 <!-- main content starts here-->
 <div class="row marl main-content">
-<h4>Leave Creation <small> -To Add,Delete,Edit your leaves</small></h4>
+<h4>Leave Creation  <small> -To Add,Delete,Edit your Leaves</small></h4>
 <div class="row marl blog-form blog-new">
 <div class="panel panel-default">
   <div class="panel-body">
@@ -17,6 +17,8 @@
             <p>
               <label class="control-label" for="html">Leave Description</label>
               <br/>
+            <p>Date: <input type="text" id="date" name="date"></p>
+
             <div class="control-group">
               <div class="controls" id="reason">
                 <input type="hidden" name="reason">
@@ -67,4 +69,11 @@
     });
 </script>
 {% endcompress %}
+<script>
+  $(function() {
+    $( "#date" ).datepicker({
+      showButtonPanel: true
+    });
+  });
+  </script>
 {% endblock %}

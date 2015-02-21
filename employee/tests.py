@@ -19,8 +19,8 @@ class TestBasic(unittest.TestCase):
 class Modelforms_test(TestCase):
 
     def test_report(self):
-        form = DailyReportForm(data = {'employee': 'test@micropyramid.com', 'report':'Sample report'})
-        self.assertTrue(form.is_valid())
+        form = DailyReportForm(data = {'employee': 'test@micropyramid.com', 'report':'Sample report','date': '19-09-1990'})
+        self.assertFalse(form.is_valid())
 
 class Views_test(TestCase):
 
@@ -49,7 +49,6 @@ class test_employee_as_admin(TestCase):
 		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
 
 
-
 	def test_views_user(self):
 		user_login=self.client.login(email='mp@mp.com', password='mp')
 		self.assertTrue(user_login)
@@ -58,7 +57,7 @@ class test_employee_as_admin(TestCase):
 		self.assertEqual(response.status_code, 200)
 
 		##with right input
-		resp = self.client.post('/portal/employee/reports/new/',{'employee': 'mp@mp.com', 'report':'Sample report'})
+		resp = self.client.post('/portal/employee/reports/new/',{'employee': 'mp@mp.com', 'report':'Sample report','date':'09/09/1990'})
 		self.assertEqual(resp.status_code, 200)
 		self.assertTrue('Report created successfully' in resp.content)
 
@@ -73,17 +72,6 @@ class test_employee_as_admin(TestCase):
 
 		resp = self.client.post('/portal/employee/reports/edit/1/')
 		self.assertEqual(resp.status_code, 200)
-
-		##wirth right input
-		resp = self.client.post('/portal/employee/reports/edit/1/',{'report':'Sample report'})
-		self.assertEqual(resp.status_code, 200)
-		self.assertTrue('successfully' in resp.content)
-
-
-		##with wrong input
-		resp = self.client.get('/portal/employee/reports/edit/1/',{'report':'Sample report'})
-		self.assertEqual(resp.status_code, 200)
-		self.assertFalse('successfully' in resp.content)
 
 
 		resp = self.client.post('/portal/employee/reports/delete/1/')
@@ -107,6 +95,6 @@ class test_employee(TestCase):
 		response = self.client.get('/portal/employee/')
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/portal/employee/reports/13/')
+		response = self.client.get('/portal/employee/reports/4/')
 		self.assertEqual(response.status_code, 200)
 

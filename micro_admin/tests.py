@@ -129,6 +129,7 @@ class user_test(TestCase):
 		self.assertTemplateUsed(response,'admin/user/change_password.html')
 
 
+
 		response = self.client.post('/portal/users/new/',{'first_name':'Micro', 'last_name':'Pyramid', 'email':'micro@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
 										'fb_profile': 'www.fb.com','last_login':'1970-01-01' ,'date_of_birth': '1970-01-01', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile':123456, 'phones': 123456, 'pincode': 502286})
 		self.assertEqual(response.status_code,200)
@@ -138,16 +139,16 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('created successfully' in response.content)
 
-		response = self.client.get('/portal/users/edit/11/')
+		response = self.client.get('/portal/users/edit/8/')
 		self.assertEqual(response.status_code,200)
 
 
-		response = self.client.post('/portal/users/edit/11/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+		response = self.client.post('/portal/users/edit/8/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
 										'fb_profile': 'www.fb.com','last_login':'1970-01-01' ,'date_of_birth': '1970-01-01', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile':123456, 'phones': 123456, 'pincode': 502286})
 		self.assertEqual(response.status_code,200)
 		self.assertTrue('updated successfully' in response.content)
 
-		response = self.client.post('/portal/users/edit/11/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
+		response = self.client.post('/portal/users/edit/8/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 
@@ -167,8 +168,8 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('Password changed' in response.content)
 
-		response = self.client.post('/portal/users/change-state/11/')
+		response = self.client.post('/portal/users/change-state/8/')
 		self.assertEqual(response.status_code,302)
 
-		response = self.client.post('/portal/users/change-state/11/')
+		response = self.client.post('/portal/users/change-state/8/')
 		self.assertEqual(response.status_code,302)

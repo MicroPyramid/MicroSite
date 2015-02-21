@@ -229,7 +229,7 @@ h3 {
   font-size: 3.4em;
   left: 65%;
   width: 35%;
-  opacity: 0;
+  opacity: 1;
   bottom: 1%;
   z-index: 50;
 }

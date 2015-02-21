@@ -12,7 +12,6 @@
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><input type="checkbox" /></th>
                 <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Full Name</th>
                 <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Email</th>
                 <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Role</th>
@@ -24,7 +23,6 @@
             <tbody>
               {% for user in users %}
               <tr>
-                <td><input type="checkbox" /></td>
                 <td>{{user.get_full_name}}</td>
                 <td><a href="{% url 'micro_admin:user_info' pk=user.id %}">{{user.email}}</a></td>
                 <td>{{user.user_roles}}</td>

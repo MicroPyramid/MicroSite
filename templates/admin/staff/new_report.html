@@ -17,6 +17,8 @@
             <p>
               <label class="control-label" for="html">Report Description</label>
               <br/>
+            <p>Date: <input type="text" id="date" name="date"></p>
+
             <div class="control-group">
               <div class="controls" id="report">
                 <input type="hidden" name="report">
@@ -67,4 +69,11 @@
     });
 </script>
 {% endcompress %}
+<script>
+  $(function() {
+    $( "#date" ).datepicker({
+      showButtonPanel: true
+    });
+  });
+  </script>
 {% endblock %}

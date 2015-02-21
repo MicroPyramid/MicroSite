@@ -19,7 +19,7 @@
               {% for report in reports %}
               <tr>
                 <td>{{forloop.counter}}</td>
-              <td><a href={% url 'employee:employee_report' pk=report.id%}>{{report.email}}</a></td>
+              <td>{% if request.user.is_admin %}<a href={% url 'employee:employee_report' pk=report.id%}>{{report.email}}</a>{% elif request.user.email == report.email %}<a href={% url 'employee:employee_report' pk=report.id%}>{{report.email}}</a>{% else %}{{report.email}}{% endif %}</td>
                 <td class="sec-col">{{report.first_name}}</td>
                 <td class="sec-col">{{report.user_roles}}</td>
               </tr>
