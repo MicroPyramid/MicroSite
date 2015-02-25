@@ -66,9 +66,9 @@ BROKER_URL = 'redis://localhost:6379/0'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MICROSITEDBNAME'),
-        'USER': os.getenv('MICROSITEDBUSER'),
-        'PASSWORD': os.getenv('MICROSITEDBPASS'),
+        'NAME': 'microsite',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }
