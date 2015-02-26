@@ -9,6 +9,7 @@ from micro_admin.models import USER_ROLES, User
 from micro_blog.models import Image_File, Category, Tags, Post
 from employee.models import DailyReport,Dailyreport_files,Leaves
 import math
+import datetime
 
 @login_required
 def users(request):
@@ -38,11 +39,17 @@ def change_password(request):
 def new_user(request):
     if request.method == 'POST':
         validate_user = UserForm(request.POST)
+        datestring_format = datetime.datetime.strptime(request.POST.get('date_of_birth'),"%d/%m/%Y").strftime("%Y-%m-%d")
+        date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
+
         if validate_user.is_valid():
 
             user = User.objects.create_user(email=request.POST.get('email'), password=request.POST.get('password'))
             user.first_name = request.POST.get('first_name')
             user.last_name = request.POST.get('last_name')
+            user.user_roles = request.POST.get('user_roles')
+            user.date_of_birth = date
+            user.last_login = datetime.datetime.now() 
             user.gplus_url = request.POST.get('gplus_url')
             user.fb_profile = request.POST.get('fb_profile')
             user.tw_profile = request.POST.get('tw_profile')

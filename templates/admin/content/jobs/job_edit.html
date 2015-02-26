@@ -27,9 +27,14 @@
             </input>
           </div>
           <div class="form-group" id="description">
-            <label for="exampleInputEmail">Description</label>
-            <input type="hidden" name="description">
-            <textarea class="form-control" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">{{blog_career.description}}</textarea>
+          <label for="exampleInputEmail">Description</label>
+          <input type="hidden" name="description">
+          <textarea class="form-control" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">{{blog_career.description}}</textarea>
+        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail">Url</label>
+            <input type="Text" class="form-control" name="url" value="{{blog_career.url}}">
+            <div id='url'></div>
           </div>
           <div class="tags-block">
             <p>
@@ -61,11 +66,11 @@
 </script>
 <script type="text/javascript">
   $ = jQuery;
-    $('form#blogform').ajaxForm({
+    $('form#editcareerform').ajaxForm({
       beforeSerialize: function() {
-        console.log(CKEDITOR.instances.textareacontents.getData())
-        $("input[name='description']").val(CKEDITOR.instances.textareacontents.getData());
-      },
+       console.log(CKEDITOR.instances.textareacontents.getData());
+       $("input[name='description']").val(CKEDITOR.instances.textareacontents.getData());
+     },
       dataType: 'json',
       success: function(data) {
         if (data.error) {

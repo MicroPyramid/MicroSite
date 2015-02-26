@@ -83,6 +83,7 @@ class test_employee(TestCase):
 	def setUp(self):
 		self.client = Client()
 		self.user = User.objects.create_user('micro@mp.com', 'mp')
+		self.u = str(self.user.id)
 
 	def test_user(self):
 		self.client = Client()
@@ -95,6 +96,6 @@ class test_employee(TestCase):
 		response = self.client.get('/portal/employee/')
 		self.assertEqual(response.status_code, 200)
 
-		response = self.client.get('/portal/employee/reports/4/')
+		response = self.client.get('/portal/employee/reports/' + self.u + '/')
 		self.assertEqual(response.status_code, 200)
 
