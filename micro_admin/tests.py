@@ -108,7 +108,7 @@ class user_test(TestCase):
 		self.client = Client()
 		self.user = User.objects.create_superuser('micro@mp.com', 'micro')
 		self.u  = str(self.user.id)
-		
+
 	def test_views_user(self):
 		user_login=self.client.login(email='micro@mp.com', password='micro')
 		self.assertTrue(user_login)
@@ -146,6 +146,7 @@ class user_test(TestCase):
 		self.assertTrue('updated successfully' in response.content)
 
 		response = self.client.post('/portal/users/edit/'+ self.u + '/',{'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin'})
+
 		self.assertEqual(response.status_code,200)
 		self.assertFalse('updated successfully' in response.content)
 
