@@ -140,7 +140,7 @@ class user_test(TestCase):
 		self.assertEqual(response.status_code,200)
 
 
-		response = self.client.post('/portal/users/edit/5/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+		response = self.client.post('/portal/users/edit/'+ self.u + '/',{'first_name':'Micro-edit', 'last_name':'Pyramid', 'email':'micro-edit@micropyramid.com', 'password':'micro123','user_roles':'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
 										'fb_profile': 'www.fb.com','last_login':'01/01/1970' ,'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile':123456, 'phones': 123456, 'pincode': 502286})
 		self.assertEqual(response.status_code,200)
 		self.assertTrue('updated successfully' in response.content)
