@@ -122,7 +122,6 @@ CELERY_TIMEZONE="Asia/Calcutta"
 
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 from celery.schedules import crontab
-from datetime import timedelta
 
 CELERYBEAT_SCHEDULE = {
     # Executes every day evening at 5:00 PM GMT +5.30

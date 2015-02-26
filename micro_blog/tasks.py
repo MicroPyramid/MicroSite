@@ -1,10 +1,5 @@
-from celery.task.schedules import crontab
-from celery.decorators import periodic_task,task
-from celery.utils.log import get_task_logger
-from datetime import datetime
-from django.core.mail import send_mail
+from celery.decorators import task
 import sendgrid
-import requests
 from django.conf import settings
 from micro_admin.models import User
 

@@ -75,9 +75,6 @@ class Post(models.Model):
     def get_url(self):
         return settings.SITE_BLOG_URL + self.slug
 
-    def get_comment_count(self):
-        return BlogComments.objects.filter(status='on',post=self).count()
-
     def is_editable_by(self, user):
         if self.user==user or user.is_admin:
             return True
@@ -87,6 +84,7 @@ class Post(models.Model):
         if self.user==user or user.is_admin:
             return True
         return False
+
 
 class Image_File(models.Model):
     upload = models.FileField(upload_to="static/uploads/%Y/%m/%d/")

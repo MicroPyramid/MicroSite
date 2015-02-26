@@ -1,9 +1,4 @@
 from django.shortcuts import render_to_response
-from django.core.mail import send_mail
-from django.core.context_processors import csrf
-from django.http.response import HttpResponse
-import json
-from pages.forms import ContactForm
 from micro_admin.models import career
 
 def index(request):
