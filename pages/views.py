@@ -132,7 +132,7 @@ def edit_menu(request, pk):
                     if updated_menu.parent.id == updated_menu.id:
                         data = {'error':True, 'response':{'parent':'you can not choose the same as parent'}}
                         return HttpResponse(json.dumps(data))
-                except:
+                except Exception:
                     pass
 
                 lnk_count = Menu.objects.filter(parent=updated_menu.parent).count()

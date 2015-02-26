@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import check_password
 import json
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
-from micro_blog.models import Image_File, Tags, Post
+from micro_blog.models import Tags, Post
 from employee.models import DailyReport, Leaves
 import math
 import datetime

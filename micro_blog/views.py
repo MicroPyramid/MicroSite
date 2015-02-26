@@ -179,17 +179,17 @@ def blog_article(request, slug):
     try:
         if facebook['shares']:
             fbshare_count = facebook['shares']
-    except:
+    except Exception:
         pass
     try:
         if twitter['count']:
             twshare_count = twitter['count']
-    except:
+    except Exception:
         pass
     try:
         if linkedin['count']:
             lnshare_count = linkedin['count']
-    except:
+    except Exception:
         pass
     c = {}
     c.update(csrf(request))
@@ -371,7 +371,11 @@ def contact(request):
 
     if 'category' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
-            Contact.objects.create(contact_info=contact,category=request.POST.get('category'),domain=request.POST.get('category'),domain_url=request.POST.get('doamin_url'),skype=request.POST.get('skype'),country=request.POST.get('country'),budget=request.POST.get('budget'),technology=request.POST.get('technology'),requirements=request.POST.get('requirements'),enquery_type=request.POST.get('enquery_type'))
+            contact = simplecontact.objects.create(full_name=request.POST.get('full_name'),message=request.POST.get('message'),\
+                                                        email=request.POST.get('email'),phone=request.POST.get('phone'))
+            Contact.objects.create(contact_info=contact,category=request.POST.get('category'),domain=request.POST.get('category'),domain_url=request.POST.get('doamin_url'),\
+                skype=request.POST.get('skype'),country=request.POST.get('country'),budget=request.POST.get('budget'),technology=request.POST.get('technology'),\
+                requirements=request.POST.get('requirements'),enquery_type=request.POST.get('enquery_type'))
         else:
             errors = {}
             errors=dict((validate_simplecontact.errors).items() + (validate_contact.errors).items())

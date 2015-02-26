@@ -33,7 +33,7 @@ class RecurseNode(template.Node):
         try:
             if len(vals):
                 pass
-        except:
+        except Exception:
             vals = [vals]
         if len(vals):
             if 'loop' in self.nodeList:

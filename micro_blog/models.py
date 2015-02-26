@@ -2,7 +2,7 @@ import datetime
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.conf import settings
-
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Category(models.Model):
@@ -103,5 +103,5 @@ def create_slug(tempslug):
             Post.objects.get(slug = tempslug)
             slugcount = slugcount + 1
             tempslug = tempslug + '-' + str(slugcount)
-        except:
+        except ObjectDoesNotExist:
             return tempslug
