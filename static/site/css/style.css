@@ -307,6 +307,7 @@ input[type="reset"]:active {
   margin: 4px 0px;
   float: left;
   display: block;
+  width:200px;
 }
 
 .news-part ul li .news-thumb {
@@ -3002,7 +3003,7 @@ font-size: 13px;
 .blogs .blog-list{
   margin:0px;
   padding:0px;
-  border-left: 2px solid #e6e6e8;
+  /*border-left: 2px solid #e6e6e8;*/
   padding-left: 30px;
 }
 .blogs .blog-list li{
@@ -3011,7 +3012,7 @@ font-size: 13px;
 .blogs .blog-list .list-item{
   padding-bottom:30px;
   margin-bottom:30px;
-  border-bottom:2px dashed #e6e6e8;
+  border-bottom:1px solid #e6e6e8;
 }
 
 .blogs .blog-list .blog-left{
@@ -3413,7 +3414,7 @@ font-size: 13px;
   margin:50px 0px;
   color:#ffffff;
   font-weight:400;
-  font-size:40px; 
+  font-size:26px; 
   text-shadow:0px 5px 5px #0798d0;
 }
 .career-banner .job-ban-left{
@@ -3853,3 +3854,13 @@ font-size: 13px;
   border-radius:2px;
 }
 
+.quote-form select.form-control {
+background: white;
+border-radius: 0px;
+box-shadow: none;
+border: none;
+height: 45px;
+display: block;
+padding: 6px 12px;
+color: #555;
+}

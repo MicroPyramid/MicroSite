@@ -10,7 +10,7 @@ class UserForm(forms.ModelForm):
 
 	class Meta:
 		model = User
-		exclude = ['gender','website']
+		exclude = ['gender','website','last_login','area']
 
 class CareerForm(forms.ModelForm):
 

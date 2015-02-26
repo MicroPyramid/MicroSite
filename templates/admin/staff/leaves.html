@@ -37,9 +37,9 @@
               {% for s in pages %}
               <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/employee/leaves/?page={{s}}">{{s}}</a></li>
               {% endfor %}
-              <li class="disabled"><a href="/portal/employee/leaves/?page={{s}}">...</a></li>
-              <li><a href="/portal/employee/leaves/?page={{last_page}}">last</a></li>
-              <li><a href="/portal/employee/leaves/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
+              <li class="disabled"><a href="/portal/employee/leaves/{{request.user.id}}/?page={{s}}">...</a></li>
+              <li><a href="/portal/employee/leaves/{{request.user.id}}/?page={{last_page}}">last</a></li>
+              <li><a href="/portal/employee/leaves/{{request.user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
               </li>
             </ul>
           </nav>
