@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response,render
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
@@ -6,8 +6,8 @@ from django.contrib.auth.hashers import check_password
 import json
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
-from micro_blog.models import Image_File, Category, Tags, Post
-from employee.models import DailyReport,Dailyreport_files,Leaves
+from micro_blog.models import Tags, Post
+from employee.models import DailyReport, Leaves
 import math
 import datetime
 

@@ -104,5 +104,5 @@ def create_slug(tempslug):
 			Page.objects.get(slug = tempslug)
 			slugcount = slugcount + 1
 			tempslug = tempslug + '-' + str(slugcount)
-		except:
+		except ObjectDoesNotExist:
 			return tempslug
