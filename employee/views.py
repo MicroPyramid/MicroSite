@@ -1,11 +1,11 @@
-from django.http.response import HttpResponse,HttpResponseRedirect
-from django.shortcuts import render_to_response,render
+from django.http.response import HttpResponse
+from django.shortcuts import render_to_response, render
 from django.core.context_processors import csrf
 import json
 from django.contrib.auth.decorators import login_required
-from employee.models import DailyReport,Leaves
+from employee.models import DailyReport, Leaves
 from micro_admin.models import User
-from employee.forms import DailyReportForm,LeaveForm
+from employee.forms import DailyReportForm, LeaveForm
 import math
 import datetime
 

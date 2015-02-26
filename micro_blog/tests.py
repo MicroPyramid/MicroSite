@@ -103,8 +103,6 @@ class micro_blogviews_get(TestCase):
 		self.assertEqual(response.status_code, 302)
 
 
-
-
 class micro_blog_post_data(TestCase):
 
 	'''
@@ -183,8 +181,6 @@ class micro_blog_post_data(TestCase):
 
 		# response = self.client.get('/blog/ajax/photos/recent/')
 		# self.assertEqual(response.status_code,200)
-
-
 
 
 # class image_upload(unittest.TestCase):
