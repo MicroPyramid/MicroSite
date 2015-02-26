@@ -58,6 +58,10 @@
           <input type="Text" class="form-control" id="ln_profile" name="ln_profile">
         </div>
         <div class="form-group">
+          <label for="exampleInputEmail1">date_of_birth</label>
+          <input type="Text" class="form-control" id="date" name="date_of_birth">
+        </div>
+        <div class="form-group">
           <label for="exampleInputEmail1">about</label>
           <textarea class="input-xlarge" id="about" name="about" rows="10" placeholder="HTML code of this email"></textarea>
         </div>
@@ -109,4 +113,11 @@
   });
 </script>
 {% endcompress %}
+<script>
+  $(function() {
+    $( "#date" ).datepicker({
+      showButtonPanel: true
+    });
+  });
+  </script>
 {% endblock %}

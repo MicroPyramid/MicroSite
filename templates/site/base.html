@@ -25,22 +25,21 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,300,200,500,700,600,800,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/site/css/sequencejs-theme.modern-slide-in.css" rel="stylesheet">
-    {% compress css %}
-    <link href="/static/site/css/style.css" rel="stylesheet">
     <link href="/static/site/css/plugin.css" rel="stylesheet">
-    <link href="/static/site/css/mobile.css" rel="stylesheet">
+        <link href="/static/site/css/style.css" rel="stylesheet">
+
     <link href="/static/site/css/responsive.css" rel="stylesheet">
     <link href="/static/site/css/tag.css" rel="stylesheet">
-    {% endcompress %}
+    <link href="/static/site/css/sequencejs-theme.modern-slide-in.css" rel="stylesheet">
+
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/styles/default.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     {% compress js %}
-    <script type='text/javascript'  src="/static/site/js/jquery.sequence-min.js"></script>
-    <script type='text/javascript'  src="/static/site/js/sequencejs-options.modern-slide-in.js"></script>
+    
     <script type="text/javascript">
       $(document).ready(function() {
         $(".sliding-top-control").click(function(e) {
@@ -164,7 +163,7 @@
                           <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <input class="button button-arrow" type="submit" value="Sign In">
-                        <span class="forgot"><a href="#">Forgot Password?</a>
+                        <span class="forgot"><a href="/portal/user/change-password/">Forgot Password?</a>
                         </span>
                       </form>
                     </div>
@@ -419,13 +418,15 @@
       <!-- footer ends here -->
     </div>
     <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.3/highlight.min.js"></script>
-    {% block js %}
-    {% endblock %}
     <script src="/static/site/js/sequencejs-options.modern-slide-in.js"></script>
     <script src="/static/site/js/jquery.sequence-min.js"></script>
+
+
+    {% block js %}
+    {% endblock %}
+   
     {% compress js %}
     <script src="/static/site/js/modernizr.custom.js"></script>
     <script src="/static/site/js/superfish.js"></script>

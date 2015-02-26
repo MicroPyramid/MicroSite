@@ -307,6 +307,7 @@ input[type="reset"]:active {
   margin: 4px 0px;
   float: left;
   display: block;
+  width:200px;
 }
 
 .news-part ul li .news-thumb {

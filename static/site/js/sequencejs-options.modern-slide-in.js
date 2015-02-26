@@ -1,1 +1,19 @@
-$(document).ready(function(){{var e={nextButton:!0,prevButton:!0,pagination:!0,animateStartingFrameIn:!0,autoPlay:!0,autoPlayDelay:3e3,preloader:!0,preloadTheseFrames:[1],preloadTheseImages:["images/tn-model1.png","images/tn-model2.png","images/tn-model3.png"]};$("#sequence").sequence(e).data("sequence")}});
+$(document).ready(function(){
+    var options = {
+        nextButton: true,
+        prevButton: true,
+        pagination: true,
+        animateStartingFrameIn: true,
+        autoPlay: true,
+        autoPlayDelay: 3000,
+        preloader: true,
+        preloadTheseFrames: [1],
+        preloadTheseImages: [
+            "images/tn-model1.png",
+            "images/tn-model2.png",
+            "images/tn-model3.png"
+        ]
+    };
+    
+    var mySequence = $("#sequence").sequence(options).data("sequence");
+});

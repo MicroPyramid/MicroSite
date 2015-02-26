@@ -2,46 +2,54 @@
 {% block stage %}
 <!-- banner starts here-->
 {% load compress %}
-<div class="row marl banner-row">
-  <div class="sequence-theme" style="position:relative;">
-    <div id="sequence">
-      <img class="sequence-prev" src="/static/site/images/bt-prev.png" alt="Previous Frame" />
-      <img class="sequence-next" src="/static/site/images/bt-next.png" alt="Next Frame" />
-      <ul class="sequence-canvas">
-        <li class="animate-in">
-          <h2 class="title">Website Desiging</h2>
-          <h3 class="subtitle">With 5 Years of experience on Amazon web services we have proven expertise on developing and managing applications on cloud services. Amazon Web Services : EC2, SES, SNS, RDS, Route53, S3, CloudFront, Beanstalk</h3>
-          <img class="model" src="/static/site/images/responsive.png" alt="Model 1" />
-        </li>
-        <li>
-          <h2 class="title">Cloud Computing</h2>
-          <h3 class="subtitle">Our web designing team develop all designs with own care
-            and commitment to the brand's nature and target users. By usig photoshop,
-            GIMP, bootstrap, jquery, angularjs, fontawesome, We have developed amazing designs, layouts and interfaces.
-          </h3>
-          <img class="model" src="/static/site/images/1-c-n.png" alt="Model 2" />
-        </li>
-        <li>
-          <h2 class="title">Social apps development and integration</h2>
-          <h3 class="subtitle">We can offer facebook, twitter, google+, github, linkedin, stackoverflow integrations as of now and our learning never stops to enhance your products or services.</h3>
-          <img class="model" src="/static/site/images/social.png" alt="Model 3" />
-        </li>
-        <li>
-          <h2 class="title">Server Management</h2>
-          <h3 class="subtitle">MicroPyramid can manage your server to harden security to withstand DDoS attacks and other attacks based on exploits in your applications..</h3>
-          <img class="model" src="/static/site/images/server.png" alt="Model 4" />
-        </li>
-      </ul>
-      <!--<ul class="sequence-pagination">
-        <li><img src="images/tn-model1.png" alt="Model 1" /></li>
-        <li><img src="images/tn-model2.png" alt="Model 2"></li>
-        <li><img src="images/tn-model3.png" alt="Model 3" /></li>
-                  
+         <!-- banner starts here-->
+         <div class="row marl banner-row">
+           <div class="sequence-theme" style="position:relative;">
+
+      <div id="sequence">
+        <img class="sequence-prev" src="/static/site/images/bt-prev.png" alt="Previous Frame" />
+        <img class="sequence-next" src="static/site/images/bt-next.png" alt="Next Frame" />
+
+        <ul class="sequence-canvas">
+          <li class="animate-in">
+            <h2 class="title">Website Desiging</h2>
+            <h3 class="subtitle">With 5 Years of experience on Amazon web services we have proven expertise on developing and managing applications on cloud services. Amazon Web Services : EC2, SES, SNS, RDS, Route53, S3, CloudFront, Beanstalk</h3>
+            <img class="model" src="images/responsive.png" alt="Model 1" />
+          </li>
+          <li>
+            <h2 class="title">Cloud Computing</h2>
+            <h3 class="subtitle">Our web designing team develop all designs with own care
+                         and commitment to the brand's nature and target users. By usig photoshop,
+                         GIMP, bootstrap, jquery, angularjs, fontawesome, We have developed amazing designs, layouts and interfaces.</h3>
+            <img class="model" src="images/1-c-n.png" alt="Model 2" />
+          </li>
+          <li>
+            <h2 class="title">Social apps development and integration</h2>
+            <h3 class="subtitle">We can offer facebook, twitter, google+, github, linkedin, stackoverflow integrations as of now and our learning never stops to enhance your products or services.</h3>
+            <img class="model" src="images/social.png" alt="Model 3" />
+          </li>
+                    <li>
+            <h2 class="title">Server Management</h2>
+            <h3 class="subtitle">MicroPyramid can manage your server to harden security to withstand DDoS attacks and other attacks based on exploits in your applications..</h3>
+            <img class="model" src="images/server.png" alt="Model 4" />
+          </li>
+        
+                
+                </ul>    
+
+        <!--<ul class="sequence-pagination">
+          <li><img src="images/tn-model1.png" alt="Model 1" /></li>
+          <li><img src="images/tn-model2.png" alt="Model 2"></li>
+          <li><img src="images/tn-model3.png" alt="Model 3" /></li>
+                    
         </ul>-->
+                
+
+      </div>
     </div>
-  </div>
-</div>
-<!-- banner ends here-->
+         </div>
+         <!-- banner ends here-->
+
 <!-- sec-about starts -->
 <section id="about-holder">
   <div class="row marl">
@@ -342,6 +350,8 @@
 </section>
 <!-- sec-contact ends -->
 <script type="text/javascript" src="/static/site/js/modernizr.custom.js"></script>
+<script type='text/javascript'  src="/static/site/js/jquery.sequence-min.js"></script>
+    <script type='text/javascript'  src="/static/site/js/sequencejs-options.modern-slide-in.js"></script>
 <script type="text/javascript">
   $('a.tab-scroll').click(function(e){
      e.preventDefault();

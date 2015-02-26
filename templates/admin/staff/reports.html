@@ -35,6 +35,18 @@
               {% endfor %}
             </tbody>
           </table>
+          <nav>
+            <ul class="pagination">
+              {% get_page current_page last_page as pages %}
+              {% for s in pages %}
+              <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/employee/reports/?page={{s}}">{{s}}</a></li>
+              {% endfor %}
+              <li class="disabled"><a href="/portal/employee/reports/{{request.user.id}}/?page={{s}}">...</a></li>
+              <li><a href="/portal/employee/reports/{{request.user.id}}/?page={{last_page}}">last</a></li>
+              <li><a href="/portal/employee/reports/{{request.user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
