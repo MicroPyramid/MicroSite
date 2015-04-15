@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'haystack',
     'compressor',
     'cachalot',
+    'docs',
 )
 
 MIDDLEWARE_CLASSES = (
