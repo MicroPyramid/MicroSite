@@ -7,3 +7,8 @@ class BookForm(forms.ModelForm):
         model = Book
         exclude = ('slug','authors')
 
+
+class TopicForm(forms.ModelForm):
+    class Meta:
+        model = Topic
+        exclude = ('slug','authors')
