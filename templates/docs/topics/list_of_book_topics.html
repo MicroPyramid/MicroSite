@@ -1,0 +1,82 @@
+{% extends 'admin/base.html' %} {% block stage %}
+{% load topics_filters %}
+<!-- main content starts here-->
+<div class="row marl main-content">
+  <h4>Topic Viewer <small> - To Add,Delete,Edit,Enable/Disable Your Topics</small></h4>
+  <div class="row marl blog-form">
+    <div class="table-responsive table-bordered">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+        <span class="topic_list_heading">{{book.title|capfirst}} Topics List</span>
+        <span style="float:right"><a href="{% url 'docs:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button type="button" class="btn btn-success">Add New Topic</button></a></span>
+        <div class="panel-body topic_list_div">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th width="2%"></th>
+                <th width="15%">Title</th>
+                <th width="10%">Slug</th>
+                <th width="6%">Status</th>
+                <th width="15%">Authors</th>
+                <th width="9%">Created Date</th>
+                <th width="5%">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for topic in topics %}
+                {% with sub_topics=topic|get_sub_topics %}
+                  <tr class="parent_row">
+                    <td>{% if sub_topics %}<a class="show_sub_categories" row-id="{{topic.id}}"><i class="fa fa-plus"></i></a>{% endif %}</td>
+                    <td><a href="{% url 'docs:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.display_title}}</a></td>
+                    <td>{{topic.slug}}</td>
+                    <td>{{topic.status}}</td>
+                    <td>{% for author in topic.authors.all %}
+                      <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+                    {% endfor %}</td>
+                    <td>{{topic.created_on}}</td>
+                    <td>
+                      <a href="{% url 'docs:create_topic' slug=book.slug %}?topic=sub-topic&topic_id={{topic.id}}" title="Add Sub Topic"><i class="fa fa-plus-square-o plus-color"></i></a>
+                      <a href="#"><i class="fa fa-pencil-square-o edit-color"></i></a>
+                      <a href="#"><i class="fa fa-trash-o trash-color"></i></a>
+                    </td>
+                  </tr>
+                  {% if sub_topics %}
+                    {% for subtopic in sub_topics %}
+                      <tr class="child_row subtopic-of-{{topic.id}}">
+                        <td></td>
+                        <td>{{subtopic.display_title}}</td>
+                        <td>{{subtopic.slug}}</td>
+                        <td>{{subtopic.status}}</td>
+                        <td>{% for author in subtopic.authors.all %}
+                          <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+                        {% endfor %}</td>
+                        <td>{{subtopic.created_on}}</td>
+                        <td>
+                          <a href="#"><i class="fa fa-pencil-square-o edit-color"></i></a>
+                          <a href="#"><i class="fa fa-trash-o trash-color"></i></a>
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- main content ends here-->
+{% load compress %}
+{% compress js %}
+<script type="text/javascript">
+  $ = jQuery;
+  $(".show_sub_categories").click(function(){
+    row_id = $(this).attr("row-id")
+    $(".subtopic-of-"+row_id).show();
+    $(this).hide();
+  });
+</script>
+{% endcompress %}
+{% endblock %}

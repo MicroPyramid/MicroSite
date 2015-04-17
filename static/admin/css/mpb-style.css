@@ -22,7 +22,7 @@ body{
 	background: -o-linear-gradient(left, #3d464b 50%,#2b95d1 50%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(left, #3d464b 50%,#2b95d1 50%); /* IE10+ */
 	background: linear-gradient(to right, #3d464b 50%,#2b95d1 50%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d464b', endColorstr='#2b95d1',GradientType=1 ); /* IE6-9 */	
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d464b', endColorstr='#2b95d1',GradientType=1 ); /* IE6-9 */    
 }
 .fn12{
 	font-size:12px;
@@ -80,7 +80,7 @@ margin-right:0px;
 	padding:0% 10%;
 	}
 .login-row .login-right{
-/*	background:#2b95d2;*/
+/*  background:#2b95d2;*/
 	height:100%;
 	padding:0% 2.5%;
 	}
@@ -102,7 +102,7 @@ margin-right:0px;
 	font-weight:bold;
 	margin-top:0px;
 	font-size:14px;
-	text-shadow:1px 3px 6px #222;	
+	text-shadow:1px 3px 6px #222;   
 }
 .login-left .login-form{
 	margin-top:40px;
@@ -110,10 +110,10 @@ margin-right:0px;
 	border-radius:3px;
 	border:2px dashed #4b5960;
 	padding:0px;
-	color:#a0aeb7;	
+	color:#a0aeb7;  
 }
 .login-left .login-form .panel-body{
-	padding:45px 15px;	
+	padding:45px 15px;  
 }
 .login-left .login-form .form-control{
 	background:#505f66;
@@ -143,10 +143,10 @@ margin-right:0px;
 	
 }
 .login-form .forgot-submit .forgot{
-	display:inline-block;	
+	display:inline-block;   
 }
 .login-form .forgot-submit .forgot a{
- color:#a0aeb7; 	
+ color:#a0aeb7;     
 }
 .login-form .forgot-submit .submit{
 	float:right;
@@ -166,7 +166,7 @@ margin-right:0px;
 }
 
 .login-right #login-r8-blocks{
-	margin-top:75px;	
+	margin-top:75px;    
 }
 
 #login-r8-blocks .login-r8-block{
@@ -175,13 +175,13 @@ margin-right:0px;
 	border:none;
 	box-shadow:none;
 	clear: both;
-	position: relative;	
+	position: relative; 
 }
 .login-r8-block .login-r8-icon{
 	float:left;
 	margin: 0px 25px 0px 0px;
 	font-size:70px;
-	display:inline-block;	
+	display:inline-block;   
 	width:20%;
 }
 .login-r8-block .login-r8-head-desc{
@@ -197,73 +197,73 @@ margin-right:0px;
 .login-r8-head-desc p{
 	font-weight:300;
 	line-height:21px;
-	font-size:13px;	
+	font-size:13px; 
 	text-align:justify;
 }
 header.top-header{
 	background:#fff;
 }
 .logo-sign-row {
-    background: none;
-    border-bottom: 1px solid #d4d4d4;
+	background: none;
+	border-bottom: 1px solid #d4d4d4;
 }
 .navbar { margin-bottom: 0px }
 .navbar-default {
-    background: none;
-    border-radius: 0px;
-    box-shadow: none;
-    border: none;
+	background: none;
+	border-radius: 0px;
+	box-shadow: none;
+	border: none;
 }
 .navbar-brand {
-    float: left;
-    padding: 15px;
-    font-size: 18px;
-    line-height: 20px;
-    height: 50px;
-    color: #fdb53f !important;
-    font-weight: bold;
-    padding-left: 0px;
+	float: left;
+	padding: 15px;
+	font-size: 18px;
+	line-height: 20px;
+	height: 50px;
+	color: #fdb53f !important;
+	font-weight: bold;
+	padding-left: 0px;
 }
 .navbar-default .navbar-nav>li>a {
-    color: #6b6b6b;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 10px;
-    padding: 5px 10px;
+	color: #6b6b6b;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 10px;
+	padding: 5px 10px;
 }
 .navbar-default .navbar-nav>li>a:hover {
-    border-radius: 2px;
-    background: #f1f1f1;
+	border-radius: 2px;
+	background: #f1f1f1;
 }
 .navbar-nav { margin-top: 12px }
 .navbar-default .navbar-nav>.open>a,
 .navbar-default .navbar-nav>.open>a:hover,
 .navbar-default .navbar-nav>.open>a:focus {
-    border-radius: 2px;
-    color: #447471;
-    background: #e2e2e2;
+	border-radius: 2px;
+	color: #447471;
+	background: #e2e2e2;
 }
 .navbar-nav>li>.dropdown-menu {
-    border-radius: 0px;
-    padding: 0px;
-    border: 1px solid #d1d1d1;
+	border-radius: 0px;
+	padding: 0px;
+	border: 1px solid #d1d1d1;
 }
 .dropdown-menu>li>a {
-    color: #6b6b6b;
-    background: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 10px;
-    padding: 9px 10px;
+	color: #6b6b6b;
+	background: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 10px;
+	padding: 9px 10px;
    /* border-bottom: 1px solid #6b6b6b;*/
 }
 .dropdown-menu>li>a:hover {
-    background: #f1f1f1;
+	background: #f1f1f1;
 }.main-content{
-	margin-bottom:40px;	
+	margin-bottom:40px; 
 }
 .main-content h4{
-	font-weight:bold;	
+	font-weight:bold;   
 	margin:30px 0px;
 	color:#505458;
 }
@@ -271,19 +271,19 @@ header.top-header{
 	margin-top:15px;
 }
 .blog-form .panel-body{
-	padding:0px;	
+	padding:0px;    
 }
 .blog-new .panel-body{
-	padding:15px;	
+	padding:15px;   
 }
 .blog-form .table-bordered{
-	border:none;	
+	border:none;    
 }
 .blog-form .pagination{
-	margin-left:10px;	
+	margin-left:10px;   
 }
 .blog-form fieldset{
-	border:1px dashed #fff;	
+	border:1px dashed #fff; 
 	padding:10px 15px;
 }
 .blog-form legend{
@@ -296,18 +296,18 @@ header.top-header{
 	padding:6px 10px;
 	width:auto;
 	border-bottom:none;
-	margin-left:1px;	
+	margin-left:1px;    
 }
 .blog-form label{
 	color: #505458;
-	font-size:13px;	
+	font-size:13px; 
 }
 .blog-form .form-control{
 	background: #fff;
 	border-radius:1px;
 	/* border:1px solid #fbc71b; */
 	color:#555;
-	font-size:13px;	
+	font-size:13px; 
 	border-color: #cfdadd;  border-radius: 2px;
 }
 .blog-form select{
@@ -318,7 +318,7 @@ header.top-header{
 	border:1px solid #fbc71b;
 	color:#fff;
 	font-size:13px;
-	padding:6px 6px;	
+	padding:6px 6px;    
 	background: #fff;  border-radius: 1px;  /* border: 1px solid #fbc71b; */  color: #fff;  font-size: 13px;  border-color: #cfdadd;  border-radius: 2px;
 }
 .blog-form .option{
@@ -327,7 +327,7 @@ header.top-header{
 	color:#333;
 	padding:7px;
 	font-weight:bold;
-	height:40px;	
+	height:40px;    
 }
 .blog-form .slug-text{
 	display:block;
@@ -343,7 +343,7 @@ header.top-header{
 .blog-form .text-editor{
 }
 .blog-form .tags-block{
-	margin-top:20px;	
+	margin-top:20px;    
 }
 .blog-form div.tagsinput{
 	background:#015786;
@@ -363,7 +363,7 @@ header.top-header{
 .blog-form .save-btn i{
 	background:#fbc71b;
 	padding:7px;
-	font-size:14px;	
+	font-size:14px; 
 }
 .blog-form .save-btn .save{
 	background:none;
@@ -372,21 +372,21 @@ header.top-header{
 	padding-left:12px;
 	padding-right:12px;
 	font-weight:bold;
-	box-shadow:none;	
+	box-shadow:none;    
 }
 /*.blog-form .save-btn .save:hover{
 	background:#fbc71b;
 	padding-top:5px;
 	padding-bottom:5px;
-	color:#393e42;			
+	color:#393e42;          
 }*/
 .table-bordered table th{
 	background:#f8f8f8;
-	color:#58666e;	
+	color:#58666e;  
 }
 .table-bordered table td{
 	background:#fff;
-	color:#58666e;	
+	color:#58666e;  
 }
 
 .table-bordered table .sec-col{
@@ -458,4 +458,100 @@ padding:-1px 0px;
 }
 .input-xlarge{
 	width:100%;
+}
+/* Styles for Docs book detail Page */
+.title_row{
+	padding: 10px 0px;
+}
+.title_row span,.authors_div span{
+	margin-right: 15px;
+}
+.title_row .book_admin{
+	
+	color: #1aafc5;
+	font-weight: 600;
+	/*text-shadow: 0.5px 0.5px 0.5px #ddd;*/
+}
+.title_row .admin_name{
+	font-style: italic;
+	font-weight: 600;
+}
+.title_row .created_detail{
+	font-style: italic;
+}
+.title_row .created_on{
+	color: #efa530;
+	font-weight: 600;
+}
+.title_row .updated_on{
+	color: #967bdc;
+	font-weight: 600;
+}
+.title_row .slug_div{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ddd;
+}
+.title_row .slug_div span.slug{
+	color: #9FA87B;
+	font-weight: 600;
+}
+.book_detail .book_title{
+	font-weight: bold;
+	font-size: 18px;
+	text-transform: uppercase;
+}
+/*.book_detail .image_cover_page img{
+	width: 98px;
+	height: 150px;
+}*/
+.book_detail .description_div{
+	padding: 15px 0px;
+}
+.book_detail .description_div span{
+	color: #fe7971;
+	font-weight: 600;
+}
+.book_detail .description_div p{
+	padding: 15px 0px;
+}
+.authors_div .authors{
+	padding: 5px 10px;
+	background: #ddd;
+	font-weight: 600;
+}
+.authors_div .author_name{
+	padding-right: 15px;
+	border-right: 1px dotted #ccc;
+}
+/* Styles for Docs book detail Page */
+/* Styles for list of book topics Page */
+.topic_list_div .child_row{
+	display: none;
+}
+.topic_list_div .child_row td{
+	background: #dff0d8;
+	/*transition: 1s;*/
+}
+.topic_list_div .child_row td:first-child{
+	padding-left: 15px;
+}
+/* Styles for list of book topics Page */
+.plus-icon i{
+	padding-top: 9px;
+}
+.plus-color {
+	background: #45bbbd;
+	padding: 5px;
+	color: #fff;
+}
+.topic_list_div{
+	margin-top: 15px; 
+}
+.topic_list_div .table-bordered{
+	border: 1px solid #ddd;
+}
+.topic_list_heading{
+	font-size: 22px;
+	color: #efa530;
 }

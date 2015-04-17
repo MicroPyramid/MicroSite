@@ -17,7 +17,8 @@
                 <th width="15%">Title</th>
                 <th width="10%">Slug</th>
                 <th width="8%">Owner</th>
-                <th width="15%">Created Date</th>
+                <th width="10%">Created Date</th>
+                <th width="15%">Authors</th>
                 <th width="5%">Actions</th>
               </tr>
             </thead>
@@ -25,10 +26,13 @@
               {% for book in books %}
               <tr>
                 <td>{{forloop.counter}}</td>
-                <td>{{book.display_title}}</td>
-                <td class="sec-col">{{book.slug}}</td>
-                <td class="sec-col">{{book.owner}}</td>
-                <td class="sec-col">{{book.created_on}}</td>
+                <td><a href="{% url 'docs:view_book' slug=book.slug %}">{{book.display_title}}</a></td>
+                <td>{{book.slug}}</td>
+                <td>{{book.owner}}</td>
+                <td>{{book.created_on}}</td>
+                <td>{% for author in book.authors.all %}
+                  <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+                {% endfor %}</td>
                 <td>
                   <a href="#"><i class="fa fa-pencil-square-o edit-color"></i></a>
                   <a href="#"><i class="fa fa-trash-o trash-color"></i></a>

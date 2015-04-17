@@ -1,39 +1,33 @@
 {% extends 'admin/base.html' %} 
 {% block stage %}
 <div class="row marl main-content">
-<h4>Book Creation <small> -To Add,Delete,Edit,Enable/Disable Your Book</small></h4>
+<h4>Topic Creation <small> -To Add,Delete,Edit,Enable/Disable Topic</small></h4>
 <div class="row marl blog-form blog-new">
   <div class="panel panel-default">
     <div class="panel-body">
-      <form action="." method="POST" id="book_form">
+      <form action="." method="POST" id="topic_form">
         {% csrf_token %}
+        <input type="hidden" name="book" value="{{book.id}}">
+        <input type="hidden" name="topic" value="{{topic}}">
+        <input type="hidden" name="topic_id" value="{{topic_id}}">
         <div class="form-group">
-          <label for="exampleInputEmail1">Title</label>
+          <label for="exampleInputEmail1">Title <span>*</span></label>
           <input type="Text" class="form-control" id="title" name="title">
         </div>
         <div class="form-group">
-          <label for="exampleInputEmail1">Display Title</label>
+          <label for="exampleInputEmail1">Display Title <span>*</span></label>
           <input type="Text" class="form-control" id="display_title" name="display_title">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Book Admin</label>
-          <select name="admin" id="admin" style="color:black;">
-            <option value="select">Select Book Admin</option>
-            {% for user in users %}
-              <option value="{{user.id}}">{{user.get_full_name}}</option>
-            {% endfor %}
-          </select>
         </div>
         <div class="row marl text-editor">
           <div>
-            <div class="">
+            <div>
               <p>
-                <label class="control-label" for="html">Description</label>
+                <label class="control-label" for="html">Content <span>*</span></label>
                 <br/>
               <div class="control-group">
                 <div class="controls" id="content">
-                  <textarea class="input-xlarge" id="textareadescription" name="textareadescription" rows="10" placeholder="Write the description here"></textarea>
-                  <input type="hidden" name="description" id="description">
+                  <textarea class="input-xlarge" id="textareacontent" name="textareacontent" rows="10"placeholder="Write the content here"></textarea>
+                  <input type="hidden" name="content" id="content">
                 </div>
               </div>
             </div>
@@ -51,17 +45,17 @@
 {% compress js %}
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
-  var editor = CKEDITOR.replace('textareadescription', {
+  var editor = CKEDITOR.replace('textareacontent', {
     filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
     filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
   });
 </script>
 <script type="text/javascript">
   $ = jQuery;
-    $('form#book_form').ajaxForm({
+    $('form#topic_form').ajaxForm({
       beforeSerialize: function() {
-        console.log(CKEDITOR.instances.textareadescription.getData())
-        $("input[name='description']").val(CKEDITOR.instances.textareadescription.getData());
+        console.log(CKEDITOR.instances.textareacontent.getData())
+        $("input[name='content']").val(CKEDITOR.instances.textareacontent.getData());
       },
       dataType: 'json',
       success: function(data) {
@@ -71,7 +65,7 @@
             $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
           }
         } else {
-          window.location = "{% url 'docs:books' %}";
+          window.location = "{% url 'docs:view_book_topics' slug=book.slug %}";
         }
       }
     });

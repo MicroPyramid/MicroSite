@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import slugify
+from django.core.exceptions import ObjectDoesNotExist
 
 
 STATUS_CHOICES = (
@@ -24,8 +25,29 @@ class Book(models.Model):
     def __unicode__(self):
         return self.display_title
 
+    def create_book_slug(self, title_slug):
+        slugcount = 0
+        while True:
+            
+            try:
+                Book.objects.get(slug = title_slug)
+                slugcount = slugcount + 1
+                title_slug = title_slug + '-' + str(slugcount)
+            
+            except ObjectDoesNotExist:
+                return title_slug
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        title_slug = slugify(self.title)
+        
+        if self.id:
+            book = Book.objects.get(pk=self.id)
+            
+            if book.title != self.title:
+                self.slug = self.create_book_slug(title_slug)
+        else:
+            self.slug = self.create_book_slug(title_slug)
+
         super(Book, self).save(*args, **kwargs)
 
     @property
@@ -53,7 +75,28 @@ class Topic(models.Model):
     def __unicode__(self):
         return self.display_title
 
+    def create_topic_slug(self, title_slug):
+        slugcount = 0
+        while True:
+            
+            try:
+                Topic.objects.get(slug = title_slug)
+                slugcount = slugcount + 1
+                title_slug = title_slug + '-' + str(slugcount)
+            
+            except ObjectDoesNotExist:
+                return title_slug
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        title_slug = slugify(self.title)
+        
+        if self.id:
+            topic = Topic.objects.get(pk=self.id)
+            
+            if topic.title != self.title:
+                self.slug = self.create_topic_slug(title_slug)
+        else:
+            self.slug = self.create_topic_slug(title_slug)
+
         super(Topic, self).save(*args, **kwargs)
 
