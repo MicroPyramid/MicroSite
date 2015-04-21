@@ -16,7 +16,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100, unique = True)
     slug = models.CharField(max_length=50, unique = True)
     created_on = models.DateTimeField(auto_now_add=True)
-    description = models.CharField(max_length=2000)
+    description = models.TextField()
     updated_on = models.DateTimeField(auto_now_add=True)
     authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
@@ -60,11 +60,11 @@ class Topic(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True)
 
     display_title = models.CharField(max_length=100)
-    title = models.CharField(max_length=100, unique = True)
+    title = models.CharField(max_length=100)
     slug = models.CharField(max_length=50, unique = True)
     created_on = models.DateTimeField(auto_now_add=True)
     
-    content = models.CharField(max_length=2000)
+    content = models.TextField()
     authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
     updated_on = models.DateTimeField(auto_now_add=True)
 

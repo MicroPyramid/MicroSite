@@ -36,8 +36,8 @@
                     <td>{{topic.created_on}}</td>
                     <td>
                       <a href="{% url 'docs:create_topic' slug=book.slug %}?topic=sub-topic&topic_id={{topic.id}}" title="Add Sub Topic"><i class="fa fa-plus-square-o plus-color"></i></a>
-                      <a href="#"><i class="fa fa-pencil-square-o edit-color"></i></a>
-                      <a href="#"><i class="fa fa-trash-o trash-color"></i></a>
+                      <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o edit-color"></i></a>
+                      <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o trash-color"></i></a>
                     </td>
                   </tr>
                   {% if sub_topics %}
@@ -52,8 +52,8 @@
                         {% endfor %}</td>
                         <td>{{subtopic.created_on}}</td>
                         <td>
-                          <a href="#"><i class="fa fa-pencil-square-o edit-color"></i></a>
-                          <a href="#"><i class="fa fa-trash-o trash-color"></i></a>
+                          <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o edit-color"></i></a>
+                          <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o trash-color"></i></a>
                         </td>
                       </tr>
                     {% endfor %}
@@ -76,6 +76,14 @@
     row_id = $(this).attr("row-id")
     $(".subtopic-of-"+row_id).show();
     $(this).hide();
+  });
+
+  $('.delete-btn-click').click(function(e) {
+    e.preventDefault();
+    $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){
+        alert(data.response);
+        window.location = '.';
+      }, "json");
   });
 </script>
 {% endcompress %}

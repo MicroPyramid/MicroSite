@@ -1,0 +1,86 @@
+{% extends 'admin/base.html' %}
+{% block stage %}
+{% load topics_filters %}
+<div class="row marl main-content">
+  <h4>{{book.display_title|capfirst}} Documentation <small> - To View, Edit, Delete Book</small>
+  </h4>
+  <div class="row marl blog-form blog-new">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="col-md-3 tree_div">
+          <ul class="parent_list">
+            {% for topic in topics %}
+              <li class="topic"><a href="#{{topic.slug}}"><i class="fa fa-caret-right"></i>
+                {{topic.display_title|capfirst}}</a>
+                <ul class="sub_topic_list">
+                  {% for subtopic in topic|get_sub_topics %}
+                    <a href="#{{subtopic.slug}}"><li><i class="fa fa-file-text-o"></i>{{subtopic.display_title|capfirst}}</li></a>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-md-9 content_div">
+        {% for topic in topics %}
+          <div id="{{topic.slug}}">
+            <h5>{{topic.display_title|capfirst}}</h5>
+            <span class="actions_book">
+              <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
+              <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
+              <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+            </span>
+            {{topic.content|safe}}
+            {% for subtopic in topic|get_sub_topics %}
+              <div id="{{subtopic.slug}}">
+                <h4>{{subtopic.display_title|capfirst}}</h4>
+                <span class="actions_book">
+                  <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
+                  <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
+                  <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
+                  <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+                </span>
+                {{subtopic.content|safe}}
+              </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- main content ends here-->
+{% load compress %}
+{% compress js %}
+<script type="text/javascript">
+  $('.parent_list .topic').click(function(e){
+    $(this).children('ul').slideDown('slow');
+    $(this).children('i').css({
+      "transform":"rotate(90deg)",
+      "padding-left":"9px",
+    });
+  });
+
+  $(document).ready(function() {
+    $('.btn-click').click(function(e) {
+      e.preventDefault();
+      $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){
+          alert(data.response);
+        }, "json");
+    });
+
+    $('.delete-btn-click').click(function(e) {
+      e.preventDefault();
+      $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){
+          alert(data.response);
+          window.location = '.';
+        }, "json");
+    });
+    
+  });
+
+</script>
+{% endcompress %}
+{% endblock %}

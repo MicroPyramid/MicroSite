@@ -521,8 +521,8 @@ padding:-1px 0px;
 	font-weight: 600;
 }
 .authors_div .author_name{
-	padding-right: 15px;
-	border-right: 1px dotted #ccc;
+	padding-left: 15px;
+	border-left: 1px dotted #ccc;
 }
 /* Styles for Docs book detail Page */
 /* Styles for list of book topics Page */
@@ -554,4 +554,46 @@ padding:-1px 0px;
 .topic_list_heading{
 	font-size: 22px;
 	color: #efa530;
+}
+.content_div{
+    border-left: 1px solid #ddd;
+}
+.tree_div .parent_list,
+.tree_div .parent_list li ul{
+	padding: 0px;
+	margin: 0px;
+}
+.tree_div .parent_list li,
+.tree_div .parent_list li ul li{
+	list-style: none;
+	cursor: pointer;
+}
+.tree_div .parent_list li ul li{
+	padding-left: 36px;
+	padding-top: 5px;
+}
+.tree_div .parent_list li i{
+	padding-right: 8px;
+}
+.tree_div .sub_topic_list{
+	display: none;
+}
+.content_div{
+	height: 470px;
+	overflow-y: scroll;
+}
+.content_div h5{
+	font-size: 25px;
+	color: #fd6e70;
+}
+.li_active{
+	color: #efa530 !important;
+}
+.actions_book{
+	float: right;
+}
+.actions_book a{
+	padding: 5px;
+	margin:0px 3px;
+	border: 1px solid #ddd;
 }
