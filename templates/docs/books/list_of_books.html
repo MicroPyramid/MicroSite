@@ -30,12 +30,12 @@
                 <td>{{book.slug}}</td>
                 <td>{{book.owner}}</td>
                 <td>{{book.created_on}}</td>
-                <td>{% for author in book.authors.all %}
+                <td class="authors_div">{% for author in book.authors.all %}
                   <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
                 {% endfor %}</td>
                 <td>
-                  <a href="#"><i class="fa fa-pencil-square-o edit-color"></i></a>
-                  <a href="#"><i class="fa fa-trash-o trash-color"></i></a>
+                  <a href="{% url 'docs:edit_book' slug=book.slug %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
+                  <a href="{% url 'docs:delete_book' slug=book.slug %}"><i class="fa fa-trash-o trash-color"></i></a>
                 </td>
               </tr>
               {% endfor %}
