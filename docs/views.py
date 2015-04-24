@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.contrib.auth.decorators import login_required
-from docs.models import Book, Topic
+from docs.models import Book, Topic, PRIVACY_CHOICES
 from docs.forms import BookForm, TopicForm
 from django.core.exceptions import ObjectDoesNotExist
 from micro_admin.models import User
@@ -33,7 +33,7 @@ def create_book(request):
             return HttpResponse(json.dumps(data))
 
         users = User.objects.all()
-        return render_to_response("docs/books/create_book.html",{"users": users})
+        return render_to_response("docs/books/create_book.html",{"users": users, "privacy_choices":PRIVACY_CHOICES})
 
     return render_to_response("admin/accessdenied.html")
 
@@ -211,7 +211,7 @@ def edit_book(request, slug):
             return HttpResponse(json.dumps(data))
 
         users = User.objects.all()
-        return render_to_response("docs/books/edit_book.html", {"book": book, "users": users})
+        return render_to_response("docs/books/edit_book.html", {"book": book, "users": users, "privacy_choices":PRIVACY_CHOICES})
 
     return render_to_response("admin/accessdenied.html")
 

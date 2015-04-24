@@ -28,6 +28,16 @@
             {% endfor %}
           </select>
         </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Privacy Setting</label>
+          {% for privacy_choice in privacy_choices %}
+            {% ifequal book.privacy privacy_choice.0 %}
+              <input type="radio" class="pagination" id="privacy" name="privacy" value="{{ privacy_choice.0 }}" checked="checked">{{ privacy_choice.0 }}
+            {% else %}
+              <input type="radio" class="pagination" id="privacy" name="privacy" value="{{ privacy_choice.0 }}">{{ privacy_choice.0 }}
+            {% endifequal %}
+          {% endfor %}
+        </div>
         <div class="row marl text-editor">
           <div>
             <div class="">
