@@ -27,11 +27,11 @@
               <div class="slug_div"><span class="slug">Slug : </span><span>{{book.slug|capfirst}}</span></div>
             </div>
             <!--TITLE AND DESCRIPTON-->
-            <div class="row marl book_detail">
+            <div class="row marl book_detail authors_div">
               <!--<span class="image_cover_page">
               <img src="isla-and-the-happily-ever-after-196x300.jpg">
               </span>-->
-              <span class="book_title">{{book.title|capfirst}}</span>
+              <span class="book_title">{{book.title|capfirst}}</span><span class="authors" style="background-color:#FFEFC6;">{{ book.privacy }}</span>
               <div class="description_div">
                 <span>Description</span>
                 {{book.description|safe}}

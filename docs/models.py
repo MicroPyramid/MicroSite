@@ -10,6 +10,11 @@ STATUS_CHOICES = (
         ('Rejected','Rejected'),
     )
 
+PRIVACY_CHOICES = (
+        ('Private', 'Private'),
+        ('Public', 'Public'),
+    )
+
 class Book(models.Model):
     admin = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='books')
     display_title = models.CharField(max_length=100)
@@ -21,6 +26,8 @@ class Book(models.Model):
     authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, blank=True)
+
+    privacy = models.CharField(max_length=10, choices=PRIVACY_CHOICES)
 
     def __unicode__(self):
         return self.display_title
