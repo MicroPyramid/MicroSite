@@ -1,56 +1,59 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
-<div class="row marl main-content">
-  <h4>Menu Viewer <small> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
-  <div class="row marl blog-form">
-    <div class="table-responsive table-bordered">
-      <div class="panel panel-default">
-        <div class="panel-heading"><a href="{% url 'pages:add_menu' %}"><button type="button" class="btn btn-success">Add Menu</button></a></div>
-        <div class="panel-body">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Title</th>
-                <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">URL</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Swap</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for menu in menu_list %}
-              {% with count=iterator.next  %}
-              <tr>
-                <td>{{count}}</td>
-                <td>{{menu.title}}</td>
-                <td class="sec-col">{{menu.url}}</td>
-                <td class="menu-swap">
-                  <div class="inner-swap-wid" style="width:30px;">
-                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
-                      id="{{menu.id}}"></i></a></span>
-                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
-                      id="{{menu.id}}"></i></a></span>
-                  </div>
-                </td>
-                <td><a href="{% url 'pages:change_menu_status' pk=menu.id %}">
-                  {% ifequal menu.status 'on' %}
-                  <i class="fa fa-circle status-color-g"></i>
-                  {% else %}
-                  <i class="fa fa-circle status-color"></i>
-                  {% endifequal %}
-                  </a>
-                </td>
-                <td><a href="{% url 'pages:edit_menu' pk=menu.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
-                  <a href="{% url 'pages:delete_menu' pk=menu.id %}"><i class="fa fa-trash-o trash-color"></i></a>
-                </td>
-              </tr>
-              {% endwith %}
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Menu Viewer</h3>
+    <span>
+      <span class='active_user'><i class="fa fa-square"></i>ON</span>
+      <span class='inactive_user'><i class="fa fa-square"></i>OFF</span>
+      <a href="{% url 'pages:add_menu' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add Menu </button></a>
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th width="5%">No</th>
+            <th width="20%">Title</th>
+            <th width="20%">URL</th>
+            <th width="5%">Swap</th>
+            <th width="5%">Status</th>
+            <th width="10%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for menu in menu_list %}
+          {% with count=iterator.next  %}
+          <tr class="{% ifequal menu.status 'on' %} success {% else %} danger {% endifequal %}">
+            <td class="txt_center">{{count}}</td>
+            <td>{{menu.title}}</td>
+            <td class="sec-col">{{menu.url}}</td>
+            <td class="menu-swap txt_center">
+              <div class="inner-swap-wid txt_center">
+                <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
+                  id="{{menu.id}}"></i></a></span>
+                <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
+                  id="{{menu.id}}"></i></a></span>
+              </div>
+            </td>
+            <td class="txt_center"><a href="{% url 'pages:change_menu_status' pk=menu.id %}" class="on_off">
+              {% ifequal menu.status 'on' %}
+              <i class="fa fa-toggle-on"></i> ON
+              {% else %}
+              <i class="fa fa-toggle-off"></i> OFF
+              {% endifequal %}
+              </a>
+            </td>
+            <td class="txt_center">
+              <a href="{% url 'pages:edit_menu' pk=menu.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
+              <a href="{% url 'pages:delete_menu' pk=menu.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i>Delete</a>
+            </td>
+          </tr>
+          {% endwith %}
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -80,7 +83,5 @@
   });
 </script>
 {% endcompress %}
-
 <!-- main content ends here-->
 {% endblock %}
-<!-- main content ends here-->

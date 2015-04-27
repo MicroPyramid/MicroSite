@@ -16,7 +16,7 @@ from django.db.models.aggregates import Max
 #@csrf_protect
 def index(request):
     if request.user.is_authenticated():
-        return render_to_response('admin/index.html')
+        return render_to_response('admin/index.html',context_instance = RequestContext(request))
     if request.method=="POST":
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:
@@ -154,7 +154,7 @@ def menu_order(request,pk):
                 down_link.lvl = down_link.lvl-1
                 curr_link.save()
                 down_link.save()
-
+                data = {'error':False}
         else:
             link_parent = Menu.objects.get(pk=pk).parent
             curr_link = Menu.objects.get(pk=pk)
@@ -168,4 +168,5 @@ def menu_order(request,pk):
                 up_link.lvl = up_link.lvl+1
                 curr_link.save()
                 up_link.save()
+                data = {'error':False}
         return HttpResponse(json.dumps(data))

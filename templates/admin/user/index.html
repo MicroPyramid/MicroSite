@@ -1,57 +1,58 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
-<div class="row marl main-content">
-  <h4>User List <small> -To Add,Delete,Edit,Enable/Disable Users</small></h4>
-  <div class="row marl blog-form">
-    <div class="table-responsive table-bordered">
-      <div class="panel panel-default">
-        {% if request.user.is_admin %}
-        <div class="panel-heading"><a href="{% url 'micro_admin:new_user' %}"><button type="button" class="btn btn-success">Add New User</button></a></div>
-        {% endif %}
-        <div class="panel-body">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Full Name</th>
-                <th class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Email</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Role</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Status</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Posts</th>
-                <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for user in users %}
-              <tr>
-                <td>{{user.get_full_name}}</td>
-                <td><a href="{% url 'micro_admin:user_info' pk=user.id %}">{{user.email}}</a></td>
-                <td>{{user.user_roles}}</td>
-                <td>
-                  <a href="{% url 'micro_admin:change_state' pk=user.id %}">
-                  {% if user.is_active %}
-                  <i class="fa fa-circle status-color-g"></i>
-                  {% else %}
-                  <i class="fa fa-circle status-color"></i>
-                  {% endif %}
-                  </a>
-                </td>
-                <td>
-                  {{ user.total_posts}} / {{ user.drafted_posts }}
-                </td>
-                <td>
-                  {% if request.user.is_admin %}
-                  <a href="{% url 'micro_admin:edit_user' pk=user.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
-                  {% endif %}
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="panel panel-default">
+  
+  <div class="panel-heading">
+    <h3 class="panel-title">Users</h3>
+    <span>
+      <span class='active_user'><i class="fa fa-square"></i>Active</span>
+      <span class='inactive_user'><i class="fa fa-square"></i>Inactive</span>
+      {% if request.user.is_admin %}<a href="{% url 'micro_admin:new_user' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New User </button></a>{% endif %}
+    </span>
+  </div>
+  
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th width="15%">Full Name</th>
+            <th width="15%">Email Id</th>
+            <th width="5%">Role</th>
+            <th width="5%">Posts</th>
+            <th width="8%">Status</th>
+            <th width="10%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="{% if user.is_active %} success {% else %} danger {% endif %}">
+            <td>{{user.get_full_name}}</td>
+            <td><a href="{% url 'micro_admin:user_info' pk=user.id %}">{{user.email}}</a></td>
+            <td>{{user.user_roles}}</td>
+            <td class="txt_center">
+              {{ user.total_posts}} / {{ user.drafted_posts }}
+            </td>
+            <td class="txt_center">
+              <a href="{% url 'micro_admin:change_state' pk=user.id %}" class="on_off">
+              {% if user.is_active %}
+              <i class="fa fa-toggle-on"></i> ACTIVE
+              {% else %}
+              <i class="fa fa-toggle-off"></i> INACTIVE
+              {% endif %}
+              </a>
+            </td>
+            <td class="txt_center">
+              {% if request.user.is_admin %}
+              <a href="{% url 'micro_admin:edit_user' pk=user.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 <!-- main content ends here-->
 {% endblock %}
-<!-- main content ends here-->

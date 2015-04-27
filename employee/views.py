@@ -93,15 +93,15 @@ def delete_report(request,pk):
 @login_required
 def new_leave(request):
     if request.method == 'POST':
-        leaves=Leaves.objects.filter(date=request.POST.get('date'))
-        if leaves:
-            datestring_format = datetime.datetime.strptime(request.POST.get('date'),"%d/%m/%Y").strftime("%Y-%m-%d")
-            date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
+        datestring_format = datetime.datetime.strptime(request.POST.get('date'),"%d/%m/%Y").strftime("%Y-%m-%d")
+        date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
+        leaves=Leaves.objects.filter(date=date)
+        if not leaves:
             validate_leave = LeaveForm(request.POST)
             if validate_leave.is_valid():
                 new_leave = Leaves.objects.create(reason=request.POST.get('reason'),user=request.user,date=date)
                 new_leave.save()
-                data = {'error':False,'response':'Report created successfully'}
+                data = {'error':False,'response':'Leave created successfully'}
             else:
                 data = {'error':True,'response':validate_leave.errors}
         else:

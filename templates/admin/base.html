@@ -1,27 +1,23 @@
 {% load compress %}
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8">
     <title>Micro Pyramid Admin</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     {% compress css %}
-    <link type="text/css" href="/static/admin/css/mpb-style.css" rel="stylesheet"/>
-    <link type="text/css" href="/static/admin/css/mpb-mobile.css" rel="stylesheet"/>
-    <link type="text/css" href="/static/admin/css/mpb-responsive.css" rel="stylesheet"/>
+    <link href="/static/admin/css/style.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/admin/css/jquery.tagsinput.css" />
     {% endcompress %}
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="http://malsup.github.com/jquery.form.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" />
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <script src="//cdn.ckeditor.com/4.4.5/standard/ckeditor.js"></script>
@@ -31,92 +27,97 @@
     {% endcompress %}
   </head>
   <body>
-    <div id="wrapper">
-      <!-- top-header starts here-->
-      <header class="top-header">
-        <div class="row marl logo-sign-row">
-          <div class="container">
-            <nav class="navbar navbar-default" role="navigation">
-              <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="#"><img src="/static/admin/images/logo-inner.png"></a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'micro_admin:index' %}">Home</a>
-                    </li>
-                    <li><a href="{% url 'micro_admin:users' %}">Users</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="{% url 'pages:menu' %}">Menu</a>
-                        </li>
-                        <li><a href="{% url 'pages:pages' %}">Pages</a>
-                        </li>
-                        <li><a href="{% url 'docs:books' %}">Books</a>
-                        </li>
-                        <li><a href="{% url 'micro_admin:jobs' %}">Jobs</a>
-                        </li>
-                        <li><a href="{% url 'micro_admin:contacts' %}">Contacts</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog<b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="{% url 'micro_blog:admin_category_list' %}">Categories</a>
-                        </li>
-                        <li><a href="{% url 'micro_blog:admin_post_list' %}">Posts</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">StaffZone <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="{% url 'employee:reports_list' %}">Reports</a>
-                        </li>
-                        <li><a href="{% url 'employee:leaves_list' %}">Leaves</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a href="{% url 'micro_kb:knowledgebase' %}">KB</a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Settings</a></li>
-                        <li><a href="{% url 'micro_admin:change_password' %}">Change Password</a></li>
-                        <li><a href="{% url 'micro_admin:out' %}">Logout</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-              </div>
-              <!-- /.container-fluid -->
-            </nav>
-          </div>
-        </div>
-      </header>
-      <!-- top-header ends here-->    
-      <div class="row marl">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
-          <!-- menu strats here-->
-          {% block stage %} {% endblock %}
-          <!-- menu ends here-->
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+            class="fa fa-bar"></span><span class="fa fa-bar"></span><span class="fa fa-bar"></span></a><a class="brand" href="{% url 'micro_admin:index' %}"><img src="/static/admin/images/logo-inner.png"></a>
+          <span class="nav-collapse">
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                  class="fa fa-cog"></i> Settings <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="javascript:;">Settings</a></li>
+                  <li><a href="{% url 'micro_admin:change_password' %}">Change Password</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                  class="fa fa-user"></i> {{ request.user.get_full_name|default:"Account" }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="javascript:;">Profile</a></li>
+                  <li><a href="{% url 'micro_admin:out' %}">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </span>
+          <!--/.nav-collapse --> 
         </div>
+        <!-- /container --> 
       </div>
+      <!-- /navbar-inner --> 
     </div>
+    <!-- /navbar -->
+    <div class="subnavbar">
+      <div class="subnavbar-inner">
+        <div class="container">
+          <ul class="mainnav">
+            <li><a href="{% url 'micro_admin:index' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span> </a> </li>
+            <li id="users"><a href="{% url 'micro_admin:users' %}"><i class="fa fa-user"></i><span>Users</span> </a> </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i><span>Site</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'pages:menu' %}">Menu</a></li>
+                <li><a href="{% url 'pages:pages' %}">Pages</a></li>
+                <li><a href="{% url 'docs:books' %}">Books</a></li>
+                <li><a href="{% url 'micro_admin:jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'micro_admin:contacts' %}">Contacts</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-pencil-square-o"></i><span>Blog</span><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'micro_blog:admin_category_list' %}">Categories</a></li>
+                <li><a href="{% url 'micro_blog:admin_post_list' %}">Posts</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-users"></i><span>Staff Zone</span> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="{% url 'employee:reports_list' %}">Reports</a></li>
+                <li><a href="{% url 'employee:leaves_list' %}">Leaves</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'micro_kb:knowledgebase' %}"><i class="fa fa-lightbulb-o"></i><span>Knowledge Base</span></a></li>
+            <li></li>
+          </ul>
+        </div>
+        <!-- /container --> 
+      </div>
+      <!-- /subnavbar-inner --> 
     </div>
+    <!-- /subnavbar -->
+    <div class="main">
+      <div class="main-inner">
+        <div class="container">
+          <!--CONTENT-->
+          {% block stage %} {% endblock %}
+          <!--/CONTENT-->
+        </div>
+        <!-- /container --> 
+      </div>
+      <!-- /main-inner --> 
+    </div>
+    <!-- /main -->
+    {% compress js %}
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".mainnav > li").removeClass("active");
+        $('a[href="'+window.location.pathname+'"]').parent("li").addClass("active");
+        $('a[href="'+window.location.pathname+'"]').parent().parent().parent().addClass("active");
+      });        
+    </script>
+    {% endcompress %}
   </body>
-  <html>
+</html>
