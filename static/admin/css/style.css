@@ -605,6 +605,42 @@ textarea {
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
+.widget-content th {
+  background: #fff;
+  font-weight: 800 !important;
+  font-size: 13px;
+  width: 20%;
+  /*color: #BE8411;*/
+  border-bottom: 1px dashed #ddd!important;
+  border-top: none!important;
+}
+
+.widget-content th i {
+  float: right;
+  color: #B2AFAA!important;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  padding-top: 5px;
+  border-radius: 50%;
+  background: #FFf;
+  border: 1px solid #E5C89A !important;
+  text-shadow: 1px 1px 0.9px #ddd;
+  box-shadow: 1px 1px 0.9px #ddd;
+}
+
+.widget-content td {
+  text-transform: uppercase;
+  color: #888;
+  font-weight: bold;
+  font-size: 13px;
+  border-bottom: 1px dashed #ddd !important;
+  border-top: none !important;
+}
+
+.widget-content td.mail_id {
+  text-transform: lowercase;
+}
 
 .widget-header+.widget-content {
   border-top: none;
@@ -619,6 +655,7 @@ textarea {
 .widget-nopad .widget-content {
   padding: 0;
 }
+
 /* Widget Content Clearfix */
 
 .widget-content:before,
@@ -678,9 +715,31 @@ textarea {
 /*user-detail*/
 
 .posts_leaves {
+  display: block;
   font-weight: 600;
-  color: #5e96ea;
-  font-size: 15px;
+  color: #00ba8b!important;
+  font-size: 19px!important;
+}
+
+.stat a{
+  text-decoration: none;
+  width: 126px;
+  border: 1px solid #fff;
+  display: inline-block;
+  height: 64px;
+  padding-top: 5px;
+}
+.stat a:hover{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+}
+#big_stats i {
+  font-size: 20px !important;
+  display: inline!important;
+  padding-right: 6px;
+  line-height: 40px;
+  color: #b2afaa;
 }
 /*user-detail*/
 /*EDIT ANCHOR AND DELETE ANCHOR*/
@@ -757,6 +816,62 @@ td {
   color: #000;
 }
 /*caret wid*/
+
+form label{
+  text-transform: capitalize !important;
+  color: #666;
+  font-size: 12px;
+}
+form .form-control{
+  box-shadow:none;
+  width: 96%;
+  border-radius:0px;
+  border-bottom: 2px solid #ccc;
+}
+form .form-control:focus{
+  border: 1px solid #3092BE; 
+  border-bottom: 2px solid #3092BE !important;
+}
+.columns2-form .form-group{
+  width: 50%;
+  float: left;
+}
+.save-btn{
+  border: 1px solid #2e6da4;
+  background: #337ab7;
+  padding:5px 22px;
+  display: inline-block;
+}
+.save-btn:hover{
+  background: #2e6da4;
+}
+.save-btn .save{
+  background: none;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+}
+.save-btn i{
+  color: #fff;
+  margin:0px 3px;
+}
+.failure{
+  color: red;
+}
+.slug-text {
+  display: block;
+  border-radius: 3px;
+  border: none;
+  background: #7266ba;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 6px 6px;
+  margin-top: 4px;
+  width: 96%;
+}
+
 /*------------------------------------------------------------------
 [1. Max Width: 480px]
 */

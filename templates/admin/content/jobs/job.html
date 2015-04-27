@@ -1,57 +1,55 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<div class="row marl main-content">
-<h4>Job Post Creation <small> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
-<div class="row marl blog-form blog-new">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form method="POST" id="careerform" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">Title</label>
-          <input type="Text" class="form-control" id="title" name="title">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail">Experience</label>
-          <input type="Text" class="form-control" id="experience" name="experience" >
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail">Skills</label>
-          <input type="Text" class="form-control" name="skills">
-          <div id='skills'></div>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail">Number Of Openings</label>
-          <input type="text" style="width:41px;" class="form-control" id="num of opening" name="num_of_opening" >
-          </input>
-        </div>
-        <div class="form-group" id="description">
-          <label for="exampleInputEmail">Description</label>
-          <input type="hidden" name="description">
-          <textarea class="form-control" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail">Url</label>
-          <input type="Text" class="form-control" name="url">
-          <div id='url'></div>
-        </div>
-        <div class="tags-block">
-          <p>
-            <label>Featured Image</label>
-            <input type="file" name="featured_image" />
-          </p>
-        </div>
-        <div class="draft-box">
-          <input type="checkbox" name="is_active" checked />
-          <lable>Active</lable>
-        </div>
-        <div class="save-btn">
-          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
-        </div>
-      </form>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Job Post Creation</h3>
+  </div>
+  <div class="panel-body">
+    <form method="POST" id="careerform" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="Text" class="form-control" id="title" name="title">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail">Experience</label>
+        <input type="Text" class="form-control" id="experience" name="experience" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail">Skills</label>
+        <input type="Text" class="form-control" name="skills">
+        <div id='skills'></div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail">Number Of Openings</label>
+        <input type="text" style="width:20%;" class="form-control" id="num of opening" name="num_of_opening" >
+        </input>
+      </div>
+      <div class="form-group" id="description">
+        <label for="exampleInputEmail">Description</label>
+        <input type="hidden" name="description">
+        <textarea class="form-control" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail">Url</label>
+        <input type="Text" class="form-control" name="url" value="http://">
+        <div id='url'></div>
+      </div>
+      <div class="tags-block">
+        <p>
+          <label>Featured Image</label>
+          <input type="file" name="featured_image" />
+        </p>
+      </div>
+      <div class="draft-box">
+        <input type="checkbox" name="is_active" checked />
+        <lable>Active</lable>
+      </div>
+      <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+      </div>
+    </form>
   </div>
 </div>
-<!-- main content ends here-->
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">

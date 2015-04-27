@@ -1,43 +1,50 @@
 {% extends 'admin/base.html' %} {% block stage %}
 {% load blog_tags %}
-<div class="row marl">
-  {% include 'admin/user/leftmenu.html' %}
-  <div class="col-lg-9">
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Employee</th>
-          <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Name</th>
-          <th class="col-lg-2 col-md-2 col-sm-2 col-xs-4">Role</th>
-          <th class="col-lg-1 col-md-1 col-sm-1 col-xs-1">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for leave in leaves %}
-        <tr>
-          <td><a href="{% url 'employee:view_leaves' pk=leave.id %}">{{leave.user.email}}</a></td>
-          <input type="hidden" id="user_id" name="user_id" value="{{ leaves.user.id }}">
-          <td class="sec-col">{{leaves.user.first_name}}</td>
-          <td class="sec-col">{{leaves.user.user_roles}}</td>
-          <td><a href="{% url 'employee:edit_leaves' pk=leave.id %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
-            <a href="{% url 'employee:delete_leaves' pk=leave.id %}" class="delete_report" value="{{leave.id}}"><i class="fa fa-trash-o trash-color"></i></a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <nav>
-      <ul class="pagination">
-        {% get_page current_page last_page as pages %}
-        {% for s in pages %}
-        <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/users/leaves/{{user.id}}/?page={{s}}">{{s}}</a></li>
-        {% endfor %}
-        <li class="disabled"><a href="/portal/users/leaves/{{user.id}}/?page={{s}}">...</a></li>
-        <li><a href="/portal/users/leaves/{{user.id}}/?page={{last_page}}">last</a></li>
-        <li><a href="/portal/users/leaves/{{user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
-        </li>
-      </ul>
-    </nav>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Leaves Viewer</h3>
+    <span>
+      <a href="{% url 'employee:new_leave' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Leave </button></a>
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th width="8%">Employee</th>
+            <th width="8%">Name</th>
+            <th width="8%">Role</th>
+            <th width="5%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for leave in leaves %}
+          <tr>
+            <td><a href="{% url 'employee:view_leaves' pk=leave.id %}">{{leave.user.email}}</a></td>
+            <input type="hidden" id="user_id" name="user_id" value="{{ leaves.user.id }}">
+            <td class="txt_center">{{leave.user.first_name}}</td>
+            <td class="txt_center">{{leave.user.user_roles}}</td>
+            <td class="txt_center"><a href="{% url 'employee:edit_leaves' pk=leave.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
+              <a href="{% url 'employee:delete_leaves' pk=leave.id %}" class="delete_report delete_anchor" value="{{leave.id}}"><i class="fa fa-trash-o"></i>Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <nav>
+        <ul class="pagination">
+          {% get_page current_page last_page as pages %}
+          {% for s in pages %}
+          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/users/leaves/{{user.id}}/?page={{s}}">{{s}}</a></li>
+          {% endfor %}
+          <li class="disabled"><a href="/portal/users/leaves/{{user.id}}/?page={{s}}">...</a></li>
+          <li><a href="/portal/users/leaves/{{user.id}}/?page={{last_page}}">last</a></li>
+          <li><a href="/portal/users/leaves/{{user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
 <script type="text/javascript">
@@ -46,7 +53,7 @@
     $('.delete_report').click(function(e){
       var value =$('#user_id').val();
       e.preventDefault();
-      if (!confirm('Do you want to delete report?'))
+      if (!confirm('Do you want to delete leave?'))
         return;
       $.post('/portal/employee/leaves/delete/'+$(this).attr('value')+'/',function(data){
         if(data.error)

@@ -1,71 +1,62 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<!-- menu strats here-->
-<!-- menu ends here-->
 <!-- main content starts here-->
-<div class="row marl main-content">
-<h4>Blog Post Creation <small> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
-<div class="row marl blog-form blog-new">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="{% url 'micro_blog:edit_blog_post' blog_slug=blog_post.slug %}" method="POST" id="blogform" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">Title</label>
-          <input type="Text" class="form-control" id="title" name="title" value="{{blog_post.title}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Slug</label>
-          <input type="text" class="form-control" id="slug" name="slug" value="{{blog_post.title}}">
-          <span class="slug-text">Do not mix form groups directly with input groups. Instead, nest the input group inside of the form group.</span>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Category</label>
-          <select class="form-control" id="category" name="category">
-          {% for category in categories %}
-          <option value="{{category.id}}" {% ifequal blog_post.category category %}selected{% endifequal %}>{{category.name}}</option>
-          {% endfor %}
-          </select>
-        </div>
-        <div class="row marl text-editor">
-          <div>
-            <div class="">
-              <p>
-                <label class="control-label" for="html">Blog Post Description</label>
-                <br/>
-              <div class="control-group">
-                <div class="controls" id="content">
-                  <input type="hidden" name="content">
-                  <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
-                  {{blog_post.content|safe}}
-                  </textarea>
-                </div>
-              </div>
-            </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Blog Post</h3>
+  </div>
+  <div class="panel-body">
+    <form action="{% url 'micro_blog:edit_blog_post' blog_slug=blog_post.slug %}" method="POST" id="blogform" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="Text" class="form-control" id="title" name="title" value="{{blog_post.title}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Slug</label>
+        <input type="text" class="form-control" id="slug" name="slug" value="{{blog_post.title}}">
+        <span class="slug-text">Do not mix form groups directly with input groups. Instead, nest the input group inside of the form group.</span>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Category</label>
+        <select class="form-control" id="category" name="category">
+        {% for category in categories %}
+        <option value="{{category.id}}" {% ifequal blog_post.category category %}selected{% endifequal %}>{{category.name}}</option>
+        {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="html">Blog Post Description</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <input type="hidden" name="content">
+            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
+            {{blog_post.content|safe}}
+            </textarea>
           </div>
         </div>
-        <div class="tags-block">
-          <p><label>Tags Creation</label>
-            <input id="tags_1" type="text" class="tags" name="tags" value="{% for tag in blog_post.tags.all %}{{tag.name}},{% endfor %}" />
-        </div>
-        <div class="tags-block">
-          <p>
-            <label>Featured Image</label>
-            <input type="file" name="featuredimage" />
-          </p>
-        </div>
-        <div class="draft-box">
-          <input type="checkbox" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
-          <label>Save As Draft</label>
-        </div>
-        <div class="draft-box">
-          <input type="checkbox" name="featured_post" value="on" {% ifequal blog_post.featured_post 'on' %}checked{% endifequal %}>
-          <label>Featured Post</label>
-        </div>
-        <div class="save-btn">
-          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="tags-block">
+        <p><label>Tags Creation</label>
+          <input id="tags_1" type="text" class="tags" name="tags" value="{% for tag in blog_post.tags.all %}{{tag.name}},{% endfor %}" />
+      </div>
+      <div class="tags-block">
+        <p>
+          <label>Featured Image</label>
+          <input type="file" name="featuredimage" />
+        </p>
+      </div>
+      <div class="draft-box">
+        <input type="checkbox" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
+        <label>Save As Draft</label>
+      </div>
+      <div class="draft-box">
+        <input type="checkbox" name="featured_post" value="on" {% ifequal blog_post.featured_post 'on' %}checked{% endifequal %}>
+        <label>Featured Post</label>
+      </div>
+      <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+      </div>
+    </form>
   </div>
 </div>
 <!-- main content ends here-->

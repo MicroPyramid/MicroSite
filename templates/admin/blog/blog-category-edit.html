@@ -1,31 +1,28 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<!-- menu strats here-->
-<!-- menu ends here-->
 <!-- main content starts here-->
-<div class="row marl main-content">
-<h4>Blog Category Creation</h4>
-<div class="row marl blog-form blog-new">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <fieldset>
-        <legend>Edit Blog Category</legend>
-        <form action="{% url 'micro_blog:edit_blog_category' category_slug=blog_category.slug %}" method="POST" id="blogcategoryform">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="exampleInputEmail1">Title</label>
-            <input type="Text" class="form-control" id="name" name="name" value="{{blog_category.name}}">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email">{{blog_category.description}}</textarea>
-          </div>
-          <div class="save-btn">
-            <i class="fa fa-floppy-o"></i>
-            <input type="submit" value="Save" class="save" id="search_lessons">
-          </div>
-        </form>
-      </fieldset>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Blog Category</h3>
+  </div>
+  <div class="panel-body">
+    <fieldset>
+      <legend>Edit Blog Category</legend>
+      <form action="{% url 'micro_blog:edit_blog_category' category_slug=blog_category.slug %}" method="POST" id="blogcategoryform">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="Text" class="form-control" id="name" name="name" value="{{blog_category.name}}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail">Description</label>
+          <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email">{{blog_category.description}}</textarea>
+        </div>
+        <div class="save-btn">
+          <i class="fa fa-floppy-o"></i>
+          <input type="submit" value="Save" class="save" id="search_lessons">
+        </div>
+      </form>
+    </fieldset>
   </div>
 </div>
 <!-- main content ends here-->

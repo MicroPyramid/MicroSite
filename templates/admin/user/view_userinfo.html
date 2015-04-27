@@ -1,23 +1,68 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
-<div class="row marl profile-part">
-  {% include 'admin/user/leftmenu.html' %}
-  <div class="col-lg-9 profile-right">
-    <span>first name{{user.first_name}}</span>
-    <span>last {{user.last_name}}</span>
-    <span>{{user.user_roles}}</span>
-    <span>{{user.address}}</span>
-    <span>{{user.state}}</span>
-    <span>{{user.fb_profile}}</span>
-    <span>{{user.tw_profile}}</span>
-    <span>{{user.ln_profile}}</span>
-    <span>{{user.about}}</span>
-    <span>{{user.city}}</span>
-    <span>{{user.phones}}</span>
-    <span>{{user.mobile}}</span>
-    <span>{{user.pincode}}</span>
+<!--CONTENT-->
+<div class="row mt">
+  <div class="widget widget-nopad">
+    <div class="widget-header">
+      <i class="fa fa-list-alt"></i>
+      <h3> {{user.get_full_name|default:user.email}}'s Account Over view</h3>
+    </div>
+    <!-- /widget-header -->
+    <div class="widget-content">
+      <div class="widget big-stats-container">
+        <div class="widget-content">
+          <div class="bigstats">
+            <table class="table">
+              <tr>
+                <th><i class='fa fa-user'></i>First Name</th>
+                <td>{{user.first_name}}</td>
+              </tr>
+              <tr>
+                <th><i class='fa fa-user'></i>Second Name</th>
+                <td>{{user.last_name}}</td>
+              </tr>
+              <th><i class='fa fa-envelope'></i>Email Id</th>
+              <td class="mail_id">{{user.email}}</td>
+              </tr>
+              <tr>
+                <th><i class='fa fa-phone'></i>Phone number</th>
+                <td>{{user.mobile}}</td>
+              </tr>
+              <tr>
+                <th><i class="fa fa-map-marker"></i>Address</th>
+                <td>{{user.address}}</td>
+              </tr>
+            </table>
+          </div>
+          <div id="big_stats" class="cf">
+            <div class="stat">
+              <a href="{% url 'micro_admin:reports' user.id %}">
+                <span class="posts_leaves">Reports</span>
+                <i class="fa fa-file-text-o"></i>
+                <span class="value">{{daily_reports.count|default:'0'}}</span>
+              </a>
+            </div>
+            <div class="stat">
+              <a href="{% url 'micro_admin:blogposts' user.id %}">
+                <span class="posts_leaves">Blog Posts</span>
+                <i class="fa fa-pencil-square-o"></i>
+                <span class="value">{{blog_posts.count|default:'0'}}</span>
+              </a>
+            </div>
+            <div class="stat">
+              <a href="{% url 'micro_admin:leaves' user.id %}">
+                <span class="posts_leaves">Leaves</span>
+                <i class="fa fa-plane"></i>
+                <span class="value">{{leaves.count|default:'0'}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- /widget-content --> 
+      </div>
+    </div>
   </div>
 </div>
-<!-- main content ends here-->
+<!--/CONTENT-->
 {% endblock %}
 <!-- main content ends here-->

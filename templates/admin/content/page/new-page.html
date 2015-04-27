@@ -1,47 +1,38 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<div class="row marl main-content">
-<h4>Page Creation <small> -To Add,Delete,Edit,Enable/Disable your Menu</small></h4>
-<div class="row marl blog-form blog-new">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="." method="POST" id="pageform">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">Title</label>
-          <input type="Text" class="form-control" id="title" name="title" >
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Slug</label>
-          <input type="Text" class="form-control" id="title" name="slug" >
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Meta</label>
-          <input type="Text" class="form-control" id="title" name="meta" >
-        </div>
-        <div class="row marl text-editor">
-          <div>
-            <div class="">
-              <p>
-                <label class="control-label" for="html">Page Content</label>
-                <br/>
-              <div class="control-group">
-                <div class="controls" id="content">
-                  <input type="hidden" name="content">
-                  <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
-                  </textarea>
-                </div>
-              </div>
-            </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Page Creation</h3>
+  </div>
+  <div class="panel-body">
+    <form action="." method="POST" id="pageform">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="Text" class="form-control" id="title" name="title" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Slug</label>
+        <input type="Text" class="form-control" id="slug" name="slug" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Meta</label>
+        <input type="Text" class="form-control" id="meta" name="meta" >
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="html">Page Content</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <input type="hidden" name="content">
+            <textarea class="input-xlarge form-control" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email"></textarea>
           </div>
         </div>
-        <div class="save-btn">
-          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save" class="save" id="search_lessons">
+      </div>
+    </form>
   </div>
 </div>
-<!-- main content ends here-->
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
