@@ -1,6 +1,5 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
-{% load blog_tags %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Reports Viewer</h3>
@@ -10,13 +9,13 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table class="table table-bordered table-striped">
+      <table id="report_list" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th width="8%">Employee</th>
             <th width="6%">Name</th>
             <th width="8%">Date</th>
-            <th width="8%">Created On</th>
+            <th width="15%">Created On</th>
             <th width="8%">Role</th>
             <th width="5%">Actions</th>
           </tr>
@@ -30,7 +29,7 @@
             <input type="hidden" id="user_id" name="user_id" value="{{ new_report.employee.id }}">
             <td class="txt_center">{{report.employee.first_name}}</td>
             <td class="txt_center">{{report.date}}</td>
-            <td class="sec-col">{{report.created_on}}</td>
+            <td class="txt_center">{{report.created_on}}</td>
             <td class="txt_center">{{report.employee.user_roles}}</td>
             <td class="txt_center">
               <a href="{% url 'employee:delete_report' pk=report.id %}" class="delete_report delete_anchor" value="{{report.id}}"><i class="fa fa-trash-o trash-color"></i>Delete</a>
@@ -39,18 +38,6 @@
           {% endfor %}
         </tbody>
       </table>
-      <nav>
-        <ul class="pagination">
-          {% get_page current_page last_page as pages %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/employee/reports/?page={{s}}">{{s}}</a></li>
-          {% endfor %}
-          <li class="disabled"><a href="/portal/employee/reports/{{request.user.id}}/?page={{s}}">...</a></li>
-          <li><a href="/portal/employee/reports/{{request.user.id}}/?page={{last_page}}">last</a></li>
-          <li><a href="/portal/employee/reports/{{request.user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </div>
@@ -71,8 +58,13 @@
           window.location ='.';
         }
       },'json');
-    })
     });
+
+    $('#report_list').DataTable({
+      "sPaginationType": "full_numbers" 
+    });
+
+  });
 </script>
 {% endblock %}
 <!-- main content ends here-->

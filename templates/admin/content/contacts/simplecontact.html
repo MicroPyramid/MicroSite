@@ -3,31 +3,31 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Contact List</h3>
-    <div class="panel-body">
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th width="5%">No</th>
-              <th width="5%">Name</th>
-              <th width="10%">Email</th>
-              <th width="15%">Comments</th>
-              <th width="5%">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for contact in contacts %}
-            <tr>
-              <td class="txt_center">{{forloop.counter}}</td>
-              <td>{{contact.full_name}}</td>
-              <td>{{contact.email}}</td>
-              <td>{{contact.message|truncatewords:10}}</td>
-              <td class="txt_center"><a value="{{contact.id}}" href="{% url 'micro_admin:delete_contact' pk=contact.id %}" class="delete_contact delete_anchor"><i class="fa fa-trash-o"></i>Delete</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th width="1%">No</th>
+            <th width="5%">Name</th>
+            <th width="10%">Email</th>
+            <th width="15%">Comments</th>
+            <th width="5%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+          <tr>
+            <td class="txt_center">{{forloop.counter}}</td>
+            <td>{{contact.full_name}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.message|truncatewords:10}}</td>
+            <td class="txt_center"><a value="{{contact.id}}" href="{% url 'micro_admin:delete_contact' pk=contact.id %}" class="delete_contact delete_anchor"><i class="fa fa-trash-o"></i>Delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

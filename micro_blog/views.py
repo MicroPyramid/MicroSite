@@ -249,14 +249,8 @@ def archive_posts(request, year, month):
 
 @login_required
 def admin_post_list(request):
-    items_per_page = 10
-    if "page" in request.GET:
-        page = int(request.GET.get('page'))
-    else:
-        page = 1
-    no_pages = int(math.ceil(float(Post.objects.filter().count()) / items_per_page))
-    blog_posts = Post.objects.filter()[(page - 1) * items_per_page:page * items_per_page]
-    return render(request,'admin/blog/blog-posts.html',{'blog_posts':blog_posts,'current_page':page,'last_page':no_pages,})
+    blog_posts = Post.objects.all()
+    return render(request,'admin/blog/blog-posts.html',{'blog_posts':blog_posts})
 
 
 @login_required

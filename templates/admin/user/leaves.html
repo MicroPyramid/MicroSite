@@ -9,7 +9,7 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table class="table table-bordered table-striped">
+      <table id="leaves_list" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th width="8%">Employee</th>
@@ -32,18 +32,6 @@
           {% endfor %}
         </tbody>
       </table>
-      <nav>
-        <ul class="pagination">
-          {% get_page current_page last_page as pages %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/portal/users/leaves/{{user.id}}/?page={{s}}">{{s}}</a></li>
-          {% endfor %}
-          <li class="disabled"><a href="/portal/users/leaves/{{user.id}}/?page={{s}}">...</a></li>
-          <li><a href="/portal/users/leaves/{{user.id}}/?page={{last_page}}">last</a></li>
-          <li><a href="/portal/users/leaves/{{user.id}}/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </div>
@@ -64,8 +52,13 @@
           window.location ='.';
         }
   
-    },'json');
-    })
+      },'json');
     });
+    
+    $('#leaves_list').DataTable({
+      "sPaginationType": "full_numbers" 
+    });
+
+  });
 </script>
 {% endblock %}

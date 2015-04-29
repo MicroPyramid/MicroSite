@@ -1,16 +1,13 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<div class="panel panel-default blog-list">
+<div class="panel panel-default blog_detail">
   <div class="panel-heading">
-    <h3 class="panel-title">Report Detail Page</h3>
+    <h3 class="panel-title report_name">{{reports.employee.get_full_name}}</h3><span class="report_on">'s Report on</span> 
+    <span class="udate_time report_cdate">{{reports.created_on}}</span>
   </div>
   <div class="panel-body">
     <div class="blog-left">
-      <div class="blog-upic-details">
-        <span class="uname">{{reports.employee.email}}</span>
-        <span class="udate-time">{{reports.created_on}}</span>
-      </div>
       <div class="desc">
-        Report: {{reports.report|safe}}
+        {{reports.report|safe}}
       </div>
     </div>
   </div>

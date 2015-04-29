@@ -10,7 +10,7 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table class="table table-bordered">
+      <table id="blog_posts" class="table table-bordered">
         <thead>
           <tr>
             <th width="8%">Title</th>
@@ -24,7 +24,7 @@
           {% for post in blog_posts %}
           <tr>
             <td><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></td>
-            <td class="sec-col">{{post.author}}</td>
+            <td class="txt_center">{{post.author}}</td>
             <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}
             </td>
             <td class="txt_center">{{ post.blogcomments_set.all.count|default:'0' }}</td>
@@ -39,18 +39,6 @@
           {% endfor %}
         </tbody>
       </table>
-      <nav>
-        <ul class="pagination">
-          {% get_page current_page last_page as pages %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/list?page={{s}}">{{s}}</a></li>
-          {% endfor %}
-          <li class="disabled"><a href="/blog/list/?page={{s}}">...</a></li>
-          <li><a href="/blog/list/?page={{last_page}}">last</a></li>
-          <li><a href="/blog/list/?page={{current_page| add:"1"}}">Next<i class="fa fa-angle-right pagination-next"></i></a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </div>
@@ -74,7 +62,12 @@
         }
       },"json")
     });
+
+    $('#blog_posts').DataTable({
+      "sPaginationType": "full_numbers" 
     });
+
+  });
 </script>>
 {% endcompress %}
 <!-- main content ends here-->

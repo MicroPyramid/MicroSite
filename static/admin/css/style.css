@@ -535,7 +535,7 @@ textarea {
 .panel-default th {
   background: #fff;
   font-weight: 800;
-  font-size: 15px;
+  font-size: 13px;
 }
 /*list*/
 /*------------------------------------------------------------------
@@ -871,6 +871,96 @@ form .form-control:focus{
   margin-top: 4px;
   width: 96%;
 }
+/*blog detail*/
+.blog_detail h4{
+  display: inline-block;
+}
+.blog_detail span.uname::before{
+  content: '-';
+  padding-right: 3px;
+}
+.blog_detail span.uname{
+  color: #FF5722
+}
+.blog_detail span.uname,
+.blog_detail span.udate_time{
+  float: none;
+  font-size: 11px;
+  background: inherit!important;
+}.blog_detail span.udate_time::before{
+  content: ',';
+  padding-right: 5px;
+  padding-left: 0px;
+}
+.blog_detail span.udate_time{
+  font-style: italic;
+  padding-left: 0px;
+  color: #135DAB;
+}
+.tags_blog_detail ul{
+  margin: 0px;
+  padding: 0px;
+}
+.tags_blog_detail ul li{
+  list-style: none;
+  display: inline-block;
+  color: #0C5C56;
+  background: #D7CCC8;
+  border: 1px solid #615340;
+  padding: 1px 8px;
+  font-size: 11px;
+  box-shadow: 1px 1px 1.5px #C5BDB3;
+}
+.tags_blog_detail ul li i{
+  padding-right: 5px;
+}
+/*blog detail*/
+
+/* Report detail*/
+
+.blog_detail span.report_on{
+  font-size: 12px;
+  font-style: italic;
+  float: none;
+  background: inherit;
+}
+.blog_detail span.report_cdate::before{
+  content: ''; 
+}
+.blog_detail span.report_cdate{
+  font-style: normal;
+  font-size: 14px;
+}
+.blog_detail h3.report_name{
+  text-transform: capitalize;
+}
+/* Report detail*/
+
+/* pagination */
+table.dataTable thead th, 
+table.dataTable thead td, 
+table.dataTable.no-footer
+{
+  border-bottom: none;
+}
+table.dataTable.no-footer{
+  margin-bottom: 15px;
+}
+/* pagination */
+
+/*search*/
+input[type=search],
+select{
+  /* -webkit-appearance: none; */
+  border: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 10px;
+}
+select{
+  background: #fff;
+  padding:3px 5px;
+}
+/*search*/
 
 /*------------------------------------------------------------------
 [1. Max Width: 480px]
