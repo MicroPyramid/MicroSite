@@ -148,6 +148,14 @@ def approve_topic(request, book_slug, topic_slug):
         topic = Topic.objects.get(slug = topic_slug)
         topic.status = "Approved"
         topic.save()
+
+        if topic.shadow:
+            # If approved one is shadow of a topic or sub-topic, then approve main topic or sub-topic, 
+            # replace content of main topic or sub-topic with approved shadow.
+            topic.shadow.status = "Approved"
+            topic.shadow.content = topic.content
+            topic.shadow.save()
+
         data = {"response" : "Approved Successfully"}
 
     else:

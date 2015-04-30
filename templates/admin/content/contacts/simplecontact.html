@@ -1,35 +1,33 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
-<div class="row marl main-content">
-  <h4>Contact List</h4>
-  <div class="row marl blog-form">
-    <div class="table-responsive table-bordered">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">No</th>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Name</th>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Email</th>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Comments</th>
-                <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for contact in contacts %}
-              <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{contact.full_name}}</td>
-                <td>{{contact.email}}</td>
-                <td>{{contact.message|truncatewords:10}}</td>
-                <td><a class="delete_contact" value="{{contact.id}}" href="{% url 'micro_admin:delete_contact' pk=contact.id %}"><i class="fa fa-trash-o trash-color"></i></a></td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Contact List</h3>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th width="1%">No</th>
+            <th width="5%">Name</th>
+            <th width="10%">Email</th>
+            <th width="15%">Comments</th>
+            <th width="5%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+          <tr>
+            <td class="txt_center">{{forloop.counter}}</td>
+            <td>{{contact.full_name}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.message|truncatewords:10}}</td>
+            <td class="txt_center"><a value="{{contact.id}}" href="{% url 'micro_admin:delete_contact' pk=contact.id %}" class="delete_contact delete_anchor"><i class="fa fa-trash-o"></i>Delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -42,19 +40,17 @@
         return;
 
       $.post('/portal/contacts/'+$(this).attr('value')+'/',function(data){
-      if(data.error)
-      {
-        alert(data.message);
-      }
-      else{
-        window.location ="{% url 'micro_admin:contacts' %}";
-      }
-
-    },"json")
-    })
+        if(data.error)
+        {
+          alert(data.message);
+        }
+        else{
+          window.location ="{% url 'micro_admin:contacts' %}";
+        }
+      },"json")
+      
     });
-
+  });
 </script>
 <!-- main content ends here-->
 {% endblock %}
-<!-- main content ends here-->

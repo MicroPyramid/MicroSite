@@ -1,91 +1,90 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<!-- menu strats here-->
-<!-- menu ends here-->
 <!-- main content starts here-->
-<div class="row marl main-content">
-<h4>User Editing <small> -To Edit your Menu</small></h4>
-<div class="row marl blog-form blog-new">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="{% url 'micro_admin:new_user' %}" method="POST" id="userform">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">First Name</label>
-          <input type="Text" class="form-control" id="first_name" name="first_name" value="{{edit_user.first_name}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Last Name</label>
-          <input type="Text" class="form-control" id="last_name" name="last_name" value="{{edit_user.last_name}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Email</label>
-          <input type="Text" class="form-control" id="email" name="email" value="{{edit_user.email}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Password</label>
-          <input type="password" class="form-control" id="password" name="password" value="{{edit_user.password}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Role</label>
-          <select class="form-control" id="user_roles" name="user_roles">
-          {% for role in role_list %}
-          <option value="{{role.0}}" {% ifequal edit_user.user_roles role.0 %}selected{% endifequal %}>{{role.1}}</option>
-          {% endfor %}
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Google Plus URL</label>
-          <input type="Text" class="form-control" id="google_plus_url" name="google_plus_url" value="{{edit_user.google_plus_url}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Address</label>
-          <textarea class="input-xlarge" id="address" name="address" rows="10" placeholder="HTML code of this email" value="{{edit_user.address}}">{{edit_user.address}}</textarea>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">state</label>
-          <input type="Text" class="form-control" id="state" name="state" value="{{edit_user.state}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">fb_profile</label>
-          <input type="Text" class="form-control" id="fb_profile" name="fb_profile" value="{{edit_user.fb_profile}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">tw_profile</label>
-          <input type="Text" class="form-control" id="tw_profile" name="tw_profile" value="{{edit_user.tw_profile}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">ln_profile</label>
-          <input type="Text" class="form-control" id="ln_profile" name="ln_profile" value="{{edit_user.ln_profile}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">about</label>
-          <textarea class="input-xlarge" id="about" name="about" rows="10" placeholder="HTML code of this email" value="{{edit_user.about}}">{{edit_user.about}}</textarea>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">city</label>
-          <input type="Text" class="form-control" id="city" name="city" value="{{edit_user.city}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">phones</label>
-          <input type="Text" class="form-control" id="phones" name="phones" value="{{edit_user.phones}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">mobile</label>
-          <input type="Text" class="form-control" id="mobile" name="mobile" value="{{edit_user.mobile}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">pincode</label>
-          <input type="Text" class="form-control" id="pincode" name="pincode" value="{{edit_user.pincode}}">
-        </div>
-        <div class="draft-box">
-          <input type="checkbox" name="is_active" value="true" {% if edit_user.is_active %}checked{% endif %}>
-          <label>Active</label>
-        </div>
-        <div class="save-btn">
-          <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
-        </div>
-      </form>
-    </div>
+<div class="panel panel-default columns2-form">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit User</h3>
+  </div>
+  <div class="panel-body">
+    <form action="#" method="POST" id="userform">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">First Name</label>
+        <input type="Text" class="form-control" id="first_name" name="first_name" value="{{edit_user.first_name}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input type="Text" class="form-control" id="last_name" name="last_name" value="{{edit_user.last_name}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Password</label>
+        <input type="password" class="form-control" id="password" name="password" value="{{edit_user.password}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email</label>
+        <input type="Text" class="form-control" id="email" name="email" value="{{edit_user.email}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Role</label>
+        <select class="form-control" id="user_roles" name="user_roles">
+        {% for role in role_list %}
+        <option value="{{role.0}}" {% ifequal edit_user.user_roles role.0 %}selected{% endifequal %}>{{role.1}}</option>
+        {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Google Plus URL</label>
+        <input type="Text" class="form-control" id="google_plus_url" name="google_plus_url" value="{{edit_user.google_plus_url}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Address</label>
+        <textarea class="input-xlarge form-control" id="address" name="address" rows="10" placeholder="HTML code of this email" value="{{edit_user.address}}">{{edit_user.address}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">about</label>
+        <textarea class="input-xlarge form-control" id="about" name="about" rows="10" placeholder="HTML code of this email" value="{{edit_user.about}}">{{edit_user.about}}</textarea>
+      </div>
+      <br clear="all">
+      <div class="form-group">
+        <label for="exampleInputEmail1">city</label>
+        <input type="Text" class="form-control" id="city" name="city" value="{{edit_user.city}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">state</label>
+        <input type="Text" class="form-control" id="state" name="state" value="{{edit_user.state}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">phones</label>
+        <input type="Text" class="form-control" id="phones" name="phones" value="{{edit_user.phones}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">mobile</label>
+        <input type="Text" class="form-control" id="mobile" name="mobile" value="{{edit_user.mobile}}">
+      </div>
+      <br clear="all">
+      <div class="form-group">
+        <label for="exampleInputEmail1">pincode</label>
+        <input type="Text" class="form-control" id="pincode" name="pincode" value="{{edit_user.pincode}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">FB Profile</label>
+        <input type="Text" class="form-control" id="fb_profile" name="fb_profile" value="{{edit_user.fb_profile}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Twitter Profile</label>
+        <input type="Text" class="form-control" id="tw_profile" name="tw_profile" value="{{edit_user.tw_profile}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Linkedin Profile</label>
+        <input type="Text" class="form-control" id="ln_profile" name="ln_profile" value="{{edit_user.ln_profile}}">
+      </div>
+      <div class="draft-box">
+        <input type="checkbox" name="is_active" value="true" {% if edit_user.is_active %}checked{% endif %}>
+        <label>Active</label>
+      </div>
+      <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+      </div>
+    </form>
   </div>
 </div>
 <!-- main content ends here-->
@@ -97,9 +96,10 @@
     e.preventDefault();
     $.post(".", $("form#userform").serialize(), function(data) {
       if (data.error) {
-        $('p.failure').remove();
-        for (var key in data.response) {
-          $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
+        $('span.failure').remove();
+        for (var key in data.message) {
+          console.log($('#' + key));
+          $('#' + key).after('<span class="failure">' + data.message[key] + '</span>');
         }
       } else {
         window.location = '/portal/users/';

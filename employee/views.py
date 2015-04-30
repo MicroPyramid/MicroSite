@@ -17,16 +17,12 @@ def reports_list(request):
 
 @login_required
 def employee_report(request,pk):
-    user=User.objects.get(pk=pk)
+    user = User.objects.get(pk=pk)
+    
     if request.user == user or request.user.is_admin:
-        items_per_page = 10
-        if "page" in request.GET:
-            page = int(request.GET.get('page'))
-        else:
-            page = 1
-        no_pages = int(math.ceil(float(DailyReport.objects.filter(employee=user).count()) / items_per_page))
-        reports = DailyReport.objects.filter(employee=user).order_by('created_on')[(page - 1) * items_per_page:page * items_per_page]
-        return render(request,'admin/staff/reports.html',{'reports':reports,'current_page':page,'last_page':no_pages})
+        reports = DailyReport.objects.filter(employee=user).order_by('created_on')
+        return render(request,'admin/staff/reports.html',{'reports':reports})
+    
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -93,15 +89,15 @@ def delete_report(request,pk):
 @login_required
 def new_leave(request):
     if request.method == 'POST':
-        leaves=Leaves.objects.filter(date=request.POST.get('date'))
-        if leaves:
-            datestring_format = datetime.datetime.strptime(request.POST.get('date'),"%d/%m/%Y").strftime("%Y-%m-%d")
-            date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
+        datestring_format = datetime.datetime.strptime(request.POST.get('date'),"%d/%m/%Y").strftime("%Y-%m-%d")
+        date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
+        leaves=Leaves.objects.filter(date=date)
+        if not leaves:
             validate_leave = LeaveForm(request.POST)
             if validate_leave.is_valid():
                 new_leave = Leaves.objects.create(reason=request.POST.get('reason'),user=request.user,date=date)
                 new_leave.save()
-                data = {'error':False,'response':'Report created successfully'}
+                data = {'error':False,'response':'Leave created successfully'}
             else:
                 data = {'error':True,'response':validate_leave.errors}
         else:
@@ -122,14 +118,8 @@ def leaves_list(request):
 def employee_leaves(request,pk):
     user=User.objects.get(pk=pk)
     if request.user == user or request.user.is_admin:
-        items_per_page = 10
-        if "page" in request.GET:
-            page = int(request.GET.get('page'))
-        else:
-            page = 1
-        no_pages = int(math.ceil(float(Leaves.objects.filter(user=user).count()) / items_per_page))
-        leaves = Leaves.objects.filter(user=user).order_by('created_on')[(page - 1) * items_per_page:page * items_per_page]
-        return render(request,'admin/staff/leaves.html',{'leaves':leaves,'current_page':page,'last_page':no_pages})
+        leaves = Leaves.objects.filter(user=user).order_by('created_on')
+        return render(request,'admin/staff/leaves.html',{'leaves':leaves})
     else:
         return render_to_response('admin/accessdenied.html')
     

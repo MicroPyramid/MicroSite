@@ -148,35 +148,17 @@ def user_info(request,pk):
 
 def blogposts(request,pk):
     user = User.objects.get(pk = pk)
-    items_per_page = 10
-    if "page" in request.GET:
-        page = int(request.GET.get('page'))
-    else:
-        page = 1
-    no_pages = int(math.ceil(float(Post.objects.filter(user=user).count()) / items_per_page))
-    blog_posts = Post.objects.filter(user=user)[(page - 1) * items_per_page:page * items_per_page]
-    return render(request,'admin/user/blogposts.html',{'user':user,'blog_posts':blog_posts,'current_page':page,'last_page':no_pages})
+    blog_posts = Post.objects.filter(user=user)
+    return render(request,'admin/user/blogposts.html',{'user':user,'blog_posts':blog_posts})
 
 
 def reports(request,pk):
     user = User.objects.get(pk = pk)
-    items_per_page = 10
-    if "page" in request.GET:
-        page = int(request.GET.get('page'))
-    else:
-        page = 1
-    no_pages = int(math.ceil(float(Post.objects.filter(user=user).count()) / items_per_page))
-    reports = DailyReport.objects.filter(employee=user)[(page - 1) * items_per_page:page * items_per_page]
-    return render(request,'admin/user/reports.html',{'user':user,'reports':reports,'current_page':page,'last_page':no_pages})
+    reports = DailyReport.objects.filter(employee=user)
+    return render(request,'admin/user/reports.html',{'user':user,'reports':reports})
 
 
 def leaves(request,pk):
     user = User.objects.get(pk = pk)
-    items_per_page = 10
-    if "page" in request.GET:
-        page = int(request.GET.get('page'))
-    else:
-        page = 1
-    no_pages = int(math.ceil(float(Post.objects.filter(user=user).count()) / items_per_page))
-    leaves = Leaves.objects.filter(user=user)[(page - 1) * items_per_page:page * items_per_page]
-    return render(request,'admin/user/leaves.html',{'user':user,'leaves':leaves,'current_page':page,'last_page':no_pages})
+    leaves = Leaves.objects.filter(user=user)
+    return render(request,'admin/user/leaves.html',{'user':user,'leaves':leaves})
