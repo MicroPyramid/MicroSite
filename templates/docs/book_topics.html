@@ -2,23 +2,22 @@
 <html>
   <head>
     <title>read_the_docs</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div class="col-md-3 tree_div">
     <h3>{{book.title}}</h3>
-    <h5>List of topics</h5>
       <ul>
         {% for topic in parent_topics %}
         <li>
           <a href="{% url "docs:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.display_title}}</a>
           <ul>
           {% for subtopic in topic.topic_set.all %}
-            {% if subtopic.status == "Approved" and subtopic.shadow == "None" %}
+            {% if subtopic.status == "Approved" and not subtopic.shadow %}
               <li><a href="{% url "docs:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.display_title}}</a></li>
             {% endif %}
           {% endfor %}  
@@ -54,8 +53,8 @@
     <!--/ROW-->
      <style type="text/css">
     body{
-    	position: relative;
-    	height: 100%;
+    	/*sition: relative !important;*/
+    	height: 100%!important;
     	font-size: 15px;
     	font-family: 'Open Sans', sans-serif;
     }

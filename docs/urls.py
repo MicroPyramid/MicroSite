@@ -19,7 +19,9 @@ urlpatterns = patterns('docs.views',
     url(r'^(?P<slug>[-\w]+)/create-topic/$', 'create_topic', name='create_topic'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/$','view_topic', name='view_topic'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/edit/$','edit_topic', name='edit_topic'),
-    url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/approve/$','approve_topic', name='approve_topic'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/reject/$','reject_topic', name='reject_topic'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/delete/$','delete_topic', name='delete_topic'),
+    url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/approve/$','approve_topic', name='approve_topic'),
+    url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/(?P<subtopic_slug>[-\w]+)/$','view_subtopic', name='view_subtopic'),
+    
 )

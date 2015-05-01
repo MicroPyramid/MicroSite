@@ -92,7 +92,17 @@ def create_topic(request, slug):
 def view_topic(request, book_slug, topic_slug):
     book = Book.objects.get(slug = book_slug)
     topic = Topic.objects.get(slug = topic_slug)
-    return render_to_response("docs/topics/topic_detail.html", {"book" : book, "topic" : topic})
+    topic_shadows = Topic.objects.filter(shadow=topic.id)
+    return render_to_response("docs/topics/topic_detail.html", {"book" : book, "topic" : topic, "topic_shadows":topic_shadows})
+
+
+@login_required
+def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
+    book = Book.objects.get(slug = book_slug)
+    topic = Topic.objects.get(slug = topic_slug)
+    subtopic = Topic.objects.get(slug = subtopic_slug)
+    subtopic_shadows = Topic.objects.filter(shadow=subtopic.id)
+    return render_to_response("docs/topics/topic_detail.html", {"book" : book, "topic":topic, "subtopic" : subtopic, "subtopic_shadows":subtopic_shadows})
 
 
 @login_required
