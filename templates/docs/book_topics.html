@@ -18,8 +18,8 @@
           <a href="{% url "docs:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.display_title}}</a>
           <ul>
           {% for subtopic in topic.topic_set.all %}
-            {% if subtopic.status == "Approved" %}
-            <li><a href="{% url "docs:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.display_title}}</a></li>
+            {% if subtopic.status == "Approved" and subtopic.shadow == "None" %}
+              <li><a href="{% url "docs:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.display_title}}</a></li>
             {% endif %}
           {% endfor %}  
           </ul>
