@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^portal/employee/', include('employee.urls', namespace='employee')),
     url(r'^portal/kb/', include('micro_kb.urls', namespace='micro_kb')),
     url(r'^docs/', include('docs.urls', namespace='docs')),
-    url(r'^(?P<slug>[-\w]+)/$','pages.views.site_page'),
+    # url(r'^(?P<slug>[-\w]+)/$','pages.views.site_page'),
     url(r'^rss.xml$', 'microsite_front.xml.rss' ),
     url(r'^sitemap.xml$', 'microsite_front.xml.sitemap'),
 )

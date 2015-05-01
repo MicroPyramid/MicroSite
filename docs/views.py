@@ -5,6 +5,7 @@ from docs.models import Book, Topic, PRIVACY_CHOICES
 from docs.forms import BookForm, TopicForm
 from django.core.exceptions import ObjectDoesNotExist
 from micro_admin.models import User
+from django.db.models import Q
 import json
 
 
@@ -263,3 +264,28 @@ def delete_book(request, slug):
     
     else:
         return render_to_response("admin/accessdenied.html")
+
+
+def book_list(request):
+    books = Book.objects.filter(privacy="public",status="Approved")
+    return render_to_response("docs/books.html",{"books":books})
+
+
+def book_info(request, slug):
+    book = Book.objects.get(slug=slug)
+    parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
+    return render_to_response("docs/book_topics.html",{"book":book,"parent_topics":parent_topics})
+
+
+def topic_info(request, book_slug, topic_slug):
+    book = Book.objects.get(slug=book_slug)
+    topic = Topic.objects.get(slug=topic_slug)
+    parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
+    return render_to_response("docs/book_topics.html",{"book":book,"parent_topics":parent_topics,"topic":topic})
+
+
+def subtopic_info(request, book_slug, subtopic_slug):
+    book = Book.objects.get(slug=book_slug)
+    subtopic = Topic.objects.get(slug=subtopic_slug)
+    parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
+    return render_to_response("docs/book_topics.html",{"book":book,"parent_topics":parent_topics,"subtopic":subtopic})

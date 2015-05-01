@@ -19,7 +19,7 @@ class Book(models.Model):
     admin = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='books')
     display_title = models.CharField(max_length=100)
     title = models.CharField(max_length=100, unique = True)
-    slug = models.CharField(max_length=50, unique = True)
+    slug = models.SlugField(unique = True)
     created_on = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
     updated_on = models.DateTimeField(auto_now_add=True)
@@ -68,7 +68,7 @@ class Topic(models.Model):
 
     display_title = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    slug = models.CharField(max_length=50, unique = True)
+    slug = models.SlugField(unique = True)
     created_on = models.DateTimeField(auto_now_add=True)
     
     content = models.TextField()
