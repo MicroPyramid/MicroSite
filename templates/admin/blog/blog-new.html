@@ -45,13 +45,22 @@
           <input type="file" name="featuredimage" />
         </p>
       </div>
+      {% if request.user.user_roles == "Admin" or request.user.is_special %}
       <div class="draft-box">
-        <input type="checkbox"> <label>Save As Draft</label>
+        <input type="radio" name="status" value="D">
+        <label>Saved as Draft</label>
       </div>
       <div class="draft-box">
-        <input type="checkbox" name="featured_post" value="on">
-        <label>Featured Post</label>
+        <input type="radio" name="status" value="P">
+        <label>Publish Post</label>
       </div>
+        {% if request.user.user_roles == "Admin" %}
+          <div class="draft-box">
+            <input type="radio" name="status" value="T">
+            <label>Reject Post</label>
+          </div>
+        {% endif %}  
+      {% endif %}
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
       </div>

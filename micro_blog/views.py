@@ -260,11 +260,14 @@ def new_post(request):
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
             blog_post.user=request.user
-
-            if request.POST.get('status',''):
-                blog_post.status='D'
-            else:
+            
+            if request.POST.get('status') == "publish":
                 blog_post.status='P'
+            elif request.POST.get('status') == "reject":
+                blog_post.status='T'
+            else:    
+                blog_post.status='D'
+            
             blog_post.save()
             if request.POST.get('tags',''):
                 tags = request.POST.get('tags')
@@ -283,7 +286,7 @@ def new_post(request):
     categories = Category.objects.all()
     c = {}
     c.update(csrf(request))
-    return render_to_response('admin/blog/blog-new.html',{'categories':categories,'csrf_token':c['csrf_token']})
+    return render(request,'admin/blog/blog-new.html',{'categories':categories,'csrf_token':c['csrf_token']})
 
 
 @login_required
@@ -293,11 +296,12 @@ def edit_blog_post(request,blog_slug):
         validate_blog = BlogpostForm(request.POST,instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
-            blog_post.user=request.user
+
             if request.POST.get('status'):
+                blog_post.status = request.POST.get('status')
+            else:    
                 blog_post.status='D'
-            else:
-                blog_post.status='P'
+            
             blog_post.save()
 
             if request.POST.get('tags',''):
@@ -322,7 +326,7 @@ def edit_blog_post(request,blog_slug):
     if request.user.is_admin or blog_post.user ==request.user :
         c = {}
         c.update(csrf(request))
-        return render_to_response('admin/blog/blog-edit.html',{'blog_post':blog_post,'categories':categories,'csrf_token':c['csrf_token']})
+        return render(request,'admin/blog/blog-edit.html',{'blog_post':blog_post,'categories':categories,'csrf_token':c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -388,3 +392,4 @@ def contact(request):
     data = {'error':False, 'response': 'submitted successfully'}
 
     return HttpResponse(json.dumps(data))
+    
