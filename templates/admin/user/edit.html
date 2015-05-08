@@ -81,6 +81,10 @@
         <input type="checkbox" name="is_active" value="true" {% if edit_user.is_active %}checked{% endif %}>
         <label>Active</label>
       </div>
+      <div class="draft-box">
+        <input type="checkbox" name="is_special" value="true" {% if edit_user.is_special %}checked{% endif %}>
+        <label>Special Permission</label>
+      </div>
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
       </div>

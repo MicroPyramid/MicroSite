@@ -39,7 +39,7 @@ def change_password(request):
 def new_user(request):
     if request.method == 'POST':
         validate_user = UserForm(request.POST)
-        datestring_format = datetime.datetime.strptime(request.POST.get('date_of_birth'),"%d/%m/%Y").strftime("%Y-%m-%d")
+        datestring_format = datetime.datetime.strptime(request.POST.get('date_of_birth'),"%m/%d/%Y").strftime("%Y-%m-%d")
         date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
 
         if validate_user.is_valid():
@@ -70,6 +70,9 @@ def new_user(request):
 
             if request.POST.get('is_active',False):
                 user.is_active = True
+
+            if request.POST.get('is_special',False):
+                user.is_special = True
 
             user.save()
             data = {'error':False, 'response':'created successfully'}
@@ -106,6 +109,9 @@ def edit_user(request,pk):
 
                 if request.POST.get('is_active',False):
                     current_user.is_active = True
+
+                if request.POST.get('is_special',False):
+                    current_user.is_special = True
 
                 current_user.save()
 

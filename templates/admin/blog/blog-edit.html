@@ -45,14 +45,22 @@
           <input type="file" name="featuredimage" />
         </p>
       </div>
+      {% if request.user.user_roles == "Admin" or request.user.is_special %}
       <div class="draft-box">
-        <input type="checkbox" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
-        <label>Save As Draft</label>
+        <input type="radio" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
+        <label>Saved as Draft</label>
       </div>
       <div class="draft-box">
-        <input type="checkbox" name="featured_post" value="on" {% ifequal blog_post.featured_post 'on' %}checked{% endifequal %}>
-        <label>Featured Post</label>
+        <input type="radio" name="status" value="P" {% ifequal blog_post.status 'P' %}checked{% endifequal %}>
+        <label>Publish Post</label>
       </div>
+        {% if request.user.user_roles == "Admin" and not blog_post.user.user_roles == "Admin" %}
+          <div class="draft-box">
+            <input type="radio" name="status" value="T" {% ifequal blog_post.status 'T' %}checked{% endifequal %}>
+            <label>Reject Post</label>
+          </div>
+        {% endif %}
+      {% endif %}
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
       </div>
@@ -108,7 +116,6 @@
   $ = jQuery;
     $('form#blogform').ajaxForm({
       beforeSerialize: function() {
-        console.log(CKEDITOR.instances.textareacontents.getData())
         $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
       },
       dataType: 'json',

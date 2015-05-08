@@ -5,6 +5,7 @@ from docs.models import Book, Topic, PRIVACY_CHOICES
 from docs.forms import BookForm, TopicForm
 from django.core.exceptions import ObjectDoesNotExist
 from micro_admin.models import User
+from django.db.models import Q
 import json
 
 
@@ -91,7 +92,17 @@ def create_topic(request, slug):
 def view_topic(request, book_slug, topic_slug):
     book = Book.objects.get(slug = book_slug)
     topic = Topic.objects.get(slug = topic_slug)
-    return render_to_response("docs/topics/topic_detail.html", {"book" : book, "topic" : topic})
+    topic_shadows = Topic.objects.filter(shadow=topic.id)
+    return render_to_response("docs/topics/topic_detail.html", {"book" : book, "topic" : topic, "topic_shadows":topic_shadows})
+
+
+@login_required
+def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
+    book = Book.objects.get(slug = book_slug)
+    topic = Topic.objects.get(slug = topic_slug)
+    subtopic = Topic.objects.get(slug = subtopic_slug)
+    subtopic_shadows = Topic.objects.filter(shadow=subtopic.id)
+    return render_to_response("docs/topics/topic_detail.html", {"book" : book, "topic":topic, "subtopic" : subtopic, "subtopic_shadows":subtopic_shadows})
 
 
 @login_required
@@ -263,3 +274,28 @@ def delete_book(request, slug):
     
     else:
         return render_to_response("admin/accessdenied.html")
+
+
+def book_list(request):
+    books = Book.objects.filter(privacy="public",status="Approved")
+    return render_to_response("docs/books.html",{"books":books})
+
+
+def book_info(request, slug):
+    book = Book.objects.get(slug=slug)
+    parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
+    return render_to_response("docs/book_topics.html",{"book":book,"parent_topics":parent_topics})
+
+
+def topic_info(request, book_slug, topic_slug):
+    book = Book.objects.get(slug=book_slug)
+    topic = Topic.objects.get(slug=topic_slug)
+    parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
+    return render_to_response("docs/book_topics.html",{"book":book,"parent_topics":parent_topics,"topic":topic})
+
+
+def subtopic_info(request, book_slug, subtopic_slug):
+    book = Book.objects.get(slug=book_slug)
+    subtopic = Topic.objects.get(slug=subtopic_slug)
+    parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
+    return render_to_response("docs/book_topics.html",{"book":book,"parent_topics":parent_topics,"subtopic":subtopic})

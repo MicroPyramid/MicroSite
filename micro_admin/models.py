@@ -41,6 +41,7 @@ class User(AbstractBaseUser):
     date_of_birth = models.DateField(default='1970-01-01')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_special = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100, default='')
     last_name = models.CharField(max_length=100, default='')
     gender = models.CharField(choices = GENDER_TYPES ,max_length = 10)
