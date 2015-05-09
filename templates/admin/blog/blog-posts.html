@@ -25,7 +25,7 @@
           <tr>
             <td><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></td>
             <td class="txt_center">{{post.author}}</td>
-            <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}
+            <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}
             </td>
             <td class="txt_center">{{ post.blogcomments_set.all.count|default:'0' }}</td>
             <td class="txt_center">{% if post|is_editable_by:request.user %}

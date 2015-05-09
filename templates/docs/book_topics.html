@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>read_the_docs</title>
+    <title>{{book.title}} | Docs | Micro Pyramid</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -37,7 +37,7 @@
     {% endif %}
     {% if not topic and not subtopic %}
       <span class="by">By</span>
-      <span class='author'>{{book.admin.first_name}}</span>
+      <span class='author'>{{book.admin.get_full_name}}</span>
     {% endif %}
     </div>
     {% if topic %}

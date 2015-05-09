@@ -1,50 +1,62 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
-<div class="row marl main-content">
-  <h4>Book Viewer <small> -To Add,Delete,Edit,Enable/Disable Your Books</small></h4>
-  <div class="row marl blog-form">
-    <div class="table-responsive table-bordered">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-        {% if request.user.is_admin %}
-          <a href="{% url 'docs:create_book' %}"><button type="button" class="btn btn-success">Add New Book</button></a></div>
-        {% endif %}
-        <div class="panel-body">
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th width='5%'>No</th>
-                <th width="15%">Title</th>
-                <th width="10%">Slug</th>
-                <th width="8%">Owner</th>
-                <th width="10%">Created Date</th>
-                <th width="15%">Authors</th>
-                <th width="5%">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for book in books %}
-              <tr>
-                <td>{{forloop.counter}}</td>
-                <td><a href="{% url 'docs:view_book' slug=book.slug %}">{{book.display_title}}</a></td>
-                <td>{{book.slug}}</td>
-                <td>{{book.owner}}</td>
-                <td>{{book.created_on}}</td>
-                <td class="authors_div">{% for author in book.authors.all %}
-                  <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
-                {% endfor %}</td>
-                <td>
-                  <a href="{% url 'docs:edit_book' slug=book.slug %}"><i class="fa fa-pencil-square-o edit-color"></i></a>
-                  <a href="{% url 'docs:delete_book' slug=book.slug %}"><i class="fa fa-trash-o trash-color"></i></a>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Book Viewer</h3>
+    {% if request.user.is_admin %}
+    <span>
+      <a href="{% url 'docs:create_book' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Book </button></a>
+    </span>
+    {% endif %}
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" id="books_list">
+        <thead>
+          <tr>
+            <th width='1%'>No</th>
+            <th width="8%">Title</th>
+            <th width="10%">Slug</th>
+            <th width="7%">Owner</th>
+            <th width="13%">Created Date</th>
+            <th width="10%">Authors</th>
+            <th width="10%">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td><a href="{% url 'docs:view_book' slug=book.slug %}">{{book.display_title}}</a></td>
+            <td>{{book.slug}}</td>
+            <td>{{book.owner}}</td>
+            <td>{{book.created_on}}</td>
+            <td class="authors_div">{% for author in book.authors.all %}
+              <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+            {% endfor %}</td>
+            <td>
+              <a href="{% url 'docs:edit_book' slug=book.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
+              <a href="{% url 'docs:delete_book' slug=book.slug %}" class="delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+{% load compress %}
+{% compress js %}
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+
+    $('#books_list').DataTable({
+      "sPaginationType": "full_numbers" 
+    });
+
+  });
+</script>>
+{% endcompress %}
 <!-- main content ends here-->
 {% endblock %}

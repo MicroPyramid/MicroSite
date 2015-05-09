@@ -1,83 +1,78 @@
 {% extends 'admin/base.html' %}
 {% block stage %}
 {% load topics_filters %}
-<div class="row marl main-content">
+<div class="panel panel-default">
   <div class="panel-heading">
-    <h4>Topic Detail <small> -To Add,Delete,Edit Topic</small></h4>
+    <h3 class="panel-title">Topic Detail</h3>
   </div>
-  <div class="row marl blog-form blog-new">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="col-md-3 tree_div">
-          <ul class="parent_list">
-            <li class="topic li_active"><a href="{% url "docs:view_topic" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-right"></i>{{topic.display_title|capfirst}}</a>
-              
-              <ul class="sub_topic_list">
-                {% for subtopic in topic.topic_set.all %}
-                  {% if not subtopic.shadow %}
-                  <li><a href="{% url "docs:view_subtopic" subtopic_slug=subtopic.slug topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-file-text-o"></i>{{subtopic.display_title|capfirst}}</a></li>
-                  {% endif %}
-                {% endfor %}
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-9 content_div">
-        <div>
-        {% if topic_shadows %}
-        <span>Shadows:</span>
-          {% for shadow in topic_shadows %}
-          <a href="{% url "docs:view_topic" topic_slug=shadow.slug book_slug=book.slug %}"><span>{{forloop.counter}}</span></a>
-          {% endfor %}
-        {% endif %}
-        {% if subtopic_shadows %}
-        <span>Shadows:</span>
-          {% for shadow in subtopic_shadows %}
-          <a href="{% url "docs:view_subtopic" subtopic_slug=shadow.slug topic_slug=topic.slug book_slug=book.slug %}"><span>{{forloop.counter}}</span></a>
-          {% endfor %}
-        {% endif %}
-        </div>
-          <div>
-          {% if topic and not subtopic%}
-            <h5>{{topic.display_title|capfirst}}</h5>
-            <p>
-              {% if topic.status == "Approved" %}
-                Approved
-              {% else %}
-                Waiting for Approval
-              {% endif %}
-              </p>
-            <span class="actions_book">
-            {% if not topic.shadow %}
-              <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
-            {% endif %}  
-              <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
-              <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
-              <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
-            </span>
-            {{topic.content|safe}}
-            {% endif %}
-            {% if subtopic %}
-              <h5>{{subtopic.display_title|capfirst}}</h5>
-              <p>
-              {% if subtopic.status == "Approved" %}
-                Approved
-              {% else %}
-                Waiting for Approval
-              {% endif %}
-              </p>
-              <span class="actions_book">
+  <div class="panel-body">
+    <div class="col-md-3 tree_div">
+      <ul class="parent_list">
+        <li class="topic li_active"><a href="{% url "docs:view_topic" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-right"></i>{{topic.display_title|capfirst}}</a>
+          <ul class="sub_topic_list">
+            {% for subtopic in topic.topic_set.all %}
               {% if not subtopic.shadow %}
-                <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
+              <li class="sub-topic"><a href="{% url "docs:view_subtopic" subtopic_slug=subtopic.slug topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-file-text-o"></i>{{subtopic.display_title|capfirst}}</a></li>
               {% endif %}
-                <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
-                <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
-                <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
-              </span>
-              {{subtopic.content|safe}}
-            {% endif %}
-          </div>
-        </div>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9 content_div">
+    <div>
+    {% if topic_shadows %}
+    <span>Shadows:</span>
+      {% for shadow in topic_shadows %}
+      <a href="{% url "docs:view_topic" topic_slug=shadow.slug book_slug=book.slug %}"><span>{{forloop.counter}}</span></a>
+      {% endfor %}
+    {% endif %}
+    {% if subtopic_shadows %}
+    <span>Shadows:</span>
+      {% for shadow in subtopic_shadows %}
+      <a href="{% url "docs:view_subtopic" subtopic_slug=shadow.slug topic_slug=topic.slug book_slug=book.slug %}"><span>{{forloop.counter}}</span></a>
+      {% endfor %}
+    {% endif %}
+    </div>
+      <div>
+      {% if topic and not subtopic%}
+        <h5>{{topic.display_title|capfirst}}</h5>
+        <p>
+          {% if topic.status == "Approved" %}
+            Approved
+          {% else %}
+            Waiting for Approval
+          {% endif %}
+          </p>
+        <span class="actions_book">
+        {% if not topic.shadow %}
+          <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
+        {% endif %}  
+          <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
+          <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
+          <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+        </span>
+        {{topic.content|safe}}
+        {% endif %}
+        {% if subtopic %}
+          <h5>{{subtopic.display_title|capfirst}}</h5>
+          <p>
+          {% if subtopic.status == "Approved" %}
+            Approved
+          {% else %}
+            Waiting for Approval
+          {% endif %}
+          </p>
+          <span class="actions_book">
+          {% if not subtopic.shadow %}
+            <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
+          {% endif %}
+            <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
+            <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
+            <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+          </span>
+          {{subtopic.content|safe}}
+        {% endif %}
       </div>
     </div>
   </div>
@@ -85,15 +80,29 @@
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
-  $('.parent_list .topic').click(function(e){
-    $(this).children('ul').slideDown('slow');
-    $(this).children('i').css({
-      "transform":"rotate(90deg)",
-      "padding-left":"9px",
-    });
-  });
 
   $(document).ready(function() {
+
+    if($('a[href="'+window.location.pathname+'"]').parent('li').hasClass("topic")){
+      
+      $('a[href="'+window.location.pathname+'"]').parent('li').children('ul').slideDown('slow');
+
+      $('a[href="'+window.location.pathname+'"]').children('i').css({
+        "transform":"rotate(90deg)",
+        "padding-left":"9px",
+      });
+    }
+
+    if($('a[href="'+window.location.pathname+'"]').parent('li').hasClass("sub-topic")){
+      
+      $('a[href="'+window.location.pathname+'"]').parent('li').parent('ul').slideDown('slow');
+
+      $('a[href="'+window.location.pathname+'"]').parent('li').parent('ul').parent('li').children('a').children('i').css({
+        "transform":"rotate(90deg)",
+        "padding-left":"9px",
+      });
+    }
+
     $('.btn-click').click(function(e) {
       e.preventDefault();
       $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){

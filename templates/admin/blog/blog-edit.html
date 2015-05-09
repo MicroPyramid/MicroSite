@@ -45,16 +45,16 @@
           <input type="file" name="featuredimage" />
         </p>
       </div>
-      {% if request.user.user_roles == "Admin" or request.user.is_special %}
+      {% if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_admin %}
       <div class="draft-box">
         <input type="radio" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
-        <label>Saved as Draft</label>
+        <label>Save as Draft</label>
       </div>
       <div class="draft-box">
         <input type="radio" name="status" value="P" {% ifequal blog_post.status 'P' %}checked{% endifequal %}>
         <label>Publish Post</label>
       </div>
-        {% if request.user.user_roles == "Admin" and not blog_post.user.user_roles == "Admin" %}
+        {% if request.user.user_roles == "Admin" or request.user.is_admin %}
           <div class="draft-box">
             <input type="radio" name="status" value="T" {% ifequal blog_post.status 'T' %}checked{% endifequal %}>
             <label>Reject Post</label>

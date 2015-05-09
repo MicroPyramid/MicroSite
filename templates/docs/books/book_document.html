@@ -1,53 +1,80 @@
 {% extends 'admin/base.html' %}
 {% block stage %}
 {% load topics_filters %}
-<div class="row marl main-content">
-  <h4>{{book.display_title|capfirst}} Documentation <small> - To View, Edit, Delete Book</small>
-  </h4>
-  <div class="row marl blog-form blog-new">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="col-md-3 tree_div">
-          <ul class="parent_list">
-            {% for topic in topics %}
-              <li class="topic"><a href="#{{topic.slug}}"><i class="fa fa-caret-right"></i>
-                {{topic.display_title|capfirst}}</a>
-                <ul class="sub_topic_list">
-                  {% for subtopic in topic|get_sub_topics %}
-                    <a href="#{{subtopic.slug}}"><li><i class="fa fa-file-text-o"></i>{{subtopic.display_title|capfirst}}</li></a>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="col-md-9 content_div">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{book.display_title|capfirst}} Documentation </h3>
+  </div>
+  <div class="panel-body">
+    <div class="col-md-3 tree_div">
+      <ul class="parent_list">
         {% for topic in topics %}
-          <div id="{{topic.slug}}">
-            <h5>{{topic.display_title|capfirst}}</h5>
-            <span class="actions_book">
-              <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
-              <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
-              <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
-              <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
-            </span>
-            {{topic.content|safe}}
-            {% for subtopic in topic|get_sub_topics %}
-              <div id="{{subtopic.slug}}">
-                <h4>{{subtopic.display_title|capfirst}}</h4>
-                <span class="actions_book">
-                  <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
-                  <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
-                  <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
-                  <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
-                </span>
-                {{subtopic.content|safe}}
-              </div>
+          <li class="topic"><a href="#{{topic.slug}}"><i class="fa fa-caret-right"></i>
+            {{topic.display_title|capfirst}}</a>
+            <ul class="sub_topic_list">
+              {% for subtopic in topic|get_sub_topics %}
+                <li class="topic sub"><a href="#{{subtopic.slug}}"><i class="fa fa-file-text-o"></i>{{subtopic.display_title|capfirst}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-9 content_div">
+      <div class="book_desc">
+        <h5 style="display:inline-block;">{{book.display_title|capfirst}}</h5>
+        <span class="by">By</span>
+        <span class='author'>{{book.admin.get_full_name}}</span>
+        {{book.description|safe}}
+        <!--AUTHORS ROW-->
+        <div class="authors_div">
+          <span class="authors">Authors</span>
+            {% for author in book.authors.all %}
+              <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
             {% endfor %}
+        </div>
+        <!--/AUTHORS ROW-->
+      </div>
+      {% for topic in topics %}
+        <div id="{{topic.slug}}" class="content-div">
+          <h5>{{topic.display_title|capfirst}}</h5>
+          <span class="actions_book">
+            <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
+            <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
+            <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
+            <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+          </span>
+          {{topic.content|safe}}
+          <!--AUTHORS ROW-->
+          <div class="authors_div">
+            <span class="authors">Authors</span>
+              {% for author in topic.authors.all %}
+                <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+              {% endfor %}
+          </div>
+          <!--/AUTHORS ROW-->
+        </div>
+        {% for subtopic in topic|get_sub_topics %}
+          <div id="{{subtopic.slug}}" class="content-div">
+            <h5>{{subtopic.display_title|capfirst}}</h5>
+            <span class="actions_book">
+              <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
+              <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
+              <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+            </span>
+            {{subtopic.content|safe}}
+            <!--AUTHORS ROW-->
+            <div class="authors_div">
+              <span class="authors">Authors</span>
+                {% for author in subtopic.authors.all %}
+                  <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+                {% endfor %}
+            </div>
+            <!--/AUTHORS ROW-->
           </div>
         {% endfor %}
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </div>
@@ -56,11 +83,26 @@
 {% compress js %}
 <script type="text/javascript">
   $('.parent_list .topic').click(function(e){
-    $(this).children('ul').slideDown('slow');
-    $(this).children('i').css({
-      "transform":"rotate(90deg)",
-      "padding-left":"9px",
-    });
+    $(".book_desc").hide();
+    $(".content-div").hide();
+    if ($(this).hasClass("sub")){
+      $(this).parent('ul').slideDown('slow');
+      $(this).parent('ul').parent('li').children('a').children('i').css({
+        "transform":"rotate(90deg)",
+        "padding-left":"9px",
+      });
+    }
+    else{
+      $(this).children('ul').slideDown('slow');
+      $(this).children('a').children('i').css({
+        "transform":"rotate(90deg)",
+        "padding-left":"9px",
+      });
+    }
+
+    $(($(this).children('a').attr("href"))).show();
+    e.stopPropagation();
+
   });
 
   $(document).ready(function() {
