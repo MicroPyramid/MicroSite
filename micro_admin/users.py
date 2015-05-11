@@ -39,10 +39,10 @@ def change_password(request):
 def new_user(request):
     if request.method == 'POST':
         validate_user = UserForm(request.POST)
-        datestring_format = datetime.datetime.strptime(request.POST.get('date_of_birth'),"%m/%d/%Y").strftime("%Y-%m-%d")
-        date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
-
+        
         if validate_user.is_valid():
+            datestring_format = datetime.datetime.strptime(request.POST.get('date_of_birth'),"%m/%d/%Y").strftime("%Y-%m-%d")
+            date = datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
 
             user = User.objects.create_user(email=request.POST.get('email'), password=request.POST.get('password'))
             user.first_name = request.POST.get('first_name')
