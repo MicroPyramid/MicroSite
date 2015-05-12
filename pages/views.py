@@ -7,6 +7,7 @@ from pages.models import Page, Menu
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
+from django.core.exceptions import ObjectDoesNotExist
 
 @login_required
 def pages(request):
@@ -164,6 +165,9 @@ def edit_menu(request, pk):
         return render_to_response('admin/accessdenied.html')
 
 def site_page(request,slug):
-    page= Page.objects.get(slug=slug)
-    return render_to_response('site/page.html',{ 'page':page})
+    try:
+        page = Page.objects.get(slug=slug)
+    except ObjectDoesNotExist:
+        page = {"content": "<p>Sorry. The page you have requested cannot be found.</p>"}
+    return render_to_response('site/page.html', {'page': page})
 

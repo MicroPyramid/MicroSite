@@ -12,6 +12,7 @@ from micro_blog.views import store_image
 import os
 from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
+from django.core.exceptions import ObjectDoesNotExist
 
 #@csrf_protect
 def index(request):
@@ -153,7 +154,7 @@ def menu_order(request,pk):
                     down_link.lvl = down_link.lvl-1
                     curr_link.save()
                     down_link.save()
-                except:
+                except ObjectDoesNotExist:
                     pass
                 data = {'error':False}
         else:
@@ -169,7 +170,7 @@ def menu_order(request,pk):
                     up_link.lvl = up_link.lvl+1
                     curr_link.save()
                     up_link.save()
-                except:
+                except ObjectDoesNotExist:
                     pass
                 data = {'error':False}
         return HttpResponse(json.dumps(data))
