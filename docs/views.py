@@ -1,12 +1,13 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.contrib.auth.decorators import login_required
-from docs.models import Book, Topic, PRIVACY_CHOICES
+from docs.models import Book, Topic, PRIVACY_CHOICES, History
 from docs.forms import BookForm, TopicForm
 from django.core.exceptions import ObjectDoesNotExist
 from micro_admin.models import User
 from django.db.models import Q
 import json
+import datetime
 
 
 @login_required
@@ -132,6 +133,13 @@ def edit_topic(request, book_slug, topic_slug):
                 book.authors.add(request.user)
                 book.save()
 
+            try:
+                Topic.objects.get(slug = topic_slug, authors__in = [request.user])
+
+            except ObjectDoesNotExist:
+                topic.authors.add(request.user)
+                topic.save()
+
             if topic.parent:
                 new_topic.parent = topic.parent
 
@@ -157,17 +165,28 @@ def approve_topic(request, book_slug, topic_slug):
     if request.user.is_admin or book.admin == request.user:
         
         topic = Topic.objects.get(slug = topic_slug)
-        topic.status = "Approved"
-        topic.save()
 
         if topic.shadow:
-            # If approved one is shadow of a topic or sub-topic, then approve main topic or sub-topic, 
-            # replace content of main topic or sub-topic with approved shadow.
+            history = History.objects.create(topic = topic.shadow, title = topic.shadow.title, 
+                            content = topic.shadow.content)
+
+            history.slug = history.create_slug(topic.shadow.slug)
+            history.save()
+
+            topic.shadow.title = topic.title
             topic.shadow.status = "Approved"
             topic.shadow.content = topic.content
+            topic.updated_on = datetime.datetime.now()
             topic.shadow.save()
 
-        data = {"response" : "Approved Successfully"}
+            topic.delete()
+
+            data = {"topic_slug": topic.shadow.slug, "response" : "Approved Successfully"}
+        else:
+            topic.status = "Approved"
+            topic.save()
+
+            data = {"response" : "Approved Successfully"}
 
     else:
         data = {"response" : "You don't have the permission to Approve."}

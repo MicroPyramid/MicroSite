@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<title>book_list</title>
+	<title>Docs | Micro Pyramid</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -15,9 +14,9 @@
 <div class="row marl">
 {% for book in books %}
 <div class="book_wrap">
-<a href="{% url "docs:book_info" slug=book.slug %}"><h2>{{book.display_title}}</h2></a>
+<a href="{% url "docs:book_info" slug=book.slug %}"><h2>{{book.title}}</h2></a>
 <div class="border"></div>
-<div class="author_book_list">{{book.admin.first_name}}</div>
+<div class="author_book_list">{{book.admin.get_full_name}}</div>
 <div class="book_list_time">
 <i class="fa fa-clock-o"></i>
 {{book.updated_on}}

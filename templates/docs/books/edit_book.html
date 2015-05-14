@@ -1,66 +1,56 @@
 {% extends 'admin/base.html' %} 
 {% block stage %}
-<div class="row marl main-content">
-<h4>Edit Book <small> -To Edit Your Book</small></h4>
-<div class="row marl blog-form blog-new">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form action="." method="POST" id="book_form">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">Title</label>
-          <input type="Text" class="form-control" id="title" name="title" value="{{book.title}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Display Title</label>
-          <input type="Text" class="form-control" id="display_title" name="display_title" value="{{book.display_title}}">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Book Admin</label>
-          <select name="admin" id="admin" style="color:black;">
-            <option value="select">Select Book Admin</option>
-            {% for user in users %}
-              {% ifequal user.id book.admin.id %}
-                <option value="{{ user.id }}" selected="selected">{{ user.get_full_name }}</option>
-              {% else %}
-                <option value="{{ user.id }}">{{ user.get_full_name }}</option>
-              {% endifequal %}
-            {% endfor %}
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Privacy Setting</label>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Book</h3>
+  </div>
+  <div class="panel-body">
+    <form action="." method="POST" id="book_form">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title <span>*</span></label>
+        <input type="Text" class="form-control" id="title" name="title" value="{{book.title}}">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Book Admin <span>*</span></label>
+        <select name="admin" id="admin" style="color:black;">
+          <option value="select">Select Book Admin</option>
+          {% for user in users %}
+            {% ifequal user.id book.admin.id %}
+              <option value="{{ user.id }}" selected="selected">{{ user.get_full_name }}</option>
+            {% else %}
+              <option value="{{ user.id }}">{{ user.get_full_name }}</option>
+            {% endifequal %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Privacy Setting <span>*</span> : </label>
+        <div id="privacy" style="display:inline-block">
           {% for privacy_choice in privacy_choices %}
             {% ifequal book.privacy privacy_choice.0 %}
-              <input type="radio" class="pagination" id="privacy" name="privacy" value="{{ privacy_choice.0 }}" checked="checked">{{ privacy_choice.0 }}
+              <input type="radio" class="pagination" name="privacy" value="{{ privacy_choice.0 }}" checked="checked">{{ privacy_choice.0 }}
             {% else %}
-              <input type="radio" class="pagination" id="privacy" name="privacy" value="{{ privacy_choice.0 }}">{{ privacy_choice.0 }}
+              <input type="radio" class="pagination" name="privacy" value="{{ privacy_choice.0 }}">{{ privacy_choice.0 }}
             {% endifequal %}
           {% endfor %}
         </div>
-        <div class="row marl text-editor">
-          <div>
-            <div class="">
-              <p>
-                <label class="control-label" for="html">Description</label>
-                <br/>
-              <div class="control-group">
-                <div class="controls" id="content">
-                  <textarea class="input-xlarge" id="textareadescription" name="textareadescription" rows="10" placeholder="Write the description here">{{book.description}}</textarea>
-                  <input type="hidden" name="description" id="description" value="{{book.description}}">
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="html">Description <span>*</span></label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <textarea class="input-xlarge" id="textareadescription" name="textareadescription" rows="10" placeholder="Write the description here">{{book.description}}</textarea>
+            <input type="hidden" name="description" id="description" value="{{book.description}}">
           </div>
         </div>
-        <div class="save-btn">
-          <i class="fa fa-floppy-o"></i><input type="submit" value="Save" class="save" id="search_lessons">
-        </div>
-      </form>
-    </div>
+      </div>
+      <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save" class="save" id="search_lessons">
+      </div>
+    </form>
   </div>
 </div>
-<!-- main content ends here-->
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">

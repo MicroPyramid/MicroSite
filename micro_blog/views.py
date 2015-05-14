@@ -261,12 +261,15 @@ def new_post(request):
             blog_post = validate_blog.save(commit=False)
             blog_post.user=request.user
             
-            if request.POST.get('status') == "publish":
-                blog_post.status='P'
-            elif request.POST.get('status') == "reject":
-                blog_post.status='T'
-            else:    
-                blog_post.status='D'
+            blog_post.status = 'D'
+            
+            if request.POST.get('status') == "P":
+                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_admin:
+                    blog_post.status = 'P'
+                
+            elif request.POST.get('status') == "T":
+                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_admin:
+                    blog_post.status = 'T'
             
             blog_post.save()
             if request.POST.get('tags',''):
@@ -297,10 +300,15 @@ def edit_blog_post(request,blog_slug):
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
 
-            if request.POST.get('status'):
-                blog_post.status = request.POST.get('status')
-            else:    
-                blog_post.status='D'
+            blog_post.status = 'D'
+            
+            if request.POST.get('status') == "P":
+                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_admin:
+                    blog_post.status = 'P'
+                
+            elif request.POST.get('status') == "T":
+                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_admin:
+                    blog_post.status = 'T'
             
             blog_post.save()
 

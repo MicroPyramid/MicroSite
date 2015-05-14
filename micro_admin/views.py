@@ -12,6 +12,7 @@ from micro_blog.views import store_image
 import os
 from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
+from django.core.exceptions import ObjectDoesNotExist
 
 #@csrf_protect
 def index(request):
@@ -142,31 +143,34 @@ def menu_order(request,pk):
             curr_link = Menu.objects.get(pk=pk)
             lvlmax = Menu.objects.filter(parent=pk).aggregate(Max('lvl'))['lvl__max']
             if lvlmax == curr_link.lvl:
-                data = {'error':True,'message':'you cant move down'}
-                return HttpResponseRedirect('/portal/content/menu/')
+                data = {'error':True,'message':'You cant move down.'}
             count=Menu.objects.all().count()
             if count ==curr_link.lvl:
-                data = {'error':True,'message':'you cant move down'}
-                return HttpResponseRedirect('/portal/content/menu/')
+                data = {'error':True,'message':'You cant move down.'}
             else:
-                down_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl+1)
-                curr_link.lvl = curr_link.lvl+1
-                down_link.lvl = down_link.lvl-1
-                curr_link.save()
-                down_link.save()
+                try:
+                    down_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl+1)
+                    curr_link.lvl = curr_link.lvl+1
+                    down_link.lvl = down_link.lvl-1
+                    curr_link.save()
+                    down_link.save()
+                except ObjectDoesNotExist:
+                    pass
                 data = {'error':False}
         else:
             link_parent = Menu.objects.get(pk=pk).parent
             curr_link = Menu.objects.get(pk=pk)
             count=Menu.objects.all().count()
             if curr_link.lvl == 1:
-                data = {'error':True,'message':'you cant move down'}
-                return HttpResponseRedirect('/portal/content/menu/')
+                data = {'error':True,'message':'You cant move up.'}
             else:
-                up_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl-1)
-                curr_link.lvl = curr_link.lvl-1
-                up_link.lvl = up_link.lvl+1
-                curr_link.save()
-                up_link.save()
+                try:
+                    up_link = Menu.objects.get(parent=link_parent,lvl=curr_link.lvl-1)
+                    curr_link.lvl = curr_link.lvl-1
+                    up_link.lvl = up_link.lvl+1
+                    curr_link.save()
+                    up_link.save()
+                except ObjectDoesNotExist:
+                    pass
                 data = {'error':False}
         return HttpResponse(json.dumps(data))

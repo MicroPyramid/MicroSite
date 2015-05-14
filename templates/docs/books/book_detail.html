@@ -1,57 +1,56 @@
 {% extends 'admin/base.html' %} {% block stage %}
-<!-- main content starts here-->
-<div class="row marl main-content">
-  <h4>Book Detail Page<small> -To view complete Book Details & Description</small></h4>
-  <div class="row marl blog-form blog-new">
-    <div class="panel panel-default blog-list">
-        <div class="panel-heading">
-          <a href="{% url 'docs:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button type="button" class="btn btn-success">Add New Topic</button></a>
-          <a href="{% url 'docs:view_book_topics' slug=book.slug %}"><button type="button" class="btn btn-success">View Topics</button></a>
-          <span style="float:right"><a href="{% url 'docs:view_book_doc' slug=book.slug %}">
-          <button type="button" class="btn btn-success">View Docs</button></a></span>
-        </div>
-        <div class="panel-body">
-          <div class="blog-left">
-            <!--book content-->
-            <!--row-->
-            <div class="row marl title_row">
-              <span class="book_admin">Book Admin : </span><span class="admin_name">{{book.owner}}</span>
-              <span class="created_on">Created On : </span><span class="created_detail">{{book.created_on}}</span>
-              <span class="updated_on">Updated On : </span><span class="created_detail">{{book.updated_on}}</span>
-              <span class="actions_book">
-                <a href="{% url 'docs:edit_book' slug=book.slug %}" title="Edit Book"><i class="fa fa-pencil-square-o"></i></a>
-                <a href="{% url 'docs:approve_book' slug=book.slug %}" title="Approve Book"><i class="fa fa-check"></i></a>
-                <a href="{% url 'docs:reject_book' slug=book.slug %}" title="Reject Book"><i class="fa fa-times"></i></a>
-                <a href="{% url 'docs:delete_book' slug=book.slug %}" title="Delete Book"><i class="fa fa-trash-o"></i></a>
-              </span>
-              <div class="slug_div"><span class="slug">Slug : </span><span>{{book.slug|capfirst}}</span></div>
-            </div>
-            <!--TITLE AND DESCRIPTON-->
-            <div class="row marl book_detail authors_div">
-              <!--<span class="image_cover_page">
-              <img src="isla-and-the-happily-ever-after-196x300.jpg">
-              </span>-->
-              <span class="book_title">{{book.title|capfirst}}</span><span class="authors" style="background-color:#FFEFC6;">{{ book.privacy }}</span>
-              <div class="description_div">
-                <span>Description</span>
-                {{book.description|safe}}
-              </div>
-            </div>
-            <!--/TITLE AND DESCRIPTION-->
-            <!--AUTHORS ROW-->
-            <div class="row marl authors_div">
-              <span class="authors">Authors</span>
-                {% for author in book.authors.all %}
-                  <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
-                {% endfor %}
-            </div>
-            <!--/AUTHORS ROW-->
-            <!--ROW-->
-            <!--/book content-->
+<div class="panel panel-default blog-list">
+    <div class="panel-heading">
+      <h3 class="panel-title">Book Detail Page</h3>
+      <span>
+        <a href="{% url 'docs:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Topic </button></a>
+        <a href="{% url 'docs:view_book_topics' slug=book.slug %}"><button class="btn btn-warning">View Topics </button></a>
+        <a href="{% url 'docs:view_book_doc' slug=book.slug %}"><button class="btn btn-warning">Preview</button></a>
+      </span>
+    </div>
+    <div class="panel-body">
+      <div class="blog-left">
+        <!--book content-->
+        <!--row-->
+        <div class="row marl title_row">
+          <span class="book_admin">Book Admin : </span><span class="admin_name">{{book.owner}}</span>
+          <span class="created_on">Created On : </span><span class="created_detail">{{book.created_on}}</span>
+          <span class="updated_on">Updated On : </span><span class="created_detail">{{book.updated_on}}</span>
+          <span class="actions_book">
+            <a href="{% url 'docs:edit_book' slug=book.slug %}" title="Edit Book"><i class="fa fa-pencil-square-o"></i></a>
+            <a href="{% url 'docs:approve_book' slug=book.slug %}" title="Approve Book"><i class="fa fa-check"></i></a>
+            <a href="{% url 'docs:reject_book' slug=book.slug %}" title="Reject Book"><i class="fa fa-times"></i></a>
+            <a href="{% url 'docs:delete_book' slug=book.slug %}" title="Delete Book"><i class="fa fa-trash-o"></i></a>
+          </span>
+          <div class="slug_div">
+            <span class="slug">Slug : </span><span>{{book.slug}}</span>
+            <span class="status">Status : </span><span>{{book.status}}</span>
           </div>
         </div>
+        <!--TITLE AND DESCRIPTON-->
+        <div class="row marl book_detail authors_div">
+          <!--<span class="image_cover_page">
+          <img src="isla-and-the-happily-ever-after-196x300.jpg">
+          </span>-->
+          <span class="book_title">{{book.title|capfirst}}</span><span class="authors" style="background-color:#FFEFC6;">{{ book.privacy }}</span>
+          <div class="description_div">
+            <span>Description :</span>
+            {{book.description|safe}}
+          </div>
+        </div>
+        <!--/TITLE AND DESCRIPTION-->
+        <!--AUTHORS ROW-->
+        <div class="row marl authors_div">
+          <span class="authors">Authors</span>
+            {% for author in book.authors.all %}
+              <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
+            {% endfor %}
+        </div>
+        <!--/AUTHORS ROW-->
+        <!--ROW-->
+        <!--/book content-->
+      </div>
     </div>
-  </div>
 </div>
 {% endblock %}
 <!-- main content ends here-->

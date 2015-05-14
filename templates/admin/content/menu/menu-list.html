@@ -62,23 +62,21 @@
 <script type="text/javascript">
   $ = jQuery;
   $(document).ready(function() {
-    $('.fa-caret-down').click(function(data){
-        var thisRow = $(this).closest('tr');
-        var nextRow = thisRow.next();
-        if (nextRow.length) {
-            nextRow.after(thisRow);
-        }
+    $('.fa-caret-down').click(function(){
         $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
-        });
+          if (data.message){
+            alert(data.message);
+          }
+          window.location = '/portal/content/menu/';
+        }, 'json');
     });
-    $('.fa-caret-up').click(function(data){
-        var thisRow = $(this).closest('tr');
-        var prevRow = thisRow.prev();
-        if (prevRow.length) {
-            prevRow.before(thisRow);
-        }
+    $('.fa-caret-up').click(function(){
         $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'up'},function(data){
-        });
+          if (data.message){
+            alert(data.message);
+          }
+          window.location = '/portal/content/menu/';
+        }, 'json');
     });
   });
 </script>
