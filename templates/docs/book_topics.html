@@ -14,11 +14,11 @@
       <ul>
         {% for topic in parent_topics %}
         <li>
-          <a href="{% url "docs:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.display_title}}</a>
+          <a href="{% url "docs:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.title}}</a>
           <ul>
           {% for subtopic in topic.topic_set.all %}
             {% if subtopic.status == "Approved" and not subtopic.shadow %}
-              <li><a href="{% url "docs:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.display_title}}</a></li>
+              <li><a href="{% url "docs:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a></li>
             {% endif %}
           {% endfor %}  
           </ul>
@@ -29,11 +29,11 @@
     <div class="col-md-9 content_div_book">
     <div class="book_title">
     {% if topic %}
-      <h3>{{topic.display_title}}</h3>
+      <h3>{{topic.title}}</h3>
     {% elif subtopic %}
-      <h3>{{subtopic.display_title}}</h3>
+      <h3>{{subtopic.title}}</h3>
     {% else %}
-      <h3>{{book.display_title}}</h3>
+      <h3>{{book.title}}</h3>
     {% endif %}
     {% if not topic and not subtopic %}
       <span class="by">By</span>

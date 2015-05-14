@@ -17,7 +17,6 @@ PRIVACY_CHOICES = (
 
 class Book(models.Model):
     admin = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='books')
-    display_title = models.CharField(max_length=100)
     title = models.CharField(max_length=100, unique = True)
     slug = models.SlugField(unique = True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -30,7 +29,7 @@ class Book(models.Model):
     privacy = models.CharField(max_length=10, choices=PRIVACY_CHOICES)
 
     def __unicode__(self):
-        return self.display_title
+        return self.title
 
     def create_book_slug(self, title_slug):
         slugcount = 0
@@ -66,7 +65,6 @@ class Topic(models.Model):
     book = models.ForeignKey(Book)
     parent = models.ForeignKey('self', null=True, blank=True)
 
-    display_title = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     slug = models.SlugField(unique = True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -80,7 +78,7 @@ class Topic(models.Model):
     shadow = models.ForeignKey('self', null=True, blank=True, related_name='versions')
 
     def __unicode__(self):
-        return self.display_title
+        return self.title
 
     def create_topic_slug(self, title_slug):
         slugcount = 0
@@ -107,3 +105,28 @@ class Topic(models.Model):
 
         super(Topic, self).save(*args, **kwargs)
 
+
+class History(models.Model):
+    topic = models.ForeignKey(Topic)
+
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(unique = True)
+
+    date = models.DateTimeField(auto_now_add=True)
+    
+    content = models.TextField()
+    
+    def __unicode__(self):
+        return self.title
+
+    def create_slug(self, title_slug):
+        slugcount = 0
+        while True:
+            
+            try:
+                History.objects.get(slug = title_slug)
+                slugcount = slugcount + 1
+                title_slug = title_slug + '-' + str(slugcount)
+            
+            except ObjectDoesNotExist:
+                return title_slug

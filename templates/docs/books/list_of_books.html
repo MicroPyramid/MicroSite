@@ -27,7 +27,7 @@
           {% for book in books %}
           <tr>
             <td>{{forloop.counter}}</td>
-            <td><a href="{% url 'docs:view_book' slug=book.slug %}">{{book.display_title}}</a></td>
+            <td><a href="{% url 'docs:view_book' slug=book.slug %}">{{book.title}}</a></td>
             <td>{{book.slug}}</td>
             <td>{{book.owner}}</td>
             <td>{{book.created_on}}</td>

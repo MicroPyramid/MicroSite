@@ -1110,6 +1110,10 @@ select{
   margin:0px 3px;
   border: 1px solid #ddd;
 }
+a{
+  cursor: pointer;
+  text-decoration: none !important;
+}
 
 /*------------------------------------------------------------------
 [1. Max Width: 480px]

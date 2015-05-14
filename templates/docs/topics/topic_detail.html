@@ -8,11 +8,11 @@
   <div class="panel-body">
     <div class="col-md-3 tree_div">
       <ul class="parent_list">
-        <li class="topic li_active"><a href="{% url "docs:view_topic" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-right"></i>{{topic.display_title|capfirst}}</a>
+        <li class="topic li_active"><a href="{% url "docs:view_topic" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-right"></i>{{topic.title|capfirst}}</a>
           <ul class="sub_topic_list">
             {% for subtopic in topic.topic_set.all %}
               {% if not subtopic.shadow %}
-              <li class="sub-topic"><a href="{% url "docs:view_subtopic" subtopic_slug=subtopic.slug topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-file-text-o"></i>{{subtopic.display_title|capfirst}}</a></li>
+              <li class="sub-topic"><a href="{% url "docs:view_subtopic" subtopic_slug=subtopic.slug topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-file-text-o"></i>{{subtopic.title|capfirst}}</a></li>
               {% endif %}
             {% endfor %}
           </ul>
@@ -23,20 +23,72 @@
     <div>
     {% if topic_shadows %}
     <span>Shadows:</span>
-      {% for shadow in topic_shadows %}
-      <a href="{% url "docs:view_topic" topic_slug=shadow.slug book_slug=book.slug %}"><span>{{forloop.counter}}</span></a>
-      {% endfor %}
+      <p>{% for shadow in topic_shadows %}
+      <a href="{% url "docs:view_topic" topic_slug=shadow.slug book_slug=book.slug %}"><span>Shadow {{forloop.counter}}</span></a>
+      {% endfor %}</p>
     {% endif %}
     {% if subtopic_shadows %}
     <span>Shadows:</span>
-      {% for shadow in subtopic_shadows %}
-      <a href="{% url "docs:view_subtopic" subtopic_slug=shadow.slug topic_slug=topic.slug book_slug=book.slug %}"><span>{{forloop.counter}}</span></a>
-      {% endfor %}
+      <p>{% for shadow in subtopic_shadows %}
+      <a href="{% url "docs:view_subtopic" subtopic_slug=shadow.slug topic_slug=topic.slug book_slug=book.slug %}"><span>Shadow {{forloop.counter}}</span></a>
+      {% endfor %}</p>
     {% endif %}
+    <!-- Start of Topic History list -->
+    {% if topic and not subtopic %}
+      {% if topic.history_set.count %}
+        <a class="view_history"><span>View History</span></a>
+        <div id="history_div">
+          {% for history in topic.history_set.all %}
+            <a pan-id="#version-{{history.id}}" class="view_version"><span>Version {{forloop.counter}}</span></a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+    <!-- End of Topic History list -->
+
+    <!-- Start of Sub Topic History list -->
+    {% if subtopic %}
+      {% if subtopic.history_set.count %}
+        <a class="view_history"><span>View History</span></a>
+        <div id="history_div">
+          {% for history in subtopic.history_set.all %}
+            <a pan-id="#version-{{history.id}}" class="view_version"><span>Version {{forloop.counter}}</span></a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+    <!-- End of Sub Topic History list -->
+
     </div>
+    <!-- Start of Topic History View -->
+    {% if topic and not subtopic%}
       <div>
+        {% for history in topic.history_set.all %}
+          <div id="version-{{history.id}}" class="versions_div">
+            <h5>{{history.title|capfirst}} - on {{history.date}}</h5>
+            {{history.content|safe}}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <!-- End of Topic History View -->
+
+    <!-- Start of Sub Topic History View -->
+    {% if subtopic%}
+      <div>
+        {% for history in subtopic.history_set.all %}
+          <div id="version-{{history.id}}" class="versions_div">
+            <h5>{{history.title|capfirst}} - on {{history.date}}</h5>
+            {{history.content|safe}}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <!-- End of Sub Topic History View -->
+
+      <div class="topics_div">
       {% if topic and not subtopic%}
-        <h5>{{topic.display_title|capfirst}}</h5>
+        <h5>{{topic.title|capfirst}}</h5>
         <p>
           {% if topic.status == "Approved" %}
             Approved
@@ -55,7 +107,7 @@
         {{topic.content|safe}}
         {% endif %}
         {% if subtopic %}
-          <h5>{{subtopic.display_title|capfirst}}</h5>
+          <h5>{{subtopic.title|capfirst}}</h5>
           <p>
           {% if subtopic.status == "Approved" %}
             Approved
@@ -103,10 +155,26 @@
       });
     }
 
+    $("#history_div").hide();
+    $(".versions_div").hide();
+
+    $(".view_history").click(function(e) {
+      $("#history_div").show();
+    });
+
+    $(".view_version").click(function(e) {
+      $(".versions_div").hide();
+      $(".topics_div").hide();
+      $($(this).attr("pan-id")).show();
+    });
+
     $('.btn-click').click(function(e) {
       e.preventDefault();
       $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){
           alert(data.response);
+          if(data.topic_slug){
+            window.location = '/docs/{{book.slug}}/'+data.topic_slug;
+          }
         }, "json");
     });
 

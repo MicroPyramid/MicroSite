@@ -27,7 +27,7 @@
             {% with sub_topics=topic|get_sub_topics %}
               <tr class="parent_row">
                 <td>{% if sub_topics %}<a class="show_sub_categories" row-id="{{topic.id}}"><i class="fa fa-plus"></i></a>{% endif %}</td>
-                <td><a href="{% url 'docs:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.display_title}}</a></td>
+                <td><a href="{% url 'docs:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
                 <td>{{topic.slug}}</td>
                 <td>{{topic.status}}</td>
                 <td>{% for author in topic.authors.all %}
@@ -44,7 +44,7 @@
                 {% for subtopic in sub_topics %}
                   <tr class="child_row subtopic-of-{{topic.id}}">
                     <td></td>
-                    <td>{{subtopic.display_title}}</td>
+                    <td>{{subtopic.title}}</td>
                     <td>{{subtopic.slug}}</td>
                     <td>{{subtopic.status}}</td>
                     <td>{% for author in subtopic.authors.all %}
