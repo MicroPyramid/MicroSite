@@ -78,10 +78,5 @@ def do_recurse(parser, token):
         if tag == 'endrecurse':
             break
 
-    print var
-    print name
-    print child
-    print nodeList
-    
     return RecurseNode(var, name, child, nodeList)
 do_recurse = register.tag('recurse', do_recurse)
