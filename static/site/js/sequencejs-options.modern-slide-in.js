@@ -1,1 +1,0 @@
-$(document).ready(function(){{var e={nextButton:!0,prevButton:!0,pagination:!0,animateStartingFrameIn:!0,autoPlay:!0,autoPlayDelay:3e3,preloader:!0,preloadTheseFrames:[1],preloadTheseImages:["images/tn-model1.png","images/tn-model2.png","images/tn-model3.png"]};$("#sequence").sequence(e).data("sequence")}});

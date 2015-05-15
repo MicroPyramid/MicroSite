@@ -1,1 +1,12 @@
-jQuery(document).ready(function(){"use strict";jQuery("ul.sf-menu").superfish({animation:{height:"show"},animationOut:{height:"hide"},speed:"fast",speedOut:"fast",delay:800,pathClass:"current"}),jQuery.fn.toggle=function(e,t){if(!jQuery.isFunction(e)||!jQuery.isFunction(t))return oldToggle.apply(this,arguments);var u=arguments,n=e.guid||jQuery.guid++,i=0,s=function(t){var n=(jQuery._data(this,"lastToggle"+e.guid)||0)%i;return jQuery._data(this,"lastToggle"+e.guid,n+1),t.preventDefault(),u[n].apply(this,arguments)||!1};for(s.guid=n;i<u.length;)u[i++].guid=n;return this.click(s)};var e=jQuery(".site-menu > nav ul").clone(),t='<span class="submenu"></span>';e.removeClass().addClass("mobile-menu bottom-0 list-unstyled"),e.find("ul").removeAttr("style"),e.find(".menu-normal .sf-with-ul").after(t),e.find(".submenu").toggle(function(){jQuery(this).parent().addClass("over").find(">ul").slideDown(200)},function(){jQuery(this).parent().removeClass("over").find(">ul").slideUp(200)}),jQuery("#mobile-menu .menu-content").after(e[0]),jQuery("#mobile-menu").mmenu({position:"right",zposition:"front"}),jQuery('*[data-toggle="tooltip"]').tooltip(),jQuery(".fixedheader").affix({offset:{top:40}}),jQuery(".fullfixed").affix({offset:{top:90}})});
+jQuery(document).ready(function($) {
+    jQuery('.fixedheader').affix({
+        offset: {
+            top: 0
+        }
+    });
+    jQuery('.fullfixed').affix({
+        offset: {
+            top: 0
+        }
+    });
+});

@@ -1,1 +1,0 @@
-$(function(){"use strict";$(window).load(function(){$("#status").fadeOut(),$("#preloader").delay(1e3).fadeOut("slow")}),$(window).width()>240&&(new WOW).init()});
