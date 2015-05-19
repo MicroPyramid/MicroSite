@@ -6,8 +6,8 @@
 <div class="row marl" id="work-process">
   <div class="container">
     <div class="row marl company-moral">
-      <h3>Micropyramid focusing on “power of open source”</h3>
-      <span>We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time with high quality.</span>
+      <h3>Micropyramid leveraging the power of open source technologies</h3>
+      <span>We follow perfect mix of development process agile + scrum and that let us boost in delivering software in time with high quality.</span>
     </div>
     <div class="row marl work-process">
       <!-- plan starts here -->
@@ -15,8 +15,8 @@
         <div class="step-pic"><img src="/static/site/images/plan.png" />
         </div>
         <div class="step-content">
-          <span class="step-title">Planning of project</span>
-          <span class="step-desc">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time with high quality.</span>
+          <span class="step-title">Planning</span>
+          <span class="step-desc">Project artictecture planning involves all aspects of a web application from design, security, performance, modularity and scalability perspective. We plan by assessing all these.</span>
         </div>
       </div>
       <!-- plan ends here -->
@@ -25,7 +25,7 @@
         <div class="step-pic"><img src="/static/site/images/design.png" />
         </div>
         <div class="step-content">
-          <span class="step-title">design of project</span>
+          <span class="step-title">Designing</span>
           <span class="step-desc">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time with high quality.</span>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <div class="step-pic"><img src="/static/site/images/development.png" />
         </div>
         <div class="step-content">
-          <span class="step-title">development of project</span>
+          <span class="step-title">Development</span>
           <span class="step-desc">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time with high quality.</span>
         </div>
       </div>
@@ -45,7 +45,7 @@
         <div class="step-pic"><img src="/static/site/images/testing.png" />
         </div>
         <div class="step-content">
-          <span class="step-title">testing of project</span>
+          <span class="step-title">Testing &amp; Maintenance</span>
           <span class="step-desc">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time with high quality.</span>
         </div>
       </div>
@@ -58,8 +58,7 @@
 <div class="row marl" id="our-services">
   <div class="container">
     <div class="row marl home-headings">
-      <h3 class="home-head">Our services</h3>
-      <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>
+      <h3 class="home-head">Services we offer</h3>
     </div>
     <!-- service blocks starts here -->
     <div class="row marl service-block1">
@@ -67,7 +66,7 @@
       <div class="col-md-4 col-sm-4 service">
         <div class="design-service">
           <span class="title">Web desiging</span>
-          <span class="desc">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time boost in delivering software in time with high quality.</span>
+          <span class="desc">Our design process is fine flow of ideas and implementation among mockups, UX, responsive layouts, whiteboard. We mainly use Bootstrap, LESS, AngularJs and Jquery.</span>
           <span class="re-direct"><a href="#">View More</a></span>
         </div>
       </div>
@@ -130,7 +129,6 @@
 <div class="row marl home-headings" id="our-story">
   <div class="container">
     <h3 class="home-head">Our Story</h3>
-    <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>
   </div>
 </div>
 <div class="row marl" id="our-story"> 
@@ -140,8 +138,7 @@
 <!-- our technologies starts here -->
 <div class="row marl" id="our-technologies">
   <div class="container">
-    <h3 class="home-head">Our Technologies</h3>
-    <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>
+    <h3 class="home-head">Technologies we use the most</h3>
     <div class="row marl our-technologies">
       <div class="tech-grid">
         <div class="grid">
@@ -180,8 +177,7 @@
 <!-- our blog starts here -->
 <div class="row marl" id="our-blog">
   <div class="container">
-    <h3 class="home-head">Our Blog</h3>
-    <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>
+    <h3 class="home-head">Fresh from our Blog</h3>
     <!-- blog starts here -->
     <div class="row marl blog-blocks">
       <!-- latest block starts here -->
@@ -191,7 +187,7 @@
           {% for post in latest_posts|slice:":1" %}
             <div class="title">{{ post.title }}</div>
             <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date">{{ post.created_on|date:"d F Y" }}</span></div>
-            <div class="desc">{{ post.content|safe|truncatewords:75 }}</div>
+            <div class="desc">{{ post.content|safe|truncatewords:45 }}</div>
             <div class="more"><a href="/blog/{{post.slug}}/">Read More</a></div>
           {% endfor %}
         </div>
@@ -202,7 +198,7 @@
           <div class="recent-blog {% if forloop.counter == 1 %}green{% else %}yellow{% endif %}">
             <div class="title">{{ post.title }}</div>
             <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date">{{ post.created_on|date:"d F Y" }}</span></div>
-            <div class="desc">{{ post.content|safe|truncatewords:25 }}</div>
+            <div class="desc">{{ post.content|safe|truncatewords:20 }}</div>
             <div class="more"><a href="/blog/{{post.slug}}/">Read More</a></div>
           </div>
         {% endfor %}
@@ -229,7 +225,7 @@
 <div class="row marl" id="get-in-touch">
   <div class="container">
     <h2>Get in Touch</h2>
-    <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>
+    <span class="home-sub-head">We can addess and fix any issue within our development stack, talk to us.</span>
     <div class="row marl contact-form">
       <form id="contactform" name="contactform" method="post">
         {% csrf_token %}

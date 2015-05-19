@@ -15,6 +15,7 @@
         <label for="exampleInputEmail1">Last Name</label>
         <input type="Text" class="form-control" id="last_name" name="last_name" value="{{edit_user.last_name}}">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">Password</label>
         <input type="password" class="form-control" id="password" name="password" value="{{edit_user.password}}">
@@ -23,6 +24,7 @@
         <label for="exampleInputEmail1">Email</label>
         <input type="Text" class="form-control" id="email" name="email" value="{{edit_user.email}}">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">date_of_birth</label>
         <input type="Text" class="form-control" id="date_of_birth" name="date_of_birth" value="{{edit_user.date_of_birth|date:"m/d/Y"}}">
@@ -53,6 +55,7 @@
         <label for="exampleInputEmail1">state</label>
         <input type="Text" class="form-control" id="state" name="state" value="{{edit_user.state}}">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">phones</label>
         <input type="Text" class="form-control" id="phones" name="phones" value="{{edit_user.phones}}">
@@ -61,6 +64,7 @@
         <label for="exampleInputEmail1">mobile</label>
         <input type="Text" class="form-control" id="mobile" name="mobile" value="{{edit_user.mobile}}">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">Google Plus URL</label>
         <input type="Text" class="form-control" id="google_plus_url" name="google_plus_url" value="{{edit_user.google_plus_url}}">
@@ -69,6 +73,7 @@
         <label for="exampleInputEmail1">pincode</label>
         <input type="Text" class="form-control" id="pincode" name="pincode" value="{{edit_user.pincode}}">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">FB Profile</label>
         <input type="Text" class="form-control" id="fb_profile" name="fb_profile" value="{{edit_user.fb_profile}}">
@@ -77,6 +82,7 @@
         <label for="exampleInputEmail1">Twitter Profile</label>
         <input type="Text" class="form-control" id="tw_profile" name="tw_profile" value="{{edit_user.tw_profile}}">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">Linkedin Profile</label>
         <input type="Text" class="form-control" id="ln_profile" name="ln_profile" value="{{edit_user.ln_profile}}">
@@ -104,10 +110,16 @@
     e.preventDefault();
     $.post(".", $("form#userform").serialize(), function(data) {
       if (data.error) {
-        $('span.failure').remove();
-        for (var key in data.message) {
-          console.log($('#' + key));
-          $('#' + key).after('<span class="failure">' + data.message[key] + '</span>');
+        if(data.error_message){
+          alert(data.error_message);
+          window.location = '/portal/users/';
+        }
+        else{
+          $('span.failure').remove();
+          for (var key in data.message) {
+            console.log($('#' + key));
+            $('#' + key).after('<span class="failure">' + data.message[key] + '</span>');
+          }
         }
       } else {
         window.location = '/portal/users/';

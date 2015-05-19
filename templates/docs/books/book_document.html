@@ -7,7 +7,7 @@
   </div>
   <div class="panel-body">
     <div class="col-md-3 tree_div">
-      <p class="panel-title"><a href="{% url 'docs:view_book_doc' book.slug %}">{{book.title|capfirst}}</a></p>
+      <p class="panel-title"><a href="{% url 'books:view_book_doc' book.slug %}">{{book.title|capfirst}}</a></p>
       <ul class="parent_list">
         {% for topic in topics %}
           {% with topic|get_sub_topics as sub_topics %}
@@ -63,10 +63,10 @@
           <div id="{{topic.slug}}desc">
           <h5>{{topic.title|capfirst}}</h5>
           <span class="actions_book">
-            <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
-            <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
-            <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
-            <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+            <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
+            <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
+            <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
+            <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
           </span>
           {{topic.content|safe}}
           <!--AUTHORS ROW-->
@@ -104,10 +104,10 @@
             <div id="{{subtopic.slug}}desc">
             <h5>{{subtopic.title|capfirst}}</h5>
             <span class="actions_book">
-              <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
-              <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
-              <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
-              <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+              <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
+              <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
+              <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
             </span>
             {{subtopic.content|safe}}
             <!--AUTHORS ROW-->

@@ -1,4 +1,8 @@
 import os
+import djcelery
+from celery.schedules import crontab
+from datetime import timedelta
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -22,14 +26,13 @@ INSTALLED_APPS = (
     'django_inbound_email',
     'micro_admin',
     'pages',
+    'books',
     'micro_blog',
-    'micro_kb',
     'employee',
     'sorl.thumbnail',
     'haystack',
     'compressor',
     'cachalot',
-    'docs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -59,19 +62,18 @@ ROOT_URLCONF = 'microsite.urls'
 WSGI_APPLICATION = 'microsite.wsgi.application'
 AUTH_USER_MODEL = 'micro_admin.User'
 
-import djcelery
 djcelery.setup_loader()
 
 BROKER_URL = 'redis://localhost:6379/0'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'microsite',
-        'USER': 'root',
+        'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -91,7 +93,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
-COMPRESS_ROOT=BASE_DIR + '/static/'
+COMPRESS_ROOT = BASE_DIR + '/static/'
 BLOG_IMAGES = BASE_DIR + '/static/blog/'
 TEAM_IMAGES = BASE_DIR + '/static/team/'
 CLIENT_IMAGES = BASE_DIR + '/static/client/'
@@ -99,7 +101,7 @@ TRAINER_IMAGES = BASE_DIR + '/static/trainer/'
 COURSE_IMAGES = BASE_DIR + '/static/course/'
 QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
 
-TEMPLATE_DIRS = (BASE_DIR +'/templates',)
+TEMPLATE_DIRS = (BASE_DIR + '/templates',)
 
 MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
@@ -110,7 +112,7 @@ TEMPLATE_LOADERS = (
         "django.template.loaders.app_directories.Loader",
     )),
 )
-COMPRESS_ENABLED=True
+COMPRESS_ENABLED = True
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -119,10 +121,10 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-CELERY_TIMEZONE="Asia/Calcutta"
+CELERY_TIMEZONE = "Asia/Calcutta"
 
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
-from celery.schedules import crontab
+
 
 CELERYBEAT_SCHEDULE = {
     # Executes every day evening at 5:00 PM GMT +5.30
@@ -132,10 +134,8 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
- 
-
 SG_USER = os.getenv('SGUSER')
-SG_PWD =  os.getenv('SGPWD')
+SG_PWD = os.getenv('SGPWD')
 
 LOGGING = {
     'version': 1,
@@ -161,8 +161,6 @@ LOGGING = {
     }
 }
 
-
-
 ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
 SITE_URL = "http://micropyramid.com"
@@ -177,14 +175,14 @@ INBOUND_EMAIL_LOG_REQUESTS = True
 INBOUND_EMAIL_RESPONSE_200 = True
 
 COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter','compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-COMPRESS_REBUILD_TIMEOUT=5400
+COMPRESS_REBUILD_TIMEOUT = 5400
 
-query_cache_type=0
+query_cache_type = 0
 
-CACHALOT_ENABLED=True
-CACHALOT_CACHE_RANDOM=True
+CACHALOT_ENABLED = True
+CACHALOT_CACHE_RANDOM = True
 
 if 'TRAVIS' in os.environ:
     DATABASES = {

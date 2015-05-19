@@ -34,7 +34,7 @@
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
-            class="fa fa-bar"></span><span class="fa fa-bar"></span><span class="fa fa-bar"></span></a><a class="brand" href="{% url 'micro_admin:index' %}"><img src="/static/admin/images/logo-inner.png"></a>
+            class="fa fa-bar"></span><span class="fa fa-bar"></span><span class="fa fa-bar"></span></a><a class="brand" href="{% url 'micro_admin:index' %}"><img src="/static/site/images/logo.png"></a>
           <span class="nav-collapse">
             <ul class="nav pull-right">
               <li class="dropdown">
@@ -73,8 +73,8 @@
               <ul class="dropdown-menu">
                 <li><a href="{% url 'pages:menu' %}">Menu</a></li>
                 <li><a href="{% url 'pages:pages' %}">Pages</a></li>
-                <li><a href="{% url 'docs:books' %}">Books</a></li>
-                <li><a href="{% url 'micro_admin:jobs' %}">Jobs</a></li>
+                <li><a href="{% url 'books:books' %}">Books</a></li>
+                <!-- <li><a href="#">Jobs</a></li> -->
                 <li><a href="{% url 'micro_admin:contacts' %}">Contacts</a></li>
               </ul>
             </li>
@@ -89,10 +89,8 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-users"></i><span>Staff Zone</span> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="{% url 'employee:reports_list' %}">Reports</a></li>
-                <li><a href="{% url 'employee:leaves_list' %}">Leaves</a></li>
               </ul>
             </li>
-            <li><a href="{% url 'micro_kb:knowledgebase' %}"><i class="fa fa-lightbulb-o"></i><span>Knowledge Base</span></a></li>
             <li></li>
           </ul>
         </div>
@@ -119,7 +117,7 @@
         $(".mainnav > li").removeClass("active");
         $('a[href="'+window.location.pathname+'"]').parent("li").addClass("active");
         $('a[href="'+window.location.pathname+'"]').parent().parent().parent().addClass("active");
-      });        
+      });
     </script>
     {% endcompress %}
   </body>

@@ -15,6 +15,7 @@
         <label for="exampleInputEmail1">Last Name</label>
         <input type="Text" class="form-control" id="last_name" name="last_name">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">Password</label>
         <input type="password" class="form-control" id="password" name="password">
@@ -23,6 +24,7 @@
         <label for="exampleInputEmail1">Email</label>
         <input type="Text" class="form-control" id="email" name="email">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">date_of_birth</label>
         <input type="Text" class="form-control" id="date_of_birth" name="date_of_birth">
@@ -53,6 +55,7 @@
         <label for="exampleInputEmail1">state</label>
         <input type="Text" class="form-control" id="state" name="state">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">phones</label>
         <input type="Text" class="form-control" id="phones" name="phones">
@@ -61,6 +64,7 @@
         <label for="exampleInputEmail1">mobile</label>
         <input type="Text" class="form-control" id="mobile" name="mobile">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">pincode</label>
         <input type="Text" class="form-control" id="pincode" name="pincode">
@@ -69,6 +73,7 @@
         <label for="exampleInputEmail1">Google Plus URL</label>
         <input type="Text" class="form-control" id="google_plus_url" name="google_plus_url">
       </div>
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">FB Profile</label>
         <input type="Text" class="form-control" id="fb_profile" name="fb_profile">
@@ -77,7 +82,7 @@
         <label for="exampleInputEmail1">Twitter Profile</label>
         <input type="Text" class="form-control" id="tw_profile" name="tw_profile">
       </div>
-
+      <br clear="all">
       <div class="form-group">
         <label for="exampleInputEmail1">Linkedin Profile</label>
         <input type="Text" class="form-control" id="ln_profile" name="ln_profile">
@@ -104,6 +109,7 @@
   $("form#userform").submit(function(e) {
     e.preventDefault();
     $.post(".", $("form#userform").serialize(), function(data) {
+      console.log(data);
       if (data.error) {
         $('span.failure').remove();
         for (var key in data.response) {
