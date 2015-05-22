@@ -36,7 +36,7 @@
   $(document).ready(function() {
     $('.delete_contact').click(function(e){
       e.preventDefault();
-      if (!confirm('Do you want to delete blog post?'))
+      if (!confirm('Do you want to delete Contact?'))
         return;
 
       $.post('/portal/contacts/'+$(this).attr('value')+'/',function(data){

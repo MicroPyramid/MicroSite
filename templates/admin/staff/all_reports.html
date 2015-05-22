@@ -20,7 +20,7 @@
           <tr>
           <td class="txt_center">{{forloop.counter}}</td>
           <td>
-            {% if request.user.is_admin or request.user.email == report.email %}
+            {% if request.user.is_superuser or request.user.email == report.email %}
               <a href={% url 'employee:employee_report' pk=report.id%}>{{report.email}}</a>
             {% else %}{{report.email}}
             {% endif %}

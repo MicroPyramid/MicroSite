@@ -21,9 +21,6 @@ class Migration(migrations.Migration):
                 ('slug', models.CharField(unique=True, max_length=20)),
                 ('description', models.CharField(max_length=500)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Image_File',
@@ -34,9 +31,6 @@ class Migration(migrations.Migration):
                 ('is_image', models.BooleanField(default=True)),
                 ('thumbnail', models.FileField(null=True, upload_to=b'static/uploads/%Y/%m/%d/', blank=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Post',
@@ -50,9 +44,6 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(blank=True, max_length=2, choices=[(b'D', b'Draft'), (b'P', b'Published'), (b'T', b'Rejected')])),
                 ('category', models.ForeignKey(to='micro_blog.Category')),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Tags',
@@ -61,20 +52,15 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(unique=True, max_length=20)),
                 ('slug', models.CharField(unique=True, max_length=20)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='post',
             name='tags',
-            field=models.ManyToManyField(related_name='rel_posts', null=True, to='micro_blog.Tags', blank=True),
-            preserve_default=True,
+            field=models.ManyToManyField(related_name='rel_posts', to='micro_blog.Tags', blank=True),
         ),
         migrations.AddField(
             model_name='post',
             name='user',
             field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
-            preserve_default=True,
         ),
     ]

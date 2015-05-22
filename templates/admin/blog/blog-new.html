@@ -45,7 +45,7 @@
           <input type="file" name="featuredimage" />
         </p>
       </div>
-      {% if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_admin %}
+      {% if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser %}
       <div class="draft-box">
         <input type="radio" name="status" value="D">
         <label>Save as Draft</label>
@@ -54,12 +54,12 @@
         <input type="radio" name="status" value="P">
         <label>Publish Post</label>
       </div>
-        {% if request.user.user_roles == "Admin" or request.user.is_admin %}
+        {% if request.user.user_roles == "Admin" or request.user.is_superuser %}
           <div class="draft-box">
             <input type="radio" name="status" value="T">
             <label>Reject Post</label>
           </div>
-        {% endif %}  
+        {% endif %}
       {% endif %}
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
@@ -107,10 +107,7 @@
 </script>
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
-  var editor = CKEDITOR.replace('textareacontents', {
-    filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
-    filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
-  });
+  var editor = CKEDITOR.replace('textareacontents');
 </script>
 <script type="text/javascript">
   $ = jQuery;

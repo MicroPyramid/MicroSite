@@ -5,5 +5,5 @@ register = Library()
 
 @register.filter
 def is_admin(user):
-    if user.is_admin:
+    if user.is_superuser or user.is_admin:
         return True

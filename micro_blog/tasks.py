@@ -10,7 +10,7 @@ def daily_report():
 	api_user =settings.SG_USER
 	api_key =settings.SG_PWD
 	user = User.objects.all()
-	sg = sendgrid.SendGridClient(api_user,api_key)
+	sg = sendgrid.SendGridClient(api_user, api_key)
 	for usr in user:
 		message = sendgrid.Mail()
 		message.add_to(usr.email)

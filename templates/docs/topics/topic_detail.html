@@ -8,11 +8,11 @@
   <div class="panel-body">
     <div class="col-md-3 tree_div">
       <ul class="parent_list">
-        <li class="topic li_active"><a href="{% url "docs:view_topic" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-right"></i>{{topic.title|capfirst}}</a>
+        <li class="topic li_active"><a href="{% url 'books:view_topic' topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-right"></i>{{topic.title|capfirst}}</a>
           <ul class="sub_topic_list">
             {% for subtopic in topic.topic_set.all %}
               {% if not subtopic.shadow %}
-              <li class="sub-topic"><a href="{% url "docs:view_subtopic" subtopic_slug=subtopic.slug topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-file-text-o"></i>{{subtopic.title|capfirst}}</a></li>
+              <li class="sub-topic"><a href="{% url 'books:view_subtopic' subtopic_slug=subtopic.slug topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-file-text-o"></i>{{subtopic.title|capfirst}}</a></li>
               {% endif %}
             {% endfor %}
           </ul>
@@ -24,13 +24,13 @@
     {% if topic_shadows %}
     <span>Shadows:</span>
       <p>{% for shadow in topic_shadows %}
-      <a href="{% url "docs:view_topic" topic_slug=shadow.slug book_slug=book.slug %}"><span>Shadow {{forloop.counter}}</span></a>
+      <a href="{% url 'books:view_topic' topic_slug=shadow.slug book_slug=book.slug %}"><span>Shadow {{forloop.counter}}</span></a>
       {% endfor %}</p>
     {% endif %}
     {% if subtopic_shadows %}
     <span>Shadows:</span>
       <p>{% for shadow in subtopic_shadows %}
-      <a href="{% url "docs:view_subtopic" subtopic_slug=shadow.slug topic_slug=topic.slug book_slug=book.slug %}"><span>Shadow {{forloop.counter}}</span></a>
+      <a href="{% url 'books:view_subtopic' subtopic_slug=shadow.slug topic_slug=topic.slug book_slug=book.slug %}"><span>Shadow {{forloop.counter}}</span></a>
       {% endfor %}</p>
     {% endif %}
     <!-- Start of Topic History list -->
@@ -98,11 +98,11 @@
           </p>
         <span class="actions_book">
         {% if not topic.shadow %}
-          <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
+          <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
         {% endif %}  
-          <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
-          <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
-          <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+          <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
+          <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
+          <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
         </span>
         {{topic.content|safe}}
         {% endif %}
@@ -117,11 +117,11 @@
           </p>
           <span class="actions_book">
           {% if not subtopic.shadow %}
-            <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
+            <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
           {% endif %}
-            <a href="{% url 'docs:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
-            <a href="{% url 'docs:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
-            <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+            <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
+            <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
+            <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
           </span>
           {{subtopic.content|safe}}
         {% endif %}
@@ -173,7 +173,7 @@
       $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){
           alert(data.response);
           if(data.topic_slug){
-            window.location = '/docs/{{book.slug}}/'+data.topic_slug;
+            window.location = '/books/{{book.slug}}/'+data.topic_slug;
           }
         }, "json");
     });
