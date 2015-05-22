@@ -3,9 +3,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Book Viewer</h3>
-    {% if request.user.is_admin %}
+    {% if request.user.is_superuser %}
     <span>
-      <a href="{% url 'docs:create_book' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Book </button></a>
+      <a href="{% url 'books:create_book' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Book </button></a>
     </span>
     {% endif %}
   </div>
@@ -27,7 +27,7 @@
           {% for book in books %}
           <tr>
             <td>{{forloop.counter}}</td>
-            <td><a href="{% url 'docs:view_book' slug=book.slug %}">{{book.title}}</a></td>
+            <td><a href="{% url 'books:view_book' slug=book.slug %}">{{book.title}}</a></td>
             <td>{{book.slug}}</td>
             <td>{{book.owner}}</td>
             <td>{{book.created_on}}</td>
@@ -35,8 +35,8 @@
               <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
             {% endfor %}</td>
             <td>
-              <a href="{% url 'docs:edit_book' slug=book.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
-              <a href="{% url 'docs:delete_book' slug=book.slug %}" class="delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
+              <a href="{% url 'books:edit_book' slug=book.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
+              <a href="{% url 'books:delete_book' slug=book.slug %}" class="delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
             </td>
           </tr>
           {% endfor %}

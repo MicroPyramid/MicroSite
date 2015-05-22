@@ -3,7 +3,7 @@ from django.test import Client
 from micro_blog.forms import BlogpostForm, BlogCategoryForm
 from micro_blog.models import Category, Post
 from micro_admin.models import User
-from micro_blog.views import store_image, upload_photos, recent_photos
+from micro_blog.views import store_image
 import unittest
 from microsite.settings import BASE_DIR
 from django.core.files import File

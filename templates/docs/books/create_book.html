@@ -16,7 +16,7 @@
         <select name="admin" id="admin" style="color:black;">
           <option value="select">Select Book Admin</option>
           {% for user in users %}
-            <option value="{{user.id}}">{{user.get_full_name}}</option>
+            <option value="{{user.id}}">{% if user.get_full_name %}{{ user.get_full_name }} {% else %} {{user.email}} {% endif %} </option>
           {% endfor %}
         </select>
       </div>
@@ -47,10 +47,7 @@
 {% compress js %}
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
-  var editor = CKEDITOR.replace('textareadescription', {
-    filebrowserUploadUrl: '{% url "micro_blog:upload_photos" %}',
-    filebrowserBrowseUrl: '{% url "micro_blog:recent_photos" %}'
-  });
+  var editor = CKEDITOR.replace('textareadescription');
 </script>
 <script type="text/javascript">
   $ = jQuery;
@@ -67,7 +64,7 @@
             $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
           }
         } else {
-          window.location = "{% url 'docs:books' %}";
+          window.location = "{% url 'books:books' %}";
         }
       }
     });

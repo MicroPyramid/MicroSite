@@ -7,7 +7,7 @@
     <span>
       <span class='active_user'><i class="fa fa-square"></i>Active</span>
       <span class='inactive_user'><i class="fa fa-square"></i>Inactive</span>
-      {% if request.user.is_admin %}<a href="{% url 'micro_admin:new_user' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New User </button></a>{% endif %}
+      {% if request.user.is_superuser %}<a href="{% url 'micro_admin:new_user' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New User </button></a>{% endif %}
     </span>
   </div>
   
@@ -43,7 +43,7 @@
               </a>
             </td>
             <td class="txt_center">
-              {% if request.user.is_admin %}
+              {% if request.user.is_superuser %}
               <a href="{% url 'micro_admin:edit_user' pk=user.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
               {% endif %}
             </td>

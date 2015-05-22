@@ -3,9 +3,9 @@
     <div class="panel-heading">
       <h3 class="panel-title">Book Detail Page</h3>
       <span>
-        <a href="{% url 'docs:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Topic </button></a>
-        <a href="{% url 'docs:view_book_topics' slug=book.slug %}"><button class="btn btn-warning">View Topics </button></a>
-        <a href="{% url 'docs:view_book_doc' slug=book.slug %}"><button class="btn btn-warning">Preview</button></a>
+        <a href="{% url 'books:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Topic </button></a>
+        <a href="{% url 'books:view_book_topics' slug=book.slug %}"><button class="btn btn-warning">View Topics </button></a>
+        <a href="{% url 'books:view_book_doc' slug=book.slug %}"><button class="btn btn-warning">Preview</button></a>
       </span>
     </div>
     <div class="panel-body">
@@ -17,10 +17,10 @@
           <span class="created_on">Created On : </span><span class="created_detail">{{book.created_on}}</span>
           <span class="updated_on">Updated On : </span><span class="created_detail">{{book.updated_on}}</span>
           <span class="actions_book">
-            <a href="{% url 'docs:edit_book' slug=book.slug %}" title="Edit Book"><i class="fa fa-pencil-square-o"></i></a>
-            <a href="{% url 'docs:approve_book' slug=book.slug %}" title="Approve Book"><i class="fa fa-check"></i></a>
-            <a href="{% url 'docs:reject_book' slug=book.slug %}" title="Reject Book"><i class="fa fa-times"></i></a>
-            <a href="{% url 'docs:delete_book' slug=book.slug %}" title="Delete Book"><i class="fa fa-trash-o"></i></a>
+            <a href="{% url 'books:edit_book' slug=book.slug %}" title="Edit Book"><i class="fa fa-pencil-square-o"></i></a>
+            <a href="{% url 'books:approve_book' slug=book.slug %}" title="Approve Book"><i class="fa fa-check"></i></a>
+            <a href="{% url 'books:reject_book' slug=book.slug %}" title="Reject Book"><i class="fa fa-times"></i></a>
+            <a href="{% url 'books:delete_book' slug=book.slug %}" title="Delete Book"><i class="fa fa-trash-o"></i></a>
           </span>
           <div class="slug_div">
             <span class="slug">Slug : </span><span>{{book.slug}}</span>

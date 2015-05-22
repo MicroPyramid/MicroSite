@@ -5,7 +5,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">{{book.title|capfirst}} - Topics List</h3>
     <span>
-      <a href="{% url 'docs:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning">Add New Topic</button></a>
+      <a href="{% url 'books:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning">Add New Topic</button></a>
     </span>
   </div>
   <div class="panel-body topic_list_div">
@@ -27,7 +27,7 @@
             {% with sub_topics=topic|get_sub_topics %}
               <tr class="parent_row">
                 <td>{% if sub_topics %}<a class="show_sub_categories" row-id="{{topic.id}}"><i class="fa fa-plus"></i></a>{% endif %}</td>
-                <td><a href="{% url 'docs:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
+                <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
                 <td>{{topic.slug}}</td>
                 <td>{{topic.status}}</td>
                 <td>{% for author in topic.authors.all %}
@@ -35,9 +35,9 @@
                 {% endfor %}</td>
                 <td>{{topic.created_on}}</td>
                 <td>
-                  <a href="{% url 'docs:create_topic' slug=book.slug %}?topic=sub-topic&topic_id={{topic.id}}" title="Add Sub Topic"><i class="fa fa-plus-square-o plus-color"></i></a>
-                  <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic" class="edit_anchor"><i class="fa fa-pencil-square-o edit-color"></i>Edit</a>
-                  <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
+                  <a href="{% url 'books:create_topic' slug=book.slug %}?topic=sub-topic&topic_id={{topic.id}}" title="Add Sub Topic"><i class="fa fa-plus-square-o plus-color"></i></a>
+                  <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic" class="edit_anchor"><i class="fa fa-pencil-square-o edit-color"></i>Edit</a>
+                  <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
                 </td>
               </tr>
               {% if sub_topics %}
@@ -52,8 +52,8 @@
                     {% endfor %}</td>
                     <td>{{subtopic.created_on}}</td>
                     <td>
-                      <a href="{% url 'docs:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
-                      <a href="{% url 'docs:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o"></i>Delete</a>
+                      <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
+                      <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o"></i>Delete</a>
                     </td>
                   </tr>
                 {% endfor %}

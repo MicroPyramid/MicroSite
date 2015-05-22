@@ -14,11 +14,11 @@
       <ul>
         {% for topic in parent_topics %}
         <li>
-          <a href="{% url "docs:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.title}}</a>
+          <a href="{% url "books:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.title}}</a>
           <ul>
           {% for subtopic in topic.topic_set.all %}
             {% if subtopic.status == "Approved" and not subtopic.shadow %}
-              <li><a href="{% url "docs:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a></li>
+              <li><a href="{% url "books:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a></li>
             {% endif %}
           {% endfor %}  
           </ul>
