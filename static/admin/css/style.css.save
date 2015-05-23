@@ -630,7 +630,7 @@ textarea {
 }
 
 .widget-content td {
-  /*text-transform: uppercase;*/
+ /*  text-transform: uppercase; */
   color: #888;
   font-weight: bold;
   font-size: 13px;

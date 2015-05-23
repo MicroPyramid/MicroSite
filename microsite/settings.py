@@ -14,8 +14,14 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+RAVEN_CONFIG = {
+    'dsn': 'http://4b6829226a2f47fb9baa4b462c90567f:f6fae270f1e1413facb985fe5a93cd92@52.0.172.203/2',
+}
+
+
 
 INSTALLED_APPS = (
+    'raven.contrib.django.raven_compat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +42,8 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -137,6 +145,7 @@ CELERYBEAT_SCHEDULE = {
 SG_USER = os.getenv('SGUSER')
 SG_PWD = os.getenv('SGPWD')
 
+'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -159,6 +168,49 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+'''
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
 }
 
 ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
