@@ -1,3 +1,6 @@
+img {
+  max-width: 100%;
+}
 body {
     font-size: 13px;
     font-family: 'Lato', sans-serif;
