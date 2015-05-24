@@ -202,20 +202,17 @@ def new_post(request):
         validate_blog = BlogpostForm(request.POST)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
-            blog_post.user=request.user
-            
+            blog_post.user = request.user
             blog_post.status = 'D'
-            
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'P'
-                
+
             elif request.POST.get('status') == "T":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
-            
             blog_post.save()
-            if request.POST.get('tags',''):
+            if request.POST.get('tags', ''):
                 tags = request.POST.get('tags')
                 tags = tags.split(',')
                 for tag in tags:
@@ -236,26 +233,22 @@ def new_post(request):
 
 
 @login_required
-def edit_blog_post(request,blog_slug):
+def edit_blog_post(request, blog_slug):
     if request.method == 'POST':
         current_post = Post.objects.get(slug=blog_slug)
         validate_blog = BlogpostForm(request.POST, instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
-
             blog_post.status = 'D'
-            
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'P'
-                
             elif request.POST.get('status') == "T":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
-            
             blog_post.save()
 
-            if request.POST.get('tags',''):
+            if request.POST.get('tags', ''):
                 for tag in blog_post.tags.all():
                     blog_post.tags.remove(tag)
                 tags = request.POST.get('tags')
@@ -274,7 +267,7 @@ def edit_blog_post(request,blog_slug):
         return HttpResponse(json.dumps(data))
     blog_post = Post.objects.get(slug=blog_slug)
     categories = Category.objects.all()
-    if request.user.is_superuser or blog_post.user ==request.user :
+    if request.user.is_superuser or blog_post.user == request.user:
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/blog/blog-edit.html', {'blog_post': blog_post, 'categories': categories, 'csrf_token': c['csrf_token']})
@@ -310,7 +303,6 @@ def report(request):
         for key in my_dict1.keys():
             Dailyreport_files.objects.create(dailyreport=rep, attachments=my_dict1[key]['filename'], date=datetime.datetime.now().date())
     rep.save()
-    print "HTTP/1.1 200 OK"
     return HttpResponseRedirect('/portal/')
 
 
