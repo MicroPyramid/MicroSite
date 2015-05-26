@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 
-# HTML_MINIFY = True
+HTML_MINIFY = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
