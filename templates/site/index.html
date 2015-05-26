@@ -179,10 +179,9 @@
         <div class="latest-blog blog-item">
           {% get_latest_posts as latest_posts %}
           {% for post in latest_posts|slice:":1" %}
-            <div class="title">{{ post.title }}</div>
-            <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date">{{ post.created_on|date:"d F Y" }}</span></div>
-            <div class="desc">{{ post.content|safe|truncatewords:45 }}</div>
-            <div class="more"><a href="/blog/{{post.slug}}/">Read More</a></div>
+            <div class="title"><a href="/blog/{{post.slug}}/">{{ post.title }}</a></div>
+            <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date"><a href="/blog/{{post.created_on|date:"Y"}}/{{post.created_on|date:"n"}}">{{ post.created_on|date:"d F Y" }}</a></span></div>
+            <div class="desc"><a href="/blog/{{post.slug}}/">{{ post.content|safe|truncatewords:45 }}</a></div>
           {% endfor %}
         </div>
       </div>
@@ -190,10 +189,9 @@
       <div class="col-md-5 col-sm-6 blog-block">
         {% for post in latest_posts|slice:"1:3" %}
           <div class="recent-blog {% if forloop.counter == 1 %}green{% else %}yellow{% endif %}">
-            <div class="title">{{ post.title }}</div>
-            <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date">{{ post.created_on|date:"d F Y" }}</span></div>
-            <div class="desc">{{ post.content|safe|truncatewords:20 }}</div>
-            <div class="more"><a href="/blog/{{post.slug}}/">Read More</a></div>
+            <div class="title"><a href="/blog/{{post.slug}}/">{{ post.title }}</a></div>
+            <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date"><a href="/blog/{{post.created_on|date:"Y"}}/{{post.created_on|date:"n"}}">{{ post.created_on|date:"d F Y" }}</a></span></div>
+            <div class="desc"><a href="/blog/{{post.slug}}/">{{ post.content|safe|truncatewords:20 }}</a></div>
           </div>
         {% endfor %}
       </div>
