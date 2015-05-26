@@ -3,7 +3,7 @@ img {
 }
 body {
     font-size: 13px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Arimo', sans-serif;
 }
 .marl {
     margin-left: 0px;
@@ -37,7 +37,7 @@ body {
     padding-top: 10px;
     padding-left: 0px;
     padding-right: 0px;
-    font-size: 20px;
+    font-size: 16px;
 }
 #header #topbar #callus span { margin-right: 20px }
 #header #topbar #callus span,
@@ -78,12 +78,13 @@ body {
 }
 #top-social li a {
     color: #bbc0cb;
-    font-size: 20px;
+    font-size: 18px;
     margin: 0px 1px;
     display: inline-block;
     width: 30px;
     height: 30px;
     text-align: center;
+    padding-top:4px;
     transition: 0.5s all linear;
 }
 #top-social li a:hover { transition: 0.5s all linear }
@@ -206,14 +207,12 @@ body {
 #work-process .company-moral h3 {
     color: #5c5f70;
     font-weight: bold;
-    font-size: 24px;
-    text-transform: uppercase;
+    font-size: 30px;
 }
 #work-process .company-moral span {
     display: block;
     margin-top: 5px;
-    font-size: 11px;
-    text-transform: uppercase;
+    font-size: 13px;
     color: #99a1b1;
 }
 #work-process .work-process .plan { padding: 0px 25px }
@@ -222,30 +221,32 @@ body {
     min-height: 160px;
 }
 #work-process .work-process .plan .step-content {
-    letter-spacing: 1px;
+    letter-spacing: 0px;
 }
 #work-process .work-process .plan .step-content span { display: block }
 #work-process .work-process .plan .step-content .step-title {
     color: #5c5f70;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
 }
 #work-process .work-process .plan .step-content .step-desc {
     margin-top: 10px;
     line-height: 22px;
-    font-size: 15px;
-    color: #797F8B;
+    font-size: 13px;
+    color: #68707E;
 }
 /* work proces ends here */
 .home-headings { padding-top: 20px }
 .home-head {
-    color: #5c5f70;
-    font-weight: bold;
-    font-size: 24px;
+      color: #5c5f70;
+      font-weight: 600;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0px;
 }
 .home-sub-head {
     display: block;
-    font-size: 20px;
+    font-size: 15px;
     color: #99a1b1;
 }
 /*service-blocks starts here */
@@ -280,7 +281,7 @@ body {
     background-position-y: 50%;
 }
 #our-services .server-service {
-    min-height: 200px;
+    min-height: 305px;
     padding: 15px 30px;
     background: url(/static/site/images/server-service.png) no-repeat top right #ff405f;
     background-position-y: 50%;
@@ -308,7 +309,7 @@ body {
 }
 #our-services .social-service .title {
     color: #232728;
-    font-size: 25px;
+    font-size: 22px;
 }
 #our-services .design-service .desc,
 #our-services .develop-service .desc,
@@ -317,7 +318,7 @@ body {
 #our-services .server-service .desc,
 #our-services .social-service .desc {
     letter-spacing: 1px;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 23px;
     color: #fff;
     padding-top: 10px;
@@ -413,38 +414,49 @@ body {
 }
 #our-blog .blog-blocks .blog-block .latest-blog{
     min-height:300px;
-    background:#0d60a9; 
+    background:#838383; 
 }
 .blog-blocks .blog-block .blog-item{
     padding:15px 15px;  
 }
-.latest-blog .title{
-    font-weight:800;
-    font-size:14px;
-    text-transform:uppercase;
-    color:#0d3050;  
+.blog-block .title{
+    font-weight:600;
+    font-size:18px;
+    color:#fff;  
+}
+.blog-block .title a{
+    color: #fff;
 }
 .blog-blocks .blog-block .date-author{
     margin-top:15px;
-    color:#fbb651;
-    font-size:13px;
-    font-weight:bold;   
+    color:#D0D2D7;
+    font-size:15px;
 }
+.blog-blocks .blog-block .date-author a{
+    color: #D0D2D7;
+}
+
 .blog-blocks .blog-block .date-author .date{
     float:right;
+}
+.blog-blocks .blog-block .date-author .date a{
+    color: #D0D2D7;
 }
 .blog-blocks .blog-block .desc{
     line-height:22px;
     margin-top:15px;
     color:#fff;
-    font-size:13px; 
+    font-size:15px; 
+}
+.blog-blocks .blog-block .desc a{
+    color: #fff;
 }
 .blog-blocks .blog-block .more{
     margin-top:20px;    
 }
 .blog-blocks .blog-block .more a{
     background:#fff;
-    color:#0d60a9;
+    color:#797F8B;
     display:inline-block;
     padding:5px 10px;
     font-size:10px;
@@ -453,15 +465,14 @@ body {
     font-weight:800;
 }
 .blog-blocks .blog-block .category-list{
-    background:#ff405f;
+    background:#1DABDD;
     padding:15px;
     min-height:300px;   
 }
 .category-list .title{
     font-weight:800;
     font-size:14px;
-    text-transform:uppercase;
-    color:#6a1c05;      
+    color:#fff;      
 }
 .category-list .cat-list{
     margin:0px;
@@ -476,42 +487,16 @@ body {
     float:right;    
 }
 .category-list .cat-list li a{
-    color:#fdd1d8;
-    font-weight:300;    
+    color:#fff;
+    font-weight:300;
+    font-size: 15px;    
 }
 .blog-block .recent-blog{
-    padding:8px;    
+  padding: 8px;
+  background-color: #838383;
+  margin-bottom: 10px;
+  min-height: 144px;
 }
-.blog-block .recent-blog.green .title{
-    font-weight:800;
-    font-size:13px;
-    text-transform:uppercase;
-    color:#02542e;  
-}
-.blog-block .recent-blog.yellow .title{
-    font-weight:800;
-    font-size:13px;
-    text-transform:uppercase;
-    color:#946202;  
-}
-.blog-block .recent-blog.green{
-    background:#00a75a;
-    margin-bottom:10px;
-    min-height:145px;   
-}
-.blog-block .recent-blog.yellow{
-    background:#feb834;
-    margin-top:10px;
-    min-height:145px;   
-}
-.blog-block .recent-blog .date-author{
-    margin-top:7px;
-    color:#fff;
-    font-size:13px;
-    font-weight:bold;   
-}
-.blog-blocks .blog-block .date-author .date{
-    float:right;
 }
 .blog-blocks .blog-block .desc{
     line-height:22px;
@@ -520,18 +505,7 @@ body {
     font-size:13px;
     font-weight:300;    
 }
-.blog-block .recent-blog.green .more{
-    margin-top:8px; 
-}
-.blog-block .recent-blog.green .more a{
-    color:#00a75a;
-}
-.blog-block .recent-blog.yellow .more{
-    margin-top:8px; 
-}
-.blog-block .recent-blog.yellow .more a{
-    color:#feb834;
-}
+
 /* our blog ends here */
 /* our contact starts here */
 #our-contact .contact-detail{
@@ -592,8 +566,10 @@ body {
     margin-top:25px;    
     padding:20px 0px;
 }
-#get-in-touch h2{
-    color:#576172;
+#get-in-touch h2 {
+    color: #576172;   
+    font-size: 24px;  
+    font-weight: bold;
 }
 #get-in-touch .contact-form{
     margin-top:25px;    
@@ -647,6 +623,7 @@ body {
     height:35px;
     text-align:center;
     background:#9f9fa3;
+    padding-top:1px;
     transition: 0.5s all linear;
 }
 #footer-social li a:hover{
@@ -1382,6 +1359,8 @@ body {
 }
 #blog h1 {
   margin-bottom: 7px;
+  font-weight: bold;
+  font-size: 350%;
 }
 #blog h1 a {
   color: #31383e;
@@ -1435,8 +1414,8 @@ body {
 #blog p {
   clear: both;
   color: #777;
-  font-size: 13px;
-  line-height: 24px;
+  font-size: 15px;
+  line-height: 25px;
   padding: 5px 0px 0px 0px;
 }
 #blog button {
@@ -2143,18 +2122,17 @@ box-shadow: 2px 2px -5px #ddd;
 border-top-right-radius: 5px;
 }
 .widget h3 span {
-display: inline-block;
-padding: 0px 6px;
-background: #666;
-color: #fff;
-position: relative;
-top: 4px;
-left: -23px;
-font-size:11px;
-/* -webkit-box-shadow: 1px 1px 0px #aaa; */
-box-shadow: 2px 2px -5px #ddd;
-/* border-bottom-right-radius: 5px; */
-border-top-right-radius: 5px;
+  display: inline-block;
+  padding: 5px 6px;
+  background: #666;
+  color: #fff;
+  position: relative;
+  top: 4px;
+  left: -23px;
+  font-weight: bold;
+  font-size: 12px;
+  box-shadow: 2px 2px -5px #ddd;
+  border-top-right-radius: 5px;
 }
 .widget{
     padding-bottom:10px;
@@ -2269,7 +2247,7 @@ font-size: 13px;
 }
 .blog-colors .widget-tag-cloud a,.blog-colors .widget ul li a,.blog-colors .widget ul li span {
 color: #fff;
-font-size: 13px;
+font-size: 15px;
 }
 .search-padding{
     padding:0px;    
@@ -2314,11 +2292,6 @@ font-size: 13px;
     color:#fff;
     font-size:18px;
     font-weight:bold;   
-}
-#blog p{
-    font-size:13px;
-    line-height:20px;
-    margin-top:10px;
 }
 #blog .blog-content p{
     font-size:13px;
@@ -2452,21 +2425,17 @@ font-size: 13px;
 }
 .blog-left h3 a{
   color:#31383e;
-  font-size:20px;
+  font-size:2em;
   font-weight:700;
   margin:0px;
   display:block;
   margin:10px 0px;
   padding:0px;  
 }
-#blog p{
-  font-size:13px;
-  line-height:23px;
-  margin-top:10px;
-}
+
 .blog-left .blog-left .desc{
   font-weight:normal;
-  font-size:14px;
+  font-size:1px;
 }
 .blog-content-social ul{
   margin:0px;

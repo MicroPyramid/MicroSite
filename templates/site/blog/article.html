@@ -16,17 +16,17 @@
   <div class="row">
     <div class="col-xs-12 posts wow fadeIn animated">
       <div class="width-left">
-        <h1><a href="#">{{ post.title }}</a></h1>
+        <h1>{{ post.title }}</h1>
         <div class="post-info">
           <div class="entry-meta">
             <ul>
-              <li><a href="#" class="blue-clr">{{ post.created_on|date:"d F" }}</a>
+              <li><a class="blue-clr">{{ post.created_on|date:"d F" }}</a>
               </li>
-              <li><a href="#" class="pink-clr">{{ post.user.get_full_name }}</a>
+              <li><a class="pink-clr">{{ post.user.get_full_name }}</a>
               </li>
-              <li><a href="{{ SITE_URL }}/blog/{{ post.slug }}/#disqus_thread" class="yellow-clr">Comments : </a>
+              <li><a href="{{ SITE_URL }}/blog/{{ post.slug }}/#disqus_thread" class="yellow-clr">Comments : {{ post.blogcomments_set.all.count|default:'0' }}</a>
               </li>
-              <li><a href="#" class="green-clr">Category : {{ post.category.name }}</a>
+              <li><a href="/blog/category/{{post.category.slug}}" class="green-clr">Category : {{ post.category.name }}</a>
               </li>
             </ul>
           </div>
