@@ -85,31 +85,4 @@
     <!-- /row -->
   </div>
 </div>
-{% load compress %}
-{% compress js %}
-<script type="text/javascript">
-  $('#contactform').submit(function(e) {
-    e.preventDefault();
-    $.post($(this).attr('action'), $(this).serialize(), function(data) {
-      if (data.error) {
-        $.each(data.response, function( key, value ) {
-            $('#'+key).prepend("<span style='color:red;'>"+value+"</span>");
-            });
-      } else {
-        alert(data.response);
-        window.location = '.';
-      }
-    }, 'json');
-  });
-</script>
-<script type="text/javascript">
-  function getTwitterCount(url){
-         var tweets;
-         $.getJSON('http://urls.api.twitter.com/1/urls/count.json?url=' + url + '&callback=?',             function(data){
-         tweets = data.count;
-         $('#twitterCount').html(tweets);
-     });
-     }
-</script>
-{% endcompress %}
 {% endblock %}
