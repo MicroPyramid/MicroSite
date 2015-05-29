@@ -64,6 +64,12 @@ def jobs(request):
     return render_to_response('admin/content/jobs/job_list.html', {'jobs': jobs})
 
 
+@login_required
+def clear_cache(request):
+    import cachalot
+    cachalot.api.invalidate_all()
+    return HttpResponseRedirect('/portal/')
+
 # @login_required
 # def new_job(request):
 #     if request.method=="POST":
