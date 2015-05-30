@@ -7,38 +7,50 @@
     <ul class="blog-list">
       {% for post in posts %}
       <li class="list-item">
-      <div class="blog-right">
-          <div class="blog-content-social">
-            <ul>
-              <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://micropyramid.com/blog/{{post.slug}}/&t={{ post.title }}" class="social-share facebook"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="https://plus.google.com/share?hl=en-US&url=http://micropyramid.com/blog/{{post.slug}}/" class="social-share google"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="https://twitter.com/intent/tweet?text={{ post.title }}&url=http://micropyramid.com/blog/{{post.slug}}/&via=MicroPyramid" class="social-share twitter"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="https://www.linkedin.com/cws/share?url=http://micropyramid.com/blog/{{post.slug}}/&token=&isFramed=true" class="social-share linkedin"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
+        <div class="blog-right">
+           <div class="blog-author-pic">
+              {% if post.featured_image %}
+                 <img src="/static/blog/{{post.featured_image}}" />
+              {% endif %}
+           </div>
+           <div class="blog-upic-details">
+              <span class="uname"><a>{{ post.user.get_full_name }}</a></span>
+              <span class="designation">{{ post.user.user_roles }}</span>
+              <span class="udate-time">{{ post.created_on }}</span>
+              <span class="blog-count">{{ post.user.total_posts }} Blog Posts</span>
+           </div>
+           <div class="blog-content-social">
+              <ul >
+                {% if post.user.fb_profile %}
+                  <li><a href="{{ post.user.fb_profile }}" class="social-share facebook"><i class="fa fa-facebook"></i></a>
+                </li>{% endif %}
+                {% if post.user.ln_profile %}
+                  <li><a href="{{ post.user.ln_profile }}" class="social-share linkedin"><i class="fa fa-linkedin"></i></a>
+                </li>{% endif %}
+                {% if post.user.google_plus_url %}
+                  <li><a href="{{ post.user.google_plus_url }}" class="social-share google"><i class="fa fa-google-plus"></i></a>
+                </li>{% endif %}
+                {% if post.user.tw_profile %}
+                  <li><a href="{{ post.user.tw_profile }}" class="social-share twitter"><i class="fa fa-twitter"></i></a>
+                </li>{% endif %}
+              </ul>
+           </div>
         </div>
         <div class="blog-left">
-          <div class="blog-upic-details">
-            {% if post.featured_image %}
-            <span class="upic"><img src="/static/blog/{{post.featured_image}}" /></span>
-            {% endif %}
-            <span class="uname">{{ post.user.get_full_name }}</span>
-            <span class="udate-time">{{ post.created_on }}</span>
-          </div>
-          <h3 class="title"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></h3>
-          <div class="desc">
-            <p>{{post.content|safe|truncatewords:50}}</p>
-          </div>
-          <div class="tags">
-            <ul>
-              {% for tag in post.tags.all %}
-              <li><a href="/blog/tag/{{tag.slug}}/"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="read"><a href="/blog/{{post.slug}}/">Readmore</a></div>
+           <h3 class="title"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></h3>
+           <div class="desc">
+              <p>{{post.content|safe|truncatewords:50}}</p>
+           </div>
+           <div class="tags">
+              <ul>
+                {% for tag in post.tags.all %}
+                  <li><a href="/blog/tag/{{tag.slug}}/"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
+                {% endfor %}
+              </ul>
+           </div>
+           <div class="read"><a href="/blog/{{post.slug}}/">Continue Reading.....</a></div>
         </div>
-      </li>
+     </li>
       {% endfor %}
     </ul>
   </div>
