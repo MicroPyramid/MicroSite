@@ -50,7 +50,7 @@ a:hover {
     padding-top: 15px;
     padding-left: 0px;
     padding-right: 0px;letter-spacing: 0.4px;
-    font-size: 1.3rem;
+    font-size: 1.6rem;
 }
 #header #topbar #callus span {
     margin-right: 20px
@@ -1135,10 +1135,10 @@ a:hover {
 .blog-colors .widget.tags li {
     display: inline-block;
     /* margin-bottom: 2px; */
-    
     border: none;
     margin-bottom: 0px;
     padding-bottom: 4px;
+    margin-left: 5px;
 }
 .blog-colors .widget.tags li a {
     background: #fef0f0;
@@ -1527,7 +1527,7 @@ a:hover {
 }
 .post-left-view .user-details .user-name{
   color: #01A75B;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 .post-left-view .user-details .user-desig{

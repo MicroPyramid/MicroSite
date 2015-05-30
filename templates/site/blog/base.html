@@ -12,12 +12,12 @@
       <div class="row">
         <div class="col-xs-12 search-padding">
           {% block blog_author_details %}{% endblock %}
-          <form role="search" method="get" id="searchform" class="searchform" action="#">
+          <!-- <form role="search" method="get" id="searchform" class="searchform" action="#">
             <div>
               <input type="text" value="" name="s" id="s" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
               <input type="submit" id="searchsubmit" value="Search">
             </div>
-          </form>
+          </form> -->
         </div>
         <!-- / widget -->
         <div class="col-xs-12 widget" id="tag-blue">
@@ -35,7 +35,7 @@
           <ul style="margin:0px;padding:0px;">
             {% get_archives as archives %}
             {% for archive in archives %}
-            <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
+                <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
             </li>
             {% endfor %}
           </ul>

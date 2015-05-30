@@ -9,6 +9,7 @@ class Category(models.Model):
     name = models.CharField(max_length=20, unique=True)
     slug = models.CharField(max_length=20, unique=True)
     description = models.CharField(max_length=500)
+    is_display = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
