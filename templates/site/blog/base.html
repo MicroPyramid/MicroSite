@@ -11,6 +11,7 @@
     <div class="col-sm-12 col-md-3 blog-colors" id="right-sidebar">
       <div class="row">
         <div class="col-xs-12 search-padding">
+          {% block blog_author_details %}{% endblock %}
           <form role="search" method="get" id="searchform" class="searchform" action="#">
             <div>
               <input type="text" value="" name="s" id="s" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
@@ -21,7 +22,7 @@
         <!-- / widget -->
         <div class="col-xs-12 widget" id="tag-blue">
           <h3><span>Categories</span></h3>
-          <ul>
+          <ul style="margin:0px;padding:0px;">
             {% get_categories as categories %}
             {% for category in categories %}
             <li><a href="/blog/category/{{category.slug}}">{{ category.name }}</a></li>
@@ -31,7 +32,7 @@
         <!-- / widget -->
         <div class="col-xs-12 widget" id="green">
           <h3><span>Archives</span></h3>
-          <ul>
+          <ul style="margin:0px;padding:0px;">
             {% get_archives as archives %}
             {% for archive in archives %}
             <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
@@ -42,7 +43,7 @@
         <!-- / widget -->
         <div class="col-xs-12 widget tags" id="pink">
           <h3><span>Tags</span></h3>
-          <ul>
+          <ul style="margin:0px;padding:0px;">
             {% get_tags as tags %}
             {% for tag in tags %}
             <li><a href="/blog/tag/{{tag.slug}}"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
@@ -50,9 +51,10 @@
           </ul>
         </div>
         <!-- / widget -->
-        <div class="col-xs-12 widget widget-recent-entries" id="yellow">
+        
+        <!--<div class="col-xs-12 widget widget-recent-entries" id="yellow">
           <h3><span>Recent posts</span></h3>
-          <ul>
+          <ul style="margin:0px;padding:0px;">
             {% get_latest_posts as latest_posts %}
             {% for post in latest_posts %}
             <li>
@@ -66,19 +68,20 @@
             </li>
             {% endfor %}   
           </ul>
-        </div>
+        </div>-->
         <!-- / widget -->
         <div class="clearfix"></div>
         <!-- / widget widget-meta -->
-        <div class="col-xs-12 widget widget-recent-comments" id="tag-blue">
+        <!--<div class="col-xs-12 widget widget-recent-comments" id="tag-blue">
           <h3 class="widget-title"><span>Recent Comments</span></h3>
           <ul id="recentcomments">
             {% for comment in comments %}
             <li class="recentcomments"><a href="/blog/{{comment.post.slug}}/"> {{comment.name}} &thinsp; {{comment.created|date:"M d Y"}}</a></li>
             {% endfor %}   
           </ul>
-        </div>
+        </div>-->
         <!-- / widget widget-recent-comments -->
+
       </div>
       <!-- / widget widget-text -->
     </div>
