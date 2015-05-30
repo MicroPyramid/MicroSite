@@ -3,7 +3,6 @@ from django.test import Client
 from micro_blog.forms import BlogpostForm, BlogCategoryForm
 from micro_blog.models import Category, Post
 from micro_admin.models import User
-from micro_blog.views import store_image
 import unittest
 from microsite.settings import BASE_DIR
 from django.core.files import File
@@ -13,7 +12,7 @@ class micro_blog_forms_test(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.user = User.objects.create_superuser('mp@mp.com', 'micro-test', 'mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'D')
 
@@ -31,12 +30,12 @@ class micro_blogviews_get(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.user = User.objects.create_superuser('mp@mp.com', 'micro','mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c,status = 'D')
 
 	def test_blog_get(self):
-		user_login=self.client.login(email='mp@mp.com', password='mp')
+		user_login=self.client.login(username = 'micro', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/blog/')
@@ -111,12 +110,12 @@ class micro_blog_post_data(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'D')
 
 	def test_blog_post(self):
-		user_login=self.client.login(email='mp@mp.com', password='mp')
+		user_login=self.client.login(username='micro', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/blog/')
@@ -203,11 +202,11 @@ class micro_user_test(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_user('test@micropyramid.com', 'test')
+		self.user = User.objects.create_user('test@micropyramid.com', 'testuser','test')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'D')
 
 	def test_blog_without_user(self):
 
-		user_login=self.client.login(email='test@micropyramid.com', password='test')
+		user_login=self.client.login(username='testuser', password='test')
 		self.assertTrue(user_login)

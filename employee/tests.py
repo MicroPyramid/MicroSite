@@ -46,11 +46,11 @@ class test_employee_as_admin(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.user = User.objects.create_superuser('mp@mp.com', 'microtest', 'mp')
 
 
 	def test_views_user(self):
-		user_login=self.client.login(email='mp@mp.com', password='mp')
+		user_login=self.client.login(username='microtest', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/portal/employee/')
@@ -82,12 +82,13 @@ class test_employee(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_user('micro@mp.com', 'mp')
+		self.user = User.objects.create_user('micro@mp.com', 'testuser', 'mp')
+		# self.user = User.objects.create(username='testuser', email = "ravi@micropyramid.com", password='pwd', is_active=1, is_staff=1)
 		self.u = str(self.user.id)
 
 	def test_user(self):
 		self.client = Client()
-		user_login=self.client.login(email='micro@mp.com', password='mp')
+		user_login=self.client.login(username='testuser', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/portal/employee/')

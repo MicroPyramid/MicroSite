@@ -9,7 +9,7 @@ class frontend_test(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
 		self.c=Category.objects.create(name='django', description='django desc')
 		self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'P')
 

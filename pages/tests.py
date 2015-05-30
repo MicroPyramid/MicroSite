@@ -34,13 +34,13 @@ class pages_views_test(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('pyramid@mp.com', 'mp')
+		self.user = User.objects.create_superuser('pyramid@mp.com', 'microtest', 'mp')
 		self.p=Page.objects.create(title='Page', content= 'page_content')
 		self.m= Menu.objects.create(title='main', url='micro.in', status='on', lvl=1)
 
 
 	def test_views(self):
-		user_login=self.client.login(email='pyramid@mp.com', password='mp')
+		user_login=self.client.login(username='microtest', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/blog/')
