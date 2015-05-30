@@ -35,14 +35,14 @@ class Views_test(TestCase):
 		resp = c.get('/portal/contacts/')
 		self.assertEqual(resp.status_code,302)
 
-		resp = c.get('/portal/jobs/')
-		self.assertEqual(resp.status_code, 302)
+		# resp = c.get('/portal/jobs/')
+		# self.assertEqual(resp.status_code, 302)
 
-		resp = c.post('/portal/new-jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
-		self.assertEqual(resp.status_code, 302)
+		# resp = c.post('/portal/new-jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		# self.assertEqual(resp.status_code, 302)
 
-		resp = c.get('/portal/edit-jobs/python-developer/')
-		self.assertEqual(resp.status_code, 302)
+		# resp = c.get('/portal/edit-jobs/python-developer/')
+		# self.assertEqual(resp.status_code, 302)
 
 
 class test_portal_admin(TestCase):
@@ -51,48 +51,48 @@ class test_portal_admin(TestCase):
 	'''
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('mp@mp.com', 'mp')
+		self.user = User.objects.create_superuser('mp@mp.com', 'microtest', 'mp')
 
 	def test_user_index(self):
 		user = self.client.post('/portal/', {'email': 'mp@mp.com', 'password': 'mp'})
 		self.assertEqual(user.status_code,200)
 
 	def test_views_user(self):
-		user_login=self.client.login(email='mp@mp.com', password='mp')
+		user_login=self.client.login(username='microtest', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/portal/contacts/')
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'admin/content/contacts/simplecontact.html')
 
-		resp = self.client.get('/portal/jobs/')
-		self.assertEqual(resp.status_code, 200)
-		self.assertTemplateUsed(resp,'admin/content/jobs/job_list.html')
+		# resp = self.client.get('/portal/jobs/')
+		# self.assertEqual(resp.status_code, 200)
+		# self.assertTemplateUsed(resp,'admin/content/jobs/job_list.html')
 
-		resp = self.client.post('/portal/new-jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
-		self.assertEqual(resp.status_code, 200)
-		self.assertTrue('created' in resp.content)
+		# resp = self.client.post('/portal/new-jobs/', {'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		# self.assertEqual(resp.status_code, 200)
+		# self.assertTrue('created' in resp.content)
 
-		resp = self.client.post('/portal/new-jobs/', {'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
-		self.assertEqual(resp.status_code, 200)
-		self.assertFalse('created' in resp.content)
+		# resp = self.client.post('/portal/new-jobs/', {'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		# self.assertEqual(resp.status_code, 200)
+		# self.assertFalse('created' in resp.content)
 
-		resp = self.client.get('/portal/new-jobs/')
-		self.assertEqual(resp.status_code, 200)
+		# resp = self.client.get('/portal/new-jobs/')
+		# self.assertEqual(resp.status_code, 200)
 
-		resp = self.client.get('/portal/edit-jobs/1/')
-		self.assertEqual(resp.status_code, 200)
+		# resp = self.client.get('/portal/edit-jobs/1/')
+		# self.assertEqual(resp.status_code, 200)
 
-		resp = self.client.post('/portal/edit-jobs/1/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
-		self.assertEqual(resp.status_code, 200)
-		self.assertTrue('updated successfully' in resp.content)
+		# resp = self.client.post('/portal/edit-jobs/1/',{'title':'Python developer', 'experience':1, 'skills': 'Python, django', 'description':'sample description', 'num_of_opening':5,'url':'http://peeljobs.com/java/'})
+		# self.assertEqual(resp.status_code, 200)
+		# self.assertTrue('updated successfully' in resp.content)
 
-		resp = self.client.post('/portal/edit-jobs/1/',{'title':'Python developer', 'experience':1, 'skills': '', 'description':''})
-		self.assertEqual(resp.status_code, 200)
-		self.assertFalse('updated successfully' in resp.content)
+		# resp = self.client.post('/portal/edit-jobs/1/',{'title':'Python developer', 'experience':1, 'skills': '', 'description':''})
+		# self.assertEqual(resp.status_code, 200)
+		# self.assertFalse('updated successfully' in resp.content)
 
-		resp = self.client.get('/portal/delete-jobs/1/')
-		self.assertEqual(resp.status_code, 302)
+		# resp = self.client.get('/portal/delete-jobs/1/')
+		# self.assertEqual(resp.status_code, 302)
 
 		resp = self.client.post('/portal/',{'email':'mp@mp.com','password':'mp'})
 		self.assertEqual(resp.status_code,200)
@@ -106,11 +106,11 @@ class user_test(TestCase):
 
 	def setUp(self):
 		self.client = Client()
-		self.user = User.objects.create_superuser('micro@mp.com', 'micro')
+		self.user = User.objects.create_superuser('micro@mp.com', 'micro', 'mp')
 		self.u  = str(self.user.id)
 
 	def test_views_user(self):
-		user_login=self.client.login(email='micro@mp.com', password='micro')
+		user_login=self.client.login(username='micro', password='mp')
 		self.assertTrue(user_login)
 
 		response = self.client.get('/portal/users/new/')
