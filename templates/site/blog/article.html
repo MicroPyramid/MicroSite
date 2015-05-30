@@ -75,8 +75,8 @@
     <div class="user-details">
       <div class="name-desig">
         <span class="user-name">{{ post.user.get_full_name }}</span>
-        <span class="user-desig">{{ post.user.user_roles }}</span>
-        <span class="post-date">{{ post.created_on }}</span>
+        <!-- <span class="user-desig">{{ post.user.user_roles }}</span> -->
+        <span class="post-date">{{ post.created_on|date:"d F Y" }}</span>
         <span class="post-count">{{ post.user.total_posts }} Blog Posts</span>
       </div>
     </div>

@@ -15,8 +15,8 @@
            </div>
            <div class="blog-upic-details">
               <span class="uname"><a>{{ post.user.get_full_name }}</a></span>
-              <span class="designation">{{ post.user.user_roles }}</span>
-              <span class="udate-time">{{ post.created_on }}</span>
+              <!-- <span class="designation">{{ post.user.user_roles }}</span> -->
+              <span class="udate-time">{{ post.created_on|date:"d F Y" }}</span>
               <span class="blog-count">{{ post.user.total_posts }} Blog Posts</span>
            </div>
            <div class="blog-content-social">
