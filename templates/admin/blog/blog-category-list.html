@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           {% for category in blog_categories %}
-          <tr>
+          <tr class="{% if category.is_display %}success{% else %}danger{% endif %}">
             <td class="txt_center">{{ forloop.counter }}</td>
             <td>{{ category.name }}</td>
             <td class="txt_center">
