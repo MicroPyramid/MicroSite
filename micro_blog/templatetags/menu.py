@@ -12,7 +12,7 @@ def get_tags(context):
 
 @register.assignment_tag(takes_context=True)
 def get_categories(context):
-    return Category.objects.all()
+    return Category.objects.filter(is_display=True)
 
 
 @register.assignment_tag(takes_context=True)
