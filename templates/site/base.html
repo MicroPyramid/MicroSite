@@ -16,12 +16,12 @@
     <meta name="keywords" content="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails" />
     <meta name="author" content="micropyramid" />
     <meta name="robots" content="index, follow">
-    <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails Development Company - Hyderabad, India &raquo; Feed" href="http://www.micropyramid.com.com/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails Development Company - Hyderabad, India &raquo; Feed" href="http://www.micropyramid.com/rss.xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block extra-head %}
     {% endblock %}
     {% load compress %}
-    <!-- <link rel="shortcut icon" href="/static/favicon.ico"> -->
+    <link rel="shortcut icon" href="/static/favicon.png">
     <!-- google fonts starts here-->
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
 
@@ -30,13 +30,15 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     {% compress css %}
     <link rel="stylesheet" href="/static/site/css/bootstrap.min.css">
-    <link href="/static/site/css/style.css" rel="stylesheet">
+    <link href="/static/site/less/style.less" rel="stylesheet" type="text/less">
     <link href="/static/site/css/mobile.css" rel="stylesheet">
     <link href="/static/site/css/responsive.css" rel="stylesheet">
     <link href="/static/site/css/tag.css" rel="stylesheet">
     {% endcompress %}
     <!-- css ends here -->
     <!-- scripts starts here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/static/site/js/bootstrap.js"></script>
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
     <!-- scripts ends here -->
   </head>
@@ -204,8 +206,6 @@
       <!-- footer links ends here -->
     </div>
     <!-- For the demo ad only -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     {% compress js %}
     <script src="/static/site/js/isotope.js"></script>

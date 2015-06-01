@@ -24,9 +24,7 @@ This project contains the following modules.
    * Configurable Menu.
    * Blog.
    * Employee daily reports.
-   * Employee payroll.
    * Internal knowledge base.
-   * Projects the company is dealing.
 
 
 
