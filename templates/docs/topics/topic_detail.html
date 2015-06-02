@@ -1,4 +1,6 @@
 {% extends 'admin/base.html' %}
+{% load user_tags %}
+
 {% block stage %}
 {% load topics_filters %}
 <div class="panel panel-default">
@@ -104,7 +106,7 @@
           <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
           <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
         </span>
-        {{topic.content|safe}}
+        {{topic.content|convert_to_html|safe}}
         {% endif %}
         {% if subtopic %}
           <h5>{{subtopic.title|capfirst}}</h5>
@@ -123,7 +125,7 @@
             <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
             <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
           </span>
-          {{subtopic.content|safe}}
+          {{subtopic.content|convert_to_html|safe}}
         {% endif %}
       </div>
     </div>

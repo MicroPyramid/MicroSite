@@ -1,4 +1,7 @@
-{% extends 'admin/base.html' %} {% block stage %}
+{% extends 'admin/base.html' %} 
+{% load user_tags %}
+
+{% block stage %}
 <div class="panel panel-default blog-list">
     <div class="panel-heading">
       <h3 class="panel-title">Book Detail Page</h3>
@@ -35,7 +38,7 @@
           <span class="book_title">{{book.title|capfirst}}</span><span class="authors" style="background-color:#FFEFC6;">{{ book.privacy }}</span>
           <div class="description_div">
             <span>Description :</span>
-            {{book.description|safe}}
+            {{book.description|convert_to_html|safe}}
           </div>
         </div>
         <!--/TITLE AND DESCRIPTION-->

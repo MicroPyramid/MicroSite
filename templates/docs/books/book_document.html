@@ -1,6 +1,8 @@
 {% extends 'admin/base.html' %}
-{% block stage %}
+{% load user_tags %}
 {% load topics_filters %}
+
+{% block stage %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">{{book.title|capfirst}} Documentation </h3>
@@ -29,7 +31,7 @@
         <h5 style="display:inline-block;">{{book.title|capfirst}}</h5>
         <span class="by">By</span>
         <span class='author'>{{book.admin.get_full_name}}</span>
-        {{book.description|safe}}
+        {{book.description|convert_to_html|safe}}
         <!--AUTHORS ROW-->
         <div class="authors_div">
           <span class="authors">Authors</span>
@@ -109,7 +111,7 @@
               <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
               <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
             </span>
-            {{subtopic.content|safe}}
+            {{subtopic.content|convert_to_html|safe}}
             <!--AUTHORS ROW-->
             <div class="authors_div">
               <span class="authors">Authors</span>

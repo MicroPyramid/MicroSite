@@ -24,7 +24,7 @@ def create_book(request):
 
             if book_form.is_valid():
                 book = book_form.save()
-                book.status = "Waiting"
+                book.status = request.POST.get('status')
                 book.authors.add(request.user)
                 book.save()
                 data = {"error": False, "response": "Book created"}
@@ -64,7 +64,7 @@ def create_topic(request, slug):
         
         if topic_form.is_valid():
             topic = topic_form.save()
-            topic.status = "Waiting"
+            topic.status = request.POST.get('status')
             topic.authors.add(request.user)
             
             try:
@@ -238,7 +238,7 @@ def edit_book(request, slug):
             
             if book_form.is_valid():
                 book = book_form.save()
-                book.status = "Waiting"
+                book.status = request.POST.get('status')
                 book.authors.add(request.user)
                 book.save()
                 data = {"error": False, "response": "Book has been edited Successfully."}
@@ -301,6 +301,7 @@ def book_list(request):
 
 
 def book_info(request, slug):
+    print slug
     book = Book.objects.get(slug=slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render_to_response("docs/book_topics.html", {"book": book, "parent_topics": parent_topics})

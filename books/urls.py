@@ -3,10 +3,10 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns(
     'books.views',
     url(r'^$', 'book_list', name='book_list'),
-    url(r'^book/(?P<slug>[-\w]+)/$', 'book_info', name='book_info'),
-    url(r'^book/(?P<book_slug>[-\w]+)/topic/(?P<topic_slug>[-\w]+)/$', 'topic_info', name='topic_info'),
-    url(r'^book/(?P<book_slug>[-\w]+)/subtopic/(?P<subtopic_slug>[-\w]+)/$', 'subtopic_info', name='subtopic_info'),
     url(r'^books/$', 'books', name='books'),
+    url(r'^(?P<slug>[-\w]+)/$', 'book_info', name='book_info'),
+    url(r'^(?P<book_slug>[-\w]+)/topic/(?P<topic_slug>[-\w]+)/$', 'topic_info', name='topic_info'),
+    url(r'^(?P<book_slug>[-\w]+)/subtopic/(?P<subtopic_slug>[-\w]+)/$', 'subtopic_info', name='subtopic_info'),
     url(r'^create-book/$', 'create_book', name='create_book'),
     url(r'^(?P<slug>[-\w]+)/detail/$', 'view_book', name='view_book'),
     url(r'^(?P<slug>[-\w]+)/$', 'view_book_doc', name='view_book_doc'),
