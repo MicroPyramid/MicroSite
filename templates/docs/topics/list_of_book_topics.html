@@ -1,9 +1,16 @@
 {% extends 'admin/base.html' %}
 {% load user_tags %}
-
-{% block stage %}
 {% load topics_filters %}
-<!-- main content starts here-->
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="/portal/">Home</a></li>
+  <li><a href="/books/books/">Books</a></li>
+  <li><a href="/books/{{book.slug}}/detail/">{{book.slug}}</a></li>
+  <li class="active">Topics</li>
+</ol>
+{% endblock breadcrumb %}
+{% block stage %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">{{book.title|capfirst}} - Topics List</h3>
@@ -16,7 +23,6 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th width="2%"></th>
             <th width="10%">Title</th>
             <th width="10%">Slug</th>
             <th width="6%">Status</th>
@@ -29,7 +35,6 @@
           {% for topic in topics %}
             {% with sub_topics=topic|get_sub_topics %}
               <tr class="parent_row">
-                <td>{% if sub_topics %}<a class="show_sub_categories" row-id="{{topic.id}}"><i class="fa fa-plus"></i></a>{% endif %}</td>
                 <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
                 <td>{{topic.slug}}</td>
                 <td>{{topic.status}}</td>
@@ -38,16 +43,19 @@
                 {% endfor %}</td>
                 <td>{{topic.created_on}}</td>
                 <td>
-                  <a href="{% url 'books:create_topic' slug=book.slug %}?topic=sub-topic&topic_id={{topic.id}}" title="Add Sub Topic"><i class="fa fa-plus-square-o plus-color"></i></a>
-                  <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic" class="edit_anchor"><i class="fa fa-pencil-square-o edit-color"></i>Edit</a>
                   <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
+                  {% if topic.status == "Waiting" or topic.status == "Rejected" %}
+                  <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve" class="delete-btn-click check_anchor"><i class="fa fa-check check-color"></i></a>
+                  {% endif %}
+                  {% if topic.status == "Waiting" or topic.status == "Approved" %}
+                  <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject" class="delete-btn-click cross_anchor"><i class="fa fa-times remove-color"></i></a>
+                  {% endif %}
                 </td>
               </tr>
               {% if sub_topics %}
                 {% for subtopic in sub_topics %}
-                  <tr class="child_row subtopic-of-{{topic.id}}">
-                    <td></td>
-                    <td>{{subtopic.title}}</td>
+                  <tr class="subtopic-of-{{topic.id}}">
+                    <td class="sub-topic-title">{{subtopic.title}}</td>
                     <td>{{subtopic.slug}}</td>
                     <td>{{subtopic.status}}</td>
                     <td>{% for author in subtopic.authors.all %}
@@ -55,8 +63,9 @@
                     {% endfor %}</td>
                     <td>{{subtopic.created_on}}</td>
                     <td>
-                      <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
                       <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o"></i>Delete</a>
+                      <a href="" title="Approve" class="delete-btn-click check_anchor"><i class="fa fa-check check-color"></i></a>
+                      <a href="" title="Reject" class="delete-btn-click cross_anchor"><i class="fa fa-times remove-color"></i></a>
                     </td>
                   </tr>
                 {% endfor %}
@@ -72,13 +81,6 @@
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
-  $ = jQuery;
-  $(".show_sub_categories").click(function(){
-    row_id = $(this).attr("row-id")
-    $(".subtopic-of-"+row_id).show();
-    $(this).hide();
-  });
-
   $('.delete-btn-click').click(function(e) {
     e.preventDefault();
     $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){

@@ -1,6 +1,13 @@
 {% extends 'admin/base.html' %} 
 {% load user_tags %}
 
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="/portal/">Home</a></li>
+  <li><a href="/books/books/">Books</a></li>
+  <li class="active">Book Details</li>
+</ol>
+{% endblock breadcrumb %}
 {% block stage %}
 <div class="panel panel-default blog-list">
     <div class="panel-heading">

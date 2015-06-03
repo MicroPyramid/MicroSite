@@ -1,4 +1,12 @@
-{% extends 'admin/base.html' %} {% block stage %}
+{% extends 'admin/base.html' %} 
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="/portal/">Home</a></li>
+  <li class="active">Books</li>
+</ol>
+{% endblock breadcrumb %}
+{% block stage %}
 <!-- main content starts here-->
 <div class="panel panel-default">
   <div class="panel-heading">

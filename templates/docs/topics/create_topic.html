@@ -1,4 +1,13 @@
-{% extends 'admin/base.html' %} 
+{% extends 'admin/base.html' %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="/portal/">Home</a></li>
+  <li><a href="/books/books/">Books</a></li>
+  <li><a href="/books/{{book.slug}}/detail/">{{book.slug}}</a></li>
+  <li class="active">Create Topic</li>
+</ol>
+{% endblock breadcrumb %} 
 {% block stage %}
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -9,23 +18,18 @@
       {% csrf_token %}
       <input type="hidden" name="book" value="{{book.id}}">
       <input type="hidden" name="topic" value="{{topic}}">
-      <input type="hidden" name="topic_id" value="{{topic_id}}">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Parent <span>*</span></label>
+        <select id="parent" name="parent" class="form-control">
+          <option value="">Top Level</option>
+          {% for topic in topics %}
+          <option value="{{topic.id}}">{{topic.title}}</option>
+          {% endfor %}
+        </select>
+      </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Title <span>*</span></label>
         <input type="Text" class="form-control" id="title" name="title">
-      </div>
-      <div class="form-group">
-        <label class="control-label" for="html">Content <span>*</span></label>
-        <div class="control-group">
-          <div class="controls" id="content">
-            <textarea class="input-xlarge" name="content" rows="10" cols="100" placeholder="Write the content here"></textarea>
-            {# <input type="hidden" name="content" id="content"> #}
-          </div>
-        </div>
-      </div>
-      <div>
-        <input type="radio" class="pagination" name="status" value="Waiting">waiting<br/>
-        <input type="radio" class="pagination" name="status" value="Approved">Approved
       </div>
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save" class="save" id="search_lessons">

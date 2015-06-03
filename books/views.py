@@ -64,7 +64,7 @@ def create_topic(request, slug):
         
         if topic_form.is_valid():
             topic = topic_form.save()
-            topic.status = request.POST.get('status')
+            topic.status = "Waiting"
             topic.authors.add(request.user)
             
             try:
@@ -74,8 +74,8 @@ def create_topic(request, slug):
                 book.authors.add(request.user)
                 book.save()
 
-            if request.POST.get("topic") == "sub-topic":
-                topic.parent = Topic.objects.get(id=request.POST.get("topic_id"))
+            if request.POST.get("parent"):
+                topic.parent = Topic.objects.get(id=request.POST.get("parent"))
 
             topic.save()
 
@@ -85,8 +85,48 @@ def create_topic(request, slug):
             data = {"error": True, "response": topic_form.errors}
         
         return HttpResponse(json.dumps(data))
+    topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
+    return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics, "topic": request.GET.get("topic"), "topic_id": request.GET.get("topic_id")})
 
-    return render_to_response("docs/topics/create_topic.html", {"book": book, "topic": request.GET.get("topic"), "topic_id": request.GET.get("topic_id")})
+
+@login_required
+def create_content(request, book_slug, topic_slug):
+    topic = Topic.objects.get(slug=topic_slug)
+    if request.POST.get("content"):
+        if not topic.content:
+            topic.content = request.POST.get("content")
+            topic.save()
+        else:
+            topic_form = TopicForm(request.POST)
+        
+            if topic_form.is_valid():
+                new_topic = topic_form.save()
+                new_topic.status = "Waiting"
+                new_topic.authors.add(request.user)
+                
+                try:
+                    Book.objects.get(slug=book_slug, authors__in=[request.user])
+
+                except ObjectDoesNotExist:
+                    book.authors.add(request.user)
+                    book.save()
+
+                try:
+                    Topic.objects.get(slug=topic_slug, authors__in=[request.user])
+
+                except ObjectDoesNotExist:
+                    topic.authors.add(request.user)
+                    topic.save()
+
+                if request.POST.get('parent'):
+                    new_topic.parent = request.POST.get('parent')
+
+                new_topic.shadow = topic
+                new_topic.content = request.POST.get("content")
+
+                new_topic.save()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -140,8 +180,8 @@ def edit_topic(request, book_slug, topic_slug):
                 topic.authors.add(request.user)
                 topic.save()
 
-            if topic.parent:
-                new_topic.parent = topic.parent
+            if request.POST.get('parent'):
+                new_topic.parent = request.POST.get('parent')
 
             new_topic.shadow = topic
 
@@ -153,8 +193,8 @@ def edit_topic(request, book_slug, topic_slug):
             data = {"error": True, "response": topic_form.errors}
         
         return HttpResponse(json.dumps(data))
-
-    return render_to_response("docs/topics/edit_topic.html", {"book": book, "topic": topic})
+    topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
+    return render_to_response("docs/topics/edit_topic.html", {"book": book, "topics":topics, "topic": topic})
 
 
 @login_required
@@ -271,9 +311,7 @@ def approve_book(request, slug):
 
 @login_required
 def reject_book(request, slug):
-
     if request.user.is_superuser:
-        
         book = Book.objects.get(slug=slug)
         book.status = "Rejected"
         book.save()
@@ -285,7 +323,6 @@ def reject_book(request, slug):
 
 @login_required
 def delete_book(request, slug):
-
     if request.user.is_superuser:
         book = Book.objects.get(slug=slug)
         book.delete()
@@ -301,7 +338,6 @@ def book_list(request):
 
 
 def book_info(request, slug):
-    print slug
     book = Book.objects.get(slug=slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render_to_response("docs/book_topics.html", {"book": book, "parent_topics": parent_topics})

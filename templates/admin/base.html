@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <title>Micro Pyramid Admin</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css">
 
     {% compress css %}
     <link type="text/css" href="/static/admin/css/style.css" rel="stylesheet">
@@ -106,7 +106,8 @@
       <div class="main-inner">
         <div class="container">
           <!--CONTENT-->
-          {% block stage %} {% endblock %}
+          {% block breadcrumb %} {% endblock breadcrumb %}
+          {% block stage %} {% endblock stage %}
           <!--/CONTENT-->
         </div>
         <!-- /container --> 
