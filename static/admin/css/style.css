@@ -781,6 +781,37 @@ textarea {
   transition: 0.5s;
   text-decoration: none;
 }
+.check_anchor {
+  padding: 2px 3px;
+  border: 1px solid #91c55a;
+  color: #91c55a;
+  border-radius: 4px;
+  transition: 0.5s;
+  background: #fff;
+}
+
+.check_anchor:hover {
+  background: #91c55a;
+  color: #fff;
+  transition: 0.5s;
+  text-decoration: none;
+}
+
+.cross_anchor {
+  padding: 2px 3px;
+  border: 1px solid #e2435a;
+  color: #e2435a;
+  border-radius: 4px;
+  transition: 0.5s;
+  background: #fff;
+}
+
+.cross_anchor:hover {
+  background: #e2435a;
+  color: #fff;
+  transition: 0.5s;
+  text-decoration: none;
+}
 /*EDIT ANCHOR AND DELETE ANCHOR*/
 
 .txt_center {
@@ -1115,6 +1146,7 @@ a{
   text-decoration: none !important;
 }
 
+
 /*------------------------------------------------------------------
 [1. Max Width: 480px]
 */
@@ -1210,6 +1242,14 @@ a{
     margin-right: 1em;
   };
 }
+.topic-content{
+  margin-top: 25px;
+}
+.topic-content .form-control{
+  box-shadow:none;
+  background: white;
+  border-radius: 2px;
+}
 /*------------------------------------------------------------------
 [3. Max Width: 979px]
 */
@@ -1236,3 +1276,10 @@ a{
     width: 200px;
   };
 }
+.topic_list_div .sub-topic-title{
+  padding-left: 30px;
+}
+.topic-content .btn{
+  margin-top: 20px;
+}
+select:focus,select:active,input:focus,textarea:focus{background:#D4EAFC;}

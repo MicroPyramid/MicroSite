@@ -1,6 +1,17 @@
 {% extends 'admin/base.html' %}
-{% block stage %}
+{% load user_tags %}
 {% load topics_filters %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb">
+  <li><a href="/portal/">Home</a></li>
+  <li><a href="/books/books/">Books</a></li>
+  <li><a href="/books/{{book.slug}}/detail/">{{book.slug}}</a></li>
+  <li><a href="/books/{{book.slug}}/topics/">Topics</a></li>
+  <li class="active">Topic Details</li>
+</ol>
+{% endblock breadcrumb %}
+{% block stage %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Topic Detail</h3>
@@ -96,15 +107,28 @@
             Waiting for Approval
           {% endif %}
           </p>
+        <div class="row marl">
         <span class="actions_book">
-        {% if not topic.shadow %}
-          <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Edit Topic"><i class="fa fa-pencil-square-o"></i></a>
-        {% endif %}  
+        {% if topic.status == "Waiting" or topic.status == "Rejected" %}  
           <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Approve Topic" class="btn-click"><i class="fa fa-check"></i></a>
+        {% endif %}
+        {% if topic.status == "Waiting" or topic.status == "Approved" %}  
           <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject Topic" class="btn-click"><i class="fa fa-times"></i></a>
+        {% endif %}  
           <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Delete Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
+          <a href="{% url 'books:topic_info' book_slug=book.slug topic_slug=topic.slug %}" title="preview Topic" class="preview-btn-click"><i class="fa fa-eye"></i></a>
         </span>
-        {{topic.content|safe}}
+        </div>
+        <div class="row marl topic-content">
+        <form action="{% url "books:create_content" topic_slug=topic.slug book_slug=book.slug %}" method="post">
+          <input type="hidden" name="book" value="{{book.id}}">
+          <input type="hidden" name="topic" value="{{topic}}">
+          <input type="hidden" name="title" value="{{topic.title}}">
+          <input type="hidden" name="parent" value="{{topic.parent.id}}">
+          <textarea name="content" class="form-control" rows="10" cols="50">{{ topic.content }}</textarea>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>  
+        </div>
         {% endif %}
         {% if subtopic %}
           <h5>{{subtopic.title|capfirst}}</h5>
@@ -115,15 +139,23 @@
             Waiting for Approval
           {% endif %}
           </p>
+          <div class="row marl">
           <span class="actions_book">
-          {% if not subtopic.shadow %}
-            <a href="{% url 'books:edit_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Edit Sub Topic"><i class="fa fa-pencil-square-o"></i></a>
-          {% endif %}
+          {% if subtopic.status == "Waiting" or subtopic.status == "Rejected" %}
             <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve Sub Topic" class="btn-click"><i class="fa fa-check"></i></a>
+          {% endif %}
+          {% if subtopic.status == "Waiting" or subtopic.status == "Approved" %}  
             <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject Sub Topic" class="btn-click"><i class="fa fa-times"></i></a>
+          {% endif %}
             <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click"><i class="fa fa-trash-o"></i></a>
           </span>
-          {{subtopic.content|safe}}
+         </div> 
+        <div class="row marl topic-content">
+        <form action="{% url "books:create_content" topic_slug=subtopic.slug book_slug=book.slug %}" method="post">
+          <textarea name="content" class="form-control" rows="10" cols="50">{{ subtopic.content }}</textarea>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>  
+        </div>
         {% endif %}
       </div>
     </div>

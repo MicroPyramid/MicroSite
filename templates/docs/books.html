@@ -12,6 +12,7 @@
 <body>
 <div class="container">
 <div class="row marl">
+{% if books %}
 {% for book in books %}
 <div class="book_wrap">
 <a href="{% url "books:book_info" slug=book.slug %}"><h2>{{book.title}}</h2></a>
@@ -24,6 +25,9 @@
 </div>
 {% endfor %}
 <br clear="all">
+{% else %}
+<span>No books available</span>
+{% endif %}
 </div>
 </div>
 </body>
