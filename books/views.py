@@ -117,9 +117,10 @@ def create_content(request, book_slug, topic_slug):
                 except ObjectDoesNotExist:
                     topic.authors.add(request.user)
                     topic.save()
-
+                    
                 if request.POST.get('parent'):
-                    new_topic.parent = request.POST.get('parent')
+                    topic_inst = Topic.objects.get(id=request.POST.get('parent'))
+                    new_topic.parent = topic_inst
 
                 new_topic.shadow = topic
                 new_topic.content = request.POST.get("content")

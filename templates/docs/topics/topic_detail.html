@@ -77,7 +77,7 @@
         {% for history in topic.history_set.all %}
           <div id="version-{{history.id}}" class="versions_div">
             <h5>{{history.title|capfirst}} - on {{history.date}}</h5>
-            {{history.content|safe}}
+            {{history.content}}
           </div>
         {% endfor %}
       </div>
@@ -90,7 +90,7 @@
         {% for history in subtopic.history_set.all %}
           <div id="version-{{history.id}}" class="versions_div">
             <h5>{{history.title|capfirst}} - on {{history.date}}</h5>
-            {{history.content|safe}}
+            {{history.content}}
           </div>
         {% endfor %}
       </div>
@@ -152,6 +152,10 @@
          </div> 
         <div class="row marl topic-content">
         <form action="{% url "books:create_content" topic_slug=subtopic.slug book_slug=book.slug %}" method="post">
+          <input type="hidden" name="book" value="{{book.id}}">
+          <input type="hidden" name="topic" value="{{subtopic}}">
+          <input type="hidden" name="title" value="{{subtopic.title}}">
+          <input type="hidden" name="parent" value="{{subtopic.parent.id}}">
           <textarea name="content" class="form-control" rows="10" cols="50">{{ subtopic.content }}</textarea>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>  
