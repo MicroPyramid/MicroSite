@@ -6,7 +6,6 @@ urlpatterns = patterns(
     url(r'^books/$', 'books', name='books'),
     url(r'^create-book/$', 'create_book', name='create_book'),
     url(r'^(?P<slug>[-\w]+)/$', 'book_info', name='book_info'),
-    url(r'^(?P<book_slug>[-\w]+)/topic/(?P<topic_slug>[-\w]+)/$', 'topic_info', name='topic_info'),
     url(r'^(?P<slug>[-\w]+)/detail/$', 'view_book', name='view_book'),
     url(r'^(?P<slug>[-\w]+)/$', 'view_book_doc', name='view_book_doc'),
     url(r'^(?P<slug>[-\w]+)/edit/$', 'edit_book', name='edit_book'),
@@ -22,5 +21,6 @@ urlpatterns = patterns(
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/delete/$', 'delete_topic', name='delete_topic'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/approve/$', 'approve_topic', name='approve_topic'),
     url(r'^(?P<book_slug>[-\w]+)/subtopic/(?P<subtopic_slug>[-\w]+)/$', 'subtopic_info', name='subtopic_info'),
+    url(r'^(?P<book_slug>[-\w]+)/topic/(?P<topic_slug>[-\w]+)/$', 'topic_info', name='topic_info'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/(?P<subtopic_slug>[-\w]+)/$', 'view_subtopic', name='view_subtopic'),
 )
