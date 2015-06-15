@@ -1,161 +1,102 @@
 {% load user_tags %}
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>{{book.title}} | Docs | Micro Pyramid</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-  </head>
-  <body>
-    <div class="col-md-3 tree_div">
-    <h3>{{book.title}}</h3>
-      <ul>
-        {% for topic in parent_topics %}
-        <li>
-          <a href="{% url "books:topic_info" topic_slug=topic.slug book_slug=book.slug %}"><i class="fa fa-caret-down"></i>{{topic.title}}</a>
-          <ul>
-          {% for subtopic in topic.topic_set.all %}
-            {% if subtopic.status == "Approved" and not subtopic.shadow %}
-              <li><a href="{% url "books:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a></li>
-            {% endif %}
-          {% endfor %}  
-          </ul>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="col-md-9 content_div_book">
-    <div class="book_title">
-    {% if topic %}
-      <h3>{{topic.title}}</h3>
-    {% elif subtopic %}
-      <h3>{{subtopic.title}}</h3>
-    {% else %}
-      <h3>{{book.title}}</h3>
-    {% endif %}
-    {% if not topic and not subtopic %}
-      <span class="by">By</span>
-      <span class='author'>{{book.admin.get_full_name}}</span>
-    {% endif %}
-    </div>
-    {% if topic %}
-      {{topic.content|convert_to_html|safe}}
-    {% elif subtopic %}
-      {{subtopic.content|convert_to_html|safe}}
-    {% else %}
-      {{book.description|convert_to_html|safe}}
-    {% endif %}
-    </div>
-    <br clear="all">
-    <!--/right column-->
-    <!--/ROW-->
-     <style type="text/css">
-    body{
-    	/*sition: relative !important;*/
-    	height: 100%!important;
-    	font-size: 15px;
-    	font-family: 'Open Sans', sans-serif;
-    }
-      .tree_div{
-        width: 321px!important;
-      	position: absolute;
-      	height: 100%;
-      	padding: 0px;
-      	padding-top: 15px;
-      	background: #374ca3;
-      }
-      .tree_div h3{
-      	text-transform: uppercase;
-  /* padding-left: 10px; */
-  /* padding-top: 10px; */
-  color: #fff;
-  padding: 6px 20px;
-  background: #06bcd5;
-  display: inline-block;
-  /* padding-bottom: 10px; */
-  font-size: 16px;
-  font-weight: bold;
-  border-left: 3px solid #CDEEF2;
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
 
-      }
-      .tree_div ul{
-      	margin: 0px;
-      	padding: 0px;
-      }
-      .tree_div ul li{
-      	list-style: none;
-      }
-      .tree_div ul li i{
-      	padding-right: 7px;
-      	color: #fff;
-      }
-      .tree_div ul li a{
-      		color: #fff;
-  text-decoration: none;
-  font-size: 11px;
-  display: block;
-  padding-left: 20px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  letter-spacing: 2px;
-  line-height: 23px;
-  text-transform: uppercase;
-      }
-      .tree_div ul li ul li a{
-      	padding-left: 46px;
-      }
-      .tree_div ul li a:active,
-      .tree_div ul li a:hover{
-      background: #041456;
-      color: #fff;
-      }
-      .content_div_book{
-      	margin-left: 322px;
-      	padding:15px;
-      	border-left: 1px solid #ddd;
-      	/*background: #f3f3f3;*/
-      }
-      .content_div_book h3{
-      	margin-bottom: 20px;
-      	text-transform: uppercase;
-      	display: inline-block;
-      	color: #424242;
-      }
-      .content_div_book .book_title h3{
-      	color: #222c32;
-      }
-      .content_div_book .book_title .by{
-      	color: #ccc;
-      	padding: 0px 15px;
-      	font-style: 18px;
-      }
-      .content_div_book .book_title .author{
-      	color: #E95F3A;
-      	padding: 0px 5px;
-      	font-weight: 600;
-      	font-size: 20px;
-      }
-      .content_div_book  h4.sub_topic_header{
-      	color: #fff;
-  background: #384146;
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-top: 20px;
-  display: inline-block;
-  padding: 5px 10px;
-      }
-      .content_div_book p{
-      	 margin: 0 0 10px;
-  font-size: 13px;
-  line-height: 24px;
-  color: #666;
-  letter-spacing: 1px;
-      }
-    </style>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    {% load compress %}
+    {% compress css %}
+    <link rel="stylesheet" href="/static/site/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/site/css/theme_extra.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/site/css/bs_leftnavi.css">
+    <link rel="stylesheet" type="text/css" href="/static/site/css/books.css">
+    {% endcompress %}
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    {% compress js %}
+    <script src="/static/site/js/bootstrap.js" defer></script>
+    <script src="/static/site/js/modernizr.custom.js"></script>
+    <script src="/static/site/js/theme.js"></script>
+    <script src="/static/site/js/bs_leftnavi.js"></script>
+    {% endcompress %}
+  </head>
+  <body class="docs-body" role="document" data-twttr-rendered="true">
+    <div class="docs-main-nav">
+      <nav data-toggle="wy-nav-shift" class="left-side-nav stickynav">
+        <div>
+          <div class="left-search-title">
+            <div class="date"><i class="fa fa-clock-o"></i> {{book.updated_on}}</div>
+            <div class="title">{{book.title}}</div>
+            <!-- <div class="search-bar"><input type="text" class="form-control" placeholder="search your document"></div> -->
+          </div>
+          <div class="nano-content">
+            <ul class="gw-nav gw-nav-list">
+              {% for topic in parent_topics %}
+                {% with topic.topic_set.all as subtopics %}
+                  <li class="init-arrow-down">
+                    <a href="javascript:void(0)}" data-url="{% url "books:topic_info" topic_slug=topic.slug book_slug=book.slug %}">
+                      <span class="gw-menu-text">{{topic.title}}</span>
+                    </a>
+                    {% if subtopics %}
+                      <span class="topic_arrow"><b class="gw-arrow"></b></span>
+                      <ul class="gw-submenu">
+                        {% for subtopic in subtopics %}
+                          {% if subtopic.status == "Approved" and not subtopic.shadow %}
+                            <li>
+                              <a href="{% url "books:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a>
+                            </li>
+                          {% endif %}
+                        {% endfor %}
+                      </ul> 
+                    {% endif %}
+                  </li>
+                {% endwith %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        &nbsp;
+      </nav>
+      <section data-toggle="wy-nav-shift" class="docs-content">
+        <nav class="mobile-nav-top" role="navigation" aria-label="top navigation">
+          <i data-toggle="mobile-nav-top" class="fa fa-bars"></i>
+          <a href="#">{{book.title}}</a>
+        </nav>
+        <div class="right-doc-content">
+          {% if topic %}
+            <h3>{{topic.title}}</h3>
+          {% elif subtopic %}
+            <h3>{{subtopic.title}}</h3>
+          {% else %}
+            <h3>{{book.title}}</h3>
+          {% endif %}
+
+          {% if topic %}
+            {{topic.content|convert_to_html|safe}}
+          {% elif subtopic %}
+            {{subtopic.content|convert_to_html|safe}}
+          {% else %}
+            {{book.description|convert_to_html|safe}}
+          {% endif %}
+        </div>
+      </section>
+    </div>
+    {% compress js %}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        var list_item = $('a[href="'+window.location.pathname+'"]').parent("li")
+        list_item.addClass("active");
+        list_item.parent('ul').show();
+        list_item.parent('ul').parent('li').attr("class", "arrow-up")
+
+        $(".gw-menu-text").click(function(e) {
+          window.location = $(this).parent().attr("data-url");
+        });
+      });
+    </script>
+    {% endcompress %}
   </body>
 </html>
