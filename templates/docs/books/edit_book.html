@@ -48,14 +48,14 @@
         <label class="control-label" for="html">Description <span>*</span></label>
         <div class="control-group">
           <div class="controls" id="content">
-            <textarea class="input-xlarge" name="description" rows="10" cols="100" placeholder="Write the description here">{{book.description}}</textarea>
+            <textarea class="form-control" name="description" rows="10" cols="100" placeholder="Write the description here">{{book.description}}</textarea>
             {# <input type="hidden" name="description" id="description" value="{{book.description}}"> #}
           </div>
         </div>
       </div>
       <div>
-        <input type="radio" class="pagination" name="status" value="Waiting" {% ifequal book.status "Waiting" %}checked{% endifequal %}>waiting<br/>
-        <input type="radio" class="pagination" name="status" value="Approved" {% ifequal book.status "Approved" %}checked{% endifequal %}>Approved
+        <input type="radio" class="pagination" name="status" value="Waiting" {% ifequal book.status "Waiting" %}checked{% endifequal %}> Waiting<br/>
+        <input type="radio" class="pagination" name="status" value="Approved" {% ifequal book.status "Approved" %}checked{% endifequal %}> Approve
       </div>
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save" class="save" id="search_lessons">

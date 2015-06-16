@@ -31,14 +31,16 @@
     {% compress css %}
     <link rel="stylesheet" href="/static/site/css/bootstrap.min.css">
     <link href="/static/site/less/style.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/css/mobile.css" rel="stylesheet">
-    <link href="/static/site/css/responsive.css" rel="stylesheet">
-    <link href="/static/site/css/tag.css" rel="stylesheet">
+    <link href="/static/site/less/mobile.less" rel="stylesheet" type="text/less">
+    <link href="/static/site/less/responsive.less" rel="stylesheet" type="text/less">
+    <link href="/static/site/less/tag.less" rel="stylesheet" type="text/less">
     {% endcompress %}
+    {% block extra-styles %}
+    {% endblock %}
     <!-- css ends here -->
     <!-- scripts starts here -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="/static/site/js/bootstrap.js"></script>
+    <script src="/static/site/js/bootstrap.js" defer></script>
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
     <!-- scripts ends here -->
   </head>
@@ -96,7 +98,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="/static/site/images/logo.png">
+                    <a class="navbar-brand" href="/"><img src="/static/site/images/logo.png">
                     </a>
                   </div>
                   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -124,6 +126,7 @@
       </header>
       <!-- header ends here-->
       {% block stage %} {% endblock %}
+      {% block footer %}
       <footer>
         <!--footer social start here -->
         <div class="row marl" id="footer-social">
@@ -204,13 +207,14 @@
         </div>
       </div>
       <!-- footer links ends here -->
+      {% endblock %}
     </div>
     <!-- For the demo ad only -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     {% compress js %}
-    <script src="/static/site/js/isotope.js"></script>
-    <script src="/static/site/js/jquery.form.js"></script>
-    <script src="/static/site/js/functions.js"></script>
+    <script src="/static/site/js/isotope.js" defer></script>
+    <script src="/static/site/js/jquery.form.js" defer></script>
+    <script src="/static/site/js/functions.js" defer></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('.grid').isotope({

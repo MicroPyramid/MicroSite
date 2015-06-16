@@ -1,0 +1,76 @@
+.book_wrap {
+    border: 1px solid #ddd;
+    width: 30%;
+    float: left;
+    margin: 15px 5px 5px 5px;
+    padding: 20px;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #fff;
+    transition: border 1s ease;
+    h2 {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 17px;
+        font-weight: bold;
+        color: #4c4c4c;
+    }
+    div {
+        &.border {
+            width: 100;
+            height: 2px;
+            background: #ffffff;
+            background: -moz-linear-gradient(left,  #ffffff 0%, #cccccc 50%, #ffffff 100%);
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(50%,#cccccc), color-stop(100%,#ffffff));
+            background: -webkit-linear-gradient(left,  #ffffff 0%,#cccccc 50%,#ffffff 100%);
+            background: -o-linear-gradient(left,  #ffffff 0%,#cccccc 50%,#ffffff 100%);
+            background: -ms-linear-gradient(left,  #ffffff 0%,#cccccc 50%,#ffffff 100%);
+            background: linear-gradient(to right,  #ffffff 0%,#cccccc 50%,#ffffff 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
+            transition: 1s;
+        }
+    }
+    &:hover {
+        border: 1px solid #374ca3;
+        cursor: pointer;
+        outline-color: #374ca3;
+        transition: border 1s ease;
+        div {
+            &.border {
+                background: #ffffff;
+                background: -moz-linear-gradient(left,  #ffffff 0%, #374ca3 50%, #ffffff 100%);
+                background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(50%,#374ca3), color-stop(100%,#ffffff));
+                background: -webkit-linear-gradient(left,  #ffffff 0%,#374ca3 50%,#ffffff 100%);
+                background: -o-linear-gradient(left,  #ffffff 0%,#374ca3 50%,#ffffff 100%);
+                background: -ms-linear-gradient(left,  #ffffff 0%,#374ca3 50%,#ffffff 100%);
+                background: linear-gradient(to right,  #ffffff 0%,#374ca3 50%,#ffffff 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
+                transition: 1s;
+            }
+        }
+    }
+    .author_book_list {
+        &::before {
+            content: '-';
+            padding-right: 5px;
+        }
+    }
+    .book_list_time {
+        padding: 0px;
+        color: #666;
+        font-weight: normal;
+        i {
+            padding-right: 8px;
+            font-size: 15px;
+            color: #ccc;
+        }
+    }
+}
+.book_wrap .author_book_list,
+.book_wrap .book_list_time {
+    text-align: center;
+    font-style: italic;
+    color: #374ca3;
+    padding: 15px;
+    font-weight: 600;
+}

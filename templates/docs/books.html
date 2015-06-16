@@ -1,34 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Docs | Micro Pyramid</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/static/admin/css/books.css">
-</head>
-<body>
-<div class="container">
-<div class="row marl">
-{% if books %}
-{% for book in books %}
-<div class="book_wrap">
-<a href="{% url "books:book_info" slug=book.slug %}"><h2>{{book.title}}</h2></a>
-<div class="border"></div>
-<div class="author_book_list">{{book.admin.get_full_name}}</div>
-<div class="book_list_time">
-<i class="fa fa-clock-o"></i>
-{{book.updated_on}}
-</div>
-</div>
-{% endfor %}
-<br clear="all">
-{% else %}
-<span>No books available</span>
-{% endif %}
-</div>
-</div>
-</body>
-</html>
+{% extends 'site/base.html' %}
+{% load compress %}
+{% load user_tags %}
+
+{% block title %} Docs | MicroPyramid {% endblock %}
+{% block extra-styles %}
+  {% compress css %}
+    <link href="/static/site/less/books.less" rel="stylesheet" type="text/less">
+  {% endcompress %}
+{% endblock %}
+
+{% block stage %}
+  <!-- <div class="row marl isotope-row">
+      <div class="container">
+        <div class="portfolioFilter">
+          <a href="#" data-filter="*" class="current active">All Categories</a>
+          <a href="#" data-filter=".people">People</a>
+          <a href="#" data-filter=".places">Places</a>
+          <a href="#" data-filter=".food">Food</a>
+          <a href="#" data-filter=".objects">Objects</a>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Books starts here -->
+    <div class="row marl books-row">
+      <div class="container">
+        <div class="row marl">
+          <div class="portfolioContainer">
+            {% if books %}
+              {% for book in books %}
+                <!-- book item starts here -->
+                <div class="col-md-3 col-sm-4 col-xs-12 book-block">
+                  <div class="book-item">
+                    <div class="book-title pink-red">
+                      <a href="{% url "books:book_info" slug=book.slug %}">{{book.title}}</a>
+                    </div>
+                    <div class="book-description">
+                      {{book.description|convert_to_html|safe}}
+                    </div>
+                    <div class="date-time">
+                      <i class="fa fa-clock-o"></i> {{book.updated_on}}
+                    </div>
+                  </div>
+                </div>
+                <!-- book item ends here -->
+              {% endfor %}
+            {% else %}
+              <span>No books available</span>
+            {% endif %}
+          </div>
+      </div>
+    </div>
+    <!-- Books ends here -->
+{% endblock %}
+{% block footer %}
+{% endblock %}
