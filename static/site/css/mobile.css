@@ -7,6 +7,9 @@
         padding: 0px;
         border: 1px solid #d1d1d1;
     }
+	img{
+		max-width:100%;	
+	}
     .dropdown-menu>li>a {
         color: #fff !important;
         background: #009ddc;

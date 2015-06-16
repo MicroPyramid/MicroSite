@@ -7,13 +7,6 @@ body{
 	color:#fff;
 	font-family: 'Lato', sans-serif;
 	background: #3d464b; /* Old browsers */
-	background: -moz-linear-gradient(left, #3d464b 50%, #2b95d1 50%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, right top, color-stop(50%,#3d464b), color-stop(50%,#2b95d1)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(left, #3d464b 50%,#2b95d1 50%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(left, #3d464b 50%,#2b95d1 50%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(left, #3d464b 50%,#2b95d1 50%); /* IE10+ */
-	background: linear-gradient(to right, #3d464b 50%,#2b95d1 50%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3d464b', endColorstr='#2b95d1',GradientType=1 ); /* IE6-9 */
 	height:100%;
 	}
 .fn12{
@@ -69,7 +62,6 @@ margin-right:0px;
 .login-row .login-left{
 	/*background:#3c464c;*/
 	height:100%;
-	padding:0% 10%;
 	}
 .login-row .login-left .save{
 	color: #fff;
