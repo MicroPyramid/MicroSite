@@ -492,6 +492,7 @@ textarea {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     zoom: 1;
+    padding: 15px !important;
     th {
         background: #fff;
         font-weight: 800 !important;
@@ -499,6 +500,7 @@ textarea {
         width: 20%;
         border-bottom: 1px dashed #ddd!important;
         border-top: none!important;
+        text-align: left !important;
         i {
             float: right;
             color: #B2AFAA!important;
@@ -595,6 +597,25 @@ textarea {
     }
 }
 #big_stats {
+    .stat{
+        width: 1%;
+        height: 90px;
+        text-align: center;
+        display: table-cell;
+        padding: 0;
+        position: relative;
+        border-right: 1px solid #CCC;
+        border-left: 1px solid #FFF;
+        &:last-child{
+            border-right: none;
+        }
+        .value{
+            font-size: 27px!important;
+            font-weight: bold;
+            color: #545454;
+            line-height: 1em;
+        }
+    }
     i {
         font-size: 20px !important;
         display: inline!important;

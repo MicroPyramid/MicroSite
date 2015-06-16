@@ -10,17 +10,17 @@
     {% load compress %}
     {% compress css %}
     <link rel="stylesheet" href="/static/site/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/site/css/theme_extra.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/static/site/css/bs_leftnavi.css">
-    <link rel="stylesheet" type="text/css" href="/static/site/css/books.css">
+    <link rel="stylesheet" href="/static/site/less/theme_extra.less" type="text/less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/bs_leftnavi.less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/books.less">
     {% endcompress %}
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     {% compress js %}
     <script src="/static/site/js/bootstrap.js" defer></script>
-    <script src="/static/site/js/modernizr.custom.js"></script>
-    <script src="/static/site/js/theme.js"></script>
-    <script src="/static/site/js/bs_leftnavi.js"></script>
+    <script src="/static/site/js/modernizr.custom.js" defer></script>
+    <script src="/static/site/js/theme.js" defer></script>
+    <script src="/static/site/js/bs_leftnavi.js" defer></script>
     {% endcompress %}
   </head>
   <body class="docs-body" role="document" data-twttr-rendered="true">
@@ -29,7 +29,7 @@
         <div>
           <div class="left-search-title">
             <div class="date"><i class="fa fa-clock-o"></i> {{book.updated_on}}</div>
-            <div class="title">{{book.title}}</div>
+            <div class="title"><a href="{% url "books:book_info" slug=book.slug %}">{{book.title}}</a></div>
             <!-- <div class="search-bar"><input type="text" class="form-control" placeholder="search your document"></div> -->
           </div>
           <div class="nano-content">
@@ -90,7 +90,7 @@
         var list_item = $('a[href="'+window.location.pathname+'"]').parent("li")
         list_item.addClass("active");
         list_item.parent('ul').show();
-        list_item.parent('ul').parent('li').attr("class", "arrow-up")
+        list_item.parent('ul').parent('li').attr("class", "arrow-down active")
 
         $(".gw-menu-text").click(function(e) {
           window.location = $(this).parent().attr("data-url");
