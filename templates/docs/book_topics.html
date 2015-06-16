@@ -3,6 +3,7 @@
 <html>
   <head>
     <title>{{book.title}} | Docs | Micro Pyramid</title>
+    <link rel="shortcut icon" href="/static/favicon.png">
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -46,7 +47,7 @@
                         {% for subtopic in subtopics %}
                           {% if subtopic.status == "Approved" and not subtopic.shadow %}
                             <li>
-                              <a href="{% url "books:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a>
+                              <a href="{% url "books:subtopic_info" topic_slug=topic.slug subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a>
                             </li>
                           {% endif %}
                         {% endfor %}

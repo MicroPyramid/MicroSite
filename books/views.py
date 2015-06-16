@@ -147,11 +147,11 @@ def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
     return render_to_response("docs/topics/topic_detail.html", {"book": book, "topic": topic, "subtopic": subtopic, "subtopic_shadows": subtopic_shadows})
 
 
-@login_required
-def view_book_doc(request, slug):
-    book = Book.objects.get(slug=slug)
-    topics = Topic.objects.filter(book=book, parent__isnull=True, shadow__isnull=True)
-    return render(request, "docs/books/book_document.html", {"book": book, "topics": topics})
+# @login_required
+# def view_book_doc(request, slug):
+#     book = Book.objects.get(slug=slug)
+#     topics = Topic.objects.filter(book=book, parent__isnull=True, shadow__isnull=True)
+#     return render(request, "docs/books/book_document.html", {"book": book, "topics": topics})
 
 
 @login_required
@@ -351,7 +351,7 @@ def topic_info(request, book_slug, topic_slug):
     return render_to_response("docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "topic": topic})
 
 
-def subtopic_info(request, book_slug, subtopic_slug):
+def subtopic_info(request, book_slug, topic_slug, subtopic_slug):
     book = Book.objects.get(slug=book_slug)
     subtopic = Topic.objects.get(slug=subtopic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
