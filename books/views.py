@@ -327,7 +327,7 @@ def delete_book(request, slug):
     if request.user.is_superuser:
         book = Book.objects.get(slug=slug)
         book.delete()
-        return HttpResponseRedirect('/docs/books/')
+        return HttpResponseRedirect('/books/list/')
     
     else:
         return render_to_response("admin/accessdenied.html")
