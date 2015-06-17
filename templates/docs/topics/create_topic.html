@@ -3,7 +3,7 @@
 {% block breadcrumb %}
 <ol class="breadcrumb">
   <li><a href="/portal/">Home</a></li>
-  <li><a href="/books/books/">Books</a></li>
+  <li><a href="/books/list/">Books</a></li>
   <li><a href="/books/{{book.slug}}/detail/">{{book.slug}}</a></li>
   <li class="active">Create Topic</li>
 </ol>
@@ -17,7 +17,6 @@
     <form action="." method="POST" id="topic_form">
       {% csrf_token %}
       <input type="hidden" name="book" value="{{book.id}}">
-      <input type="hidden" name="topic" value="{{topic}}">
       <div class="form-group">
         <label for="exampleInputEmail1">Parent <span>*</span></label>
         <select id="parent" name="parent" class="form-control">

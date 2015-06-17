@@ -25,6 +25,7 @@ def create_book(request):
             if book_form.is_valid():
                 book = book_form.save()
                 book.status = request.POST.get('status')
+                book.display_order = Book.objects.all().count()
                 book.authors.add(request.user)
                 book.save()
                 data = {"error": False, "response": "Book created"}
@@ -77,6 +78,7 @@ def create_topic(request, slug):
             if request.POST.get("parent"):
                 topic.parent = Topic.objects.get(id=request.POST.get("parent"))
 
+            topic.display_order = Topic.objects.filter(book=book, parent=topic.parent).count()
             topic.save()
 
             data = {"error": False, "response": "Topic created"}
@@ -86,7 +88,7 @@ def create_topic(request, slug):
         
         return HttpResponse(json.dumps(data))
     topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
-    return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics, "topic": request.GET.get("topic"), "topic_id": request.GET.get("topic_id")})
+    return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics})
 
 
 @login_required
@@ -95,6 +97,7 @@ def create_content(request, book_slug, topic_slug):
     if request.POST.get("content"):
         if not topic.content:
             topic.content = request.POST.get("content")
+            topic.keywords = request.POST.get("keywords")
             topic.save()
         else:
             topic_form = TopicForm(request.POST)
@@ -102,6 +105,7 @@ def create_content(request, book_slug, topic_slug):
             if topic_form.is_valid():
                 new_topic = topic_form.save()
                 new_topic.status = "Waiting"
+                new_topic.keywords = request.POST.get("keywords")
                 new_topic.authors.add(request.user)
                 
                 try:
@@ -124,6 +128,7 @@ def create_content(request, book_slug, topic_slug):
 
                 new_topic.shadow = topic
                 new_topic.content = request.POST.get("content")
+                new_topic.display_order = Topic.objects.filter(book__slug=book_slug, parent=new_topic.parent, shadow=new_topic.shadow).count()
 
                 new_topic.save()
 
@@ -217,6 +222,7 @@ def approve_topic(request, book_slug, topic_slug):
             topic.shadow.title = topic.title
             topic.shadow.status = "Approved"
             topic.shadow.content = topic.content
+            topic.shadow.keywords = topic.keywords
             topic.updated_on = datetime.datetime.now()
             topic.shadow.save()
 
