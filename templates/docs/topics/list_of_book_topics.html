@@ -36,7 +36,7 @@
           {% for topic in topics %}
             {% with sub_topics=topic|get_sub_topics %}
               <tr class="parent_row">
-                <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}} ----- {{topic.display_order}}</a></td>
+                <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
                 <td>{{topic.slug}}</td>
                 <td>{{topic.status}}</td>
                 <td class="menu-swap txt_center">
@@ -64,7 +64,7 @@
               {% if sub_topics %}
                 {% for subtopic in sub_topics %}
                   <tr class="subtopic-of-{{topic.id}}">
-                    <td class="sub-topic-title">{{subtopic.title}} ----- {{subtopic.display_order}}</td>
+                    <td class="sub-topic-title">{{subtopic.title}}</td>
                     <td>{{subtopic.slug}}</td>
                     <td>{{subtopic.status}}</td>
                     <td class="menu-swap txt_center">
