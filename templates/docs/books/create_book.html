@@ -3,7 +3,7 @@
 {% block breadcrumb %}
 <ol class="breadcrumb">
   <li><a href="/portal/">Home</a></li>
-  <li><a href="/books/books/">Books</a></li>
+  <li><a href="/books/list/">Books</a></li>
   <li class="active">Create Book</li>
 </ol>
 {% endblock breadcrumb %}
@@ -40,8 +40,16 @@
         <label class="control-label" for="html">Description <span>*</span></label>
         <div class="control-group">
           <div class="controls" id="content">
-            <textarea class="form-control" name="description" rows="10" cols="100" placeholder="Write the description here"></textarea>
+            <textarea class="form-control" name="description" rows="10" cols="100" placeholder="Write the description here" id="description"></textarea>
             {# <input type="hidden" name="description" id="description"> #}
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="html">Keywords <span>*</span></label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <textarea class="form-control" name="keywords" rows="3" cols="100" placeholder="Write the meta tag keywords here" id="keywords"></textarea>
           </div>
         </div>
       </div>

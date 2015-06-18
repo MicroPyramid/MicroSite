@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{book.title}} | Docs | Micro Pyramid</title>
+    <title>{{book.title}} | Micro Pyramid</title>
+    <meta name="description" content="{% if topic %}{{ topic.title }}{% elif subtopic %}{{ subtopic.title }}{% else %}{{ book.title }}{% endif %}" />
+    <meta name="keywords" content="{% if topic %}{{ topic.keywords }}{% elif subtopic %}{{ subtopic.keywords }}{% else %}{{ book.keywords }}{% endif %}" />
+    <link rel="shortcut icon" href="/static/favicon.png">
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -28,7 +31,6 @@
       <nav data-toggle="wy-nav-shift" class="left-side-nav stickynav">
         <div>
           <div class="left-search-title">
-            <div class="date"><i class="fa fa-clock-o"></i> {{book.updated_on}}</div>
             <div class="title"><a href="{% url "books:book_info" slug=book.slug %}">{{book.title}}</a></div>
             <!-- <div class="search-bar"><input type="text" class="form-control" placeholder="search your document"></div> -->
           </div>
@@ -46,7 +48,7 @@
                         {% for subtopic in subtopics %}
                           {% if subtopic.status == "Approved" and not subtopic.shadow %}
                             <li>
-                              <a href="{% url "books:subtopic_info" subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a>
+                              <a href="{% url "books:subtopic_info" topic_slug=topic.slug subtopic_slug=subtopic.slug book_slug=book.slug %}">{{subtopic.title}}</a>
                             </li>
                           {% endif %}
                         {% endfor %}

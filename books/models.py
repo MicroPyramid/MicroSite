@@ -26,6 +26,11 @@ class Book(models.Model):
     authors = models.ManyToManyField(settings.AUTH_USER_MODEL)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, blank=True)
     privacy = models.CharField(max_length=10, choices=PRIVACY_CHOICES)
+    keywords = models.CharField(max_length=200, default='')
+    display_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
 
     def __unicode__(self):
         return self.title
@@ -69,6 +74,11 @@ class Topic(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, blank=True)
 
     shadow = models.ForeignKey('self', null=True, blank=True, related_name='versions')
+    keywords = models.CharField(max_length=200, default='')
+    display_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
 
     def __unicode__(self):
         return self.title

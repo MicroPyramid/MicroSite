@@ -25,6 +25,7 @@ def create_book(request):
             if book_form.is_valid():
                 book = book_form.save()
                 book.status = request.POST.get('status')
+                book.display_order = Book.objects.all().count()
                 book.authors.add(request.user)
                 book.save()
                 data = {"error": False, "response": "Book created"}
@@ -77,6 +78,7 @@ def create_topic(request, slug):
             if request.POST.get("parent"):
                 topic.parent = Topic.objects.get(id=request.POST.get("parent"))
 
+            topic.display_order = Topic.objects.filter(book=book, parent=topic.parent, shadow__isnull=True).count()
             topic.save()
 
             data = {"error": False, "response": "Topic created"}
@@ -86,7 +88,7 @@ def create_topic(request, slug):
         
         return HttpResponse(json.dumps(data))
     topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
-    return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics, "topic": request.GET.get("topic"), "topic_id": request.GET.get("topic_id")})
+    return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics})
 
 
 @login_required
@@ -95,6 +97,7 @@ def create_content(request, book_slug, topic_slug):
     if request.POST.get("content"):
         if not topic.content:
             topic.content = request.POST.get("content")
+            topic.keywords = request.POST.get("keywords")
             topic.save()
         else:
             topic_form = TopicForm(request.POST)
@@ -102,6 +105,7 @@ def create_content(request, book_slug, topic_slug):
             if topic_form.is_valid():
                 new_topic = topic_form.save()
                 new_topic.status = "Waiting"
+                new_topic.keywords = request.POST.get("keywords")
                 new_topic.authors.add(request.user)
                 
                 try:
@@ -124,6 +128,7 @@ def create_content(request, book_slug, topic_slug):
 
                 new_topic.shadow = topic
                 new_topic.content = request.POST.get("content")
+                new_topic.display_order = Topic.objects.filter(book__slug=book_slug, parent=new_topic.parent, shadow=new_topic.shadow).count()
 
                 new_topic.save()
 
@@ -147,11 +152,11 @@ def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
     return render_to_response("docs/topics/topic_detail.html", {"book": book, "topic": topic, "subtopic": subtopic, "subtopic_shadows": subtopic_shadows})
 
 
-@login_required
-def view_book_doc(request, slug):
-    book = Book.objects.get(slug=slug)
-    topics = Topic.objects.filter(book=book, parent__isnull=True, shadow__isnull=True)
-    return render(request, "docs/books/book_document.html", {"book": book, "topics": topics})
+# @login_required
+# def view_book_doc(request, slug):
+#     book = Book.objects.get(slug=slug)
+#     topics = Topic.objects.filter(book=book, parent__isnull=True, shadow__isnull=True)
+#     return render(request, "docs/books/book_document.html", {"book": book, "topics": topics})
 
 
 @login_required
@@ -217,6 +222,7 @@ def approve_topic(request, book_slug, topic_slug):
             topic.shadow.title = topic.title
             topic.shadow.status = "Approved"
             topic.shadow.content = topic.content
+            topic.shadow.keywords = topic.keywords
             topic.updated_on = datetime.datetime.now()
             topic.shadow.save()
 
@@ -260,7 +266,15 @@ def delete_topic(request, book_slug, topic_slug):
     if request.user.is_superuser or book.admin == request.user:
         
         topic = Topic.objects.get(slug=topic_slug)
+        topic_id = topic.id
         topic.delete()
+
+        if not topic.shadow:
+            remaining_topics = Topic.objects.filter(id__gte=topic_id)
+            for each_topic in remaining_topics:
+                each_topic.display_order = (each_topic.display_order) - 1
+                each_topic.save()
+
         data = {"response": "Deleted Successfully"}
 
     else:
@@ -327,7 +341,7 @@ def delete_book(request, slug):
     if request.user.is_superuser:
         book = Book.objects.get(slug=slug)
         book.delete()
-        return HttpResponseRedirect('/docs/books/')
+        return HttpResponseRedirect('/books/list/')
     
     else:
         return render_to_response("admin/accessdenied.html")
@@ -351,8 +365,36 @@ def topic_info(request, book_slug, topic_slug):
     return render_to_response("docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "topic": topic})
 
 
-def subtopic_info(request, book_slug, subtopic_slug):
+def subtopic_info(request, book_slug, topic_slug, subtopic_slug):
     book = Book.objects.get(slug=book_slug)
     subtopic = Topic.objects.get(slug=subtopic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render_to_response("docs/book_topics.html", {"book": book,"parent_topics": parent_topics,"subtopic": subtopic})
+
+
+def change_topic_order(request, book_slug, topic_slug):
+    book = Book.objects.get(slug=book_slug)
+    topic = Topic.objects.get(book=book, slug=topic_slug)
+    new_order = topic.display_order
+    if request.POST.get('mode') == 'down':
+        try:
+            nxt_topic = Topic.objects.get(book=book, parent=topic.parent, shadow__isnull=True, display_order=(topic.display_order)+1)
+            topic.display_order = nxt_topic.display_order
+            nxt_topic.display_order = new_order
+            topic.save()
+            nxt_topic.save()
+            data = {'error': False}
+        except ObjectDoesNotExist:
+            data = {'error': True, 'message': 'You cant move down.'}
+    else:
+        try:
+            prv_topic = Topic.objects.get(book=book, parent=topic.parent, shadow__isnull=True, display_order=(topic.display_order)-1)
+            topic.display_order = prv_topic.display_order
+            prv_topic.display_order = new_order
+            topic.save()
+            prv_topic.save()
+            data = {'error': False}
+        except ObjectDoesNotExist:
+            data = {'error': True, 'message': 'You cant move up.'}
+
+    return HttpResponse(json.dumps(data))

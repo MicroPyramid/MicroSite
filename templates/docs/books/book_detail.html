@@ -4,7 +4,7 @@
 {% block breadcrumb %}
 <ol class="breadcrumb">
   <li><a href="/portal/">Home</a></li>
-  <li><a href="/books/books/">Books</a></li>
+  <li><a href="/books/list/">Books</a></li>
   <li class="active">Book Details</li>
 </ol>
 {% endblock breadcrumb %}
@@ -15,7 +15,7 @@
       <span>
         <a href="{% url 'books:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Topic </button></a>
         <a href="{% url 'books:view_book_topics' slug=book.slug %}"><button class="btn btn-warning">View Topics </button></a>
-        <a href="{% url 'books:view_book_doc' slug=book.slug %}"><button class="btn btn-warning">Preview</button></a>
+        <a href="{% url 'books:book_info' slug=book.slug %}"><button class="btn btn-warning">Preview</button></a>
       </span>
     </div>
     <div class="panel-body">
@@ -46,6 +46,10 @@
           <div class="description_div">
             <span>Description :</span>
             {{book.description|convert_to_html|safe}}
+          </div>
+          <div class="description_div">
+            <span>Keywords :</span>
+            {{book.keywords}}
           </div>
         </div>
         <!--/TITLE AND DESCRIPTION-->
