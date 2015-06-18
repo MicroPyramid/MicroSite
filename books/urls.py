@@ -23,4 +23,5 @@ urlpatterns = patterns(
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/(?P<subtopic_slug>[-\w]+)/$', 'subtopic_info', name='subtopic_info'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/$', 'topic_info', name='topic_info'),
     url(r'^(?P<book_slug>[-\w]+)/(?P<topic_slug>[-\w]+)/(?P<subtopic_slug>[-\w]+)/view/$', 'view_subtopic', name='view_subtopic'),
+    url(r'^(?P<book_slug>[-\w]+)/change/(?P<topic_slug>[-\w]+)/order/$', 'change_topic_order', name='change_topic_order'),
 )

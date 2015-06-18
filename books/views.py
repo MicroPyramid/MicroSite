@@ -78,7 +78,7 @@ def create_topic(request, slug):
             if request.POST.get("parent"):
                 topic.parent = Topic.objects.get(id=request.POST.get("parent"))
 
-            topic.display_order = Topic.objects.filter(book=book, parent=topic.parent).count()
+            topic.display_order = Topic.objects.filter(book=book, parent=topic.parent, shadow__isnull=True).count()
             topic.save()
 
             data = {"error": False, "response": "Topic created"}
@@ -266,7 +266,15 @@ def delete_topic(request, book_slug, topic_slug):
     if request.user.is_superuser or book.admin == request.user:
         
         topic = Topic.objects.get(slug=topic_slug)
+        topic_id = topic.id
         topic.delete()
+
+        if not topic.shadow:
+            remaining_topics = Topic.objects.filter(id__gte=topic_id)
+            for each_topic in remaining_topics:
+                each_topic.display_order = (each_topic.display_order) - 1
+                each_topic.save()
+
         data = {"response": "Deleted Successfully"}
 
     else:
@@ -362,3 +370,31 @@ def subtopic_info(request, book_slug, topic_slug, subtopic_slug):
     subtopic = Topic.objects.get(slug=subtopic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render_to_response("docs/book_topics.html", {"book": book,"parent_topics": parent_topics,"subtopic": subtopic})
+
+
+def change_topic_order(request, book_slug, topic_slug):
+    book = Book.objects.get(slug=book_slug)
+    topic = Topic.objects.get(book=book, slug=topic_slug)
+    new_order = topic.display_order
+    if request.POST.get('mode') == 'down':
+        try:
+            nxt_topic = Topic.objects.get(book=book, parent=topic.parent, shadow__isnull=True, display_order=(topic.display_order)+1)
+            topic.display_order = nxt_topic.display_order
+            nxt_topic.display_order = new_order
+            topic.save()
+            nxt_topic.save()
+            data = {'error': False}
+        except ObjectDoesNotExist:
+            data = {'error': True, 'message': 'You cant move down.'}
+    else:
+        try:
+            prv_topic = Topic.objects.get(book=book, parent=topic.parent, shadow__isnull=True, display_order=(topic.display_order)-1)
+            topic.display_order = prv_topic.display_order
+            prv_topic.display_order = new_order
+            topic.save()
+            prv_topic.save()
+            data = {'error': False}
+        except ObjectDoesNotExist:
+            data = {'error': True, 'message': 'You cant move up.'}
+
+    return HttpResponse(json.dumps(data))

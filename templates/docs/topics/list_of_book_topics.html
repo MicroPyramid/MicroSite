@@ -26,6 +26,7 @@
             <th width="10%">Title</th>
             <th width="10%">Slug</th>
             <th width="6%">Status</th>
+            <th width="5%">Swap</th>
             <th width="15%">Authors</th>
             <th width="10%">Created Date</th>
             <th width="15%">Actions</th>
@@ -35,9 +36,17 @@
           {% for topic in topics %}
             {% with sub_topics=topic|get_sub_topics %}
               <tr class="parent_row">
-                <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
+                <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}} ----- {{topic.display_order}}</a></td>
                 <td>{{topic.slug}}</td>
                 <td>{{topic.status}}</td>
+                <td class="menu-swap txt_center">
+                  <div class="inner-swap-wid txt_center">
+                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
+                      post-url="{% url 'books:change_topic_order' book_slug=book.slug topic_slug=topic.slug %}"></i></a></span>
+                    <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
+                      post-url="{% url 'books:change_topic_order' book_slug=book.slug topic_slug=topic.slug %}"></i></a></span>
+                  </div>
+                </td>
                 <td>{% for author in topic.authors.all %}
                   <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
                 {% endfor %}</td>
@@ -55,17 +64,29 @@
               {% if sub_topics %}
                 {% for subtopic in sub_topics %}
                   <tr class="subtopic-of-{{topic.id}}">
-                    <td class="sub-topic-title">{{subtopic.title}}</td>
+                    <td class="sub-topic-title">{{subtopic.title}} ----- {{subtopic.display_order}}</td>
                     <td>{{subtopic.slug}}</td>
                     <td>{{subtopic.status}}</td>
+                    <td class="menu-swap txt_center">
+                      <div class="inner-swap-wid txt_center">
+                        <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
+                          post-url="{% url 'books:change_topic_order' book_slug=book.slug topic_slug=subtopic.slug %}"></i></a></span>
+                        <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
+                          post-url="{% url 'books:change_topic_order' book_slug=book.slug topic_slug=subtopic.slug %}"></i></a></span>
+                      </div>
+                    </td>
                     <td>{% for author in subtopic.authors.all %}
                       <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
                     {% endfor %}</td>
                     <td>{{subtopic.created_on}}</td>
                     <td>
                       <a href="{% url 'books:delete_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Delete Sub Topic" class="delete-btn-click delete_anchor"><i class="fa fa-trash-o"></i>Delete</a>
-                      <a href="" title="Approve" class="delete-btn-click check_anchor"><i class="fa fa-check check-color"></i></a>
-                      <a href="" title="Reject" class="delete-btn-click cross_anchor"><i class="fa fa-times remove-color"></i></a>
+                      {% if subtopic.status == "Waiting" or subtopic.status == "Rejected" %}
+                      <a href="{% url 'books:approve_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Approve" class="delete-btn-click check_anchor"><i class="fa fa-check check-color"></i></a>
+                      {% endif %}
+                      {% if subtopic.status == "Waiting" or subtopic.status == "Approved" %}
+                      <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=subtopic.slug %}" title="Reject" class="delete-btn-click cross_anchor"><i class="fa fa-times remove-color"></i></a>
+                      {% endif %}
                     </td>
                   </tr>
                 {% endfor %}
@@ -87,6 +108,24 @@
         alert(data.response);
         window.location = '.';
       }, "json");
+  });
+  $(document).ready(function() {
+    $('.fa-caret-down').click(function(){
+        $.post(($(this).attr('post-url')),{'mode':'down'},function(data){
+          if (data.message){
+            alert(data.message);
+          }
+          window.location = '.';
+        }, 'json');
+    });
+    $('.fa-caret-up').click(function(){
+        $.post(($(this).attr('post-url')),{'mode':'up'},function(data){
+          if (data.message){
+            alert(data.message);
+          }
+          window.location = '.';
+        }, 'json');
+    });
   });
 </script>
 {% endcompress %}
