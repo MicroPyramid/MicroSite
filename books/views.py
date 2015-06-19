@@ -68,12 +68,8 @@ def create_topic(request, slug):
             topic.status = "Waiting"
             topic.authors.add(request.user)
             
-            try:
-                Book.objects.get(slug=slug, authors__in=[request.user])
-
-            except ObjectDoesNotExist:
+            if request.user not in book.authors.all():
                 book.authors.add(request.user)
-                book.save()
 
             if request.POST.get("parent"):
                 topic.parent = Topic.objects.get(id=request.POST.get("parent"))
@@ -94,6 +90,7 @@ def create_topic(request, slug):
 @login_required
 def create_content(request, book_slug, topic_slug):
     topic = Topic.objects.get(slug=topic_slug)
+    book = Book.objects.get(slug=book_slug)
     if request.POST.get("content"):
         if not topic.content:
             topic.content = request.POST.get("content")
@@ -107,20 +104,9 @@ def create_content(request, book_slug, topic_slug):
                 new_topic.status = "Waiting"
                 new_topic.keywords = request.POST.get("keywords")
                 new_topic.authors.add(request.user)
-                
-                try:
-                    Book.objects.get(slug=book_slug, authors__in=[request.user])
 
-                except ObjectDoesNotExist:
+                if request.user not in book.authors.all():
                     book.authors.add(request.user)
-                    book.save()
-
-                try:
-                    Topic.objects.get(slug=topic_slug, authors__in=[request.user])
-
-                except ObjectDoesNotExist:
-                    topic.authors.add(request.user)
-                    topic.save()
                     
                 if request.POST.get('parent'):
                     topic_inst = Topic.objects.get(id=request.POST.get('parent'))
@@ -131,6 +117,9 @@ def create_content(request, book_slug, topic_slug):
                 new_topic.display_order = Topic.objects.filter(book__slug=book_slug, parent=new_topic.parent, shadow=new_topic.shadow).count()
 
                 new_topic.save()
+
+        if request.user not in topic.authors.all():
+            topic.authors.add(request.user)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -172,19 +161,11 @@ def edit_topic(request, book_slug, topic_slug):
             new_topic.status = "Waiting"
             new_topic.authors.add(request.user)
             
-            try:
-                Book.objects.get(slug=book_slug, authors__in=[request.user])
-
-            except ObjectDoesNotExist:
+            if request.user not in book.authors.all():
                 book.authors.add(request.user)
-                book.save()
 
-            try:
-                Topic.objects.get(slug=topic_slug, authors__in=[request.user])
-
-            except ObjectDoesNotExist:
+            if request.user not in topic.authors.all():
                 topic.authors.add(request.user)
-                topic.save()
 
             if request.POST.get('parent'):
                 new_topic.parent = request.POST.get('parent')
@@ -270,7 +251,7 @@ def delete_topic(request, book_slug, topic_slug):
         topic.delete()
 
         if not topic.shadow:
-            remaining_topics = Topic.objects.filter(id__gte=topic_id)
+            remaining_topics = Topic.objects.filter(id__gte=topic_id, parent=topic.parent, shadow=topic.shadow)
             for each_topic in remaining_topics:
                 each_topic.display_order = (each_topic.display_order) - 1
                 each_topic.save()
