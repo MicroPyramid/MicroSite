@@ -47,7 +47,7 @@
                       post-url="{% url 'books:change_topic_order' book_slug=book.slug topic_slug=topic.slug %}"></i></a></span>
                   </div>
                 </td>
-                <td>{% for author in topic.authors.all %}
+                <td class="authors_div">{% for author in topic.authors.all %}
                   <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
                 {% endfor %}</td>
                 <td>{{topic.created_on}}</td>
@@ -75,7 +75,7 @@
                           post-url="{% url 'books:change_topic_order' book_slug=book.slug topic_slug=subtopic.slug %}"></i></a></span>
                       </div>
                     </td>
-                    <td>{% for author in subtopic.authors.all %}
+                    <td class="authors_div">{% for author in subtopic.authors.all %}
                       <span class="{% if forloop.counter > 1 %}author_name{% endif %}">{{author.get_full_name}}</span>
                     {% endfor %}</td>
                     <td>{{subtopic.created_on}}</td>
