@@ -32,7 +32,11 @@
                 <!-- book item starts here -->
                 <div class="col-md-3 col-sm-4 col-xs-12 book-block">
                   <div class="book-item">
+                    
                     <div class="book-title pink-red">
+                      {% ifequal book.privacy 'Private'%} 
+                        <div class="book-privacy-flap"> {{book.privacy}} </div>
+                      {% endifequal %}
                       <a href="{% url "books:book_info" slug=book.slug %}">{{book.title}}</a>
                     </div>
                     <div class="book-description">
