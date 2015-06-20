@@ -95,6 +95,7 @@ def create_content(request, book_slug, topic_slug):
         if not topic.content:
             topic.content = request.POST.get("content")
             topic.keywords = request.POST.get("keywords")
+            topic.updated_on = datetime.datetime.now()
             topic.save()
         else:
             topic_form = TopicForm(request.POST)
@@ -204,7 +205,7 @@ def approve_topic(request, book_slug, topic_slug):
             topic.shadow.status = "Approved"
             topic.shadow.content = topic.content
             topic.shadow.keywords = topic.keywords
-            topic.updated_on = datetime.datetime.now()
+            topic.shadow.updated_on = datetime.datetime.now()
             topic.shadow.save()
 
             topic.delete()
@@ -276,6 +277,7 @@ def edit_book(request, slug):
                 book = book_form.save()
                 book.status = request.POST.get('status')
                 book.authors.add(request.user)
+                book.updated_on = datetime.datetime.now()
                 book.save()
                 data = {"error": False, "response": "Book has been edited Successfully."}
             
@@ -329,7 +331,10 @@ def delete_book(request, slug):
 
 
 def book_list(request):
-    books = Book.objects.filter(privacy="Public", status="Approved")
+    if request.user.is_authenticated():
+        books = Book.objects.filter(status="Approved")
+    else:
+        books = Book.objects.filter(privacy="Public", status="Approved")
     return render_to_response("docs/books.html", {"books": books})
 
 
