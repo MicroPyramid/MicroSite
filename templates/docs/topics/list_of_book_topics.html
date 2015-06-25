@@ -15,6 +15,8 @@
   <div class="panel-heading">
     <h3 class="panel-title">{{book.title|capfirst}} - Topics List</h3>
     <span>
+      <span class='active_user'><i class="fa fa-square"></i>Approved</span>
+      <span class='inactive_user'><i class="fa fa-square"></i>Waiting/Rejected</span>
       <a href="{% url 'books:create_topic' slug=book.slug %}?topic='parent-topic'&topic_id=''"><button class="btn btn-warning">Add New Topic</button></a>
     </span>
   </div>
@@ -29,13 +31,13 @@
             <th width="5%">Swap</th>
             <th width="15%">Authors</th>
             <th width="10%">Created Date</th>
-            <th width="15%">Actions</th>
+            <th width="10%">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for topic in topics %}
             {% with sub_topics=topic|get_sub_topics %}
-              <tr class="parent_row">
+              <tr class="parent_row {% ifequal topic.status 'Approved' %}success{% else %}danger{% endifequal %}">
                 <td><a href="{% url 'books:view_topic' book_slug=book.slug topic_slug=topic.slug %}">{{topic.title}}</a></td>
                 <td>{{topic.slug}}</td>
                 <td>{{topic.status}}</td>
@@ -59,11 +61,12 @@
                   {% if topic.status == "Waiting" or topic.status == "Approved" %}
                   <a href="{% url 'books:reject_topic' book_slug=book.slug topic_slug=topic.slug %}" title="Reject" class="delete-btn-click cross_anchor"><i class="fa fa-times remove-color"></i></a>
                   {% endif %}
+                  <a href="{% url 'books:topic_info' book_slug=book.slug topic_slug=topic.slug %}" title="Preview Topic" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
                 </td>
               </tr>
               {% if sub_topics %}
                 {% for subtopic in sub_topics %}
-                  <tr class="subtopic-of-{{topic.id}}">
+                  <tr class="subtopic-of-{{topic.id}} {% ifequal subtopic.status 'Approved' %}success{% else %}danger{% endifequal %}">
                     <td class="sub-topic-title">{{subtopic.title}}</td>
                     <td>{{subtopic.slug}}</td>
                     <td>{{subtopic.status}}</td>

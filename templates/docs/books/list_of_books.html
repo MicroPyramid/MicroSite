@@ -13,6 +13,8 @@
     <h3 class="panel-title">Book Viewer</h3>
     {% if request.user.is_superuser %}
     <span>
+      <span class='active_user'><i class="fa fa-square"></i>Approved</span>
+      <span class='inactive_user'><i class="fa fa-square"></i>Waiting/Rejected</span>
       <a href="{% url 'books:create_book' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Book </button></a>
     </span>
     {% endif %}
@@ -25,6 +27,7 @@
             <th width='1%'>No</th>
             <th width="8%">Title</th>
             <th width="10%">Slug</th>
+            <th width="5%">Privacy</th>
             <th width="7%">Owner</th>
             <th width="13%">Created Date</th>
             <th width="10%">Authors</th>
@@ -33,10 +36,11 @@
         </thead>
         <tbody>
           {% for book in books %}
-          <tr>
+          <tr class="{% ifequal book.status 'Approved' %}success{% else %}danger{% endifequal %}">
             <td>{{forloop.counter}}</td>
             <td><a href="{% url 'books:view_book' slug=book.slug %}">{{book.title}}</a></td>
             <td>{{book.slug}}</td>
+            <td>{{book.privacy}}</td>
             <td>{{book.owner}}</td>
             <td>{{book.created_on}}</td>
             <td class="authors_div">{% for author in book.authors.all %}
@@ -45,6 +49,7 @@
             <td>
               <a href="{% url 'books:edit_book' slug=book.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
               <a href="{% url 'books:delete_book' slug=book.slug %}" class="delete_anchor"><i class="fa fa-trash-o trash-color"></i>Delete</a>
+              <a href="{% url 'books:book_info' slug=book.slug %}" title="Preview Topic" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
             </td>
           </tr>
           {% endfor %}

@@ -5,6 +5,7 @@ urlpatterns = patterns(
 
     url(r'^$', 'index', name='index'),
     url(r'^clear_cache/$', 'clear_cache', name='clear_cache'),
+    url(r'^forgot-password/$', 'forgot_password', name='forgot_password'),
     url(r'^contacts/$', 'contacts', name='contacts'),
     url(r'^contacts/(?P<pk>[-\w]+)/$', 'delete_contact', name='delete_contact'),
     # url(r'^jobs/$', 'jobs', name='jobs'),
