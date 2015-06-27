@@ -38,12 +38,12 @@
             <ul class="gw-nav gw-nav-list">
               {% for topic in parent_topics %}
                 {% with topic.topic_set.all as subtopics %}
-                  <li class="init-arrow-down">
-                    <a href="javascript:void(0)}" data-url="{% url "books:topic_info" topic_slug=topic.slug book_slug=book.slug %}">
+                  <li class="{% if subtopics %}init-arrow-down{%else%}init-un-active{% endif %}">
+                    <a href="{% url "books:topic_info" topic_slug=topic.slug book_slug=book.slug %}">
                       <span class="gw-menu-text">{{topic.title}}</span>
                     </a>
                     {% if subtopics %}
-                      <span class="topic_arrow"><b class="gw-arrow"></b></span>
+                      <b class="gw-arrow"></b>
                       <ul class="gw-submenu">
                         {% for subtopic in subtopics %}
                           {% if subtopic.status == "Approved" and not subtopic.shadow %}
@@ -91,12 +91,14 @@
       $(document).ready(function() {
         var list_item = $('a[href="'+window.location.pathname+'"]').parent("li")
         list_item.addClass("active");
-        list_item.parent('ul').show();
-        list_item.parent('ul').parent('li').attr("class", "arrow-down active")
-
-        $(".gw-menu-text").click(function(e) {
-          window.location = $(this).parent().attr("data-url");
-        });
+        if (list_item.hasClass("init-arrow-down") || list_item.hasClass("arrow-down")){
+          list_item.attr("class", "arrow-down active");
+          list_item.children('ul').show();
+        }
+        else{
+          list_item.parent('ul').show();
+          list_item.parent('ul').parent('li').attr("class", "arrow-down")
+        }
       });
     </script>
     {% endcompress %}
