@@ -5,13 +5,16 @@ from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.template import RequestContext
 import json
-from micro_admin.models import career
+from micro_admin.models import career, User
 from micro_admin.forms import CareerForm
 from microsite.settings import BLOG_IMAGES
 import os
 from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
 from django.core.exceptions import ObjectDoesNotExist
+import string
+import random
+from django.core.mail import EmailMessage
 
 #@csrf_protect
 def index(request):
@@ -139,6 +142,7 @@ def job_state(request, pk):
     return HttpResponseRedirect('/portal/jobs/')
 
 
+@login_required
 def menu_order(request, pk):
     if request.method == 'POST':
         if request.POST.get('mode') == 'down':
@@ -176,4 +180,30 @@ def menu_order(request, pk):
                 except ObjectDoesNotExist:
                     pass
                 data = {'error': False}
+        return HttpResponse(json.dumps(data))
+
+
+def forgot_password(request):
+    if request.method == "POST":
+        try:
+            user = User.objects.get(email=request.POST.get("email"))
+            chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
+            pwd_token = ''.join(random.choice(chars) for i in range(20))
+
+            user.set_password(pwd_token)
+            user.save()
+
+            message = "<p><b>Hello "+user.first_name+",</b></p><p>We got a request to reset your password.</p>"
+            message += "<p>Here is your new password: "+ pwd_token +"</p>"
+            sending_msg = EmailMessage('Reset Your Password', message, "hello@micropyramid.com",
+                                [request.POST.get('email')])
+
+            sending_msg.content_subtype = "html"
+            sending_msg.send()
+            
+            data = {'error': False, "message": "Password has been sent to your email sucessfully."}
+
+        except ObjectDoesNotExist:
+            data = {'error': True, "message":"Entered Email id is incorrect."}
+
         return HttpResponse(json.dumps(data))

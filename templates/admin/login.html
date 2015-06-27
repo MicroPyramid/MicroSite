@@ -38,6 +38,7 @@
         <!-- Login Form Starts Here -->
         <div class="panel panel-default login-form">
           <div class="panel-body">
+            <div class="login_div active_login">
             <form id="loginform" role="form" action="/portal/">{% csrf_token %}
               <div class="form-group">
                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
@@ -46,10 +47,24 @@
                 <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
               <div class="forgot-submit">
-                <span class="forgot"><a href="#">Forgot Password?</a></span>
+                <span class="forgot"><a class="forgot_tag">Forgot Password?</a></span>
                 <span class="submit"><input type="submit" value="Login"  class="save" id="search_lessons"></span>
               </div>
             </form>
+            </div>
+            <div class="forgot_div">
+            <form id="forgotpasswordform" role="form">{% csrf_token %}
+              <div class="form-group">
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required="True">
+              </div>
+              
+              <div class="forgot-submit">
+                <span class="forgot"><a class="login_tag">Login Here</a></span>
+                <span class="submit"><input type="submit" value="Submit" class="save" id="search_lessons"></span>
+              </div>
+            </form>
+            </div>
+
           </div>
         </div>
         <!-- Login Form ends Here -->
@@ -63,6 +78,16 @@
 {% compress js %}
   <script type="text/javascript">
   $(document).ready(function() {
+    $(".forgot_tag").click(function(){
+      $(".login-form .panel-body").children('div').removeClass("active_login");
+      $(".forgot_div").addClass("active_login");
+    });
+    $(".login_tag").click(function(){
+      $(".login-form .panel-body").children('div').removeClass("active_login");
+      $(".login_div").addClass("active_login");
+    });
+
+
     $("#loginform").submit(function(e) {
       e.preventDefault();
       $.post("/portal/", $("form#loginform").serialize(), function(data) {
@@ -70,6 +95,19 @@
           $("p.error").remove();
           $("#error").prepend("<p class='error'>" + data.message + "</p>");
         } else {
+          window.location = '.';
+        }
+      }, 'json');
+    });
+
+    $("#forgotpasswordform").submit(function(e) {
+      e.preventDefault();
+      $.post("{% url 'micro_admin:forgot_password' %}", $("form#forgotpasswordform").serialize(), function(data) {
+        if (data.error) {
+          $("p.error").remove();
+          $("#error").prepend("<p class='error'>" + data.message + "</p>");
+        } else {
+          alert(data.message);
           window.location = '.';
         }
       }, 'json');
