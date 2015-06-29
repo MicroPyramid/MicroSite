@@ -28,6 +28,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'djcelery',
     'django_inbound_email',
     'micro_admin',
@@ -36,9 +37,9 @@ INSTALLED_APPS = (
     'micro_blog',
     'employee',
     'sorl.thumbnail',
-    'haystack',
     'compressor',
     'cachalot',
+    'search',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -213,7 +214,7 @@ LOGGING = {
     },
 }
 
-ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
+# ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
 SITE_URL = "http://micropyramid.com"
 
@@ -256,3 +257,16 @@ if 'TRAVIS' in os.environ:
             'PORT':     '',
         }
     }
+
+#Haystack settings for Elasticsearch
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack_post',
+        'TIMEOUT': 60,
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_DEFAULT_OPERATOR = 'OR'
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1

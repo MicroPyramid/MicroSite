@@ -22,7 +22,6 @@ django-compressor==1.5
 django-htmlmin==0.7.0
 django-inbound-email==0.8.4
 docutils==0.12
-haystack==0.15
 html5lib==0.99999
 kombu==3.0.26
 linecache2==1.0.0
@@ -44,3 +43,5 @@ sphinx-rtd-theme==0.1.8
 traceback2==1.4.0
 unittest2==1.0.1
 wsgiref==0.1.2
+django-haystack==2.4.0
+elasticsearch==1.6.0
