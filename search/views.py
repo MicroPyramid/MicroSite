@@ -9,11 +9,9 @@ def autocomplete(request):
 					'title': result.object.title,
 					'link': result.object.get_url,
 					'Auther': result.object.user.username,
-					'created': str(result.object.updated_on)
+					'created': str(result.object.updated_on),
 					} for result in sqs]
 	the_data = json.dumps({
 		'results': suggestions
 	})
-	print the_data
-
 	return HttpResponse(the_data, content_type='application/json')

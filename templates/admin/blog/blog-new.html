@@ -181,11 +181,11 @@ Autocomplete.prototype.show_results = function(data) {
   $('.ac-results').remove()
 
   var results = data.results || []
-  var results_wrapper = $('<div class="ac-results" style="position:absolute;"></div>')
+  var results_wrapper = $('<div class="ac-results"></div>')
   var base_elem = $('<div class="result-wrapper"><a href="" class="ac-result"></a><br><p class="auther"></p></div>')
   if(results.length > 0) {
     for(var res_offset in results) {
-      elem = $('<div class="result-wrapper"><a  target="_blank" href='+ results[res_offset]['link']+ '>'+results[res_offset]['title'] +'</a><br><p>'+'Auther: '+results[res_offset]['Auther'] + ', Created: '+results[res_offset]['created'] + '</p></div>');
+      elem = $('<div class="result-wrapper"><a  target="_blank" href='+ results[res_offset]['link']+ '>'+results[res_offset]['title'] +'</a><br><p>'+'Auther: '+results[res_offset]['Auther'] + ', Created On: '+results[res_offset]['created'] + '</p></div>');
       results_wrapper.append(elem);
     }
   }
