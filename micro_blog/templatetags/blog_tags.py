@@ -1,7 +1,6 @@
 from django import template
 import datetime
 from micro_blog.models import Post
-import itertools
 
 register = template.Library()
 
