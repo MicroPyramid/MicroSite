@@ -179,9 +179,11 @@
         <div class="latest-blog blog-item">
           {% get_latest_posts as latest_posts %}
           {% for post in latest_posts|slice:":1" %}
-            <div class="title"><a href="/blog/{{post.slug}}/">{{ post.title }}</a></div>
-            <div class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date"><a href="/blog/{{post.created_on|date:"Y"}}/{{post.created_on|date:"n"}}">{{ post.created_on|date:"d F Y" }}</a></span></div>
-            <div class="desc"><a href="/blog/{{post.slug}}/">{{ post.content|safe|truncatewords:45 }}</a></div>
+          <span itemscope itemType="http://schema.org/BlogPosting">
+            <div class="title"><a href="/blog/{{post.slug}}/"><span itemprop="headline">{{ post.title }}</span></a></div>
+            <div class="date-author"><span class="author" itemprop="author"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ post.user.get_full_name }}</span></span></span> <span class="date"><a href="/blog/{{post.created_on|date:"Y"}}/{{post.created_on|date:"n"}}"><span itemprop="datePublished">{{ post.created_on|date:"d F Y" }}</span></a></span></div>
+            <div class="desc"><a href="/blog/{{post.slug}}/"><span itemprop="description">{{ post.content|safe|truncatewords:45 }}</span></a></div>
+          </span>
           {% endfor %}
         </div>
       </div>
