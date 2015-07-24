@@ -115,11 +115,10 @@ MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
 
 TEMPLATE_LOADERS = (
-    ("django.template.loaders.cached.Loader", (
         "django.template.loaders.filesystem.Loader",
         "django.template.loaders.app_directories.Loader",
-    )),
 )
+
 COMPRESS_ENABLED = True
 
 STATICFILES_FINDERS = (
