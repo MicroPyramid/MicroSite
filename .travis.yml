@@ -8,6 +8,7 @@ services:
 #Django & Database
 addons:
   postgresql: "9.4"
+  # sudo: true
 
 env:
   -DJANGO=1.7 DB=mysql
@@ -21,10 +22,11 @@ install:
 
 #mysql db creation
 before_script:
+  sudo: true
   - sleep 15
   - mysql -e 'create database test;' -u root
   - psql -c 'create database test;' -U postgres
-sudo: true
+
 # command to run tests
 script:
   - python manage.py test
