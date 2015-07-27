@@ -5,11 +5,11 @@
     <h3 class="panel-title">Blog Post Creation</h3>
   </div>
   <div class="panel-body">
-    <form action="{% url 'micro_blog:new_post' %}" method="POST" id="blogform" enctype="multipart/form-data">
+    <form action="{% url 'micro_blog:new_post' %}" class="autocomplete-me" method="POST" id="blogform" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
-        <input type="Text" class="form-control" id="title" name="title">
+        <input type="Text" class="form-control" id="title" name="title" style="position:relative;">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Slug</label>
@@ -129,6 +129,79 @@
         }
       }
     });
+</script>
+<script type="text/javascript">
+  var Autocomplete = function(options) {
+  this.form_selector = options.form_selector
+  this.url = '/search/autocomplete/' || options.url
+  this.delay = parseInt(options.delay || 300)
+  this.minimum_length = parseInt(options.minimum_length || 3)
+  this.form_elem = null
+  this.query_box = null
+}
+
+Autocomplete.prototype.setup = function() {
+  var self = this
+
+  this.form_elem = $(this.form_selector)
+  this.query_box = this.form_elem.find('input[name=title]')
+
+  this.query_box.on('keyup', function() {
+    var query = self.query_box.val()
+
+    if(query.length < self.minimum_length) {
+      return false
+    }
+
+    self.fetch(query)
+  })
+
+  this.form_elem.on('click', '.ac-result', function(ev) {
+    self.query_box.val($(this).text())
+    $('.ac-results').remove()
+    return false
+  })
+}
+
+Autocomplete.prototype.fetch = function(query) {
+  var self = this
+
+  $.ajax({
+    url: this.url
+  , data: {
+      'q': query
+    }
+  , success: function(data) {
+      self.show_results(data)
+    }
+  })
+}
+
+Autocomplete.prototype.show_results = function(data) {
+  $('.ac-results').remove()
+
+  var results = data.results || []
+  var results_wrapper = $('<div class="ac-results"></div>')
+  var base_elem = $('<div class="result-wrapper"><a href="" class="ac-result"></a><br><p class="auther"></p></div>')
+  if(results.length > 0) {
+    for(var res_offset in results) {
+      elem = $('<div class="result-wrapper"><a  target="_blank" href='+ results[res_offset]['link']+ '>'+results[res_offset]['title'] +'</a><br><p>'+'Auther: '+results[res_offset]['Auther'] + ', Created On: '+results[res_offset]['created'] + '</p></div>');
+      results_wrapper.append(elem);
+    }
+  }
+  else {
+    return false
+  }
+
+  this.query_box.after(results_wrapper)
+}
+
+$(document).ready(function() {
+  window.autocomplete = new Autocomplete({
+    form_selector: '.autocomplete-me'
+  })
+  window.autocomplete.setup()
+})
 </script>
 {% endcompress %}
 {% endblock %}
