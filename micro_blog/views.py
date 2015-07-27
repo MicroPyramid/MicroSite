@@ -48,7 +48,8 @@ def new_blog_category(request):
             data = {'error': False, 'response': 'Blog category created'}
         else:
             data = {'error': True, 'response': validate_blogcategory.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
@@ -67,7 +68,8 @@ def edit_category(request, category_slug):
             data = {'error': False, 'response': 'Blog category updated'}
         else:
             data = {'error': True, 'response': validate_blogcategory.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
     if request.user.is_superuser:
         blog_category = Category.objects.get(slug=category_slug)
         c = {}
@@ -113,7 +115,7 @@ def blog_article(request, slug):
     linkedin = {}
     linkedin.update(ln.json())
     facebook = {}
-    facebook.update(fb.json())
+    facebook.update(fb.json() if fb else {})
     twitter = {}
     twitter.update(tw.json())
     fbshare_count = 0
@@ -225,7 +227,8 @@ def new_post(request):
             data = {'error': False, 'response': 'Blog Post created'}
         else:
             data = {'error': True, 'response': validate_blog.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
     categories = Category.objects.all()
     c = {}
     c.update(csrf(request))
@@ -247,7 +250,7 @@ def edit_blog_post(request, blog_slug):
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
             blog_post.save()
-
+            blog_post.tags.clear()
             if request.POST.get('tags', ''):
                 for tag in blog_post.tags.all():
                     blog_post.tags.remove(tag)
@@ -264,7 +267,8 @@ def edit_blog_post(request, blog_slug):
             data = {'error': False, 'response': 'Blog Post edited'}
         else:
             data = {'error': True, 'response': validate_blog.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
     blog_post = Post.objects.get(slug=blog_slug)
     categories = Category.objects.all()
     if request.user.is_superuser or blog_post.user == request.user:
@@ -282,8 +286,8 @@ def delete_post(request,blog_slug):
         blog_post.delete()
         data = {"error": False, 'message': 'Blog Post Deleted'}
     else:
-        data = {"error": True, 'message': 'admin or owner can delete blog post'}
-    return HttpResponse(json.dumps(data))
+        data = {"error": True, 'message': 'Admin or Owner can delete blog post'}
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
@@ -321,7 +325,7 @@ def contact(request):
             errors = {}
             errors = dict((validate_simplecontact.errors).items() + (validate_contact.errors).items())
             data = {'error': True, 'errinfo': errors}
-            return HttpResponse(json.dumps(data))
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     if validate_simplecontact.is_valid():
         simplecontact.objects.get_or_create(full_name=request.POST.get('full_name'), message=request.POST.get('message'), email=request.POST.get('email'), phone=request.POST.get('phone') if request.POST.get('phone') else False)
@@ -329,7 +333,7 @@ def contact(request):
         errors = {}
         errors = dict((validate_simplecontact.errors).items())
         data = {'error': True, 'errinfo': errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     send_mail('Thank u for ur message', "Thank you for contacting us. We will get back to you soon!!!", "hello@micropyramid.com", [request.POST.get('email')], fail_silently=False)
 
@@ -355,4 +359,4 @@ def contact(request):
 
     data = {'error': False, 'response': 'submitted successfully'}
 
-    return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')

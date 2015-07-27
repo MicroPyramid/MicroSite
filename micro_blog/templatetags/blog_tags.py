@@ -8,11 +8,9 @@ register = template.Library()
 @register.assignment_tag(takes_context=True)
 def get_archives(context):
     archives = []
-    current_date = datetime.date.today()
     dates = []
-    for each_object in Post.objects.all().order_by('created_on').values('created_on'):
-        for key, value in each_object.items():
-            date = value
+    for each_object in Post.objects.filter(status='P').order_by('created_on').values('created_on'):
+        for date in each_object.values():
             dates.append((date.year, date.month, 1))
 
     dates = list(set(dates))
@@ -24,22 +22,6 @@ def get_archives(context):
         return archives[:5]
     return archives
 
-    # i = 0
-    # while True:
-    #     date = current_date + datetime.timedelta(i*365/12)
-    #     print date.year,date.month
-        
-    #     if Post.objects.filter(status="P", created_on__year=date.year, created_on__month=date.month):
-    #         archives.append(current_date + datetime.timedelta(i*365/12))
-    #         i = i - 1
-    #     else:
-    #         i = i - 2
-    #     if len(archives) == 4:
-    #         break
-
-    # for i in reversed(range(-4,1)):
-    #     archives.append(current_date + datetime.timedelta(i*365/12))
-    # return archives
 
 @register.assignment_tag(takes_context=True)
 def get_page(context,page,no_pages):

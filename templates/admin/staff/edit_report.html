@@ -12,11 +12,12 @@
       <div class="row marl text-editor">
         <label class="control-label" for="html">Report Description</label>
         <div class="control-group">
-          <div class="controls" id="report">
-            <input type="hidden" name="report">
+          <div class="controls">
+            <input type="hidden" name="date" value="{{ new_report.date|date:"Y-m-d" }}">
             <input type="hidden" id="user_id" name="user_id" value="{{ new_report.employee.id }}">
             <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">{{new_report.report|safe}}
             </textarea>
+            <input type="hidden" name="report" id="report">
           </div>
         </div>
       </div>
@@ -51,10 +52,12 @@
          }
          else
          {
-          alert(data.response);
-          window.location = '/portal/employee/reports/'+value+'/';
-           }
+          $('p.failure').remove();
+          for (var key in data.response) {
+            $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
+          }
          }
+       }
     });
   });
 </script>

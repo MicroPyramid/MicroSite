@@ -24,14 +24,19 @@ def change_password(request):
         if validate_changepassword.is_valid():
             user = request.user
             if not check_password(request.POST['oldpassword'], user.password):
-                return HttpResponse(json.dumps({'error': True, 'response': {'oldpassword': 'Invalid old password'}}))
+                return HttpResponse(json.dumps({'error': True, 'response': {'oldpassword': 'Invalid old password'}}),
+                                    content_type='application/json; charset=utf-8')
             if request.POST['newpassword'] != request.POST['retypepassword']:
-                return HttpResponse(json.dumps({'error': True, 'response': {'newpassword': 'New password and ConformPasswords did not match'}}))
+                return HttpResponse(json.dumps({'error': True, 'response': {'newpassword': 'New password and ConformPasswords did not match'}}),
+                                    content_type='application/json; charset=utf-8')
+
             user.set_password(request.POST['newpassword'])
             user.save()
-            return HttpResponse(json.dumps({'error': False, 'response': 'Password changed successfully'}))
+            return HttpResponse(json.dumps({'error': False, 'response': 'Password changed successfully'}),
+                                    content_type='application/json; charset=utf-8')
         else:
-            return HttpResponse(json.dumps({'error': True, 'response': validate_changepassword.errors}))
+            return HttpResponse(json.dumps({'error': True, 'response': validate_changepassword.errors}),
+                                    content_type='application/json; charset=utf-8')
     return render_to_response('admin/user/change_password.html')
 
 
@@ -80,7 +85,7 @@ def new_user(request):
             data = {'error': False, 'response': 'User created successfully.'}
         else:
             data = {'error': True, 'response': validate_user.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         if request.user.is_superuser:
             c = {}
@@ -121,10 +126,10 @@ def edit_user(request, pk):
                 data = {'error': False, 'message': 'updated successfully'}
             else:
                 data = {'error': True, 'message': validate_user.errors}
-            return HttpResponse(json.dumps(data))
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
         else:
             data = {'error': True, 'error_message': "You Dont have permission to edit."}
-            return HttpResponse(json.dumps(data))
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         if request.user.is_superuser:
             c = {}
