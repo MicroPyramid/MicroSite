@@ -7,7 +7,7 @@ services:
   - elasticsearch
 #Django & Database
 addons:
-  sudo: true
+  # sudo: true
   postgresql: "9.4"
 
 env:
