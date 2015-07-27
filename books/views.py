@@ -24,7 +24,7 @@ def create_book(request):
 
             if book_form.is_valid():
                 book = book_form.save()
-                book.status = request.POST.get('status')
+                book.status = request.POST.get('status') if request.POST.get('status') else 'Waiting'
                 book.display_order = Book.objects.all().count()
                 book.authors.add(request.user)
                 book.save()
@@ -33,7 +33,7 @@ def create_book(request):
             else:
                 data = {"error": True, "response": book_form.errors}
 
-            return HttpResponse(json.dumps(data))
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
         users = User.objects.all()
         return render_to_response("docs/books/create_book.html", {"users": users, "privacy_choices": PRIVACY_CHOICES})
@@ -82,7 +82,7 @@ def create_topic(request, slug):
         else:
             data = {"error": True, "response": topic_form.errors}
         
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
     return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics})
 
@@ -180,7 +180,7 @@ def edit_topic(request, book_slug, topic_slug):
         else:
             data = {"error": True, "response": topic_form.errors}
         
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
     return render_to_response("docs/topics/edit_topic.html", {"book": book, "topics":topics, "topic": topic})
 
@@ -220,7 +220,7 @@ def approve_topic(request, book_slug, topic_slug):
     else:
         data = {"response": "You don't have the permission to Approve."}
     
-    return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
@@ -238,7 +238,7 @@ def reject_topic(request, book_slug, topic_slug):
     else:
         data = {"response": "You don't have the permission to Reject."}
     
-    return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
@@ -262,7 +262,7 @@ def delete_topic(request, book_slug, topic_slug):
     else:
         data = {"response": "You don't have the permission to Delete."}
     
-    return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
@@ -284,7 +284,7 @@ def edit_book(request, slug):
             else:
                 data = {"error": True, "response": book_form.errors}
             
-            return HttpResponse(json.dumps(data))
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
         users = User.objects.all()
         return render_to_response("docs/books/edit_book.html", {"book": book, "users": users, "privacy_choices": PRIVACY_CHOICES})
@@ -383,4 +383,4 @@ def change_topic_order(request, book_slug, topic_slug):
         except ObjectDoesNotExist:
             data = {'error': True, 'message': 'You cant move up.'}
 
-    return HttpResponse(json.dumps(data))
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')

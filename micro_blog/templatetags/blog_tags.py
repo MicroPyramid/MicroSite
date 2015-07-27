@@ -4,26 +4,24 @@ from micro_blog.models import Post
 
 register = template.Library()
 
+
 @register.assignment_tag(takes_context=True)
 def get_archives(context):
     archives = []
-    current_date = datetime.date.today()
-    # i = 0
-    # while True:
-    #     date = current_date + datetime.timedelta(i*365/12)
-    #     print date.year,date.month
-        
-    #     if Post.objects.filter(status="P", created_on__year=date.year, created_on__month=date.month):
-    #         archives.append(current_date + datetime.timedelta(i*365/12))
-    #         i = i - 1
-    #     else:
-    #         i = i - 2
-    #     if len(archives) == 4:
-    #         break
+    dates = []
+    for each_object in Post.objects.filter(status='P').order_by('created_on').values('created_on'):
+        for date in each_object.values():
+            dates.append((date.year, date.month, 1))
 
-    for i in reversed(range(-4,1)):
-        archives.append(current_date + datetime.timedelta(i*365/12))
+    dates = list(set(dates))
+    dates.sort(reverse=True)
+    for each in dates:
+        archives.append(datetime.datetime(each[0], each[1], each[2]))
+
+    if len(archives) > 5:
+        return archives[:5]
     return archives
+
 
 @register.assignment_tag(takes_context=True)
 def get_page(context,page,no_pages):

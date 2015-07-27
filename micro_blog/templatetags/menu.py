@@ -7,12 +7,17 @@ register = template.Library()
 
 @register.assignment_tag(takes_context=True)
 def get_tags(context):
-    return Tags.objects.annotate(Num=Count('rel_posts')).filter(Num__gt = 0)[:20]
+    return Tags.objects.annotate(Num=Count('rel_posts')).filter(Num__gt = 0, rel_posts__status='P')[:20]
 
 
 @register.assignment_tag(takes_context=True)
 def get_categories(context):
-    return Category.objects.filter(is_display=True)
+    has_blog_posts_categories = []
+    categories = Category.objects.filter(is_display=True)
+    for category in categories:
+        if Post.objects.filter(category_id=category.id, status='P').exists():
+            has_blog_posts_categories.append(category)
+    return has_blog_posts_categories
 
 
 @register.assignment_tag(takes_context=True)

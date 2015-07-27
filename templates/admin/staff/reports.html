@@ -15,9 +15,9 @@
             <th width="8%">Employee</th>
             <th width="6%">Name</th>
             <th width="8%">Date</th>
-            <th width="15%">Created On</th>
+            <th width="10%">Created On</th>
             <th width="8%">Role</th>
-            <th width="5%">Actions</th>
+            <th width="8%">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +32,7 @@
             <td class="txt_center">{{report.created_on}}</td>
             <td class="txt_center">{{report.employee.user_roles}}</td>
             <td class="txt_center">
+              <a href="{% url 'employee:edit_report' pk=report.id %}" class=" edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
               <a href="{% url 'employee:delete_report' pk=report.id %}" class="delete_report delete_anchor" value="{{report.id}}"><i class="fa fa-trash-o trash-color"></i>Delete</a>
             </td>
           </tr>

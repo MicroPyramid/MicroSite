@@ -30,7 +30,7 @@ def index(request):
                 data = {'error': True, 'message': "The password is valid, but the account has been disabled!"}
         else:
             data = {'error': True,'message': "The username and password are incorrect."}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         data = {}
         data.update(csrf(request))
@@ -47,8 +47,8 @@ def out(request):
 
 @login_required
 def contacts(request):
-    contacts=simplecontact.objects.all()
-    return render_to_response('admin/content/contacts/simplecontact.html',{'contacts':contacts})
+    contacts = simplecontact.objects.all()
+    return render_to_response('admin/content/contacts/simplecontact.html', {'contacts': contacts})
 
 @login_required
 def delete_contact(request, pk):
@@ -56,7 +56,7 @@ def delete_contact(request, pk):
     if request.user.is_superuser:
         contact.delete()
         data = {'error': False, 'response': 'contact deleted successfully'}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -180,7 +180,7 @@ def menu_order(request, pk):
                 except ObjectDoesNotExist:
                     pass
                 data = {'error': False}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 def forgot_password(request):
@@ -204,6 +204,6 @@ def forgot_password(request):
             data = {'error': False, "message": "Password has been sent to your email sucessfully."}
 
         except ObjectDoesNotExist:
-            data = {'error': True, "message":"Entered Email id is incorrect."}
+            data = {'error': True, "message": "Entered Email id is incorrect."}
 
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
