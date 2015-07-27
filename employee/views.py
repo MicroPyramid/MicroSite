@@ -39,16 +39,16 @@ def view_report(request,pk):
 @login_required
 def new_report(request):
     if request.method == 'POST':
-        datestring_format = datetime.datetime.strptime(request.POST.get('date'), "%d/%m/%Y").strftime("%Y-%m-%d")
-        date=datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
         validate_report = DailyReportForm(request.POST)
         if validate_report.is_valid():
+            datestring_format = datetime.datetime.strptime(request.POST.get('date'), "%m/%d/%Y").strftime("%Y-%m-%d")
+            date = datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
             new_report = DailyReport.objects.create(report=request.POST.get('report'), employee=request.user, date=date)
             new_report.save()
             data = {'error': False, 'response': 'Report created successfully'}
         else:
             data = {'error': True, 'response': validate_report.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     c = {}
     c.update(csrf(request))
     return render(request, 'admin/staff/new_report.html', {'csrf_token': c['csrf_token'], 'date': datetime.date.today()})
@@ -62,14 +62,15 @@ def edit_report(request,pk):
             validate_report = DailyReportForm(request.POST, instance=current_report)
             if validate_report.is_valid():
                 new_report = validate_report.save(commit=False)
-                new_report.user=request.user
+                new_report.user = request.user
                 new_report.save()
                 data = {'error': False, 'response': 'Report updated successfully'}
             else:
                 data = {'error': True, 'response': validate_report.errors}
         else:
             data = {'error': True, 'response': 'You cannot edit this report' }
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
     new_report = DailyReport.objects.get(id=pk)
     if request.user.is_superuser or request.user.email == new_report.employee.email:
         c = {}
@@ -84,6 +85,6 @@ def delete_report(request,pk):
     if request.user.is_superuser or request.user == report.employee:
         report.delete()
         data = {'error': False, 'response': 'Report deleted.'}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         return render_to_response('admin/accessdenied.html')

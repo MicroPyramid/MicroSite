@@ -24,7 +24,7 @@ def new_page(request):
             data = {"error": False, 'response': 'Page created successfully'}
         else:
             data = {"error": True, 'response': validate_page.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
@@ -52,7 +52,7 @@ def edit_page(request, pk):
             data = {"error": False, 'response': 'Page updated successfully'}
         else:
             data = {"error": True, 'response': validate_page.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
@@ -107,7 +107,7 @@ def add_menu(request):
             data = {"error": False, 'response': 'Menu created successfully'}
         else:
             data = {"error": True, 'response': validate_menu.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     if request.user.is_superuser:
         c = {}
@@ -132,7 +132,7 @@ def edit_menu(request, pk):
                 try:
                     if updated_menu.parent.id == updated_menu.id:
                         data = {'error': True, 'response': {'parent': 'you can not choose the same as parent'}}
-                        return HttpResponse(json.dumps(data))
+                        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
                 except Exception:
                     pass
 
@@ -154,7 +154,8 @@ def edit_menu(request, pk):
             data = {'error': False, 'response': 'updated successfully'}
         else:
             data = {'error': True, 'response': validate_menu.errors}
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
     if request.user.is_superuser:
         parent = Menu.objects.filter(parent=None).order_by('lvl')
         current_menu = Menu.objects.get(pk=pk)
