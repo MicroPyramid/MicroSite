@@ -22,7 +22,6 @@ install:
 
 #mysql db creation
 before_script:
-  sudo: true
   - sleep 15
   - mysql -e 'create database test;' -u root
   - psql -c 'create database test;' -U postgres
