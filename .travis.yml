@@ -2,8 +2,12 @@ language: python
 python:
   - "2.7"
 
-services: mysql
+services:
+  - mysql
+  - elasticsearch
 #Django & Database
+addons:
+  postgresql: "9.3"
 
 env:
   -DJANGO=1.7 DB=mysql
@@ -24,7 +28,9 @@ install:
 
 #mysql db creation
 before_script:
+  - sleep 15
   - mysql -e 'create database test;' -u root
+  - psql -c 'create database test;' -U postgres
 # command to run tests
 script:
   - python manage.py test
