@@ -39,12 +39,12 @@
           <input id="tags_1" type="text" class="tags" name="tags" value="" />
         </p>
       </div>
-      <div class="tags-block">
+      <!-- <div class="tags-block">
         <p>
           <label>Featured Image</label>
           <input type="file" name="featuredimage" />
         </p>
-      </div>
+      </div> -->
       {% if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser %}
       <div class="draft-box">
         <input type="radio" name="status" value="D">
@@ -185,7 +185,7 @@ Autocomplete.prototype.show_results = function(data) {
   var base_elem = $('<div class="result-wrapper"><a href="" class="ac-result"></a><br><p class="auther"></p></div>')
   if(results.length > 0) {
     for(var res_offset in results) {
-      elem = $('<div class="result-wrapper"><a  target="_blank" href='+ results[res_offset]['link']+ '>'+results[res_offset]['title'] +'</a><br><p>'+'Auther: '+results[res_offset]['Auther'] + ', Created On: '+results[res_offset]['created'] + '</p></div>');
+      elem = $('<div class="result-wrapper"><a  target="_blank" href='+ results[res_offset]['link']+ '>'+results[res_offset]['title'] +'</a><br><p>'+'Author: '+results[res_offset]['Auther'] + ', Created On: '+results[res_offset]['created'] + '</p></div>');
       results_wrapper.append(elem);
     }
   }

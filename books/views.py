@@ -50,9 +50,7 @@ def view_book(request, slug):
 @login_required
 def view_book_topics(request, slug):
     book = Book.objects.get(slug=slug)
-
     topics = Topic.objects.filter(book=book, parent__isnull=True, shadow__isnull=True)
-
     return render(request, "docs/topics/list_of_book_topics.html", {"book": book, "topics": topics})
 
 
@@ -78,7 +76,6 @@ def create_topic(request, slug):
             topic.save()
 
             data = {"error": False, "response": "Topic created"}
-
         else:
             data = {"error": True, "response": topic_form.errors}
         
@@ -176,7 +173,6 @@ def edit_topic(request, book_slug, topic_slug):
             new_topic.save()
 
             data = {"error": False, "response": "Topic has been edited Successfully"}
-
         else:
             data = {"error": True, "response": topic_form.errors}
         
@@ -193,7 +189,6 @@ def approve_topic(request, book_slug, topic_slug):
     if request.user.is_superuser or book.admin == request.user:
         
         topic = Topic.objects.get(slug=topic_slug)
-
         if topic.shadow:
             history = History.objects.create(topic=topic.shadow, title=topic.shadow.title, 
                             content=topic.shadow.content)
@@ -216,7 +211,6 @@ def approve_topic(request, book_slug, topic_slug):
             topic.save()
 
             data = {"response": "Approved Successfully"}
-
     else:
         data = {"response": "You don't have the permission to Approve."}
     
@@ -234,7 +228,6 @@ def reject_topic(request, book_slug, topic_slug):
         topic.status = "Rejected"
         topic.save()
         data = {"response": "Rejected Successfully"}
-
     else:
         data = {"response": "You don't have the permission to Reject."}
     
@@ -258,7 +251,6 @@ def delete_topic(request, book_slug, topic_slug):
                 each_topic.save()
 
         data = {"response": "Deleted Successfully"}
-
     else:
         data = {"response": "You don't have the permission to Delete."}
     
@@ -280,7 +272,6 @@ def edit_book(request, slug):
                 book.updated_on = datetime.datetime.now()
                 book.save()
                 data = {"error": False, "response": "Book has been edited Successfully."}
-            
             else:
                 data = {"error": True, "response": book_form.errors}
             
@@ -294,15 +285,11 @@ def edit_book(request, slug):
 
 @login_required
 def approve_book(request, slug):
-
     if request.user.is_superuser:
-        
         book = Book.objects.get(slug=slug)
         book.status = "Approved"
         book.save()
-
         return render(request, "docs/books/book_detail.html", {"book": book})
-    
     else:
         return render_to_response("admin/accessdenied.html")
 
@@ -314,7 +301,6 @@ def reject_book(request, slug):
         book.status = "Rejected"
         book.save()
         return render(request, "docs/books/book_detail.html", {"book": book})
-    
     else:
         return render_to_response("admin/accessdenied.html")
 
@@ -325,7 +311,6 @@ def delete_book(request, slug):
         book = Book.objects.get(slug=slug)
         book.delete()
         return HttpResponseRedirect('/books/list/')
-    
     else:
         return render_to_response("admin/accessdenied.html")
 
@@ -358,6 +343,7 @@ def subtopic_info(request, book_slug, topic_slug, subtopic_slug):
     return render_to_response("docs/book_topics.html", {"book": book,"parent_topics": parent_topics,"subtopic": subtopic})
 
 
+@login_required
 def change_topic_order(request, book_slug, topic_slug):
     book = Book.objects.get(slug=book_slug)
     topic = Topic.objects.get(book=book, slug=topic_slug)

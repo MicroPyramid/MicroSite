@@ -17,13 +17,13 @@
     <div class="col-xs-12 blog-post wow fadeIn animated">
       <div class="post-view row marl">
         <div class="post-right-view">
-          {% if post.featured_image %}
+          <!-- {% if post.featured_image %}
           <div class="post-img">
             <a class="fancybox replace-2x" rel="" href="images/portfolio/06/01.jpg" title="Img Title!">
             <img class="replace-2x" itemprop="image" src="/static/blog/{{ post.featured_image }}" width="620" height="370" alt="">
             </a>
           </div>
-          {% endif %}
+          {% endif %} -->
           <p itemprop="articleBody">{{ post.content|safe }}</p>
           <h5>Tags</h5>
           <div class="tag-div">
@@ -75,7 +75,7 @@
   <div class="post-left-view" style="padding:0px;">
     <div class="user-details">
       <div class="name-desig">
-        <span itemprop="author"><span itemscope itemtype="http://schema.org/Person"><span class="user-name" itemprop="name">{{ post.user.get_full_name }}ravi</span></span></span>
+        <span itemprop="author"><span itemscope itemtype="http://schema.org/Person"><span class="user-name" itemprop="name">{{ post.user.get_full_name }}</span></span></span>
         <!-- <span class="user-desig">{{ post.user.user_roles }}</span> -->
         <span class="post-date" itemprop="datePublished">{{ post.created_on|date:"d F Y" }}</span>
         <span class="post-count">{{ post.user.total_posts }} Blog Posts</span>
