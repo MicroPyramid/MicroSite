@@ -7,7 +7,7 @@ from django.template import RequestContext
 import json
 from micro_admin.models import career, User
 from micro_admin.forms import CareerForm
-from microsite.settings import BLOG_IMAGES
+from microsite.settings import BLOG_IMAGES, SG_USER, SG_PWD
 import os
 from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
@@ -15,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 import string
 import random
 from django.core.mail import EmailMessage
+import sendgrid
 
 #@csrf_protect
 def index(request):
@@ -195,11 +196,15 @@ def forgot_password(request):
 
             message = "<p><b>Hello "+user.first_name+",</b></p><p>We got a request to reset your password.</p>"
             message += "<p>Here is your new password: "+ pwd_token +"</p>"
-            sending_msg = EmailMessage('Reset Your Password', message, "hello@micropyramid.com",
-                                [request.POST.get('email')])
 
-            sending_msg.content_subtype = "html"
-            sending_msg.send()
+            sg = sendgrid.SendGridClient(SG_USER, SG_PWD)
+            sending_msg = sendgrid.Mail()
+            sending_msg.set_subject("Reset Your Password")
+            sending_msg.set_html(message)
+            sending_msg.set_text('Reset Your Password')
+            sending_msg.set_from("hello@micropyramid.com")
+            sending_msg.add_to(request.POST.get('email'))
+            sg.send(sending_msg)
             
             data = {'error': False, "message": "Password has been sent to your email sucessfully."}
 

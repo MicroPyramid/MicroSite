@@ -123,7 +123,7 @@ class pages_views_test(TestCase):
 		self.assertFalse('successfully' in response.content)
 
 
-		response = self.client.get('/portal/content/menu/delete/1/')
+		response = self.client.get('/portal/content/menu/delete_menu/1/')
 		self.assertTrue(response.status_code,200)
 
 

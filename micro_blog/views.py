@@ -18,6 +18,8 @@ from ast import literal_eval
 from employee.models import DailyReport, Dailyreport_files
 from django.core.mail import send_mail, EmailMessage
 from pages.forms import SimpleContactForm, ContactForm
+from django.conf import settings
+import sendgrid
 
 
 @csrf_exempt
@@ -224,6 +226,21 @@ def new_post(request):
                     else:
                         blog_tag = Tags.objects.create(name=tag)
                     blog_post.tags.add(blog_tag)
+
+            sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
+            sending_msg = sendgrid.Mail()
+            sending_msg.set_subject("New blog post has been created")
+
+            blog_url = 'http://www.micropyramid.com/blog/view-post/' + str(blog_post.slug) + '/'
+            message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '+ str(blog_post.category.name) + '.</p>'
+            message += '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
+
+            sending_msg.set_html(message)
+            sending_msg.set_text('New blog post has been created')
+            sending_msg.set_from(request.user.email)
+            sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
+            sg.send(sending_msg)
+
             data = {'error': False, 'response': 'Blog Post created'}
         else:
             data = {'error': True, 'response': validate_blog.errors}
@@ -335,8 +352,6 @@ def contact(request):
         data = {'error': True, 'errinfo': errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
-    send_mail('Thank u for ur message', "Thank you for contacting us. We will get back to you soon!!!", "hello@micropyramid.com", [request.POST.get('email')], fail_silently=False)
-
     message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "+request.POST.get('email')+"</p><p>Message: "+request.POST.get('message')+"</p>"
 
     if request.POST.get('phone'):
@@ -350,12 +365,22 @@ def contact(request):
                     request.POST.get('requirements')+"</p><p>Technology: "+request.POST.get('technology')+"</p><p>Enquery Type: "+\
                     request.POST.get('enquery_type')+"</p><p>Budget: "+request.POST.get('budget')+"</p>"
 
-    sending_msg = EmailMessage('Contact Request', message, request.POST.get('email'),
-                        ["hello@micropyramid.com"])
+    sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
-    sending_msg.content_subtype = "html"
+    contact_msg = sendgrid.Mail()
+    contact_msg.set_subject("Thank u for ur message")
+    contact_msg.set_text('Thank you for contacting us. We will get back to you soon!!!')
+    contact_msg.set_from("hello@micropyramid.com")
+    contact_msg.add_to(request.POST.get('email'))
+    sg.send(contact_msg)
 
-    sending_msg.send()
+    sending_msg = sendgrid.Mail()
+    sending_msg.set_subject("Contact Request")
+    sending_msg.set_html(message)
+    sending_msg.set_text('Contact Request')
+    sending_msg.set_from(request.POST.get('email'))
+    sending_msg.add_to("hello@micropyramid.com")
+    sg.send(sending_msg)
 
     data = {'error': False, 'response': 'submitted successfully'}
 

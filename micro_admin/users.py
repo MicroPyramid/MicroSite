@@ -153,6 +153,7 @@ def change_state(request, pk):
     return HttpResponseRedirect("/portal/users/")
 
 
+@login_required
 def user_info(request, pk):
     user = User.objects.get(pk=pk)
     blog_posts = Post.objects.filter(user=user)
@@ -160,12 +161,14 @@ def user_info(request, pk):
     return render(request, 'admin/user/view_userinfo.html', {'daily_reports': daily_reports, 'blog_posts': blog_posts, 'user': user})
 
 
+@login_required
 def blogposts(request, pk):
     user = User.objects.get(pk=pk)
     blog_posts = Post.objects.filter(user=user)
     return render(request, 'admin/user/blogposts.html', {'user': user, 'blog_posts': blog_posts})
 
 
+@login_required
 def reports(request, pk):
     user = User.objects.get(pk=pk)
     reports = DailyReport.objects.filter(employee=user)
