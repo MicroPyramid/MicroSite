@@ -76,7 +76,7 @@ class micro_blogviews_get(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'site/blog/index.html')
 
-		response = self.client.get('/blog/python-introduction/')
+		response = self.client.get('/blog/'+self.p.slug+'/')
 		self.assertEqual(response.status_code, 200)
 		self.assertTemplateUsed(response,'site/blog/article.html')
 
