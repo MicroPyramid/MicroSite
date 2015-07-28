@@ -143,8 +143,8 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-SG_USER = os.getenv('SGUSER')
-SG_PWD = os.getenv('SGPWD')
+SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
+SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
 
 '''
 LOGGING = {
