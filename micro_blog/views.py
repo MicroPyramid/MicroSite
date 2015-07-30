@@ -318,11 +318,11 @@ def report(request):
     envelope = request.POST.get('envelope')
     my_dict = literal_eval(envelope)
     user = User.objects.get(email=my_dict['from'])
-    rep = DailyReport.objects.create(employee=user, report=request.POST.get('text'))
+    rep = DailyReport.objects.create(employee=user, report=request.POST.get('text'), date=datetime.datetime.now().date())
     if request.POST.get('attachment-info'):
         my_dict1 = literal_eval(request.POST.get('attachment-info'))
         for key in my_dict1.keys():
-            Dailyreport_files.objects.create(dailyreport=rep, attachments=my_dict1[key]['filename'], date=datetime.datetime.now().date())
+            Dailyreport_files.objects.create(dailyreport=rep, attachments=my_dict1[key]['filename'])
     rep.save()
     return HttpResponseRedirect('/portal/')
 
