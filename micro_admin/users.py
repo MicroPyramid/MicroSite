@@ -101,7 +101,7 @@ def edit_user(request, pk):
     '''does the corresponding form validation and stores the edited details of administrator'''
     current_user = User.objects.get(pk=pk)
     if request.method == 'POST':
-        if request.user.is_superuser and request.user == current_user:
+        if request.user.is_superuser or request.user == current_user:
             validate_user = UserForm(request.POST, instance=current_user)
             old_password = current_user.password
             if validate_user.is_valid():

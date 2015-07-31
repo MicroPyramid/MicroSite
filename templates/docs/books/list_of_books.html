@@ -11,13 +11,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Book Viewer</h3>
-    {% if request.user.is_superuser %}
     <span>
       <span class='active_user'><i class="fa fa-square"></i>Approved</span>
       <span class='inactive_user'><i class="fa fa-square"></i>Waiting/Rejected</span>
-      <a href="{% url 'books:create_book' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Book </button></a>
+      {% if request.user.is_superuser %}
+        <a href="{% url 'books:create_book' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Book </button></a>
+      {% endif %}
     </span>
-    {% endif %}
   </div>
   <div class="panel-body">
     <div class="table-responsive">
@@ -65,7 +65,8 @@
   $(document).ready(function() {
 
     $('#books_list').DataTable({
-      "sPaginationType": "full_numbers" 
+      "sPaginationType": "full_numbers",
+      "bSort": false 
     });
 
   });

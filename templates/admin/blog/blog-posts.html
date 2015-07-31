@@ -5,6 +5,9 @@
   <div class="panel-heading">
     <h3 class="panel-title">Blog Post Viewer</h3>
     <span>
+      <span class='active_user'><i class="fa fa-square" style="color:#f8cb00;"></i>Drafted</span>
+      <span class='active_user'><i class="fa fa-square"></i>Published</span>
+      <span class='inactive_user'><i class="fa fa-square"></i>Rejected</span>
       <a href="{% url 'micro_blog:new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
     </span>
   </div>
@@ -16,18 +19,16 @@
             <th width="8%">Title</th>
             <th width="5%">Author</th>
             <th width="5%">Status</th>
-            <th width="5%">Comments</th>
             <th width="5%">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for post in blog_posts %}
-          <tr>
-            <td><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></td>
+          <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% else %}danger{% endif %}">
+            <td><a href="/blog/view-post/{{post.slug}}">{{post.title}} - {{ post.created_on }} - Updated {{ post.updated_on }}</a></td>
             <td class="txt_center">{{post.author}}</td>
             <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}
             </td>
-            <td class="txt_center">{{ post.blogcomments_set.all.count|default:'0' }}</td>
             <td class="txt_center">{% if post|is_editable_by:request.user %}
               <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.slug%}" class="edit_anchor" value="{{ post.slug }}"><i class="fa fa-pencil-square-o"></i>Edit</a>{% endif %}
               {% if post|is_deletable_by:request.user %}
@@ -64,7 +65,9 @@
     });
 
     $('#blog_posts').DataTable({
-      "sPaginationType": "full_numbers" 
+      "sPaginationType": "full_numbers",
+      "bSort": false,
+      "pageLength": 50
     });
 
   });
