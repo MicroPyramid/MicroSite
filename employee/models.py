@@ -29,7 +29,7 @@ class DailyReport(models.Model):
     date = models.DateField()
 
     def __unicode__(self):
-        return self.employee.email + self.date
+        return self.employee.email + ' - Report #' + str(self.date)
 
 
 class Dailyreport_files(models.Model):

@@ -48,6 +48,7 @@ textarea {
     .nav {
         position: relative;
         left: 0;
+        top:10px;
         display: block;
         float: left;
         margin: 0 10px 0 0;
@@ -58,16 +59,14 @@ textarea {
             display: block;
             float: left;
             & > a {
-                color: #fff !important;
                 float: none;
                 padding: 10px 10px 11px;
                 line-height: 19px;
                 color: #999999;
                 text-decoration: none;
-                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
                 &:hover {
                     background-color: transparent;
-                    color: #ffffff;
+                    color: #333;
                     text-decoration: none;
                 }
             }
@@ -92,7 +91,7 @@ textarea {
     .brand {
         font-weight: 600;
         position: relative;
-        top: 2px;
+        top: 8px;
         float: left;
         display: block;
         padding: 8px 20px 12px;
@@ -163,8 +162,8 @@ textarea {
     }
 }
 .navbar-inner {
-    padding: 7px 0;
-    background: #00ba8b !important;
+    padding: 0px 0;
+    background: #fff !important;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
@@ -224,8 +223,8 @@ textarea {
 }
 .navbar .nav .dropdown-toggle .caret,
 .navbar .nav .open.dropdown .caret {
-    border-top-color: #ffffff;
-    border-bottom-color: #ffffff;
+    border-top-color: #999;
+    border-bottom-color: #999;
 }
 .navbar .nav .open>.dropdown-toggle,
 .navbar .nav .active>.dropdown-toggle,
@@ -248,8 +247,7 @@ textarea {
     right: 13px;
 }
 .subnavbar {
-    width: 100%;
-    .container {
+    .container1 {
         & > ul {
             display: inline-block;
             height: 80px;
@@ -257,17 +255,20 @@ textarea {
             margin: 0;
             & > li {
                 float: left;
-                min-width: 90px;
+                min-width: 89px;
                 height: 60px;
                 padding: 0;
                 margin: 0;
                 text-align: center;
                 list-style: none;
                 border-left: 1px solid #d9d9d9;
+                &:last-child{
+                    border-right: 1px solid #d9d9d9;
+                }
                 & > a {
                     display: block;
                     height: 100%;
-                    padding: 0 15px;
+                    padding: 0 0px;
                     font-size: 12px;
                     font-weight: bold;
                     color: #b2afaa;

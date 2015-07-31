@@ -92,7 +92,6 @@ def delete_category(request, category_slug):
 
 
 def site_blog_home(request):
-    page_list = Page.objects.all()
     items_per_page = 10
     if "page" in request.GET:
         page = int(request.GET.get('page'))
@@ -102,14 +101,13 @@ def site_blog_home(request):
     blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist': page_list, 'current_page': page, 'last_page': no_pages,
+    return render_to_response('site/blog/index.html', {'current_page': page, 'last_page': no_pages,
                             'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
 def blog_article(request, slug):
     blog_post = Post.objects.get(slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
-    page_list = Page.objects.all()[:4]
     fb = requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
     tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
@@ -140,7 +138,7 @@ def blog_article(request, slug):
         pass
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html', {'csrf_token': c['csrf_token'], 'pagelist': page_list,
+    return render_to_response('site/blog/article.html', {'csrf_token': c['csrf_token'],
                             'post': blog_post, 'posts': blog_posts, 'fbshare_count': fbshare_count,
                             'twshare_count': twshare_count, 'lnshare_count': lnshare_count})
 
@@ -148,7 +146,6 @@ def blog_article(request, slug):
 def blog_tag(request, slug):
     tag = Tags.objects.get(slug=slug)
     blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by('-created_on')
-    page_list = Page.objects.all()
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
@@ -158,14 +155,13 @@ def blog_tag(request, slug):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist': page_list, 'current_page': page,
+    return render_to_response('site/blog/index.html', {'current_page': page,
                                 'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
 def blog_category(request, slug):
     category = Category.objects.get(slug=slug)
     blog_posts = Post.objects.filter(category=category, status="P").order_by('-created_on')
-    page_list = Page.objects.all()
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
@@ -175,13 +171,12 @@ def blog_category(request, slug):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist': page_list,
-                            'current_page': page, 'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
+    return render_to_response('site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+                                    'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
 def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P", created_on__year=year, created_on__month=month).order_by('-created_on')
-    page_list = Page.objects.all()
     items_per_page = 6
     if "page" in request.GET:
         page = int(request.GET.get('page'))
@@ -191,12 +186,12 @@ def archive_posts(request, year, month):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'pagelist': page_list, 'current_page': page, 'last_page': no_pages,
+    return render_to_response('site/blog/index.html', {'current_page': page, 'last_page': no_pages,
                                                         'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 @login_required
 def admin_post_list(request):
-    blog_posts = Post.objects.all()
+    blog_posts = Post.objects.all().order_by('created_on')
     return render(request, 'admin/blog/blog-posts.html', {'blog_posts': blog_posts})
 
 
@@ -318,11 +313,13 @@ def report(request):
     envelope = request.POST.get('envelope')
     my_dict = literal_eval(envelope)
     user = User.objects.get(email=my_dict['from'])
-    rep = DailyReport.objects.create(employee=user, report=request.POST.get('text'), date=datetime.datetime.now().date())
+    rep = DailyReport.objects.filter(employee=user, report=request.POST.get('text')).first()
+    if not rep:
+        rep = DailyReport.objects.create(employee=user, report=request.POST.get('text'), date=datetime.datetime.now().date())
     if request.POST.get('attachment-info'):
         my_dict1 = literal_eval(request.POST.get('attachment-info'))
         for key in my_dict1.keys():
-            Dailyreport_files.objects.create(dailyreport=rep, attachments=my_dict1[key]['filename'])
+            Dailyreport_files.objects.get_or_create(dailyreport=rep, attachments=my_dict1[key]['filename'])
     rep.save()
     return HttpResponseRedirect('/portal/')
 

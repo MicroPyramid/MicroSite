@@ -12,7 +12,7 @@ import datetime
 
 @login_required
 def books(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('created_on')
     return render(request, "docs/books/list_of_books.html", {"books": books})
 
 
