@@ -285,6 +285,14 @@ a {
       color: #fff;
       font-size: 13px;
       font-weight: 300;
+      h1,h2,h3,h4,h5,h6{
+        line-height:20px;
+        margin:0px;
+        padding:0px;
+      }
+      h1,h2{
+        font-size:24px;
+      }
     }
   }
 }
@@ -797,6 +805,27 @@ a {
       &:hover {
         background: #576172;
         transition: 0.5s all linear;
+      }
+      &.facebook{
+        background: #325c94;
+      }
+      &.twitter{
+        background: #00abdc;
+      }
+      &.linkedin{
+        background: #0073b2;
+      }
+      &.youtube-play{
+        background: #C4302B;
+      }
+      &.rss{
+        background: #FA9B39;
+      }
+      &.google-plus{
+        background: #ea3032;
+      }
+      &.github{
+        background: #333;
       }
     }
   }
@@ -1977,7 +2006,8 @@ a {
 .widget {
   padding-bottom: 10px;
   h3 {
-    margin-bottom: 22px;
+    margin-top: 0px;
+    margin-bottom: 15px;
     span {
       display: inline-block;
       padding: 5px 6px;

@@ -191,7 +191,7 @@ def archive_posts(request, year, month):
 
 @login_required
 def admin_post_list(request):
-    blog_posts = Post.objects.all().order_by('created_on')
+    blog_posts = Post.objects.all().order_by('-created_on')
     return render(request, 'admin/blog/blog-posts.html', {'blog_posts': blog_posts})
 
 
@@ -321,7 +321,7 @@ def report(request):
         for key in my_dict1.keys():
             Dailyreport_files.objects.get_or_create(dailyreport=rep, attachments=my_dict1[key]['filename'])
     rep.save()
-    return HttpResponseRedirect('/portal/')
+    return HttpResponse('Report has been created Sucessfully.')
 
 
 def contact(request):
