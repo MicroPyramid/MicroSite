@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -6,15 +6,14 @@ from django.core.context_processors import csrf
 from django.template import RequestContext
 import json
 from micro_admin.models import career, User
-from micro_admin.forms import CareerForm
-from microsite.settings import BLOG_IMAGES, SG_USER, SG_PWD
-import os
+# from micro_admin.forms import CareerForm
+from microsite.settings import SG_USER, SG_PWD
+# import os
 from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
 from django.core.exceptions import ObjectDoesNotExist
 import string
 import random
-from django.core.mail import EmailMessage
 import sendgrid
 
 #@csrf_protect
@@ -49,7 +48,7 @@ def out(request):
 @login_required
 def contacts(request):
     contacts = simplecontact.objects.all()
-    return render_to_response('admin/content/contacts/simplecontact.html', {'contacts': contacts})
+    return render(request, 'admin/content/contacts/simplecontact.html', {'contacts': contacts})
 
 @login_required
 def delete_contact(request, pk):
@@ -65,7 +64,7 @@ def delete_contact(request, pk):
 @login_required
 def jobs(request):
     jobs = career.objects.all()
-    return render_to_response('admin/content/jobs/job_list.html', {'jobs': jobs})
+    return render(request, 'admin/content/jobs/job_list.html', {'jobs': jobs})
 
 
 @login_required

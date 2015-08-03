@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from employee.models import DailyReport
 from micro_admin.models import User
 from employee.forms import DailyReportForm
-import math
 import datetime
 
 @login_required

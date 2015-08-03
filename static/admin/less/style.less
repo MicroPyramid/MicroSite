@@ -215,11 +215,25 @@ textarea {
         }
     }
 }
-.navbar .nav .active>a,
+.navbar .nav .active>a{
+    color: #333;
+    text-decoration: none;
+    background-color: #222222;  
+}
 .navbar .nav .active>a:hover {
-    color: #ffffff;
+    color: #333;
     text-decoration: none;
     background-color: #222222;
+}
+.navbar .nav .open.active>.dropdown-toggle{
+    color:#fff !important;
+    background:#333 !important;
+}
+.navbar .nav li .active>a{
+    color:#fff;
+}
+.navbar .nav li .active>a:hover{
+    color: #fff;
 }
 .navbar .nav .dropdown-toggle .caret,
 .navbar .nav .open.dropdown .caret {

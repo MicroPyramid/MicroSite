@@ -6,9 +6,8 @@ from django.contrib.auth.hashers import check_password
 import json
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
-from micro_blog.models import Tags, Post
+from micro_blog.models import Post
 from employee.models import DailyReport
-import math
 import datetime
 
 @login_required
@@ -37,7 +36,7 @@ def change_password(request):
         else:
             return HttpResponse(json.dumps({'error': True, 'response': validate_changepassword.errors}),
                                     content_type='application/json; charset=utf-8')
-    return render_to_response('admin/user/change_password.html')
+    return render(request, 'admin/user/change_password.html')
 
 
 @login_required
@@ -91,7 +90,7 @@ def new_user(request):
             c = {}
             c.update(csrf(request))
             user_roles = USER_ROLES
-            return render_to_response('admin/user/new.html', {'user_roles': user_roles, 'csrf_token': c['csrf_token']})
+            return render(request, 'admin/user/new.html', {'user_roles': user_roles, 'csrf_token': c['csrf_token']})
         else:
             return render_to_response('admin/accessdenied.html')
 
@@ -136,7 +135,7 @@ def edit_user(request, pk):
             c.update(csrf(request))
             current_user = User.objects.get(pk=pk)
             user_roles = USER_ROLES
-            return render_to_response('admin/user/edit.html', {'role_list': user_roles, 'edit_user': current_user, 'csrf_token': c['csrf_token']})
+            return render(request, 'admin/user/edit.html', {'role_list': user_roles, 'edit_user': current_user, 'csrf_token': c['csrf_token']})
         else:
             return render_to_response('admin/accessdenied.html')
 

@@ -25,7 +25,7 @@
         <tbody>
           {% for post in blog_posts %}
           <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% else %}danger{% endif %}">
-            <td><a href="/blog/view-post/{{post.slug}}">{{post.title}} - {{ post.created_on }} - Updated {{ post.updated_on }}</a></td>
+            <td><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></td>
             <td class="txt_center">{{post.author}}</td>
             <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}
             </td>
@@ -66,7 +66,8 @@
 
     $('#blog_posts').DataTable({
       "sPaginationType": "full_numbers",
-      "bSort": false,
+      "aaSorting": [],
+      "bSort": true,
       "pageLength": 50
     });
 
