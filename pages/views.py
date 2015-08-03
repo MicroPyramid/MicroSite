@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
 import json
@@ -9,10 +9,11 @@ from django.db.models.aggregates import Max
 import itertools
 from django.core.exceptions import ObjectDoesNotExist
 
+
 @login_required
 def pages(request):
     pagelist = Page.objects.all()
-    return render_to_response('admin/content/page/page-list.html', {'pages': pagelist})
+    return render(request, 'admin/content/page/page-list.html', {'pages': pagelist})
 
 
 @login_required
@@ -28,7 +29,7 @@ def new_page(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        return render_to_response('admin/content/page/new-page.html', {'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/page/new-page.html', {'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -57,7 +58,7 @@ def edit_page(request, pk):
         c = {}
         c.update(csrf(request))
         current_page = Page.objects.get(pk=pk)
-        return render_to_response('admin/content/page/edit-page.html', {'page': current_page, 'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/page/edit-page.html', {'page': current_page, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -73,7 +74,7 @@ def delete_menu(request, pk):
 
 @login_required
 def change_menu_status(request, pk):
-    menu=Menu.objects.get(pk=pk)
+    menu = Menu.objects.get(pk=pk)
     if menu.status == "on":
         menu.status = "off"
     else:
@@ -86,7 +87,7 @@ def change_menu_status(request, pk):
 def menu(request):
     iterator = itertools.count()
     menu_list = Menu.objects.filter().order_by('lvl')
-    return render_to_response('admin/content/menu/menu-list.html', {'menu_list': menu_list, 'iterator': iterator})
+    return render(request, 'admin/content/menu/menu-list.html', {'menu_list': menu_list, 'iterator': iterator})
 
 
 @login_required
@@ -113,7 +114,7 @@ def add_menu(request):
         c = {}
         c.update(csrf(request))
         parent = Menu.objects.filter(parent=None).order_by('lvl')
-        return render_to_response('admin/content/menu/new-menu-item.html', {'parent': parent, 'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/menu/new-menu-item.html', {'parent': parent, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -161,7 +162,7 @@ def edit_menu(request, pk):
         current_menu = Menu.objects.get(pk=pk)
         c = {}
         c.update(csrf(request))
-        return render_to_response('admin/content/menu/edit-menu-item.html', {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
+        return render(request, 'admin/content/menu/edit-menu-item.html', {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -170,4 +171,4 @@ def site_page(request,slug):
         page = Page.objects.get(slug=slug)
     except ObjectDoesNotExist:
         page = {"content": "<p>Sorry. The page you have requested cannot be found.</p>"}
-    return render_to_response('site/page.html', {'page': page})
+    return render(request, 'site/page.html', {'page': page})

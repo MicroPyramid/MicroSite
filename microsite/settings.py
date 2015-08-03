@@ -1,7 +1,6 @@
 import os
 import djcelery
 from celery.schedules import crontab
-from datetime import timedelta
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 

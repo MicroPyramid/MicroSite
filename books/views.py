@@ -36,7 +36,7 @@ def create_book(request):
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
         users = User.objects.all()
-        return render_to_response("docs/books/create_book.html", {"users": users, "privacy_choices": PRIVACY_CHOICES})
+        return render(request, "docs/books/create_book.html", {"users": users, "privacy_choices": PRIVACY_CHOICES})
 
     return render_to_response("admin/accessdenied.html")
 
@@ -81,7 +81,7 @@ def create_topic(request, slug):
         
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
-    return render_to_response("docs/topics/create_topic.html", {"book": book, "topics":topics})
+    return render(request, "docs/topics/create_topic.html", {"book": book, "topics":topics})
 
 
 @login_required
@@ -127,7 +127,7 @@ def view_topic(request, book_slug, topic_slug):
     book = Book.objects.get(slug=book_slug)
     topic = Topic.objects.get(slug=topic_slug)
     topic_shadows = Topic.objects.filter(shadow=topic.id)
-    return render_to_response("docs/topics/topic_detail.html", {"book": book, "topic": topic, "topic_shadows": topic_shadows})
+    return render(request, "docs/topics/topic_detail.html", {"book": book, "topic": topic, "topic_shadows": topic_shadows})
 
 
 @login_required
@@ -136,7 +136,7 @@ def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
     topic = Topic.objects.get(slug=topic_slug)
     subtopic = Topic.objects.get(slug=subtopic_slug)
     subtopic_shadows = Topic.objects.filter(shadow=subtopic.id)
-    return render_to_response("docs/topics/topic_detail.html", {"book": book, "topic": topic, "subtopic": subtopic, "subtopic_shadows": subtopic_shadows})
+    return render(request, "docs/topics/topic_detail.html", {"book": book, "topic": topic, "subtopic": subtopic, "subtopic_shadows": subtopic_shadows})
 
 
 # @login_required
@@ -178,7 +178,7 @@ def edit_topic(request, book_slug, topic_slug):
         
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     topics = Topic.objects.filter(book=book.id, parent__isnull=True, shadow__isnull=True)    
-    return render_to_response("docs/topics/edit_topic.html", {"book": book, "topics":topics, "topic": topic})
+    return render(request, "docs/topics/edit_topic.html", {"book": book, "topics":topics, "topic": topic})
 
 
 @login_required
@@ -278,7 +278,7 @@ def edit_book(request, slug):
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
         users = User.objects.all()
-        return render_to_response("docs/books/edit_book.html", {"book": book, "users": users, "privacy_choices": PRIVACY_CHOICES})
+        return render(request, "docs/books/edit_book.html", {"book": book, "users": users, "privacy_choices": PRIVACY_CHOICES})
 
     return render_to_response("admin/accessdenied.html")
 
@@ -320,27 +320,27 @@ def book_list(request):
         books = Book.objects.filter(status="Approved")
     else:
         books = Book.objects.filter(privacy="Public", status="Approved")
-    return render_to_response("docs/books.html", {"books": books})
+    return render(request, "docs/books.html", {"books": books})
 
 
 def book_info(request, slug):
     book = Book.objects.get(slug=slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
-    return render_to_response("docs/book_topics.html", {"book": book, "parent_topics": parent_topics})
+    return render(request, "docs/book_topics.html", {"book": book, "parent_topics": parent_topics})
 
 
 def topic_info(request, book_slug, topic_slug):
     book = Book.objects.get(slug=book_slug)
     topic = Topic.objects.get(slug=topic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
-    return render_to_response("docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "topic": topic})
+    return render(request, "docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "topic": topic})
 
 
 def subtopic_info(request, book_slug, topic_slug, subtopic_slug):
     book = Book.objects.get(slug=book_slug)
     subtopic = Topic.objects.get(slug=subtopic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
-    return render_to_response("docs/book_topics.html", {"book": book,"parent_topics": parent_topics,"subtopic": subtopic})
+    return render(request, "docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "subtopic": subtopic})
 
 
 @login_required

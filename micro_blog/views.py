@@ -4,11 +4,9 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Image_File, Category, Tags, Post
-from pages.models import Page, simplecontact, Contact
-import os
+from pages.models import simplecontact, Contact
 import math
 from django.core.files.storage import default_storage
-from django.core.files.base import File as fle
 from micro_blog.forms import BlogpostForm, BlogCategoryForm
 import datetime
 import requests
@@ -16,7 +14,6 @@ import json
 from micro_admin.models import User
 from ast import literal_eval
 from employee.models import DailyReport, Dailyreport_files
-from django.core.mail import send_mail, EmailMessage
 from pages.forms import SimpleContactForm, ContactForm
 from django.conf import settings
 import sendgrid
@@ -32,13 +29,13 @@ def recent_photos(request):
         thumburl = default_storage.url(obj.thumbnail.url)
         imgs.append({'src': uploaded_url, 'thumb': thumburl,
                 'is_image': True})
-    return render_to_response('admin/browse.html', {'files': imgs})
+    return render(request, 'admin/browse.html', {'files': imgs})
 
 
 @login_required
 def admin_category_list(request):
     blog_categories = Category.objects.all()
-    return render_to_response('admin/blog/blog-category-list.html', {'blog_categories': blog_categories})
+    return render(request, 'admin/blog/blog-category-list.html', {'blog_categories': blog_categories})
 
 
 @login_required
@@ -55,7 +52,7 @@ def new_blog_category(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        return render_to_response('admin/blog/blog-category.html', {'csrf_token': c['csrf_token']})
+        return render(request, 'admin/blog/blog-category.html', {'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -76,7 +73,7 @@ def edit_category(request, category_slug):
         blog_category = Category.objects.get(slug=category_slug)
         c = {}
         c.update(csrf(request))
-        return render_to_response('admin/blog/blog-category-edit.html', {'blog_category': blog_category, 'csrf_token': c['csrf_token']})
+        return render(request, 'admin/blog/blog-category-edit.html', {'blog_category': blog_category, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -101,7 +98,7 @@ def site_blog_home(request):
     blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
                             'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -138,7 +135,7 @@ def blog_article(request, slug):
         pass
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/article.html', {'csrf_token': c['csrf_token'],
+    return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'],
                             'post': blog_post, 'posts': blog_posts, 'fbshare_count': fbshare_count,
                             'twshare_count': twshare_count, 'lnshare_count': lnshare_count})
 
@@ -155,7 +152,7 @@ def blog_tag(request, slug):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'current_page': page,
+    return render(request, 'site/blog/index.html', {'current_page': page,
                                 'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -171,7 +168,7 @@ def blog_category(request, slug):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
                                     'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -186,7 +183,7 @@ def archive_posts(request, year, month):
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     c = {}
     c.update(csrf(request))
-    return render_to_response('site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
                                                         'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 @login_required
@@ -227,8 +224,8 @@ def new_post(request):
             sending_msg.set_subject("New blog post has been created")
 
             blog_url = 'http://www.micropyramid.com/blog/view-post/' + str(blog_post.slug) + '/'
-            message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '+ str(blog_post.category.name) + '.</p>'
-            message += '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
+            message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '
+            message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
 
             sending_msg.set_html(message)
             sending_msg.set_text('New blog post has been created')
@@ -305,7 +302,7 @@ def delete_post(request,blog_slug):
 @login_required
 def view_post(request,blog_slug):
     blog_post = Post.objects.get(slug=blog_slug)
-    return render_to_response('admin/blog/view_post.html', {'post': blog_post})
+    return render(request, 'admin/blog/view_post.html', {'post': blog_post})
 
 
 def report(request):
@@ -331,9 +328,10 @@ def contact(request):
     if 'category' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
             contact = simplecontact.objects.create(full_name=request.POST.get('full_name'), message=request.POST.get('message'),\
-                                                        email=request.POST.get('email'), phone=request.POST.get('phone') if request.POST.get('phone') else False)
-            Contact.objects.create(contact_info=contact, category=request.POST.get('category'), domain=request.POST.get('domain'), domain_url=request.POST.get('domain_url'),\
-                skype=request.POST.get('skype'), country=request.POST.get('country'), budget=request.POST.get('budget'), technology=request.POST.get('technology'),\
+                                                    email=request.POST.get('email'), phone=request.POST.get('phone') if request.POST.get('phone') else False)
+            Contact.objects.create(contact_info=contact, category=request.POST.get('category'), domain=request.POST.get('domain'),\
+                domain_url=request.POST.get('domain_url'), skype=request.POST.get('skype'), country=request.POST.get('country'),\
+                budget=request.POST.get('budget'), technology=request.POST.get('technology'),\
                 requirements=request.POST.get('requirements'), enquery_type=request.POST.get('enquery_type'))
         else:
             errors = {}
@@ -342,7 +340,8 @@ def contact(request):
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     if validate_simplecontact.is_valid():
-        simplecontact.objects.get_or_create(full_name=request.POST.get('full_name'), message=request.POST.get('message'), email=request.POST.get('email'), phone=request.POST.get('phone') if request.POST.get('phone') else False)
+        simplecontact.objects.get_or_create(full_name=request.POST.get('full_name'), message=request.POST.get('message'), email=request.POST.get('email'),\
+                                                phone=request.POST.get('phone') if request.POST.get('phone') else False)
     else:
         errors = {}
         errors = dict((validate_simplecontact.errors).items())
@@ -355,8 +354,8 @@ def contact(request):
         message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
 
     if 'category' in request.POST.keys():
-        message += "<p>Skype ID: "+request.POST.get('skype')+"</p><p>Country: "+request.POST.get('country')+"</p><p><b>Domain Details: </b></p><p>Domain: "+request.POST.get('domain')+\
-                    "</p><p>Domain URL: "+request.POST.get('domain_url')+"</p>"
+        message += "<p>Skype ID: "+request.POST.get('skype')+"</p><p>Country: "+request.POST.get('country')+"</p><p><b>Domain Details: </b></p><p>Domain: "+\
+                    request.POST.get('domain')+ "</p><p>Domain URL: "+request.POST.get('domain_url')+"</p>"
 
         message += "<p><b>General Information: </b></p><p>Category: "+request.POST.get('category')+"</p><p>Requirements: "+\
                     request.POST.get('requirements')+"</p><p>Technology: "+request.POST.get('technology')+"</p><p>Enquery Type: "+\

@@ -11,4 +11,4 @@ def is_admin(user):
 
 @register.filter
 def convert_to_html(value):
-	return publish_string(value, writer_name='html')
+    return publish_string(value, writer_name='html')
