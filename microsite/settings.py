@@ -138,7 +138,7 @@ CELERYBEAT_SCHEDULE = {
     # Executes every day evening at 5:00 PM GMT +5.30
     'add-every-day-evening': {
         'task': 'micro_blog.tasks.daily_report',
-        'schedule': crontab(hour=18, minute=00, day_of_week='mon,tue,wed,thu,fri,sat'),
+        'schedule': crontab(hour=17, minute=00, day_of_week='mon,tue,wed,thu,fri,sat'),
     },
 }
 

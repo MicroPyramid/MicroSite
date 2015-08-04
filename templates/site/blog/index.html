@@ -7,37 +7,37 @@
     <ul class="blog-list">
       {% for post in posts %}
       <li class="list-item" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="blog-right">
-           <div class="blog-author-pic">
-              {% if post.featured_image %}
-                 <img itemprop="image" src="/static/blog/{{post.featured_image}}" />
-              {% endif %}
-           </div>
-           <div class="blog-upic-details" >
-              <span class="uname" itemprop="author"><a>{{ post.user.get_full_name }}</a></span>
-              <!-- <span class="designation">{{ post.user.user_roles }}</span> -->
-              <span class="udate-time" itemprop="datePublished">{{ post.created_on|date:"d F Y" }}</span>
-              <span class="blog-count">{{ post.user.total_posts }} Blog Posts</span>
-           </div>
-           <div class="blog-content-social">
-              <ul >
-                {% if post.user.fb_profile %}
-                  <li><a href="{{ post.user.fb_profile }}" class="social-share facebook"><i class="fa fa-facebook"></i></a>
-                </li>{% endif %}
-                {% if post.user.ln_profile %}
-                  <li><a href="{{ post.user.ln_profile }}" class="social-share linkedin"><i class="fa fa-linkedin"></i></a>
-                </li>{% endif %}
-                {% if post.user.google_plus_url %}
-                  <li><a href="{{ post.user.google_plus_url }}" class="social-share google"><i class="fa fa-google-plus"></i></a>
-                </li>{% endif %}
-                {% if post.user.tw_profile %}
-                  <li><a href="{{ post.user.tw_profile }}" class="social-share twitter"><i class="fa fa-twitter"></i></a>
-                </li>{% endif %}
-              </ul>
-           </div>
-        </div>
         <div class="blog-left">
            <h3 class="title" itemprop="headline"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></h3>
+            <div class="blog-right">
+              <div class="blog-author-pic">
+                {% if post.featured_image %}
+                   <img itemprop="image" src="/static/blog/{{post.featured_image}}" />
+                {% endif %}
+              </div>
+              <div class="blog-upic-details" >
+                <span class="uname" itemprop="author"><a>{{ post.user.get_full_name }}</a></span>
+                <!-- <span class="designation">{{ post.user.user_roles }}</span> -->
+                <span class="udate-time" itemprop="datePublished">{{ post.created_on|date:"d F Y" }}</span>
+                <span class="blog-count">{{ post.user.total_posts }} Blog Posts</span>
+                <span class="blog-content-social">
+                  <ul >
+                    {% if post.user.fb_profile %}
+                      <li><a href="{{ post.user.fb_profile }}" class="social-share facebook"><i class="fa fa-facebook"></i></a>
+                    </li>{% endif %}
+                    {% if post.user.ln_profile %}
+                      <li><a href="{{ post.user.ln_profile }}" class="social-share linkedin"><i class="fa fa-linkedin"></i></a>
+                    </li>{% endif %}
+                    {% if post.user.google_plus_url %}
+                      <li><a href="{{ post.user.google_plus_url }}" class="social-share google"><i class="fa fa-google-plus"></i></a>
+                    </li>{% endif %}
+                    {% if post.user.tw_profile %}
+                      <li><a href="{{ post.user.tw_profile }}" class="social-share twitter"><i class="fa fa-twitter"></i></a>
+                    </li>{% endif %}
+                  </ul>
+                </span>
+              </div>
+            </div>
            <div class="desc">
               <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
            </div>

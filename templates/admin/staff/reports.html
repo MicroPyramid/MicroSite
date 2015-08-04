@@ -1,4 +1,6 @@
-{% extends 'admin/base.html' %} {% block stage %}
+{% extends 'admin/base.html' %}
+{% load tz %}
+{% block stage %}
 <!-- main content starts here-->
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -29,7 +31,7 @@
             <input type="hidden" id="user_id" name="user_id" value="{{ new_report.employee.id }}">
             <td class="txt_center">{{report.employee.first_name}}</td>
             <td class="txt_center">{{report.date}}</td>
-            <td class="txt_center">{{report.created_on}}</td>
+            <td class="txt_center">{{report.created_on|timezone:"Asia/Calcutta"}}</td>
             <td class="txt_center">{{report.employee.user_roles}}</td>
             <td class="txt_center">
               <a href="{% url 'employee:edit_report' pk=report.id %}" class=" edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>

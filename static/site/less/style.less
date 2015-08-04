@@ -1044,11 +1044,15 @@ a {
       padding-right: 4%;
     }
     .blog-right {
-      display: table-cell;
-      width: 120px;
-      padding: 0px 20px 0px 0px;
+      display: table-row;
+      width: 100%;
+      padding: 0px 10px 0px 0px;
       text-align: right;
       vertical-align: top;
+      span{
+        display: inline-block !important;
+        margin-right: 10px !important;
+      }
     }
   }
   .blog-left {
@@ -2068,12 +2072,11 @@ a {
 }
 .blog-content-social {
   text-align: left;
+  position:relative;
+  top:17px;
   ul {
     margin: 0px;
     padding: 0px;
-    margin: 0px;
-    padding: 0px;
-    margin-top: 15px;
     li {
       list-style: none;
       margin-bottom: 3px;
@@ -2157,7 +2160,7 @@ a {
 .blog-right {
   .blog-author-pic {
     text-align: center;
-    padding-bottom: 15px;
+    padding-bottom: 0px;
     img {
       border-radius: 5px;
       width: 100px;
@@ -2172,7 +2175,7 @@ a {
     .udate-time {
       color: #576172;
       font-size: 1.3rem;
-      margin: 10px 0px;
+      margin: 0px 0px;
       font-weight: 500;
     }
     .blog-count {
