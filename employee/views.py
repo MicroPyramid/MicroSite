@@ -19,7 +19,7 @@ def employee_report(request,pk):
     user = User.objects.get(pk=pk)
     
     if request.user == user or request.user.is_superuser:
-        reports = DailyReport.objects.filter(employee=user).order_by('created_on')
+        reports = DailyReport.objects.filter(employee=user).order_by('-created_on')
         return render(request, 'admin/staff/reports.html', {'reports': reports})
     
     else:

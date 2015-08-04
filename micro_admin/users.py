@@ -170,5 +170,5 @@ def blogposts(request, pk):
 @login_required
 def reports(request, pk):
     user = User.objects.get(pk=pk)
-    reports = DailyReport.objects.filter(employee=user)
+    reports = DailyReport.objects.filter(employee=user).order_by('-created_on')
     return render(request, 'admin/user/reports.html', {'user': user, 'reports': reports})

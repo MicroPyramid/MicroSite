@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from micro_admin.models import career
 
 def index(request):
