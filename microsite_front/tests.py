@@ -33,10 +33,14 @@ class frontend_test(TestCase):
 
     def test_xml(self):
         client=Client()
+        response = self.client.get('/rss.xml')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('xml' in response.content)
+
         response = self.client.get('/rss.xml?category=Django')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('xml' in response.content)
 
         response = self.client.get('/sitemap.xml')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 200)
         self.assertTrue('xml' in response.content)
