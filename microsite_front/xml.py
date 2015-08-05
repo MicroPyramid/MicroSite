@@ -57,8 +57,11 @@ def rss(request):
                    JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
                 </image>
                     '''
-    posts = Post.objects.filter(status = 'P', category__name=request.GET.get('category')).order_by('-updated_on')[:10]
-
+    if 'category' in request.GET.keys():
+        posts = Post.objects.filter(status = 'P', category__name=request.GET.get('category')).order_by('-updated_on')[:10]
+    else:
+        posts = Post.objects.filter(status = 'P').order_by('-updated_on')[:10]
+                
     for post in posts:
 
         nowtuple = post.updated_on.timetuple()
