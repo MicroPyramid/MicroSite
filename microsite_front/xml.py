@@ -2,7 +2,7 @@ import time
 from email import utils
 from django.http.response import HttpResponse 
 from pages.models import Page
-from micro_blog.models import Category, Post, Tags
+from micro_blog.models import Category, Post
 
 
 def sitemap(request):
