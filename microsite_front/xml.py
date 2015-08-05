@@ -1,8 +1,8 @@
 import time
 from email import utils
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse 
 from pages.models import Page
-from micro_blog.models import Category, Post
+from micro_blog.models import Category, Post, Tags
 
 
 def sitemap(request):
@@ -57,8 +57,8 @@ def rss(request):
                    JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
                 </image>
                     '''
+    posts = Post.objects.filter(status = 'P', category__name=request.GET.get('category')).order_by('-updated_on')[:10]
 
-    posts = Post.objects.filter(status = "P").order_by('-updated_on')[:10]
     for post in posts:
 
         nowtuple = post.updated_on.timetuple()
