@@ -1,6 +1,6 @@
 import time
 from email import utils
-from django.http.response import HttpResponse 
+from django.http.response import HttpResponse
 from pages.models import Page
 from micro_blog.models import Category, Post
 
@@ -12,7 +12,7 @@ def sitemap(request):
     xml = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'''
 
-    pages = Page.objects.filter(is_active = True)
+    pages = Page.objects.filter(is_active=True)
     for page in pages:
         xml = xml + '<url><loc>http://micropyramid.com/page/' + page.slug + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
@@ -20,13 +20,13 @@ def sitemap(request):
     for category in categories:
         xml = xml + '<url><loc>http://micropyramid.com/blog/category/' + category.slug + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
-    posts = Post.objects.filter(status = "P")
+    posts = Post.objects.filter(status="P")
     for post in posts:
         xml = xml + '<url><loc>http://micropyramid.com/blog/' + post.slug + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     xml = xml + '</urlset>'
 
-    return HttpResponse(xml,content_type="text/xml")
+    return HttpResponse(xml, content_type="text/xml")
 
 
 def rss(request):
@@ -58,10 +58,10 @@ def rss(request):
                 </image>
                     '''
     if 'category' in request.GET.keys():
-        posts = Post.objects.filter(status = 'P', category__name=request.GET.get('category')).order_by('-updated_on')[:10]
+        posts = Post.objects.filter(status='P', category__name__icontains=request.GET.get('category')).order_by('-updated_on')[:10]
     else:
-        posts = Post.objects.filter(status = 'P').order_by('-updated_on')[:10]
-        
+        posts = Post.objects.filter(status='P').order_by('-updated_on')[:10]
+
     for post in posts:
 
         nowtuple = post.updated_on.timetuple()
@@ -78,4 +78,4 @@ def rss(request):
 
     xml = xml + '</channel></rss>'
 
-    return HttpResponse(xml,content_type="text/xml")
+    return HttpResponse(xml, content_type="text/xml")
