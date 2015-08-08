@@ -11,7 +11,7 @@ class frontend_test(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
         self.c=Category.objects.create(name='Django', description='django desc')
-        self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'P')
+        # self.p=Post.objects.create(title = 'python introduction',user = self.user,content = 'This is content',category = self.c, status = 'P')
 
 
 
