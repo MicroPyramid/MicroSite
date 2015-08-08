@@ -29,7 +29,7 @@ def index(request):
             else:
                 data = {'error': True, 'message': "The password is valid, but the account has been disabled!"}
         else:
-            data = {'error': True,'message': "The username and password are incorrect."}
+            data = {'error': True, 'message': "The username and password are incorrect."}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         data = {}
@@ -50,6 +50,7 @@ def contacts(request):
     contacts = simplecontact.objects.all()
     return render(request, 'admin/content/contacts/simplecontact.html', {'contacts': contacts})
 
+
 @login_required
 def delete_contact(request, pk):
     contact = simplecontact.objects.get(pk=pk)
@@ -61,10 +62,10 @@ def delete_contact(request, pk):
         return render_to_response('admin/accessdenied.html')
 
 
-@login_required
-def jobs(request):
-    jobs = career.objects.all()
-    return render(request, 'admin/content/jobs/job_list.html', {'jobs': jobs})
+# @login_required
+# def jobs(request):
+#     jobs = career.objects.all()
+#     return render(request, 'admin/content/jobs/job_list.html', {'jobs': jobs})
 
 
 @login_required
@@ -121,25 +122,25 @@ def clear_cache(request):
 #         else:
 #             return render_to_response('admin/accessdenied.html')
 
-@login_required
-def delete_job(request, pk):
-    careers = career.objects.get(pk=pk)
-    if request.user.is_superuser:
-        careers.delete()
-        return HttpResponseRedirect('/portal/jobs/')
-    else:
-        return render_to_response('admin/accessdenied.html')
+# @login_required
+# def delete_job(request, pk):
+#     careers = career.objects.get(pk=pk)
+#     if request.user.is_superuser:
+#         careers.delete()
+#         return HttpResponseRedirect('/portal/jobs/')
+#     else:
+#         return render_to_response('admin/accessdenied.html')
 
-@login_required
-def job_state(request, pk):
-    job = career.objects.get(pk=pk)
-    if job.is_active:
-        job.is_active = False
-    else:
-        job.is_active = True
+# @login_required
+# def job_state(request, pk):
+#     job = career.objects.get(pk=pk)
+#     if job.is_active:
+#         job.is_active = False
+#     else:
+#         job.is_active = True
 
-    job.save()
-    return HttpResponseRedirect('/portal/jobs/')
+#     job.save()
+#     return HttpResponseRedirect('/portal/jobs/')
 
 
 @login_required
