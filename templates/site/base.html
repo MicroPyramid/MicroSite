@@ -20,31 +20,11 @@
     {% endblock %}
     {% load compress %}
     <link rel="shortcut icon" href="/static/favicon.png">
-    <!-- google fonts starts here-->
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css' defer="defer">
-
-    <!-- google fonts ends here-->
-    <!-- css starts here -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" async defer>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" async defer>
-    {% compress css %}
-    <!-- <link rel="stylesheet" href="/static/site/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="/static/site/less/pace/pace-theme-flash.less" type="text/less">
-    <link href="/static/site/less/style.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/mobile.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/responsive.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/tag.less" rel="stylesheet" type="text/less">
-    {% endcompress %}
-    {% block extra-styles %}
-    {% endblock %}
-    <!-- css ends here -->
     <!-- scripts starts here -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" async defer></script>
     {% compress js %}
-    <script src="/static/site/js/pace/pace.min.js" async defer></script>
     <script src="/static/site/js/bootstrap.js" defer></script>
     {% endcompress %}
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
     <!-- scripts ends here -->
   </head>
   <body>
@@ -221,9 +201,27 @@
       <!-- footer links ends here -->
       {% endblock %}
     </div>
-    <!-- For the demo ad only -->
+    <!-- google fonts starts here-->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css' defer="defer">
+    <!-- google fonts ends here-->
+    <!-- css starts here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" async defer>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" async defer>
+    {% compress css %}
+    <!-- <link rel="stylesheet" href="/static/site/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/static/site/less/pace/pace-theme-flash.less" type="text/less">
+    <link href="/static/site/less/style.less" rel="stylesheet" type="text/less">
+    <link href="/static/site/less/mobile.less" rel="stylesheet" type="text/less">
+    <link href="/static/site/less/responsive.less" rel="stylesheet" type="text/less">
+    <link href="/static/site/less/tag.less" rel="stylesheet" type="text/less">
+    {% endcompress %}
+    {% block extra-styles %}
+    {% endblock %}
+    <!-- css ends here -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
     {% compress js %}
+    <script src="/static/site/js/pace/pace.min.js" async defer></script>
     <script src="/static/site/js/isotope.js" defer></script>
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
