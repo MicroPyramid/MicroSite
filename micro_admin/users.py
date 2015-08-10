@@ -130,7 +130,7 @@ def edit_user(request, pk):
             data = {'error': True, 'error_message': "You Dont have permission to edit."}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
-        if request.user.is_superuser:
+        if request.user.is_superuser or request.user == current_user:
             c = {}
             c.update(csrf(request))
             current_user = User.objects.get(pk=pk)

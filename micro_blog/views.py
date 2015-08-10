@@ -19,17 +19,17 @@ from django.conf import settings
 import sendgrid
 
 
-@csrf_exempt
-def recent_photos(request):
-    ''' returns all the images from the data base '''
+# @csrf_exempt
+# def recent_photos(request):
+#     ''' returns all the images from the data base '''
 
-    imgs = []
-    for obj in Image_File.objects.filter(is_image=True).order_by("-date_created"):
-        uploaded_url = default_storage.url(obj.upload.url)
-        thumburl = default_storage.url(obj.thumbnail.url)
-        imgs.append({'src': uploaded_url, 'thumb': thumburl,
-                'is_image': True})
-    return render(request, 'admin/browse.html', {'files': imgs})
+#     imgs = []
+#     for obj in Image_File.objects.filter(is_image=True).order_by("-date_created"):
+#         uploaded_url = default_storage.url(obj.upload.url)
+#         thumburl = default_storage.url(obj.thumbnail.url)
+#         imgs.append({'src': uploaded_url, 'thumb': thumburl,
+#                 'is_image': True})
+#     return render(request, 'admin/browse.html', {'files': imgs})
 
 
 @login_required
