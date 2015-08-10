@@ -43,7 +43,7 @@
               </a>
             </td>
             <td class="txt_center">
-              {% if request.user.is_superuser %}
+              {% if request.user.is_superuser or request.user.id == user.id %}
               <a href="{% url 'micro_admin:edit_user' pk=user.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
               {% endif %}
             </td>
