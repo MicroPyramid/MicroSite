@@ -50,7 +50,7 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
-        response = self.client.post('/blog/edit-post/python-blog/', {'title': 'python blog', 'content': 'This is content edited', 'category': self.category.id, 'status': 'T'})
+        response = self.client.get('/blog/edit-post/python-blog/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
