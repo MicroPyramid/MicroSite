@@ -34,6 +34,7 @@
               {% if post|is_deletable_by:request.user %}
               <a href="{% url 'micro_blog:delete_post' blog_slug=post.slug %}" class="delete_post delete_anchor" value="{{ post.slug }}"><i class="fa fa-trash-o"></i>Delete</a>
               {% endif %}
+              <a href="{% url 'micro_blog:blog_article' slug=post.slug %}" title="View on site" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
             </td>
             <p class="active"></p>
           </tr>

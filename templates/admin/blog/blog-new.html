@@ -62,7 +62,7 @@
         {% endif %}
       {% endif %}
       <div class="save-btn">
-        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="save_blog_post">
       </div>
     </form>
   </div>
@@ -118,7 +118,11 @@
         $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
       },
       dataType: 'json',
+      beforeSend: function() { 
+        $("#save_blog_post").attr("disabled", "disabled");
+      },
       success: function(data) {
+        $("#save_blog_post").removeAttr('disabled');
         if (data.error) {
           $('p.failure').remove();
           for (var key in data.response) {

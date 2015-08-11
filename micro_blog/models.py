@@ -28,11 +28,28 @@ class Tags(models.Model):
     slug = models.CharField(max_length=20, unique=True)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        tempslug = slugify(self.name)
+        if self.id:
+            tag = Tags.objects.get(pk=self.id)
+            if tag.name != self.name:
+                self.slug = create_tag_slug(tempslug)
+        else:
+            self.slug = create_tag_slug(tempslug)
         super(Tags, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
+
+
+def create_tag_slug(tempslug):
+    slugcount = 0
+    while True:
+        try:
+            Tags.objects.get(slug=tempslug)
+            slugcount = slugcount + 1
+            tempslug = tempslug + '-' + str(slugcount)
+        except ObjectDoesNotExist:
+            return tempslug
 
 
 class Post(models.Model):
