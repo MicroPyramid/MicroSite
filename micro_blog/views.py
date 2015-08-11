@@ -2,11 +2,11 @@ from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Image_File, Category, Tags, Post
+# from django.views.decorators.csrf import csrf_exempt
+from micro_blog.models import Category, Tags, Post
 from pages.models import simplecontact, Contact
 import math
-from django.core.files.storage import default_storage
+# from django.core.files.storage import default_storage
 from micro_blog.forms import BlogpostForm, BlogCategoryForm
 import datetime
 import requests
@@ -306,7 +306,7 @@ def view_post(request,blog_slug):
 
 
 def report(request):
-    envelope={}
+    envelope = {}
     envelope = request.POST.get('envelope')
     my_dict = literal_eval(envelope)
     user = User.objects.get(email=my_dict['from'])

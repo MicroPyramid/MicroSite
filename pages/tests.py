@@ -173,6 +173,10 @@ class pages_views_test(TestCase):
         response = self.client.post('/portal/content/menu/1/order/', {'mode': 'up'})
         self.assertTrue(response.status_code, 200)
 
+        response = self.client.post('/portal/content/menu/edit/1/', {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 2})
+        self.assertTrue(response.status_code, 200)
+        self.assertTrue('updated successfully' in response.content)
+
         response = self.client.get('/portal/content/menu/delete_menu/1/')
         self.assertTrue(response.status_code, 200)
 
