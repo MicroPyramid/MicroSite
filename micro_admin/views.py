@@ -16,7 +16,8 @@ import string
 import random
 import sendgrid
 
-#@csrf_protect
+
+# @csrf_protect
 def index(request):
     if request.user.is_authenticated():
         return render_to_response('admin/index.html', context_instance=RequestContext(request))
