@@ -36,10 +36,10 @@
           <h5>Share this blog post:</h5>
           <div id="top-social" style="text-align:left;">
             <ul class="list-inline">
-              <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://micropyramid.com/blog/{{post.slug}}/&t={{ post.title }}" class="facebook"><i class="fa fa-facebook"></i></a><span class="share-count">{{fbshare_count}}</span></li>
-              <li><a href="https://plus.google.com/share?hl=en-US&url=http://micropyramid.com/blog/{{post.slug}}/" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-              <li><a href="https://twitter.com/intent/tweet?text={{ post.title }}&url=http://micropyramid.com/blog/{{post.slug}}/&via=MicroPyramid" class="twitter"><i class="fa fa-twitter"></i></a><span id="twitterCount" class="share-count">{{twshare_count}}</span></li>
-              <li><a href="https://www.linkedin.com/cws/share?url=http://micropyramid.com/blog/{{post.slug}}/&token=&isFramed=true" class="linkedin"><i class="fa fa-linkedin"></i></a><span class="share-count">{{lnshare_count}}</span></li>
+              <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ minified_url }}&t={{ post.title }}" class="facebook"><i class="fa fa-facebook"></i></a><span class="share-count">{{fbshare_count}}</span></li>
+              <li><a href="https://plus.google.com/share?hl=en-US&url={{ minified_url }}" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+              <li><a href="https://twitter.com/intent/tweet?text={{ post.title }}&url={{ minified_url }}&via=MicroPyramid" class="twitter"><i class="fa fa-twitter"></i></a><span id="twitterCount" class="share-count">{{twshare_count}}</span></li>
+              <li><a href="https://www.linkedin.com/cws/share?url={{ minified_url }}&token=&isFramed=true" class="linkedin"><i class="fa fa-linkedin"></i></a><span class="share-count">{{lnshare_count}}</span></li>
             </ul>
           </div>
           <!-- COMMENTS -->
@@ -49,7 +49,6 @@
             <script type="text/javascript">
               /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
               var disqus_shortname = 'micropyramid'; // required: replace example with your forum shortname
-              
               /* * * DON'T EDIT BELOW THIS LINE * * */
               (function() {
                 var dsq = document.createElement('script');
