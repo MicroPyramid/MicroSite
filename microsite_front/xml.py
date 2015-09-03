@@ -3,6 +3,7 @@ from email import utils
 from django.http.response import HttpResponse
 from pages.models import Page
 from micro_blog.models import Category, Post
+from books.models import *
 
 
 def sitemap(request):
@@ -14,15 +15,26 @@ def sitemap(request):
 
     pages = Page.objects.filter(is_active=True)
     for page in pages:
-        xml = xml + '<url><loc>http://micropyramid.com/page/' + page.slug + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>http://micropyramid.com/page/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     categories = Category.objects.all()
     for category in categories:
-        xml = xml + '<url><loc>http://micropyramid.com/blog/category/' + category.slug + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>http://micropyramid.com/blog/category/' + category.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     posts = Post.objects.filter(status="P")
     for post in posts:
-        xml = xml + '<url><loc>http://micropyramid.com/blog/' + post.slug + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>http://micropyramid.com/blog/' + post.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+
+    books = Book.objects.filter(status="Approved", privacy="Public")
+    for book in books:
+        xml = xml + '<url><loc>http://micropyramid.com/books/' + book.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+
+    topics = Topic.objects.filter(status="Approved")
+    for topic in topics:
+        if topic.parent:
+            xml = xml + '<url><loc>http://micropyramid.com/books/' + topic.book.slug + '/' + topic.parent.slug + '/' + topic.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        else:
+            xml = xml + '<url><loc>http://micropyramid.com/books/' + topic.book.slug + '/' + topic.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     xml = xml + '</urlset>'
 
@@ -70,11 +82,11 @@ def rss(request):
 
         xml = xml + '<item><title><![CDATA[' + post.title + ']]></title>'
         xml = xml + '<description><![CDATA[' + post.content + ']]></description>'
-        xml = xml + '<link>http://micropyramid.com/blog/' + post.slug + '</link>'
+        xml = xml + '<link>http://micropyramid.com/blog/' + post.slug + '/</link>'
         xml = xml + '<category domain="micropyramid.com"><![CDATA[' + post.category.name + ']]></category>'
-        xml = xml + '<comments>http://micropyramid.com/blog/' + post.slug + '</comments>'
+        xml = xml + '<comments>http://micropyramid.com/blog/' + post.slug + '/</comments>'
         xml = xml + '<pubDate>' + published_date + '</pubDate>'
-        xml = xml + '<guid>http://micropyramid.com/tutorial/article/' + post.slug + '</guid></item>'
+        xml = xml + '<guid>http://micropyramid.com/blog/' + post.slug + '/</guid></item>'
 
     xml = xml + '</channel></rss>'
 
