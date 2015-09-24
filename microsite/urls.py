@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 
 urlpatterns = patterns(
@@ -18,3 +19,9 @@ urlpatterns = patterns(
     url(r'^sitemap.xml$', 'microsite_front.xml.sitemap'),
     url(r'^search/autocomplete/$', 'search.views.autocomplete'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^404$', 'micro_blog.views.handler404'),
+        url(r'^500$', 'micro_blog.views.handler500'),
+    )

@@ -1,0 +1,15 @@
+{% extends 'site/base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans '404' %} | {% trans 'Page not found' %} | {{ block.super }}
+{% endblock %}
+
+{% block stage %}
+  <div class="row marl">
+    <div class="container">
+      <p>{% trans "Page not found!" %}</p>
+      <p>{% trans "We're sorry but the page you are looking for can't be found." %}</p>
+    </div>
+  </div>
+{% endblock %}

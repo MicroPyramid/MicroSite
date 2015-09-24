@@ -1,0 +1,14 @@
+{% extends 'site/base.html' %}
+{% load i18n %}
+
+{% block title %}
+  {% trans '500' %} | {% trans 'Server error' %} | {{ block.super }}
+{% endblock %}
+
+{% block stage %}
+  <div class="row marl">
+    <div class="container">
+      <p>{% trans "Sorry, but the requested page is unavailable due to server error!" %}</p>
+    </div>
+  </div>
+{% endblock %}

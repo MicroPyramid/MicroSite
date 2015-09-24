@@ -1,5 +1,5 @@
-from django.shortcuts import render_to_response, render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response, render, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
@@ -60,9 +60,9 @@ def new_blog_category(request):
 
 @login_required
 def edit_category(request, category_slug):
+    blog_category = get_object_or_404(Category, slug=category_slug)
     if request.method == 'POST':
-        category = Category.objects.get(slug=category_slug)
-        validate_blogcategory = BlogCategoryForm(request.POST, instance=category)
+        validate_blogcategory = BlogCategoryForm(request.POST, instance=blog_category)
         if validate_blogcategory.is_valid():
             validate_blogcategory.save()
             data = {'error': False, 'response': 'Blog category updated'}
@@ -71,7 +71,6 @@ def edit_category(request, category_slug):
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     if request.user.is_superuser:
-        blog_category = Category.objects.get(slug=category_slug)
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/blog/blog-category-edit.html', {'blog_category': blog_category, 'csrf_token': c['csrf_token']})
@@ -81,7 +80,7 @@ def edit_category(request, category_slug):
 
 @login_required
 def delete_category(request, category_slug):
-    category = Category.objects.get(slug=category_slug)
+    category = get_object_or_404(Category, slug=category_slug)
     if request.user.is_superuser:
         category.delete()
         return HttpResponseRedirect('/blog/category-list/')
@@ -92,11 +91,16 @@ def delete_category(request, category_slug):
 def site_blog_home(request):
     items_per_page = 10
     if "page" in request.GET:
-        page = int(request.GET.get('page'))
+        if not request.GET.get('page').isdigit():
+            raise Http404
+        page = int(request.GET.get('page', 1))
     else:
         page = 1
-    no_pages = int(math.ceil(float(Post.objects.filter(status='P').count()) / items_per_page))
-    blog_posts = Post.objects.filter(status='P').order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
+
+    posts = Post.objects.filter(status='P')
+    no_pages = int(math.ceil(float(posts.count()) / items_per_page))
+    blog_posts = posts.order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
+
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
@@ -104,7 +108,7 @@ def site_blog_home(request):
 
 
 def blog_article(request, slug):
-    blog_post = Post.objects.get(slug=slug)
+    blog_post = get_object_or_404(Post, slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
     fb = requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
     tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
@@ -146,15 +150,19 @@ def blog_article(request, slug):
 
 
 def blog_tag(request, slug):
-    tag = Tags.objects.get(slug=slug)
+    tag = get_object_or_404(Tags, slug=slug)
     blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by('-created_on')
     items_per_page = 6
     if "page" in request.GET:
+        if not request.GET.get('page').isdigit():
+            raise Http404
         page = int(request.GET.get('page'))
     else:
         page = 1
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+    if not blog_posts:
+        raise Http404
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/index.html', {'current_page': page,
@@ -162,15 +170,19 @@ def blog_tag(request, slug):
 
 
 def blog_category(request, slug):
-    category = Category.objects.get(slug=slug)
+    category = get_object_or_404(Category, slug=slug)
     blog_posts = Post.objects.filter(category=category, status="P").order_by('-created_on')
     items_per_page = 6
     if "page" in request.GET:
+        if not request.GET.get('page').isdigit():
+            raise Http404
         page = int(request.GET.get('page'))
     else:
         page = 1
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+    if not blog_posts:
+        raise Http404
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
@@ -181,11 +193,15 @@ def archive_posts(request, year, month):
     blog_posts = Post.objects.filter(status="P", created_on__year=year, created_on__month=month).order_by('-created_on')
     items_per_page = 6
     if "page" in request.GET:
+        if not request.GET.get('page').isdigit():
+            raise Http404
         page = int(request.GET.get('page'))
     else:
         page = 1
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
+    if not blog_posts:
+        raise Http404
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
@@ -252,7 +268,7 @@ def new_post(request):
 @login_required
 def edit_blog_post(request, blog_slug):
     if request.method == 'POST':
-        current_post = Post.objects.get(slug=blog_slug)
+        current_post = get_object_or_404(Post, slug=blog_slug)
         validate_blog = BlogpostForm(request.POST, instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
@@ -283,7 +299,7 @@ def edit_blog_post(request, blog_slug):
             data = {'error': True, 'response': validate_blog.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
-    blog_post = Post.objects.get(slug=blog_slug)
+    blog_post = get_object_or_404(Post, slug=blog_slug)
     categories = Category.objects.all()
     if request.user.is_superuser or blog_post.user == request.user:
         c = {}
@@ -294,8 +310,8 @@ def edit_blog_post(request, blog_slug):
 
 
 @login_required
-def delete_post(request,blog_slug):
-    blog_post = Post.objects.get(slug=blog_slug)
+def delete_post(request, blog_slug):
+    blog_post = get_object_or_404(Post, slug=blog_slug)
     if request.user == blog_post.user or request.user.is_superuser:
         blog_post.delete()
         data = {"error": False, 'message': 'Blog Post Deleted'}
@@ -305,8 +321,8 @@ def delete_post(request,blog_slug):
 
 
 @login_required
-def view_post(request,blog_slug):
-    blog_post = Post.objects.get(slug=blog_slug)
+def view_post(request, blog_slug):
+    blog_post = get_object_or_404(Post, slug=blog_slug)
     return render(request, 'admin/blog/view_post.html', {'post': blog_post})
 
 
@@ -386,3 +402,11 @@ def contact(request):
     data = {'error': False, 'response': 'submitted successfully'}
 
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)

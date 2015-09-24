@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from books.models import Book, Topic, PRIVACY_CHOICES, History
 from books.forms import BookForm, TopicForm
@@ -43,21 +43,20 @@ def create_book(request):
 
 @login_required
 def view_book(request, slug):
-    book = Book.objects.get(slug=slug)
+    book = get_object_or_404(Book, slug=slug)
     return render(request, "docs/books/book_detail.html", {"book": book})
 
 
 @login_required
 def view_book_topics(request, slug):
-    book = Book.objects.get(slug=slug)
+    book = get_object_or_404(Book, slug=slug)
     topics = Topic.objects.filter(book=book, parent__isnull=True, shadow__isnull=True)
     return render(request, "docs/topics/list_of_book_topics.html", {"book": book, "topics": topics})
 
 
 @login_required
 def create_topic(request, slug):
-    book = Book.objects.get(slug=slug)
-    
+    book = get_object_or_404(Book, slug=slug)
     if request.method == "POST":
         topic_form = TopicForm(request.POST)
         
@@ -72,7 +71,8 @@ def create_topic(request, slug):
             if request.POST.get("parent"):
                 topic.parent = Topic.objects.get(id=request.POST.get("parent"))
 
-            topic.display_order = Topic.objects.filter(book=book, parent=topic.parent, shadow__isnull=True).count()
+            topic.display_order = Topic.objects.filter(book=book,
+                                    parent=topic.parent, shadow__isnull=True).count()
             topic.save()
 
             data = {"error": False, "response": "Topic created"}
@@ -86,9 +86,9 @@ def create_topic(request, slug):
 
 @login_required
 def create_content(request, book_slug, topic_slug):
-    topic = Topic.objects.get(slug=topic_slug)
-    book = Book.objects.get(slug=book_slug)
-    if request.POST.get("content"):
+    topic = get_object_or_404(Topic, slug=topic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    if request.method == "POST" and request.POST.get("content"):
         if not topic.content:
             topic.content = request.POST.get("content")
             topic.keywords = request.POST.get("keywords")
@@ -112,7 +112,8 @@ def create_content(request, book_slug, topic_slug):
 
                 new_topic.shadow = topic
                 new_topic.content = request.POST.get("content")
-                new_topic.display_order = Topic.objects.filter(book__slug=book_slug, parent=new_topic.parent, shadow=new_topic.shadow).count()
+                new_topic.display_order = Topic.objects.filter(book__slug=book_slug,
+                        parent=new_topic.parent, shadow=new_topic.shadow).count()
 
                 new_topic.save()
 
@@ -124,17 +125,17 @@ def create_content(request, book_slug, topic_slug):
 
 @login_required
 def view_topic(request, book_slug, topic_slug):
-    book = Book.objects.get(slug=book_slug)
-    topic = Topic.objects.get(slug=topic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     topic_shadows = Topic.objects.filter(shadow=topic.id)
     return render(request, "docs/topics/topic_detail.html", {"book": book, "topic": topic, "topic_shadows": topic_shadows})
 
 
 @login_required
 def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
-    book = Book.objects.get(slug=book_slug)
-    topic = Topic.objects.get(slug=topic_slug)
-    subtopic = Topic.objects.get(slug=subtopic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    topic = get_object_or_404(Topic, slug=topic_slug)
+    subtopic = get_object_or_404(Topic, slug=subtopic_slug)
     subtopic_shadows = Topic.objects.filter(shadow=subtopic.id)
     return render(request, "docs/topics/topic_detail.html", {"book": book, "topic": topic, "subtopic": subtopic, "subtopic_shadows": subtopic_shadows})
 
@@ -148,8 +149,8 @@ def view_subtopic(request, book_slug, topic_slug, subtopic_slug):
 
 @login_required
 def edit_topic(request, book_slug, topic_slug):
-    book = Book.objects.get(slug=book_slug)
-    topic = Topic.objects.get(slug=topic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    topic = get_object_or_404(Topic, slug=topic_slug)
 
     if request.method == "POST":
         topic_form = TopicForm(request.POST)
@@ -183,12 +184,11 @@ def edit_topic(request, book_slug, topic_slug):
 
 @login_required
 def approve_topic(request, book_slug, topic_slug):
-
-    book = Book.objects.get(slug=book_slug)
+    book = get_object_or_404(Book, slug=book_slug)
     
     if request.user.is_superuser or book.admin == request.user:
         
-        topic = Topic.objects.get(slug=topic_slug)
+        topic = get_object_or_404(Topic, slug=topic_slug)
         if topic.shadow:
             history = History.objects.create(topic=topic.shadow, title=topic.shadow.title, 
                             content=topic.shadow.content)
@@ -204,43 +204,36 @@ def approve_topic(request, book_slug, topic_slug):
             topic.shadow.save()
 
             topic.delete()
-
             data = {"topic_slug": topic.shadow.slug, "response": "Approved Successfully"}
         else:
             topic.status = "Approved"
             topic.save()
-
             data = {"response": "Approved Successfully"}
     else:
         data = {"response": "You don't have the permission to Approve."}
-    
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
 def reject_topic(request, book_slug, topic_slug):
-
-    book = Book.objects.get(slug=book_slug)
+    book = get_object_or_404(Book, slug=book_slug)
     
     if request.user.is_superuser or book.admin == request.user:
-        
-        topic = Topic.objects.get(slug=topic_slug)
+        topic = get_object_or_404(Topic, slug=topic_slug)
         topic.status = "Rejected"
         topic.save()
         data = {"response": "Rejected Successfully"}
     else:
         data = {"response": "You don't have the permission to Reject."}
-    
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
 def delete_topic(request, book_slug, topic_slug):
-    book = Book.objects.get(slug=book_slug)
+    book = get_object_or_404(Book, slug=book_slug)
     
     if request.user.is_superuser or book.admin == request.user:
-        
-        topic = Topic.objects.get(slug=topic_slug)
+        topic = get_object_or_404(Topic, slug=topic_slug)
         topic_id = topic.id
         topic.delete()
 
@@ -253,13 +246,12 @@ def delete_topic(request, book_slug, topic_slug):
         data = {"response": "Deleted Successfully"}
     else:
         data = {"response": "You don't have the permission to Delete."}
-    
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
 @login_required
 def edit_book(request, slug):
-    book = Book.objects.get(slug=slug)
+    book = get_object_or_404(Book, slug=slug)
     if request.user.is_superuser or book.admin == request.user:
 
         if request.method == "POST":
@@ -286,7 +278,7 @@ def edit_book(request, slug):
 @login_required
 def approve_book(request, slug):
     if request.user.is_superuser:
-        book = Book.objects.get(slug=slug)
+        book = get_object_or_404(Book, slug=slug)
         book.status = "Approved"
         book.save()
         return render(request, "docs/books/book_detail.html", {"book": book})
@@ -297,7 +289,7 @@ def approve_book(request, slug):
 @login_required
 def reject_book(request, slug):
     if request.user.is_superuser:
-        book = Book.objects.get(slug=slug)
+        book = get_object_or_404(Book, slug=slug)
         book.status = "Rejected"
         book.save()
         return render(request, "docs/books/book_detail.html", {"book": book})
@@ -308,7 +300,7 @@ def reject_book(request, slug):
 @login_required
 def delete_book(request, slug):
     if request.user.is_superuser:
-        book = Book.objects.get(slug=slug)
+        book = get_object_or_404(Book, slug=slug)
         book.delete()
         return HttpResponseRedirect('/books/list/')
     else:
@@ -324,29 +316,29 @@ def book_list(request):
 
 
 def book_info(request, slug):
-    book = Book.objects.get(slug=slug)
+    book = get_object_or_404(Book, slug=slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render(request, "docs/book_topics.html", {"book": book, "parent_topics": parent_topics})
 
 
 def topic_info(request, book_slug, topic_slug):
-    book = Book.objects.get(slug=book_slug)
-    topic = Topic.objects.get(slug=topic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render(request, "docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "topic": topic})
 
 
 def subtopic_info(request, book_slug, topic_slug, subtopic_slug):
-    book = Book.objects.get(slug=book_slug)
-    subtopic = Topic.objects.get(slug=subtopic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    subtopic = get_object_or_404(Topic, slug=subtopic_slug)
     parent_topics = Topic.objects.filter(Q(book_id=book.id) & Q(parent=None) & Q(status="Approved") & Q(shadow_id=None))
     return render(request, "docs/book_topics.html", {"book": book, "parent_topics": parent_topics, "subtopic": subtopic})
 
 
 @login_required
 def change_topic_order(request, book_slug, topic_slug):
-    book = Book.objects.get(slug=book_slug)
-    topic = Topic.objects.get(book=book, slug=topic_slug)
+    book = get_object_or_404(Book, slug=book_slug)
+    topic = get_object_or_404(Topic, slug=topic_slug, book=book)
     new_order = topic.display_order
     if request.POST.get('mode') == 'down':
         try:

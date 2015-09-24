@@ -43,28 +43,28 @@ class pages_views_test_with_employee(TestCase):
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
         response = self.client.get('/portal/content/page/edit/1/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'admin/accessdenied.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
 
         response = self.client.get('/portal/content/page/delete/1/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'admin/accessdenied.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
 
         response = self.client.get('/portal/content/menu/new/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
         response = self.client.get('/portal/content/menu/edit/1/')
-        self.assertTrue(response.status_code, 200)
+        self.assertTrue(response.status_code, 404)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
         response = self.client.get('/portal/content/menu/delete_menu/1/')
-        self.assertTrue(response.status_code, 200)
-        self.assertTemplateUsed(response, 'admin/accessdenied.html')
+        self.assertTrue(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
 
         response = self.client.get('/page-test/')
-        self.assertTrue(response.status_code, 200)
-        self.assertTrue('The page you have requested cannot be found' in response.content)
+        self.assertTrue(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
 
 
 class pages_views_test(TestCase):
