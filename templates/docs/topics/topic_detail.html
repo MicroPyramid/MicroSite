@@ -211,7 +211,7 @@
       $.post($(this).attr('href'), {'title': $(this).attr('title')}, function(data){
           alert(data.response);
           if(data.topic_slug){
-            window.location = '/books/topic/{{book.slug}}/'+data.topic_slug;
+            window.location = '/books/{{book.slug}}/topic/'+ data.topic_slug;
           }
         }, "json");
     });
