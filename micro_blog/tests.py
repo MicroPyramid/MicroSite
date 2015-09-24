@@ -113,7 +113,7 @@ class micro_blogviews_get(TestCase):
 
         response = self.client.get('/blog/' + self.blogppost.slug + '/')
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response,'site/blog/article.html')
+        self.assertTemplateUsed(response, 'site/blog/article.html')
 
         response = self.client.get('/blog/2014/12/')
         self.assertEqual(response.status_code, 200)
