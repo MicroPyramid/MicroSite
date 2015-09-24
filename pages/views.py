@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.context_processors import csrf
 import json
@@ -29,15 +29,17 @@ def new_page(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        return render(request, 'admin/content/page/new-page.html', {'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/page/new-page.html',
+                        {'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
 
 @login_required
 def delete_page(request, pk):
+    page = get_object_or_404(Page, pk=pk)
     if request.user.is_superuser:
-        Page.objects.get(pk=pk).delete()
+        page.delete()
         return HttpResponseRedirect('/portal/content/page/')
     else:
         return render_to_response('admin/accessdenied.html')
@@ -45,9 +47,9 @@ def delete_page(request, pk):
 
 @login_required
 def edit_page(request, pk):
+    page = get_object_or_404(Page, pk=pk)
     if request.method == 'POST':
-        page_instance = Page.objects.get(pk=pk)
-        validate_page = PageForm(request.POST, instance=page_instance)
+        validate_page = PageForm(request.POST, instance=page)
         if validate_page.is_valid():
             validate_page.save()
             data = {"error": False, 'response': 'Page updated successfully'}
@@ -57,16 +59,17 @@ def edit_page(request, pk):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        current_page = Page.objects.get(pk=pk)
-        return render(request, 'admin/content/page/edit-page.html', {'page': current_page, 'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/page/edit-page.html',
+                        {'page': page, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
 
 @login_required
 def delete_menu(request, pk):
+    menu = get_object_or_404(Menu, pk=pk)
     if request.user.is_superuser:
-        Menu.objects.get(pk=pk).delete()
+        menu.delete()
         return HttpResponseRedirect('/portal/content/menu/')
     else:
         return render_to_response('admin/accessdenied.html')
@@ -74,7 +77,7 @@ def delete_menu(request, pk):
 
 @login_required
 def change_menu_status(request, pk):
-    menu = Menu.objects.get(pk=pk)
+    menu = get_object_or_404(Menu, pk=pk)
     if menu.status == "on":
         menu.status = "off"
     else:
@@ -87,7 +90,8 @@ def change_menu_status(request, pk):
 def menu(request):
     iterator = itertools.count()
     menu_list = Menu.objects.filter().order_by('lvl')
-    return render(request, 'admin/content/menu/menu-list.html', {'menu_list': menu_list, 'iterator': iterator})
+    return render(request, 'admin/content/menu/menu-list.html',
+                    {'menu_list': menu_list, 'iterator': iterator})
 
 
 @login_required
@@ -114,7 +118,8 @@ def add_menu(request):
         c = {}
         c.update(csrf(request))
         parent = Menu.objects.filter(parent=None).order_by('lvl')
-        return render(request, 'admin/content/menu/new-menu-item.html', {'parent': parent, 'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/menu/new-menu-item.html',
+                        {'parent': parent, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -122,7 +127,7 @@ def add_menu(request):
 @login_required
 def edit_menu(request, pk):
     if request.method == 'POST':
-        menu_instance = Menu.objects.get(pk=pk)
+        menu_instance = get_object_or_404(Menu, pk=pk)
         current_parent = menu_instance.parent
         current_lvl = menu_instance.lvl
         validate_menu = MenuForm(request.POST, instance=menu_instance)
@@ -159,16 +164,14 @@ def edit_menu(request, pk):
 
     if request.user.is_superuser:
         parent = Menu.objects.filter(parent=None).order_by('lvl')
-        current_menu = Menu.objects.get(pk=pk)
+        current_menu = get_object_or_404(Menu, pk=pk)
         c = {}
         c.update(csrf(request))
-        return render(request, 'admin/content/menu/edit-menu-item.html', {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
+        return render(request, 'admin/content/menu/edit-menu-item.html',
+            {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
     else:
         return render_to_response('admin/accessdenied.html')
 
-def site_page(request,slug):
-    try:
-        page = Page.objects.get(slug=slug)
-    except ObjectDoesNotExist:
-        page = {"content": "<p>Sorry. The page you have requested cannot be found.</p>"}
+def site_page(request, slug):
+    page = get_object_or_404(Page, slug=slug)
     return render(request, 'site/page.html', {'page': page})
