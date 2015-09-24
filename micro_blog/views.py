@@ -17,7 +17,8 @@ from employee.models import DailyReport, Dailyreport_files
 from pages.forms import SimpleContactForm, ContactForm
 from django.conf import settings
 import sendgrid
-
+from microurl import google_mini
+from django.core.urlresolvers import reverse
 
 # @csrf_exempt
 # def recent_photos(request):
@@ -109,6 +110,10 @@ def blog_article(request, slug):
     tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
     ln = requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
+    minified_url = ''
+    if 'HTTP_HOST' in request.META.keys():
+        minified_url = google_mini('http://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
+
     linkedin = {}
     linkedin.update(ln.json())
     facebook = {}
@@ -137,7 +142,7 @@ def blog_article(request, slug):
     c.update(csrf(request))
     return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'],
                             'post': blog_post, 'posts': blog_posts, 'fbshare_count': fbshare_count,
-                            'twshare_count': twshare_count, 'lnshare_count': lnshare_count})
+                            'twshare_count': twshare_count, 'lnshare_count': lnshare_count, 'minified_url': minified_url})
 
 
 def blog_tag(request, slug):

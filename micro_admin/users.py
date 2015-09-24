@@ -10,6 +10,7 @@ from micro_blog.models import Post
 from employee.models import DailyReport
 import datetime
 
+
 @login_required
 def users(request):
     users = User.objects.all()
@@ -106,21 +107,39 @@ def edit_user(request, pk):
             if validate_user.is_valid():
                 if old_password != request.POST.get('password'):
                     current_user.set_password(request.POST.get('password'))
-                current_user.user_roles = request.POST.get('user_roles')
+                edit_user = validate_user.save(commit=False)
+                edit_user.user_roles = request.POST.get('user_roles')
                 if request.POST.get('user_roles') == 'Admin':
-                    current_user.is_admin = True
-                    current_user.is_superuser = True
+                    edit_user.is_admin = True
+                    edit_user.is_superuser = True
 
-                if request.POST.get('google_plus_url',False):
-                    current_user.google_plus_url = request.POST.get('google_plus_url')
+                if request.POST.get('google_plus_url'):
+                    edit_user.google_plus_url = request.POST.get('google_plus_url')
+                else:
+                    edit_user.google_plus_url = ''
 
-                if request.POST.get('is_active',False):
-                    current_user.is_active = True
+                if request.POST.get('fb_profile'):
+                    edit_user.fb_profile = request.POST.get('fb_profile')
+                else:
+                    edit_user.fb_profile = ''
 
-                if request.POST.get('is_special',False):
-                    current_user.is_special = True
+                if request.POST.get('tw_profile'):
+                    edit_user.tw_profile = request.POST.get('tw_profile')
+                else:
+                    edit_user.tw_profile = ''
 
-                current_user.save()
+                if request.POST.get('ln_profile'):
+                    edit_user.ln_profile = request.POST.get('ln_profile')
+                else:
+                    edit_user.ln_profile = ''
+
+                if request.POST.get('is_active', False):
+                    edit_user.is_active = True
+
+                if request.POST.get('is_special', False):
+                    edit_user.is_special = True
+
+                edit_user.save()
 
                 data = {'error': False, 'message': 'updated successfully'}
             else:
