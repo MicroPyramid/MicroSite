@@ -43,8 +43,8 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
         response = self.client.get('/blog/edit-category/django/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'admin/accessdenied.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response, '404.html')
 
         response = self.client.get('/blog/delete-category/category/')
         self.assertEqual(response.status_code, 200)
@@ -70,6 +70,9 @@ class micro_blogviews_get(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
         self.category = Category.objects.create(name='django', description='django desc')
+        print "django category"
+        print self.category.__dict__
+        print 'dict'
         self.blogppost = Post.objects.create(title='python introduction', user=self.user, content='This is content', category=self.category, status='D')
 
     def test_blog_get(self):
@@ -104,24 +107,24 @@ class micro_blogviews_get(TestCase):
         self.assertTemplateUsed(response,'admin/blog/blog-category.html')
 
         response = self.client.get('/blog/category/django/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response,'site/blog/index.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response,'404.html')
 
         response = self.client.get('/blog/category/django/?page=1')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response,'site/blog/index.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response,'404.html')
 
         response = self.client.get('/blog/' + self.blogppost.slug + '/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,'site/blog/article.html')
 
         response = self.client.get('/blog/2014/12/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response,'site/blog/index.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response,'404.html')
 
         response = self.client.get('/blog/2014/12/?page=1')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response,'site/blog/index.html')
+        self.assertEqual(response.status_code, 404)
+        self.assertTemplateUsed(response,'404.html')
 
         response = self.client.get('/blog/edit-category/django/')
         self.assertEqual(response.status_code, 200)
@@ -212,10 +215,10 @@ class micro_blog_post_data(TestCase):
         self.assertFalse('Blog category updated' in response.content)
 
         response = self.client.get('/blog/tag/django/')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get('/blog/tag/django/?page=1')
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 404)
 
         # img = open(BASE_DIR + '/static/site/images/1-c-n.png')
         # img = File(img)

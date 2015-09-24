@@ -99,8 +99,6 @@ def site_blog_home(request):
     posts = Post.objects.filter(status='P')
     no_pages = int(math.ceil(float(posts.count()) / items_per_page))
     blog_posts = posts.order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
-    if not blog_posts:
-        raise Http404
 
     c = {}
     c.update(csrf(request))
