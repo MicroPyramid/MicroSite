@@ -26,5 +26,21 @@ This project contains the following modules.
    * Employee daily reports.
    * Internal knowledge base.
 
+After installing/cloning this, add the following settings in the virtual env/bin/activate file::
+
+   # SendGrid details
+   SGUSER="Your Sendgrid Username"
+   SGPWD="Your Sendgrid password"
+
+   # Raven Settings(Sentry)
+   SENTRYDSN="Your site DSN"
+
+   GOOGLE_ANALYTICS_CODE = "Your site DSN"
+
+   export SGUSER
+   export SGPWD
+   export SENTRYDSN
+   export GOOGLE_ANALYTICS_CODE
+
 
 

@@ -14,7 +14,7 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 RAVEN_CONFIG = {
-    'dsn': 'http://4b6829226a2f47fb9baa4b462c90567f:f6fae270f1e1413facb985fe5a93cd92@52.0.172.203/2',
+    'dsn': os.getenv('SENTRYDSN') if os.getenv('SENTRYDSN') else '',
 }
 
 
@@ -144,6 +144,8 @@ CELERYBEAT_SCHEDULE = {
 
 SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
 SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
+
+GOOGLE_ANALYTICS_CODE = os.getenv('GOOGLE_ANALYTICS_CODE') if os.getenv('GOOGLE_ANALYTICS_CODE') else ''
 
 '''
 LOGGING = {

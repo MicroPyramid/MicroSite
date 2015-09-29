@@ -1,0 +1,87 @@
+{% extends 'site/base.html' %}
+{% load range %}
+{% block title %}
+    URL Checker| Tools | {{ block.super }}
+{% endblock %}
+{% block stage %}
+
+<div class="row marl">
+  <div class="container">
+    <div class="row marl">
+      <h3>URL Checker:</h3>
+      <!-- URL Checker Form -->
+      <div>
+        <p>Enter url(s) or links you want to check (one per line) from your browser address bar... </p>
+        <form method="post" action="." enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+              <textarea name="urls" rows="5" cols="100"></textarea>
+          </div>
+          <div class="form-group">
+              <p>Or upload a file</p>
+              <input type="file" name="file">
+          </div>
+          <br clear="all">
+          <div class="save-btn">
+              <button type="submit" class="btn btn-success">Check Now</button>
+              <button type="reset" class="btn btn-danger" style="margin-left: 5px;">Cancel</button>
+          </div>
+        </form>
+      </div>
+      <!-- /URL Checker Form -->
+      <!-- URL Checker Results -->
+      <div class="panel-body">
+        <div class="table-responsive">
+          {% if responses %}
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  {% for each in max_redirects|get_range %}
+                    <th width="12%">URL</th>
+                    <th width="7%">Status Code</th>
+                  {% endfor %}
+                  <th width="15%">URL</th>
+                  <th width="7%">Status Code</th>
+                  <th width="3%">No. of Redirects</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for response in responses %}
+                  {% if response %}
+                    <tr>
+                      {% if response.history %}
+                        {% with response.history|length as history_length %}
+                          {% for history in response.history %}
+                            <td>{{history.url}}</td>
+                            <td>{{history.status_code}}</td>
+                          {% endfor %}
+                          {% for each in max_redirects|subtract:history_length|get_range %}
+                            <td>-</td>
+                            <td>-</td>
+                          {% endfor %}
+                          <td>{{response.url}}</td>
+                          <td>{{response.status_code}}</td>
+                          <td>{{history_length}}</td>
+                        {% endwith %}
+                      {% else %}
+                        <td>{{response.url}}</td>
+                        <td>{{response.status_code}}</td>
+                        {% for each in max_redirects|get_range %}
+                          <td>-</td>
+                          <td>-</td>
+                        {% endfor %}
+                        <td>0</td>
+                      {% endif %}
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          {% endif %}
+        </div>
+      </div>
+      <!-- /URL Checker Results -->
+    </div>
+  </div>
+</div>
+{% endblock %}
