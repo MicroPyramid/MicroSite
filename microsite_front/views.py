@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from micro_admin.models import career
 import requests
+from django.conf import settings
 
 
 def index(request):
     latest_featured_posts = {} #Post.objects.filter(status = 'P',featured_post = 'on').order_by('-created_on')[:2]
-    return render(request, 'site/index.html', {'latest_featured_posts': latest_featured_posts})
+    return render(request, 'site/index.html', {'latest_featured_posts': latest_featured_posts, 
+                            'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
 
 
 def career_page(request):
