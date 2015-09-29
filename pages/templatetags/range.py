@@ -26,3 +26,8 @@ def get_range( value ):
 @register.filter
 def get_past_six_months( value ):
     return value
+
+
+@register.filter
+def subtract(number, value):
+    return int(int(number) - int(value))

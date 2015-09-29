@@ -1,0 +1,19 @@
+{% extends 'site/base.html' %}
+{% block title %}
+    Tools | {{ block.super }}
+{% endblock %}
+{% block stage %}
+
+<div class="row marl">
+  <div class="container">
+    <div class="row marl">
+      <h3>Tools</h3>
+      <div>
+        <h4><a href="{% url 'url_checker_tool' %}">URL Checker</a></h4>
+        <span>A tool that checks a given url, and returns a full detailed report.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
