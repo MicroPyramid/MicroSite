@@ -18,7 +18,7 @@
               <div class="blog-upic-details" >
                 <span class="uname" itemprop="author"><a>{{ post.user.get_full_name }}</a></span>
                 <!-- <span class="designation">{{ post.user.user_roles }}</span> -->
-                <span class="udate-time" itemprop="datePublished">{{ post.created_on|date:"d F Y" }}</span>
+                <span class="udate-time" itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span>
                 <span class="blog-count">{{ post.user.total_posts }} Blog Posts</span>
                 <span class="blog-content-social">
                   <ul >
