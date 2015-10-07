@@ -1,0 +1,73 @@
+{% extends 'site/base.html' %}
+{% load range %}
+{% block title %}
+    Set Meta-Data for S3 Objects | Tools | {{ block.super }}
+{% endblock %}
+{% block stage %}
+
+<div class="row marl">
+  <div class="container">
+    <div class="row marl">
+      <h3>Set Meta-Data for S3 Objects:</h3>
+      <!-- Set Meta-Data for S3 Objects Form -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form method="post" role="form" id="s3_form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="access_key">AWS ACCESS KEY </label>
+                <input type="text" class="form-control" id="access_key" name="access_key" required="True">
+            </div>
+            <div class="form-group">
+                <label for="secret_key">AWS SECRET KEY </label>
+                <input type="text" class="form-control" id="secret_key" name="secret_key" required="True">
+            </div>
+            <div class="form-group">
+                <label for="bucket_name">S3 Bucket Name </label>
+                <input type="text" class="form-control" id="bucket_name" name="bucket_name" required="True">
+            </div>
+            <div class="form-group">
+                <label for="max_age">Max Age </label>
+                <input type="number" class="form-control" id="max_age" name="max_age" required="True" placeholder="Enter the max age in seconds.">
+            </div>
+            <div class="form-group">
+                <label for="expiry_date">Expiry Time </label>
+                <input type="number" class="form-control" id="expiry_time" name="expiry_time" required="True" placeholder="Enter the expiry time in number of days.">
+            </div>
+            <br clear="all">
+            <div class="save-btn">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-danger" style="margin-left: 5px;">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /Set Meta-Data for S3 Objects Form -->
+    </div>
+  </div>
+</div>
+{% load compress %}
+{% compress js %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("form#s3_form").submit(function(e) {
+      e.preventDefault();
+      $.post(".", $("form#s3_form").serialize(), function(data) {
+        console.log(data);
+        if (data.error) {
+          $('p.failure').remove();
+          for (var key in data.errors) {
+            $('#' + key).after('<p class="failure" style="color:red;">* ' + data.errors[key] + '</p>');
+          }
+        }
+        else {
+          alert("Successfully max-age, expiry-date has been set for S3 Objects in an given Bucket.");
+          window.location = ".";
+        }
+      }, 'json');
+    });
+  });
+</script>
+{% endcompress %}
+{% endblock %}
+
