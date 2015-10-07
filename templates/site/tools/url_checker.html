@@ -55,12 +55,12 @@
                             <td>{{history.url}}</td>
                             <td>{{history.status_code}}</td>
                           {% endfor %}
+                          <td>{{response.url}}</td>
+                          <td>{{response.status_code}}</td>
                           {% for each in max_redirects|subtract:history_length|get_range %}
                             <td>-</td>
                             <td>-</td>
                           {% endfor %}
-                          <td>{{response.url}}</td>
-                          <td>{{response.status_code}}</td>
                           <td>{{history_length}}</td>
                         {% endwith %}
                       {% else %}
