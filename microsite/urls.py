@@ -7,7 +7,10 @@ urlpatterns = patterns(
 
     url(r'^$', 'microsite_front.views.index'),
     url(r'^tools/$', 'microsite_front.views.tools', name='tools'),
-    url(r'^tools/url-checker/$', 'microsite_front.views.url_checker_tool', name='url_checker_tool'),
+    url(r'^tools/url-checker/$', 'microsite_front.views.url_checker_tool',
+                                                name='url_checker_tool'),
+    url(r'^tools/set-meta-data-for-S3-objects/$', 'microsite_front.views.s3_objects_set_metadata',
+                                                name='s3_objects_set_metadata'),
     url(r'^report/$', 'micro_blog.views.report'),
     url(r'^contact/$', 'micro_blog.views.contact'),
     url(r'^careers/$', 'microsite_front.views.career_page'),

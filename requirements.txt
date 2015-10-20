@@ -46,3 +46,4 @@ unittest2==1.0.1
 wsgiref==0.1.2
 django-haystack==2.4.0
 elasticsearch==1.6.0
+boto==2.38.0

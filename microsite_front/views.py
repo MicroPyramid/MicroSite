@@ -1,7 +1,15 @@
 from django.shortcuts import render
+from django.http.response import HttpResponse
 from micro_admin.models import career
 import requests
 from django.conf import settings
+from mimetypes import MimeTypes
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+import time
+import json
+import boto
+from datetime import datetime, timedelta
 
 
 def index(request):
@@ -33,7 +41,6 @@ def url_checker_tool(request):
 
         for url in urls:
             if url:
-                count = 0
                 try:
                     response = requests.head(url, allow_redirects=True)
                 except:
@@ -50,3 +57,48 @@ def url_checker_tool(request):
                         'max_redirects': max_redirects})
 
     return render(request, 'site/tools/url_checker.html')
+
+
+def s3_objects_set_metadata(request):
+    if request.method == "POST":
+        errors = {}
+        if not request.POST.get('expiry_time').isnumeric():
+            errors['expiry_time'] = "Expiry Time must be in number of days."
+
+        if not request.POST.get('max_age').isnumeric():
+            errors['max_age'] = "Invalid max-age value. Max Age must be in seconds."
+
+        # Make an S3 Connection
+        conn = S3Connection(request.POST.get('access_key'), request.POST.get('secret_key'))
+
+        # Get a bucket from S3 or None if the bucket does not exist
+        bucket = conn.lookup(request.POST.get('bucket_name'))
+        if not bucket:
+            errors['bucket_name'] = "NoSuchBucket - The specified bucket does not exist."
+
+        if errors:
+            return HttpResponse(json.dumps({"error": True, "errors": errors}),
+                                    content_type='application/json; charset=utf-8')
+
+        for x in bucket.list():
+            mime_type = MimeTypes().guess_type(x.key)
+            expires = datetime.utcnow() + timedelta(days=request.POST.get('expiry_time'))
+            expiration_period = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+            if mime_type[0] is not None:
+                x.set_metadata('Cache-Control', 'max-age = '+ request.POST.get('max_age'))
+                x.set_metadata('Expires', expiration_period)
+                x.set_metadata('Content-Type', mime_type[0])
+
+                x.copy(
+                    x.bucket.name,
+                    x.name,
+                    x.metadata,
+                    preserve_acl=True
+                )
+
+        return HttpResponse(json.dumps({"error": False}),
+                            content_type='application/json; charset=utf-8')
+
+    return render(request, 'site/tools/s3_objects_set_metadata.html')
+

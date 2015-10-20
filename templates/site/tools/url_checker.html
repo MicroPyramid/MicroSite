@@ -1,7 +1,7 @@
 {% extends 'site/base.html' %}
 {% load range %}
 {% block title %}
-    URL Checker| Tools | {{ block.super }}
+    URL Checker | Tools | {{ block.super }}
 {% endblock %}
 {% block stage %}
 
@@ -15,7 +15,7 @@
         <form method="post" action="." enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
-              <textarea name="urls" rows="5" cols="100"></textarea>
+              <textarea name="urls" rows="12" cols="185"></textarea>
           </div>
           <div class="form-group">
               <p>Or upload a file</p>
