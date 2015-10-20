@@ -1,4 +1,9 @@
 {% extends 'site/blog/base.html' %}
+
+{% block meta-description %}
+  <meta name="description" content="{% for post in posts %} {{ post.title }}{% if not forloop.last %}, {% endif %}{% endfor %} - MicroPyramid." />
+{% endblock %}
+
 {% load blog_tags %}
 {% block blogcontent %}
 <!-- sec-about starts -->

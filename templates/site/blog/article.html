@@ -4,6 +4,10 @@
     {{ post.title }} - {{ block.super }}
 {% endblock %}
 
+{% block meta-description %}
+  <meta name="description" content="{{ post.title }} - MicroPyramid." />
+{% endblock %}
+
 {% block extra-head %}
   <link rel="canonical" href='http://micropyramid.com/blog/{{ post.slug }}/'/>
   <link rel="pingback" href="http://micropyramid.com/blog/xmlrpc/"/>
