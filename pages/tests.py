@@ -121,17 +121,17 @@ class pages_views_test(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFalse('successfully' in response.content)
 
-        response = self.client.get('/portal/content/page/edit/1/')
+        response = self.client.get('/portal/content/page/edit/'+str(self.page.id)+'/')
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/portal/content/menu/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/portal/content/page/edit/1/', {'title': 'Page', 'content': 'page_content'})
+        response = self.client.post('/portal/content/page/edit/'+str(self.page.id)+'/', {'title': 'Page', 'content': 'page_content'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('successfully' in response.content)
 
-        response = self.client.post('/portal/content/page/edit/1/', {'content': 'page_content'})
+        response = self.client.post('/portal/content/page/edit/'+str(self.page.id)+'/', {'content': 'page_content'})
         self.assertEqual(response.status_code, 200)
         self.assertFalse('successfully' in response.content)
 
@@ -183,5 +183,5 @@ class pages_views_test(TestCase):
         response = self.client.get('/page2/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('/portal/content/page/delete/1/')
+        response = self.client.get('/portal/content/page/delete/'+str(self.page.id)+'/')
         self.assertEqual(response.status_code, 302)

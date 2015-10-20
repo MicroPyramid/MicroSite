@@ -5,10 +5,7 @@ import requests
 from django.conf import settings
 from mimetypes import MimeTypes
 from boto.s3.connection import S3Connection
-from boto.s3.key import Key
-import time
 import json
-import boto
 from datetime import datetime, timedelta
 
 
@@ -43,12 +40,12 @@ def url_checker_tool(request):
             if url:
                 try:
                     response = requests.head(url, allow_redirects=True)
-                except:
+                except Exception:
                     response = {'url': url, 'status_code': 'Invalid Url'}
                 responses.append(response)
                 try:
                     response_history = len(response.history)
-                except:
+                except Exception:
                     response_history = 0
                 redirects_count.append(response_history)
 

@@ -343,6 +343,8 @@ def report(request):
 
 
 def contact(request):
+    if request.method == 'GET':
+        raise Http404
     validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
 
@@ -400,7 +402,6 @@ def contact(request):
     sg.send(sending_msg)
 
     data = {'error': False, 'response': 'submitted successfully'}
-
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
