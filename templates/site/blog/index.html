@@ -1,5 +1,9 @@
 {% extends 'site/blog/base.html' %}
 
+{% block title %}
+  {{ posts.0.title }} ... | {{ block.super }}
+{% endblock %}
+
 {% block meta-description %}
   <meta name="description" content="{% for post in posts %} {{ post.title }}{% if not forloop.last %}, {% endif %}{% endfor %} - MicroPyramid." />
 {% endblock %}
