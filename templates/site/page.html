@@ -1,4 +1,9 @@
 {% extends 'site/base.html' %}
+
+{% block meta-description %}
+  <meta name="description" content="{{ page.title }} - MicroPyramid." />
+{% endblock %}
+
 {% block stage %}
 
 {{ page.content | safe }}
