@@ -110,13 +110,13 @@ def site_blog_home(request):
 def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
-    fb = requests.get('http://graph.facebook.com/?id=http://micropyramid.com//blog/'+slug)
-    tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=http://micropyramid.com//blog/'+slug)
+    fb = requests.get('http://graph.facebook.com/?id=https://micropyramid.com//blog/'+slug)
+    tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=https://micropyramid.com//blog/'+slug)
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
-    ln = requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
+    ln = requests.get('https://www.linkedin.com/countserv/count/share?url=https://micropyramid.com/blog/'+slug+'&format=json')
     minified_url = ''
     if 'HTTP_HOST' in request.META.keys():
-        minified_url = google_mini('http://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
+        minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
 
     linkedin = {}
     linkedin.update(ln.json())
@@ -244,7 +244,7 @@ def new_post(request):
             sending_msg = sendgrid.Mail()
             sending_msg.set_subject("New blog post has been created")
 
-            blog_url = 'http://www.micropyramid.com/blog/view-post/' + str(blog_post.slug) + '/'
+            blog_url = 'https://www.micropyramid.com/blog/view-post/' + str(blog_post.slug) + '/'
             message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '
             message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
 
