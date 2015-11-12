@@ -91,3 +91,55 @@ def rss(request):
     xml = xml + '</channel></rss>'
 
     return HttpResponse(xml, content_type="text/xml")
+
+
+def blog_rss(request):
+
+    xml = '''<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+                <channel>
+                <atom:link href="http://micropyramid.com/rss.xml" rel="self" type="application/rss+xml" />
+                <title>MicroPyramid | Web Development | Mobile App Development</title>
+                <description>MicroPyramid python development company.
+                 Our ambit of service encompasses and is as vivid as e-commerce,
+                  web applications, news portals, community and job portals design &amp;
+                   development. We work on Python, Django, Mongodb, Responsive web design, CSS3,
+                    JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
+                <link>http://micropyramid.com</link>
+                <category domain="micropyramid.com">
+                MicroPyramid | Web Development | Mobile App Development
+                </category>
+                <copyright>Copyright 2014 MicroPyramid Informatics Private Limited</copyright>
+                <language>en-us</language>
+                <image>
+                <url>http://micropyramid.com/static/site/images/logo.png</url>
+                <title>MicroPyramid | Web Development | Mobile App Development</title>
+                <link>http://micropyramid.com</link>
+                <description>MicroPyramid python development company.
+                 Our ambit of service encompasses and is as vivid as e-commerce,
+                 web applications, news portals, community and job portals design &amp;
+                  development. We work on Python, Django, Mongodb, Responsive web design, CSS3,
+                   JavaScript, Jquery, Angularjs, Amazon web services, iphone, ruby on rails</description>
+                </image>
+                    '''
+    if 'category' in request.GET.keys():
+        posts = Post.objects.filter(status='P', category__name__icontains=request.GET.get('category')).order_by('-updated_on')[:10]
+    else:
+        posts = Post.objects.filter(status='P').order_by('-updated_on')[:10]
+
+    for post in posts:
+
+        nowtuple = post.updated_on.timetuple()
+        nowtimestamp = time.mktime(nowtuple)
+        published_date = utils.formatdate(nowtimestamp)
+
+        xml = xml + '<item><title><![CDATA[' + post.title + ']]></title>'
+        xml = xml + '<description><![CDATA[' + post.content + ']]></description>'
+        xml = xml + '<link>http://micropyramid.com/blog/' + post.slug + '/</link>'
+        xml = xml + '<category domain="micropyramid.com"><![CDATA[' + post.category.name + ']]></category>'
+        xml = xml + '<comments>http://micropyramid.com/blog/' + post.slug + '/</comments>'
+        xml = xml + '<pubDate>' + published_date + '</pubDate>'
+        xml = xml + '<guid>http://micropyramid.com/blog/' + post.slug + '/</guid></item>'
+
+    xml = xml + '</channel></rss>'
+
+    return HttpResponse(xml, content_type="text/xml")
