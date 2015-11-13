@@ -20,7 +20,8 @@ def sitemap(request):
     categories = Category.objects.filter(is_display=True)
     for category in categories:
         if category.post_set.filter(status='P').exists():
-            xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+            xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug
+            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     posts = Post.objects.filter(status="P")
     for post in posts:
@@ -33,9 +34,11 @@ def sitemap(request):
     topics = Topic.objects.filter(status="Approved")
     for topic in topics:
         if topic.parent:
-            xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.parent.slug + '/' + topic.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+            xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.parent.slug + '/' + topic.slug
+            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
         else:
-            xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+            xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.slug
+            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     xml = xml + '</urlset>'
 
