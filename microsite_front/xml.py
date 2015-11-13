@@ -17,9 +17,10 @@ def sitemap(request):
     for page in pages:
         xml = xml + '<url><loc>https://micropyramid.com/page/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
-    categories = Category.objects.all()
+    categories = Category.objects.filter(is_display=True)
     for category in categories:
-        xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        if category.post_set.filter(status='P').exists():
+            xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     posts = Post.objects.filter(status="P")
     for post in posts:
