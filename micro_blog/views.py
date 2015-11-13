@@ -99,7 +99,7 @@ def site_blog_home(request):
 
     posts = Post.objects.filter(status='P')
     no_pages = int(math.ceil(float(posts.count()) / items_per_page))
-    blog_posts = posts.order_by('-created_on')[(page - 1) * items_per_page:page * items_per_page]
+    blog_posts = posts.order_by('-updated_on')[(page - 1) * items_per_page:page * items_per_page]
 
     c = {}
     c.update(csrf(request))
@@ -151,7 +151,7 @@ def blog_article(request, slug):
 
 def blog_tag(request, slug):
     tag = get_object_or_404(Tags, slug=slug)
-    blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by('-created_on')
+    blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by('-updated_on')
     items_per_page = 6
     if "page" in request.GET:
         if not request.GET.get('page').isdigit():
@@ -171,7 +171,7 @@ def blog_tag(request, slug):
 
 def blog_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    blog_posts = Post.objects.filter(category=category, status="P").order_by('-created_on')
+    blog_posts = Post.objects.filter(category=category, status="P").order_by('-updated_on')
     items_per_page = 6
     if "page" in request.GET:
         if not request.GET.get('page').isdigit():
@@ -190,7 +190,7 @@ def blog_category(request, slug):
 
 
 def archive_posts(request, year, month):
-    blog_posts = Post.objects.filter(status="P", created_on__year=year, created_on__month=month).order_by('-created_on')
+    blog_posts = Post.objects.filter(status="P", updated_on__year=year, updated_on__month=month).order_by('-updated_on')
     items_per_page = 6
     if "page" in request.GET:
         if not request.GET.get('page').isdigit():

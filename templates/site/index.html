@@ -171,7 +171,7 @@
           {% for post in latest_posts|slice:":1" %}
           <span itemscope itemType="http://schema.org/BlogPosting">
             <span class="title"><a href="/blog/{{post.slug}}/"><span itemprop="headline">{{ post.title }}</span></a></span>
-            <span class="date-author"><span class="author" itemprop="author"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ post.user.get_full_name }}</span></span></span> <span class="date"><a href="/blog/{{post.created_on|date:"Y"}}/{{post.created_on|date:"n"}}"><span itemprop="datePublished">{{ post.created_on|date:"d F Y" }}</span></a></span></span>
+            <span class="date-author"><span class="author" itemprop="author"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ post.user.get_full_name }}</span></span></span> <span class="date"><a href="/blog/{{post.updated_on|date:"Y"}}/{{post.updated_on|date:"n"}}"><span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></a></span></span>
             <span class="desc"><a href="/blog/{{post.slug}}/"><span itemprop="description">{{ post.content|safe|truncatewords:45 }}</span></a></span>
           </span>
           {% endfor %}
