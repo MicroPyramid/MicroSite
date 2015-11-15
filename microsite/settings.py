@@ -218,7 +218,7 @@ LOGGING = {
 
 # ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
-SITE_URL = "http://micropyramid.com"
+SITE_URL = "https://micropyramid.com"
 
 # the fully-qualified path to the provider's backend parser
 INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'

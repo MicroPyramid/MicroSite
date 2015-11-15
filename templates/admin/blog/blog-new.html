@@ -130,7 +130,7 @@
         $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
       },
       dataType: 'json',
-      beforeSend: function() { 
+      beforeSend: function() {
         $("#save_blog_post").attr("disabled", "disabled");
       },
       success: function(data) {
