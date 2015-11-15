@@ -216,7 +216,6 @@ def admin_post_list(request):
 
 @login_required
 def new_post(request):
-    print request.POST
     if request.method == 'POST':
         validate_blog = BlogpostForm(request.POST)
         if validate_blog.is_valid():
@@ -251,15 +250,14 @@ def new_post(request):
             message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '
             message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
 
-            # sending_msg.set_html(message)
-            # sending_msg.set_text('New blog post has been created')
-            # sending_msg.set_from(request.user.email)
-            # sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
-            # sg.send(sending_msg)
+            sending_msg.set_html(message)
+            sending_msg.set_text('New blog post has been created')
+            sending_msg.set_from(request.user.email)
+            sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
+            sg.send(sending_msg)
 
             data = {'error': False, 'response': 'Blog Post created'}
         else:
-            print validate_blog.errors
             data = {'error': True, 'response': validate_blog.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
