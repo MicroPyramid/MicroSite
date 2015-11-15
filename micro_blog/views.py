@@ -115,8 +115,8 @@ def blog_article(request, slug):
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
     ln = requests.get('https://www.linkedin.com/countserv/count/share?url=http://micropyramid.com/blog/'+slug+'&format=json')
     minified_url = ''
-    if 'HTTP_HOST' in request.META.keys():
-        minified_url = google_mini('http://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
+    # if 'HTTP_HOST' in request.META.keys():
+    #     minified_url = google_mini('http://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
 
     linkedin = {}
     linkedin.update(ln.json())
@@ -215,11 +215,13 @@ def admin_post_list(request):
 
 @login_required
 def new_post(request):
+    print request.POST
     if request.method == 'POST':
         validate_blog = BlogpostForm(request.POST)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
             blog_post.user = request.user
+            blog_post.meta_description = request.POST['meta_description']
             blog_post.status = 'D'
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
@@ -248,14 +250,15 @@ def new_post(request):
             message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '
             message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
 
-            sending_msg.set_html(message)
-            sending_msg.set_text('New blog post has been created')
-            sending_msg.set_from(request.user.email)
-            sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
-            sg.send(sending_msg)
+            # sending_msg.set_html(message)
+            # sending_msg.set_text('New blog post has been created')
+            # sending_msg.set_from(request.user.email)
+            # sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
+            # sg.send(sending_msg)
 
             data = {'error': False, 'response': 'Blog Post created'}
         else:
+            print validate_blog.errors
             data = {'error': True, 'response': validate_blog.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
@@ -272,6 +275,7 @@ def edit_blog_post(request, blog_slug):
         validate_blog = BlogpostForm(request.POST, instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
+            blog_post.meta_description = request.POST['meta_description']
             blog_post.status = 'D'
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
