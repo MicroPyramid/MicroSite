@@ -22,7 +22,7 @@ def get_categories(context):
 
 @register.assignment_tag(takes_context=True)
 def get_latest_posts(context):
-    return Post.objects.filter(status='P').order_by('-created_on')[:10]
+    return Post.objects.filter(status='P').order_by('-updated_on')[:10]
 
 
 @register.assignment_tag(takes_context=True)

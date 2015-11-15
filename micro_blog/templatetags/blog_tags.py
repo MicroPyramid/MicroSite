@@ -9,7 +9,7 @@ register = template.Library()
 def get_archives(context):
     archives = []
     dates = []
-    for each_object in Post.objects.filter(status='P').order_by('created_on').values('created_on'):
+    for each_object in Post.objects.filter(status='P').order_by('updated_on').values('updated_on'):
         for date in each_object.values():
             dates.append((date.year, date.month, 1))
 
