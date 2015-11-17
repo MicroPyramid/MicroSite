@@ -14,14 +14,14 @@ class micro_blog_forms_test(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro-test', 'mp')
         self.category = Category.objects.create(name='django', description='django desc')
-        self.blogppost = Post.objects.create(title='python introduction', user=self.user, content='This is content', category=self.category, status='D')
+        self.blogppost = Post.objects.create(title='python introduction', user=self.user, content='This is content', category=self.category, status='D', meta_description='meta')
 
     def test_blogpostform(self):
-        form = BlogpostForm(data={'title':'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D'})
+        form = BlogpostForm(data={'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta'})
         self.assertTrue(form.is_valid())
 
     def test_BlogCategoryForm(self):
-        form = BlogCategoryForm(data={'name':'django form', 'description': 'django'})
+        form = BlogCategoryForm(data={'name': 'django form', 'description': 'django'})
         self.assertTrue(form.is_valid())
 
 
@@ -70,9 +70,6 @@ class micro_blogviews_get(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
         self.category = Category.objects.create(name='django', description='django desc')
-        print "django category"
-        print self.category.__dict__
-        print 'dict'
         self.blogppost = Post.objects.create(title='python introduction', user=self.user, content='This is content', category=self.category, status='D')
 
     def test_blog_get(self):
@@ -162,36 +159,36 @@ class micro_blog_post_data(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # with correct input
-        response = self.client.post('/blog/new-post/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'tags': 'django'})
+        response = self.client.post('/blog/new-post/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'tags': 'django', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Blog Post created' in response.content)
 
-        response = self.client.post('/blog/new-post/', {'title': 'python', 'content': 'This is content', 'category': self.category.id, 'status': 'P', 'tags': 'python'})
+        response = self.client.post('/blog/new-post/', {'title': 'python', 'content': 'This is content', 'category': self.category.id, 'status': 'P', 'tags': 'python', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Blog Post created' in response.content)
 
-        response = self.client.post('/blog/new-post/', {'title': 'Django', 'content': 'This is content', 'category': self.category.id, 'status': 'T', 'tags': 'django'})
+        response = self.client.post('/blog/new-post/', {'title': 'Django', 'content': 'This is content', 'category': self.category.id, 'status': 'T', 'tags': 'django', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Blog Post created' in response.content)
 
         # with wrong input
-        response = self.client.post('/blog/new-post/',{'content':'This is content', 'category': self.category.id, 'status': 'D'})
+        response = self.client.post('/blog/new-post/',{'content':'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Blog Post created' in response.content)
 
-        response = self.client.post('/blog/edit-post/python-introduction/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D'})
+        response = self.client.post('/blog/edit-post/python-introduction/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Blog Post edited' in response.content)
 
-        response = self.client.post('/blog/edit-post/python-introduction/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'P'})
+        response = self.client.post('/blog/edit-post/python-introduction/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'P', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Blog Post edited' in response.content)
 
-        response = self.client.post('/blog/edit-post/python-introduction/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'T', 'tags': 'django python'})
+        response = self.client.post('/blog/edit-post/python-introduction/', {'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'T', 'tags': 'django python', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Blog Post edited' in response.content)
 
-        response = self.client.post('/blog/edit-post/python-introduction/', {'content': 'This is content', 'category': self.category.id, 'status': 'D', 'tags': 'python'})
+        response = self.client.post('/blog/edit-post/python-introduction/', {'content': 'This is content', 'category': self.category.id, 'status': 'D', 'tags': 'python', 'meta_description': 'meta'})
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Blog Post edited' in response.content)
 

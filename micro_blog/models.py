@@ -68,6 +68,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
+    meta_description = models.TextField(max_length=500, default='')
 
     def __unicode__(self):
         return self.title

@@ -1,11 +1,15 @@
 {% extends 'site/blog/base.html' %}
 
 {% block title %}
-    {{ post.title }} - {{ block.super }}
+    {{ post.title }} - Micropyramid
 {% endblock %}
 
 {% block meta-description %}
+{%  if not post.meta_description %}
   <meta name="description" content="{{ post.title }} - MicroPyramid." />
+{% else %}
+  <meta name="description" content="{{ post.meta_description }}" />
+{% endif %}
 {% endblock %}
 
 {% block extra-head %}

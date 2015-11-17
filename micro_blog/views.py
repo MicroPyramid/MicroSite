@@ -115,6 +115,7 @@ def blog_article(request, slug):
     # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
     ln = requests.get('https://www.linkedin.com/countserv/count/share?url=https://micropyramid.com/blog/'+slug+'&format=json')
     minified_url = ''
+
     if 'HTTP_HOST' in request.META.keys():
         minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
 
@@ -220,6 +221,7 @@ def new_post(request):
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
             blog_post.user = request.user
+            blog_post.meta_description = request.POST['meta_description']
             blog_post.status = 'D'
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
@@ -272,6 +274,7 @@ def edit_blog_post(request, blog_slug):
         validate_blog = BlogpostForm(request.POST, instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
+            blog_post.meta_description = request.POST['meta_description']
             blog_post.status = 'D'
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
