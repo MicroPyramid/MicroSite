@@ -117,7 +117,7 @@ def blog_article(request, slug):
     minified_url = ''
 
     if 'HTTP_HOST' in request.META.keys():
-        minified_url = google_mini('http://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
+        minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
 
     linkedin = {}
     linkedin.update(ln.json())
