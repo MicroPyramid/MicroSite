@@ -1,0 +1,51 @@
+{% extends 'site/base.html' %}
+{% block title %}
+    Sitemap | {{ block.super }}
+{% endblock %}
+
+{% block meta-description %}
+  <meta name="description" content="Sitemap - MicroPyramid." />
+{% endblock %}
+
+{% block stage %}
+{% load blog_tags %}
+<div class='container'>
+<ul class="sitemap_list">
+    {% if sitemap_links.number == 1  %}
+    <li class="sitemap-parent" ><a href='https://micropyramid.com/'>Home</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/how-we-do/'>How We Do</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/tools-we-use/'>Tools We Use</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/contact-us/'>Contact Us</a></li>
+    {% endif %}
+
+    {% if sitemap_links|get_object_list_class:"Book" %}
+    <li class="sitemap-parent"><a href='https://micropyramid.com/books/'>Books</a></li>
+    {% endif %}
+
+    {% for link in sitemap_links %}
+    {% if link|get_class_name == 'Book' %}
+      <li class="sitemap-child"><a href='https://micropyramid.com/books/{{link.slug}}'>{{ link.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if sitemap_links|get_object_list_class:"Category" %}
+    <li class="sitemap-parent"><a href='https://micropyramid.com/blog/'>Blog</a></li>
+    {% endif %}
+
+    {% for link in sitemap_links %}
+    {% if link|get_class_name == 'Category' %}
+      <li class="sitemap-child"><a href='https://micropyramid.com/blog/category/{{link.slug}}'>{{ link.name }} Posts</a></li>
+    {% endif %}
+    {% endfor %}
+
+
+{% for page in sitemap_links.paginator.page_range %}
+  {% if page == sitemap_links.number %}
+  {% else %}
+    <li class="sitemap-parent"><a href="/sitemap?page={{ page }}">Site map {{ page }}</a></li>
+  {% endif %}
+{% endfor %}
+
+</ul>
+</div>
+{% endblock %}

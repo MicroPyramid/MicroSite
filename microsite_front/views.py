@@ -1,5 +1,7 @@
+from itertools import chain
 from django.shortcuts import render
 from django.http.response import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from micro_admin.models import career
 import requests
 from django.conf import settings
@@ -7,6 +9,8 @@ from mimetypes import MimeTypes
 from boto.s3.connection import S3Connection
 import json
 from datetime import datetime, timedelta
+from micro_blog.models import Category
+from books.models import Book
 
 
 def index(request):
@@ -99,3 +103,18 @@ def s3_objects_set_metadata(request):
 
     return render(request, 'site/tools/s3_objects_set_metadata.html')
 
+
+def html_sitemap(request):
+    page = request.GET.get('page')
+    # categories = Category.objects.filter(is_display=True)
+    categories = Category.objects.all()
+    books = Book.objects.filter(status='Approved', privacy='Public')
+    sitemap_links = list(chain(books, categories))
+    object_list = Paginator(sitemap_links, 100)
+    try:
+        sitemap_links = object_list.page(page)
+    except PageNotAnInteger:
+        sitemap_links = object_list.page(1)
+    except EmptyPage:
+        sitemap_links = object_list.page(object_list.num_pages)
+    return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links})
