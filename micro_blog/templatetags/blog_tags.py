@@ -47,3 +47,16 @@ def is_editable_by(post,user):
 @register.filter
 def is_deletable_by(post,user):
     return post.is_deletable_by(user)
+
+
+@register.filter
+def get_class_name(value):
+    return value.__class__.__name__
+
+
+@register.filter
+def get_object_list_class(object_list, class_name):
+    for c in object_list:
+        if c.__class__.__name__ == class_name:
+            return True
+    return False

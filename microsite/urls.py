@@ -19,6 +19,7 @@ urlpatterns = patterns(
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^portal/employee/', include('employee.urls', namespace='employee')),
     url(r'^books/', include('books.urls', namespace='books')),
+    url(r'^sitemap/$', 'microsite_front.views.html_sitemap'),
     url(r'^(?P<slug>[-\w]+)/$', 'pages.views.site_page'),
     url(r'^rss.xml$', 'microsite_front.xml.rss'),
     url(r'^blog.rss$', 'microsite_front.xml.blog_rss'),
