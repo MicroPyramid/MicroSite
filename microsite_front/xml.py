@@ -17,7 +17,7 @@ def sitemap(request):
 
     pages = Page.objects.filter(is_active=True)
     for page in pages:
-        xml = xml + '<url><loc>https://micropyramid.com/page/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>https://micropyramid.com/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
