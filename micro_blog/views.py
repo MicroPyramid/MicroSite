@@ -351,7 +351,7 @@ def contact(request):
     validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
 
-    if 'category' in request.POST.keys():
+    if 'enquery_type' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
             contact = simplecontact.objects.create(full_name=request.POST.get('full_name'), message=request.POST.get('message'),\
                                                     email=request.POST.get('email'), phone=request.POST.get('phone') if request.POST.get('phone') else False)
