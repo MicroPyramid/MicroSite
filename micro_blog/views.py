@@ -351,41 +351,48 @@ def contact(request):
     validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
 
-    if 'category' in request.POST.keys():
+    if 'enquery_type' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
-            contact = simplecontact.objects.create(full_name=request.POST.get('full_name'), message=request.POST.get('message'),\
-                                                    email=request.POST.get('email'), phone=request.POST.get('phone') if request.POST.get('phone') else False)
-            Contact.objects.create(contact_info=contact, category=request.POST.get('category'), domain=request.POST.get('domain'),\
-                domain_url=request.POST.get('domain_url'), skype=request.POST.get('skype'), country=request.POST.get('country'),\
-                budget=request.POST.get('budget'), technology=request.POST.get('technology'),\
-                requirements=request.POST.get('requirements'), enquery_type=request.POST.get('enquery_type'))
+            contact = simplecontact.objects.create(
+                full_name=request.POST.get('full_name'), message=request.POST.get('message'),
+                email=request.POST.get('email'),
+                phone=request.POST.get('phone') if request.POST.get('phone') else False
+            )
+            Contact.objects.create(
+                contact_info=contact, domain=request.POST.get('domain'),
+                domain_url=request.POST.get('domain_url'), country=request.POST.get('country'),
+                enquery_type=request.POST.get('enquery_type')
+            )
         else:
             errors = {}
             errors = dict((validate_simplecontact.errors).items() + (validate_contact.errors).items())
             data = {'error': True, 'errinfo': errors}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-
-    if validate_simplecontact.is_valid():
-        simplecontact.objects.get_or_create(full_name=request.POST.get('full_name'), message=request.POST.get('message'), email=request.POST.get('email'),\
-                                                phone=request.POST.get('phone') if request.POST.get('phone') else False)
     else:
-        errors = {}
-        errors = dict((validate_simplecontact.errors).items())
-        data = {'error': True, 'errinfo': errors}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+        if validate_simplecontact.is_valid():
+            simplecontact.objects.get_or_create(
+                full_name=request.POST.get('full_name'), message=request.POST.get('message'),
+                email=request.POST.get('email'),
+                phone=request.POST.get('phone') if request.POST.get('phone') else False
+            )
+        else:
+            errors = {}
+            errors = dict((validate_simplecontact.errors).items())
+            data = {'error': True, 'errinfo': errors}
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
-    message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "+request.POST.get('email')+"</p><p>Message: "+request.POST.get('message')+"</p>"
+    message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "
+    message += request.POST.get('email')+"</p><p>Message: "+request.POST.get('message')+"</p>"
 
     if request.POST.get('phone'):
         message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
 
-    if 'category' in request.POST.keys():
-        message += "<p>Skype ID: "+request.POST.get('skype')+"</p><p>Country: "+request.POST.get('country')+"</p><p><b>Domain Details: </b></p><p>Domain: "+\
-                    request.POST.get('domain')+ "</p><p>Domain URL: "+request.POST.get('domain_url')+"</p>"
+    if 'enquery_type' in request.POST.keys():
+        message += "<p><b>Domain Details: </b></p><p>Domain: "+request.POST.get('domain')+\
+                    "</p><p>Domain URL: "+request.POST.get('domain_url')+"</p>"
 
-        message += "<p><b>General Information: </b></p><p>Category: "+request.POST.get('category')+"</p><p>Requirements: "+\
-                    request.POST.get('requirements')+"</p><p>Technology: "+request.POST.get('technology')+"</p><p>Enquery Type: "+\
-                    request.POST.get('enquery_type')+"</p><p>Budget: "+request.POST.get('budget')+"</p>"
+        message += "<p><b>General Information: </b></p>"+"<p>Enquery Type: "+\
+                    request.POST.get('enquery_type')+"</p><p>Country: "+request.POST.get('country')
 
     sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 

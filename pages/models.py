@@ -36,23 +36,6 @@ class simplecontact(models.Model):
 
 
 class Contact(models.Model):
-    CONTACT_TYPES = (
-                    ('Hire', 'Hire Us'),
-                    ('Contact', 'Contact Us'),
-                    ('Report', 'Report Issue'),
-                    )
-
-    CONTACT_REQUIREMENTS = (
-                            ('new site', 'New website from scratch'),
-                            ('revamp', 'Revamp existing website / application'),
-                            ('new features', 'Addition of new features'),
-                            ('minor changes', 'Minor design changes / tweaks'),
-                            ('integration', 'Integrate selected platform into my website'),
-                            ('security', 'Enhance security to my application'),
-                            ('performance', 'Tune performance of my application'),
-                            ('maintenance', 'Maintenance of web application / server'),
-                            ('payment gateway', 'Integrate / enhance payment gateway'),
-                            )
 
     ENQUERY_TYPES = (
                     ('general', 'Request For Services'),
@@ -63,15 +46,10 @@ class Contact(models.Model):
                     ('others', 'Others'),
                     )
 
-    category = models.CharField(max_length=100, choices=CONTACT_TYPES)
-    domain = models.CharField(max_length=100)
-    domain_url = models.URLField(max_length=200)
+    domain = models.CharField(max_length=100, null=True, blank=True)
+    domain_url = models.URLField(max_length=200, null=True, blank=True)
     contact_info = models.ForeignKey(simplecontact)
-    skype = models.CharField(max_length=50)
     country = models.CharField(max_length=100)
-    budget = models.IntegerField()
-    technology = models.CharField(max_length=100)
-    requirements = models.CharField(max_length=200, choices=CONTACT_REQUIREMENTS)
     enquery_type = models.CharField(max_length=100, choices=ENQUERY_TYPES)
 
     def __unicode__(self):
