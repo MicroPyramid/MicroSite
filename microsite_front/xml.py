@@ -13,9 +13,13 @@ def sitemap(request):
     xml = '''<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'''
 
+    xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>'
+
     pages = Page.objects.filter(is_active=True)
     for page in pages:
         xml = xml + '<url><loc>https://micropyramid.com/page/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+
+    xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     categories = Category.objects.filter(is_display=True)
     for category in categories:
@@ -31,7 +35,7 @@ def sitemap(request):
     for book in books:
         xml = xml + '<url><loc>https://micropyramid.com/books/' + book.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
-    topics = Topic.objects.filter(status="Approved")
+    topics = Topic.objects.filter(status="Approved", book__status="Approved", book__privacy="Public")
     for topic in topics:
         if topic.parent:
             xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.parent.slug + '/' + topic.slug
