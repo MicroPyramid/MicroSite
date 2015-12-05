@@ -1,0 +1,60 @@
+$tab_max:991px;
+$tab_min:768px;
+$smob_max:767px;
+$smob_min:480px;
+$mob_max:479px;
+$mob_min:240px;
+$menu_bg:#fdfdfd;
+$theme_green:#748907;
+$stroke_color:#E1E1E1;
+$menu_shadow: 0px 2px 2px #ccc;
+$blog_shadow:0px 0px 1px #ccc;
+$clay:#EC6A5C;
+$yellow:#E0A713;
+$amazon:#f7981d;
+$django:#082d1f;
+$mongo:#46ab4d;
+$linux:#000000;
+$python:#406888;
+$facebook:#325c94;
+$linkedin:#0073b2;
+$twitter:#00abdc;
+$youtube:#c4302b;
+$google-plus:#ea3032;
+$github:#333333;
+$rss:#fa9b39;
+$page_title:#353333;
+$text_color:#696969;
+.opensans{
+	font-family: 'Open Sans', sans-serif;
+}
+.row{
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	cursor: pointer;
+	color: inherit;
+	text-decoration: none;
+	&:hover{
+		text-decoration: none;
+		color: inherit;
+	}
+}
+.bold_upper{
+	text-transform:uppercase;
+	font-weight:bold;
+}
+@mixin social-style{
+	font-size: 2.3rem;
+    margin: 0 3px;
+    color: #fff;
+    border-radius: 50%;
+    width: 35px;
+    display: inline-block;
+    height: 35px;
+    text-align: center;
+    padding-top: 6px;
+    transition: .5s all linear;
+}
+

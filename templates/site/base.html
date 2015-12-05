@@ -24,28 +24,21 @@
     <link rel="shortcut icon" href="/static/favicon.png">
     <!-- google fonts starts here-->
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
-
     <!-- google fonts ends here-->
     <!-- css starts here -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     {% compress css %}
-    <!-- <link rel="stylesheet" href="/static/site/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="/static/site/less/pace/pace-theme-flash.less" type="text/less">
     <link href="/static/site/less/style.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/mobile.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/responsive.less" rel="stylesheet" type="text/less">
     <link href="/static/site/less/tag.less" rel="stylesheet" type="text/less">
+    <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
+    <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
     <!-- css ends here -->
     <!-- scripts starts here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    {% compress js %}
-    <script src="/static/site/js/pace/pace.min.js"></script>
-    <script src="/static/site/js/bootstrap.js"></script>
-    {% endcompress %}
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
     <!-- scripts ends here -->
   </head>
@@ -60,185 +53,115 @@
       ga('send', 'pageview');
 
     </script>
-    <div id="wrap">
-      <!-- header starts here-->
-      <header id="header">
-        <!-- top row bg starts here-->
-        <!-- <div class="row marl top-gradient">
-        </div> -->
-        <!-- top row bg ends here-->
-        <!-- top row starts here -->
-        <!--<div id="topbar">
-          <div class="container">
-            <div class="row marl">
-              <div id="callus" class="col-md-6 col-sm-12">
-                <div class="clearfix ">
-                  <span><strong>Call us:</strong> +91-40-6599-6999</span>
-                  <span ><strong>Email:</strong> <a href="mailto:hello@micropyramid.com">hello@micropyramid.com</a></span>
+    <!-- push menu -->
+    <div class="mp-pusher" id="mp-pusher">
+      <!-- mp-menu -->
+      <nav id="mp-menu" class="mp-menu">
+        {% include 'site/side-bar-menu.html' %}
+      </nav>
+      <!-- /mp-menu -->
+      <div class="scroller">
+        <!-- this is for emulating position fixed of the nav -->
+        <div class="scroller-inner">
+          <!-- Top Navigation -->
+          <div class="codrops-top clearfix">
+          </div>
+          <div class="content clearfix">
+            <!-- mobile_menu wrap -->
+            <div id='mob_menu'>
+              <!-- row -->
+              <div class="row">
+                <span class='menu_navigator' id='trigger'>
+                <i class='fa fa-reorder'></i>
+                </span>
+                <!-- logo -->
+                <div class="logo">
+                  <div class='image_wrap'><img src='/static/site/images/new/company_logo.gif'></div>
+                </div>
+                <!--/ logo -->
+              </div>
+              <!-- row -->
+            </div>
+            <!--/ mobile_menu wrap -->
+            <!-- menu -->
+            <div id='base_menu' class='fixed_menu'>
+              <span class="logo">
+                <img src='/static/site/images/new/company_logo.gif'>
+              </span>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                  <a>Portfolio</a>
+                  <ul>
+                    <li><a>Web Design</a></li>
+                    <li><a>Development</a></li>
+                    <li><a>About MP</a></li>
+                  </ul>
+                </li>
+              </ul>
+              {% get_menus as menu_list %}
+              {% recurse menu.menu_set.all|dictsort:"lvl" with menu_list as menu %}
+              <ul>
+                {% loop %}
+                  <li><a href="{{menu.url}}">{{menu.title}}</a>
+                  {% child %}
+                  </li>
+                {% endloop %}
+              </ul>
+              {% endrecurse %}
+            </div>
+            <!--/ menu -->
+
+            {% block stage %}
+            {% endblock %}
+
+            {% block footer %}
+            <!-- footer links starts here -->
+            <div class="row marl" id="footer-links-mp">
+              <div class="container">
+                <div class="col-md-6 col-sm-12 footer-links">
+                  {% recurse menu_item.headerlinks_set.all with menu_list as menu_item %}
+                  <ul class="list-inline">
+                    <li><a href="/">Home</a></li>
+                    {% loop %}
+                      <li><a href="{{menu_item.url}}">{{menu_item.title|capfirst}}</a></li>
+                    {% child %} {% endloop %}
+                    <li><a href="/sitemap/">Sitemap</a></li>
+                  </ul>
+                  {% endrecurse %}
+                </div>
+                <div class="col-md-6 col-sm-12 footer-mp">
+                  Developed by Micropyramid.com using Django, Bootstrap and PostgreSQL
                 </div>
               </div>
-              <div id="top-social" class="col-md-6 col-sm-12">
-                <ul class="list-inline">
-                  <li><a href="https://www.facebook.com/MicroPyramid" class="facebook"><i class="fa fa-facebook"></i></a>
-                  </li>
-                  <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                  </li>
-                  <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play"><i class="fa fa-youtube-play"></i></a>
-                  </li>
-                  <li><a href="https://micropyramid.com/rss.xml" class="rss"><i class="fa fa-rss"></i></a>
-                  </li>
-                  <li><a href="http://google.com/+Micropyramid/" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                  </li>
-                  <li><a href="https://twitter.com/micropyramid" class="twitter"><i class="fa fa-twitter"></i></a>
-                  </li>
-                  <li><a href="https://github.com/micropyramid" class="github"><i class="fa fa-github"></i></a>
-                  </li>
-                </ul>
-              </div>
             </div>
-          </div>
-        </div>-->
-        <!-- top row ends here -->
-        <!-- logo and menu starts here -->
-        <div id="mainheader" class="fixedheader">
-          <div class="container">
-            <div class="row marl logo-menu">
-              <nav class="navbar navbar-default">
-                <div class="container">
-                  <!-- Brand and toggle get grouped for better mobile display -->
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><img src="/static/site/images/logo.png" alt="Micropyramid Logo">
-                    </a>
-                  </div>
-                  <!-- Collect the nav links, forms, and other content for toggling -->
-                  <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
-                    {% get_menus as menu_list%}
-                    {% recurse category.headerlinks_set.all with menu_list as category %}
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/">Home</a></li>
-
-                      {% loop %}
-                        <li><a href="{{category.url}}">{{category.title}}</a></li>
-                      {% child %} {% endloop %}
-
-                    </ul>
-                    {% endrecurse %}
-                  </div>
-                  <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-              </nav>
-            </div>
+            <!-- footer links ends here -->
+            {% endblock %}
           </div>
         </div>
-        <!-- logo and menu ends here -->
-      </header>
-      <!-- header ends here-->
-      {% block stage %} {% endblock %}
-      {% block footer %}
-      <footer>
-        <!--footer social start here -->
-        <div class="row marl" id="footer-social">
-          <div class="container">
-            <ul class="list-inline">
-              <li><a href="https://www.facebook.com/MicroPyramid" class="facebook"><i class="fa fa-facebook"></i></a>
-              </li>
-              <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin"><i class="fa fa-linkedin"></i></a>
-              </li>
-              <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play"><i class="fa fa-youtube-play"></i></a>
-              </li>
-              <li><a href="https://micropyramid.com/rss.xml" class="rss"><i class="fa fa-rss"></i></a>
-              </li>
-              <li><a href="http://google.com/+Micropyramid/" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              </li>
-              <li><a href="https://twitter.com/micropyramid" class="twitter"><i class="fa fa-twitter"></i></a>
-              </li>
-              <li><a href="https://github.com/micropyramid" class="github"><i class="fa fa-github"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!--footer social ends here -->
-      </footer>
-      <!-- our contact starts here -->
-      <div class="row marl" id="our-contact">
-        <!--  <h3 class="home-head">Reach Us</h3>
-          <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>-->
-        <div class="row marl contact-detail">
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark">
-            <div class="icon"><i class="fa fa-phone"></i></div>
-            <div class="text"><span class="head">Call Us</span>
-              <span class="desc">040 6599 6999</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark1">
-            <div class="icon"><i class="fa fa-envelope-o"></i></div>
-            <div class="text"><span class="head">E-Mail Address</span>
-              <span class="desc">hello@micropyramid.com</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark2">
-            <div class="icon"><i class="fa fa-map-marker"></i></div>
-            <div class="text"><span class="head">Reach US</span>
-              <span class="desc">
-              HIG499, Viswa sai dham apartment,
-              behind anupama hospital, 
-              6th phase KPHB, Hyderabad - 72</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark3">
-            <div class="icon"><i class="fa fa-clock-o"></i></div>
-            <div class="text"><span class="head">Office Timings</span>
-              <span class="desc">Monday - Friday : 10:00 - 19:00 <br />
-              Saturday : 10:00 - 19:00 </span>
-            </div>
-          </div>
-        </div>
-        {% block map %} {% endblock %}
+        <!-- /scroller-inner -->
       </div>
-      <!-- our contact ends here --> 
-      <!-- footer links starts here -->
-      <div class="row marl" id="footer-links-mp">
-        <div class="container">
-          <div class="col-md-6 col-sm-12 footer-links">
-            {% recurse menu_item.headerlinks_set.all with menu_list as menu_item %}
-            <ul class="list-inline">
-              <li><a href="/">Home</a></li>
-              {% loop %}
-                <li><a href="{{menu_item.url}}">{{menu_item.title|capfirst}}</a></li>
-              {% child %} {% endloop %}
-	      <li><a href="/sitemap/">Sitemap</a></li>
-            </ul>
-            {% endrecurse %}
-          </div>
-          <div class="col-md-6 col-sm-12 footer-mp">
-            Developed by Micropyramid.com using Django, Bootstrap and PostgreSQL
-          </div>
-        </div>
-      </div>
-      <!-- footer links ends here -->
-      {% endblock %}
+      <!-- /scroller -->
     </div>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- /pusher -->
+    <!--/ push menu -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     {% compress js %}
-    <script src="/static/site/js/isotope.js" defer></script>
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
+
+    <script type="text/javascript" src="/static/site/js/pace/pace.min.js"></script>
+    <script type="text/javascript" src="/static/site/js/bootstrap.js"></script>
+    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
+    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
+    <script type="text/javascript" src='/static/site/js/classie.js'></script>
+    <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-        $('.grid').isotope({
-          itemSelector: '.grid-item',
-          percentPosition: true,
-          masonry: {
-            columnWidth: '.grid-sizer'
-          }
-        });
+      new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
+    </script>
+    <script type="text/javascript">
+      $('.daimond_work').click(function(e){
+        $(this).hover();
       });
     </script>
     <script type="text/javascript">

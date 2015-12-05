@@ -75,6 +75,16 @@ class Menu(models.Model):
     def __unicode__(self):
         return self.title
 
+    def has_children(self):
+        if self.menu_set.exists():
+            return True
+        return False
+
+    def is_child(self):
+        if self.parent:
+            return True
+        return False
+
 
 def create_slug(tempslug):
     slugcount = 0

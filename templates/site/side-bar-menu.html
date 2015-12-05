@@ -1,0 +1,23 @@
+{% load recurse %}
+{% load menu %}
+
+{% get_menus as menu_list %}
+{% recurse menu.active_children|dictsort:"lvl" with menu_list as menu %}
+
+<div class="mp-level">
+  <h2 class="icon icon-world">{% if menu %}{{menu.title}}{% else %}Menu{% endif %}</h2>
+  {% if menu %}
+    <a class="mp-back" href="#">back</a>
+  {% endif %}
+  <ul>
+    {% loop %}
+    <li class="icon {% if menu.has_children %} icon-arrow-left {% endif %}">
+      <a href="{{menu.url}}">{% if menu.has_children %}<i class='fa fa-angle-left left_icon'></i>{% endif %}{{menu.title}}</a>
+      {% child %}
+    </li>
+    {% endloop %}
+  </ul>
+</div>
+
+{% endrecurse %}
+
