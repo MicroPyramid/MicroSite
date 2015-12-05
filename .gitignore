@@ -10,3 +10,5 @@ static/admin/images/*
 static/uploads
 .coverage
 fabfile
+.sass-cache
+static/site/scss/*.css

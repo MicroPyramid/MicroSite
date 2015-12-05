@@ -7,7 +7,7 @@ $mob_min:240px;
 $menu_bg:#fdfdfd;
 $theme_green:#748907;
 $stroke_color:#E1E1E1;
-$menu_shadow: 0px 2px 2px #ccc;
+$menu_shadow:1px 5px 5px #DEDCDC;
 $blog_shadow:0px 0px 1px #ccc;
 $clay:#EC6A5C;
 $yellow:#E0A713;
@@ -25,6 +25,12 @@ $github:#333333;
 $rss:#fa9b39;
 $page_title:#353333;
 $text_color:#696969;
+/* web development */
+$web_dev_brown:#8F6D3B;
+$web_dev_pink:#F1605D;
+$web_dev_head:#1B242B;
+$web_dev_text:#fdd9a5;
+/* web development */
 .opensans{
 	font-family: 'Open Sans', sans-serif;
 }
@@ -57,4 +63,7 @@ a{
     padding-top: 6px;
     transition: .5s all linear;
 }
-
+@mixin brand_contact($color){
+	background: $color;
+	border:1px darken($color,15%);
+}

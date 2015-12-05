@@ -8,6 +8,7 @@
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
+ var mob_menu=document.getElementById('mob_menu');
 ;( function( window ) {
 	
 	'use strict';
@@ -179,7 +180,7 @@
 			var levelFactor = ( this.level - 1 ) * this.options.levelSpacing,
 				translateVal = this.options.type === 'overlap' ? this.el.offsetWidth + levelFactor : this.el.offsetWidth;
 			
-			this._setTransform( 'translate3d(' + translateVal + 'px,0,0)' );
+			this._setTransform( 'translateX(' + translateVal + 'px)' );
 
 			if( subLevel ) {
 				// reset transform for sublevel
@@ -188,7 +189,7 @@
 				for( var i = 0, len = this.levels.length; i < len; ++i ) {
 					var levelEl = this.levels[i];
 					if( levelEl != subLevel && !classie.has( levelEl, 'mp-level-open' ) ) {
-						this._setTransform( 'translate3d(-100%,0,0) translate3d(' + -1*levelFactor + 'px,0,0)', levelEl );
+						this._setTransform( 'translateX(-100%) translateX(' + -1*levelFactor + 'px)', levelEl );
 					}
 				}
 			}
@@ -202,7 +203,7 @@
 		},
 		// close the menu
 		_resetMenu : function() {
-			this._setTransform('translate3d(0,0,0)');
+			this._setTransform('none');
 			this.level = 0;
 			// remove class mp-pushed from main wrapper
 			classie.remove( this.wrapper, 'mp-pushed' );
@@ -212,7 +213,8 @@
 		// close sub menus
 		_closeMenu : function() {
 			var translateVal = this.options.type === 'overlap' ? this.el.offsetWidth + ( this.level - 1 ) * this.options.levelSpacing : this.el.offsetWidth;
-			this._setTransform( 'translate3d(' + translateVal + 'px,0,0)' );
+			//this._setTransform( 'translate3d(' + translateVal + 'px,0,0)' );
+			this._setTransform('none');
 			this._toggleLevels();
 		},
 		// translate the el

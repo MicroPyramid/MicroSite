@@ -19,39 +19,6 @@
             </div>
           </form> -->
         </div>
-        <!-- / widget -->
-        <div class="col-xs-12 widget" id="tag-blue">
-          <h3><span>Categories</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_categories as categories %}
-            {% for category in categories %}
-            <li><a href="/blog/category/{{category.slug}}">{{ category.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!-- / widget -->
-        <div class="col-xs-12 widget" id="green">
-          <h3><span>Archives</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_archives as archives %}
-            {% for archive in archives %}
-                <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!-- / widget -->
-        <div class="col-xs-12 widget tags" id="pink">
-          <h3><span>Tags</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_tags as tags %}
-            {% for tag in tags %}
-            <li><a href="/blog/tag/{{tag.slug}}"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!-- / widget -->
-        
         <!--<div class="col-xs-12 widget widget-recent-entries" id="yellow">
           <h3><span>Recent posts</span></h3>
           <ul style="margin:0px;padding:0px;">

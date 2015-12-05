@@ -2,7 +2,7 @@
 
 #body{
 	font-family: 'Raleway', sans-serif;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 13px;
 	color: #4c4c4c;
 	line-height: 20px;
@@ -11,7 +11,7 @@
 	overflow-x:hidden!important;
 }
 body{
-    @extend #body;
+	@extend #body;
 }
 #banner_wrap{
 	height: 550px;
@@ -117,26 +117,26 @@ body{
 		}
 		.tab_image{
 			position: absolute;
-			top: 10%;
-			left: 10px;
+			top: 18%;
+			left: 20px;
 			opacity: 0.1;
 			max-width: 50%;
 			height: auto;
 			z-index: 0;
-			font-size: 320px;
+			font-size: 210px;
 			@media (min-width: $mob_min) and (max-width:$smob_max){
 				font-size: 200px;
 			}
 			@media (min-width: $tab_min) and (max-width:$tab_max){
-				font-size: 280px;
+				font-size: 200px;
 			}
 			@media(min-width: $mob_min) and (max-width:$mob_max){
 				display: none;
 			}
 		}
 		.title{
-			text-transform: uppercase;
-			font-size: 45px;
+			font-size: 40px;
+			font-weight:bold;
 			margin-bottom: 40px;
 			z-index: 1;
 			@media(min-width: $tab_min) and (max-width:$tab_max){
@@ -152,8 +152,8 @@ body{
 		}
 		.text{
 			padding-left:50%;
-			font-size: 18px;
-			line-height: 45px;
+			font-size: 16px;
+			line-height: 35px;
 			z-index: 1;
 			@media(min-width: $tab_min) and (max-width: $tab_max){
 				line-height: 40px;
@@ -187,6 +187,7 @@ body{
 			position: absolute;
 			bottom: 0px;
 			right: 0px;
+			top:55px;
 			@media(min-width: $mob_min) and (max-width:$smob_max){
 				display: none;
 			}
@@ -197,7 +198,6 @@ body{
 				padding: 9px 20px 9px 30px;
 				width: auto;
 				float: right;
-				background: rgba(255,255,255,0.4);
 				line-height: 0px;
 				li{
 					display: inline-block;
@@ -210,8 +210,8 @@ body{
 					}
 					.dot_each{
 						cursor: pointer;
-						width: 8px;
-						height: 8px;
+						width: 12px;
+						height: 12px;
 						border:2px solid #fff;
 						border-radius: 50%;
 						display: inline-block;
@@ -315,8 +315,7 @@ body{
 							.heading{
 								display: block;
 								font-size: 12px;
-								font-weight: 600;
-								text-transform: uppercase;
+								font-weight: 400;
 								padding-top: 4px;
 								@media(min-width: $mob_min) and (max-width:$smob_max){
 									font-size: 8px;
@@ -340,8 +339,11 @@ body{
 	//background: #4c4c4c;
 	//text-align: center;
 	box-shadow: $menu_shadow;
-	z-index: 1000;
+	position: relative;
+    z-index: 999999;
 	clear: both;
+	padding-top: 8px;
+	padding-bottom:2px;
 	.logo{
 		img{
 			position: relative;
@@ -356,6 +358,8 @@ body{
 		position: fixed;
 		top: 0px;
 		left: 0px;
+		transform:translateZ(0);
+		-webkit-transform:translate(0);
 	}
 	ul{
 		margin: 0px;
@@ -500,9 +504,10 @@ body{
 						}
 					}
 					.day{
-						font-size: 22px;
-						@media(min-width: $mob_min) and (max-width:$tab_max){
-							font-size: 17px;
+						font-size: 12px;
+						@extend .opensans;
+						@media (min-width: $mob_min) and (max-width:$tab_max){
+							font-size: 9px;
 						}
 					}
 				}
@@ -891,8 +896,9 @@ body{
 	.about_text{
 		p{
 			margin: 0px;
-			font-size: 15px;
+			font-size: 14px;
 			line-height: 30px;
+			font-weight:500;
 			@media(min-width: $mob_min) and (max-width:$smob_max){
 				font-size: 1em;
 				line-height: 1.5em;
@@ -1090,9 +1096,7 @@ body{
 			margin-right: 90px;
 			height: 190px;
 			transform:rotate(45deg);
-			background:#F0EEEE;
-			border:1px solid $stroke_color;
-			box-shadow: $blog_shadow;
+			background:#eee;
 			float: left;
 			z-index: 0;
 			position: relative;
@@ -1276,6 +1280,7 @@ body{
 					.description{
 						clear: both;
 						padding-top: 10px;
+						font-weight:500;
 						@media (min-width: $mob_min) and (max-width:$mob_max){
 							display: none;
 						}
@@ -1295,6 +1300,14 @@ body{
 }
 
 /* our_work */
+/* about-us */
+#about-us{
+	background: #fff;
+    padding: 50px 0px;
+    font-size: 20px;
+    line-height: 40px;
+}
+/* about-us */
 /* main_contaienr */
 #main_contaienr{
 	padding-top: 60px;
@@ -1318,10 +1331,15 @@ body{
 	background:$menu_bg;
 	box-shadow: $menu_shadow;
 	z-index: 1000;
-	position:fixed;
+	position:fixed!important;
 	top: 0px;
 	left:0px;
-	padding:5px;
+	padding:10px 5px;
+	.contact_mob{
+		font-size: 27px;
+		color: $theme_green;
+		cursor: pointer;
+	}
 	.menu_navigator{
 		color:#444;
 		font-size:1.8em;
@@ -1352,7 +1370,7 @@ body{
 /* base_menu */
 /* blog row starts here */
 .blog-row{
-	padding:70px;
+	padding:20px 70px;
 	@media (min-width: $mob_min) and (max-width: $tab_max){
 		padding:0px;
 	}
@@ -1418,6 +1436,7 @@ body{
 			margin-top:30px;
 			line-height:28px;
 			text-align:justify;
+			position: relative;
 			strong{
 				margin:15px 0px;
 				font-size:17px;
@@ -1555,9 +1574,10 @@ body{
 				width:100px;
 				padding-top:14px;
 				@media(min-width: $mob_min) and (max-width:$smob_max){
-					padding-left: 0px;
+					/* padding-left: 0px;
 					display: block;
-					width: auto;
+					width: auto; */
+					display: none;
 				}
 				.date_daimond{
 					width: 50px;
@@ -1568,7 +1588,7 @@ body{
 					font-weight: 600;
 					transform:rotate(45deg);
 					z-index: 0;
-					@media(min-width: $mob_min) and (max-width:$smob_max){
+					/* @media(min-width: $mob_min) and (max-width:$smob_max){
 						width: auto;
 						height: auto;
 						display: block;
@@ -1577,30 +1597,29 @@ body{
 						background: #f9f9f9;
 						color: $clay;
 						padding: 5px;
-					}
+					} */
 					.text_wrap{
 						transform:rotate(315deg);
 						text-align: center;
 						margin-left: -4px;
 						margin-top: 7px;
 						line-height: 15px;
-						@media(min-width: $mob_min) and (max-width:$smob_max){
+						/* @media(min-width: $mob_min) and (max-width:$smob_max){
 							transform:rotate(0deg);
 							margin: 0px;
 							//padding: 5px;
-						}
+						} */
 						.month{
 							font-size: 12px;
-							@media (min-width: $mob_min) and (max-width: $smob_max){
+							/* @media (min-width: $mob_min) and (max-width: $smob_max){
 								display: inline-block;
-							}
+							} */
 						}
 						.day{
-							font-size: 22px;
-							@media (min-width: $mob_min) and (max-width: $smob_max){
-								display: inline-block;
-								font-size: 14px;
-								padding-left: 5px;
+							font-size: 12px;
+							@extend .opensans;
+							@media (min-width: $mob_min) and (max-width:$tab_max){
+								font-size: 9px;
 							}
 						}
 					}
@@ -1619,6 +1638,9 @@ body{
 						font-weight:bold;
 						margin-bottom:10px;
 						font-size:18px;
+						@media(min-width: $mob_min) and (max-width:$smob_max){
+							color: $theme_green!important;
+						}
 					}
 				}
 				p{
@@ -1794,32 +1816,22 @@ body{
 /* prev_next_blog */
 .prev_next_blog{
 	padding: 10px 0px;
-	border-top: 1px solid $stroke_color;
-	border-bottom: 1px solid $stroke_color;
+	//border-top: 1px solid $stroke_color;
+	//border-bottom: 1px solid $stroke_color;
 	margin-top: 10px;
 	.prev{
-		padding: 5px 10px;
-		border:1px solid $theme_green;
+		padding: 3px 15px;
+		border:1px solid darken($theme_green,5%);
+		box-shadow: $blog_shadow;
 		color:$theme_green;
 		display: inline-block;
 		cursor: pointer;
 		transition:0.4s;
-		i{
-			padding-right: 5px;
-		}
-		&:hover{
-			background: $theme_green;
-			color: #fff;
-		}
+		font-weight: 800;
+		background: #fff;
 	}
 	.next{
 		@extend .prev;
-		i{
-			padding-left: 5px;
-			padding-right: 0px;
-			position: relative;
-			top: 1px;
-		}
 	}
 }
 /* prev_next_blog */
@@ -1880,6 +1892,9 @@ body{
 	font-weight: 600;
 	cursor: pointer;
 	z-index: 2000;
+	@media(min-width: $mob_min) and (max-width:$smob_max){
+		display: none;
+	}
 	span{
 		display: block;
 	}
@@ -1892,13 +1907,16 @@ body{
 	left: 0px;
 	z-index: 30000;
 	background: rgba(0,0,0,0.6);
+	/* @media (min-width: $mob_min) and (max-width:$smob_max){
+		position: absolute;
+	} */
 	display: none;
 }
 .contact_div_wrap{
 	display: none;
 	position: fixed;
-	background: #f2f2f2;
-	//background: #fff;
+	//background: #f2f2f2;
+	background: #fff;
 	padding: 15px;
 	z-index: 30001;
 	width: 50%;
@@ -1907,25 +1925,32 @@ body{
 	margin: 0px auto;
 	margin-top: 8%;
 	min-height: 200px;
+	@media (min-width: $tab_max) and (max-width:1200px){
+		width: 75%;
+	}
+	@media (min-width: $tab_min) and (max-width:$tab_max){
+		width: 85%;
+	}
+	@media (min-width: $mob_min) and (max-width:$smob_max){
+		width: 92%;
+		position: absolute;
+	}
 	.close_contact{
 		position: absolute;
-		top: -25px;
-		right: -25px;
-		//border:1px solid $theme_green;
+		top: -12px;
+		right: -10px;
 		color: #fff;
-		//background: lighten($theme_green,5%);
 		text-align: center;
 		cursor: pointer;
 		font-weight: 800;
-		font-size: 17px;
+		font-size: 16px;
 		width:25px;
 		height: 25px;
 		display: inline-block;
-		text-align: center;
-		padding-top: 0px;
 		border:2px solid rgba(255,255,255,0.8);
 		border-radius: 50%;
-		background: rgba(116,137,7,0.4);
+		//background: rgba(116,137,7,0.4);
+		background: $theme_green;
 	}
 	.form_div{
 		.form-control{
@@ -1975,37 +2000,275 @@ body{
 			}
 		}
 	}
+	.contact_social{
+		ul{
+			margin: 10px 0px;
+			padding: 0px;
+			text-align: center;
+			li{
+				list-style: none;
+				display: inline-block;
+				.social_each{
+					width: 30px;
+					height: 30px;
+					text-align: center;
+					display: inline-block;
+					padding-top: 5px;
+					font-size: 20px;
+					margin: 3px;
+					cursor: pointer;
+					color: #fff;
+					&.fb{
+						@include brand_contact($facebook);
+					}
+					&.in{
+						@include brand_contact($linkedin);
+					}
+					&.youtube{
+						@include brand_contact($youtube);
+					}
+					&.rss{
+						@include brand_contact($rss);
+					}
+					&.gplus{
+						@include brand_contact($google-plus);
+					}
+					&.twit{
+						@include brand_contact($twitter);
+					}
+					&.git{
+						@include brand_contact(#333);
+					}
+				}
+			}
+		}
+	}
+	.content{
+		//display: none;
+	}
 	.address_div{
 		position: relative;
+		padding-left: 0px;
+		text-align: center;
+		.address_wrap{
+			float: left;
+			width: 50%;
+			height: 90px;
+			@media (min-width: $mob_min) and (max-width:$smob_max){
+				float: none;
+				width: 100%;
+				margin-bottom: 5px;
+			}
+			//display: table;
+			//width: 100%;
+			//background: $clay;
+			.address{
+				/* display: table-cell;
+				vertical-align: middle; */
+				span{
+					display: block;
+				}
+			}
+		}
 		h4{
-			color: $twitter;
+			color: $theme_green;
 			font-weight: 700;
+			margin: 0px;
+			margin-bottom: 5px;
 		}
 		i{
 			position: absolute;
-			font-size: 100px;
+			font-size: 50px;
 			color: $theme_green;
 			opacity: 0.1;
 			top: 0px;
-			left: 15px;
+			left: 0px;
 		}
+	}
+	.mail_us{
+		@extend .cal_us;
 	}
 	.cal_us{
 		position: relative;
-		h4{
-			color: $twitter;
+		float: left;
+		width: 50%;
+		height: 50px;
+		@media (min-width: $mob_min) and (max-width:$smob_max){
+			height: 30px;
+		}
+		@media (min-width: $mob_min) and (max-width:$smob_max){
+			float: none;
+			width: 100%;
+		}
+		//padding-left: 15px;
+		//display: table;
+		/* h4{
+			color: $theme_green;
 			font-weight: 700;
+			display: inline-block;
+			position: relative;
+			top: 2px;
+			padding-right: 5px;
+			display: table-cell;
+			vertical-align: middle;
+		} */
+		h4{
+			display: none;
+		}
+		.content{
+			@extend .opensans;
+			//color: $theme_green;
+			font-weight: 700;
+			font-size: 25px;
+			@media (min-width: $mob_min) and (max-width:$smob_max){
+				font-size: 1.5em;
+			}
 		}
 		i{
-			bottom: -100px;
-			left: -15px;
+			top: -12px;
+			font-size: 40px;
+			@media (min-width: $mob_min) and (max-width:$smob_max){
+				font-size: 2.2em;
+			}
 		}
+	}
+	.input-group{
+		margin-bottom: 5px;
 	}
 	.input-group-addon{
 		border-radius: 0px;
 		border:1px solid rgba(116,137,7,0.4);
 		border-right: none;
 		color: $theme_green;
+		background: rgba(116,137,7,0.3);
+		i{
+			width: 20px;
+		}
+	}
+	.button_row{
+		padding: 5px 0px;
+		text-align: center;
+		.submit_contact{
+			display: inline-block;
+			text-align: center;
+			background: #4c4c4c;
+			color: #fff;
+			cursor: pointer;
+			padding: 8px 25px;
+			width: 60%;
+			margin: 0px auto;
+			padding-left: 20px;
+			font-size: 15px;
+			font-weight: 600;
+			&:hover{
+				//transform: scale3d(0.99,0.99,0.99)
+			}
+			i{
+				padding-right: 9px;
+			}
+		}
 	}
 }
 /* conatact_us_icon */
+
+/* web_development */
+#web_development{
+	.banner{
+		background: $web_dev_brown;
+		color: $web_dev_text;
+		padding: 25px;
+		position: relative;
+		height: 500px;
+		overflow: hidden;
+		line-height: 25px;
+		background: url(../images/banners_web_dev/develop-left-pattern.png) $web_dev_brown;
+		.left_banner{
+			width: 43%;
+			@media (min-width: $tab_min) and (max-width: 1200px){
+				width: 30%;
+			}
+		}
+		.title{
+			color: $web_dev_head;
+			font-size: 35px;
+			font-weight: 500;
+			line-height: 50px;
+			padding-top: 150px;
+			margin-bottom: 25px;
+			@media (min-width: $tab_max) and (max-width: 1200px){
+				font-size: 30px;
+				padding-top: 100px;
+			}
+			@media (min-width: $tab_min) and (max-width: $tab_max){
+				font-size: 2.2em;
+				padding-top: 40%;
+				margin-bottom: 10px;
+				line-height: 1.5em;
+			}
+		}
+		.right_banner{
+			position: absolute;
+			overflow: hidden;
+			width: 900px;
+			height: 900px;
+			background: $web_dev_pink;
+			transform:rotate(35deg);
+			top: -410px;
+			right: -242px;
+			box-shadow: 10px 10px 10px darken($web_dev_brown,15%);
+			z-index: 10;
+			@media (min-width: $tab_max) and (max-width: 1200px){
+				right: -30%;
+				top: -85%;
+			}
+			@media (min-width: $tab_min) and (max-width: $tab_max){
+				right: -63%;
+				top: -85%;
+			}
+			@media(min-width: 901px) and (max-width:$tab_max){
+				right: -45%;
+			}
+			.right_wrapper{
+				transform:rotate(325deg);
+				background: url(../images/banners_web_dev/develop-right-pattern.png) $web_dev_pink;
+				width: 700px;
+				height: 700px;
+				position: relative;
+				top: 450px;
+				left: 73px;
+				@media (min-width: $tab_max) and (max-width: 1200px){
+					top: 49%;
+					left: 11%;
+				}
+				@media(min-width: $tab_min) and (max-width: $tab_max){
+					top: 49%;
+					left: 11%;
+				}
+				img{
+					position: absolute;
+					top: 55px;
+					left: 208px;
+					max-width: 100%;
+					@media(min-width: $tab_max) and (max-width: 1200px){
+						max-width: 60%;
+						height: auto;
+						top: 10%;
+						left: 22%;
+					}
+					@media(min-width: $tab_min) and (max-width: $tab_max){
+						max-width: 50%;
+						height: auto;
+						top: 13%;
+						left: 15%;
+					}
+					@media(min-width: 901px) and (max-width:$tab_max){
+						top: 15%;
+						left: 22%;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* web_development */

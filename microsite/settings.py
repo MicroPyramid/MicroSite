@@ -121,7 +121,7 @@ TEMPLATE_LOADERS = (
         "django.template.loaders.app_directories.Loader",
 )
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -233,6 +233,7 @@ COMPRESS_ENABLED = True
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
+    ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
 
 COMPRESS_OFFLINE_CONTEXT = {
