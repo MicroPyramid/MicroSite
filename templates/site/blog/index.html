@@ -16,14 +16,16 @@
     <div class=" row">
       <!-- blog categories archies starts here -->
       <div class="blog-categories-archives">
+        {% if request.get_full_path = "/blog/" %}
         <h4 class="blog-cat-archives text-center">Blog Categories & Archives</h4>
         <div class="categories">
           <ul class="text-center">
-            <li><a href="#" class="mongo"><img src="images/mongodb.png" height="33" width="87"></a></li>
-            <li><a href="#" class="linux"><img src="images/linux.png" height="33" width="87"></a></li>
-            <li><a href="#" class="amazon"><img src="images/aws.png" height="33" width="87"></a></li>
-            <li><a href="#" class="django"><img src="images/django-b.png" height="33" width="87"></a></li>
-            <li><a href="#" class="python"><img src="images/python.png" height="33" width="87"></a></li>
+            <li><a href="/blog/category/django/" class="django"><img src="/static/site/images/django-b.png" height="33" width="87"></a></li>
+            <li><a href="/blog/category/python/" class="python"><img src="/static/site/images/python.png" height="33" width="87"></a></li>
+            <li><a href="/blog/category/mongodb/" class="mongo"><img src="/static/site/images/mongodb.png" height="33" width="87"></a></li>
+            <li><a href="/blog/category/linux/" class="linux"><img src="/static/site/images/linux.png" height="33" width="87"></a></li>
+            <li><a href="/blog/category/amazon-web-services/" class="amazon"><img src="/static/site/images/aws.png" height="33" width="87"></a></li>
+
           </ul>
         </div>
         <div class="archives">
@@ -34,6 +36,7 @@
             {% endfor %}
           </ul>
           </div>
+          {% endif %}
           </div>
         <!-- blog categories archies ends here -->
         <!-- blog list starts here -->
