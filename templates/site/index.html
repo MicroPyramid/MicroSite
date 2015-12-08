@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     {% compress css %}
-    <link rel="stylesheet" href="/static/site/less/pace/pace-theme-flash.less" type="text/less">
     <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     {% endcompress %}
@@ -39,6 +38,10 @@
     <!-- css ends here -->
     <!-- scripts starts here -->
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
+    <script type="text/javascript" src='/static/site/js/classie.js'></script>
+    <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
+    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
+    
     <!-- scripts ends here -->
   </head>
   <body>
@@ -636,12 +639,8 @@
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
 
-    <script src="/static/site/js/pace/pace.min.js"></script>
     <script src="/static/site/js/bootstrap.js"></script>
     <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
-    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
-    <script type="text/javascript" src='/static/site/js/classie.js'></script>
-    <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
     <script type="text/javascript">
       new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
     </script>
