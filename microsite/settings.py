@@ -121,7 +121,7 @@ TEMPLATE_LOADERS = (
         "django.template.loaders.app_directories.Loader",
 )
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',

@@ -172,6 +172,7 @@ def edit_menu(request, pk):
     else:
         return render_to_response('admin/accessdenied.html')
 
+
 def site_page(request, slug):
     page = get_object_or_404(Page, slug=slug)
     return render(request, 'site/page.html', {'page': page})

@@ -59,3 +59,21 @@ $('body').keyup(function(e){
     }
 });
  /* contact pop up */
+ /* web development technologies tabs */
+function change_tab(_index_row,_index_element){
+	$('.tech_daimond_wrap .tect_each_wrap').removeClass('active');
+	$('.tech_daimond_wrap .row').eq(_index_row).children('a').eq(_index_element).children('.tect_each_wrap').addClass('active');
+	var current_active=(_index_row*3)+_index_element;
+	$('.tech_content .tab_content_each').removeClass('active');
+	$('.tech_content .tab_content_each').eq(current_active).addClass('active');
+}
+$('.tech_daimond_wrap a').click(function(e){
+	if($(window).width()>767){
+		e.preventDefault();
+		var _index_row=$(this).parent('.row').index()
+		var _index_element=$(this).index()
+		change_tab(_index_row,_index_element);
+	}
+});
+
+ /* web development technologies tabs */
