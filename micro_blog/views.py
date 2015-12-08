@@ -111,44 +111,13 @@ def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
     blog_posts = Post.objects.filter(status='P')[:3]
     related_posts = Post.objects.filter(category=blog_post.category, status='P').order_by('?')[:3]
-    fb = requests.get('http://graph.facebook.com/?id=https://micropyramid.com//blog/'+slug)
-    tw = requests.get('http://cdn.api.twitter.com/1/urls/count.json?url=https://micropyramid.com/blog/'+slug)
-    # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
-    ln = requests.get('https://www.linkedin.com/countserv/count/share?url=https://micropyramid.com/blog/'+slug+'&format=json')
     minified_url = ''
     if 'HTTP_HOST' in request.META.keys():
-        pass
-        # minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
-
-    linkedin = {}
-    linkedin.update(ln.json())
-    facebook = {}
-    twitter = {}
-    fbshare_count = 0
-    twshare_count = 0
-    lnshare_count = 0
-    try:
-        facebook.update(fb.json() if fb else {})
-        if facebook['shares']:
-            fbshare_count = facebook['shares']
-    except Exception:
-        pass
-    try:
-        twitter.update(tw.json())
-        if twitter['count']:
-            twshare_count = twitter['count']
-    except Exception:
-        pass
-    try:
-        if linkedin['count']:
-            lnshare_count = linkedin['count']
-    except Exception:
-        pass
+        minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDjOD_nuEhITIStn9hMXFRJukEoX28lb38')
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
-                            'post': blog_post, 'posts': blog_posts, 'fbshare_count': fbshare_count,
-                            'twshare_count': twshare_count, 'lnshare_count': lnshare_count, 'minified_url': minified_url})
+                                                      'post': blog_post, 'posts': blog_posts, 'minified_url': minified_url})
 
 
 def blog_tag(request, slug):
