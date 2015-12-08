@@ -45,17 +45,17 @@
           <div class="blog-item" itemscope itemType="http://schema.org/BlogPosting">
             <div class="post-date">
               <div class="date_daimond">
-                <div class="text_wrap">
-                  <div class="month">{{ post.updated_on|date:"M" }}</div>
+                <div class="text_wrap" itemprop="datePublished">
+                  <div class="month" >{{ post.updated_on|date:"M" }}</div>
                   <div class="day">{{ post.updated_on|date:"d Y" }}</div>
                 </div>
               </div>
             </div>
             <div class="blog-right">
-              <span class="blog-title"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></span>
-              <p>{{post.content|safe|truncatewords:50}}</p>
+              <span class="blog-title" itemprop="headline"><a href="{{ SITE_URL }}/blog/{{post.slug}}/">{{ post.title }}</a></span>
+              <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
               <ul class="post-det">
-                <li>By {{ post.user.get_full_name }}</li>
+                <li itemprop="author">By {{ post.user.get_full_name }}</li>
               </ul>
             </div>
           </div>
@@ -66,13 +66,47 @@
         <div class="pagination_mp">
         <ul>
           {% get_page current_page last_page as pages %}
+          {% if category%}
+          {% for s in pages %}
+          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/category/{{category.slug}}?page={{s}}"><span>{{s}}</span></a></li>
+          {% endfor %}
+          <li class="disabled"><a href=""><span>...</span></a></li>
+          <li><a href="/blog/category/{{category.slug}}/?page={{last_page}}"><span>last</span></a></li>
+          {% if not last_page > current_page %}
+          <li><a href="/blog/category/{{category.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
+          </li>
+          {% endif %}
+          {% elif tag %}
+          {% for s in pages %}
+          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/tag/{{tag.slug}}/?page={{s}}"><span>{{s}}</span></a></li>
+          {% endfor %}
+          <li class="disabled"><a href=""><span>...</span></a></li>
+          <li><a href="/blog/tag/{{tag.slug}}/?page={{last_page}}"><span>last</span></a></li>
+          {% if not last_page > current_page %}
+          <li><a href="/blog/tag/{{tag.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
+          </li>
+          {% endif %}
+          {% elif year and month %}
+          {% for s in pages %}
+          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/{{year}}/{{month}}/?page={{s}}"><span>{{s}}</span></a></li>
+          {% endfor %}
+          <li class="disabled"><a href=""><span>...</span></a></li>
+          <li><a href="/blog/{{year}}/{{month}}/?page={{last_page}}"><span>last</span></a></li>
+          {% if not last_page > current_page %}
+          <li><a href="/blog/{{year}}/{{month}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
+          </li>
+          {% endif %}
+          {% else %}
           {% for s in pages %}
           <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}"><span>{{s}}</span></a></li>
           {% endfor %}
           <li class="disabled"><a href=""><span>...</span></a></li>
           <li><a href="/blog/?page={{last_page}}"><span>last</span></a></li>
+          {% if last_page > current_page %}
           <li><a href="/blog/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
           </li>
+          {% endif %}
+          {% endif %}
         </ul>
         </div>
         <!--/ paginantion -->

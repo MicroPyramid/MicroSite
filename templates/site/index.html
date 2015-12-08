@@ -457,15 +457,6 @@
                                </span>
                             </a>
                          </div>
-                         <div class="tag_div_wrap">
-                            {% for tag in post.tags.all|slice:':5' %}
-                               <a href="/blog/tag/{{tag.slug}}/" title="{{tag.name|capfirst}}">
-                                  <span class='tag_each' itemprop="keywords">
-                                     {{tag.name|capfirst}}
-                                  </span>
-                               </a>
-                            {% endfor %}
-                         </div>
                       </div>
                     </div>
                     <!--/blog each-->
@@ -476,33 +467,50 @@
               <!-- our blog ends here -->
 
               <!-- our technologies starts here -->
-              <div id='technologies_wrapper'>
-                <img src='https://wallpaperscraft.com/image/books_board_chalk_inscription_school_63404_1920x1080.jpg' class='tech_bg_image'>
-                <div class="img_overlay_div"></div>
-                <div class="images_wrap">
-                  <div class="col-md-4 col-sm-4 col-xs-6 img_each">
-                     <img src='/static/site/images/new/amazon_stroke.png'>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-6 img_each">
-                     <img src='/static/site/images/new/django.png'>
-                  </div>
-                  <div class="col-md-4 col-sm-6 col-xs-12 img_each">
-                     <img src='/static/site/images/new/bootstrap_stroke.png'>
-                  </div>
-                  <div class="col-md-4 col-sm-4 col-xs-6 img_each">
-                     <img src='/static/site/images/new/salesforce_stroke.png'>
-                  </div>
-                  <div class="col-md-6 col-sm-5 col-xs-6 img_each">
-                     <img src='/static/site/images/new/Angular_stroke.png'>
-                  </div>
-                  <div class="clearfix"></div>
+                    <div id='technologies_wrapper'>
+        <div class="row">
+          <!-- Mp-Code starts here -->
+          <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 mp-code text-center">
+           <img src="/static/site/images/tech-home/mp-code.png" alt="Technologies we use" />
+          </div>
+          <!-- Mp-Code ends here -->
+
+          <!-- Mp-technologies starts here -->
+          <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 mp-technologies">
+             <div class="logo-gallery-row row">
+                 <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                        <img src="/static/site/images/tech-home/python-tech.png" class="logo" alt="python" />
                 </div>
-                <div class="heading_div_wrap">
-                  <div class="heading_div">
-                     <span>technologies</span> <span>we use</span>
-                  </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/django-tech.png" class="logo" alt="python" />
                 </div>
-              </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/elastic-tech.png" class="logo" alt="python" />
+                </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/aws-tech.png" class="logo" alt="python" />
+                </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/oscar-tech.png" class="logo" alt="python" />
+                </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/salesforce-tech.png" class="logo" alt="python" />
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/angular-js-tech.png" class="logo" alt="python" />
+                </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/bootstrap-tech.png" class="logo" alt="python" />
+                </div>
+                 <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                        <img src="/static/site/images/tech-home/git-tech.png" class="logo" alt="python" />
+                </div>
+             </div>
+          </div>
+          <!-- Mp-technologies ends here -->
+
+        </div>
+      </div>
               <!-- our technologies ends here -->
 
               <!--get in touch start here -->

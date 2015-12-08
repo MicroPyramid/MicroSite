@@ -109,15 +109,14 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
-    blog_posts = Post.objects.filter(status='P')[:3]
-    related_posts = Post.objects.filter(category=blog_post.category, status='P').order_by('?')[:3]
+    related_posts = Post.objects.filter(category=blog_post.category, status='P').exclude(id=blog_post.id).order_by('?')[:3]
     minified_url = ''
     if 'HTTP_HOST' in request.META.keys():
         minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDjOD_nuEhITIStn9hMXFRJukEoX28lb38')
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
-                                                      'post': blog_post, 'posts': blog_posts, 'minified_url': minified_url})
+                                                      'post': blog_post, 'minified_url': minified_url})
 
 
 def blog_tag(request, slug):
@@ -136,7 +135,7 @@ def blog_tag(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'tag': tag,
                                 'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -156,7 +155,7 @@ def blog_category(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'category': category, 'last_page': no_pages,
                                     'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -175,7 +174,7 @@ def archive_posts(request, year, month):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'year':year, 'month': month, 'last_page': no_pages,
                                                         'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 @login_required

@@ -460,7 +460,7 @@ body{
 			height: 450px;
 			position: relative;
 			@media(min-width: 1300px){
-				height: 400px;
+				height: 350px;
 			}
 			@media(min-width: $tab_min) and (max-width:$tab_max){
 				height: 530px;
@@ -597,120 +597,26 @@ body{
 /* blog_list */
 /* technologies_wrapper */
 #technologies_wrapper{
-	height: 410px;
-	position: relative;
-	overflow: hidden!important;
-	@media(min-width: $tab_min) and (max-width:$tab_max){
-		height: 300px;
-	}
-	@media(min-width: $smob_min) and (max-width:$smob_max){
-		height: 510px;
-	}
-	@media(min-width: $mob_min) and (max-width:$mob_max){
-		height: 360px;
-	}
-	.tech_bg_image{
-		max-width: 100%;
-		position: absolute;
-		z-index: -2;
-		height: 100%;
-		width: 100%;
-		@media(min-width: $mob_min) and (max-width:$smob_max){
-			/* max-height: 100%;
-			height: auto; */
-		}
-		/* -webkit-filter: blur(3.5px);
-    filter: blur(3.5px); */
-	}
-	.img_overlay_div{
-		background: rgba(102,102,102,0.6);
-		z-index: -1;
-		position: absolute;
-		top: 0px;
-		left: 0px;
-		width: 100%;
-		height: 100%;
-	}
-	.images_wrap{
-		position: absolute;
-		//z-index: 10;
-		width: 52%;
-		@media(min-width: $mob_min) and (max-width:$smob_max){
-			width: 100%;
-			padding-top: 25px;
-		}
-		//background:rgba(255,255,255,0.1)
-		.img_each{
-			text-align: center;
-			padding: 15px;
-			img{
-				width: 100%;
-				height: auto;
-				position: relative;
-				@media(min-width: $smob_min) and (max-width:$smob_max){
-					width: 45%;
-				}
-				@media(min-width: $mob_min) and (max-width:$mob_max){
-					width: 65%;
-				}
-			}
-		}
-	}
-	.heading_div_wrap{
-		position: absolute;
-		width: 650px;
-		height: 650px;
-		background:rgba(26,83,116,0.6);
-		border:1px solid rgb(26,83,116);
-		transform:rotate(28deg);
-		right: -200px;
-		top: -300px;
-		@media(min-width: $mob_min)and (max-width:$smob_max){
-			position: static;
-			width: 100%;
-			height: auto;
-			transform:rotate(0deg);
-		}
-		@media(min-width: $tab_min) and (max-width:1100px){
-			right: -350px;
-			top: -250px;
-		}
-		@media(min-width: $tab_min) and (max-width:$tab_max){
-			top: -289px;
-		}
-		.heading_div{
-			transform:rotate(332deg);
-			font-size: 50px;
-			line-height: 77px;
-			color: #fff;
-			text-transform: uppercase;
-			z-index: 1;
-			position: absolute;
-			bottom: 98px;
-			text-align: center;
-			left: 96px;
-			@media(min-width: $mob_min)and (max-width:$smob_max){
-				position: static;
-				height: auto;
-				font-size: 19px;
-				line-height: 25px;
-				transform:rotate(0deg);
-				font-weight: 600;
-			}
-			@media(min-width: $tab_min) and (max-width:1100px){
-				font-size: 37px;
-				line-height: 61px;
-				bottom: 74px;
-				left: 48px;
-			}
-			span{
-				display: block;
-				@media(min-width: $mob_min) and (max-width:$smob_max){
-					display: inline-block;
-				}
-			}
-		}
-	}
+       background:$tech_bg;
+       .mp-code{
+               padding:0px 15px;
+               img{
+                       max-width:100%;
+               }
+       }
+       .mp-technologies{
+               background:white;
+               padding:0px;
+               .logo-gallery-row{
+                       .logo-thumb{
+                               padding: 35px 0px;
+                               text-align:center;
+                                @media(min-width: $mob_min) and (max-width:$med_max){
+                                        padding: 15px 0px;
+                                }
+                       }
+               }
+       }
 }
 /* technologies_wrapper */
 /* get-in-touch */
