@@ -2273,7 +2273,8 @@ body{
 }
 .blog_description{
   iframe{
-  width: 100% !important;
+    height: auto;
+    width: 100% !important;
   }
 }
 .container.section_container {
