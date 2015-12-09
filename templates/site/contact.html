@@ -55,47 +55,52 @@
       <div class="contact_social">
         <ul>
           <li>
-            <span class='social_each fb'><i class='fa fa-facebook'></i></span>
+            <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank" title="MicroPyramid facebook page"><span class='social_each fb'><i class='fa fa-facebook'></i></span></a>
           </li>
           <li>
-            <span class='social_each in'><i class='fa fa-linkedin'></i></span>
+            <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank" title="MicroPyramid linkedin page"><span class='social_each in'><i class='fa fa-linkedin'></i></span></a>
           </li>
           <li>
-            <span class='social_each youtube'><i class='fa fa-youtube-play'></i></span>
+            <a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank" title="MicroPyramid youtube channel"><span class='social_each youtube'><i class='fa fa-youtube-play'></i></span></a>
           </li>
           <li>
-            <span class='social_each rss'><i class='fa fa-rss'></i></span>
+            <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank" title="MicroPyramid rss feed"><span class='social_each rss'><i class='fa fa-rss'></i></span></a>
           </li>
           <li>
-            <span class='social_each gplus'><i class='fa fa-google-plus'></i></span>
+            <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank" title="MicroPyramid googleplus page"><span class='social_each gplus'><i class='fa fa-google-plus'></i></span></a>
           </li>
           <li>
-            <span class='social_each twit'><i class='fa fa-twitter'></i></span>
+            <a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><span class='social_each twit' title="MicroPyramid twitter page"><i class='fa fa-twitter'></i></span></a>
           </li>
           <li>
-            <span class='social_each git'><i class='fa fa-github'></i></span>
+            <a href="https://github.com/micropyramid" class="github" target="_blank" title="MicroPyramid github organisation"><span class='social_each git'><i class='fa fa-github'></i></span></a>
           </li>
         </ul>
       </div>
       <!--/ social media -->
       <!-- form -->
-      <div class="form_div">
-        <div class="input-group">
-          <span class="input-group-addon"><i class='fa fa-user'></i></span>
-          <input type="text" class="form-control" placeholder="Name" aria-describedby="basic-addon1">
+      <form id="contactform" name="contactform" method="post">
+        <div class="form_div">
+          <div class="input-group">
+            <span class="input-group-addon"><i class='fa fa-user'></i></span>
+            <input type="text" class="form-control" name="full_name" placeholder="Name" aria-describedby="basic-addon1">
+          </div>
+          <span id="full_name"></span>
+          <div class="input-group">
+            <span class="input-group-addon"><i class='fa fa-comments'></i></span>
+            <input type="text" class="form-control" name="email" placeholder="Email" aria-describedby="basic-addon1">
+          </div>
+          <span id="email"></span>
+          <div class="input-group">
+            <span class="input-group-addon"><i class='fa fa-envelope'></i></span>
+            <textarea type="text" class="form-control" name="message" placeholder="Message" aria-describedby="basic-addon1"></textarea>
+          </div>
+          <span id="message"></span>
+          <div class="button_row">
+          <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send
+          </button></div>
         </div>
-        <div class="input-group">
-          <span class="input-group-addon"><i class='fa fa-comments'></i></span>
-          <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1">
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon"><i class='fa fa-envelope'></i></span>
-          <textarea type="text" class="form-control" placeholder="Message" aria-describedby="basic-addon1"></textarea>
-        </div>
-        <div class="button_row">
-        <span class='submit_contact'><i class='fa fa-paper-plane-o'></i>Send</span>
-        </div>
-      </div>
+      </form>
       <!--/ form -->
     </div>
     <!--/ contact us -->

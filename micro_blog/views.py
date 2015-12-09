@@ -112,7 +112,10 @@ def blog_article(request, slug):
     related_posts = Post.objects.filter(category=blog_post.category, status='P').exclude(id=blog_post.id).order_by('?')[:3]
     minified_url = ''
     if 'HTTP_HOST' in request.META.keys():
-        minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDjOD_nuEhITIStn9hMXFRJukEoX28lb38')
+        try:
+            minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), settings.GGL_URL_API_KEY)
+        except:
+            minified_url = 'https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug})
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
@@ -367,7 +370,12 @@ def contact(request):
 
     contact_msg = sendgrid.Mail()
     contact_msg.set_subject("Thank u for ur message")
-    contact_msg.set_text('Thank you for contacting us. We will get back to you soon!!!')
+    message_reply = 'Hello ' + request.POST.get('full_name') + ',\n\n'
+    message_reply = message_reply + 'Thank you for writing in.\n'
+    message_reply = message_reply +  'We appreciate that you have taken the time to share your feedback with us! We will get back to you soon.\n\n'
+    message_reply = message_reply + 'Regards\n'
+    message_reply = message_reply + 'The MicroPyramid Team.'
+    contact_msg.set_text(message_reply)
     contact_msg.set_from("hello@micropyramid.com")
     contact_msg.add_to(request.POST.get('email'))
     sg.send(contact_msg)

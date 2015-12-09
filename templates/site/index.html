@@ -35,9 +35,7 @@
 
     {% block extra-styles %}
     {% endblock %}
-    <!-- css ends here -->
     <!-- scripts starts here -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
     <script type="text/javascript" src='/static/site/js/classie.js'></script>
     <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
     <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
@@ -72,7 +70,7 @@
             {% block banner %}
             <!-- banner wrap -->
             <div id="banner_wrap">
-              <img src='/static/site/images/new/slider_bg_grass.jpg' class='banner_bg_image'>
+              <img src='/static/site/images/new/slider_bg_grass.jpg' alt="MicroPyramid_slider_background" class='banner_bg_image'>
               <div class="img_overlay_div"></div>
               <!-- row -->
               <div class="row">
@@ -81,7 +79,7 @@
                 </span>
                 <!-- logo -->
                 <div class="logo">
-                  <div class='image_wrap'><img src='/static/site/images/new/logo_white.png'></div>
+                  <div class='image_wrap'><img src='/static/site/images/new/logo_white.png' alt="MicroPyramid_logo"></div>
                   <div class="name_wrap">
                     <div class="large">Micro Pyramid</div>
                     <div class="small">Informatics Pvt. Ltd.</div>
@@ -226,7 +224,7 @@
             <!-- menu -->
             <div id='menu_wrapper'>
               <span class="logo">
-                <a href="/"><img src='/static/site/images/new/company_logo.gif'></a>
+                <a href="/"><img src='/static/site/images/new/company_logo.gif' alt="MicroPyramid_logo"></a>
               </span>
               {% get_menus as menu_list %}
               {% recurse menu.active_children with menu_list as menu %}
@@ -270,7 +268,7 @@
                   <div class="logo">
                   <div class="image_wrap">
                   <span class='img'>
-                  <img src='/static/site/images/haciendabaru.png'>
+                  <img src='/static/site/images/haciendabaru.png' alt="haciendabaru">
                   </span>
                   </div>
                   </div>
@@ -320,7 +318,7 @@
                   <div class="logo">
                   <div class="image_wrap">
                   <span class='img'>
-                    <img src='/static/site/images/peeljobs.png'>
+                    <img src='/static/site/images/peeljobs.png' alt="peeljobs">
                     <span class='title'>Peel Jobs</span>
                     </span>
                   </div>
@@ -344,7 +342,7 @@
                   <div class="logo">
                   <div class="image_wrap">
                     <span class='img'>
-                  <img src='/static/site/images/hellocoupons.png'>
+                  <img src='/static/site/images/hellocoupons.png' alt="helloCoupons">
                   </span>
                   </div>
                   </div>
@@ -367,7 +365,7 @@
                   <div class="logo">
                   <div class="image_wrap">
                     <span class='img'>
-                  <img src='/static/site/images/giftingnation.png'>
+                  <img src='/static/site/images/giftingnation.png' alt="giftingnation">
                   </span>
                   </div>
                   </div>
@@ -394,7 +392,7 @@
                   <div class="logo">
                   <div class="image_wrap">
                     <span class='img'>
-                  <img src='/static/site/images/crditable.png'>
+                  <img src='/static/site/images/crditable.png' alt="creditable">
                   </span>
                   </div>
                   </div>
@@ -482,28 +480,28 @@
                         <img src="/static/site/images/tech-home/python-tech.png" class="logo" alt="python" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/django-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/django-tech.png" class="logo" alt="django" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/elastic-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/elastic-tech.png" class="logo" alt="elastic search" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/aws-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/aws-tech.png" class="logo" alt="amazon web services" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/oscar-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/oscar-tech.png" class="logo" alt="djagno oscar" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/salesforce-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/salesforce-tech.png" class="logo" alt="salseforce" />
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/angular-js-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/angular-js-tech.png" class="logo" alt="angular_js" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/bootstrap-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/bootstrap-tech.png" class="logo" alt="boostrap" />
                 </div>
                  <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                        <img src="/static/site/images/tech-home/git-tech.png" class="logo" alt="python" />
+                        <img src="/static/site/images/tech-home/git-tech.png" class="logo" alt="git" />
                 </div>
              </div>
           </div>
@@ -643,11 +641,11 @@
     <!-- /pusher -->
     <!--/ push menu -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     {% compress js %}
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
 
-    <script src="/static/site/js/bootstrap.js"></script>
     <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
     <script type="text/javascript">
       new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
