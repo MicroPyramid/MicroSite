@@ -1,13 +1,12 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
-from django.core.exceptions import ObjectDoesNotExist
 
 
 @login_required
@@ -29,8 +28,7 @@ def new_page(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        return render(request, 'admin/content/page/new-page.html',
-                        {'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/page/new-page.html', {'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 

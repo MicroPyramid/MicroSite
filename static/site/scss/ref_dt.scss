@@ -1,3 +1,5 @@
+$med_min:992px;
+$med_max:1199px;
 $tab_max:991px;
 $tab_min:768px;
 $smob_max:767px;
@@ -7,7 +9,7 @@ $mob_min:240px;
 $menu_bg:#fdfdfd;
 $theme_green:#748907;
 $stroke_color:#E1E1E1;
-$menu_shadow:1px 5px 5px #DEDCDC;
+$menu_shadow:3px -1px 15px #626262;
 $blog_shadow:0px 0px 1px #ccc;
 $clay:#EC6A5C;
 $yellow:#E0A713;
@@ -26,11 +28,28 @@ $rss:#fa9b39;
 $page_title:#353333;
 $text_color:#696969;
 /* web development */
-$web_dev_brown:#8F6D3B;
-$web_dev_pink:#F1605D;
-$web_dev_head:#1B242B;
-$web_dev_text:#fdd9a5;
+$web_dev_brown:#0c6770;
+$web_dev_pink:#df4b48;
+$web_dev_head:#63cdbf;
+$web_dev_text:#e5fafc;
 /* web development */
+/* testing */
+$testing_grey:#c0c0c0;
+$testing_yellow:#0293b1;
+$testing_blue:#3d5e71;
+$tech_bg:#272822;
+/* testing */
+/* server manintainance */
+//$server_banner_bg:#FFC73D;
+//$server_banner_fg:#3DB698;
+$server_banner_bg:#90A4AE;
+$server_banner_fg:#546E7A;
+/* server maintainance */
+/* crm */
+$crm_bg:#E6CB4A;
+$crm_fg:#6A4FBD;
+$crm_text:#90813A;
+/* crm */
 .opensans{
 	font-family: 'Open Sans', sans-serif;
 }
@@ -67,7 +86,6 @@ a{
 	background: $color;
 	border:1px darken($color,15%);
 }
+/* change color keyframe */
 
-$med_min:992px;
-$med_max:1199px;
-$tech_bg:#272822;
+/* change color keyframe */

@@ -17,8 +17,6 @@ RAVEN_CONFIG = {
     'dsn': os.getenv('SENTRYDSN') if os.getenv('SENTRYDSN') else '',
 }
 
-
-
 INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
     'django.contrib.admin',
@@ -37,7 +35,6 @@ INSTALLED_APPS = (
     'employee',
     'sorl.thumbnail',
     'compressor',
-    'cachalot',
     'search',
 )
 
@@ -117,8 +114,8 @@ MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
 
 TEMPLATE_LOADERS = (
-        "django.template.loaders.filesystem.Loader",
-        "django.template.loaders.app_directories.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
 )
 
 COMPRESS_ENABLED = True
@@ -247,8 +244,6 @@ COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
-CACHALOT_ENABLED = True
-CACHALOT_CACHE_RANDOM = True
 
 if 'TRAVIS' in os.environ:
     DATABASES = {
@@ -262,7 +257,7 @@ if 'TRAVIS' in os.environ:
         }
     }
 
-#Haystack settings for Elasticsearch
+# Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',

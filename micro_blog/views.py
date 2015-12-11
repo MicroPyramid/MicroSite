@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Category, Tags, Post

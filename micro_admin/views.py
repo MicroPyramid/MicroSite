@@ -1,23 +1,19 @@
+import json
+import string
+import random
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.core.context_processors import csrf
 from django.template import RequestContext
-import json
-from micro_admin.models import career, User
-# from micro_admin.forms import CareerForm
-from microsite.settings import SG_USER, SG_PWD
-# import os
-from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
 from django.core.exceptions import ObjectDoesNotExist
-import string
-import random
 import sendgrid
+from micro_admin.models import User
+from microsite.settings import SG_USER, SG_PWD
+from pages.models import simplecontact, Menu
 
 
-# @csrf_protect
 def index(request):
     if request.user.is_authenticated():
         return render_to_response('admin/index.html', context_instance=RequestContext(request))
@@ -33,9 +29,7 @@ def index(request):
             data = {'error': True, 'message': "The username and password are incorrect."}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
-        data = {}
-        data.update(csrf(request))
-        return render_to_response('admin/login.html', data, context_instance=RequestContext(request))
+        return render_to_response('admin/login.html', context_instance=RequestContext(request))
 
 
 def out(request):
@@ -68,12 +62,13 @@ def delete_contact(request, pk):
 #     jobs = career.objects.all()
 #     return render(request, 'admin/content/jobs/job_list.html', {'jobs': jobs})
 
-
+'''
 @login_required
 def clear_cache(request):
     import cachalot
     cachalot.api.invalidate_all()
     return HttpResponseRedirect('/portal/')
+'''
 
 # @login_required
 # def new_job(request):
