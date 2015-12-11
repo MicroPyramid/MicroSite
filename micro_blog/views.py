@@ -109,6 +109,10 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
+
+    if not blog_post.status == 'P':
+        if not request.user.is_authenticated():
+            raise Http404
     related_posts = Post.objects.filter(category=blog_post.category, status='P').exclude(id=blog_post.id).order_by('?')[:3]
     minified_url = ''
     if 'HTTP_HOST' in request.META.keys():

@@ -12,3 +12,4 @@ static/uploads
 fabfile
 .sass-cache
 static/site/scss/*.css
+local_settings.py

@@ -269,3 +269,8 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
