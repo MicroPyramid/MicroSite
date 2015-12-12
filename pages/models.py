@@ -53,7 +53,7 @@ class Contact(models.Model):
     enquery_type = models.CharField(max_length=100, choices=ENQUERY_TYPES)
 
     def __unicode__(self):
-        return self.name
+        return self.contact_info.full_name
 
 
 class Menu(models.Model):

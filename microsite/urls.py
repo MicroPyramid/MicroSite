@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata,
                                                 name='s3_objects_set_metadata'),
     url(r'^report/$', report),
-    url(r'^contact/$', contact),
+    url(r'^contact-us/$', contact),
     url(r'^careers/$', career_page),
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),

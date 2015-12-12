@@ -323,10 +323,9 @@ def report(request):
 
 def contact(request):
     if request.method == 'GET':
-        raise Http404
+        return render(request, 'site/pages/contact_us.html')
     validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
-
     if 'enquery_type' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
             contact = simplecontact.objects.create(
@@ -373,7 +372,7 @@ def contact(request):
     sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
     contact_msg = sendgrid.Mail()
-    contact_msg.set_subject("Thank u for ur message")
+    contact_msg.set_subject("We received your message | MicroPyramid")
     message_reply = 'Hello ' + request.POST.get('full_name') + ',\n\n'
     message_reply = message_reply + 'Thank you for writing in.\n'
     message_reply = message_reply +  'We appreciate that you have taken the time to share your feedback with us! We will get back to you soon.\n\n'
