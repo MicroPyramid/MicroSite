@@ -1,7 +1,7 @@
 from django import template
 from micro_blog.models import Tags, Category, Post
 from pages.models import Menu
-from django.db.models import Count
+from django.db.models import Count, Prefetch
 
 register = template.Library()
 
@@ -22,9 +22,16 @@ def get_categories(context):
 
 @register.assignment_tag(takes_context=True)
 def get_latest_posts(context):
-    return Post.objects.filter(status='P').order_by('-updated_on')[:10]
+    return Post.objects.filter(status='P').prefetch_related(
+    	'tags'
+    ).order_by('-updated_on')[:10]
 
 
 @register.assignment_tag(takes_context=True)
 def get_menus(context):
-    return Menu.objects.filter(parent = None, status="on").order_by('lvl')
+    menu_list = Menu.objects.filter(status="on").prefetch_related(
+        Prefetch("menu_set", queryset=Menu.objects.filter(
+            status="on").order_by('lvl'), to_attr="active_children"
+        )
+    )
+    return menu_list.filter(parent=None, status="on").order_by('lvl')

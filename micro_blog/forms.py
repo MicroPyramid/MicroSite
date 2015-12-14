@@ -7,7 +7,7 @@ class BlogpostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        exclude = ('slug', 'tags', 'user', 'meta_description',)
+        exclude = ('slug', 'tags', 'user', 'meta_description', 'published_on')
 
 
 class BlogCategoryForm(forms.ModelForm):

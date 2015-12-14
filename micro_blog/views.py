@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Category, Tags, Post
@@ -109,45 +109,21 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
-    blog_posts = Post.objects.filter(status='P')[:3]
-    fb = requests.get('http://graph.facebook.com/?id=https://micropyramid.com//blog/'+slug)
-    tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=https://micropyramid.com//blog/'+slug)
-    # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
-    ln = requests.get('https://www.linkedin.com/countserv/count/share?url=https://micropyramid.com/blog/'+slug+'&format=json')
+
+    if not blog_post.status == 'P':
+        if not request.user.is_authenticated():
+            raise Http404
+    related_posts = Post.objects.filter(category=blog_post.category, status='P').exclude(id=blog_post.id).order_by('?')[:3]
     minified_url = ''
-
     if 'HTTP_HOST' in request.META.keys():
-        minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
-
-    linkedin = {}
-    linkedin.update(ln.json())
-    facebook = {}
-    facebook.update(fb.json() if fb else {})
-    twitter = {}
-    twitter.update(tw.json())
-    fbshare_count = 0
-    twshare_count = 0
-    lnshare_count = 0
-    try:
-        if facebook['shares']:
-            fbshare_count = facebook['shares']
-    except Exception:
-        pass
-    try:
-        if twitter['count']:
-            twshare_count = twitter['count']
-    except Exception:
-        pass
-    try:
-        if linkedin['count']:
-            lnshare_count = linkedin['count']
-    except Exception:
-        pass
+        try:
+            minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), settings.GGL_URL_API_KEY)
+        except:
+            minified_url = 'https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug})
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'],
-                            'post': blog_post, 'posts': blog_posts, 'fbshare_count': fbshare_count,
-                            'twshare_count': twshare_count, 'lnshare_count': lnshare_count, 'minified_url': minified_url})
+    return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
+                                                      'post': blog_post, 'minified_url': minified_url})
 
 
 def blog_tag(request, slug):
@@ -166,7 +142,7 @@ def blog_tag(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'tag': tag,
                                 'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -186,7 +162,7 @@ def blog_category(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'category': category, 'last_page': no_pages,
                                     'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -205,7 +181,7 @@ def archive_posts(request, year, month):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'year':year, 'month': month, 'last_page': no_pages,
                                                         'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 @login_required
@@ -347,10 +323,9 @@ def report(request):
 
 def contact(request):
     if request.method == 'GET':
-        raise Http404
+        return render(request, 'site/pages/contact_us.html')
     validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
-
     if 'enquery_type' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
             contact = simplecontact.objects.create(
@@ -397,8 +372,13 @@ def contact(request):
     sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
     contact_msg = sendgrid.Mail()
-    contact_msg.set_subject("Thank u for ur message")
-    contact_msg.set_text('Thank you for contacting us. We will get back to you soon!!!')
+    contact_msg.set_subject("We received your message | MicroPyramid")
+    message_reply = 'Hello ' + request.POST.get('full_name') + ',\n\n'
+    message_reply = message_reply + 'Thank you for writing in.\n'
+    message_reply = message_reply +  'We appreciate that you have taken the time to share your feedback with us! We will get back to you soon.\n\n'
+    message_reply = message_reply + 'Regards\n'
+    message_reply = message_reply + 'The MicroPyramid Team.'
+    contact_msg.set_text(message_reply)
     contact_msg.set_from("hello@micropyramid.com")
     contact_msg.add_to(request.POST.get('email'))
     sg.send(contact_msg)

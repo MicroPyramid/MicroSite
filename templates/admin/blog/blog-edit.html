@@ -41,7 +41,9 @@
           <div class="controls" id="content">
             <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1062px; height: 93px;">{{ blog_post.meta_description }}</textarea>
           </div>
+	  <p id="Wordcount"></p>
         </div>
+	
       </div>
       <div class="tags-block">
         <p><label>Tags Creation</label>
@@ -79,6 +81,17 @@
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
+   function counting_words(){
+       input_text = $('#meta_description').val();
+       char_length = input_text.length
+       word_length = input_text.split(' ').filter(Boolean).length;
+       $("#Wordcount").text('Words: ' + word_length + ', Charecters: ' +  char_length);
+   }
+   counting_words()
+   $('#meta_description').keyup(function(event) {
+     counting_words()
+   });
+
   function onAddTag(tag) {
     alert("Added a tag: " + tag);
   }

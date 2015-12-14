@@ -17,8 +17,6 @@ RAVEN_CONFIG = {
     'dsn': os.getenv('SENTRYDSN') if os.getenv('SENTRYDSN') else '',
 }
 
-
-
 INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
     'django.contrib.admin',
@@ -37,7 +35,6 @@ INSTALLED_APPS = (
     'employee',
     'sorl.thumbnail',
     'compressor',
-    'cachalot',
     'search',
 )
 
@@ -56,7 +53,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 
-HTML_MINIFY = True
+HTML_MINIFY = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -117,8 +114,8 @@ MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
 
 TEMPLATE_LOADERS = (
-        "django.template.loaders.filesystem.Loader",
-        "django.template.loaders.app_directories.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
 )
 
 COMPRESS_ENABLED = True
@@ -145,6 +142,7 @@ CELERYBEAT_SCHEDULE = {
 
 SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
 SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
+GGL_URL_API_KEY = os.getenv('GGLAPIKEY') if os.getenv('GGLAPIKEY') else ''
 
 GOOGLE_ANALYTICS_CODE = os.getenv('GOOGLE_ANALYTICS_CODE') if os.getenv('GOOGLE_ANALYTICS_CODE') else ''
 
@@ -233,6 +231,7 @@ COMPRESS_ENABLED = True
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
+    ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
 
 COMPRESS_OFFLINE_CONTEXT = {
@@ -245,8 +244,6 @@ COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
-CACHALOT_ENABLED = True
-CACHALOT_CACHE_RANDOM = True
 
 if 'TRAVIS' in os.environ:
     DATABASES = {
@@ -260,7 +257,7 @@ if 'TRAVIS' in os.environ:
         }
     }
 
-#Haystack settings for Elasticsearch
+# Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -272,3 +269,8 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

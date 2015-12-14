@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.core.context_processors import csrf
 from django.contrib.auth.hashers import check_password
+from django.template.context_processors import csrf
 import json
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
@@ -33,10 +33,10 @@ def change_password(request):
             user.set_password(request.POST['newpassword'])
             user.save()
             return HttpResponse(json.dumps({'error': False, 'response': 'Password changed successfully'}),
-                                    content_type='application/json; charset=utf-8')
+                                content_type='application/json; charset=utf-8')
         else:
             return HttpResponse(json.dumps({'error': True, 'response': validate_changepassword.errors}),
-                                    content_type='application/json; charset=utf-8')
+                                content_type='application/json; charset=utf-8')
     return render(request, 'admin/user/change_password.html')
 
 

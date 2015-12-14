@@ -53,7 +53,7 @@ class Contact(models.Model):
     enquery_type = models.CharField(max_length=100, choices=ENQUERY_TYPES)
 
     def __unicode__(self):
-        return self.name
+        return self.contact_info.full_name
 
 
 class Menu(models.Model):
@@ -74,6 +74,16 @@ class Menu(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def has_children(self):
+        if self.menu_set.exists():
+            return True
+        return False
+
+    def is_child(self):
+        if self.parent:
+            return True
+        return False
 
 
 def create_slug(tempslug):
