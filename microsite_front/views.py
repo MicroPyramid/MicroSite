@@ -28,6 +28,21 @@ def tools(request):
     return render(request, 'site/tools/index.html')
 
 
+def page_web_development(request):
+    return render(request, 'site/pages/web_development.html')
+
+
+def page_testing(request):
+    return render(request, 'site/pages/testing.html')
+
+
+def page_crm(request):
+    return render(request, 'site/pages/crm.html')
+
+
+def page_server_maintenance(request):
+    return render(request, 'site/pages/server_maintenance.html')
+
 def url_checker_tool(request):
     if request.method == "POST":
         redirects_count = []

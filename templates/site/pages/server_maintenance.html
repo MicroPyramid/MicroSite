@@ -1,0 +1,110 @@
+{% extends 'site/base.html' %}
+{% block title %}
+  Server Maintenance | MicroPyramid
+{% endblock %}
+{% load recurse %}
+{% load menu %}
+{% block meta-description %}
+  <meta name="description" content="Server Maintenance - MicroPyramid." />
+{% endblock %}
+{% block stage %}
+  <div id='container_wrapper'>
+    <div id='server_maintenance'>
+    <!-- banner-->
+      <div class="banner">
+      <!-- flap -->
+        <div class="banner_flap">
+          <div class="img_wrap">
+            <img src='/static/site/images/server_maintainance/server-banner-pic.png'>
+          </div>
+        </div>
+        <!--/flap -->
+        <!-- content -->
+        <div class="content">
+        <!-- titile -->
+          <div class="title">Server maintenance</div>
+            <div class="text">
+                Competently foster seamless total linkage whereas process-centric information. Enthusiastically integrate parallel intellectual capital after diverse value. Continually disintermediate web-enabled initiatives with pandemic processes. Competently enhance extensible content with impactful relationships. Dynamically re-engineer emerging web services via economically sound web services.
+            </div>
+              <!--/ title -->
+          </div>
+            <!--/ content -->
+        </div>
+          <!--/ banner -->
+             <!-- how we do -->
+        <div class="server_hoWeDo">
+              <!-- title -->
+          <div class="heading">
+            <span>What</span> <span class="green">we do</span> <span>?</span>
+          </div>
+          <!--/ title -->
+          <div class="content text-center">
+            <div> <p><strong>Security Hardening</strong></p>
+              <p> Top Notch measures securing our servers.</p>
+                <p><b>UFW:</b> Uncomplicated Firewall, is a front-end to iptables. manages the firewall in an easy-to-use interface. It's well-supported and popular in the Linux community. we use UFW to block all incoming and outgoing ports by default and open only service needed ports.
+                </p>
+               <p> <b>OpenVPN :</b> Our Staging Servers are secured by OPENVPN. which will grant access to authenticated users  only.</p>
+            </div>
+
+            <div>
+              <p><strong>Performance Tuning</strong></p>
+              <p> we tune everything to the best possible settings for high performance and low latency. it can be optimizing something as large as server to tune sql commands. we value time and every millisecond matters when it comes to server performance.</p></div>
+              <div>
+                <p><strong>Load Balancing</strong></p>
+                <p>Vertical scaling will not work when there is lot of data and traffic to deal with. There comes the need for horizontal scaling with Load Balancing. It is a technique of distributing your requests to multiple web servers. We master in Amazon Web Services Load Balancer.</p>
+            </div>
+
+            <div>
+              <p><strong>Disaster Recovery Planning</strong></p>
+              <p>Keeping data safe is critical for finance, eCommerce applications. We designed disaster recovery plans and secured hundreds of Gb data of our clients.</p></div>
+              <div>
+                <p><strong>Server Monitoring ( for performance and security exploits )</strong></p>
+                <p>we have centralized logging and monitoring servers that help us analyze and assess
+server statistics always. Our monitoring systems helps us in analyzing data but also useful for threat analysis and to identify malicious behavior.
+                </p>
+            </div>
+          </div>
+        </div>
+            <!--/ how we do -->
+      <!-- related blog -->
+      <div class='server_blog'>
+        <!--title-->
+        <div class="heading">
+          <span>related</span> <span class="green">blog posts</span>
+        </div>
+        <!--/ title -->
+        {% get_latest_posts as latest_posts %}
+        {% for post in latest_posts|slice:":3" %}
+        <div class="col-md-4 col-sm-4 col-xs-12 blog_ticket_wrap">
+           <div class="blog_ticket">
+           <div class="date_daimond">
+                {% if post.published_on %}
+                 <div class="text_wrap">
+                    <div class="month">{{ post.published_on|date:"b"|title }}</div>
+                    <div class="day">{{ post.published_on|date:"d" }}, {{ post.published_on|date:"Y" }}</div>
+                 </div>
+                 {% else %}
+                 <div class="text_wrap">
+                    <div class="month">{{ post.updated_on|date:"b"|title }}</div>
+                    <div class="day">{{ post.updated_on|date:"d" }}, {{ post.updated_on|date:"Y" }}</div>
+                 </div>
+                 {% endif %}
+              </div>
+              <div class="blog_title">
+                 <a href="/blog/{{post.slug}}/">{{ post.title }}</a>
+                 <div class="author">{{ post.user.get_full_name }}</div>
+              </div>
+              <div class="blog_description">
+                 <p>
+                    {{ post.content|safe|truncatewords:45 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
+                 </p>
+              </div>
+           </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!--/ related blog -->
+      <br clear="all">
+   </div>
+  </div>
+{% endblock %}
