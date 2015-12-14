@@ -68,6 +68,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
+    published_on = models.DateField(blank=True, null=True)
     meta_description = models.TextField(max_length=500, default='')
 
     def __unicode__(self):
@@ -85,7 +86,8 @@ class Post(models.Model):
                 self.slug = create_slug(tempslug)
         else:
             self.slug = create_slug(tempslug)
-
+        if self.status == 'P':
+            self.published_on = datetime.datetime.today()
         super(Post, self).save(*args, **kwargs)
 
     @property

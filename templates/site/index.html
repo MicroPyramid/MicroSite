@@ -427,6 +427,15 @@
                       <div class="blog_ticket" itemscope itemType="http://schema.org/BlogPosting">
                          <div class="date_daimond">
                             <div class="text_wrap">
+			      {% if post.published_on %}
+                               <div class='month'>
+                                  <a href="/blog/{{post.published_on|date:"Y"}}/{{post.published_on|date:"n"}}">
+                                     <span itemprop="datePublished">
+                                        {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} <br/> {{ post.published_on|date:"Y" }}
+                                     </span>
+                                  </a>
+                               </div>
+			       {% else %}
                                <div class='month'>
                                   <a href="/blog/{{post.updated_on|date:"Y"}}/{{post.updated_on|date:"n"}}">
                                      <span itemprop="datePublished">
@@ -434,6 +443,7 @@
                                      </span>
                                   </a>
                                </div>
+			       {% endif %}
                             </div>
                          </div>
                          <div class="blog_title">

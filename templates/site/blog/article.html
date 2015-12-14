@@ -28,7 +28,11 @@
       <h3 class="text-center" itemprop="headline">{{ post.title }}</h3>
       <ul class="text-center blog-det">
         <li itemprop="author">By {{ post.user.get_full_name }}</li>
-        <li>Posted On <span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span>  </li>
+	{% if post.published_on %}
+        <li>Posted On <span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
+	{% else %}
+	<li>Posted On <span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></li>
+	{% endif %}
       </ul>
       <!-- description starts here -->
       <div class="blog-det-description" itemprop="articleBody">

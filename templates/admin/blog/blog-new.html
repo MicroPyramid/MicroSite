@@ -84,7 +84,7 @@
 $('#meta_description').keyup(function(event) {
    input_text = $('#meta_description').val();
    char_length = input_text.length
-   word_length = input_text.split(' ').length;
+   word_length = input_text.split(' ').filter(Boolean).length;
    $("#Wordcount").text('Words: ' + word_length + ', Charecters: ' +  char_length);
 });
 </script>

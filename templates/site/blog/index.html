@@ -46,10 +46,17 @@
           <div class="blog-item" itemscope itemType="http://schema.org/BlogPosting">
             <div class="post-date">
               <div class="date_daimond">
+		{% if post.published_on %}
+                <div class="text_wrap" itemprop="datePublished">
+                  <div class="month" >{{ post.published_on|date:"M" }}</div>
+                  <div class="day">{{ post.published_on|date:"d Y" }}</div>
+                </div>
+		{% else %}
                 <div class="text_wrap" itemprop="datePublished">
                   <div class="month" >{{ post.updated_on|date:"M" }}</div>
                   <div class="day">{{ post.updated_on|date:"d Y" }}</div>
                 </div>
+		{% endif%}
               </div>
             </div>
             <div class="blog-right">
