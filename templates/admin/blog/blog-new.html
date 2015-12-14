@@ -41,6 +41,7 @@
             <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1062px; height: 93px;"></textarea>
           </div>
         </div>
+	<p id="Wordcount"></p>
       </div>
 
       <div class="tags-block">
@@ -79,6 +80,14 @@
 <!-- main content ends here-->
 {% load compress %}
 {% compress js %}
+<script>
+$('#meta_description').keyup(function(event) {
+   input_text = $('#meta_description').val();
+   char_length = input_text.length
+   word_length = input_text.split(' ').length;
+   $("#Wordcount").text('Words: ' + word_length + ', Charecters: ' +  char_length);
+});
+</script>
 <script type="text/javascript">
   function onAddTag(tag) {
     alert("Added a tag: " + tag);
