@@ -37,11 +37,11 @@ INSTALLED_APPS = (
     'employee',
     'sorl.thumbnail',
     'compressor',
-    'cachalot',
     'search',
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
     'microsite.middleware.RequestSessionMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware'
 )
 
 
@@ -245,8 +246,6 @@ COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
-CACHALOT_ENABLED = True
-CACHALOT_CACHE_RANDOM = True
 
 if 'TRAVIS' in os.environ:
     DATABASES = {
@@ -272,3 +271,18 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+CACHE_MIDDLEWARE_ALIAS = 'default' #The cache alias to use for storage.
+CACHE_MIDDLEWARE_SECONDS = 180 #The number of seconds each page should be cached.
+CACHE_MIDDLEWARE_KEY_PREFIX = 'microsite'
+CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+CACHE_IGNORE_REGEXPS = (
+    r'/admin.*',
+)
