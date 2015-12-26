@@ -12,12 +12,15 @@ from microsite.settings import SG_USER, SG_PWD
 from pages.models import simplecontact, Menu
 from django.db.models.aggregates import Max
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.cache import cache
 import string
 import random
 import sendgrid
+from django.views.decorators.cache import cache_page
 
 
 # @csrf_protect
+@cache_page(60 * 15)
 def index(request):
     if request.user.is_authenticated():
         return render_to_response('admin/index.html', context_instance=RequestContext(request))
@@ -46,6 +49,7 @@ def out(request):
     return HttpResponseRedirect('/portal/')
 
 
+@cache_page(60 * 15)
 @login_required
 def contacts(request):
     contacts = simplecontact.objects.all()
@@ -71,8 +75,7 @@ def delete_contact(request, pk):
 
 @login_required
 def clear_cache(request):
-    # import cachalot
-    # cachalot.api.invalidate_all()
+    cache._cache.flush_all()
     return HttpResponseRedirect('/portal/')
 
 # @login_required
@@ -144,6 +147,7 @@ def clear_cache(request):
 #     return HttpResponseRedirect('/portal/jobs/')
 
 
+@cache_page(60 * 15)
 @login_required
 def menu_order(request, pk):
     if request.method == 'POST':
