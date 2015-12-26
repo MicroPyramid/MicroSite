@@ -71,8 +71,8 @@ def delete_contact(request, pk):
 
 @login_required
 def clear_cache(request):
-    import cachalot
-    cachalot.api.invalidate_all()
+    # import cachalot
+    # cachalot.api.invalidate_all()
     return HttpResponseRedirect('/portal/')
 
 # @login_required

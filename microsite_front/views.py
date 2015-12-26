@@ -11,14 +11,17 @@ import json
 from datetime import datetime, timedelta
 from micro_blog.models import Category
 from books.models import Book
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(60 * 15)
 def index(request):
     latest_featured_posts = {} #Post.objects.filter(status = 'P',featured_post = 'on').order_by('-created_on')[:2]
     return render(request, 'site/index.html', {'latest_featured_posts': latest_featured_posts, 
                             'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
 
 
+@cache_page(60 * 15)
 def career_page(request):
     jobs = career.objects.filter(is_active=True).order_by('created_on')
     return render(request, 'site/careers.html', {'jobs': jobs})
@@ -28,6 +31,7 @@ def tools(request):
     return render(request, 'site/tools/index.html')
 
 
+@cache_page(60 * 15)
 def url_checker_tool(request):
     if request.method == "POST":
         redirects_count = []
@@ -60,6 +64,7 @@ def url_checker_tool(request):
     return render(request, 'site/tools/url_checker.html')
 
 
+@cache_page(60 * 15)
 def s3_objects_set_metadata(request):
     if request.method == "POST":
         errors = {}
@@ -104,6 +109,7 @@ def s3_objects_set_metadata(request):
     return render(request, 'site/tools/s3_objects_set_metadata.html')
 
 
+@cache_page(60 * 15)
 def html_sitemap(request):
     page = request.GET.get('page')
     # categories = Category.objects.filter(is_display=True)
