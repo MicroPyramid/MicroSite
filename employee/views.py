@@ -1,12 +1,13 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render_to_response, render
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 import json
 from django.contrib.auth.decorators import login_required
 from employee.models import DailyReport
 from micro_admin.models import User
 from employee.forms import DailyReportForm
 import datetime
+
 
 @login_required
 def reports_list(request):
@@ -15,19 +16,19 @@ def reports_list(request):
 
 
 @login_required
-def employee_report(request,pk):
+def employee_report(request, pk):
     user = User.objects.get(pk=pk)
-    
+
     if request.user == user or request.user.is_superuser:
         reports = DailyReport.objects.filter(employee=user).order_by('-created_on')
         return render(request, 'admin/staff/reports.html', {'reports': reports})
-    
+
     else:
         return render_to_response('admin/accessdenied.html')
 
 
 @login_required
-def view_report(request,pk):
+def view_report(request, pk):
     reports = DailyReport.objects.get(pk=pk)
     if reports.employee == request.user or request.user.is_superuser:
         return render_to_response('admin/staff/view_report.html', {'reports': reports})
@@ -54,7 +55,7 @@ def new_report(request):
 
 
 @login_required
-def edit_report(request,pk):
+def edit_report(request, pk):
     if request.method == 'POST':
         current_report = DailyReport.objects.get(id=pk)
         if current_report.employee == request.user or request.user.is_superuser:
@@ -67,7 +68,7 @@ def edit_report(request,pk):
             else:
                 data = {'error': True, 'response': validate_report.errors}
         else:
-            data = {'error': True, 'response': 'You cannot edit this report' }
+            data = {'error': True, 'response': 'You cannot edit this report'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     new_report = DailyReport.objects.get(id=pk)
@@ -78,8 +79,9 @@ def edit_report(request,pk):
     else:
         return render_to_response('admin/accessdenied.html')
 
+
 @login_required
-def delete_report(request,pk):
+def delete_report(request, pk):
     report = DailyReport.objects.get(id=pk)
     if request.user.is_superuser or request.user == report.employee:
         report.delete()

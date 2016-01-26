@@ -3,6 +3,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from lxml import html
 
 
 class Category(models.Model):
@@ -21,6 +22,9 @@ class Category(models.Model):
     @property
     def get_url(self):
         return settings.SITE_BLOG_URL + "category/" + self.slug
+
+    def get_blog_posts(self):
+        return Post.objects.filter(category=self)
 
 
 class Tags(models.Model):
@@ -68,6 +72,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
+    published_on = models.DateField(blank=True, null=True)
     meta_description = models.TextField(max_length=500, default='')
 
     def __unicode__(self):
@@ -78,14 +83,8 @@ class Post(models.Model):
         return self.user.first_name + ' ' + self.user.last_name
 
     def save(self, *args, **kwargs):
-        tempslug = slugify(self.title)
-        if self.id:
-            blogpost = Post.objects.get(pk=self.id)
-            if blogpost.title != self.title:
-                self.slug = create_slug(tempslug)
-        else:
-            self.slug = create_slug(tempslug)
-
+        if self.status == 'P':
+            self.published_on = datetime.datetime.today()
         super(Post, self).save(*args, **kwargs)
 
     @property
@@ -101,6 +100,14 @@ class Post(models.Model):
         if self.user == user or user.is_superuser:
             return True
         return False
+
+    def get_content(self):
+        table = html.fromstring(self.content)
+        content = ''
+        for item in table:
+            if item.text:
+                content += item.text.strip()
+        return content[:350]
 
 
 class Image_File(models.Model):
@@ -122,3 +129,13 @@ def create_slug(tempslug):
             tempslug = tempslug + '-' + str(slugcount)
         except ObjectDoesNotExist:
             return tempslug
+
+
+class Subscribers(models.Model):
+    email = models.EmailField(max_length=255)
+    created = models.DateField(auto_now_add=True)
+    blog_post = models.BooleanField(default=True)
+    category = models.ForeignKey(Category, blank=True, null=True)
+
+    def __str__(self):
+        return self.email

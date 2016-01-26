@@ -2,13 +2,44 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans '500' %} | {% trans 'Server error' %} | {{ block.super }}
+  {% trans '500' %} | {% trans 'Internal Server Error' %} | {{ block.super }}
 {% endblock %}
 
 {% block stage %}
-  <div class="row marl">
-    <div class="container">
-      <p>{% trans "Sorry, but the requested page is unavailable due to server error!" %}</p>
+<!-- container wrapper -->
+<div id='container_wrapper'>
+<!--404 -->
+  <div id='page_500'>
+  <!-- image row -->
+  <div class="hidden-md hidden-lg hidden-sm col-xs-12 image_div">
+    <img src='/static/site/images/new/500.png'>
+  </div>
+  <!--/image row -->
+  <!-- content row -->
+  <div class="col-md-6 col-sm-6 col-xs-12 text_div_wrap">
+    <div class="main_title">
+    Sorry !!
+    </div>
+    <div class="text_div">
+    The server Encountered an Internal error. We are unable to complete your request. Please try again later. You can visit our Home page and find what are you looking for?
+    </div>
+    <div class="button_row"><a href="/">
+    <span class='button'>
+      <img src='/static/site/images/new/logo_white.png'>
+      <span class='name'>Go to Home Page</span>
+    </span></a>
     </div>
   </div>
+  <!--/ content row -->
+  <!-- image row -->
+  <div class="col-md-6 col-sm-6 hidden-xs image_div">
+    <img src='/static/site/images/new/500.png'>
+  </div>
+  <!--/image row -->
+  <div class="clearfix"></div>
+  </div>
+  <!--/ 404 -->
+</div>
+<!--/ container wrapper -->
+
 {% endblock %}

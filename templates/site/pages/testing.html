@@ -1,0 +1,197 @@
+{% extends 'site/base.html' %}
+{% block title %}
+Testing | MicroPyramid
+{% endblock %}
+{% block meta-description %}
+<meta name="description" content="Testing- MicroPyramid." />
+{% endblock %}
+{% block stage %}
+<div id='container_wrapper'>
+  <!-- blog row starts here -->
+  <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <ul>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{request.path}}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Testing</span></a>
+      </li>
+    </ul>
+  </div>
+  <div id='testing'>
+    <!-- banner -->
+    <div class="testing_banner">
+      <!-- banner content -->
+      <div class="banner_content">
+        <!-- titile -->
+        <h1>
+          Website Testing
+        </h1>
+        <!--/ title -->
+        <!-- text -->
+        <div class='text'>
+          With ever changing demands of our client businesses we need to make sure of the new modules blend into the software and make it robust on every update. Never release without five level testing to ensure Quality.
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ banner content -->
+      <div class="banner_image">
+        <div class="img_wrap">
+          <img src='/static/site/images/banners_testing/testing-banner.png' alt="Testing">
+        </div>
+      </div>
+      <!-- banner image flap -->
+      <!--/ banner image flap -->
+    </div>
+    <!--/ banner -->
+    <!-- testing content -->
+    <div class="testing_content_wrap">
+      <!-- feature each -->
+      <div class="feature_wrap">
+        <i class='fa fa-check-square-o relative_icon'></i>
+        <!-- rotate flap -->
+        <div class="heading">
+          <div class="content">
+            <div class='title'>
+              <span class='green'>Functional</span> <span>Testing</span>
+            </div>
+          </div>
+        </div>
+        <!--/ rotate flap -->
+        <!-- text-->
+        <div class="text_wrap">
+          <div class="text">
+            <p>
+              Functional Testing is all about making sure there is <span class='red'>uninterrupted work flow</span> and making sure it stays that way on every feature addition. We make sure of that by <span class='red'>manual</span> and <span class='red'>unit testing</span>.
+            </p>
+            <p>Based on the client requirements we will check whether all functionalities are working fine or not.</p>
+          </div>
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ feature each -->
+      <!-- feature each -->
+      <div class="feature_wrap">
+        <i class='fa fa-user relative_icon'></i>
+        <!-- rotate flap -->
+        <div class="heading">
+          <div class="content">
+            <div class='title'>
+              <span class='green'>User</span> <span class='green'>Acceptance</span> <span>Testing</span>
+            </div>
+          </div>
+        </div>
+        <!--/ rotate flap -->
+        <!-- text-->
+        <div class="text_wrap">
+          <div class="text">
+            <p>
+              Software testing will see <span class='red'>unique scenarios</span> when users start using and we will try to simulate with <span class='red'>real user testing</span> on our <span class='red'>pilot servers</span> thus making sure the software even more perfect.
+            </p>
+          </div>
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ feature each -->
+      <!-- feature each -->
+      <div class="feature_wrap">
+        <i class='fa fa-file-code-o relative_icon'></i>
+        <!-- rotate flap -->
+        <div class="heading">
+          <div class="content">
+            <div class='title'>
+              <span class='green'>User</span> <span class='green'>Interface</span> <span>Testing</span>
+            </div>
+          </div>
+        </div>
+        <!--/ rotate flap -->
+        <!-- text-->
+        <div class="text_wrap">
+          <div class="text">
+            <p>
+              User Interface Testing is to give users <span class='red'>seamless experiences</span> across all devices and screen sizes. We <span class='red'>test UI</span> on linux, Windows, Mac, Chrome, Firefox, Safari, Internet Explorer, Android, IPhone. And need not to say that this is time consuming process.
+            </p>
+          </div>
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ feature each -->
+      <!-- feature each -->
+      <div class="feature_wrap">
+        <i class='fa fa-spinner relative_icon'></i>
+        <!-- rotate flap -->
+        <div class="heading">
+          <div class="content">
+            <div class='title'>
+              <span class='green'>Load</span> <span>Testing</span>
+            </div>
+          </div>
+        </div>
+        <!--/ rotate flap -->
+        <!-- text-->
+        <div class="text_wrap">
+          <div class="text">
+            <p>
+              Testing the application to check if the application support the required number of user load. This is to identify <span class='red'>bottlenecks</span> and improve <span class='red'>performance</span>.
+            </p>
+            <ul>
+              <li>Downloading a set of files from the application</li>
+              <li>Running numerous applications simultaneously</li>
+              <li>Handling the email traffic etc.</li>
+            </ul>
+          </div>
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ feature each -->
+      <!-- feature each -->
+      <div class="feature_wrap">
+        <i class='fa fa-tachometer relative_icon'></i>
+        <!-- rotate flap -->
+        <div class="heading">
+          <div class="content">
+            <div class='title'>
+              <span class='green'>Performance</span> <span>Testing</span>
+            </div>
+          </div>
+        </div>
+        <!--/ rotate flap -->
+        <!-- text-->
+        <div class="text_wrap">
+          <div class="text">
+            <p>
+              Performance testing is to test how fast our application is working according to the requirements. Here we must identify response time of each and every functionality/page.
+            </p>
+          </div>
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ feature each -->
+      <!-- feature each -->
+      <div class="feature_wrap">
+        <i class='fa fa-lock relative_icon'></i>
+        <!-- rotate flap -->
+        <div class="heading">
+          <div class="content">
+            <div class='title'>
+              <span class='green'>Security</span> <span>Penetration</span> <span>Testing</span>
+            </div>
+          </div>
+        </div>
+        <!--/ rotate flap -->
+        <!-- text-->
+        <div class="text_wrap">
+          <div class="text">
+            <p>
+              Security is one of the major factor that makes any application reliable by users. There are several types of security exploitations we can find in most of web applications like XSS, CSRF, SQLi, Script Injection, Header Injection and a lot of blackhat techniques out there.
+            </p>
+          </div>
+        </div>
+        <!--/ text -->
+      </div>
+      <!--/ feature each -->
+    </div>
+    <!--/ testimg content -->
+  </div>
+</div>
+{% endblock stage %}

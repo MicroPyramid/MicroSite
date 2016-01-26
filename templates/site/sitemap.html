@@ -9,7 +9,7 @@
 
 {% block stage %}
 {% load blog_tags %}
-<div class='container'>
+<div class='container_wrapper'>
 <ul class="sitemap_list">
     {% if sitemap_links.number == 1  %}
     <li class="sitemap-parent" ><a href='https://micropyramid.com/'>Home</a></li>
@@ -34,7 +34,9 @@
 
     {% for link in sitemap_links %}
     {% if link|get_class_name == 'Category' %}
-      <li class="sitemap-child"><a href='https://micropyramid.com/blog/category/{{link.slug}}'>{{ link.name }} Posts</a></li>
+      {%if link.get_blog_posts %}
+        <li class="sitemap-child"><a href='https://micropyramid.com/blog/category/{{link.slug}}'>{{ link.name }} Posts</a></li>
+      {% endif %}
     {% endif %}
     {% endfor %}
 

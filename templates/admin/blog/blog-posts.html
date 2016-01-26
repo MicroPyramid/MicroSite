@@ -1,6 +1,9 @@
-{% extends 'admin/base.html' %} {% block stage %}
+{% extends 'admin/base.html' %} 
+{% load cache %}
+{% block stage %}
 {% load blog_tags %}
 <!-- main content starts here-->
+{% cache 100 blog_posts %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Blog Post Viewer</h3>
@@ -44,6 +47,7 @@
     </div>
   </div>
 </div>
+{% endcache %}
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
@@ -73,7 +77,7 @@
     });
 
   });
-</script>>
+</script>
 {% endcompress %}
 <!-- main content ends here-->
 {% endblock %}
