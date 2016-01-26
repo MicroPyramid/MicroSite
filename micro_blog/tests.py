@@ -17,7 +17,7 @@ class micro_blog_forms_test(TestCase):
         self.blogppost = Post.objects.create(title='python introduction', user=self.user, content='This is content', category=self.category, status='D', meta_description='meta')
 
     def test_blogpostform(self):
-        form = BlogpostForm(data={'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta'})
+        form = BlogpostForm(data={'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True'})
         self.assertTrue(form.is_valid())
 
     def test_BlogCategoryForm(self):

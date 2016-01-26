@@ -1,247 +1,879 @@
-{% extends 'site/base.html' %}
+{% load recurse %}
 {% load menu %}
-{% block stage %}
-{% load compress %}
-<!-- work process starts here -->
-<div class="row marl" id="work-process">
-  <div class="container">
-    <div class="row marl company-moral">
-      <h3>Micropyramid leveraging the power of open source technologies</h3>
-      <span>We follow perfect mix of development process agile + scrum and that let us boost in delivering software in time with high quality.</span>
-    </div>
-    <div class="row marl work-process">
-      <!-- plan starts here -->
-      <div class="col-md-3 col-sm-3 plan step1">
-        <div class="step-pic"><img src="/static/site/images/plan.png" alt="Planning Logo" />
-        </div>
-        <div class="step-content">
-          <span class="step-title">Planning</span>
-          <span class="step-desc">Planning of Project artictecture involves all aspects of a application from software stack, design, security, performance, modularity and scalability and we consider all these.</span>
-        </div>
-      </div>
-      <!-- plan ends here -->
-      <!-- design starts here -->
-      <div class="col-md-3 col-sm-3 plan step2">
-        <div class="step-pic"><img src="/static/site/images/design.png" alt="Design Logo"/>
-        </div>
-        <div class="step-content">
-          <span class="step-title">Designing</span>
-          <span class="step-desc">Our design methodolgy is evolved to cater all scenarios of web applications. Whiteboard is the first thing comes in the mind of our designers as we visualize before materializing.</span>
-        </div>
-      </div>
-      <!-- design ends here -->
-      <!-- development starts here -->
-      <div class="col-md-3 col-sm-3 plan step3">
-        <div class="step-pic"><img src="/static/site/images/development.png" alt="Development Logo"/>
-        </div>
-        <div class="step-content">
-          <span class="step-title">Development</span>
-          <span class="step-desc">We accept challenges as our high performance nocturnal geeks can't work on simple things :) We do test our code with Jenkins CI to assure bug free code.</span>
-        </div>
-      </div>
-      <!-- development ends here -->
-      <!-- testing starts here -->
-      <div class="col-md-3 col-sm-3 plan step4">
-        <div class="step-pic"><img src="/static/site/images/testing.png" alt="Testing Logo"/>
-        </div>
-        <div class="step-content">
-          <span class="step-title">Testing &amp; Maintenance</span>
-          <span class="step-desc">Application and server maintennace is one of our specialities and we know how to tune applications and servers to see performance boost in milli seconds. We know the value of time.</span>
-        </div>
-      </div>
-      <!-- testing ends here -->
-    </div>
-  </div>
-</div>
-<!-- work process ends here -->
-<!-- our services starts here -->
-<div class="row marl" id="our-services">
-  <div class="container">
-    <div class="row marl home-headings">
-      <h3 class="home-head">Services we offer</h3>
-    </div>
-    <!-- service blocks starts here -->
-    <div class="row marl service-block1">
-      <!-- design service starts here -->
-      <div class="col-md-4 col-sm-4 service">
-        <div class="design-service">
-          <span class="title">Web desiging</span>
-          <span class="desc">Our design process is fine flow of ideas and implementation among mockups, UX, responsive layouts, whiteboard. We mainly use Bootstrap, LESS, AngularJs and Jquery.</span>
-          <span class="re-direct"><a href="#">View More</a></span>
-        </div>
-      </div>
-      <!-- design service ends here -->
-      <div class="col-md-8 col-sm-8  two-slides">
-        <!-- develop service starts here -->
-        <div class="row marl service">
-          <div class="develop-service">
-            <span class="title">Development</span>
-            <span class="desc">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time boost in delivering software in time with high quality.</span>
-            <span class="re-direct"><a href="#">View More</a></span>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>
+      {% block title %}
+       Django and Python Web Development | Application Development Services India – MicroPyramid
+      {% endblock %}
+    </title>
+    {% block meta-description %}
+    <meta name="description" content="Django and python web development company in India. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development." />
+    {% endblock %}
+    <meta name="keywords" content="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
+    <meta name="author" content="micropyramid" />
+    <meta name="robots" content="index, follow">
+    <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services Development Company - Hyderabad, India &raquo; Feed" href="https://www.micropyramid.com/rss.xml" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extra-head %}
+    {% endblock %}
+    {% load compress %}
+    <link rel="shortcut icon" href="/static/favicon.png">
+    <!-- google fonts starts here-->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
+    <!-- google fonts ends here-->
+    <!-- css starts here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    {% compress css %}
+    <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
+    <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
+    {% endcompress %}
+    {% block extra-styles %}
+    {% endblock %}
+    {% compress js %}
+    <!-- scripts starts here -->
+    <script type="text/javascript" src='/static/site/js/classie.js'></script>
+    <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
+    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
+    {% endcompress %}
+    <!-- scripts ends here -->
+  </head>
+  <body>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{{request.session.google_analytics_code}}', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <!-- push menu -->
+    <div class="mp-pusher" id="mp-pusher">
+      <!-- mp-menu -->
+      <nav id="mp-menu" class="mp-menu">
+        {% include 'site/side-bar-menu.html' %}
+        <a href="#" class="subscribe">Subscribe</a>
+      </nav>
+      <!-- /mp-menu -->
+      <div class="scroller">
+        <!-- this is for emulating position fixed of the nav -->
+        <div class="scroller-inner">
+          <!-- Top Navigation -->
+          <div class="codrops-top clearfix">
           </div>
-        </div>
-        <!-- develop service ends here -->
-        <!-- testing service starts here -->
-        <div class="row marl service">
-          <div class="testing-service">
-            <span class="title">Testing</span>
-            <span class="desc">Our gitlab server continuously talks to Jenkins server to identify anomalies in code. We do security penetration and load testing at unmatched level of ingenuity.</span>
-            <span class="re-direct"><a href="#">View More</a></span>
-          </div>
-        </div>
-        <!-- testing service ends here -->
-      </div>
-    </div>
-    <div class="row marl">
-      <!-- cloud service starts here -->
-      <div class="col-md-4 col-sm-4 service">
-        <div class="cloud-service">
-          <span class="title">Cloud Computing</span>
-          <span class="desc">Amazon AWS, Rackspace, ELK Stack, Mongodb, Nginx loadbalancing, autoscaling are our specialities. With 6 years of experience in cloud development and management we offer reliable and affordable services to our clients across Countries.</span>
-          <span class="re-direct"><a href="#">View More</a></span>
-        </div>
-      </div>
-      <!-- cloud service ends here -->
-      <!-- server service starts here -->
-      <div class="col-md-4 col-sm-4 service">
-        <div class="server-service">
-          <span class="title">Server Management</span>
-          <span class="desc">Server monitoring and tuning is very much exciting to us even after 6 years of continuous updation of techniques and challengs we faced to tune our process. We do security hardening, performance tuning and monitoring various metrics of server health.</span>
-          <span class="re-direct"><a href="#">View More</a></span>
-        </div>
-      </div>
-      <!-- sever service ends here -->
-      <!-- social service starts here -->
-      <div class="col-md-4 col-sm-4 service">
-        <div class="social-service">
-          <span class="title">Social Integration</span>
-          <span class="desc">Facebook, google, linkedin, twitter, bootstrap, stackexchange and many other platform integrations happened in our labs. We do deep integration by harnessing these social APIs.</span>
-          <span class="re-direct"><a href="#">View More</a></span>
-        </div>
-      </div>
-      <!-- social service ends here -->
-    </div>
-    <!-- service blocks ends here -->
-  </div>
-</div>
-<!-- our services ends here -->
-<!-- our technologies starts here -->
-<div class="row marl" id="our-technologies">
-  <div class="container">
-    <h3 class="home-head">Technologies we use the most</h3>
-    <div class="row marl our-technologies">
-      <div class="tech-grid">
-        <div class="grid">
-          <div class="grid-sizer">Python</div>
-          <div class="grid-item">Python</div>
-          <div class="grid-item">Django</div>
-          <div class="grid-item  grid-item--width2">amazon web services</div>
-          <div class="grid-item ">html</div>
-          <div class="grid-item">css</div>
-          <div class="grid-item">javascript</div>
-          <div class="grid-item ">html5</div>
-          <div class="grid-item">css3</div>
-          <div class="grid-item ">photoshop</div>
-          <div class="grid-item ">ubuntu</div>
-          <div class="grid-item">celery</div>
-          <div class="grid-item ">mysql</div>
-          <div class="grid-item grid-item--width2">postgresql</div>
-          <div class="grid-item">mongodb</div>
-          <div class="grid-item">jquery</div>
-          <div class="grid-item">Angular JS</div>
-          <div class="grid-item grid-item--width2 ">rest web services</div>
-          <div class="grid-item grid-item--width2">elastic search</div>
-          <div class="grid-item">nginx</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- our technologies ends here -->
-<!-- our blog starts here -->
-<div class="row marl" id="our-blog">
-  <div class="container">
-    <h3 class="home-head">Fresh from our Blog</h3>
-    <!-- blog starts here -->
-    <div class="row marl blog-blocks">
-      <!-- latest block starts here -->
-      <div class="col-md-4 col-sm-3 blog-block">
-        <div class="latest-blog blog-item">
-          {% get_latest_posts as latest_posts %}
-          {% for post in latest_posts|slice:":1" %}
-          <span itemscope itemType="http://schema.org/BlogPosting">
-            <span class="title"><a href="/blog/{{post.slug}}/"><span itemprop="headline">{{ post.title }}</span></a></span>
-            <span class="date-author"><span class="author" itemprop="author"><span itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ post.user.get_full_name }}</span></span></span> <span class="date"><a href="/blog/{{post.updated_on|date:"Y"}}/{{post.updated_on|date:"n"}}"><span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></a></span></span>
-            <span class="desc"><a href="/blog/{{post.slug}}/"><span itemprop="description">{{ post.content|safe|truncatewords:45 }}</span></a></span>
-          </span>
-          {% endfor %}
-        </div>
-      </div>
-      <!-- latest block ends here -->   
-      <div class="col-md-5 col-sm-6 blog-block">
-        {% for post in latest_posts|slice:"1:3" %}
-          <div class="recent-blog {% if forloop.counter == 1 %}green{% else %}yellow{% endif %}">
-            <span class="title"><a href="/blog/{{post.slug}}/">{{ post.title }}</a></span>
-            <span class="date-author"><span class="author">{{ post.user.get_full_name }}</span> <span class="date"><a href="/blog/{{post.created_on|date:"Y"}}/{{post.created_on|date:"n"}}">{{ post.created_on|date:"d F Y" }}</a></span></span>
-            <span class="desc"><a href="/blog/{{post.slug}}/">{{ post.content|safe|truncatewords:20 }}</a></span>
-          </div>
-        {% endfor %}
-      </div>
-      <!-- category block starts here -->   
-      <div class="col-md-3 col-sm-3 blog-block">
-        <div class="category-list">
-          <div class="title">Blog Categories</div>
-          <ul class="cat-list">
-            {% get_categories as categories %}
-            {% for category in categories|slice:":9" %}
-              <li><a href="/blog/category/{{category.slug}}">{{ category.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-      <!-- category block ends here --> 
-    </div>
-    <!-- blog ends here -->    
-  </div>
-</div>
-<!-- our blog ends here -->
-<!--get in touch start here -->
-<div class="row marl" id="get-in-touch">
-  <div class="container">
-    <h2>Get in Touch</h2>
-    <span class="home-sub-head">We accept challenges, talk to us.</span>
-    <div class="row marl contact-form">
-      <form id="contactform" name="contactform" method="post">
-        {% csrf_token %}
-        <div class="col-md-offset-1 col-md-10 col-md-offset-1 col-sm-12">
-          <div class="row marl first-input-row">
-            <div class="col-md-4 col-sm-4 input-blk">
-              <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name">
+          <div class="content clearfix">
+            {% block banner %}
+            <!-- banner wrap -->
+            <div id="banner_wrap">
+              <img src='/static/site/images/new/slider_bg_grass.jpg' alt="MicroPyramid - Django and Python Web Development" class='banner_bg_image'>
+              <div class="img_overlay_div"></div>
+              <!-- row -->
+              <div class="row">
+                <!-- logo -->
+                <div class="logo">
+                  <div class='image_wrap'><img src='/static/site/images/new/logo_white.png' alt="Micro Pyramid Logo"></div>
+                  <div class="name_wrap">
+                    <div class="large">Micro Pyramid</div>
+                    <div class="small">Informatics Pvt. Ltd.</div>
+                  </div>
+                </div>
+                <!--/ logo -->
+              </div>
+              <!-- row -->
+              <!-- row -->
+              <div class="row">
+                <div class="slider_text">
+                  <!--/ design -->
+                  <div class='tab_text_wrap active'>
+                    <i class='fa fa-desktop tab_image'></i>
+                    <div class="title">
+                      Design - HTML5, CSS3, LESS and SCSS
+                    </div>
+                    <div class="text">
+                      We develop Creative website designs / UX designs using latest technologies like SCSS, HTML5, CSS3.  Also our team master at banner designs which helps in campaigning. "Visual Ideas to web template".
+                    </div>
+                  </div>
+                  <!--/ design -->
+                  <!-- develope -->
+                  <div class='tab_text_wrap'>
+                    <i class='fa fa-file-code-o tab_image'></i>
+                    <div class="title">
+                      Django Web Application Development
+                    </div>
+                    <div class="text">
+                      Django web development is one of our core strengths to do rapid prototypes and application development. Python is being used in our daily development activities such as development, testing and deployment.
+                    </div>
+                  </div>
+                  <!--/ develope -->
+                  <!-- cloud -->
+                  <div class='tab_text_wrap'>
+                    <i class='fa fa-cloud tab_image'></i>
+                    <div class="title">
+                      Cloud Hosting, Performance and Security
+                    </div>
+                    <div class="text">
+                      Being Amazon Consulting Partner we master all Amazon Web Services to give Amazon Consulting Services to Security and Performance critical web sites. We have offered our services to 8 countries with successful implementations including large corporations.
+                    </div>
+                  </div>
+                  <!--/ cloud -->
+                  <!-- testing -->
+                  <div class='tab_text_wrap'>
+                    <i class='fa fa-shopping-cart tab_image'></i>
+                    <div class="title">
+                      Seamless ecommerce Integrations
+                    </div>
+                    <div class="text">
+                      We have experience in integrating 10 payment gateways and development of python API to integrate into django apps. Most notably we work with django-oscar to develop and maintain eCommerce web applications.
+                    </div>
+                  </div>
+                  <!--/ testing -->
+                  <!-- server -->
+                  <div class='tab_text_wrap'>
+                    <i class='fa fa-users tab_image'></i>
+                    <div class="title">
+                      Salesforce CRM Automation and Integrations
+                    </div>
+                    <div class="text">
+                      With so many years of experience in developing SalesForce CRM applications and integrations with other tools. Now, we can develop the much more awesome applications for large enterprises.
+                    </div>
+                  </div>
+                  <!--/ server -->
+                </div>
+              </div>
+              <!--/ row -->
+              <!-- footer slider -->
+              <div class="row slider_footer">
+                <div class="col-md-9 daimond_tabs">
+                  <ul>
+                    <li class='active'>
+                      <span class='daimond_wrap'>
+                      <span class='daimond'>
+                      <i class='fa fa-desktop   icon_tab'></i>
+                      <span class='heading'>Design</span>
+                      </span>
+                      </span>
+                    </li>
+                    <li>
+                      <span class='daimond_wrap'>
+                      <span class='daimond'>
+                      <i class='fa fa-file-code-o   icon_tab'></i>
+                      <span class='heading'>Develope</span>
+                      </span>
+                      </span>
+                    </li>
+                    <li>
+                      <span class='daimond_wrap'>
+                      <span class='daimond'>
+                      <i class='fa fa-cloud   icon_tab'></i>
+                      <span class='heading'>Cloud</span>
+                      </span>
+                      </span>
+                    </li>
+                    <li>
+                      <span class='daimond_wrap'>
+                      <span class='daimond'>
+                      <i class='fa fa-shopping-cart  icon_tab'></i>
+                      <span class='heading'>eCommerce</span>
+                      </span>
+                      </span>
+                    </li>
+                    <li>
+                      <span class='daimond_wrap'>
+                      <span class='daimond'>
+                      <i class='fa fa-users  icon_tab'></i>
+                      <span class='heading'>CRM</span>
+                      </span>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-3 dots_wrap">
+                  <ul>
+                    <li class='active'>
+                      <span class='dot_each'></span>
+                    </li>
+                    <li>
+                      <span class='dot_each'></span>
+                    </li>
+                    <li>
+                      <span class='dot_each'></span>
+                    </li>
+                    <li>
+                      <span class='dot_each'></span>
+                    </li>
+                    <li>
+                      <span class='dot_each'></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!--/ slider footer -->
             </div>
-            <div class="col-md-4 col-sm-4 input-blk">
-              <input type="email" class="form-control" placeholder="Email" id ="email" name="email">
+            <!--/ banner wrap -->
+            {% endblock %}
+            <!-- menu -->
+            <div id='menu_wrapper'>
+              <span class='menu_navigator' id='trigger'>
+              <i class='fa fa-reorder'></i>
+              </span>
+              <span class="logo">
+                <a href="/">
+                  <!-- svg logo -->
+                  <span class="logo_mp">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                      width="65px" height="50px"
+                      viewBox="0 0 1047 470">
+                      <path id="left_one"
+                        fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                        d="M 46.00,462.00
+                        C 41.42,461.99 38.50,461.94 34.00,460.71
+                        31.67,460.08 29.07,459.07 27.02,457.79
+                        11.54,448.12 23.40,426.27 30.20,415.00
+                        30.20,415.00 35.19,407.00 35.19,407.00
+                        35.19,407.00 41.42,397.00 41.42,397.00
+                        41.42,397.00 161.58,204.00 161.58,204.00
+                        161.58,204.00 249.42,63.00 249.42,63.00
+                        249.42,63.00 271.30,29.01 271.30,29.01
+                        275.76,23.92 282.05,19.40 289.00,19.04
+                        302.55,18.34 309.39,27.45 315.80,38.00
+                        315.80,38.00 347.42,90.00 347.42,90.00
+                        349.74,93.73 359.45,108.94 360.08,112.00
+                        360.77,113.91 360.61,115.18 360.08,117.00
+                        360.08,117.00 343.42,144.00 343.42,144.00
+                        343.42,144.00 309.05,199.00 309.05,199.00
+                        309.05,199.00 210.05,358.00 210.05,358.00
+                        210.05,358.00 176.95,411.00 176.95,411.00
+                        172.13,418.68 164.59,428.54 165.71,438.00
+                        167.15,450.28 175.33,453.91 182.00,462.00
+                        182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
+                      <path id="left_2"
+                        fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                        d="M 285.00,466.00
+                        C 272.43,465.85 260.25,460.59 261.09,446.00
+                        261.76,434.51 268.99,423.51 274.95,414.00
+                        274.95,414.00 300.58,373.00 300.58,373.00
+                        300.58,373.00 403.95,207.00 403.95,207.00
+                        403.95,207.00 491.05,67.00 491.05,67.00
+                        491.05,67.00 502.95,48.00 502.95,48.00
+                        509.57,37.45 517.01,24.07 531.00,23.10
+                        541.41,22.37 549.35,29.88 554.77,38.00
+                        554.77,38.00 568.20,60.00 568.20,60.00
+                        568.20,60.00 589.00,94.00 589.00,94.00
+                        589.00,94.00 599.32,111.00 599.32,111.00
+                        601.40,114.39 603.31,116.95 601.69,121.00
+                        601.69,121.00 585.05,148.00 585.05,148.00
+                        585.05,148.00 552.05,201.00 552.05,201.00
+                        552.05,201.00 452.32,361.00 452.32,361.00
+                        452.32,361.00 418.68,415.00 418.68,415.00
+                        413.86,422.65 406.16,432.57 407.19,442.00
+                        408.50,453.99 416.82,458.07 423.00,466.00
+                        423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
+                      <path id="triangle"
+                        fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                        d="M 684.68,242.00
+                        C 684.68,242.00 706.42,277.00 706.42,277.00
+                        706.42,277.00 775.68,388.00 775.68,388.00
+                        780.83,396.17 797.28,421.68 799.91,429.00
+                        801.71,434.02 802.11,437.71 801.99,443.00
+                        801.60,458.99 787.16,461.98 774.00,462.00
+                        774.00,462.00 570.00,462.00 570.00,462.00
+                        565.69,461.99 563.18,462.10 559.00,460.61
+                        556.57,459.75 554.16,458.50 552.09,456.95
+                        536.31,445.10 551.82,422.90 559.19,411.00
+                        559.19,411.00 564.80,402.00 564.80,402.00
+                        564.80,402.00 633.42,291.00 633.42,291.00
+                        633.42,291.00 673.00,227.00 673.00,227.00
+                        678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
+                      <path id="seven"
+                        fill="#2f5374" stroke="#2f5374" stroke-width='6'
+                        d="M 729.00,15.00
+                        C 729.00,15.00 799.00,15.00 799.00,15.00
+                        799.00,15.00 1018.00,15.00 1018.00,15.00
+                        1031.59,15.02 1042.86,20.25 1038.51,36.00
+                        1037.37,40.12 1031.77,49.85 1029.42,54.00
+                        1029.42,54.00 1014.70,81.00 1014.70,81.00
+                        1014.70,81.00 947.31,204.00 947.31,204.00
+                        947.31,204.00 907.42,277.00 907.42,277.00
+                        907.42,277.00 883.31,321.00 883.31,321.00
+                        879.08,328.80 874.68,337.62 865.00,339.61
+                        857.63,341.12 851.79,336.48 847.53,331.00
+                        847.53,331.00 823.85,290.00 823.85,290.00
+                        823.85,290.00 813.00,271.00 813.00,271.00
+                        811.35,268.11 808.42,263.33 808.42,260.00
+                        808.42,256.49 811.45,252.04 813.14,249.00
+                        813.14,249.00 824.14,229.00 824.14,229.00
+                        824.14,229.00 865.75,153.00 865.75,153.00
+                        865.75,153.00 881.25,123.00 881.25,123.00
+                        885.16,111.06 880.84,107.02 869.00,107.00
+                        869.00,107.00 732.00,107.00 732.00,107.00
+                        730.06,107.00 726.86,107.12 725.10,106.40
+                        721.23,104.82 716.09,93.92 713.85,90.00
+                        713.85,90.00 685.75,39.00 685.75,39.00
+                        682.60,29.40 682.42,20.11 693.00,15.65
+                        693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
+                    </svg>
+                    <img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid Text Logo">
+                  </span>
+                  <!--/ svg logo -->
+                </a>
+              </span>
+              {% get_menus as menu_list %}
+              {% recurse menu.active_children with menu_list as menu %}
+              <ul>
+                {% loop %}
+                <li><a href="{{menu.url}}">{{menu.title}}</a>
+                  {% child %}
+                </li>
+                {% endloop %}
+              </ul>
+              {% endrecurse %}
+              <ul>
+                <li><a href="/">Home</a></li>
+              </ul>
+              <div class="clearfix"></div>
             </div>
-            <div class="col-md-4 col-sm-4 input-blk">
-              <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone">
-            </div>
-          </div>
-          <div class="row marl second-input-row">
-            <div class="col-md-12 input-blk">
-              <textarea class="form-control form-control1" rows="3" placeholder="Comments" id="message" name="message"></textarea>
-            </div>
-          </div>
-          <button class="btn btn-default" type="submit">Submit Now</button>
+            <!--/ menu -->
+            {% block stage %}
+
+            <div class="overlay_subscribe"></div>
+<div class="subscribe_div_wrap">
+  <!-- close_contact -->
+  <div class="close_subscribe">x</div>
+  <!--/ close_contact -->
+  <!-- title -->
+  <div class="title_div">
+    <div class="daimond"></div>
+    <div class="daimond"></div>
+    <div class="daimond"></div>
+    <h3>Subscribe <span>With Us</span></h3>
+  </div>
+  <!--/ title -->
+  <!-- address -->
+  <div class="address_div">
+    <i class='fa fa-map-marker'></i>
+    <div class="address_wrap">
+      <div class="address">
+        <h4>Reach</h4>
+        <div class='content'>
+          <span>HIG499, Viswa sai dham apartment,</span>
+          <span>behind anupama hospital, 6th phase </span>
+          <span>KPHB, Hyderabad - 72</span>
         </div>
-      </form>
+      </div>
     </div>
+    <!-- call us -->
+    <div class="cal_us">
+      <i class='fa fa-phone'></i>
+      <h4>Call</h4>
+      <div class="content">040 6599 6999</div>
+    </div>
+    <!--/ call us -->
+    <!-- call us -->
+    <div class="mail_us">
+      <i class='fa fa-envelope-o'></i>
+      <h4>Mail</h4>
+      <div class="content">hello@micropyramid.com</div>
+    </div>
+    <!--/ call us -->
   </div>
-</div>
-<!--get in touch start here -->
-{% endblock %}
-{% block map %}
-<div class="map">
-  <div class='embed-container'>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4555949677!2d78.39003300000002!3d17.485752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144f52b17db%3A0xa94f62d5a7e9c69a!2sMicroPyramid+Informatics+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1431589311241" height="350" style="width:100%;border:0"></iframe>
+  <!--/ address -->
+  <div class="clearfix"></div>
+  <!-- social medi -->
+  <div class="contact_social">
+    <ul>
+      <li>
+        <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank" title="MicroPyramid facebook page"><span class='social_each fb'><i class='fa fa-facebook'></i></span></a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank" title="MicroPyramid linkedin page"><span class='social_each in'><i class='fa fa-linkedin'></i></span></a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank" title="MicroPyramid youtube channel"><span class='social_each youtube'><i class='fa fa-youtube-play'></i></span></a>
+      </li>
+      <li>
+        <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank" title="MicroPyramid rss feed"><span class='social_each rss'><i class='fa fa-rss'></i></span></a>
+      </li>
+      <li>
+        <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank" title="MicroPyramid googleplus page"><span class='social_each gplus'><i class='fa fa-google-plus'></i></span></a>
+      </li>
+      <li>
+        <a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><span class='social_each twit' title="MicroPyramid twitter page"><i class='fa fa-twitter'></i></span></a>
+      </li>
+      <li>
+        <a href="https://github.com/micropyramid" class="github" target="_blank" title="MicroPyramid github organisation"><span class='social_each git'><i class='fa fa-github'></i></span></a>
+      </li>
+    </ul>
   </div>
+  <!--/ social media -->
+  <!-- form -->
+  <form id="subscribeform" name="subscribeform" method="post">
+    <div class="form_div">
+      <div class="input-group">
+        <span class="input-group-addon"><i class='fa fa-user'></i></span>
+        <input type="text" class="form-control" name="full_name" placeholder="Name" aria-describedby="basic-addon1">
+      </div>
+      <span id="full_name"></span>
+      <div class="input-group">
+        <span class="input-group-addon"><i class='fa fa-comments'></i></span>
+        <input type="text" class="form-control" name="email" placeholder="Email" aria-describedby="basic-addon1">
+      </div>
+      <span id="email"></span>
+      <div class="button_row">
+        <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send
+        </button>
+      </div>
+    </div>
+  </form>
+  <!--/ form -->
 </div>
-{% endblock %}
+<div id="about-us">
+        <div class="container text-center">
+         <p>We at MicroPyramid challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing gaining our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help python Django application development services. Our expertise lies in Python, Django, Angular Js, Elastic Search, Ansible, Docker, Amazon Web Services, Salesforce, PostgreSQL, MySQL, Less and Scss.</p>
+        <p>
+        We are dedicated to providing world class software to startups, small and big enterprises. We use most of the cloud technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome open source technologies. With our custom tools,  we can assure you always get the best software you need. We always tryto meet customer satisfaction with our great monitoring and support. There are many reusable python packages, docker images, ansible roles, node packages published by our experts in their free time.</p>
+        </div>
+      </div>
+            <!-- our work -->
+            <div id='our_work'>
+              <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12 about_text">
+                  <div class="heading">
+                    <span>our recent</span> <span class='green'>works</span>
+                  </div>
+                  <p>
+                    With over 40 projects delivered for 15 clients in 8 countries we always find ways to develop secure, fast and robust web applications. We have three layer testing and two layer quality control in place to deliver awesome software. All our web applications are being monitored 24x7 using newrelic and sentry for performance and security enhancements. We develop SEO optimized web applications to boost search engine rankings easily.
+                  </p>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12 daimonds_wrap">
+                  <!-- row one -->
+                  <div class="row">
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="http://www.haciendabaru.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/haciendabaru.png' alt="haciendabaru">
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              National Wildlife Refuge and Lodge.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="http://www.boughdigital.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/bough.png' alt="bough-digital">
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              Online SEO Digital Marketing and Reporting Tool.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ row one -->
+                  <!-- row two -->
+                  <div class="row">
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="https://peeljobs.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/peeljobs.png' alt="peeljobs">
+                              <span class='title'>Peel Jobs</span>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              Online service job portal to find the best career opportunity.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="https://hellocoupons.in/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/hellocoupons.png' alt="helloCoupons">
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              India's Best Coupons Portal. Find Latest Coupons, Discount codes and Best saving offers.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="http://giftingnation.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/giftingnation.png' alt="giftingnation">
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              You can Gift anyone anytime.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/ row two -->
+                  <!-- row three -->
+                  <div class="row">
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="http://creditable.co/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/crditable.png' alt="creditable">
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              Easily manage savings, loans and enabling financial wellness for all employees at work.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="daimond_work">
+                      <div class="content_wrap">
+                      <div class="overlay">
+                        <div class="visit_web">
+                          <a href="https://wonderlandresorts.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                        </div>
+                      </div>
+                      <div class='content_rotate'>
+                        <div class="logo">
+                        <div class="image_wrap">
+                          <span class='img'>
+                        <img src='/static/site/images/wonder-logo.png'>
+                        </span>
+                        </div>
+                        </div>
+                        <div class="description">
+                        <p>
+                        The perfect vacation hotels, homes and rentals around the world.
+                        </p>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <!--/ row three -->
+                  <!--/ row three -->
+                </div>
+              </div>
+            </div>
+            <!--/ our work -->
+            <!-- our blog starts here -->
+            <!-- blog -->
+            <div id='blog_list'>
+              <div class="heading">
+                <span>latest from our </span> <span class='green'>blog</span>
+              </div>
+              <div class="row">
+                {% get_latest_posts as latest_posts %}
+                {% for post in latest_posts %}
+                <!--blog each-->
+                <div class="col-md-4 col-sm-4 col-xs-12 blog_ticket_wrap">
+                  <div class="blog_ticket" itemscope itemType="http://schema.org/BlogPosting">
+                    <div class="date_daimond">
+                      <div class="text_wrap">
+                        {% if post.published_on %}
+                        <div class='month'>
+                          <a href="/blog/{{post.published_on|date:"Y"}}/{{post.published_on|date:"n"}}">
+                          <span itemprop="datePublished">
+                          {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} <br/> {{ post.published_on|date:"Y" }}
+                          </span>
+                          </a>
+                        </div>
+                        {% else %}
+                        <div class='month'>
+                          <a href="/blog/{{post.updated_on|date:"Y"}}/{{post.updated_on|date:"n"}}">
+                          <span itemprop="datePublished">
+                          {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }} <br/> {{ post.updated_on|date:"Y" }}
+                          </span>
+                          </a>
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="blog_title">
+                      <a href="/blog/{{post.slug}}/">
+                      <span itemprop="headline">{{ post.title }}</span>
+                      </a>
+                      <div class="author">
+                        <span itemprop="author">
+                        <span itemscope itemtype="http://schema.org/Person">
+                        <span itemprop="name">{{ post.user.get_full_name }}</span>
+                        </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="blog_description">
+                      <div class="description-detail" id="/blog/{{post.slug}}/">
+                        <div itemprop="description">
+                          {{ post.get_content|truncatewords:350 }}...
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/blog each-->
+                {% endfor %}
+              </div>
+            </div>
+            <!--/ blog -->
+            <!-- our blog ends here -->
+            <!-- our technologies starts here -->
+            <div id='technologies_wrapper'>
+              <div class="row">
+                <!-- Mp-Code starts here -->
+                <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 mp-code text-center">
+                  <img src="/static/site/images/tech-home/mp-code.png" alt="Technologies we use" />
+                </div>
+                <!-- Mp-Code ends here -->
+                <!-- Mp-technologies starts here -->
+                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 mp-technologies">
+                  <div class="logo-gallery-row row">
+                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img src="/static/site/images/tech-home/python-tech.png" class="logo" alt="python" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/django-tech.png" class="logo" alt="django" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/elastic-tech.png" class="logo" alt="elastic search" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/aws-tech.png" class="logo" alt="amazon web services" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/oscar-tech.png" class="logo" alt="djagno oscar" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/salesforce-tech.png" class="logo" alt="salseforce" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/angular-js-tech.png" class="logo" alt="angular_js" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/bootstrap-tech.png" class="logo" alt="boostrap" />
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/git-tech.png" class="logo" alt="git" />
+                    </div>
+                  </div>
+                </div>
+                <!-- Mp-technologies ends here -->
+              </div>
+            </div>
+            <!-- our technologies ends here -->
+            <!--get in touch start here -->
+            <div class="row" id="get-in-touch">
+              <div class="heading">
+                <span>get in</span> <span class='green'>touch</span>
+                <!-- <div><span class="home-sub-head">We accept challenges, talk to us.</span></div> -->
+              </div>
+              <div class="row contact-form">
+                <form id="contactform" name="contactform" method="post">
+                  {% csrf_token %}
+                  <div class="row marl first-input-row">
+                    <div class="col-md-4 col-sm-4 input-blk">
+                      <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name">
+                    </div>
+                    <div class="col-md-4 col-sm-4 input-blk">
+                      <input type="email" class="form-control" placeholder="Email" id ="email" name="email">
+                    </div>
+                    <div class="col-md-4 col-sm-4 input-blk">
+                      <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone">
+                    </div>
+                  </div>
+                  <div class="row marl second-input-row">
+                    <div class="col-md-12 input-blk">
+                      <textarea class="form-control form-control1" rows="3" placeholder="Comments" id="message" name="message"></textarea>
+                    </div>
+                  </div>
+                  <div class="btn_div">
+                    <button class="btn btn-default" type="submit">Submit Now</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!--get in touch start here -->
+            {% endblock %}
+            {% block footer %}
+            <footer>
+              <!--footer social start here -->
+              <div class="row" id="footer-social">
+                <ul class="list-inline">
+                  <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                  </li>
+                  <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+                  </li>
+                  <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                  </li>
+                  <li><a href="https://micropyramid.com/rss.xml" class="rss" target="_blank"><i class="fa fa-rss"></i></a>
+                  </li>
+                  <li><a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+                  </li>
+                  <li><a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                  </li>
+                  <li><a href="https://github.com/micropyramid" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <!--footer social ends here -->
+            </footer>
+            <!-- our contact starts here -->
+            <div class="row" id="our-contact">
+              <!--  <h3 class="home-head">Reach Us</h3>
+                <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>-->
+              <div class="row contact-detail">
+                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark">
+                  <div class="icon"><i class="fa fa-phone"></i></div>
+                  <div class="text"><span class="head">Call Us</span>
+                    <span class="desc">040 6599 6999</span>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark1">
+                  <div class="icon"><i class="fa fa-envelope-o"></i></div>
+                  <div class="text"><span class="head">E-Mail Address</span>
+                    <span class="desc">hello@micropyramid.com</span>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark2">
+                  <div class="icon"><i class="fa fa-map-marker"></i></div>
+                  <div class="text"><span class="head">Reach US</span>
+                    <span class="desc">
+                    HIG499, Viswa sai dham apartment,
+                    behind anupama hospital, 
+                    6th phase KPHB, Hyderabad - 72</span>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark3">
+                  <div class="icon"><i class="fa fa-clock-o"></i></div>
+                  <div class="text">
+                    <span class="head">Office Timings</span>
+                    <span class="desc">
+                      Monday - Friday : 10:00 - 19:00<!--  <br />
+                        Saturday : 10:00 - 19:00 -->
+                    </span>
+                  </div>
+                </div>
+              </div>
+              {% block map %}
+              <div class="map" id='map'>
+                <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4555949677!2d78.39003300000002!3d17.485752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144f52b17db%3A0xa94f62d5a7e9c69a!2sMicroPyramid+Informatics+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1431589311241" height="350" style="width:100%;border:0"></iframe>-->
+              </div>
+            </div>
+            {% endblock %}
+          </div>
+          <!-- our contact ends here --> 
+          <!-- footer links starts here -->
+          <div class="row marl" id="footer-links-mp">
+            <div class="container">
+              <div class="col-md-6 col-sm-12 footer-mp text-right">
+                &copy; 2016 MicroPyramid.
+              </div>
+              <a href="/sitemap/"><Strong>Site Map</Strong></a>
+            </div>
+          </div>
+          <!-- footer links ends here -->
+          {% endblock %}
+        </div>
+      </div>
+      <!-- /scroller-inner -->
+    </div>
+    <!-- /scroller -->
+    <!-- /pusher -->
+    <!--/ push menu -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    {% compress js %}
+    <script src="/static/site/js/jquery.form.js"></script>
+    <script src="/static/site/js/functions.js"></script>
+    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
+    <script src="/static/site/js/map.js"></script>
+    <script type="text/javascript">
+      new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
+    </script>
+    <script type="text/javascript">
+      $('.daimond_work').click(function(e){
+        $(this).hover();
+      });
+      $('.description-detail').click(function(e){
+        window.location = $(this).attr('id');
+      });
+    </script>
+    <script type="text/javascript">
+    </script>
+    {% endcompress %}
+  </body>
+</html>

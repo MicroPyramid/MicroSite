@@ -1,2 +1,1 @@
-from .users import *
-from .views import *
+default_app_config = 'micro_admin.app.MicroAdminAppConfig'

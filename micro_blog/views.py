@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post
+from micro_blog.models import Category, Tags, Post, create_slug, Subscribers
 from pages.models import simplecontact, Contact
 import math
 # from django.core.files.storage import default_storage
@@ -14,11 +14,14 @@ import json
 from micro_admin.models import User
 from ast import literal_eval
 from employee.models import DailyReport, Dailyreport_files
-from pages.forms import SimpleContactForm, ContactForm
+from pages.forms import SimpleContactForm, ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
+from django.core.cache import cache
 from microurl import google_mini
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
+from .tasks import *
 
 # @csrf_exempt
 # def recent_photos(request):
@@ -45,6 +48,8 @@ def new_blog_category(request):
         validate_blogcategory = BlogCategoryForm(request.POST)
         if validate_blogcategory.is_valid():
             validate_blogcategory.save()
+
+            cache._cache.flush_all()
             data = {'error': False, 'response': 'Blog category created'}
         else:
             data = {'error': True, 'response': validate_blogcategory.errors}
@@ -65,6 +70,8 @@ def edit_category(request, category_slug):
         validate_blogcategory = BlogCategoryForm(request.POST, instance=blog_category)
         if validate_blogcategory.is_valid():
             validate_blogcategory.save()
+
+            cache._cache.flush_all()
             data = {'error': False, 'response': 'Blog category updated'}
         else:
             data = {'error': True, 'response': validate_blogcategory.errors}
@@ -83,6 +90,8 @@ def delete_category(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     if request.user.is_superuser:
         category.delete()
+
+        cache._cache.flush_all()
         return HttpResponseRedirect('/blog/category-list/')
     else:
         return render_to_response('admin/accessdenied.html')
@@ -99,7 +108,7 @@ def site_blog_home(request):
 
     posts = Post.objects.filter(status='P')
     no_pages = int(math.ceil(float(posts.count()) / items_per_page))
-    blog_posts = posts.order_by('-updated_on')[(page - 1) * items_per_page:page * items_per_page]
+    blog_posts = posts.order_by('-published_on')[(page - 1) * items_per_page:page * items_per_page]
 
     c = {}
     c.update(csrf(request))
@@ -109,45 +118,41 @@ def site_blog_home(request):
 
 def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
-    blog_posts = Post.objects.filter(status='P')[:3]
-    fb = requests.get('http://graph.facebook.com/?id=https://micropyramid.com//blog/'+slug)
-    tw = requests.get('http://urls.api.twitter.com/1/urls/count.json?url=https://micropyramid.com//blog/'+slug)
-    # r2=requests.get('https://plusone.google.com/_/+1/fastbutton?url= https://keaslteuzq.localtunnel.me/blog/'+slug)
-    ln = requests.get('https://www.linkedin.com/countserv/count/share?url=https://micropyramid.com/blog/'+slug+'&format=json')
+    all_blog_posts = list(Post.objects.filter(status='P').order_by('-published_on'))
+
+    for post in all_blog_posts:
+        if str(slug) == str(post.slug):
+            try:
+                current_index = all_blog_posts.index(post)
+                next_que = all_blog_posts[current_index+1]
+                next_url = '/blog/'+str(next_que.slug)+'/'
+            except:
+                next_url = ''
+            try:
+                current_index = all_blog_posts.index(post)
+                prev_que = all_blog_posts[current_index-1]
+                if current_index == 0:
+                    prev_url = ''
+                else:
+                    prev_url = '/blog/'+str(prev_que.slug)+'/'
+            except:
+                prev_url = ''
+            question = post
+            break
+    if not blog_post.status == 'P':
+        if not request.user.is_authenticated():
+            raise Http404
+    related_posts = Post.objects.filter(category=blog_post.category, status='P').exclude(id=blog_post.id).order_by('?')[:3]
     minified_url = ''
-
     if 'HTTP_HOST' in request.META.keys():
-        minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), 'AIzaSyDFQRPvMrFyBNouOLQLyOYPt-iHG0JVxss')
-
-    linkedin = {}
-    linkedin.update(ln.json())
-    facebook = {}
-    facebook.update(fb.json() if fb else {})
-    twitter = {}
-    twitter.update(tw.json())
-    fbshare_count = 0
-    twshare_count = 0
-    lnshare_count = 0
-    try:
-        if facebook['shares']:
-            fbshare_count = facebook['shares']
-    except Exception:
-        pass
-    try:
-        if twitter['count']:
-            twshare_count = twitter['count']
-    except Exception:
-        pass
-    try:
-        if linkedin['count']:
-            lnshare_count = linkedin['count']
-    except Exception:
-        pass
+        try:
+            minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug}), settings.GGL_URL_API_KEY)
+        except:
+            minified_url = 'https://' + request.META['HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug})
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'],
-                            'post': blog_post, 'posts': blog_posts, 'fbshare_count': fbshare_count,
-                            'twshare_count': twshare_count, 'lnshare_count': lnshare_count, 'minified_url': minified_url})
+    return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
+                                                      'post': blog_post, 'minified_url': minified_url, 'prev_url': prev_url, 'next_url': next_url})
 
 
 def blog_tag(request, slug):
@@ -166,11 +171,12 @@ def blog_tag(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'tag': tag,
                                 'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
 def blog_category(request, slug):
+    slug = slug.lower()
     category = get_object_or_404(Category, slug=slug)
     blog_posts = Post.objects.filter(category=category, status="P").order_by('-updated_on')
     items_per_page = 6
@@ -186,7 +192,7 @@ def blog_category(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'category': category, 'last_page': no_pages,
                                     'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
 
@@ -205,8 +211,9 @@ def archive_posts(request, year, month):
         raise Http404
     c = {}
     c.update(csrf(request))
-    return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
+    return render(request, 'site/blog/index.html', {'current_page': page, 'year':year, 'month': month, 'last_page': no_pages,
                                                         'posts': blog_posts, 'csrf_token': c['csrf_token']})
+
 
 @login_required
 def admin_post_list(request):
@@ -226,11 +233,26 @@ def new_post(request):
             if request.POST.get('status') == "P":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'P'
+                    blog_post.published_on = datetime.datetime.now().date()
 
             elif request.POST.get('status') == "T":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
             blog_post.save()
+            if request.user.is_superuser and request.POST.get('slug'):
+                blog_post.slug = request.POST.get('slug')
+            else:
+                tempslug = slugify(blog_post.title)
+                if blog_post:
+                    blogpost = Post.objects.get(pk=blog_post.id)
+                    blog_post.slug = create_slug(tempslug)
+                    if blogpost.title != blog_post.title:
+                        blog_post.slug = create_slug(tempslug)
+                else:
+                    blog_post.slug = create_slug(tempslug)
+
+            blog_post.save()
+
             if request.POST.get('tags', ''):
                 tags = request.POST.get('tags')
                 tags = tags.split(',')
@@ -246,9 +268,9 @@ def new_post(request):
             sending_msg = sendgrid.Mail()
             sending_msg.set_subject("New blog post has been created")
 
-            blog_url = 'https://www.micropyramid.com/blog/view-post/' + str(blog_post.slug) + '/'
-            message = '<p>New blog post has been created by '+ str(request.user) +' with the name '+ str(blog_post.title) +' in the category '
-            message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="'+ blog_url +'">click here</a> to view the blog post in the site.</p>'
+            blog_url = 'https://www.micropyramid.com/blog/' + str(blog_post.slug) + '/'
+            message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category '
+            message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="' + blog_url + '">click here</a> to view the blog post in the site.</p>'
 
             sending_msg.set_html(message)
             sending_msg.set_text('New blog post has been created')
@@ -256,6 +278,7 @@ def new_post(request):
             sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
             sg.send(sending_msg)
 
+            cache._cache.flush_all()
             data = {'error': False, 'response': 'Blog Post created'}
         else:
             data = {'error': True, 'response': validate_blog.errors}
@@ -282,6 +305,17 @@ def edit_blog_post(request, blog_slug):
             elif request.POST.get('status') == "T":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
+            if request.user.is_superuser and request.POST.get('slug'):
+                blog_post.slug = request.POST.get('slug')
+            else:
+                tempslug = slugify(blog_post.title)
+                if blog_post:
+                    blogpost = Post.objects.get(pk=blog_post.id)
+                    if blogpost.title != blog_post.title:
+                        blog_post.slug = create_slug(tempslug)
+                else:
+                    blog_post.slug = create_slug(tempslug)
+
             blog_post.save()
             blog_post.tags.clear()
             if request.POST.get('tags', ''):
@@ -297,6 +331,8 @@ def edit_blog_post(request, blog_slug):
                         blog_tag = Tags.objects.create(name=tag)
 
                     blog_post.tags.add(blog_tag)
+
+            cache._cache.flush_all()
             data = {'error': False, 'response': 'Blog Post edited'}
         else:
             data = {'error': True, 'response': validate_blog.errors}
@@ -317,6 +353,8 @@ def delete_post(request, blog_slug):
     blog_post = get_object_or_404(Post, slug=blog_slug)
     if request.user == blog_post.user or request.user.is_superuser:
         blog_post.delete()
+
+        cache._cache.flush_all()
         data = {"error": False, 'message': 'Blog Post Deleted'}
     else:
         data = {"error": True, 'message': 'Admin or Owner can delete blog post'}
@@ -347,10 +385,9 @@ def report(request):
 
 def contact(request):
     if request.method == 'GET':
-        raise Http404
+        return render(request, 'site/pages/contact-us.html')
     validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
-
     if 'enquery_type' in request.POST.keys():
         if validate_simplecontact.is_valid() and validate_contact.is_valid():
             contact = simplecontact.objects.create(
@@ -397,8 +434,13 @@ def contact(request):
     sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
     contact_msg = sendgrid.Mail()
-    contact_msg.set_subject("Thank u for ur message")
-    contact_msg.set_text('Thank you for contacting us. We will get back to you soon!!!')
+    contact_msg.set_subject("We received your message | MicroPyramid")
+    message_reply = 'Hello ' + request.POST.get('full_name') + ',\n\n'
+    message_reply = message_reply + 'Thank you for writing in.\n'
+    message_reply = message_reply +  'We appreciate that you have taken the time to share your feedback with us! We will get back to you soon.\n\n'
+    message_reply = message_reply + 'Regards\n'
+    message_reply = message_reply + 'The MicroPyramid Team.'
+    contact_msg.set_text(message_reply)
     contact_msg.set_from("hello@micropyramid.com")
     contact_msg.add_to(request.POST.get('email'))
     sg.send(contact_msg)
@@ -412,6 +454,35 @@ def contact(request):
     sg.send(sending_msg)
 
     data = {'error': False, 'response': 'submitted successfully'}
+    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+
+def subscribe(request):
+    if request.method == 'GET':
+        return render(request, 'site/pages/subscribe.html')
+    print request.POST
+    validate_subscribe = SubscribeForm(request.POST)
+    if validate_subscribe.is_valid():
+        subscriber = Subscribers.objects.create(email=request.POST.get('email'))
+        if str(request.POST.get('is_blog')) == 'True':
+            if len(request.POST.get('is_category')) > 0:
+                category = Category.objects.get(id=request.POST.get('is_category'))
+                subscriber.category = category
+                create_contact_in_category.delay(category.slug, request.POST.get('email'))
+            else:
+                create_contact_in_category.delay('blog', request.POST.get('email'))
+            subscriber.blog_post = True
+        else:
+            create_contact_in_category.delay('site', request.POST.get('email'))
+            subscriber.blog_post = False
+        subscriber.save()
+    else:
+        errors = {}
+        errors = dict((validate_subscribe.errors).items())
+        data = {'error': True, 'errinfo': errors}
+        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+    data = {'error': False, 'response': 'Your email has been successfully subscribed.'}
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 

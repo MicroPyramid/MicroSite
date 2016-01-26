@@ -180,8 +180,8 @@ class pages_views_test(TestCase):
         response = self.client.get('/portal/content/menu/delete_menu/1/')
         self.assertTrue(response.status_code, 200)
 
-        response = self.client.get('/page2/')
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get('/page/')
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get('/portal/content/page/delete/'+str(self.page.id)+'/')
         self.assertEqual(response.status_code, 302)

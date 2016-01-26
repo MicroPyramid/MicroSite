@@ -9,15 +9,13 @@ SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+TEMPLATE_DEBUG = DEBUG
+DEBUG404 = True
+ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me']
 
 RAVEN_CONFIG = {
     'dsn': os.getenv('SENTRYDSN') if os.getenv('SENTRYDSN') else '',
 }
-
-
 
 INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
@@ -27,42 +25,44 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'haystack',
     'djcelery',
     'django_inbound_email',
     'micro_admin',
     'pages',
-    'books',
     'micro_blog',
     'employee',
     'sorl.thumbnail',
     'compressor',
-    'cachalot',
     'search',
 )
 
 MIDDLEWARE_CLASSES = (
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
     'microsite.middleware.RequestSessionMiddleware',
+    'microsite.middleware.DetectMobileBrowser',
+    # 'django.middleware.cache.FetchFromCacheMiddleware'
 )
 
 
-HTML_MINIFY = True
+HTML_MINIFY = False
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.static',
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
+    'django.template.context_processors.static',
+    'django.template.context_processors.request',
+    'django.template.context_processors.media',
 )
 
 
@@ -117,8 +117,8 @@ MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
 
 TEMPLATE_LOADERS = (
-        "django.template.loaders.filesystem.Loader",
-        "django.template.loaders.app_directories.Loader",
+    "django.template.loaders.filesystem.Loader",
+    "django.template.loaders.app_directories.Loader",
 )
 
 COMPRESS_ENABLED = True
@@ -141,12 +141,20 @@ CELERYBEAT_SCHEDULE = {
         'task': 'micro_blog.tasks.daily_report',
         'schedule': crontab(hour=17, minute=00, day_of_week='mon,tue,wed,thu,fri,sat'),
     },
+    # Executes every day evening at 9:00 PM GMT +5.30
+    'add-every-day-evening': {
+        'task': 'micro_blog.tasks.sending_mail_to_subscribers',
+        'schedule': crontab(hour=18, minute=36, day_of_week='mon,tue,wed,thu,fri,sat'),
+    },
+
 }
 
 SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
 SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
+GGL_URL_API_KEY = os.getenv('GGLAPIKEY') if os.getenv('GGLAPIKEY') else ''
 
 GOOGLE_ANALYTICS_CODE = os.getenv('GOOGLE_ANALYTICS_CODE') if os.getenv('GOOGLE_ANALYTICS_CODE') else ''
+
 
 '''
 LOGGING = {
@@ -233,11 +241,17 @@ COMPRESS_ENABLED = True
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
+    ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
 
 COMPRESS_OFFLINE_CONTEXT = {
     'STATIC_URL': 'STATIC_URL',
 }
+
+# if DEBUG:
+#     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+# else:
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
@@ -245,8 +259,6 @@ COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
-CACHALOT_ENABLED = True
-CACHALOT_CACHE_RANDOM = True
 
 if 'TRAVIS' in os.environ:
     DATABASES = {
@@ -260,7 +272,7 @@ if 'TRAVIS' in os.environ:
         }
     }
 
-#Haystack settings for Elasticsearch
+# Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
@@ -272,3 +284,41 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_DEFAULT_OPERATOR = 'OR'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+
+INTERNAL_IPS = ('127.0.0.1', 'localhost', '183.82.113.154')
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+# CACHE_MIDDLEWARE_ALIAS = 'default'  # The cache alias to use for storage.
+# CACHE_MIDDLEWARE_SECONDS = 10   # The number of seconds each page should be cached.
+# CACHE_MIDDLEWARE_KEY_PREFIX = 'microsite'
+# CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+# CACHE_IGNORE_REGEXPS = (
+#     r'/admin.*',
+# )
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

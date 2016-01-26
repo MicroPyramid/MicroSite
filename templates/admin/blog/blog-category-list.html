@@ -1,5 +1,8 @@
-{% extends 'admin/base.html' %} {% block stage %}
+{% extends 'admin/base.html' %} 
+{% load cache %}
+{% block stage %}
 <!-- main content starts here-->
+{% cache 100 blog_categories %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Blog Category Viewer</h3>
@@ -34,5 +37,6 @@
     </div>
   </div>
 </div>
+{% endcache %}
 {% endblock %}
 <!-- main content ends here-->
