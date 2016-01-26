@@ -1,17 +1,78 @@
 {% extends 'site/base.html' %}
+{% load recurse %}
+{% load menu %}
 
 {% block title %}
     {{ page.title|capfirst }} | {{ block.super }}
 {% endblock %}
+
+  {% block extra-js %}
+    {% if page.title|slugify  == 'web-design'|slugify %}
+      <script type="text/javascript" src='/static/site/js/design.js'></script>
+    {% else %}
+    {% endif %}
+  {% endblock %}
+
 
 {% block meta-description %}
   <meta name="description" content="{{ page.title }} - MicroPyramid." />
 {% endblock %}
 
 {% block stage %}
-
+<div class="scroller" id='container_wrapper'>
+   <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <ul>
+         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+         </li>
+         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="{{request.path}}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ page.title|capfirst }}</span></a>
+         </li>
+      </ul>
+   </div>
 {{ page.content | safe }}
 
+{% if page.title|slugify  == 'crm'  or page.title|slugify  == 'server-maintenance' or page.title|slugify  == 'web-development'%}
+<!-- related blog -->
+<div class='server_blog'>
+  <!--title-->
+  <div class="heading">
+    <span>related</span> <span class="green">blog posts</span>
+  </div>
+  <!--/ title -->
+  {% get_latest_posts as latest_posts %}
+  {% for post in latest_posts|slice:":3" %}
+  <div class="col-md-4 col-sm-4 col-xs-12 blog_ticket_wrap">
+    <div class="blog_ticket">
+      <div class="date_daimond">
+        {% if post.published_on %}
+        <div class="text_wrap">
+          <div class="month">{{ post.published_on|date:"b"|title }}</div>
+          <div class="day">{{ post.published_on|date:"d" }}, {{ post.published_on|date:"Y" }}</div>
+        </div>
+        {% else %}
+        <div class="text_wrap">
+          <div class="month">{{ post.updated_on|date:"b"|title }}</div>
+          <div class="day">{{ post.updated_on|date:"d" }}, {{ post.updated_on|date:"Y" }}</div>
+        </div>
+        {% endif %}
+      </div>
+      <div class="blog_title">
+        <a href="/blog/{{post.slug}}/">{{ post.title }}</a>
+        <div class="author">{{ post.user.get_full_name }}</div>
+      </div>
+      <div class="blog_description">
+        <p>
+          {{ post.get_content|truncatewords:350 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<!--/ related blog -->
+{% endif %}
+</div>
 {% endblock %}
 
 {% block map %}

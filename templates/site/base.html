@@ -23,31 +23,26 @@
     {% load compress %}
     <link rel="shortcut icon" href="/static/favicon.png">
     <!-- google fonts starts here-->
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
-
     <!-- google fonts ends here-->
-    <!-- css starts here -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     {% compress css %}
-    <!-- <link rel="stylesheet" href="/static/site/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="/static/site/less/pace/pace-theme-flash.less" type="text/less">
-    <link href="/static/site/less/style.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/mobile.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/responsive.less" rel="stylesheet" type="text/less">
-    <link href="/static/site/less/tag.less" rel="stylesheet" type="text/less">
+    <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
+    <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
+    <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/error_pages.scss">
+    <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/design.scss">
+
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
-    <!-- css ends here -->
     <!-- scripts starts here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    {% compress js %}
-    <script src="/static/site/js/pace/pace.min.js"></script>
-    <script src="/static/site/js/bootstrap.js"></script>
-    {% endcompress %}
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
+    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
+    <script type="text/javascript" src='/static/site/js/classie.js'></script>
+    <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
     <!-- scripts ends here -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
   </head>
   <body>
     <script>
@@ -60,212 +55,312 @@
       ga('send', 'pageview');
 
     </script>
-    <div id="wrap">
-      <!-- header starts here-->
-      <header id="header">
-        <!-- top row bg starts here-->
-        <!-- <div class="row marl top-gradient">
-        </div> -->
-        <!-- top row bg ends here-->
-        <!-- top row starts here -->
-        <!--<div id="topbar">
-          <div class="container">
-            <div class="row marl">
-              <div id="callus" class="col-md-6 col-sm-12">
-                <div class="clearfix ">
-                  <span><strong>Call us:</strong> +91-40-6599-6999</span>
-                  <span ><strong>Email:</strong> <a href="mailto:hello@micropyramid.com">hello@micropyramid.com</a></span>
+    <!-- push menu -->
+    <div class="mp-pusher" id="mp-pusher">
+      <!-- mp-menu -->
+      <nav id="mp-menu" class="mp-menu">
+        {% include 'site/side-bar-menu.html' %}
+      </nav>
+      <!-- /mp-menu -->
+      <div class="scroller">
+        <!-- this is for emulating position fixed of the nav -->
+        <div class="scroller-inner">
+          <!-- Top Navigation -->
+          <div class="codrops-top clearfix">
+          </div>
+          <div class="content clearfix">
+            <!-- mobile_menu wrap -->
+            <div id='mob_menu'>
+              <!-- row -->
+              <div class="row">
+                <span class='menu_navigator' id='trigger'>
+                <i class='fa fa-reorder'></i>
+                </span>
+                <!-- logo -->
+                <div class="logo">
+                  <div class='image_wrap'>
+                    <!-- svg logo -->
+                    <span class="logo_mp">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="65px" height="50px"
+                         viewBox="0 0 1047 470">
+                         <path id="left_one"
+                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                            d="M 46.00,462.00
+                               C 41.42,461.99 38.50,461.94 34.00,460.71
+                                 31.67,460.08 29.07,459.07 27.02,457.79
+                                 11.54,448.12 23.40,426.27 30.20,415.00
+                                 30.20,415.00 35.19,407.00 35.19,407.00
+                                 35.19,407.00 41.42,397.00 41.42,397.00
+                                 41.42,397.00 161.58,204.00 161.58,204.00
+                                 161.58,204.00 249.42,63.00 249.42,63.00
+                                 249.42,63.00 271.30,29.01 271.30,29.01
+                                 275.76,23.92 282.05,19.40 289.00,19.04
+                                 302.55,18.34 309.39,27.45 315.80,38.00
+                                 315.80,38.00 347.42,90.00 347.42,90.00
+                                 349.74,93.73 359.45,108.94 360.08,112.00
+                                 360.77,113.91 360.61,115.18 360.08,117.00
+                                 360.08,117.00 343.42,144.00 343.42,144.00
+                                 343.42,144.00 309.05,199.00 309.05,199.00
+                                 309.05,199.00 210.05,358.00 210.05,358.00
+                                 210.05,358.00 176.95,411.00 176.95,411.00
+                                 172.13,418.68 164.59,428.54 165.71,438.00
+                                 167.15,450.28 175.33,453.91 182.00,462.00
+                                 182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
+                                 <path id="left_2"
+                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                            d="M 285.00,466.00
+                               C 272.43,465.85 260.25,460.59 261.09,446.00
+                                 261.76,434.51 268.99,423.51 274.95,414.00
+                                 274.95,414.00 300.58,373.00 300.58,373.00
+                                 300.58,373.00 403.95,207.00 403.95,207.00
+                                 403.95,207.00 491.05,67.00 491.05,67.00
+                                 491.05,67.00 502.95,48.00 502.95,48.00
+                                 509.57,37.45 517.01,24.07 531.00,23.10
+                                 541.41,22.37 549.35,29.88 554.77,38.00
+                                 554.77,38.00 568.20,60.00 568.20,60.00
+                                 568.20,60.00 589.00,94.00 589.00,94.00
+                                 589.00,94.00 599.32,111.00 599.32,111.00
+                                 601.40,114.39 603.31,116.95 601.69,121.00
+                                 601.69,121.00 585.05,148.00 585.05,148.00
+                                 585.05,148.00 552.05,201.00 552.05,201.00
+                                 552.05,201.00 452.32,361.00 452.32,361.00
+                                 452.32,361.00 418.68,415.00 418.68,415.00
+                                 413.86,422.65 406.16,432.57 407.19,442.00
+                                 408.50,453.99 416.82,458.07 423.00,466.00
+                                 423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
+                                 <path id="triangle"
+                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                            d="M 684.68,242.00
+                               C 684.68,242.00 706.42,277.00 706.42,277.00
+                                 706.42,277.00 775.68,388.00 775.68,388.00
+                                 780.83,396.17 797.28,421.68 799.91,429.00
+                                 801.71,434.02 802.11,437.71 801.99,443.00
+                                 801.60,458.99 787.16,461.98 774.00,462.00
+                                 774.00,462.00 570.00,462.00 570.00,462.00
+                                 565.69,461.99 563.18,462.10 559.00,460.61
+                                 556.57,459.75 554.16,458.50 552.09,456.95
+                                 536.31,445.10 551.82,422.90 559.19,411.00
+                                 559.19,411.00 564.80,402.00 564.80,402.00
+                                 564.80,402.00 633.42,291.00 633.42,291.00
+                                 633.42,291.00 673.00,227.00 673.00,227.00
+                                 678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
+                                 <path id="seven"
+                            fill="#2f5374" stroke="#2f5374" stroke-width='6'
+                            d="M 729.00,15.00
+                               C 729.00,15.00 799.00,15.00 799.00,15.00
+                                 799.00,15.00 1018.00,15.00 1018.00,15.00
+                                 1031.59,15.02 1042.86,20.25 1038.51,36.00
+                                 1037.37,40.12 1031.77,49.85 1029.42,54.00
+                                 1029.42,54.00 1014.70,81.00 1014.70,81.00
+                                 1014.70,81.00 947.31,204.00 947.31,204.00
+                                 947.31,204.00 907.42,277.00 907.42,277.00
+                                 907.42,277.00 883.31,321.00 883.31,321.00
+                                 879.08,328.80 874.68,337.62 865.00,339.61
+                                 857.63,341.12 851.79,336.48 847.53,331.00
+                                 847.53,331.00 823.85,290.00 823.85,290.00
+                                 823.85,290.00 813.00,271.00 813.00,271.00
+                                 811.35,268.11 808.42,263.33 808.42,260.00
+                                 808.42,256.49 811.45,252.04 813.14,249.00
+                                 813.14,249.00 824.14,229.00 824.14,229.00
+                                 824.14,229.00 865.75,153.00 865.75,153.00
+                                 865.75,153.00 881.25,123.00 881.25,123.00
+                                 885.16,111.06 880.84,107.02 869.00,107.00
+                                 869.00,107.00 732.00,107.00 732.00,107.00
+                                 730.06,107.00 726.86,107.12 725.10,106.40
+                                 721.23,104.82 716.09,93.92 713.85,90.00
+                                 713.85,90.00 685.75,39.00 685.75,39.00
+                                 682.60,29.40 682.42,20.11 693.00,15.65
+                                 693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
+                    </svg>
+                    <img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid - Django and Python Web Development">
+                    </span>
+                    <!--/ svg logo -->
+                  </div>
+                </div>
+                <!--/ logo -->
+                {% block contact %}
+                {% endblock %}
+
+              </div>
+              <!-- row -->
+            </div>
+            <!--/ mobile_menu wrap -->
+            <!-- menu -->
+            <div id='base_menu' class='fixed_menu'>
+              <span class="logo">
+                <a href="/">
+                    <!-- svg logo -->
+                    <span class="logo_mp">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="65px" height="50px"
+                         viewBox="0 0 1047 470">
+                         <path id="left_one"
+                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                            d="M 46.00,462.00
+                               C 41.42,461.99 38.50,461.94 34.00,460.71
+                                 31.67,460.08 29.07,459.07 27.02,457.79
+                                 11.54,448.12 23.40,426.27 30.20,415.00
+                                 30.20,415.00 35.19,407.00 35.19,407.00
+                                 35.19,407.00 41.42,397.00 41.42,397.00
+                                 41.42,397.00 161.58,204.00 161.58,204.00
+                                 161.58,204.00 249.42,63.00 249.42,63.00
+                                 249.42,63.00 271.30,29.01 271.30,29.01
+                                 275.76,23.92 282.05,19.40 289.00,19.04
+                                 302.55,18.34 309.39,27.45 315.80,38.00
+                                 315.80,38.00 347.42,90.00 347.42,90.00
+                                 349.74,93.73 359.45,108.94 360.08,112.00
+                                 360.77,113.91 360.61,115.18 360.08,117.00
+                                 360.08,117.00 343.42,144.00 343.42,144.00
+                                 343.42,144.00 309.05,199.00 309.05,199.00
+                                 309.05,199.00 210.05,358.00 210.05,358.00
+                                 210.05,358.00 176.95,411.00 176.95,411.00
+                                 172.13,418.68 164.59,428.54 165.71,438.00
+                                 167.15,450.28 175.33,453.91 182.00,462.00
+                                 182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
+                                 <path id="left_2"
+                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                            d="M 285.00,466.00
+                               C 272.43,465.85 260.25,460.59 261.09,446.00
+                                 261.76,434.51 268.99,423.51 274.95,414.00
+                                 274.95,414.00 300.58,373.00 300.58,373.00
+                                 300.58,373.00 403.95,207.00 403.95,207.00
+                                 403.95,207.00 491.05,67.00 491.05,67.00
+                                 491.05,67.00 502.95,48.00 502.95,48.00
+                                 509.57,37.45 517.01,24.07 531.00,23.10
+                                 541.41,22.37 549.35,29.88 554.77,38.00
+                                 554.77,38.00 568.20,60.00 568.20,60.00
+                                 568.20,60.00 589.00,94.00 589.00,94.00
+                                 589.00,94.00 599.32,111.00 599.32,111.00
+                                 601.40,114.39 603.31,116.95 601.69,121.00
+                                 601.69,121.00 585.05,148.00 585.05,148.00
+                                 585.05,148.00 552.05,201.00 552.05,201.00
+                                 552.05,201.00 452.32,361.00 452.32,361.00
+                                 452.32,361.00 418.68,415.00 418.68,415.00
+                                 413.86,422.65 406.16,432.57 407.19,442.00
+                                 408.50,453.99 416.82,458.07 423.00,466.00
+                                 423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
+                                 <path id="triangle"
+                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                            d="M 684.68,242.00
+                               C 684.68,242.00 706.42,277.00 706.42,277.00
+                                 706.42,277.00 775.68,388.00 775.68,388.00
+                                 780.83,396.17 797.28,421.68 799.91,429.00
+                                 801.71,434.02 802.11,437.71 801.99,443.00
+                                 801.60,458.99 787.16,461.98 774.00,462.00
+                                 774.00,462.00 570.00,462.00 570.00,462.00
+                                 565.69,461.99 563.18,462.10 559.00,460.61
+                                 556.57,459.75 554.16,458.50 552.09,456.95
+                                 536.31,445.10 551.82,422.90 559.19,411.00
+                                 559.19,411.00 564.80,402.00 564.80,402.00
+                                 564.80,402.00 633.42,291.00 633.42,291.00
+                                 633.42,291.00 673.00,227.00 673.00,227.00
+                                 678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
+                                 <path id="seven"
+                            fill="#2f5374" stroke="#2f5374" stroke-width='6'
+                            d="M 729.00,15.00
+                               C 729.00,15.00 799.00,15.00 799.00,15.00
+                                 799.00,15.00 1018.00,15.00 1018.00,15.00
+                                 1031.59,15.02 1042.86,20.25 1038.51,36.00
+                                 1037.37,40.12 1031.77,49.85 1029.42,54.00
+                                 1029.42,54.00 1014.70,81.00 1014.70,81.00
+                                 1014.70,81.00 947.31,204.00 947.31,204.00
+                                 947.31,204.00 907.42,277.00 907.42,277.00
+                                 907.42,277.00 883.31,321.00 883.31,321.00
+                                 879.08,328.80 874.68,337.62 865.00,339.61
+                                 857.63,341.12 851.79,336.48 847.53,331.00
+                                 847.53,331.00 823.85,290.00 823.85,290.00
+                                 823.85,290.00 813.00,271.00 813.00,271.00
+                                 811.35,268.11 808.42,263.33 808.42,260.00
+                                 808.42,256.49 811.45,252.04 813.14,249.00
+                                 813.14,249.00 824.14,229.00 824.14,229.00
+                                 824.14,229.00 865.75,153.00 865.75,153.00
+                                 865.75,153.00 881.25,123.00 881.25,123.00
+                                 885.16,111.06 880.84,107.02 869.00,107.00
+                                 869.00,107.00 732.00,107.00 732.00,107.00
+                                 730.06,107.00 726.86,107.12 725.10,106.40
+                                 721.23,104.82 716.09,93.92 713.85,90.00
+                                 713.85,90.00 685.75,39.00 685.75,39.00
+                                 682.60,29.40 682.42,20.11 693.00,15.65
+                                 693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
+                    </svg>
+                    <img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid - Django and Python Web Development">
+                    </span>
+                        <!--/ svg logo -->
+                </a>
+              </span>
+              {% get_menus as menu_list %}
+              {% recurse menu.menu_set.all|dictsort:"lvl" with menu_list as menu %}
+              <ul>
+                {% loop %}
+                  <li><a href="{{menu.url}}">{{menu.title}}</a>
+                  {% child %}
+                  </li>
+                {% endloop %}
+              </ul>
+              {% endrecurse %}
+              <ul>
+                <li><a href="/">Home</a></li>
+              </ul>
+            </div>
+            <!--/ menu -->
+
+            {% block stage %}
+            {% endblock %}
+
+            {% block footer %}
+            <!-- footer links starts here -->
+            <div class="row marl" id="footer-links-mp">
+              <div class="container">
+                <div class="col-md-6 col-sm-12 footer-links">
+                  {% recurse menu_item.headerlinks_set.all with menu_list as menu_item %}
+                  <ul class="list-inline">
+                    <li><a href="/">Home</a></li>
+                    {% loop %}
+                      <li><a href="{{menu_item.url}}">{{menu_item.title|capfirst}}</a></li>
+                    {% child %} {% endloop %}
+                    <li><a href="/subscribe/">Subscribe</a></li>
+                    <li><a href="/sitemap/">Sitemap</a></li>
+                  </ul>
+                  {% endrecurse %}
+                </div>
+                <div class="col-md-6 col-sm-12 footer-mp">
+                  &copy; 2016 MicroPyramid.
                 </div>
               </div>
-              <div id="top-social" class="col-md-6 col-sm-12">
-                <ul class="list-inline">
-                  <li><a href="https://www.facebook.com/MicroPyramid" class="facebook"><i class="fa fa-facebook"></i></a>
-                  </li>
-                  <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin"><i class="fa fa-linkedin"></i></a>
-                  </li>
-                  <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play"><i class="fa fa-youtube-play"></i></a>
-                  </li>
-                  <li><a href="https://micropyramid.com/rss.xml" class="rss"><i class="fa fa-rss"></i></a>
-                  </li>
-                  <li><a href="http://google.com/+Micropyramid/" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                  </li>
-                  <li><a href="https://twitter.com/micropyramid" class="twitter"><i class="fa fa-twitter"></i></a>
-                  </li>
-                  <li><a href="https://github.com/micropyramid" class="github"><i class="fa fa-github"></i></a>
-                  </li>
-                </ul>
-              </div>
             </div>
-          </div>
-        </div>-->
-        <!-- top row ends here -->
-        <!-- logo and menu starts here -->
-        <div id="mainheader" class="fixedheader">
-          <div class="container">
-            <div class="row marl logo-menu">
-              <nav class="navbar navbar-default">
-                <div class="container">
-                  <!-- Brand and toggle get grouped for better mobile display -->
-                  <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/"><img src="/static/site/images/logo.png" alt="Micropyramid Logo">
-                    </a>
-                  </div>
-                  <!-- Collect the nav links, forms, and other content for toggling -->
-                  <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="height: 1px;">
-                    {% get_menus as menu_list%}
-                    {% recurse category.headerlinks_set.all with menu_list as category %}
-                    <ul class="nav navbar-nav navbar-right">
-                      <li><a href="/">Home</a></li>
-
-                      {% loop %}
-                        <li><a href="{{category.url}}">{{category.title}}</a></li>
-                      {% child %} {% endloop %}
-
-                    </ul>
-                    {% endrecurse %}
-                  </div>
-                  <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container-fluid -->
-              </nav>
-            </div>
+            <!-- footer links ends here -->
+            {% endblock %}
           </div>
         </div>
-        <!-- logo and menu ends here -->
-      </header>
-      <!-- header ends here-->
-      {% block stage %} {% endblock %}
-      {% block footer %}
-      <footer>
-        <!--footer social start here -->
-        <div class="row marl" id="footer-social">
-          <div class="container">
-            <ul class="list-inline">
-              <li><a href="https://www.facebook.com/MicroPyramid" class="facebook"><i class="fa fa-facebook"></i></a>
-              </li>
-              <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin"><i class="fa fa-linkedin"></i></a>
-              </li>
-              <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play"><i class="fa fa-youtube-play"></i></a>
-              </li>
-              <li><a href="https://micropyramid.com/rss.xml" class="rss"><i class="fa fa-rss"></i></a>
-              </li>
-              <li><a href="http://google.com/+Micropyramid/" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              </li>
-              <li><a href="https://twitter.com/micropyramid" class="twitter"><i class="fa fa-twitter"></i></a>
-              </li>
-              <li><a href="https://github.com/micropyramid" class="github"><i class="fa fa-github"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!--footer social ends here -->
-      </footer>
-      <!-- our contact starts here -->
-      <div class="row marl" id="our-contact">
-        <!--  <h3 class="home-head">Reach Us</h3>
-          <span class="home-sub-head">We follow perfect mix of development process agile + scrum. This will give us boost in delivering software in time</span>-->
-        <div class="row marl contact-detail">
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark">
-            <div class="icon"><i class="fa fa-phone"></i></div>
-            <div class="text"><span class="head">Call Us</span>
-              <span class="desc">040 6599 6999</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark1">
-            <div class="icon"><i class="fa fa-envelope-o"></i></div>
-            <div class="text"><span class="head">E-Mail Address</span>
-              <span class="desc">hello@micropyramid.com</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark2">
-            <div class="icon"><i class="fa fa-map-marker"></i></div>
-            <div class="text"><span class="head">Reach US</span>
-              <span class="desc">
-              HIG499, Viswa sai dham apartment,
-              behind anupama hospital, 
-              6th phase KPHB, Hyderabad - 72</span>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark3">
-            <div class="icon"><i class="fa fa-clock-o"></i></div>
-            <div class="text"><span class="head">Office Timings</span>
-              <span class="desc">Monday - Friday : 10:00 - 19:00 <br />
-              Saturday : 10:00 - 19:00 </span>
-            </div>
-          </div>
-        </div>
-        {% block map %} {% endblock %}
+        <!-- /scroller-inner -->
       </div>
-      <!-- our contact ends here --> 
-      <!-- footer links starts here -->
-      <div class="row marl" id="footer-links-mp">
-        <div class="container">
-          <div class="col-md-6 col-sm-12 footer-links">
-            {% recurse menu_item.headerlinks_set.all with menu_list as menu_item %}
-            <ul class="list-inline">
-              <li><a href="/">Home</a></li>
-              {% loop %}
-                <li><a href="{{menu_item.url}}">{{menu_item.title|capfirst}}</a></li>
-              {% child %} {% endloop %}
-	      <li><a href="/sitemap/">Sitemap</a></li>
-            </ul>
-            {% endrecurse %}
-          </div>
-          <div class="col-md-6 col-sm-12 footer-mp">
-            Developed by Micropyramid.com using Django, Bootstrap and PostgreSQL
-          </div>
-        </div>
-      </div>
-      <!-- footer links ends here -->
-      {% endblock %}
+      <!-- /scroller -->
     </div>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- /pusher -->
+    <!--/ push menu -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
     {% compress js %}
-    <script src="/static/site/js/isotope.js" defer></script>
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
+    <script src="/static/site/js/map.js" defer></script>
+    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-        $('.grid').isotope({
-          itemSelector: '.grid-item',
-          percentPosition: true,
-          masonry: {
-            columnWidth: '.grid-sizer'
-          }
-        });
+      new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
+    </script>
+    <script type="text/javascript">
+      $('.daimond_work').click(function(e){
+        $(this).hover();
       });
     </script>
     <script type="text/javascript">
-      $("form#contactform").submit(function(e) {
-        e.preventDefault();
-        $.ajax({
-          type: "POST",
-          dataType: 'json',
-          url: "/contact/",
-          data: $('#contactform').serialize(), // from form
-          success: function(data) {
-            if (data.error) {
-              console.log(data)
-              console.log("post contact page")
-              $('p.failure').remove();
-              for (var key in data.errinfo) {
-                $('#' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
-              }
-            } else {
-              alert("Your message has been successfully sent. We will contact you very soon!");
-              window.location = ".";
-            }
-          }
-        });
-        return false;
-      });
+
     </script>
     {% endcompress %}
+    {% block extra-js %}
+    {% endblock %}
   </body>
 </html>

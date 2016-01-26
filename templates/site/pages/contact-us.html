@@ -1,0 +1,207 @@
+{% extends 'site/base.html' %}
+{% block title %}
+Contact Us | MicroPyramid
+{% endblock %}
+{% block meta-description %}
+<meta name="description" content="Contact Us - MicroPyramid." />
+{% endblock %}
+{% block stage %}
+<div class="scroller" id='container_wrapper'>
+  <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <ul>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{request.path}}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Contact Us</span></a>
+      </li>
+    </ul>
+  </div>
+  <!-- this is for emulating position fixed of the nav -->
+  <div class="scroller-inner">
+    <!-- Top Navigation -->
+    <!-- banner wrap -->
+    <!-- contact us content -->
+    <div id='contact_us_template'>
+      <!-- banner -->
+      <div class="banner">
+        <div class="text_wrap">
+          <div class="text">
+            C<span class='diamond'><img src='/static/favicon.png' alt="MicroPyramid Favicon"></span>ntact <span class='green'>us</span>
+          </div>
+        </div>
+        <div class="map_bg_div"></div>
+      </div>
+      <!--/ banner -->
+      <!-- center div -->
+      <div class="form_info_wrap">
+        <form id="contactform" method="post" name="contactform">
+          <div class="col-md-8 col-sm-7 xol-xs-12 contact_form_div">
+            <!-- heading -->
+            <div class='heading'>
+              <span>Talk to</span> <span class='green'>Us</span>
+            </div>
+            <div class="tag">
+              <p>
+                We specialize in Django web development with unit testing and functional testing. Talk to us for building your high performance and secure web application.
+              </p>
+            </div>
+            <!--/ heading -->
+            <!-- domain -->
+            <div class='category_details'>
+              <div class="title">
+                <span class='red'>Domain</span> <span>Details</span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="text" class='text_box' id="domain" name="domain" placeholder='Do you have a domain?'>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="text" class='text_box' id="domain_url" name="domain_url" placeholder='Domain Name'>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!--/ domain -->
+            <!-- genral -->
+            <div class='category_details'>
+              <div class="title">
+                <span class='red'>General</span> <span>Information</span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="text" class='text_box' id="message" name="message" placeholder='Message'>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <select class='text_box' name="enquery_type">
+                  <option value="general">Request For Services</option>
+                  <option value="partnership">Partnership Queries</option>
+                  <option value="media">Media Queries</option>
+                  <option value="general queries">General Queries</option>
+                  <option value="feedback">Website Feedback</option>
+                  <option value="others">Others</option>
+                </select>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!--/ genral -->
+            <!-- basic -->
+            <div class='category_details'>
+              <div class="title">
+                <span class='red'>Basic</span> <span>Information</span>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="text" class='text_box' id="full_name" name="full_name" placeholder='Name'>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="email" class='text_box' id="email" name="email" placeholder='Email'>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="text" class='text_box' id="country" name="country" placeholder='Country'>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 form_group">
+                <input type="text" class='text_box' id="phone" name="phone" placeholder='Phone Number'>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!--/ basic -->
+            <!-- button -->
+            <div class="button_row">
+              <button type="submit" class='button'><span  ><i class='fa fa-envelope'></i>send now</span></button>
+            </div>
+            <!--/ button -->
+          </div>
+        </form>
+        <div class="col-md-4 col-sm-5 xol-xs-12 contact_info_div">
+          <div class="diamond_style"></div>
+          <div class="diamond_style"></div>
+          <div class="content_table">
+            <div class="content_wrap">
+              <!-- info each -->
+              <div class="info_each">
+                <div class="icon_div">
+                  <i class='fa fa-phone'></i>
+                </div>
+                <div class="content">
+                  <div class='title'>Call Us</div>
+                  <div class="description">040 6599 6999</div>
+                </div>
+              </div>
+              <!--/ info each -->
+              <!-- info each -->
+              <div class="info_each">
+                <div class="icon_div">
+                  <i class='fa fa-envelope'></i>
+                </div>
+                <div class="content">
+                  <div class='title'>Email Us</div>
+                  <div class="description">hello@micropyramid.com</div>
+                </div>
+              </div>
+              <!--/ info each -->
+              <!-- info each -->
+              <div class="info_each">
+                <div class="icon_div">
+                  <i class='fa fa-clock-o'></i>
+                </div>
+                <div class="content">
+                  <div class='title'>Our working hours</div>
+                  <div class="description">Monday - Friday</div>
+                  <div class="description"> ( 10:00 - 19:00 )</div>
+                </div>
+              </div>
+              <!--/ info each -->
+              <!-- social -->
+              <div class="social_apis">
+                <div class='title'>Also find us on</div>
+                <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank">
+                <span class='each fb'>
+                <i class='fa fa-facebook'></i>
+                </span>
+                </a>
+                <a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank">
+                <span class='each youtube'>
+                <i class='fa fa-youtube-play'></i>
+                </span>
+                </a>
+                <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank">
+                <span class='each in'>
+                <i class='fa fa-linkedin'></i>
+                </span>
+                </a >
+                <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank">
+                <span class='each rss'>
+                <i class='fa fa-rss'></i>
+                </span>
+                </a>
+                <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank">
+                <span class='each gplus'>
+                <i class='fa fa-google-plus'></i>
+                </span>
+                </a>
+                <a href="https://twitter.com/micropyramid" class="twitter" target="_blank">
+                <span class='each twit'>
+                <i class='fa fa-twitter'></i>
+                </span>
+                </a>
+                <a href="https://github.com/micropyramid" class="github" target="_blank">
+                <span class='each git'>
+                <i class='fa fa-github'></i>
+                </span>
+                </a>
+              </div>
+              <!--/ social -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ center div -->
+    </div>
+    <!--/ contact us content -->
+    <!-- our contact starts here -->
+    <div class="row" id="our-contact">
+      <div class="map" id='map'>
+      </div>
+    </div>
+    <!-- our contact ends here -->
+  </div>
+  <!-- /scroller -->
+</div>
+{% endblock stage %}
