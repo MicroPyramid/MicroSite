@@ -1,5 +1,5 @@
 from django import forms
-from .models import User, career
+from micro_admin.models import User, career
 
 
 class ChangePasswordForm(forms.Form):

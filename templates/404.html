@@ -6,10 +6,35 @@
 {% endblock %}
 
 {% block stage %}
-  <div class="row marl">
-    <div class="container">
-      <p>{% trans "Page not found!" %}</p>
-      <p>{% trans "We're sorry but the page you are looking for can't be found." %}</p>
-    </div>
-  </div>
+
+<!-- container wrapper -->
+<div id='container_wrapper'>
+	<!--404 -->
+	<div id='page_404'>
+	<!-- image row -->
+	<div class="col-md-6 col-sm-6 col-xs-12 image_div">
+	  <img src='/static/site/images/new/404.png'>
+	</div>
+	<!--/image row -->
+	<!-- content row -->
+	<div class="col-md-6 col-sm-6 col-xs-12 text_div_wrap">
+	  <div class="main_title">
+	  Oops!!
+	  </div>
+	  <div class="text_div">
+	    The page you requested can not be found.The URL may be misspelled or the page you're looking for is no longer available.
+	  </div>
+	  <div class="button_row"><a href="/">
+	  <span class='button'>
+	    <img src='/static/site/images/new/logo_white.png'>
+	    <span class='name'>Go to Home Page</span>
+	  </span></a>
+	  </div>
+	</div>
+	<!--/ content row -->
+	<div class="clearfix"></div>
+	</div>
+	<!--/ 404 -->
+</div>
+<!--/ container wrapper -->
 {% endblock %}

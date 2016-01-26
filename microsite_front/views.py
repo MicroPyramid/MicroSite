@@ -1,4 +1,3 @@
-from itertools import chain
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -10,13 +9,41 @@ from boto.s3.connection import S3Connection
 import json
 from datetime import datetime, timedelta
 from micro_blog.models import Category
-from books.models import Book
+from django.views.static import serve
+import yaml
+import os
 
 
 def index(request):
-    latest_featured_posts = {} #Post.objects.filter(status = 'P',featured_post = 'on').order_by('-created_on')[:2]
-    return render(request, 'site/index.html', {'latest_featured_posts': latest_featured_posts, 
-                            'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
+    return render(request, 'site/index.html', {
+        'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
+
+
+def books(request, path):
+    if path is None or path == '':
+        documents_file = open(os.path.join(
+            settings.BASE_DIR + '/books/', 'books.yml'), 'r')
+        data = yaml.load(documents_file)
+        books = []
+        if data.get("documents") and data.get("documents") != None:
+            if request.user.is_authenticated():
+                books = [
+                    book for position, book in sorted(
+                        data['documents'].iteritems())]
+            else:
+                books = [
+                    book for position, book in sorted(
+                        data['documents'].iteritems()
+                    ) if book.get("visibilty").lower() == "public"]
+        return render(request, "site/books.html", {"books": books})
+        # return render(request, 'html/index.html')
+    else:
+        # if path.endswith('html'):
+        #     return render(request, 'html/' + path)
+        # else:
+        return serve(
+            request, path,
+            document_root=settings.BASE_DIR + '/books/templates/html/')
 
 
 def career_page(request):
@@ -34,7 +61,7 @@ def url_checker_tool(request):
         urls = []
         responses = []
 
-        if request.POST.get('urls'): 
+        if request.POST.get('urls'):
             urls = request.POST.get('urls').split('\r\n')
         if request.FILES.get('file'):
             for line in request.FILES.get('file'):
@@ -54,8 +81,7 @@ def url_checker_tool(request):
                 redirects_count.append(response_history)
 
         max_redirects = max(redirects_count) if redirects_count else 1
-        return render(request, 'site/tools/url_checker.html', {'responses': responses,
-                        'max_redirects': max_redirects})
+        return render(request, 'site/tools/url_checker.html', {'responses': responses, 'max_redirects': max_redirects})
 
     return render(request, 'site/tools/url_checker.html')
 
@@ -78,8 +104,7 @@ def s3_objects_set_metadata(request):
             errors['bucket_name'] = "NoSuchBucket - The specified bucket does not exist."
 
         if errors:
-            return HttpResponse(json.dumps({"error": True, "errors": errors}),
-                                    content_type='application/json; charset=utf-8')
+            return HttpResponse(json.dumps({"error": True, "errors": errors}), content_type='application/json; charset=utf-8')
 
         for x in bucket.list():
             mime_type = MimeTypes().guess_type(x.key)
@@ -87,7 +112,7 @@ def s3_objects_set_metadata(request):
             expiration_period = expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
 
             if mime_type[0] is not None:
-                x.set_metadata('Cache-Control', 'max-age = '+ request.POST.get('max_age'))
+                x.set_metadata('Cache-Control', 'max-age = ' + request.POST.get('max_age'))
                 x.set_metadata('Expires', expiration_period)
                 x.set_metadata('Content-Type', mime_type[0])
 
@@ -108,8 +133,7 @@ def html_sitemap(request):
     page = request.GET.get('page')
     # categories = Category.objects.filter(is_display=True)
     categories = Category.objects.all()
-    books = Book.objects.filter(status='Approved', privacy='Public')
-    sitemap_links = list(chain(books, categories))
+    sitemap_links = categories
     object_list = Paginator(sitemap_links, 100)
     try:
         sitemap_links = object_list.page(page)

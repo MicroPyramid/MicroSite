@@ -10,12 +10,15 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
         <input type="Text" class="form-control" id="title" name="title" value="{{blog_post.title}}">
+        <input type="hidden" class="form-control" id="is_superuser" name="is_superuser" value="{{request.user.is_superuser}}">
       </div>
+      {% if request.user.is_superuser %}
       <div class="form-group">
         <label for="exampleInputPassword1">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" value="{{blog_post.slug}}" readonly>
+        <input type="text" class="form-control" id="slug" name="slug" value="{{blog_post.slug}}">
         <span class="slug-text">Do not mix form groups directly with input groups. Instead, nest the input group inside of the form group.</span>
       </div>
+      {% endif %}
       <div class="form-group">
         <label for="exampleInputPassword1">Category</label>
         <select class="form-control" id="category" name="category">
@@ -41,7 +44,9 @@
           <div class="controls" id="content">
             <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1062px; height: 93px;">{{ blog_post.meta_description }}</textarea>
           </div>
+	  <p id="Wordcount"></p>
         </div>
+	
       </div>
       <div class="tags-block">
         <p><label>Tags Creation</label>
@@ -79,6 +84,17 @@
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
+   function counting_words(){
+       input_text = $('#meta_description').val();
+       char_length = input_text.length
+       word_length = input_text.split(' ').filter(Boolean).length;
+       $("#Wordcount").text('Words: ' + word_length + ', Charecters: ' +  char_length);
+   }
+   counting_words()
+   $('#meta_description').keyup(function(event) {
+     counting_words()
+   });
+
   function onAddTag(tag) {
     alert("Added a tag: " + tag);
   }

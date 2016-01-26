@@ -1,9 +1,9 @@
 import time
 from email import utils
 from django.http.response import HttpResponse
-from pages.models import Page
+from pages.models import Page, Menu
 from micro_blog.models import Category, Post
-from books.models import *
+import math
 
 
 def sitemap(request):
@@ -11,7 +11,8 @@ def sitemap(request):
     # pages, blog categories, blog posts
 
     xml = '''<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'''
+             <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
     xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>'
 
@@ -19,30 +20,23 @@ def sitemap(request):
     for page in pages:
         xml = xml + '<url><loc>https://micropyramid.com/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
-    xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+    menus = Menu.objects.filter()
+    for menu in menus:
+        xml = xml + '<url><loc>' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     categories = Category.objects.filter(is_display=True)
     for category in categories:
         if category.post_set.filter(status='P').exists():
             xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug
-            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority>/</url>'
 
-    posts = Post.objects.filter(status="P")
+    posts = Post.objects.filter(status="P").order_by('-published_on')
     for post in posts:
         xml = xml + '<url><loc>https://micropyramid.com/blog/' + post.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
-    books = Book.objects.filter(status="Approved", privacy="Public")
-    for book in books:
-        xml = xml + '<url><loc>https://micropyramid.com/books/' + book.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
-
-    topics = Topic.objects.filter(status="Approved", book__status="Approved", book__privacy="Public")
-    for topic in topics:
-        if topic.parent:
-            xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.parent.slug + '/' + topic.slug
-            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
-        else:
-            xml = xml + '<url><loc>https://micropyramid.com/books/' + topic.book.slug + '/' + topic.slug
-            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+    no_pages = int(math.ceil(float(posts.count()) / 10))
+    for page_num in range(1, no_pages+1):
+        xml = xml + '<url><loc>https://micropyramid.com/blog/?page=' + str(page_num) + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     xml = xml + '</urlset>'
 
@@ -105,7 +99,7 @@ def blog_rss(request):
 
     xml = '''<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
                 <channel>
-                <atom:link href="https://micropyramid.com/rss.xml" rel="self" type="application/rss+xml" />
+                <atom:link href="https://micropyramid.com/blog.rss" rel="self" type="application/rss+xml" />
                 <title>MicroPyramid | Web Development | Mobile App Development</title>
                 <description>MicroPyramid python development company.
                  Our ambit of service encompasses and is as vivid as e-commerce,
@@ -141,7 +135,7 @@ def blog_rss(request):
         published_date = utils.formatdate(nowtimestamp)
 
         xml = xml + '<item><title><![CDATA[' + post.title + ']]></title>'
-        xml = xml + '<description><![CDATA[' + post.content + ']]></description>'
+        xml = xml + '<description><![CDATA[' + post.get_content() + ']]></description>'
         xml = xml + '<link>https://micropyramid.com/blog/' + post.slug + '/</link>'
         xml = xml + '<category domain="micropyramid.com"><![CDATA[' + post.category.name + ']]></category>'
         xml = xml + '<comments>https://micropyramid.com/blog/' + post.slug + '/</comments>'

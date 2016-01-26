@@ -1,8 +1,9 @@
 {% extends 'site/base.html' %}
 {%load menu%}
 {% load blog_tags%}
+
 {% block stage %}
-<div class="container" id="blog">
+<div id="blog">
   <div class="row marl">
     {% block blogcontent %}
     {% endblock %}
@@ -12,76 +13,8 @@
       <div class="row marl">
         <div class="col-xs-12 search-padding">
           {% block blog_author_details %}{% endblock %}
-          <!-- <form role="search" method="get" id="searchform" class="searchform" action="#">
-            <div>
-              <input type="text" value="" name="s" id="s" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'">
-              <input type="submit" id="searchsubmit" value="Search">
-            </div>
-          </form> -->
         </div>
-        <!-- / widget -->
-        <div class="col-xs-12 widget" id="tag-blue">
-          <h3><span>Categories</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_categories as categories %}
-            {% for category in categories %}
-            <li><a href="/blog/category/{{category.slug}}">{{ category.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!-- / widget -->
-        <div class="col-xs-12 widget" id="green">
-          <h3><span>Archives</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_archives as archives %}
-            {% for archive in archives %}
-                <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!-- / widget -->
-        <div class="col-xs-12 widget tags" id="pink">
-          <h3><span>Tags</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_tags as tags %}
-            {% for tag in tags %}
-            <li><a href="/blog/tag/{{tag.slug}}"><i class="fa fa-tag"></i>{{ tag.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!-- / widget -->
-        
-        <!--<div class="col-xs-12 widget widget-recent-entries" id="yellow">
-          <h3><span>Recent posts</span></h3>
-          <ul style="margin:0px;padding:0px;">
-            {% get_latest_posts as latest_posts %}
-            {% for post in latest_posts %}
-            <li>
-              <div class="preview-img">
-                {% if post.featured_image %}
-                <img src="/static/blog/{{ post.featured_image }}" alt="">
-                {% endif %}
-              </div>
-              <a href="/blog/{{ post.slug }}">{{post.title}} </a>
-              <span class="post-date">{{post.created_on|date:"F Y"}}</span>
-            </li>
-            {% endfor %}   
-          </ul>
-        </div>-->
-        <!-- / widget -->
         <div class="clearfix"></div>
-        <!-- / widget widget-meta -->
-        <!--<div class="col-xs-12 widget widget-recent-comments" id="tag-blue">
-          <h3 class="widget-title"><span>Recent Comments</span></h3>
-          <ul id="recentcomments">
-            {% for comment in comments %}
-            <li class="recentcomments"><a href="/blog/{{comment.post.slug}}/"> {{comment.name}} &thinsp; {{comment.created|date:"M d Y"}}</a></li>
-            {% endfor %}   
-          </ul>
-        </div>-->
-        <!-- / widget widget-recent-comments -->
-
       </div>
       <!-- / widget widget-text -->
     </div>
