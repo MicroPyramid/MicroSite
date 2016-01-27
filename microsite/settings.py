@@ -51,7 +51,6 @@ MIDDLEWARE_CLASSES = (
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
     'microsite.middleware.RequestSessionMiddleware',
-    'microsite.middleware.DetectMobileBrowser',
     # 'django.middleware.cache.FetchFromCacheMiddleware'
 )
 

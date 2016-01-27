@@ -24,7 +24,7 @@ class Category(models.Model):
         return settings.SITE_BLOG_URL + "category/" + self.slug
 
     def get_blog_posts(self):
-        return Post.objects.filter(category=self)
+        return Post.objects.filter(category=self, status='P')
 
 
 class Tags(models.Model):

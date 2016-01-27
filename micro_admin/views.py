@@ -58,83 +58,10 @@ def delete_contact(request, pk):
         return render_to_response('admin/accessdenied.html')
 
 
-# @login_required
-# def jobs(request):
-#     jobs = career.objects.all()
-#     return render(request, 'admin/content/jobs/job_list.html', {'jobs': jobs})
-
 @login_required
 def clear_cache(request):
     cache._cache.flush_all()
     return HttpResponseRedirect('/portal/')
-
-# @login_required
-# def new_job(request):
-#     if request.method=="POST":
-#         validate_blogcareer=CareerForm(request.POST)
-#         if validate_blogcareer.is_valid():
-#             validate_blogcareer = validate_blogcareer.save(commit=False)
-#             if 'featured_image' in request.FILES:
-#                 validate_blogcareer.featured_image=store_image(request.FILES.get('featured_image'),BLOG_IMAGES)
-#             else:
-#                 validate_blogcareer.featured_image=''
-#             validate_blogcareer.save()
-#             data={'error':False,'response':'jobs are created'}
-#         else:
-#             data={'error':True,'response':validate_blogcareer.errors}
-#         return HttpResponse(json.dumps(data))
-#     else:
-#         if request.user.is_admin:
-#             c={}
-#             c.update(csrf(request))
-#             return render_to_response('admin/content/jobs/job.html',{'jobs':jobs,'csrf_token':c['csrf_token']})
-#         else:
-#             return render_to_response('admin/accessdenied.html')
-
-# @login_required
-# def edit_job(request,pk):
-#     if request.method=="POST":
-#         current_careers=career.objects.get(pk=pk)
-#         validate_blogcareer=CareerForm(request.POST,instance=current_careers)
-#         if validate_blogcareer.is_valid():
-#             validate_blogcareer = validate_blogcareer.save(commit=False)
-#             if 'featured_image' in request.FILES:
-#                 if current_careers.featured_image:
-#                     os.remove(BLOG_IMAGES + current_careers.featured_image)
-#                 validate_blogcareer.featured_image=store_image(request.FILES.get('featured_image'),BLOG_IMAGES)
-#             validate_blogcareer.save()
-#             data={'error':False,'response':'job updated successfully'}
-#         else:
-#             data={'error':True,'response':validate_blogcareer.errors}
-#         return HttpResponse(json.dumps(data))
-#     else:
-#         if request.user.is_admin:
-#             blog_career=career.objects.get(pk=pk)
-#             c={}
-#             c.update(csrf(request))
-#             return render_to_response('admin/content/jobs/job_edit.html',{'blog_career':blog_career,'csrf_token':c['csrf_token']})
-#         else:
-#             return render_to_response('admin/accessdenied.html')
-
-# @login_required
-# def delete_job(request, pk):
-#     careers = career.objects.get(pk=pk)
-#     if request.user.is_superuser:
-#         careers.delete()
-#         return HttpResponseRedirect('/portal/jobs/')
-#     else:
-#         return render_to_response('admin/accessdenied.html')
-
-# @login_required
-# def job_state(request, pk):
-#     job = career.objects.get(pk=pk)
-#     if job.is_active:
-#         job.is_active = False
-#     else:
-#         job.is_active = True
-
-#     job.save()
-#     return HttpResponseRedirect('/portal/jobs/')
 
 
 @login_required
@@ -199,7 +126,7 @@ def forgot_password(request):
             sending_msg.set_from("hello@micropyramid.com")
             sending_msg.add_to(request.POST.get('email'))
             sg.send(sending_msg)
-            
+
             data = {'error': False, "message": "Password has been sent to your email sucessfully."}
 
         except ObjectDoesNotExist:

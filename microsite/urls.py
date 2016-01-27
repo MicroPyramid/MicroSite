@@ -4,7 +4,7 @@ from micro_blog.views import report, contact, subscribe
 import micro_blog
 from pages.views import site_page
 from microsite_front.xml import rss, blog_rss, sitemap
-from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, career_page, html_sitemap, books
+from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books
 from search.views import autocomplete
 from django.views.static import serve
 

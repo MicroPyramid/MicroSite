@@ -40,12 +40,14 @@ def get_page(context, page, no_pages):
     pages = range(start_page, end_page+1)
     return pages
 
-@register.filter
-def is_editable_by(post,user):
-    return post.is_editable_by(user)
 
 @register.filter
-def is_deletable_by(post,user):
+def is_editable_by(post, user):
+    return post.is_editable_by(user)
+
+
+@register.filter
+def is_deletable_by(post, user):
     return post.is_deletable_by(user)
 
 

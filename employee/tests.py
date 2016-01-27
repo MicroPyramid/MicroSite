@@ -115,4 +115,3 @@ class test_employee(TestCase):
 
         response = self.client.get('/portal/employee/reports/' + str(self.employee.id) + '/')
         self.assertEqual(response.status_code, 200)
-
