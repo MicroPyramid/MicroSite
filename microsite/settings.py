@@ -13,9 +13,10 @@ TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
 ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me']
 
-RAVEN_CONFIG = {
-    'dsn': os.getenv('SENTRYDSN') if os.getenv('SENTRYDSN') else '',
-}
+if os.getenv('SENTRYDSN') is not None:
+    RAVEN_CONFIG = {
+        'dsn': os.getenv('SENTRYDSN'),
+    }
 
 INSTALLED_APPS = (
     'raven.contrib.django.raven_compat',
