@@ -9,8 +9,6 @@ services:
 addons:
   postgresql: "9.4"
 
-sudo: false
-
 env:
   -DJANGO=1.8 DB=mysql
   -DJANGO=1.8 DB=sqlite3
@@ -20,6 +18,7 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
   - pip install mysql-python --use-mirrors
+  - sudo gem install sass
 
 #mysql db creation
 before_script:
