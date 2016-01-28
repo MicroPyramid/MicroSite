@@ -119,7 +119,8 @@ def site_blog_home(request):
 def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slug=slug)
     all_blog_posts = list(Post.objects.filter(status='P').order_by('-published_on'))
-
+    prev_url = ''
+    next_url = ''
     for post in all_blog_posts:
         if str(slug) == str(post.slug):
             try:
@@ -243,13 +244,6 @@ def new_post(request):
                 blog_post.slug = request.POST.get('slug')
             else:
                 tempslug = slugify(blog_post.title)
-                if blog_post:
-                    blogpost = Post.objects.get(pk=blog_post.id)
-                    blog_post.slug = create_slug(tempslug)
-                    if blogpost.title != blog_post.title:
-                        blog_post.slug = create_slug(tempslug)
-                else:
-                    blog_post.slug = create_slug(tempslug)
 
             blog_post.save()
 
@@ -309,12 +303,6 @@ def edit_blog_post(request, blog_slug):
                 blog_post.slug = request.POST.get('slug')
             else:
                 tempslug = slugify(blog_post.title)
-                if blog_post:
-                    blogpost = Post.objects.get(pk=blog_post.id)
-                    if blogpost.title != blog_post.title:
-                        blog_post.slug = create_slug(tempslug)
-                else:
-                    blog_post.slug = create_slug(tempslug)
 
             blog_post.save()
             blog_post.tags.clear()
@@ -375,10 +363,10 @@ def report(request):
     rep = DailyReport.objects.filter(employee=user, report=request.POST.get('text')).first()
     if not rep:
         rep = DailyReport.objects.create(employee=user, report=request.POST.get('text'), date=datetime.datetime.now().date())
-    if request.POST.get('attachment-info'):
-        my_dict1 = literal_eval(request.POST.get('attachment-info'))
-        for key in my_dict1.keys():
-            Dailyreport_files.objects.get_or_create(dailyreport=rep, attachments=my_dict1[key]['filename'])
+    # if request.POST.get('attachment-info'):
+    #     my_dict1 = literal_eval(request.POST.get('attachment-info'))
+    #     for key in my_dict1.keys():
+    #         Dailyreport_files.objects.get_or_create(dailyreport=rep, attachments=my_dict1[key]['filename'])
     rep.save()
     return HttpResponse('Report has been created Sucessfully.')
 
@@ -453,7 +441,7 @@ def contact(request):
     sending_msg.add_to("hello@micropyramid.com")
     sg.send(sending_msg)
 
-    data = {'error': False, 'response': 'submitted successfully'}
+    data = {'error': False, 'response': 'Contact submitted successfully'}
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 

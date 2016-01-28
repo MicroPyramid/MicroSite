@@ -5,6 +5,7 @@ python:
 services:
   - mysql
   - elasticsearch
+  - redis-server
 #Django & Database
 addons:
   postgresql: "9.4"
@@ -20,6 +21,10 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
   - pip install mysql-python --use-mirrors
+  - gem install sass
+  - pip install npm
+  - npm install less
+  - pip install redis
 
 #mysql db creation
 before_script:

@@ -58,7 +58,7 @@ def edit_page(request, pk):
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/content/page/edit-page.html',
-                        {'page': page, 'csrf_token': c['csrf_token']})
+                      {'page': page, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -89,7 +89,7 @@ def menu(request):
     iterator = itertools.count()
     menu_list = Menu.objects.filter().order_by('lvl')
     return render(request, 'admin/content/menu/menu-list.html',
-                    {'menu_list': menu_list, 'iterator': iterator})
+                  {'menu_list': menu_list, 'iterator': iterator})
 
 
 @login_required
@@ -98,12 +98,12 @@ def add_menu(request):
         validate_menu = MenuForm(request.POST)
         if validate_menu.is_valid():
             new_menu = validate_menu.save(commit=False)
-            if request.POST.get('status',''):
+            if request.POST.get('status', ''):
                 new_menu.status = 'on'
 
             menu_count = Menu.objects.filter(parent=new_menu.parent).count()
             new_menu.lvl = menu_count + 1
-            if new_menu.url[-1]!='/':
+            if new_menu.url[-1] != '/':
                 new_menu.url = new_menu.url+'/'
 
             new_menu.save()
@@ -117,7 +117,7 @@ def add_menu(request):
         c.update(csrf(request))
         parent = Menu.objects.filter(parent=None).order_by('lvl')
         return render(request, 'admin/content/menu/new-menu-item.html',
-                        {'parent': parent, 'csrf_token': c['csrf_token']})
+                      {'parent': parent, 'csrf_token': c['csrf_token']})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -135,19 +135,22 @@ def edit_menu(request, pk):
             if updated_menu.parent != current_parent:
                 try:
                     if updated_menu.parent.id == updated_menu.id:
-                        data = {'error': True, 'response': {'parent': 'you can not choose the same as parent'}}
+                        data = {'error': True, 'response': {
+                            'parent': 'you can not choose the same as parent'}}
                         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
                 except Exception:
                     pass
 
-                lnk_count = Menu.objects.filter(parent=updated_menu.parent).count()
+                lnk_count = Menu.objects.filter(
+                    parent=updated_menu.parent).count()
                 updated_menu.lvl = lnk_count + 1
-                lvlmax = Menu.objects.filter(parent=current_parent).aggregate(Max('lvl'))['lvl__max']
+                lvlmax = Menu.objects.filter(
+                    parent=current_parent).aggregate(Max('lvl'))['lvl__max']
                 if lvlmax != 1:
                     for i in Menu.objects.filter(parent=current_parent, lvl__gt=current_lvl, lvl__lte=lvlmax):
                         i.lvl = i.lvl-1
                         i.save()
-            if updated_menu.url[-1]!='/':
+            if updated_menu.url[-1] != '/':
                 updated_menu.url = updated_menu.url+'/'
 
             if request.POST.get('status', ''):
@@ -166,7 +169,7 @@ def edit_menu(request, pk):
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/content/menu/edit-menu-item.html',
-            {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
+                      {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
     else:
         return render_to_response('admin/accessdenied.html')
 

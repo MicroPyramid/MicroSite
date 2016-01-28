@@ -8,10 +8,11 @@ from mimetypes import MimeTypes
 from boto.s3.connection import S3Connection
 import json
 from datetime import datetime, timedelta
-from micro_blog.models import Category
+from micro_blog.models import Category, Post
 from django.views.static import serve
 import yaml
 import os
+from itertools import chain
 
 
 def index(request):
@@ -45,10 +46,9 @@ def books(request, path):
             request, path,
             document_root=settings.BASE_DIR + '/books/templates/html/')
 
-
-def career_page(request):
-    jobs = career.objects.filter(is_active=True).order_by('created_on')
-    return render(request, 'site/careers.html', {'jobs': jobs})
+# def career_page(request):
+#     jobs = career.objects.filter(is_active=True).order_by('created_on')
+#     return render(request, 'site/careers.html', {'jobs': jobs})
 
 
 def tools(request):
@@ -131,9 +131,10 @@ def s3_objects_set_metadata(request):
 
 def html_sitemap(request):
     page = request.GET.get('page')
-    # categories = Category.objects.filter(is_display=True)
     categories = Category.objects.all()
-    sitemap_links = categories
+    blog_posts = Post.objects.filter(status='P').order_by('-published_on')
+    sitemap_links = list(chain(categories, blog_posts))
+
     object_list = Paginator(sitemap_links, 100)
     try:
         sitemap_links = object_list.page(page)

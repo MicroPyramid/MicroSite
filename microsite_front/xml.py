@@ -38,6 +38,7 @@ def sitemap(request):
     for page_num in range(1, no_pages+1):
         xml = xml + '<url><loc>https://micropyramid.com/blog/?page=' + str(page_num) + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
+    xml = xml + '<url><loc>https://micropyramid.com/sitemap/</loc><changefreq>daily</changefreq><priority>0.5</priority></url>'
     xml = xml + '</urlset>'
 
     return HttpResponse(xml, content_type="text/xml")
@@ -75,7 +76,6 @@ def rss(request):
         posts = Post.objects.filter(status='P', category__name__icontains=request.GET.get('category')).order_by('-updated_on')[:10]
     else:
         posts = Post.objects.filter(status='P').order_by('-updated_on')[:10]
-
     for post in posts:
 
         nowtuple = post.updated_on.timetuple()

@@ -72,13 +72,15 @@ def new_user(request):
                 user.is_admin = True
                 user.is_superuser = True
 
-            if request.POST.get('google_plus_url',False):
+            if request.POST.get('google_plus_url', False):
                 user.google_plus_url = request.POST.get('google_plus_url')
 
-            if request.POST.get('is_active',False):
+            print request.POST.get('is_active')
+            if request.POST.get('is_active', False):
+                print request.POST.get('is_active')
                 user.is_active = True
 
-            if request.POST.get('is_special',False):
+            if request.POST.get('is_special', False):
                 user.is_special = True
 
             user.save()
