@@ -5,6 +5,7 @@ python:
 services:
   - mysql
   - elasticsearch
+  - redis-server
 #Django & Database
 addons:
   postgresql: "9.4"
