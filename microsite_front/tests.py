@@ -61,8 +61,8 @@ class frontend_test(TestCase):
         response = client.get('/tools/')
         self.assertEqual(response.status_code, 200)
 
-        response = client.get('/books/git/index.html')
-        self.assertEqual(response.status_code, 200)
+        # response = client.get('/books/git/index.html')
+        # self.assertEqual(response.status_code, 200)
 
         response = client.get('/books/')
         self.assertEqual(response.status_code, 200)
