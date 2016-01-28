@@ -21,6 +21,8 @@ install:
   - pip install coveralls
   - pip install mysql-python --use-mirrors
   - gem install sass
+  - apt-get install npm
+  - npm install less
 
 #mysql db creation
 before_script:
