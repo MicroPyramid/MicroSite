@@ -21,7 +21,7 @@ install:
   - pip install coveralls
   - pip install mysql-python --use-mirrors
   - gem install sass
-  - pi p install npm
+  - pip install npm
   - npm install less
   - pip install redis
 
