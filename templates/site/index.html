@@ -34,11 +34,11 @@
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
-    {% compress js %}
+    <!--{% compress js %}
     <!-- scripts starts here -->
-    <script type="text/javascript" src='/static/site/js/classie.js'></script>
+    <!--<script type="text/javascript" src='/static/site/js/classie.js'></script>
     <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
-    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
+    <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>*/
     {% endcompress %}
     <!-- scripts ends here -->
   </head>
@@ -859,11 +859,9 @@
     {% compress js %}
     <script src="/static/site/js/jquery.form.js"></script>
     <script src="/static/site/js/functions.js"></script>
+    <script type="text/javascript" src='/static/site/js/menu.js'></script>
     <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
     <script src="/static/site/js/map.js"></script>
-    <script type="text/javascript">
-      new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
-    </script>
     <script type="text/javascript">
       $('.daimond_work').click(function(e){
         $(this).hover();

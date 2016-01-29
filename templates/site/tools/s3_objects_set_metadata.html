@@ -9,11 +9,11 @@
 {% endblock %}
 
 {% block stage %}
-
-<div class="row marl">
+<div class="scroller" id='container_wrapper'>
+<div class="row marl s3_objects">
   <div class="container">
     <div class="row marl">
-      <h3>Set Meta-Data for S3 Objects:</h3>
+      <div class='h3'>Set Meta-Data for S3 Objects</div>
       <!-- Set Meta-Data for S3 Objects Form -->
       <div class="panel panel-default">
         <div class="panel-body">
@@ -50,6 +50,7 @@
       <!-- /Set Meta-Data for S3 Objects Form -->
     </div>
   </div>
+</div>
 </div>
 {% load compress %}
 {% compress js %}
