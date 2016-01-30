@@ -37,7 +37,7 @@
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
-    <!-- scripts starts here -->
+    <!-- scripts starts here 
     <script type="text/javascript" src='/static/site/js/modernizr.custom.js'></script>
     <script type="text/javascript" src='/static/site/js/classie.js'></script>
     <script type="text/javascript" src='/static/site/js/mlpushmenu.js'></script>
@@ -58,9 +58,11 @@
     <!-- push menu -->
     <div class="mp-pusher" id="mp-pusher">
       <!-- mp-menu -->
+      {% if request.session.design|slugify == 'mobile'|slugify %}
       <nav id="mp-menu" class="mp-menu">
         {% include 'site/side-bar-menu.html' %}
       </nav>
+      {% endif %}
       <!-- /mp-menu -->
       <div class="scroller">
         <!-- this is for emulating position fixed of the nav -->
@@ -70,6 +72,7 @@
           </div>
           <div class="content clearfix">
             <!-- mobile_menu wrap -->
+      {% if request.session.design|slugify == 'mobile'|slugify %}
             <div id='mob_menu'>
               <!-- row -->
               <div class="row">
@@ -186,6 +189,8 @@
               <!-- row -->
             </div>
             <!--/ mobile_menu wrap -->
+                  {% endif %}
+
             <!-- menu -->
             <div id='base_menu' class='fixed_menu'>
               <span class="logo">
@@ -312,20 +317,47 @@
             <!-- footer links starts here -->
             <div class="row marl" id="footer-links-mp">
               <div class="container">
-                <div class="col-md-6 col-sm-12 footer-links">
-                  {% recurse menu_item.headerlinks_set.all with menu_list as menu_item %}
-                  <ul class="list-inline">
+                <div class="col-md-2 col-sm-3 col-sm-12 footer-links">
+                  {% get_child_menus as menu_list %}
+                  <ul class="inner-footer-list">
                     <li><a href="/">Home</a></li>
-                    {% loop %}
-                      <li><a href="{{menu_item.url}}">{{menu_item.title|capfirst}}</a></li>
-                    {% child %} {% endloop %}
+                    {% for menu in menu_list %}
+                      <li><a href="{{menu.url}}">{{menu.title|capfirst}}</a></li>
+                    {% endfor %}
+                    <li><a href="/contact-us/">Contact Us</a></li>
                     <li><a href="/subscribe/">Subscribe</a></li>
-                    <li><a href="/sitemap/">Sitemap</a></li>
                   </ul>
-                  {% endrecurse %}
                 </div>
-                <div class="col-md-6 col-sm-12 footer-mp">
-                  &copy; 2016 MicroPyramid.
+                <div class="col-md-7 col-sm-6 col-sm-12 footer-mp">
+                <div class="">
+                  <div class="row inner-footer-social" id="footer-social">
+                    <ul class="list-inline">
+                      <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                      </li>
+                      <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+                      </li>
+                      <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                      </li>
+                      <li><a href="https://micropyramid.com/rss.xml" class="rss" target="_blank"><i class="fa fa-rss"></i></a>
+                      </li>
+                      <li><a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+                      </li>
+                      <li><a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                      </li>
+                      <li><a href="https://github.com/micropyramid" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                      </li>
+                    </ul>
+                </div>
+                <div class="text-center sitemap_rights">
+                <span class="copy-right">&copy; 2016 MicroPyramid.</span>
+                <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
+                </div>
+              </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-sm-12 footer-mp">
+                  <p>MicroPyramid Informatics Pvt Ltd.</p>
+                 HIG499, Viswa sai dham apartment, behind anupama hospital, 6th phase KPHB, Hyderabad - 500072
+                 <p>+91 40 6599 6999</p>
                 </div>
               </div>
             </div>
@@ -342,11 +374,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
-
+    <script type="application/ld+json">
+        {
+          "@context" : "http://schema.org",
+          "@type" : "Organization",
+          "url" : "https://micropyramid.com",
+          "logo" : "http://micropyramid.com/static/site/images/company_logo.png",
+          "contactPoint" : [{
+            "@type" : "ContactPoint",
+            "telephone" : "+91 40 6599 6999",
+            "contactType" : "customer service"
+          }]
+        }
+    </script>
     {% compress js %}
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
     <script src="/static/site/js/map.js" defer></script>
+    {% if request.session.design|slugify == 'mobile'|slugify %}
+    <script type="text/javascript" src='/static/site/js/menu.js'></script>
+    {% endif %}
     <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
     <script type="text/javascript">
       new mlPushMenu( document.getElementById( 'mp-menu' ), document.getElementById( 'trigger' ) );
@@ -359,8 +406,10 @@
     <script type="text/javascript">
 
     </script>
+
     {% endcompress %}
     {% block extra-js %}
     {% endblock %}
+
   </body>
 </html>

@@ -33,3 +33,9 @@ def get_menus(context):
         )
     )
     return menu_list.filter(parent=None, status="on").order_by('lvl')
+
+
+@register.assignment_tag(takes_context=True)
+def get_child_menus(context):
+    menu_list = Menu.objects.filter(status="on").exclude(parent=None)
+    return menu_list

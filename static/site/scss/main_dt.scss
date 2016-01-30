@@ -739,6 +739,18 @@ body{
   	}
   }
 }
+
+.inner-footer-social{
+	background: none !important;
+	ul{
+		li{
+			padding:3px !important;
+			a{
+
+			}
+		}
+	}
+}
 /* footer-social */
 /* our-contact */
 #our-contact{
@@ -804,6 +816,11 @@ body{
 	}
 	ul{
 		margin: 0px;
+		&.inner-footer-list{
+			li{
+				list-style: none;
+			}
+		}
 	}
 }
 /* footer-links-mp */
@@ -1338,11 +1355,15 @@ body{
 /* about-us */
 #about-us{
 	background: #fff;
-    padding: 50px 0px;
+    padding: 32px 0px;
     font-size: 14px;
     line-height: 35px;
     p{
     	text-align: justify;
+    }
+    .content{
+    font-size: 25px;
+    margin-bottom: 15px;
     }
 }
 /* about-us */
@@ -3980,4 +4001,110 @@ body{
 .sitemap-child {
     left: 20px;
     position: relative;
+}
+.url_checker{
+	h3{
+	    font-size: 30px;
+	    font-weight: 600;
+	    text-transform: uppercase;
+	    color:#000;
+	    span{
+	    	color: #748907;
+	    }
+    }
+    .btn-success{
+    	border-radius:0px!important;
+    	background:$theme_green!important;
+    	font-weight:600;
+    	font-size:12px;
+    	border:1px solid darken($theme_green,5%);
+    	outline:none;
+    	box-shadow:none;
+    	&:hover{
+    		background:lighten($theme_green,5%);
+    	}
+    }
+    .btn-danger{
+    	@extend .btn-success;
+    	background:$clay!important;
+    	border:1px solid darken($clay,5%);
+    	&:hover{
+    		background:lighten($clay,5%);
+    	}
+    }
+}
+/* tools_wrapper */
+.tools_wrapper{
+	.h3{
+		font-size: 30px;
+	    font-weight: 600;
+	    text-transform: uppercase;
+    	color: #000;
+    	margin-bottom:25px;
+    	text-align:center;
+    	i{
+    		opacity:0.4;
+    		color:$theme_green;
+    		padding-right:10px;
+    	}
+	}
+	.ticket_each{
+		margin:10px 0px;
+		border:1px solid $stroke_color;
+		padding:15px;
+		background:#fafafa;
+		p{
+			text-align:center;
+			margin-top:17px;
+		}
+		.h4{
+			text-align:center;
+			color:$clay!important;
+			span{
+				color:$clay!important;
+			}
+		}
+		&:hover{
+			box-shadow:$blog_shadow;
+			background:#fff;
+		}
+	}
+}
+.s3_objects{
+	@extend .url_checker;
+	padding:30px 0px;
+	.panel-body{
+		padding:0px;
+	}
+	.panel-default{
+		border:none;
+	}
+	h3{
+		margin-bottom:25px;
+		color:$clay;
+	}
+	.form-control{
+		border-radius:0px;
+		box-shadow:none;
+		height:37px;
+		border:1px solid $stroke_color;
+	}
+}
+/* tools_wrapper */
+.sitemap_rights{
+	margin-top: 5px;
+	span{
+		display: inline-block;
+		font-size: 13px;
+		&.copy-right{
+			color: white;
+			margin-right:10px;
+		}
+		&.sitemap{
+			a{
+				font-weight: bold;
+				color: white;
+			}
+		}
+	}
 }

@@ -4,17 +4,21 @@
 {% endblock %}
 {% block stage %}
 
-<div class="row marl">
-  <div class="container">
+<div class="scroller" id='container_wrapper'> 
+ <div class="container tools_wrapper">
     <div class="row marl">
-      <h3>Tools</h3>
-      <div>
-        <h4><a href="{% url 'url_checker_tool' %}">URL Checker</a></h4>
+      <div class='h3'><i class='fa fa-cogs'></i>Tools</div>
+      <div class='col-md-4 col-sm-6 col-xs-12'>
+      <div class="ticket_each">
+        <div class='h4'><a href="{% url 'url_checker_tool' %}">URL Checker</a></div>
         <p>A tool that checks a given url, and returns a full detailed report.</p>
+        </div>
       </div>
-      <div>
-        <h4><a href="{% url 's3_objects_set_metadata' %}">Set Meta-Data for S3 Objects</a></h4>
+      <div class='col-md-4 col-sm-6 col-xs-12'>
+      <div class="ticket_each">
+        <div class='h4'><a href="{% url 's3_objects_set_metadata' %}">Set Meta-Data for S3 Objects</a></div>
         <p>A tool to set Max-age, Content-Type and Expires headers for S3 objects.</p>
+        </div>
       </div>
     </div>
   </div>

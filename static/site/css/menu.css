@@ -472,7 +472,7 @@
 /* We'll show the first level only */
 .no-csstransforms3d .mp-pusher,
 .no-js .mp-pusher {
-	padding-left: 300px;
+	/*padding-left: 300px;*/
 }
 
 .no-csstransforms3d .mp-menu .mp-level,
