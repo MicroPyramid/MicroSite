@@ -63,13 +63,14 @@
       </div>
       <div class="blog_description">
         <p>
-          {{ post.get_content|truncatewords:350 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
+          {{ post.get_content|truncatewords:40 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
         </p>
       </div>
     </div>
   </div>
   {% endfor %}
-</div>
+    <br clear="all">
+  </div>
 <!--/ related blog -->
 {% endif %}
 </div>

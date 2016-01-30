@@ -56,11 +56,15 @@
     <!-- push menu -->
     <div class="mp-pusher" id="mp-pusher">
       <!-- mp-menu -->
+{% if request.session.design|slugify == 'mobile'|slugify %}
+
       <nav id="mp-menu" class="mp-menu">
         {% include 'site/side-bar-menu.html' %}
         <a href="#" class="subscribe">Subscribe</a>
       </nav>
       <!-- /mp-menu -->
+        {%endif%}
+
       <div class="scroller">
         <!-- this is for emulating position fixed of the nav -->
         <div class="scroller-inner">
@@ -434,6 +438,7 @@
 </div>
 <div id="about-us">
         <div class="container text-center">
+        <h1 class="content">Django &amp; Python Web Development Company</h1>
          <p>We at MicroPyramid challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing gaining our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help python Django application development services. Our expertise lies in Python, Django, Angular Js, Elastic Search, Ansible, Docker, Amazon Web Services, Salesforce, PostgreSQL, MySQL, Less and Scss.</p>
         <p>
         We are dedicated to providing world class software to startups, small and big enterprises. We use most of the cloud technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome open source technologies. With our custom tools,  we can assure you always get the best software you need. We always tryto meet customer satisfaction with our great monitoring and support. There are many reusable python packages, docker images, ansible roles, node packages published by our experts in their free time.</p>
@@ -859,8 +864,10 @@
     {% compress js %}
     <script src="/static/site/js/jquery.form.js"></script>
     <script src="/static/site/js/functions.js"></script>
+        {% if request.session.design|slugify == 'mobile'|slugify %}
+
     <script type="text/javascript" src='/static/site/js/menu.js'></script>
-    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
+{%endif%}
     <script src="/static/site/js/map.js"></script>
     <script type="text/javascript">
       $('.daimond_work').click(function(e){
@@ -873,5 +880,7 @@
     <script type="text/javascript">
     </script>
     {% endcompress %}
+    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
+
   </body>
 </html>

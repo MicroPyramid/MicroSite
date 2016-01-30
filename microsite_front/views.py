@@ -13,6 +13,7 @@ from django.views.static import serve
 import yaml
 import os
 from itertools import chain
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -51,10 +52,12 @@ def books(request, path):
 #     return render(request, 'site/careers.html', {'jobs': jobs})
 
 
+@login_required
 def tools(request):
     return render(request, 'site/tools/index.html')
 
 
+@login_required
 def url_checker_tool(request):
     if request.method == "POST":
         redirects_count = []
@@ -86,6 +89,7 @@ def url_checker_tool(request):
     return render(request, 'site/tools/url_checker.html')
 
 
+@login_required
 def s3_objects_set_metadata(request):
     if request.method == "POST":
         errors = {}
