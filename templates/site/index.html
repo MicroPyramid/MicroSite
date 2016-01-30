@@ -861,9 +861,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
+
     {% compress js %}
     <script src="/static/site/js/jquery.form.js"></script>
     <script src="/static/site/js/functions.js"></script>
+    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
+
         {% if request.session.design|slugify == 'mobile'|slugify %}
 
     <script type="text/javascript" src='/static/site/js/menu.js'></script>
@@ -880,7 +883,6 @@
     <script type="text/javascript">
     </script>
     {% endcompress %}
-    <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
 
   </body>
 </html>
