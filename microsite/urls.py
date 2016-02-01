@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from django.conf import settings
 from micro_blog.views import report, contact, subscribe
-import micro_blog
+import microsite_front
 from pages.views import site_page
 from microsite_front.xml import rss, blog_rss, sitemap
 from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books
@@ -35,11 +35,8 @@ urlpatterns = [
     url(r'^search/autocomplete/$', autocomplete),
 ]
 
-urlpatterns += [
-    url(r'^404$', micro_blog.views.handler404),
-    url(r'^500$', micro_blog.views.handler500),
-]
-
+handler404 = microsite_front.views.handler404
+handler500 = microsite_front.views.handler500
 
 if settings.DEBUG:
     import debug_toolbar

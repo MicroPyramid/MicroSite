@@ -2,7 +2,6 @@
 {% load cache %}
 {% block stage %}
 <!-- main content starts here-->
-{% cache 100 blog_categories %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Blog Category Viewer</h3>
@@ -18,17 +17,28 @@
           <tr>
             <th width="2%">No</th>
             <th width="10%">Title</th>
+            <th width="10%">URL</th>
+            <th width="10%">Status</th>
             <th width="8%">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for category in blog_categories %}
-          <tr class="{% if category.is_display %}success{% else %}danger{% endif %}">
+          <tr>
             <td class="txt_center">{{ forloop.counter }}</td>
             <td>{{ category.name }}</td>
+            <td class="sec-col"><a href="/blog/category/{{category.slug}}/" target="_blank">https://micropyramid.com/blog/category/{{category.slug}}/</a></td>
+            <td class="txt_center"><a href="{% url 'micro_blog:change_category_status' category_slug=category.slug  %}" class="on_off">
+              {% if category.is_display %}
+              <i class="fa fa-toggle-on"></i> Active
+              {% else %}
+              <i class="fa fa-toggle-off"></i> In Active
+              {% endif %}
+              </a>
+            </td>
             <td class="txt_center">
-              <a href="{% url 'micro_blog:edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit </a>
-              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor"><i class="fa fa-trash-o"></i>Delete </a>
+              <a href="{% url 'micro_blog:edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           {% endfor %}
@@ -37,6 +47,5 @@
     </div>
   </div>
 </div>
-{% endcache %}
 {% endblock %}
 <!-- main content ends here-->

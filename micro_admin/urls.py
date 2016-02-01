@@ -4,7 +4,6 @@ from micro_admin.views import (index, forgot_password, contacts, delete_contact,
 from micro_admin.users import (edit_user, change_state, users, new_user, blogposts, reports,
                                user_info, change_password)
 
-
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^clear_cache/$', clear_cache, name='clear_cache'),

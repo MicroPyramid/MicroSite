@@ -38,7 +38,7 @@ from .tasks import *
 
 @login_required
 def admin_category_list(request):
-    blog_categories = Category.objects.all()
+    blog_categories = Category.objects.all().order_by('id')
     return render(request, 'admin/blog/blog-category-list.html', {'blog_categories': blog_categories})
 
 
@@ -95,6 +95,17 @@ def delete_category(request, category_slug):
         return HttpResponseRedirect('/blog/category-list/')
     else:
         return render_to_response('admin/accessdenied.html')
+
+
+@login_required
+def change_category_status(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    if category.is_display:
+        category.is_display = False
+    else:
+        category.is_display = True
+    category.save()
+    return HttpResponseRedirect('/blog/category-list/')
 
 
 def site_blog_home(request):
@@ -472,11 +483,3 @@ def subscribe(request):
 
     data = {'error': False, 'response': 'Your email has been successfully subscribed.'}
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-
-
-def handler404(request):
-    return render(request, '404.html', status=404)
-
-
-def handler500(request):
-    return render(request, '500.html', status=500)

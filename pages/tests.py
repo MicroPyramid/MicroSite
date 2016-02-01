@@ -172,6 +172,14 @@ class pages_views_test(TestCase):
             '/portal/content/page/edit/'+str(self.page.id)+'/')
         self.assertEqual(response.status_code, 200)
 
+        # chnage menu status to off
+        response = self.client.get('/portal/content/page/status/'+str(self.page.id)+'/')
+        self.assertEqual(response.status_code, 302)
+
+        # change menu status to on
+        response = self.client.get('/portal/content/page/status/'+str(self.page.id)+'/')
+        self.assertEqual(response.status_code, 302)
+
         response = self.client.get('/portal/content/menu/')
         self.assertEqual(response.status_code, 200)
 

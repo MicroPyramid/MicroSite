@@ -639,18 +639,21 @@ textarea {
         color: #b2afaa;
     }
 }
-.edit_anchor i,
-.delete_anchor i {
-    padding-right: 5px;
-}
+
 .edit_anchor {
-    padding: 2px 3px;
+    padding: 0px;
     border: 1px solid #13AFEB;
     color: #13AFEB;
     border-radius: 4px;
-    transition: 0.5s;
+    transition: .5s;
     background: #fff;
     margin-right: 3px;
+    text-align: center;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    padding-top: 3px;
     &:hover {
         background: #38BBED;
         color: #fff;
@@ -659,12 +662,19 @@ textarea {
     }
 }
 .delete_anchor {
-    padding: 2px 3px;
+    padding: 0px;
     border: 1px solid #ff7f74;
     color: #ff7f74;
     border-radius: 4px;
-    transition: 0.5s;
+    transition: .5s;
     background: #fff;
+    margin-right: 3px;
+    text-align: center;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+    padding-top: 3px;
     &:hover {
         background: #FD8F85;
         color: #fff;
@@ -1181,5 +1191,32 @@ select:focus,select:active,input:focus,textarea:focus {
     .result-wrapper{
       border-bottom: 1px solid #ddd;
       margin-bottom: 5px;
+    }
+}
+.main-inner{
+    .container{
+        &:first-child{
+            width: 96%;
+        }
+    }
+}
+.menu-list{
+    tbody{
+        tr{
+            td{
+                padding: 2px;
+                padding-left: 7px;
+            }
+        }
+    }
+}
+.page-list{
+    tbody{
+        tr{
+            td{
+                padding: 5px;
+                padding-left: 7px;
+            }
+        }
     }
 }

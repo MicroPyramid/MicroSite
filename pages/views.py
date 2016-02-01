@@ -11,7 +11,7 @@ import itertools
 
 @login_required
 def pages(request):
-    pagelist = Page.objects.all()
+    pagelist = Page.objects.all().order_by('id')
     return render(request, 'admin/content/page/page-list.html', {'pages': pagelist})
 
 
@@ -85,9 +85,20 @@ def change_menu_status(request, pk):
 
 
 @login_required
+def change_page_status(request, pk):
+    page = get_object_or_404(Page, pk=pk)
+    if page.is_active:
+        page.is_active = False
+    else:
+        page.is_active = True
+    page.save()
+    return HttpResponseRedirect('/portal/content/page/')
+
+
+@login_required
 def menu(request):
     iterator = itertools.count()
-    menu_list = Menu.objects.filter().order_by('lvl')
+    menu_list = Menu.objects.filter(parent=None).order_by('lvl')
     return render(request, 'admin/content/menu/menu-list.html',
                   {'menu_list': menu_list, 'iterator': iterator})
 
