@@ -8,6 +8,8 @@ class Page(models.Model):
     content = models.TextField()
     slug = models.SlugField()
     is_active = models.BooleanField(default=True)
+    meta_description = models.TextField()
+    keywords = models.TextField()
 
     def save(self, *args, **kwargs):
         tempslug = slugify(self.title)

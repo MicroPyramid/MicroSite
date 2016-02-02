@@ -9,7 +9,7 @@ class pages_forms_test(TestCase):
 
     def test_pageforms(self):
         self.client = Client()
-        form = PageForm(data={'title': 'Page', 'content': 'page_content'})
+        form = PageForm(data={'title': 'Page', 'content': 'page_content', 'meta_description': 'description', 'keywords': 'keywords'})
         self.assertTrue(form.is_valid())
 
     def test_Menuform(self):
@@ -34,8 +34,8 @@ class pages_forms_test(TestCase):
 # models test
 class pages_models_test(TestCase):
 
-    def create_page(self, title="simple page", content="simple page content"):
-        return Page.objects.create(title=title, content=content)
+    def create_page(self, title="simple page", content="simple page content", meta_description="description", keywords="keywords"):
+        return Page.objects.create(title=title, content=content, meta_description=meta_description, keywords=keywords)
 
     def test_whatever_creation(self):
         w = self.create_page()
@@ -130,12 +130,12 @@ class pages_views_test(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/page/new/', {'title': 'Page2', 'content': 'page_content'})
+            '/portal/content/page/new/', {'title': 'Page2', 'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Page created successfully' in response.content)
 
         response = self.client.post(
-            '/portal/content/page/new/', {'content': 'page_content'})
+            '/portal/content/page/new/', {'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Page created successfully' in response.content)
 
@@ -184,12 +184,12 @@ class pages_views_test(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/page/edit/'+str(self.page.id)+'/', {'title': 'Page', 'content': 'page_content'})
+            '/portal/content/page/edit/'+str(self.page.id)+'/', {'title': 'Page', 'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue('successfully' in response.content)
 
         response = self.client.post(
-            '/portal/content/page/edit/'+str(self.page.id)+'/', {'content': 'page_content'})
+            '/portal/content/page/edit/'+str(self.page.id)+'/', {'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
         self.assertEqual(response.status_code, 200)
         self.assertFalse('successfully' in response.content)
 
