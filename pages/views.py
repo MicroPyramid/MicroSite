@@ -7,6 +7,7 @@ from pages.models import Page, Menu
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
+from micro_blog.models import Category, Post
 
 
 @login_required
@@ -17,10 +18,12 @@ def pages(request):
 
 @login_required
 def new_page(request):
+    categories = Category.objects.all()
     if request.method == 'POST':
         validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            validate_page.save()
+            page = validate_page.save()
+            page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
         else:
             data = {"error": True, 'response': validate_page.errors}
@@ -28,7 +31,7 @@ def new_page(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        return render(request, 'admin/content/page/new-page.html', {'csrf_token': c['csrf_token']})
+        return render(request, 'admin/content/page/new-page.html', {'csrf_token': c['csrf_token'], 'categories': categories})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -46,10 +49,15 @@ def delete_page(request, pk):
 @login_required
 def edit_page(request, pk):
     page = get_object_or_404(Page, pk=pk)
+    categories = Category.objects.all()
+
     if request.method == 'POST':
         validate_page = PageForm(request.POST, instance=page)
         if validate_page.is_valid():
-            validate_page.save()
+            page = validate_page.save()
+            page.category.clear()
+            page.category.add(*request.POST.getlist('category'))
+
             data = {"error": False, 'response': 'Page updated successfully'}
         else:
             data = {"error": True, 'response': validate_page.errors}
@@ -58,7 +66,7 @@ def edit_page(request, pk):
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/content/page/edit-page.html',
-                      {'page': page, 'csrf_token': c['csrf_token']})
+                      {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -193,5 +201,7 @@ def site_page(request, slug):
     pages = Page.objects.filter(slug=slug)
     if pages:
         page = pages[0]
-        return render(request, 'site/page.html', {'page': page})
+        if page.category.all():
+            posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
+        return render(request, 'site/page.html', {'page': page, 'posts': posts})
     return render(request, '404.html', status=404)

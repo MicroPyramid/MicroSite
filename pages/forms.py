@@ -7,7 +7,7 @@ class PageForm(forms.ModelForm):
 
     class Meta:
         model = Page
-        exclude = ('slug',)
+        exclude = ('slug', 'category',)
 
 
 class MenuForm(forms.ModelForm):
