@@ -16,7 +16,7 @@
         <thead>
           <tr>
             <th width="2%">No</th>
-            <th width="10%">Title</th>
+            <th width="10%">Title (No. Of Posts)</th>
             <th width="10%">URL</th>
             <th width="10%">Status</th>
             <th width="8%">Actions</th>
@@ -25,8 +25,8 @@
         <tbody>
           {% for category in blog_categories %}
           <tr>
-            <td class="txt_center">{{ forloop.counter }}</td>
-            <td>{{ category.name }}</td>
+            <td class="txt_center">{{ category.id }}</td>
+            <td>{{ category.name }}({{category.no_of_blog_posts}})</td>
             <td class="sec-col"><a href="/blog/category/{{category.slug}}/" target="_blank">https://micropyramid.com/blog/category/{{category.slug}}/</a></td>
             <td class="txt_center"><a href="{% url 'micro_blog:change_category_status' category_slug=category.slug  %}" class="on_off">
               {% if category.is_display %}

@@ -3,17 +3,16 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post, create_slug, Subscribers
+from micro_blog.models import Category, Tags, Post, Subscribers
 from pages.models import simplecontact, Contact
 import math
 # from django.core.files.storage import default_storage
 from micro_blog.forms import BlogpostForm, BlogCategoryForm
 import datetime
-import requests
 import json
 from micro_admin.models import User
 from ast import literal_eval
-from employee.models import DailyReport, Dailyreport_files
+from employee.models import DailyReport
 from pages.forms import SimpleContactForm, ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
@@ -250,12 +249,16 @@ def new_post(request):
             elif request.POST.get('status') == "T":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
+
+            elif request.POST.get('status') == "R":
+                blog_post.status = 'R'
+
             blog_post.save()
             if request.user.is_superuser and request.POST.get('slug'):
                 blog_post.slug = request.POST.get('slug')
             else:
                 tempslug = slugify(blog_post.title)
-
+                blog_post.slug = tempslug
             blog_post.save()
 
             if request.POST.get('tags', ''):
@@ -310,6 +313,9 @@ def edit_blog_post(request, blog_slug):
             elif request.POST.get('status') == "T":
                 if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                     blog_post.status = 'T'
+            elif request.POST.get('status') == "R":
+                blog_post.status = 'R'
+
             if request.user.is_superuser and request.POST.get('slug'):
                 blog_post.slug = request.POST.get('slug')
             else:

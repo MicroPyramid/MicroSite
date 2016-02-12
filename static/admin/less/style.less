@@ -1223,3 +1223,41 @@ select:focus,select:active,input:focus,textarea:focus {
 .select2-container{
     width: 100%
 }
+.table-bordered {
+    tbody {
+        tr{
+            &.warning{
+                td{
+                    background: #fcf8e3;
+                    .title{
+                        color: black;
+                    }
+                }
+            }
+            &.review{
+                td{
+                    background: #EEEEEE;
+                    .title{
+                        color: black;
+                    }
+                }
+            }
+            &.success{
+                td{
+                    background: rgba(20, 128, 0, 0.38);
+                    .title{
+                        color: black;
+                    }
+                }
+            }
+            &.danger{
+                td{
+                    background: rgba(255, 0, 0, 0.42);
+                    .title{
+                        color: black;
+                    }
+                }
+            }
+        }
+    }
+}

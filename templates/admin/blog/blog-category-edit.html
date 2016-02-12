@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
           <label for="exampleInputEmail">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="10" placeholder="HTML code of this email">{{blog_category.description}}</textarea>
+          <textarea class="form-control" id="description" name="description" rows="10" placeholder="Category Description">{{blog_category.description}}</textarea>
         </div>
         <div class="draft-box">
           <input type="checkbox" name="is_display" value="true" {% if blog_category.is_display %}checked{% endif %}>

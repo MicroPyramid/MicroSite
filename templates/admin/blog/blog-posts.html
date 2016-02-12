@@ -1,16 +1,17 @@
 {% extends 'admin/base.html' %} 
 {% load cache %}
+{% load tz %}
 {% block stage %}
 {% load blog_tags %}
 <!-- main content starts here-->
-{% cache 100 blog_posts %}
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Blog Post Viewer</h3>
     <span>
-      <span class='active_user'><i class="fa fa-square" style="color:#f8cb00;"></i>Drafted</span>
-      <span class='active_user'><i class="fa fa-square"></i>Published</span>
-      <span class='inactive_user'><i class="fa fa-square"></i>Rejected</span>
+      <span class='active_user'><i class="fa fa-square" style="color:#fcf8e3;"></i>Drafted</span>
+      <span class='active_user'><i class="fa fa-square" style="color:#EEEEEE;"></i>Review</span>
+      <span class='active_user'><i class="fa fa-square" style="color:rgba(20, 128, 0, 0.38);"></i>Published</span>
+      <span class='inactive_user'><i class="fa fa-square" style="color:rgba(255, 0, 0, 0.42);"></i>Rejected</span>
       <a href="{% url 'micro_blog:new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
     </span>
   </div>
@@ -19,19 +20,25 @@
       <table id="blog_posts" class="table table-bordered">
         <thead>
           <tr>
-            <th width="8%">Title</th>
+            <th width="2%">Id</th>
+            <th width="10%">Title</th>
             <th width="5%">Author</th>
-            <th width="5%">Status</th>
-            <th width="5%">Actions</th>
+            <th width="5%">Category</th>
+            <th width="2%">Status</th>
+            <th width="2%">Created On(MM/DD/YYYY)</th>
+            <th width="3%">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for post in blog_posts %}
-          <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% else %}danger{% endif %}">
-            <td><a href="/blog/view-post/{{post.slug}}">{{post.title}}</a></td>
+          <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% elif post.status == 'R' %}review{% else %}danger{% endif %}">
+            <td>{{post.id}}</td>
+            <td><a href="/blog/view-post/{{post.slug}}" class="title">{{post.title}}</a></td>
             <td class="txt_center">{{post.author}}</td>
-            <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}
+            <td class="txt_center">{{post.category.name}}</td>
+            <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}{% ifequal post.status 'R' %}Review{% endifequal %}
             </td>
+            <td class="txt_center">{{ post.created_on|date:"m/d/Y" }}</td>
             <td class="txt_center">{% if post|is_editable_by:request.user %}
               <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.slug%}" class="edit_anchor" value="{{ post.slug }}"><i class="fa fa-pencil-square-o"></i></a>{% endif %}
               {% if post|is_deletable_by:request.user %}
@@ -39,7 +46,6 @@
               {% endif %}
               <a href="{% url 'micro_blog:blog_article' slug=post.slug %}" title="View on site" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
             </td>
-            <p class="active"></p>
           </tr>
           {% endfor %}
         </tbody>
@@ -47,7 +53,6 @@
     </div>
   </div>
 </div>
-{% endcache %}
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
@@ -73,7 +78,7 @@
       "sPaginationType": "full_numbers",
       "aaSorting": [],
       "bSort": true,
-      "pageLength": 50
+      "pageLength": 100
     });
 
   });

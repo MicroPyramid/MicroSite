@@ -32,7 +32,7 @@
         <div class="control-group">
           <div class="controls" id="content">
             <input type="hidden" name="content">
-            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
+            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="Blog Post Description">
             {{blog_post.content|safe}}
             </textarea>
           </div>
@@ -62,6 +62,10 @@
       <div class="draft-box">
         <input type="radio" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
         <label>Save as Draft</label>
+      </div>
+      <div class="draft-box">
+        <input type="radio" name="status" value="R" {% ifequal blog_post.status 'R' %}checked{% endifequal %}>
+        <label>Review</label>
       </div>
       <div class="draft-box">
         <input type="radio" name="status" value="P" {% ifequal blog_post.status 'P' %}checked{% endifequal %}>
