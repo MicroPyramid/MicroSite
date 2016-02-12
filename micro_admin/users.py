@@ -13,7 +13,7 @@ import datetime
 
 @login_required
 def users(request):
-    users = User.objects.all()
+    users = User.objects.all().order_by('id')
     return render(request, 'admin/user/index.html', {'users': users})
 
 

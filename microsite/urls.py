@@ -11,10 +11,8 @@ from django.views.static import serve
 
 urlpatterns = [
     url(r'^$', index),
-    url(r'_static/(?P<path>.*)$', serve, 
-            {'document_root': settings.BASE_DIR + '/books/templates/html/_static/'}),
-    url(r'_sources/(?P<path>.*)$', serve, 
-            {'document_root': settings.BASE_DIR + '/books/templates/html/_sources/'}),
+    url(r'_static/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_static/'}),
+    url(r'_sources/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_sources/'}),
     url(r'^books/(?P<path>.*)$', books),
     url(r'^tools/$', tools, name='tools'),
     url(r'^tools/url-checker/$', url_checker_tool, name='url_checker_tool'),

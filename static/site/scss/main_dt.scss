@@ -3839,6 +3839,7 @@ body{
 /* bread_crums */
 .bread_crums{
 	padding:25px 0px;
+	padding-bottom: 0px;
 	@media (min-width:$mob_min)and (max-width:$smob_max){
 		display:none;
 	}

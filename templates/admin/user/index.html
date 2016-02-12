@@ -16,6 +16,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
+            <th width="5%">ID</th>
             <th width="15%">Full Name</th>
             <th width="15%">Email Id</th>
             <th width="5%">Role</th>
@@ -27,6 +28,7 @@
         <tbody>
           {% for user in users %}
           <tr class="{% if user.is_active %} success {% else %} danger {% endif %}">
+            <td>{{user.id}}</td>
             <td>{{user.get_full_name}}</td>
             <td><a href="{% url 'micro_admin:user_info' pk=user.id %}">{{user.email}}</a></td>
             <td>{{user.user_roles}}</td>

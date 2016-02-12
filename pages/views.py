@@ -201,6 +201,7 @@ def site_page(request, slug):
     pages = Page.objects.filter(slug=slug)
     if pages:
         page = pages[0]
+        posts = []
         if page.category.all():
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
         return render(request, 'site/page.html', {'page': page, 'posts': posts})
