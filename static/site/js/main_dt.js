@@ -4,6 +4,10 @@ $('#menu_wrapper').click(function(e){
 $('body').click(function(e){
 	$('body').hover();
 })
+$('.cancelbutton').click(function(e){
+	e.preventDefault();
+	window.location = '/tools/';
+})
 /* slider */
 
 $('.slider_footer .daimond_tabs ul li, .dots_wrap ul li ').click(function(e){

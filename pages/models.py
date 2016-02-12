@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.exceptions import ObjectDoesNotExist
+from micro_blog.models import Category
 
 
 class Page(models.Model):
@@ -8,6 +9,9 @@ class Page(models.Model):
     content = models.TextField()
     slug = models.SlugField()
     is_active = models.BooleanField(default=True)
+    meta_description = models.TextField()
+    keywords = models.TextField()
+    category = models.ManyToManyField(Category)
 
     def save(self, *args, **kwargs):
         tempslug = slugify(self.title)
@@ -19,6 +23,13 @@ class Page(models.Model):
             self.slug = create_slug(tempslug)
 
         super(Page, self).save(*args, **kwargs)
+
+    def all_categories(self):
+        categories = Category.objects.all()
+        if self.category.all().count() == categories.count():
+            return True
+        else:
+            return False
 
     def __unicode__(self):
         return self.title

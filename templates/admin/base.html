@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 
     {% compress css %}
     <link type="text/less" href="/static/admin/less/style.less" rel="stylesheet">
@@ -24,6 +25,7 @@
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
     <script src="//cdn.ckeditor.com/4.4.5/standard/ckeditor.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
     {% compress js %}
     <script src="/static/site/js/jquery.form.js"></script>
@@ -121,6 +123,10 @@
     <!-- /main -->
     {% compress js %}
     <script type="text/javascript">
+     $(".select2").select2({
+        tags: true,
+        width: '100%'
+      })
       $(document).ready(function(){
         $(".mainnav > li").removeClass("active");
         $('a[href="'+window.location.pathname+'"]').parent("li").addClass("active");

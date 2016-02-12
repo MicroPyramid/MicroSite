@@ -13,6 +13,7 @@ from django.views.static import serve
 import yaml
 import os
 from itertools import chain
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -51,10 +52,12 @@ def books(request, path):
 #     return render(request, 'site/careers.html', {'jobs': jobs})
 
 
+@login_required(login_url='/')
 def tools(request):
     return render(request, 'site/tools/index.html')
 
 
+@login_required(login_url='/')
 def url_checker_tool(request):
     if request.method == "POST":
         redirects_count = []
@@ -86,6 +89,7 @@ def url_checker_tool(request):
     return render(request, 'site/tools/url_checker.html')
 
 
+@login_required(login_url='/')
 def s3_objects_set_metadata(request):
     if request.method == "POST":
         errors = {}
@@ -143,3 +147,11 @@ def html_sitemap(request):
     except EmptyPage:
         sitemap_links = object_list.page(object_list.num_pages)
     return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links})
+
+
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)

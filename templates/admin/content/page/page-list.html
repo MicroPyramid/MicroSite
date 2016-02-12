@@ -9,13 +9,15 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped page-list">
         <thead>
           <tr>
             <th width="1%">No</th>
             <th width="10%">Title</th>
             <th width="10%">Slug</th>
-            <th width="8%">Actions</th>
+            <th width="15%">URL</th>
+            <th width="6%">Active</th>
+            <th width="5%">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -24,9 +26,18 @@
             <td class="txt_center">{{forloop.counter}}</td>
             <td>{{page.title}}</td>
             <td class="sec-col">{{page.slug}}</td>
+            <td class="sec-col"><a href="/{{page.slug}}/" target="_blank">https://micropyramid.com/{{page.slug}}/</a></td>
+            <td class="txt_center"><a href="{% url 'pages:change_page_status' pk=page.id %}" class="on_off">
+              {% if page.is_active %}
+              <i class="fa fa-toggle-on"></i> Active
+              {% else %}
+              <i class="fa fa-toggle-off"></i> In Active
+              {% endif %}
+              </a>
+            </td>
             <td class="txt_center">
-              <a href="{% url 'pages:edit_page' pk=page.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i>Edit</a>
-              <a href="{% url 'pages:delete_page' pk=page.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i>Delete</a>
+              <a href="{% url 'pages:edit_page' pk=page.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'pages:delete_page' pk=page.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
           {% endfor %}

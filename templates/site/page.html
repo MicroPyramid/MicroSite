@@ -15,7 +15,12 @@
 
 
 {% block meta-description %}
-  <meta name="description" content="{{ page.title }} - MicroPyramid." />
+  <meta property="og:title"  content="{{ page.title|capfirst }} | MicroPyramid | Django Web Application Development | Mobile App Development" />
+  <meta property="og:description" content="{{ page.meta_description }} - MicroPyramid." />
+
+  <meta name="description" content="{{ page.meta_description }} - MicroPyramid." />
+  <meta name="keywords" content="{{ page.keywords }}" />
+
 {% endblock %}
 
 {% block stage %}
@@ -32,7 +37,7 @@
    </div>
 {{ page.content | safe }}
 
-{% if page.title|slugify  == 'crm'  or page.title|slugify  == 'server-maintenance' or page.title|slugify  == 'web-development'%}
+{% if page.category.all %}
 <!-- related blog -->
 <div class='server_blog'>
   <!--title-->
@@ -40,8 +45,7 @@
     <span>related</span> <span class="green">blog posts</span>
   </div>
   <!--/ title -->
-  {% get_latest_posts as latest_posts %}
-  {% for post in latest_posts|slice:":3" %}
+  {% for post in posts|slice:":3" %}
   <div class="col-md-4 col-sm-4 col-xs-12 blog_ticket_wrap">
     <div class="blog_ticket">
       <div class="date_daimond">
