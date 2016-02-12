@@ -43,6 +43,8 @@ def out(request):
 
 @login_required
 def contacts(request):
+    if not request.user.is_superuser:
+        return render_to_response('admin/accessdenied.html')
     contacts = simplecontact.objects.all()
     return render(request, 'admin/content/contacts/simplecontact.html', {'contacts': contacts})
 
