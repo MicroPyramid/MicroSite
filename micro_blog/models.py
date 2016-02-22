@@ -88,7 +88,8 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         if self.status == 'P':
-            self.published_on = datetime.datetime.today()
+            if not self.published_on:
+                self.published_on = datetime.datetime.today()
         super(Post, self).save(*args, **kwargs)
 
     @property
