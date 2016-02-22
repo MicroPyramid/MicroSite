@@ -3,7 +3,10 @@
 {% load menu %}
 
 {% block title %}
-    {{ page.title|capfirst }} | {{ block.super }}
+{% if page.slug == 'salesforce-development-services' %}
+    Salesforce CRM Development/Integration | Consulting Services india - MicroPyramid
+{% else %}
+    {{ page.title|capfirst }} | {{ block.super }}{% endif %}
 {% endblock %}
 
   {% block extra-js %}
@@ -15,10 +18,16 @@
 
 
 {% block meta-description %}
+
+{% if page.title == 'salesforce-development-services' %}
+  <meta property="og:title"  content="Salesforce CRM Development/Integration | Consulting Services india - MicroPyramid" />
+{% else %}
   <meta property="og:title"  content="{{ page.title|capfirst }} | MicroPyramid | Django Web Application Development | Mobile App Development" />
+{% endif %}
   <meta property="og:description" content="{{ page.meta_description }} - MicroPyramid." />
 
   <meta name="description" content="{{ page.meta_description }} - MicroPyramid." />
+
   <meta name="keywords" content="{{ page.keywords }}" />
 
 {% endblock %}
