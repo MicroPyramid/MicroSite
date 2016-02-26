@@ -1,4 +1,6 @@
-{% extends 'admin/base.html' %} {% block stage %}
+{% extends 'admin/base.html' %} 
+{% load blog_tags %}
+{% block stage %}
 <!-- main content starts here-->
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -42,11 +44,20 @@
         <label for="exampleInputPassword1">Meta Description</label>
         <div class="control-group">
           <div class="controls" id="content">
-            <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1062px; height: 93px;">{{ blog_post.meta_description }}</textarea>
+            <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1170px; height: 117px;">{{ blog_post.meta_description }}</textarea>
           </div>
 	  <p id="Wordcount"></p>
         </div>
 	
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="html">Old Slugs: {{blog_post.old_slugs|get_slugs|length}}</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <div  class="form-control" id="old_slugs" disabled name="old_slugs" style="margin: 0px; width: 1170px; height: 150px; overflow:scroll;" placeholder="Blog Post Description">{% if blog_post.old_slugs|get_slugs|length > 0 %}{% for slug in blog_post.old_slugs|get_slugs %}{{forloop.counter}}. {{slug}}{% if forloop.last %}.{% else %},{% endif %}<br>{% endfor %}{% endif %}
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tags-block">
         <p><label>Tags Creation</label>

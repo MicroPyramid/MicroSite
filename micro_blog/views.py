@@ -1,9 +1,10 @@
-from django.shortcuts import render_to_response, render, get_object_or_404
+from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.shortcuts import redirect
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post, Subscribers
+from micro_blog.models import Category, Tags, Post, Subscribers, create_slug
 from pages.models import simplecontact, Contact
 import math
 # from django.core.files.storage import default_storage
@@ -127,7 +128,15 @@ def site_blog_home(request):
 
 
 def blog_article(request, slug):
-    blog_post = get_object_or_404(Post, slug=slug)
+    blog_post = Post.objects.filter(slug=slug)
+    if blog_post:
+        blog_post = blog_post[0]
+    elif Post.objects.filter(old_slugs__icontains=slug):
+        blog_post = Post.objects.filter(old_slugs__icontains=slug)
+        blog_post = blog_post[0]
+        return redirect(reverse('micro_blog:blog_article', kwargs={'slug': blog_post.slug}), permanent=True)
+    else:
+        raise Http404
     all_blog_posts = list(Post.objects.filter(status='P').order_by('-published_on'))
     prev_url = ''
     next_url = ''
@@ -302,6 +311,7 @@ def new_post(request):
 def edit_blog_post(request, blog_slug):
     if request.method == 'POST':
         current_post = get_object_or_404(Post, slug=blog_slug)
+        existing_slug = str(current_post.slug)
         validate_blog = BlogpostForm(request.POST, instance=current_post)
         if validate_blog.is_valid():
             blog_post = validate_blog.save(commit=False)
@@ -317,6 +327,19 @@ def edit_blog_post(request, blog_slug):
                 blog_post.status = 'R'
 
             if request.user.is_superuser and request.POST.get('slug'):
+                if blog_post.old_slugs:
+                    blog_post_slugs = blog_post.old_slugs.split(',')
+                    if not existing_slug in blog_post_slugs:
+                        old_slugs = blog_post.old_slugs
+                        old_slugs += ',' + str(existing_slug)
+                    else:
+                        old_slugs = blog_post.old_slugs
+                else:
+                    if str(existing_slug) != request.POST.get('slug'):
+                        old_slugs = existing_slug
+                    else:
+                        old_slugs = ''
+                blog_post.old_slugs = old_slugs
                 blog_post.slug = request.POST.get('slug')
             else:
                 tempslug = slugify(blog_post.title)
@@ -343,7 +366,15 @@ def edit_blog_post(request, blog_slug):
             data = {'error': True, 'response': validate_blog.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
-    blog_post = get_object_or_404(Post, slug=blog_slug)
+    blog_post = Post.objects.filter(slug=blog_slug)
+    if blog_post:
+        blog_post = blog_post[0]
+    elif Post.objects.filter(old_slugs__icontains=blog_slug):
+        blog_post = Post.objects.filter(old_slugs__icontains=blog_slug)
+        blog_post = blog_post[0]
+        return redirect(reverse('micro_blog:edit_blog_post', kwargs={'blog_slug': blog_post.slug}), permanent=True)
+    else:
+        raise Http404
     categories = Category.objects.all()
     if request.user.is_superuser or blog_post.user == request.user:
         c = {}
@@ -368,7 +399,15 @@ def delete_post(request, blog_slug):
 
 @login_required
 def view_post(request, blog_slug):
-    blog_post = get_object_or_404(Post, slug=blog_slug)
+    blog_post = Post.objects.filter(slug=blog_slug)
+    if blog_post:
+        blog_post = blog_post[0]
+    elif Post.objects.filter(old_slugs__icontains=blog_slug):
+        blog_post = Post.objects.filter(old_slugs__icontains=blog_slug)
+        blog_post = blog_post[0]
+        return redirect(reverse('micro_blog:blog_article', kwargs={'slug': blog_post.slug}), permanent=True)
+    else:
+        raise Http404
     return render(request, 'admin/blog/view_post.html', {'post': blog_post})
 
 

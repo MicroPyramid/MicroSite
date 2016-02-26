@@ -78,6 +78,7 @@ class Post(models.Model):
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
     published_on = models.DateField(blank=True, null=True)
     meta_description = models.TextField(max_length=500, default='')
+    old_slugs = models.TextField()
 
     def __unicode__(self):
         return self.title
