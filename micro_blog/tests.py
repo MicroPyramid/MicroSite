@@ -327,6 +327,31 @@ class micro_blog_post_data(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Blog Post edited' in response.content)
 
+        response = self.client.post('/blog/edit-post/python-introduction-1/', {
+                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction-1'})
+        self.assertEqual(response.status_code, 200)
+        print response.content
+        self.assertTrue('Blog Post edited' in response.content)
+
+        response = self.client.post('/blog/edit-post/python-introduction-1/', {
+                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'test-python'})
+        self.assertEqual(response.status_code, 200)
+        print response.content
+        self.assertTrue('Blog Post edited' in response.content)
+
+        response = self.client.get('/blog/edit-post/python-introduction-1/')
+        self.assertEqual(response.status_code, 301)
+
+        response = self.client.get('/blog/edit-post/test-python/')
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get('/blog/test-python/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'site/blog/article.html')
+
+        response = self.client.get('/blog/python-introduction-1/')
+        self.assertEqual(response.status_code, 301)
+
         response = self.client.post(
             '/blog/new-category/', {'name': 'django form', 'description': 'django'})
         self.assertEqual(response.status_code, 200)

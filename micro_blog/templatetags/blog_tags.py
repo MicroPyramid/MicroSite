@@ -62,3 +62,10 @@ def get_object_list_class(object_list, class_name):
         if c.__class__.__name__ == class_name:
             return True
     return False
+
+
+@register.filter
+def get_slugs(value):
+    if value:
+        return value.split(',')
+    return ''
