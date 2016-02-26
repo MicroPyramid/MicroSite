@@ -330,13 +330,11 @@ class micro_blog_post_data(TestCase):
         response = self.client.post('/blog/edit-post/python-introduction-1/', {
                                     'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction-1'})
         self.assertEqual(response.status_code, 200)
-        print response.content
         self.assertTrue('Blog Post edited' in response.content)
 
         response = self.client.post('/blog/edit-post/python-introduction-1/', {
                                     'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'test-python'})
         self.assertEqual(response.status_code, 200)
-        print response.content
         self.assertTrue('Blog Post edited' in response.content)
 
         response = self.client.get('/blog/edit-post/python-introduction-1/')
