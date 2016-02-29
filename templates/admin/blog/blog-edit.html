@@ -18,7 +18,6 @@
       <div class="form-group">
         <label for="exampleInputPassword1">Slug</label>
         <input type="text" class="form-control" id="slug" name="slug" value="{{blog_post.slug}}">
-        <span class="slug-text">Do not mix form groups directly with input groups. Instead, nest the input group inside of the form group.</span>
       </div>
       {% endif %}
       <div class="form-group">
@@ -60,7 +59,7 @@
         </div>
       </div>
       <div class="tags-block">
-        <p><label>Tags Creation</label>
+        <p><label>Tags</label>
           <input id="tags_1" type="text" class="tags" name="tags" value="{% for tag in blog_post.tags.all %}{{tag.name}},{% endfor %}" />
       </div>
       <div class="tags-block">
@@ -101,7 +100,7 @@
        input_text = $('#meta_description').val();
        char_length = input_text.length
        word_length = input_text.split(' ').filter(Boolean).length;
-       $("#Wordcount").text('Words: ' + word_length + ', Charecters: ' +  char_length);
+       $("#Wordcount").text('Words: ' + word_length + ', Characters: ' +  char_length);
    }
    counting_words()
    $('#meta_description').keyup(function(event) {
