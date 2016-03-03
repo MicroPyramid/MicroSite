@@ -321,79 +321,65 @@ def new_post(request):
 
 @login_required
 def edit_blog_post(request, blog_slug):
-    if request.method == 'POST':
-        current_post = get_object_or_404(Post, slug=blog_slug)
-        existing_slug = str(current_post.slug)
-        validate_blog = BlogpostForm(request.POST, instance=current_post)
-        if validate_blog.is_valid():
-            blog_post = validate_blog.save(commit=False)
-            blog_post.meta_description = request.POST['meta_description']
-            blog_post.status = 'D'
-            if request.POST.get('status') == "P":
-                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
-                    blog_post.status = 'P'
-            elif request.POST.get('status') == "T":
-                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
-                    blog_post.status = 'T'
-            elif request.POST.get('status') == "R":
-                blog_post.status = 'R'
-
-            if request.user.is_superuser and request.POST.get('slug'):
-                if blog_post.old_slugs:
-                    blog_post_slugs = blog_post.old_slugs.split(',')
-                    if not existing_slug in blog_post_slugs:
-                        old_slugs = blog_post.old_slugs
-                        old_slugs += ',' + str(existing_slug)
-                    else:
-                        old_slugs = blog_post.old_slugs
-                else:
-                    if str(existing_slug) != request.POST.get('slug'):
-                        old_slugs = existing_slug
-                    else:
-                        old_slugs = ''
-                blog_post.old_slugs = old_slugs
-                blog_post.slug = request.POST.get('slug')
-            else:
-                tempslug = slugify(blog_post.title)
-
-            blog_post.save()
-            blog_post.tags.clear()
-            if request.POST.get('tags', ''):
-                for tag in blog_post.tags.all():
-                    blog_post.tags.remove(tag)
-                tags = request.POST.get('tags')
-                tags = tags.split(',')
-                for tag in tags:
-                    blog_tag = Tags.objects.filter(name=tag)
-                    if blog_tag:
-                        blog_tag = blog_tag[0]
-                    else:
-                        blog_tag = Tags.objects.create(name=tag)
-
-                    blog_post.tags.add(blog_tag)
-
-            cache._cache.flush_all()
-            data = {'error': False, 'response': 'Blog Post edited'}
-        else:
-            data = {'error': True, 'response': validate_blog.errors}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-
-    blog_post = Post.objects.filter(slug=blog_slug)
-    if blog_post:
-        blog_post = blog_post[0]
-    elif Post.objects.filter(old_slugs__icontains=blog_slug):
-        blog_post = Post.objects.filter(old_slugs__icontains=blog_slug)
-        blog_post = blog_post[0]
-        return redirect(reverse('micro_blog:edit_blog_post', kwargs={'blog_slug': blog_post.slug}), permanent=True)
-    else:
-        raise Http404
-    categories = Category.objects.all()
-    if request.user.is_superuser or blog_post.user == request.user:
-        c = {}
-        c.update(csrf(request))
-        return render(request, 'admin/blog/blog-edit.html', {'blog_post': blog_post, 'categories': categories, 'csrf_token': c['csrf_token']})
-    else:
+    blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
+    if not blog_post.is_editable_by(request.user):
         return render_to_response('admin/accessdenied.html')
+
+    BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs, 
+        can_delete=True, extra=3, fields=('slug', 'is_active'),
+        formset=CustomBlogSlugInlineFormSet
+    )
+    if request.method == 'POST':
+        blog_form = BlogpostForm(request.POST, instance=blog_post)
+        blogslugs_formset = BlogSlugFormSet(request.POST, instance=blog_post)
+        if blog_form.is_valid() and blogslugs_formset.is_valid():
+            blog_post = blog_form.save(commit=False)
+            if blogslugs_formset.is_valid():
+                if request.POST.get('meta_description'):
+                    blog_post.meta_description = request.POST['meta_description']
+                if request.POST.get('status') == "P":
+                    if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
+                        blog_post.status = 'P'
+                elif request.POST.get('status') == "T":
+                    if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
+                        blog_post.status = 'T'
+                elif request.POST.get('status') == "R":
+                    blog_post.status = 'R'
+
+                blog_post.save()
+                blogslugs_formset.save()
+                # If no slugs are specified, then create one using title.
+                if not blog_post.slugs.all():
+                    blog_post.create_blog_slug([slugify(blog_post.title)])
+                blog_post.check_and_activate_slug()
+
+                blog_post.tags.clear()
+                if request.POST.get('tags', ''):
+                    for tag in blog_post.tags.all():
+                        blog_post.tags.remove(tag)
+                    tags = request.POST.get('tags')
+                    tags = tags.split(',')
+                    for tag in tags:
+                        blog_tag = Tags.objects.filter(name=tag)
+                        if blog_tag:
+                            blog_tag = blog_tag[0]
+                        else:
+                            blog_tag = Tags.objects.create(name=tag)
+
+                        blog_post.tags.add(blog_tag)
+                cache._cache.flush_all()
+                return redirect(reverse('micro_blog:admin_post_list'))
+    else:
+        blog_form = BlogpostForm(instance=blog_post)
+        blogslugs_formset = BlogSlugFormSet(instance=blog_post)        
+
+    categories = Category.objects.all()
+    c = {}
+    c.update(csrf(request))
+    return render(request, 'admin/blog/blog-edit.html', {'blog_post': blog_post,
+        'categories': categories, 'csrf_token': c['csrf_token'],
+        'blogslugs_formset': blogslugs_formset, 'blog_form': blog_form}
+    )
 
 
 @login_required
