@@ -64,7 +64,7 @@ def get_blog_slug(slug):
     tempslug = slug
     while True:
         try:
-            Post_Slugs.objects.filter(slug=tempslug)
+            Post_Slugs.objects.get(slug=tempslug)
             slugcount += 1
             tempslug = slug + '-' + str(slugcount)
         except ObjectDoesNotExist:
@@ -103,11 +103,20 @@ class Post(models.Model):
                     blog=self, slug=actual_slug, is_active=False
                 )
 
-        # Check whether active slug is their for Blog or not
-        if not self.slugs.filter(is_active=True):
-            active_slug = self.slugs.all().order_by("id").first()
+    def check_and_activate_slug(self):
+        # Check whether active slug is their for blog-post or not
+        blog_slugs = self.slugs.all().order_by("id")
+        if not blog_slugs.filter(is_active=True):
+            active_slug = blog_slugs.last()
             active_slug.is_active = True
             active_slug.save()
+
+    @property
+    def slug(self):
+        blog_slug = self.slugs.filter(is_active=True).first()
+        if blog_slug:
+            return str(blog_slug.slug)
+        return ""
 
     @property
     def author(self):
@@ -145,7 +154,7 @@ class Post(models.Model):
 class Post_Slugs(models.Model):
     blog = models.ForeignKey(Post, related_name='slugs')
     slug = models.SlugField(max_length=100, unique=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
 
 
 class Image_File(models.Model):

@@ -4,11 +4,12 @@ from django.shortcuts import redirect
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post, Subscribers, create_slug
+from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
 from pages.models import simplecontact, Contact
 import math
 # from django.core.files.storage import default_storage
-from micro_blog.forms import BlogpostForm, BlogCategoryForm
+from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
+from django.forms.models import inlineformset_factory
 import datetime
 import json
 from micro_admin.models import User
@@ -243,68 +244,79 @@ def admin_post_list(request):
 
 @login_required
 def new_post(request):
+    BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs, 
+        can_delete=True, extra=3, fields=('slug', 'is_active'),
+        formset=CustomBlogSlugInlineFormSet
+    )
     if request.method == 'POST':
-        validate_blog = BlogpostForm(request.POST)
-        if validate_blog.is_valid():
-            blog_post = validate_blog.save(commit=False)
-            blog_post.user = request.user
-            blog_post.meta_description = request.POST['meta_description']
-            blog_post.status = 'D'
-            if request.POST.get('status') == "P":
-                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
-                    blog_post.status = 'P'
-                    blog_post.published_on = datetime.datetime.now().date()
+        blog_form = BlogpostForm(request.POST)
+        blogslugs_formset = BlogSlugFormSet(request.POST)
+        if blog_form.is_valid() and blogslugs_formset.is_valid():
+            blog_post = blog_form.save(commit=False)
+            blogslugs_formset = BlogSlugFormSet(request.POST, instance=blog_post)
+            if blogslugs_formset.is_valid():
+                blog_post.user = request.user
+                if request.POST.get('meta_description'):
+                    blog_post.meta_description = request.POST['meta_description']
+                blog_post.status = 'D'
+                if request.POST.get('status') == "P":
+                    if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
+                        blog_post.status = 'P'
+                        if not self.published_on:
+                            blog_post.published_on = datetime.datetime.now().date()
 
-            elif request.POST.get('status') == "T":
-                if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
-                    blog_post.status = 'T'
+                elif request.POST.get('status') == "T":
+                    if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
+                        blog_post.status = 'T'
 
-            elif request.POST.get('status') == "R":
-                blog_post.status = 'R'
+                elif request.POST.get('status') == "R":
+                    blog_post.status = 'R'
 
-            blog_post.save()
-            if request.user.is_superuser and request.POST.get('slug'):
-                blog_post.slug = request.POST.get('slug')
-            else:
-                tempslug = slugify(blog_post.title)
-                blog_post.slug = tempslug
-            blog_post.save()
+                blog_post.save()
+                blogslugs_formset.save()
+                # If no slugs are specified, then create one using title.
+                if not blog_post.slugs.all():
+                    blog_post.create_blog_slug([slugify(blog_post.title)])
+                blog_post.check_and_activate_slug()
 
-            if request.POST.get('tags', ''):
-                tags = request.POST.get('tags')
-                tags = tags.split(',')
-                for tag in tags:
-                    blog_tag = Tags.objects.filter(name=tag)
-                    if blog_tag:
-                        blog_tag = blog_tag[0]
-                    else:
-                        blog_tag = Tags.objects.create(name=tag)
-                    blog_post.tags.add(blog_tag)
+                if request.POST.get('tags', ''):
+                    tags = request.POST.get('tags')
+                    tags = tags.split(',')
+                    for tag in tags:
+                        blog_tag = Tags.objects.filter(name=tag)
+                        if blog_tag:
+                            blog_tag = blog_tag[0]
+                        else:
+                            blog_tag = Tags.objects.create(name=tag)
+                        blog_post.tags.add(blog_tag)
 
-            sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
-            sending_msg = sendgrid.Mail()
-            sending_msg.set_subject("New blog post has been created")
+                sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
+                sending_msg = sendgrid.Mail()
+                sending_msg.set_subject("New blog post has been created")
 
-            blog_url = 'https://www.micropyramid.com/blog/' + str(blog_post.slug) + '/'
-            message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category '
-            message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="' + blog_url + '">click here</a> to view the blog post in the site.</p>'
+                blog_url = 'https://www.micropyramid.com/blog/' + str(blog_post.slug) + '/'
+                message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category '
+                message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="' + blog_url + '">click here</a> to view the blog post in the site.</p>'
 
-            sending_msg.set_html(message)
-            sending_msg.set_text('New blog post has been created')
-            sending_msg.set_from(request.user.email)
-            sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
-            sg.send(sending_msg)
+                sending_msg.set_html(message)
+                sending_msg.set_text('New blog post has been created')
+                sending_msg.set_from(request.user.email)
+                sending_msg.add_to([user.email for user in User.objects.filter(is_admin=True)])
+                sg.send(sending_msg)
 
-            cache._cache.flush_all()
-            data = {'error': False, 'response': 'Blog Post created'}
-        else:
-            data = {'error': True, 'response': validate_blog.errors}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+                cache._cache.flush_all()
+                return redirect(reverse('micro_blog:admin_post_list'))
+    else:
+        blog_form = BlogpostForm()
+        blogslugs_formset = BlogSlugFormSet(instance=Post())
 
     categories = Category.objects.all()
     c = {}
     c.update(csrf(request))
-    return render(request, 'admin/blog/blog-new.html', {'categories': categories, 'csrf_token': c['csrf_token']})
+    return render(request, 'admin/blog/blog-new.html', 
+        {'categories': categories, 'csrf_token': c['csrf_token'],
+        'blogslugs_formset': blogslugs_formset, 'blog_form': blog_form}
+    )
 
 
 @login_required
