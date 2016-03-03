@@ -191,27 +191,6 @@ $('#meta_description').keyup(function(event) {
     $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
     $('form#blogform').submit();
   });
-    // $('form#blogform').ajaxForm({
-    //   beforeSerialize: function() {
-    //     console.log(CKEDITOR.instances.textareacontents.getData())
-    //     $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
-    //   },
-    //   dataType: 'json',
-    //   beforeSend: function() {
-    //     $("#save_blog_post").attr("disabled", "disabled");
-    //   },
-    //   success: function(data) {
-    //     $("#save_blog_post").removeAttr('disabled');
-    //     if (data.error) {
-    //       $('p.failure').remove();
-    //       for (var key in data.response) {
-    //         $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
-    //       }
-    //     } else {
-    //       window.location = "{% url 'micro_blog:admin_post_list' %}";
-    //     }
-    //   }
-    // });
 </script>
 <script type="text/javascript">
   var Autocomplete = function(options) {
