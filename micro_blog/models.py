@@ -59,6 +59,18 @@ def create_tag_slug(tempslug):
             return tempslug
 
 
+def get_blog_slug(slug):
+    slugcount = 0
+    tempslug = slug
+    while True:
+        try:
+            Post_Slugs.objects.filter(slug=tempslug)
+            slugcount += 1
+            tempslug = slug + '-' + str(slugcount)
+        except ObjectDoesNotExist:
+            return tempslug
+
+
 class Post(models.Model):
     STATUS_CHOICE = (
                     ('D', 'Draft'),
@@ -68,7 +80,6 @@ class Post(models.Model):
                     )
 
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -82,6 +93,21 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def create_blog_slug(self, slugs):
+        for each_slug in list(set(slugs)):
+            blog_slugs = self.slugs.filter(slug=each_slug)
+            if not blog_slugs:
+                actual_slug = get_blog_slug(each_slug)
+                Post_Slugs.objects.create(
+                    blog=self, slug=actual_slug, is_active=False
+                )
+
+        # Check whether active slug is their for Blog or not
+        if not self.slugs.filter(is_active=True):
+            active_slug = self.slugs.all().order_by("id").first()
+            active_slug.is_active = True
+            active_slug.save()
 
     @property
     def author(self):
@@ -114,6 +140,12 @@ class Post(models.Model):
             if item.text:
                 content += item.text.strip()
         return content[:350]
+
+
+class Post_Slugs(models.Model):
+    blog = models.ForeignKey(Post, related_name='slugs')
+    slug = models.SlugField(max_length=100, unique=True)
+    is_active = models.BooleanField(default=True)
 
 
 class Image_File(models.Model):

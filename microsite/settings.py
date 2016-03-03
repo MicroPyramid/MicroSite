@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
@@ -242,6 +242,8 @@ INBOUND_EMAIL_LOG_REQUESTS = True
 INBOUND_EMAIL_RESPONSE_200 = True
 
 COMPRESS_ENABLED = True
+# COMPRESS_CACHE_KEY_FUNCTION = 'compressor.cache.socket_cachekey'
+# COMPRESS_OFFLINE = False
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
@@ -252,10 +254,15 @@ COMPRESS_OFFLINE_CONTEXT = {
     'STATIC_URL': 'STATIC_URL',
 }
 
-# if DEBUG:
-#     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
-# else:
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# COMPRESS_CACHEABLE_PRECOMPILERS = (
+#     ('text/less', 'lessc {infile} {outfile}'),
+#     ('text/x-scss', 'sass --scss {infile} {outfile}'),
+# )
+
+if DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
@@ -320,3 +327,9 @@ CACHES = {
 # CACHE_IGNORE_REGEXPS = (
 #     r'/admin.*',
 # )
+
+try:
+    from settings_local import *  # noqa
+except ImportError:
+    pass
+
