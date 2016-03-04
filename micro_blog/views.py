@@ -129,15 +129,15 @@ def site_blog_home(request):
 
 
 def blog_article(request, slug):
-    blog_post = Post.objects.filter(slug=slug)
-    if blog_post:
-        blog_post = blog_post[0]
-    elif Post.objects.filter(old_slugs__icontains=slug):
-        blog_post = Post.objects.filter(old_slugs__icontains=slug)
-        blog_post = blog_post[0]
-        return redirect(reverse('micro_blog:blog_article', kwargs={'slug': blog_post.slug}), permanent=True)
-    else:
-        raise Http404
+    blog_post = get_object_or_404(Post, slugs__slug=slug)
+    active_slug = blog_post.slug
+    if active_slug != slug:
+        return redirect(reverse('micro_blog:blog_article',
+            kwargs={'slug': active_slug})
+        )
+    if not blog_post.status == 'P':
+        if not request.user.is_authenticated():
+            raise Http404
     all_blog_posts = list(Post.objects.filter(status='P').order_by('-published_on'))
     prev_url = ''
     next_url = ''
@@ -160,9 +160,6 @@ def blog_article(request, slug):
                 prev_url = ''
             question = post
             break
-    if not blog_post.status == 'P':
-        if not request.user.is_authenticated():
-            raise Http404
     related_posts = Post.objects.filter(category=blog_post.category, status='P').exclude(id=blog_post.id).order_by('?')[:3]
     minified_url = ''
     if 'HTTP_HOST' in request.META.keys():
@@ -322,6 +319,11 @@ def new_post(request):
 @login_required
 def edit_blog_post(request, blog_slug):
     blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
+    active_slug = blog_post.slug
+    if active_slug != blog_slug:
+        return redirect(reverse('micro_blog:edit_blog_post',
+            kwargs={'blog_slug': active_slug})
+        )
     if not blog_post.is_editable_by(request.user):
         return render_to_response('admin/accessdenied.html')
 
@@ -384,7 +386,10 @@ def edit_blog_post(request, blog_slug):
 
 @login_required
 def delete_post(request, blog_slug):
-    blog_post = get_object_or_404(Post, slug=blog_slug)
+    blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
+    active_slug = blog_post.slug
+    if active_slug != blog_slug:
+        raise Http404
     if request.user == blog_post.user or request.user.is_superuser:
         blog_post.delete()
 
@@ -397,15 +402,12 @@ def delete_post(request, blog_slug):
 
 @login_required
 def view_post(request, blog_slug):
-    blog_post = Post.objects.filter(slug=blog_slug)
-    if blog_post:
-        blog_post = blog_post[0]
-    elif Post.objects.filter(old_slugs__icontains=blog_slug):
-        blog_post = Post.objects.filter(old_slugs__icontains=blog_slug)
-        blog_post = blog_post[0]
-        return redirect(reverse('micro_blog:blog_article', kwargs={'slug': blog_post.slug}), permanent=True)
-    else:
-        raise Http404
+    blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
+    active_slug = blog_post.slug
+    if active_slug != blog_slug:
+        return redirect(reverse('micro_blog:view_post',
+            kwargs={'blog_slug': active_slug})
+        )
     return render(request, 'admin/blog/view_post.html', {'post': blog_post})
 
 
