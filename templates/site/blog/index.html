@@ -104,7 +104,7 @@
             </div>
           </div>
           <div class="blog-right">
-            <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
+            <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
             <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
             <ul class="post-det">
               <li itemprop="author"><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>

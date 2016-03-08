@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import redirect
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
+from django.db.models import Prefetch
 # from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
 from pages.models import simplecontact, Contact
@@ -118,9 +119,15 @@ def site_blog_home(request):
     else:
         page = 1
 
-    posts = Post.objects.filter(status='P')
+    posts = Post.objects.filter(status='P').order_by(
+        '-published_on').select_related("user").prefetch_related(
+        Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
+            to_attr="active_slugs"
+        )
+    )
+
     no_pages = int(math.ceil(float(posts.count()) / items_per_page))
-    blog_posts = posts.order_by('-published_on')[(page - 1) * items_per_page:page * items_per_page]
+    blog_posts = posts[(page - 1) * items_per_page:page * items_per_page]
 
     c = {}
     c.update(csrf(request))
