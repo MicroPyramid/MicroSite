@@ -31,7 +31,13 @@ def new_page(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        return render(request, 'admin/content/page/new-page.html', {'csrf_token': c['csrf_token'], 'categories': categories})
+        return render(
+            request,
+            'admin/content/page/new-page.html',
+            {
+                'csrf_token': c['csrf_token'],
+                'categories': categories
+            })
     else:
         return render_to_response('admin/accessdenied.html')
 
