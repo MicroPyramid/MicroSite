@@ -1,7 +1,6 @@
 from django.test import TestCase
 from micro_admin.forms import *
 from django.test import Client
-from django.contrib.auth import login, authenticate, logout
 from micro_admin.models import User
 from pages.models import simplecontact
 
@@ -9,15 +8,24 @@ from pages.models import simplecontact
 class Modelforms_test(TestCase):
 
     def test_userform(self):
-        form = UserForm(data={'first_name': 'Micro', 'last_name': 'Pyramid', 'email': 'micro@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin',
-                              'state': 'MP', 'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '1970-01-01',
-                              'date_of_birth': '1970-01-01', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com',
-                              'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        form = UserForm(
+            data={
+                'first_name': 'Micro', 'last_name': 'Pyramid', 'email': 'micro@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD',
+                'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '1970-01-01', 'date_of_birth': '1970-01-01',
+                'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com',
+                'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286
+            })
+
         self.assertTrue(form.is_valid())
 
     def test_CareerForm(self):
-        form = CareerForm(data={'title': 'Python developer', 'experience': 1, 'skills': 'Python, django',
-                                'description': 'sample description', 'num_of_opening': 5, 'url': 'http://peeljobs.com/java/'})
+        form = CareerForm(
+            data={
+                'title': 'Python developer', 'experience': 1, 'skills': 'Python, django',
+                'description': 'sample description', 'num_of_opening': 5, 'url': 'http://peeljobs.com/java/'
+            })
+
         self.assertTrue(form.is_valid())
 
 
@@ -178,90 +186,187 @@ class user_test(TestCase):
         self.assertTemplateUsed(response, 'admin/user/change_password.html')
 
         response = self.client.post(
-            '/portal/users/new/', {'first_name': 'Micro', 'last_name': 'Pyramid', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB'})
+            '/portal/users/new/',
+            {
+                'first_name': 'Micro', 'last_name': 'Pyramid', 'user_roles': 'Admin',
+                'state': 'MP', 'city': 'HYD', 'area': 'KPHB'
+            })
+
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/portal/users/new/', {'first_name': 'Micro', 'last_name': 'Pyramid', 'email': 'micro@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/new/',
+            {
+                'first_name': 'Micro', 'last_name': 'Pyramid', 'email': 'micro@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+                'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970',
+                'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com',
+                'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('created successfully' in response.content)
 
-        response = self.client.post('/portal/users/new/', {'first_name': 'Microfb', 'last_name': 'Pyramid', 'email': 'microfb@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                           'fb_profile': '', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/new/',
+            {
+                'first_name': 'Microfb', 'last_name': 'Pyramid', 'email': 'microfb@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+                'fb_profile': '', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi',
+                'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com',
+                'mobile': 123456, 'phones': 123456, 'pincode': 502286
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('created successfully' in response.content)
 
-        response = self.client.post('/portal/users/new/', {'first_name': 'Microtw', 'last_name': 'Pyramid', 'email': 'microtw@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': '', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/new/',
+            {
+                'first_name': 'Microtw', 'last_name': 'Pyramid', 'email': 'microtw@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+                'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970',
+                'address': 'ravi', 'tw_profile': '', 'ln_profile': 'www.linkedln.com',
+                'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('created successfully' in response.content)
 
-        response = self.client.post('/portal/users/new/', {'first_name': 'Microln', 'last_name': 'Pyramid', 'email': 'microln@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': '', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/new/',
+            {
+                'first_name': 'Microln', 'last_name': 'Pyramid', 'email': 'microln@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
+                'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970',
+                'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': '',
+                'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('created successfully' in response.content)
 
         response = self.client.get('/portal/users/edit/' + self.u + '/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.post('/portal/users/edit/' + self.u + '/', {'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
-
-        response = self.client.post('/portal/users/edit/' + self.u + '/', {'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                                           'fb_profile': '', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
-
-        response = self.client.post('/portal/users/edit/' + self.u + '/', {'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': '', 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/edit/' + self.u + '/',
+            {
+                'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
+                'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com',
+                'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456,
+                'phones': 123456, 'pincode': 502286
+            })
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue('updated successfully' in response.content)
 
-        response = self.client.post('/portal/users/edit/' + self.u + '/', {'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': '', 'google_plus_url': 'www.django.com', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/edit/' + self.u + '/',
+            {
+                'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'city': 'HYD', 'area': 'KPHB', 'fb_profile': '', 'last_login': '01/01/1970',
+                'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com',
+                'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456,
+                'phones': 123456, 'pincode': 502286
+            })
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue('updated successfully' in response.content)
 
-        response = self.client.post('/portal/users/edit/' + self.u + '/', {'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP', 'city': 'HYD', 'area': 'KPHB',
-                                                                           'fb_profile': 'www.fb.com', 'last_login': '01/01/1970', 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com', 'ln_profile': 'www.linkedln.com', 'google_plus_url': '', 'mobile': 123456, 'phones': 123456, 'pincode': 502286})
+        response = self.client.post(
+            '/portal/users/edit/' + self.u + '/',
+            {
+                'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
+                'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': '',
+                'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456,
+                'phones': 123456, 'pincode': 502286
+            })
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue('updated successfully' in response.content)
 
-        response = self.client.post('/portal/users/edit/' + self.u + '/', {
-                                    'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com', 'password': 'micro123', 'user_roles': 'Admin'})
+        response = self.client.post(
+            '/portal/users/edit/' + self.u + '/',
+            {
+                'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
+                'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com',
+                'ln_profile': '', 'google_plus_url': 'www.django.com', 'mobile': 123456,
+                'phones': 123456, 'pincode': 502286
+            })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('updated successfully' in response.content)
+
+        response = self.client.post(
+            '/portal/users/edit/' + self.u + '/',
+            {
+                'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
+                'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com',
+                'ln_profile': 'www.linkedln.com', 'google_plus_url': '', 'mobile': 123456,
+                'phones': 123456, 'pincode': 502286
+            })
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('updated successfully' in response.content)
+
+        response = self.client.post(
+            '/portal/users/edit/' + self.u + '/',
+            {
+                'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
+                'password': 'micro123', 'user_roles': 'Admin'
+            })
 
         self.assertEqual(response.status_code, 200)
         self.assertFalse('updated successfully' in response.content)
 
-        response = self.client.post('/portal/user/change-password/', {
-                                    'oldpassword': 'micro12', 'newpassword': 'pwd', 'retypepassword': 'pwd'})
+        response = self.client.post(
+            '/portal/user/change-password/',
+            {
+                'oldpassword': 'micro12', 'newpassword': 'pwd', 'retypepassword': 'pwd'
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Password changed' in response.content)
 
-        response = self.client.post('/portal/user/change-password/', {
-                                    'oldpassword': 'micro123', 'newpassword': 'pwd', 'retypepassword': 'pw'})
+        response = self.client.post(
+            '/portal/user/change-password/',
+            {
+                'oldpassword': 'micro123', 'newpassword': 'pwd', 'retypepassword': 'pw'
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Password changed' in response.content)
 
-        response = self.client.post('/portal/user/change-password/', {
-                                    'oldpassword': 'micro123', 'newpassword': 'pwd', 'retypepassword': 'pwd'})
+        response = self.client.post(
+            '/portal/user/change-password/',
+            {
+                'oldpassword': 'micro123', 'newpassword': 'pwd', 'retypepassword': 'pwd'
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Password changed' in response.content)
 
         response = self.client.post(
-            '/portal/user/change-password/', {'newpassword': 'pwd', 'retypepassword': 'pwd'})
+            '/portal/user/change-password/',
+            {
+                'newpassword': 'pwd', 'retypepassword': 'pwd'
+            })
+
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Password changed' in response.content)
 
-        response = self.client.post(
-            '/portal/users/change-state/' + self.u + '/')
+        response = self.client.post('/portal/users/change-state/' + self.u + '/')
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.post(
-            '/portal/users/change-state/' + self.u + '/')
+        response = self.client.post('/portal/users/change-state/' + self.u + '/')
         self.assertEqual(response.status_code, 302)
