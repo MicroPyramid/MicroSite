@@ -18,6 +18,7 @@ from django import template
 
 register = template.Library()
 
+
 class RecurseNode(template.Node):
     def __init__(self, var, name, child, nodeList):
         self.var = var
@@ -61,6 +62,7 @@ class RecurseNode(template.Node):
         output = self.renderCallback(context, vals, 1)
         return output
 
+
 def do_recurse(parser, token):
     bits = list(token.split_contents())
     if len(bits) != 6 and bits[2] != 'with' and bits[4] != 'as':
@@ -71,7 +73,7 @@ def do_recurse(parser, token):
 
     nodeList = {}
     while len(nodeList) < 4:
-        temp = parser.parse(('child','loop','endloop','endrecurse'))
+        temp = parser.parse(('child', 'loop', 'endloop', 'endrecurse'))
         tag = parser.tokens[0].contents
         nodeList[tag] = temp
         parser.delete_first_token()
