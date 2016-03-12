@@ -1,15 +1,21 @@
 from django.test import TestCase
 from django.test import Client
-from pages.forms import PageForm, MenuForm, ContactForm, SimpleContactForm
+from pages.forms import PageForm, MenuForm, SimpleContactForm
 from micro_admin.models import User
-from pages.models import Page, Menu, simplecontact, Contact, Menu
+from pages.models import Page, simplecontact, Contact
 
 
 class pages_forms_test(TestCase):
 
     def test_pageforms(self):
         self.client = Client()
-        form = PageForm(data={'title': 'Page', 'content': 'page_content', 'meta_description': 'description', 'keywords': 'keywords'})
+        form = PageForm(
+            data={
+                'title': 'Page',
+                'content': 'page_content',
+                'meta_description': 'description',
+                'keywords': 'keywords'
+            })
         self.assertTrue(form.is_valid())
 
     def test_Menuform(self):
@@ -21,20 +27,25 @@ class pages_forms_test(TestCase):
     def test_SimpleContactForm(self):
         self.client = Client()
         form = SimpleContactForm(
-            data={'full_name': 'jagadeesh', 'message': 'sample', 'email': 'john@gmail.com', 'phone': '9876543210'})
+            data={'full_name': 'ashwin', 'message': 'sample', 'email': 'john@gmail.com', 'phone': '9876543210'})
         self.assertTrue(form.is_valid())
 
     def test_ContactForm(self):
         self.client = Client()
         form = SimpleContactForm(
-            data={'full_name': 'jagadeesh', 'message': 'sample', 'email': 'john@gmail.com', 'phone': '94'})
+            data={'full_name': 'ashwin', 'message': 'sample', 'email': 'john@gmail.com', 'phone': '94'})
         self.assertTrue(form.is_valid())
 
 
 # models test
 class pages_models_test(TestCase):
 
-    def create_page(self, title="simple page", content="simple page content", meta_description="description", keywords="keywords"):
+    def create_page(
+            self,
+            title="simple page",
+            content="simple page content",
+            meta_description="description",
+            keywords="keywords"):
         return Page.objects.create(title=title, content=content, meta_description=meta_description, keywords=keywords)
 
     def test_whatever_creation(self):
@@ -56,9 +67,23 @@ class simplecontact_models_test(TestCase):
 
 class contact_models_test(TestCase):
 
-    def create_contact(self, domain="simple page", domain_url="simple page content", country="", enquery_type="feedback", full_name="simple page", message="simple page content", email='contact@mp.com'):
-        simple_contact = simplecontact.objects.create(full_name=full_name, message=message, email=email)
-        return Contact.objects.create(domain="https://micropyramid.com", domain_url="https://micropyramid.com", country="india", enquery_type="feedback", contact_info=simple_contact)
+    def create_contact(
+            self, domain="simple page",
+            domain_url="simple page content",
+            country="",
+            enquery_type="feedback",
+            full_name="simple page",
+            message="simple page content",
+            email='contact@mp.com'):
+        simple_contact = simplecontact.objects.create(
+            full_name=full_name,
+            message=message, email=email)
+        return Contact.objects.create(
+            domain="https://micropyramid.com",
+            domain_url="https://micropyramid.com",
+            country="india",
+            enquery_type="feedback",
+            contact_info=simple_contact)
 
     def test_whatever_creation(self):
         w = self.create_contact()
@@ -130,12 +155,23 @@ class pages_views_test(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/page/new/', {'title': 'Page2', 'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
+            '/portal/content/page/new/',
+            {
+                'title': 'Page2',
+                'content': 'page_content',
+                'meta_description': 'meta_description',
+                'keywords': 'keywords'
+            })
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Page created successfully' in response.content)
 
         response = self.client.post(
-            '/portal/content/page/new/', {'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
+            '/portal/content/page/new/',
+            {
+                'content': 'page_content',
+                'meta_description': 'meta_description',
+                'keywords': 'keywords'
+            })
         self.assertEqual(response.status_code, 200)
         self.assertFalse('Page created successfully' in response.content)
 
@@ -184,12 +220,23 @@ class pages_views_test(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/page/edit/'+str(self.page.id)+'/', {'title': 'Page', 'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
+            '/portal/content/page/edit/'+str(self.page.id)+'/',
+            {
+                'title': 'Page',
+                'content': 'page_content',
+                'meta_description': 'meta_description',
+                'keywords': 'keywords'
+            })
         self.assertEqual(response.status_code, 200)
         self.assertTrue('successfully' in response.content)
 
         response = self.client.post(
-            '/portal/content/page/edit/'+str(self.page.id)+'/', {'content': 'page_content', 'meta_description': 'meta_description', 'keywords': 'keywords'})
+            '/portal/content/page/edit/'+str(self.page.id)+'/',
+            {
+                'content': 'page_content',
+                'meta_description': 'meta_description',
+                'keywords': 'keywords'
+            })
         self.assertEqual(response.status_code, 200)
         self.assertFalse('successfully' in response.content)
 
@@ -218,7 +265,7 @@ class pages_views_test(TestCase):
         response = self.client.post(
             '/portal/content/menu/edit/1/', {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 2})
         self.assertTrue(response.status_code, 200)
-        #self.assertTrue('can not choose the same as parent' in response.content)
+        # self.assertTrue('can not choose the same as parent' in response.content)
 
         response = self.client.post(
             '/portal/content/menu/edit/1/', {'url': 'micro.in', 'status': 'on'})
