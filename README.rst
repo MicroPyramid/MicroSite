@@ -23,8 +23,7 @@ This project contains the following modules.
    * Static Pages.
    * Configurable Menu.
    * Blog.
-   * Employee daily reports.
-   * Internal knowledge base.
+   * Books.
 
 After installing/cloning this, add the following settings in the virtual env/bin/activate file::
 
