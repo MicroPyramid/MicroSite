@@ -34,7 +34,7 @@ After installing/cloning this, add the following settings in the virtual env/bin
    # Raven Settings(Sentry)
    SENTRYDSN="Your site DSN"
 
-   GOOGLE_ANALYTICS_CODE = "Your site DSN"
+   GOOGLE_ANALYTICS_CODE = "Your site analytics id"
 
    export SGUSER
    export SGPWD
