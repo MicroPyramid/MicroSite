@@ -271,7 +271,7 @@ def new_post(request):
                 if request.POST.get('status') == "P":
                     if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                         blog_post.status = 'P'
-                        if not self.published_on:
+                        if not blog_post.published_on:
                             blog_post.published_on = datetime.datetime.now().date()
 
                 elif request.POST.get('status') == "T":

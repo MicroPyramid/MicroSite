@@ -1,12 +1,17 @@
 from django.test import TestCase
 from django.test import Client
-from micro_blog.forms import BlogpostForm, BlogCategoryForm
-from micro_blog.models import Category, Post, Tags
+from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
+from micro_blog.models import Category, Post, Tags, Post_Slugs, get_blog_slug
 from micro_admin.models import User
 import unittest
 from microsite.settings import BASE_DIR
 from django.core.files import File
+from django.forms.models import inlineformset_factory
 
+BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs, 
+    can_delete=True, extra=3, fields=('slug', 'is_active'),
+    formset=CustomBlogSlugInlineFormSet
+)
 
 class micro_blog_forms_test(TestCase):
 
@@ -17,16 +22,28 @@ class micro_blog_forms_test(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='python introduction', user=self.user, content='This is content', category=self.category, status='D', meta_description='meta')
+            title='python introduction', user=self.user,
+            content='This is content', category=self.category,
+            status='D', meta_description='meta')
 
     def test_blogpostform(self):
-        form = BlogpostForm(data={'title': 'python introduction', 'content': 'This is content', 'category': self.category.id,
-                                  'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction'})
+        form = BlogpostForm(data={'title': 'python introduction',
+            'content': 'This is content', 'category': self.category.id,
+            'status': 'D', 'meta_description': 'meta'})
         self.assertTrue(form.is_valid())
 
     def test_BlogCategoryForm(self):
         form = BlogCategoryForm(
             data={'name': 'django form', 'description': 'django'})
+        self.assertTrue(form.is_valid())
+
+    def test_BlogSlugFormSetForm(self):
+        form = BlogSlugFormSet(data={'title': 'python introduction',
+            'content': 'This is content', 'category': self.category.id,
+            'status': 'D', 'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
         self.assertTrue(form.is_valid())
 
 
@@ -63,8 +80,9 @@ class post_models_test(TestCase):
         category = Category.objects.create(name=category, description=description)
         tag = Tags.objects.create(name=tag)
         user = User.objects.create_superuser('mp@mp.com', 'micro-test', 'mp')
-
-        return Post.objects.create(category=category, user=user, content=content, title=title, status=status, meta_description=meta_description)
+        return Post.objects.create(category=category, user=user, 
+            content=content, title=title, status=status, 
+            meta_description=meta_description)
 
     def test_category_creation(self):
         w = self.create_post()
@@ -85,7 +103,10 @@ class micro_blog_views_test_with_employee(TestCase):
         self.django_category = Category.objects.create(
             name='django', description='category desc')
         self.blogpost = Post.objects.create(
-            title='python blog', user=self.user, content='This is content', category=self.category, status='D', slug='python-blog')
+            title='python blog', user=self.user, 
+            content='This is content', category=self.category, status='D')
+        self.blog_slug = Post_Slugs.objects.create(
+            blog=self.blogpost, slug='python-blog', is_active=True)
 
     def test_views_with_employee_login(self):
         user_login = self.client.login(
@@ -172,7 +193,10 @@ class micro_blogviews_get(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='other python introduction', user=self.user, content='This is content', category=self.category, status='P', slug="other-python-introduction")
+            title='other python introduction', user=self.user,
+            content='This is content', category=self.category, status='P')
+        self.blog_slug = Post_Slugs.objects.create(
+            blog=self.blogppost, slug='other-python-introduction', is_active=True)        
         self.tag = Tags.objects.create(name='testtag')
         self.blogppost.tags.add(self.tag)
 
@@ -264,7 +288,10 @@ class micro_blog_post_data(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='django introduction', user=self.user, content='This is content', category=self.category, status='D', slug='django-introduction')
+            title='django introduction', user=self.user,
+            content='This is content', category=self.category, status='D')
+        self.blog_slug = Post_Slugs.objects.create(
+            blog=self.blogppost, slug='django-introduction', is_active=True)
 
     def test_blog_post(self):
         user_login = self.client.login(username='micro', password='mp')
@@ -280,65 +307,105 @@ class micro_blog_post_data(TestCase):
         self.assertEqual(response.status_code, 404)
 
         # with correct input
-        response = self.client.post('/blog/new-post/', {'title': 'python introduction', 'content': 'This is content', 'category':
-                                                        self.category.id, 'status': 'D', 'tags': 'django', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction-1'})
+        response = self.client.post('/blog/new-post/', {
+            'title': 'python introduction 1', 'content': 'This is content',
+            'category': self.category.id, 'status': 'D', 'tags': 'django',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']
+        })
+        self.assertRedirects(response, '/blog/list/')
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        response = self.client.post('/blog/new-post/', {
+            'title': 'introduction', 'content': 'This is content',
+            'category': self.category.id, 'status': 'D', 'tags': 'django',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/new-post/', {'title': 'introduction', 'content': 'This is content', 'category':
-                                                        self.category.id, 'status': 'D', 'tags': 'django', 'meta_description': 'meta', 'is_superuser': 'False', 'slug': 'introduction'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        response = self.client.post('/blog/new-post/', {
+            'title': 'python', 'content': 'This is content',
+            'category': self.category.id, 'status': 'P', 'tags': 'python',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['test-python'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/new-post/', {'title': 'python', 'content': 'This is content', 'category':
-                                                        self.category.id, 'status': 'P', 'tags': 'python', 'meta_description': 'meta', 'slug': 'python', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        response = self.client.post('/blog/new-post/', {
+            'title': 'Django', 'content': 'This is content',
+            'category': self.category.id, 'status': 'T', 'tags': 'django',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['django-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/new-post/', {'title': 'Django', 'content': 'This is content', 'category':
-                                                        self.category.id, 'status': 'T', 'tags': 'django', 'meta_description': 'meta', 'slug': 'django', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'title': 'python introduction', 'content': 'This is content',
+            'category': self.category.id, 'status': 'D',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-INITIAL_FORMS': ['1']})
+        self.assertRedirects(response, '/blog/list/')
 
-        # with wrong input
-        response = self.client.post(
-            '/blog/new-post/', {'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog Post created' in response.content)
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'title': 'python introduction', 'content': 'This is edited content',
+            'category': self.category.id, 'status': 'P',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-INITIAL_FORMS': ['1']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/edit-post/python-introduction-1/', {
-                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'title': 'python introduction', 'content': 'This is content',
+            'category': self.category.id, 'status': 'T', 'tags': 'django python',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-INITIAL_FORMS': ['1']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/edit-post/python-introduction-1/', {
-                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'P', 'meta_description': 'meta', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'content': 'This is content', 'category': self.category.id,
+            'status': 'D', 'tags': 'python',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-INITIAL_FORMS': ['1']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/edit-post/python-introduction-1/', {
-                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'T', 'tags': 'django python', 'meta_description': 'meta', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'title': 'python introduction', 'content': 'This is content',
+            'category': self.category.id, 'status': 'D',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-INITIAL_FORMS': ['1']})
+        self.assertRedirects(response, '/blog/list/')
 
-        response = self.client.post('/blog/edit-post/python-introduction-1/', {
-                                    'content': 'This is content', 'category': self.category.id, 'status': 'D', 'tags': 'python', 'meta_description': 'meta', 'is_superuser': 'False'})
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog Post edited' in response.content)
-
-        response = self.client.post('/blog/edit-post/python-introduction-1/', {
-                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction-1'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
-
-        response = self.client.post('/blog/edit-post/python-introduction-1/', {
-                                    'title': 'python introduction', 'content': 'This is content', 'category': self.category.id, 'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'test-python'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'title': 'python introduction', 'content': 'This is content',
+            'category': self.category.id, 'status': 'D',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-INITIAL_FORMS': ['1']})
+        self.assertRedirects(response, '/blog/list/')
 
         response = self.client.get('/blog/edit-post/python-introduction-1/')
-        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/edit-post/test-python/')
         self.assertEqual(response.status_code, 200)
