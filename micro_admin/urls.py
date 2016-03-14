@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from micro_admin.views import (index, forgot_password, contacts, delete_contact,
                                out, menu_order, clear_cache)
 from micro_admin.users import (edit_user, change_state, users, new_user, blogposts, reports,

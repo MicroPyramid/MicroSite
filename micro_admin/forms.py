@@ -12,7 +12,18 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        exclude = ['username', 'date_joined', 'gender', 'website', 'last_login', 'area', 'fb_profile', 'tw_profile', 'ln_profile', 'google_plus_url']
+        exclude = [
+                'username',
+                'date_joined',
+                'gender',
+                'website',
+                'last_login',
+                'area',
+                'fb_profile',
+                'tw_profile',
+                'ln_profile',
+                'google_plus_url'
+            ]
 
 
 class CareerForm(forms.ModelForm):
