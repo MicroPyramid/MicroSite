@@ -242,7 +242,12 @@ def archive_posts(request, year, month):
 
 @login_required
 def admin_post_list(request):
-    blog_posts = Post.objects.all().order_by('-created_on')
+    blog_posts = Post.objects.all().order_by(
+        '-created_on').select_related("user", "category").prefetch_related(
+        Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
+            to_attr="active_slugs"
+        )
+    )
     return render(request, 'admin/blog/blog-posts.html', {'blog_posts': blog_posts})
 
 
