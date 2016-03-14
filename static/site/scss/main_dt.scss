@@ -18,11 +18,11 @@ body{
 	width: 100%;
 	position: relative;
 	@media (min-width: $mob_min) and (max-width: $smob_max){
-		min-height: 500px;
+		min-height: 400px;
 		height: auto;
 	}
 	@media (min-width: $tab_min) and (max-width:$tab_max){
-		height: 500px;
+		height: 400px;
 	}
 	.banner_bg_image{
 		max-width: 100%;
@@ -714,6 +714,11 @@ body{
 		    padding-top: 5px;
 		    background: #9f9fa3;
 		    transition: 0.5s all linear;
+		    @media(min-width: $mob_min) and (max-width:$smob_max){
+		    	font-size: 16px;
+		    	margin: 0px 1px;
+		    	padding-top: 8px;
+		 	}
 		    &.facebook {
 				  background: #325c94;
 				}
@@ -813,6 +818,9 @@ body{
 	padding: 15px;
 	@media(min-width: $mob_min) and (max-width:$tab_max){
 		text-align: center!important;
+		.footer-mp{
+			text-align: center!important;
+		}
 	}
 	ul{
 		margin: 0px;
@@ -850,10 +858,11 @@ body{
 			margin: 0px;
 			font-size: 14px;
 			line-height: 30px;
+			text-align: justify;
 			font-weight:500;
 			@media(min-width: $mob_min) and (max-width:$smob_max){
 				font-size: 1em;
-				line-height: 1.5em;
+				line-height: 22px;
 			}
 			@media (min-width: $tab_min) and (max-width:$tab_max){
 				font-size: 1.2em;
@@ -1357,7 +1366,11 @@ body{
 	background: #fff;
     padding: 32px 0px;
     font-size: 14px;
-    line-height: 35px;
+    line-height: 30px;
+    @media (min-width: $mob_min) and (max-width:$smob_max){
+    	line-height: 22px;
+    	padding: 15px;
+    }
     p{
     	text-align: justify;
     }
@@ -1375,9 +1388,11 @@ body{
 /* slider styling */
 .tab_text_wrap{
 	display: none;
+	vertical-align: top !important;
+	padding-top: 30px;
 	&.active{
 		display: table-cell;
-		vertical-align: middle;
+		vertical-align: top !important;
 	}
 }
 /* slider styling */
