@@ -117,8 +117,8 @@ def forgot_password(request):
             user.set_password(pwd_token)
             user.save()
 
-            message = "<p><b>Hello "+user.first_name+",</b></p><p>We got a request to reset your password.</p>"
-            message += "<p>Here is your new password: "+ pwd_token +"</p>"
+            message = "<p><b>Hello " + user.first_name + ",</b></p><p>We got a request to reset your password.</p>"
+            message += "<p>Here is your new password: " + pwd_token + "</p>"
 
             sg = sendgrid.SendGridClient(SG_USER, SG_PWD)
             sending_msg = sendgrid.Mail()

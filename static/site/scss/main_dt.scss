@@ -14,7 +14,7 @@ body{
 	@extend #body;
 }
 #banner_wrap{
-	height: 550px;
+	height: 340px;
 	width: 100%;
 	position: relative;
 	@media (min-width: $mob_min) and (max-width: $smob_max){
@@ -104,7 +104,7 @@ body{
 	}
 	.slider_text{
 		width: 99%;
-		padding: 50px 20px;
+		padding: 40px 20px;
 		text-align: right;
 		color: #fff;
 		position: relative;
@@ -121,13 +121,13 @@ body{
 		}
 		.tab_image{
 			position: absolute;
-			top: 18%;
+			top: 12%;
 			left: 20px;
 			opacity: 0.1;
 			max-width: 50%;
 			height: auto;
 			z-index: 0;
-			font-size: 210px;
+			font-size: 180px;
 			@media (min-width: $mob_min) and (max-width:$smob_max){
 				font-size: 200px;
 			}

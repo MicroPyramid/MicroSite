@@ -27,8 +27,14 @@ def change_password(request):
                 return HttpResponse(json.dumps({'error': True, 'response': {'oldpassword': 'Invalid old password'}}),
                                     content_type='application/json; charset=utf-8')
             if request.POST['newpassword'] != request.POST['retypepassword']:
-                return HttpResponse(json.dumps({'error': True, 'response': {'newpassword': 'New password and ConformPasswords did not match'}}),
-                                    content_type='application/json; charset=utf-8')
+                return HttpResponse(
+                    json.dumps(
+                        {
+                            'error': True, 'response': {
+                                'newpassword': 'New password and ConformPasswords did not match'
+                            }
+                        }),
+                    content_type='application/json; charset=utf-8')
 
             user.set_password(request.POST['newpassword'])
             user.save()
@@ -44,18 +50,23 @@ def change_password(request):
 def new_user(request):
     if request.method == 'POST':
         validate_user = UserForm(request.POST)
-        
+
         if validate_user.is_valid():
-            datestring_format = datetime.datetime.strptime(request.POST.get('date_of_birth'), "%m/%d/%Y").strftime("%Y-%m-%d")
+            datestring_format = datetime.datetime.strptime(
+                request.POST.get('date_of_birth'), "%m/%d/%Y").strftime("%Y-%m-%d")
             date = datetime.datetime.strptime(datestring_format, "%Y-%m-%d")
 
-            user = User.objects.create_user(username=request.POST.get('first_name'), email=request.POST.get('email'), password=request.POST.get('password'))
+            user = User.objects.create_user(
+                    username=request.POST.get('first_name'),
+                    email=request.POST.get('email'),
+                    password=request.POST.get('password')
+                )
             user.first_name = request.POST.get('first_name')
             user.last_name = request.POST.get('last_name')
             user.user_roles = request.POST.get('user_roles')
             user.date_of_birth = date
             user.date_joined = datetime.datetime.now()
-            user.last_login = datetime.datetime.now() 
+            user.last_login = datetime.datetime.now()
             user.gplus_url = request.POST.get('gplus_url')
             user.fb_profile = request.POST.get('fb_profile')
             user.tw_profile = request.POST.get('tw_profile')
@@ -156,7 +167,12 @@ def edit_user(request, pk):
             c.update(csrf(request))
             current_user = User.objects.get(pk=pk)
             user_roles = USER_ROLES
-            return render(request, 'admin/user/edit.html', {'role_list': user_roles, 'edit_user': current_user, 'csrf_token': c['csrf_token']})
+            return render(
+                request,
+                'admin/user/edit.html',
+                {
+                    'role_list': user_roles, 'edit_user': current_user, 'csrf_token': c['csrf_token']
+                })
         else:
             return render_to_response('admin/accessdenied.html')
 
@@ -178,7 +194,12 @@ def user_info(request, pk):
     user = User.objects.get(pk=pk)
     blog_posts = Post.objects.filter(user=user)
     daily_reports = DailyReport.objects.filter(employee=user)
-    return render(request, 'admin/user/view_userinfo.html', {'daily_reports': daily_reports, 'blog_posts': blog_posts, 'user': user})
+    return render(
+        request,
+        'admin/user/view_userinfo.html',
+        {
+            'daily_reports': daily_reports, 'blog_posts': blog_posts, 'user': user
+        })
 
 
 @login_required

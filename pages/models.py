@@ -100,7 +100,7 @@ def create_slug(tempslug):
     slugcount = 0
     while True:
         try:
-            Page.objects.get(slug = tempslug)
+            Page.objects.get(slug=tempslug)
             slugcount = slugcount + 1
             tempslug = tempslug + '-' + str(slugcount)
         except ObjectDoesNotExist:

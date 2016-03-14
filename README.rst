@@ -23,8 +23,7 @@ This project contains the following modules.
    * Static Pages.
    * Configurable Menu.
    * Blog.
-   * Employee daily reports.
-   * Internal knowledge base.
+   * Books.
 
 After installing/cloning this, add the following settings in the virtual env/bin/activate file::
 
@@ -35,7 +34,7 @@ After installing/cloning this, add the following settings in the virtual env/bin
    # Raven Settings(Sentry)
    SENTRYDSN="Your site DSN"
 
-   GOOGLE_ANALYTICS_CODE = "Your site DSN"
+   GOOGLE_ANALYTICS_CODE = "Your site analytics id"
 
    export SGUSER
    export SGPWD
