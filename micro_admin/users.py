@@ -7,7 +7,6 @@ import json
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
 from micro_blog.models import Post
-from employee.models import DailyReport
 import datetime
 
 
@@ -193,12 +192,11 @@ def change_state(request, pk):
 def user_info(request, pk):
     user = User.objects.get(pk=pk)
     blog_posts = Post.objects.filter(user=user)
-    daily_reports = DailyReport.objects.filter(employee=user)
     return render(
         request,
         'admin/user/view_userinfo.html',
         {
-            'daily_reports': daily_reports, 'blog_posts': blog_posts, 'user': user
+            'blog_posts': blog_posts, 'user': user
         })
 
 
@@ -208,9 +206,3 @@ def blogposts(request, pk):
     blog_posts = Post.objects.filter(user=user)
     return render(request, 'admin/user/blogposts.html', {'user': user, 'blog_posts': blog_posts})
 
-
-@login_required
-def reports(request, pk):
-    user = User.objects.get(pk=pk)
-    reports = DailyReport.objects.filter(employee=user).order_by('-created_on')
-    return render(request, 'admin/user/reports.html', {'user': user, 'reports': reports})

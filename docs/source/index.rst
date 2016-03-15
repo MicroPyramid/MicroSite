@@ -30,7 +30,6 @@ Working modules
 
 Planned Modules
 ===============
-* Employee daily reports.
 * Internal Knowledgebase.
 
 We are always looking to help you customize the whole or part of the code as you like.

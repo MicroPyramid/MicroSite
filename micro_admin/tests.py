@@ -167,9 +167,6 @@ class user_test(TestCase):
         response = self.client.get('/portal/users/blogposts/' + self.u + '/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('/portal/users/reports/' + self.u + '/')
-        self.assertEqual(response.status_code, 200)
-
         response = self.client.get('/portal/users/' + self.u + '/')
         self.assertEqual(response.status_code, 200)
 

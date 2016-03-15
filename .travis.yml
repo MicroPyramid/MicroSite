@@ -35,7 +35,7 @@ before_script:
 # command to run tests
 script:
   - python manage.py test
-  - coverage run --source=micro_admin,micro_blog,employee,microsite_front,pages manage.py test
+  - coverage run --source=micro_admin,micro_blog,microsite_front,pages manage.py test
 
 after_success:
   coveralls
