@@ -111,11 +111,6 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Admin or Owner can delete blog post' in response.content)
 
-        # Testcase for report
-        response = self.client.post('/report/', {'envelope': [{'from': 'testuser@micropyramid.com'}], 'text': '</p>This is a report text</p>'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Report has been created Sucessfully.' in response.content)
-
         # Testcase for contact with get
         response = self.client.get('/contact-us/')
         self.assertEqual(response.status_code, 200)

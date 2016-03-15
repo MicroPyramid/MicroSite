@@ -23,7 +23,6 @@ django-compressor==2.0
 django-debug-toolbar==1.4
 django-haystack==2.4.1
 django-htmlmin==0.9.0
-django-inbound-email==0.8.4
 docutils==0.12
 ecdsa==0.13
 elasticsearch==2.3.0

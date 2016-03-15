@@ -33,7 +33,6 @@ INSTALLED_APPS = (
     'micro_admin',
     'pages',
     'micro_blog',
-    'employee',
     'sorl.thumbnail',
     'compressor',
     'search',
@@ -136,20 +135,6 @@ CELERY_TIMEZONE = "Asia/Calcutta"
 
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
-
-CELERYBEAT_SCHEDULE = {
-    # Executes every day evening at 5:00 PM GMT +5.30
-    'add-every-day-evening': {
-        'task': 'micro_blog.tasks.daily_report',
-        'schedule': crontab(hour=17, minute=00, day_of_week='mon,tue,wed,thu,fri,sat'),
-    },
-    # Executes every day evening at 9:00 PM GMT +5.30
-    'add-every-day-evening': {
-        'task': 'micro_blog.tasks.sending_mail_to_subscribers',
-        'schedule': crontab(hour=18, minute=36, day_of_week='mon,tue,wed,thu,fri,sat'),
-    },
-
-}
 
 SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
 SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
