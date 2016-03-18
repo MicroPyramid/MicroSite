@@ -29,7 +29,6 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'haystack',
     'djcelery',
-    'django_inbound_email',
     'micro_admin',
     'pages',
     'micro_blog',
@@ -216,15 +215,6 @@ LOGGING = {
 # ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
 SITE_URL = "https://micropyramid.com"
-
-# the fully-qualified path to the provider's backend parser
-INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'
-
-# if True (default=False) then log the contents of each inbound request
-INBOUND_EMAIL_LOG_REQUESTS = True
-
-# if True (default=True) then always return HTTP status of 200 (may be required by provider)
-INBOUND_EMAIL_RESPONSE_200 = True
 
 COMPRESS_ENABLED = True
 
