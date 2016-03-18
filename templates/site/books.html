@@ -14,17 +14,6 @@
 {% endblock %}
 
 {% block stage %}
-  <!-- <div class="row marl isotope-row">
-      <div class="container">
-        <div class="portfolioFilter">
-          <a href="#" data-filter="*" class="current active">All Categories</a>
-          <a href="#" data-filter=".people">People</a>
-          <a href="#" data-filter=".places">Places</a>
-          <a href="#" data-filter=".food">Food</a>
-          <a href="#" data-filter=".objects">Objects</a>
-        </div>
-      </div>
-    </div> -->
 <div class="scroller" id='container_wrapper'>
     <!-- Books starts here -->
     <div class="row marl books-row">
@@ -36,9 +25,8 @@
                 <!-- book item starts here -->
                 <div class="col-md-3 col-sm-4 col-xs-12 book-block">
                   <div class="book-item">
-                    
                     <div class="book-title pink-red">
-                      {% ifequal book.visibilty 'private'%} 
+                      {% ifequal book.visibilty 'private'%}
                         <div class="book-privacy-flap"> Private </div>
                       {% endifequal %}
                       <a href="{{ book.folder_name }}/index.html">{{ book.name }}</a>
