@@ -7,6 +7,7 @@ import unittest
 from microsite.settings import BASE_DIR
 from django.core.files import File
 from django.forms.models import inlineformset_factory
+import json
 
 BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs, 
     can_delete=True, extra=3, fields=('slug', 'is_active'),
@@ -37,13 +38,19 @@ class micro_blog_forms_test(TestCase):
             data={'name': 'django form', 'description': 'django'})
         self.assertTrue(form.is_valid())
 
-    def test_BlogSlugFormSetForm(self):
-        form = BlogSlugFormSet(data={'title': 'python introduction',
-            'content': 'This is content', 'category': self.category.id,
-            'status': 'D', 'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
-            'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
-            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+    def test_invalid_BlogSlugFormSetForm(self):
+        form = BlogSlugFormSet(instance=Post())
+        self.assertEqual(form.is_valid(), False)
+
+    def test_valid_BlogSlugFormSetForm(self):
+        form = BlogSlugFormSet({'slugs-MAX_NUM_FORMS': '1000',
+            'slugs-TOTAL_FORMS': '3', 'slugs-MIN_NUM_FORMS': '0',
+            'slugs-0-slug': 'python-introduction', 'slugs-1-slug': '',
+            'slugs-2-slug': '', 'slugs-INITIAL_FORMS': '0',
+            'slugs-0-id': '', 'slugs-1-id': '', 'slugs-2-id': '',
+            'slugs-0-is_active': '', 'slugs-1-is_active': '', 'slugs-2-is_active': '',
+            'slugs-0-blog': '', 'slugs-1-blog': '', 'slugs-2-blog': ''
+            }, instance=Post())
         self.assertTrue(form.is_valid())
 
 
@@ -350,8 +357,9 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
-            'slugs-INITIAL_FORMS': ['1']})
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
+            'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on'],
+            'slugs-1-id': [''], 'slugs-2-id': [''], 'slugs-3-id': ['']})
         self.assertRedirects(response, '/blog/list/')
 
         response = self.client.post('/blog/edit-post/python-introduction-1/',
@@ -359,10 +367,18 @@ class micro_blog_post_data(TestCase):
             'category': self.category.id, 'status': 'P',
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
-            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
-            'slugs-INITIAL_FORMS': ['1']})
-        self.assertRedirects(response, '/blog/list/')
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': ['python-2'],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
+            'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on'],
+            'slugs-1-is_active': ['on']})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['blog_form'].is_valid(), True)
+        self.assertEqual(
+            response.context['blogslugs_formset'].is_valid(), False)
+        self.assertTrue(
+            '["Only one slug can be active at a time."]' in json.dumps(
+                response.context['blogslugs_formset'].non_form_errors()
+            ))
 
         response = self.client.post('/blog/edit-post/python-introduction-1/',
             {'title': 'python introduction', 'content': 'This is content',
@@ -370,8 +386,8 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
-            'slugs-INITIAL_FORMS': ['1']})
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
+            'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on']})
         self.assertRedirects(response, '/blog/list/')
 
         response = self.client.post('/blog/edit-post/python-introduction-1/',
@@ -380,8 +396,23 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
             'slugs-INITIAL_FORMS': ['1']})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['blog_form'].is_valid(), False)
+        self.assertTrue(
+            '{"title": ["This field is required."]}' in json.dumps(
+                response.context['blog_form'].errors
+            ))
+
+        response = self.client.post('/blog/edit-post/python-introduction-1/',
+            {'title': 'python introduction', 'content': 'This is content',
+            'category': self.category.id, 'status': 'T',
+            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
+            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
+            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
+            'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on']})
         self.assertRedirects(response, '/blog/list/')
 
         response = self.client.post('/blog/edit-post/python-introduction-1/',
@@ -390,19 +421,15 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
-            'slugs-INITIAL_FORMS': ['1']})
-        self.assertRedirects(response, '/blog/list/')
-
-        response = self.client.post('/blog/edit-post/python-introduction-1/',
-            {'title': 'python introduction', 'content': 'This is content',
-            'category': self.category.id, 'status': 'D',
-            'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
-            'slugs-TOTAL_FORMS': ['4'], 'slugs-MIN_NUM_FORMS': ['0'],
-            'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': '1',
-            'slugs-INITIAL_FORMS': ['1']})
-        self.assertRedirects(response, '/blog/list/')
+            'slugs-2-slug': [''], 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
+            'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on'],
+            'slugs-1-is_active': ['on']})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['blogslugs_formset'].is_valid(), False)
+        self.assertTrue(
+            '[{}, {"slug": ["This field is required."]}, {}, {}]' in json.dumps(
+                response.context['blogslugs_formset'].errors
+            ))
 
         response = self.client.get('/blog/edit-post/python-introduction-1/')
         self.assertEqual(response.status_code, 200)
@@ -415,7 +442,7 @@ class micro_blog_post_data(TestCase):
         self.assertTemplateUsed(response, 'site/blog/article.html')
 
         response = self.client.get('/blog/python-introduction-1/')
-        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response.status_code, 200)
 
         response = self.client.post(
             '/blog/new-category/', {'name': 'django form', 'description': 'django'})

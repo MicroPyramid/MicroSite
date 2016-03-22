@@ -1,7 +1,9 @@
 import requests
+import base64
 from django.conf import settings
 
-headers = {'Authorization': settings.SG_AUTHORIZATION}
+authorization_key = "Basic " + base64.encodestring(''+settings.SG_USER+':'+settings.SG_PWD+'').replace('\n', '')
+headers = {'Authorization': authorization_key}
 
 
 def get_contact_lists():
