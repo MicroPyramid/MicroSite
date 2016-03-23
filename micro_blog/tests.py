@@ -3,9 +3,6 @@ from django.test import Client
 from micro_blog.forms import BlogpostForm, BlogCategoryForm
 from micro_blog.models import Category, Post, Tags
 from micro_admin.models import User
-import unittest
-from microsite.settings import BASE_DIR
-from django.core.files import File
 
 
 class micro_blog_forms_test(TestCase):
@@ -17,11 +14,15 @@ class micro_blog_forms_test(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='python introduction', user=self.user, content='This is content', category=self.category, status='D', meta_description='meta')
+            title='python introduction', user=self.user, content='This is content',
+            category=self.category, status='D', meta_description='meta')
 
     def test_blogpostform(self):
-        form = BlogpostForm(data={'title': 'python introduction', 'content': 'This is content', 'category': self.category.id,
-                                  'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction'})
+        form = BlogpostForm(
+            data={
+                'title': 'python introduction', 'content': 'This is content', 'category': self.category.id,
+                'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction'
+                })
         self.assertTrue(form.is_valid())
 
     def test_BlogCategoryForm(self):
@@ -59,12 +60,28 @@ class tags_models_test(TestCase):
 # models test
 class post_models_test(TestCase):
 
-    def create_post(self, tag="simple page", category="simple page", description="simple page content", meta_description='meta_description', title="post", content="content", status="D"):
+    def create_post(
+                self,
+                tag="simple page",
+                category="simple page",
+                description="simple page content",
+                meta_description='meta_description',
+                title="post",
+                content="content",
+                status="D"
+            ):
         category = Category.objects.create(name=category, description=description)
         tag = Tags.objects.create(name=tag)
         user = User.objects.create_superuser('mp@mp.com', 'micro-test', 'mp')
 
-        return Post.objects.create(category=category, user=user, content=content, title=title, status=status, meta_description=meta_description)
+        return Post.objects.create(
+                category=category,
+                user=user,
+                content=content,
+                title=title,
+                status=status,
+                meta_description=meta_description
+            )
 
     def test_category_creation(self):
         w = self.create_post()
