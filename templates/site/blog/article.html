@@ -16,11 +16,11 @@
 {% block blogcontent %}
 <div id='container_wrapper'>
   <!-- blog row starts here -->
+
   <div class="blog-row row">
-    <!-- left conatiner starts here -->
-    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 blog-left-container">
-      <!-- blog row starts here -->
-      <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 breadcrumb_blog blog-left-container">
+      <!-- breadcrumb starts here -->
+       <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
         <ul>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
@@ -36,28 +36,44 @@
           </li>
         </ul>
       </div>
-      <div itemscope itemType="http://schema.org/BlogPosting">
-        <h1 class="text-center" itemprop="headline">{{ post.title }}</h1>
-        <ul class="text-center blog-det">
-          <li itemprop="author">By {{ post.user.get_full_name }}</li>
-          {% if post.published_on %}
-          <li>Posted On <span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
-          {% else %}
-          <li>Posted On <span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></li>
-          {% endif %}
-        </ul>
-        <!-- description starts here -->
-        <div class="blog-det-description" itemprop="articleBody">
-          {{ post.content|safe }}
-        </div>
-        <!-- description ends here -->
-        <!-- social icons comes here -->
+      <!-- breadcrumb ends here -->
+      <h1 itemprop="headline">{{ post.title }}</h1>
+        <div class="author_social">
+        <div class="social-det col-md-6 col-sm-6 col-xs-12">
         <ul class="blog-social">
           <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ minified_url }}&t={{ post.title }}" class="facebook"><i class="fa fa-facebook"></i></a></li>
           <li><a target="_blank" href="https://plus.google.com/share?hl=en-US&url={{ minified_url }}" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
           <li><a target="_blank" href="https://twitter.com/intent/tweet?text={{ post.title }}&url={{ minified_url }}&via=MicroPyramid" class="twitter"><i class="fa fa-twitter"></i></a></li>
           <li><a target="_blank" href="https://www.linkedin.com/cws/share?url={{ minified_url }}&token=&isFramed=true" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
         </ul>
+        </div>
+        <div class="author col-md-6 col-sm-6 col-xs-12 text-right">
+        <ul class="blog-det">
+          <li itemprop="author">By{{ post.user.get_full_name }} |</li>
+          {% if post.published_on %}
+          <li>Posted On <span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
+          {% else %}
+          <li>Posted On <span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></li>
+          {% endif %}
+        </ul>
+        </div>
+        <br clear="all">
+        
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- left conatiner starts here -->
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 blog-left-container">
+      <!-- blog row starts here -->
+     
+      <div itemscope itemType="http://schema.org/BlogPosting">
+        
+        <!-- description starts here -->
+        <div class="blog-det-description" itemprop="articleBody">
+          {{ post.content|safe }}
+        </div>
+        <!-- description ends here -->
+        <!-- social icons comes here -->
         <div class="prev_next_blog">
         {% if prev_url %}
           <a href="{{prev_url}}"><span class="prev">
