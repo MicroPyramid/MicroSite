@@ -16,7 +16,7 @@ class DetectMobileBrowser():
     def process_request(self, request):
         request.mobile = False
         if 'HTTP_USER_AGENT' in request.META.keys():
-            if request.META.has_key('HTTP_USER_AGENT'):
+            if 'HTTP_USER_AGENT' in request.META:
                 user_agent = request.META['HTTP_USER_AGENT']
                 b = reg_b.search(user_agent)
                 v = reg_v.search(user_agent[0:4])
