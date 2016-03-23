@@ -300,7 +300,10 @@ class micro_blogviews_get(TestCase):
         response = self.client.get('/blog/category/status/'+str(self.category.slug)+'/')
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.post('/blog/'+str(self.blogppost.updated_on.year)+'/'+str(self.blogppost.updated_on.month)+'/')
+        response = self.client.post(
+            '/blog/' + str(self.blogppost.updated_on.year) + '/' + str(self.blogppost.updated_on.month) + '/'
+        )
+
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/category-list/')
@@ -326,11 +329,17 @@ class micro_blogviews_get(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/article.html')
 
-        response = self.client.get('/blog/'+str(self.blogppost.updated_on.year)+'/'+str(self.blogppost.updated_on.month)+'/')
+        response = self.client.get(
+            '/blog/' + str(self.blogppost.updated_on.year) + '/' + str(self.blogppost.updated_on.month) + '/'
+        )
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/index.html')
 
-        response = self.client.get('/blog/'+str(self.blogppost.updated_on.year)+'/'+str(self.blogppost.updated_on.month)+'/'+'?page=1')
+        response = self.client.get(
+            '/blog/' +
+            str(self.blogppost.updated_on.year) + '/' + str(self.blogppost.updated_on.month) + '/' + '?page=1'
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/index.html')
 
