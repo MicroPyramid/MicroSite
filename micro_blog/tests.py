@@ -102,7 +102,13 @@ class micro_blog_views_test_with_employee(TestCase):
         self.django_category = Category.objects.create(
             name='django', description='category desc')
         self.blogpost = Post.objects.create(
-            title='python blog', user=self.user, content='This is content', category=self.category, status='D', slug='python-blog')
+                title='python blog',
+                user=self.user,
+                content='This is content',
+                category=self.category,
+                status='D',
+                slug='python-blog'
+            )
 
     def test_views_with_employee_login(self):
         user_login = self.client.login(
@@ -134,21 +140,65 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertTemplateUsed(response, 'site/pages/contact-us.html')
 
         # Testcase for contact with post request simple
-        response = self.client.post('/contact-us/', {'full_name': 'client name', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': 'client name',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Contact submitted successfully' in response.content)
 
         # Testcase for contact with post request advanced
-        response = self.client.post('/contact-us/', {'full_name': 'client name', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890', 'enquery_type': 'general', 'domain': 'micropyramid.com', 'domain_url': 'https://micropyramid.com', 'country': 'india'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': 'client name',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890',
+                    'enquery_type': 'general',
+                    'domain': 'micropyramid.com',
+                    'domain_url': 'https://micropyramid.com',
+                    'country': 'india'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Contact submitted successfully' in response.content)
 
         # Testcase for contact advanced wrong data
-        response = self.client.post('/contact-us/', {'full_name': '', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': '',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
 
         # Testcase for contact simple wrong data
-        response = self.client.post('/contact-us/', {'full_name': '', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890', 'enquery_type': 'general', 'domain': 'micropyramid.com', 'domain_url': 'https://micropyramid.com', 'country': 'india'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': '',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890',
+                    'enquery_type': 'general',
+                    'domain': 'micropyramid.com',
+                    'domain_url': 'https://micropyramid.com',
+                    'country': 'india'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
 
         # Testcase for subscribe with get request
@@ -161,17 +211,41 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Testcase for subscribe on site
-        response = self.client.post('/subscribe/', {'email': 'testsubscriber@mp.com', 'is_blog': 'False', 'is_category': ''})
+        response = self.client.post(
+                '/subscribe/',
+                {
+                    'email': 'testsubscriber@mp.com',
+                    'is_blog': 'False',
+                    'is_category': ''
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Your email has been successfully subscribed.' in response.content)
 
         # Testcase for subscribe on blog
-        response = self.client.post('/subscribe/', {'email': 'testsubscriber@mp.com', 'is_blog': 'True', 'is_category': ''})
+        response = self.client.post(
+                '/subscribe/',
+                {
+                    'email': 'testsubscriber@mp.com',
+                    'is_blog': 'True',
+                    'is_category': ''
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Your email has been successfully subscribed.' in response.content)
 
         # Testcase for subscribe on blog category
-        response = self.client.post('/subscribe/', {'email': 'testsubscriber@mp.com', 'is_blog': 'True', 'is_category': str(self.category.id)})
+        response = self.client.post(
+                '/subscribe/',
+                {
+                    'email': 'testsubscriber@mp.com',
+                    'is_blog': 'True',
+                    'is_category': str(self.category.id)
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('Your email has been successfully subscribed.' in response.content)
 
