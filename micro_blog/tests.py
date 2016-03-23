@@ -366,7 +366,13 @@ class micro_blog_post_data(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='django introduction', user=self.user, content='This is content', category=self.category, status='D', slug='django-introduction')
+            title='django introduction',
+            user=self.user,
+            content='This is content',
+            category=self.category,
+            status='D',
+            slug='django-introduction'
+        )
 
     def test_blog_post(self):
         user_login = self.client.login(username='micro', password='mp')
