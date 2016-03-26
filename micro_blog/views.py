@@ -486,7 +486,6 @@ def contact(request):
 def subscribe(request):
     if request.method == 'GET':
         return render(request, 'site/pages/subscribe.html')
-    print request.POST
     validate_subscribe = SubscribeForm(request.POST)
     if validate_subscribe.is_valid():
         subscriber = Subscribers.objects.create(email=request.POST.get('email'))
