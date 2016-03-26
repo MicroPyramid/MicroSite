@@ -1,9 +1,9 @@
-from django.apps import AppConfig
+# from django.apps import AppConfig
 
 
-class MicroAdminAppConfig(AppConfig):
-    name = 'micro_admin'
+# class MicroAdminAppConfig(AppConfig):
+#     name = 'micro_admin'
 
-    def ready(self):
-        from micro_admin.users import *
-        from micro_admin.views import *
+#     def ready(self):
+#         from micro_admin.users import *
+#         from micro_admin.views import *

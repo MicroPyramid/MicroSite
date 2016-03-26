@@ -28,14 +28,12 @@ def create_contact_in_category(category_name, email_address):
         CONTACTS_ENDPOINT = "https://api.sendgrid.com/v3/contactdb/lists/" + contact_lists[category_name] + \
             "/" + "recipients/" + contact_id
         response = requests.post(CONTACTS_ENDPOINT, headers=headers)
-        print response.status_code
     else:
         contact_list_id = create_contact_list(category_name)
         contact_id = create_contact(email_address)
         CONTACTS_ENDPOINT = "https://api.sendgrid.com/v3/contactdb/" + \
             "lists/{0}/recipients/{1}".format(contact_list_id, contact_id)
         response = requests.post(CONTACTS_ENDPOINT, headers=headers)
-        print response.status_code
 
 
 @task

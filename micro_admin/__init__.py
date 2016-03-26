@@ -1,1 +1,1 @@
-default_app_config = 'micro_admin.app.MicroAdminAppConfig'
+# default_app_config = 'micro_admin.app.MicroAdminAppConfig'

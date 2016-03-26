@@ -85,9 +85,7 @@ def new_user(request):
             if request.POST.get('google_plus_url', False):
                 user.google_plus_url = request.POST.get('google_plus_url')
 
-            print request.POST.get('is_active')
             if request.POST.get('is_active', False):
-                print request.POST.get('is_active')
                 user.is_active = True
 
             if request.POST.get('is_special', False):
