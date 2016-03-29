@@ -132,7 +132,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         response = self.client.get('/blog/delete-post/python-blog/')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Admin or Owner can delete blog post' in response.content)
+        self.assertTrue(str('Admin or Owner can delete blog post') in response.content.decode('utf8'))
 
         # Testcase for contact with get
         response = self.client.get('/contact-us/')
@@ -151,7 +151,7 @@ class micro_blog_views_test_with_employee(TestCase):
             )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Contact submitted successfully' in response.content)
+        self.assertTrue(str('Contact submitted successfully') in response.content.decode('utf8'))
 
         # Testcase for contact with post request advanced
         response = self.client.post(
@@ -169,7 +169,7 @@ class micro_blog_views_test_with_employee(TestCase):
             )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Contact submitted successfully' in response.content)
+        self.assertTrue(str('Contact submitted successfully') in response.content.decode('utf8'))
 
         # Testcase for contact advanced wrong data
         response = self.client.post(
@@ -221,7 +221,7 @@ class micro_blog_views_test_with_employee(TestCase):
             )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Your email has been successfully subscribed.' in response.content)
+        self.assertTrue(str('Your email has been successfully subscribed.') in response.content.decode('utf8'))
 
         # Testcase for subscribe on blog
         response = self.client.post(
@@ -234,7 +234,7 @@ class micro_blog_views_test_with_employee(TestCase):
             )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Your email has been successfully subscribed.' in response.content)
+        self.assertTrue(str('Your email has been successfully subscribed.') in response.content.decode('utf8'))
 
         # Testcase for subscribe on blog category
         response = self.client.post(
@@ -247,7 +247,7 @@ class micro_blog_views_test_with_employee(TestCase):
             )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Your email has been successfully subscribed.' in response.content)
+        self.assertTrue(str('Your email has been successfully subscribed.') in response.content.decode('utf8'))
 
 
 class micro_blogviews_get(TestCase):
@@ -403,7 +403,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        self.assertTrue(str('Blog Post created') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/new-post/',
@@ -420,7 +420,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        self.assertTrue(str('Blog Post created') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/new-post/',
@@ -437,7 +437,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        self.assertTrue(str('Blog Post created') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/new-post/',
@@ -454,7 +454,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post created' in response.content)
+        self.assertTrue(str('Blog Post created') in response.content.decode('utf8'))
 
         # with wrong input
         response = self.client.post(
@@ -469,7 +469,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog Post created' in response.content)
+        self.assertFalse(str('Blog Post created') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-post/python-introduction-1/',
@@ -484,7 +484,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        self.assertTrue(str('Blog Post edited') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-post/python-introduction-1/',
@@ -499,7 +499,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        self.assertTrue(str('Blog Post edited') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-post/python-introduction-1/',
@@ -515,7 +515,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        self.assertTrue(str('Blog Post edited') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-post/python-introduction-1/',
@@ -530,7 +530,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog Post edited' in response.content)
+        self.assertFalse(str('Blog Post edited') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-post/python-introduction-1/',
@@ -546,7 +546,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        self.assertTrue(str('Blog Post edited') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-post/python-introduction-1/',
@@ -562,7 +562,7 @@ class micro_blog_post_data(TestCase):
         )
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog Post edited' in response.content)
+        self.assertTrue(str('Blog Post edited') in response.content.decode('utf8'))
 
         response = self.client.get('/blog/edit-post/python-introduction-1/')
         self.assertEqual(response.status_code, 301)
@@ -580,12 +580,12 @@ class micro_blog_post_data(TestCase):
         response = self.client.post(
             '/blog/new-category/', {'name': 'django form', 'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog category created' in response.content)
+        self.assertTrue(str('Blog category created') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/new-category/', {'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog category created' in response.content)
+        self.assertFalse(str('Blog category created') in response.content.decode('utf8'))
 
         response = self.client.get('/blog/edit-category/django/')
         self.assertEqual(response.status_code, 200)
@@ -593,12 +593,12 @@ class micro_blog_post_data(TestCase):
         response = self.client.post(
             '/blog/edit-category/django-form/', {'name': 'django new', 'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog category updated' in response.content)
+        self.assertTrue(str('Blog category updated') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-category/django-new/', {'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog category updated' in response.content)
+        self.assertFalse(str('Blog category updated') in response.content.decode('utf8'))
 
         response = self.client.get('/blog/tag/django/')
         self.assertEqual(response.status_code, 404)

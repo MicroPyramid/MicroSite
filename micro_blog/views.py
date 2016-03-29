@@ -428,7 +428,7 @@ def contact(request):
             )
         else:
             errors = {}
-            errors = dict((validate_simplecontact.errors).items() + (validate_contact.errors).items())
+            errors = dict(list((validate_simplecontact.errors).items()) + list((validate_contact.errors).items()))
             data = {'error': True, 'errinfo': errors}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
