@@ -238,18 +238,6 @@ COMPRESS_REBUILD_TIMEOUT = 5400
 query_cache_type = 0
 
 
-if 'TRAVIS' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.mysql',
-            'NAME':     'test',
-            'USER':     'root',
-            'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
-        }
-    }
-
 # Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {
     'default': {
