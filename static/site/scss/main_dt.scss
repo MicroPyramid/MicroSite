@@ -740,6 +740,9 @@ body{
         &.github {
           background: #333;
         }
+        &.reddit {
+          background: #ff4500;
+        }
       }
     }
   }
@@ -1567,6 +1570,9 @@ body{
           &.github{
             background:$github;
           }
+          &.reddit{
+            background:$reddit;
+          }
           &:hover{
             transition: 0.4s all ease-in-out;
           }
@@ -2174,6 +2180,9 @@ body{
           }
           &.git{
             @include brand_contact(#333);
+          }
+          &.reddit{
+            @include brand_contact($reddit);
           }
         }
       }
@@ -3375,163 +3384,6 @@ body{
   }
 }
 /* server_maintenance */
-/* crm */
-#crm{
-  @extend #server_maintenance;
-  .banner{
-    background: $crm_bg;
-    background: url(../images/crm/Crm-Icon-Pattern.png) $crm_bg;
-    color: $crm_text;
-    .banner_flap{
-      background: $crm_fg;
-      top: 0px;
-      left: -100px;
-      transform:rotate(20deg);
-      box-shadow: 5px 3px 10px 0px darken($crm_fg,30%);
-      @media (min-width: $tab_max) and (max-width:1050px){
-        left: -164px;
-      }
-      @media (min-width: $tab_min) and (max-width:$tab_max){
-        left: -44%;
-      }
-      @media (min-width: 830px) and (max-width:$tab_max){
-        left: -40%;
-      }
-      @media (min-width: 900px) and (max-width:$tab_max){
-        left: -37%;
-      }
-      @media (min-width: $smob_min) and (max-width: $smob_max){
-        left: -17%;
-        top: 57%;
-      }
-      @media (min-width: 580px) and (max-width: $smob_max){
-        left: 4%;
-      }
-      @media (min-width: $mob_min) and (max-width:$mob_max){
-        top: 46%;
-      }
-      .img_wrap{
-        transform:rotate(340deg);
-        top: 50px;
-        left: 50px;
-        @media (min-width: $tab_max) and (max-width: 1050px){
-          width: 500px;
-          height: 500px;
-          top: -7px;
-          left: 156px;
-        }
-        @media (min-width: $tab_min) and (max-width:$tab_max){
-          left: auto;
-          right: -50%;
-          top: 1%;
-        }
-        @media (min-width: $smob_min) and (max-width:$smob_max){
-          left: 2%;
-          top: 0;
-        }
-        @media (min-width: $mob_min) and (max-width:$mob_max){
-          top: 0;
-        }
-        img{
-          @media (min-width: $tab_max) and (max-width: 1050px){
-            max-width: 100%;
-          }
-        }
-      }
-    }
-    .content{
-      @media (min-width: $tab_min) and (max-width: $tab_max){
-        width: 58%;
-      }
-      .title{
-        color:white;
-        font-size:35px;
-        @media (min-width: $smob_min) and (max-width: $smob_max){
-          padding-top: 25px;
-        }
-        @media (min-width: $mob_min) and (max-width: $mob_max){
-          padding-top: 25px;
-          text-align: right;
-        }
-      }
-      .text{
-        color: $crm_text;
-        font-size:1.4em;
-        line-height:30px;
-        margin-top:40px;
-      }
-    }
-  }
-  .crm_hoWeDo{
-    @extend .web_dev_technologies;
-    background: #F9F9F9;
-    padding: 25px;
-    padding-top: 0px;
-    @media(min-width: $mob_min) and (max-width:$smob_max){
-      padding: 10px;
-    }
-    .content{
-      padding-top: 15px;
-      font-size: 14px;
-      line-height: 30px;
-      p{
-        width: 80%;
-        margin: 0px auto;
-        text-align: center;
-        @media (min-width: $mob_min) and (max-width:$smob_max){
-          width: 100%;
-        }
-      }
-      .red{
-        font-weight: 600;
-        font-size: 20px;
-        color: $clay;
-        @media (min-width: $mob_min) and (max-width:$smob_max){
-          font-size: 1.2em;
-        }
-      }
-    }
-
-    .heading{
-      text-align: center;
-      padding-bottom: 15px;
-      font-weight: 600;
-      font-size: 2em;
-      color: #000;
-      padding: 40px 0px 30px 0px;
-      text-transform:uppercase;
-      .green{
-        color: $theme_green;
-      }
-      @media (min-width: $mob_min) and (max-width:$tab_max){
-        padding-top: 15px;
-        padding-bottom:10px;
-      }
-    }
-  }
-  .crm_blog{
-    @extend .web_dev_technologies;
-    @extend #blog_list ;
-    background: #f9f9f9;
-    margin-top:50px;
-    .blog_ticket_wrap{
-      //padding: 30px;
-      .blog_ticket{
-        height: 320px;
-        @media(min-width: $mob_min) and (max-width:$smob_max){
-          height: auto!important;
-        }
-        .blog_title{
-          color: $page_title;
-          .author{
-            color: $twitter;
-          }
-        }
-      }
-    }
-  } 
-}
-/* crm */
 /* contact_us_template */
 #contact_us_template{
   background: #f9f9f9;
@@ -3810,6 +3662,9 @@ body{
           }
           &.git{
             color: $github;
+          }
+          &.reddit{
+            color: $reddit;
           }
         }
       }
