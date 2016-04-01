@@ -237,7 +237,6 @@ COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
-
 # Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {
     'default': {
