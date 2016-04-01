@@ -1,11 +1,9 @@
 {% extends 'site/base.html' %}
 {% load recurse %}
 {% load menu %}
-
 {% block title %}
-
   {{ page.title|capfirst }} | {{ block.super }}
-
+{% endblock %}
   {% block extra-js %}
     {% if page.title|slugify  == 'web-design'|slugify %}
       <script type="text/javascript" src='/static/site/js/design.js'></script>
