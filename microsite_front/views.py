@@ -148,6 +148,8 @@ def html_sitemap(request):
         sitemap_links = object_list.page(object_list.num_pages)
     return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links})
 
+def careers(request):
+    return render(request,'site/careers.html')
 
 def handler404(request):
     return render(request, '404.html', status=404)

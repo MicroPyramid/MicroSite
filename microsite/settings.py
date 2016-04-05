@@ -1,6 +1,5 @@
 import os
 import djcelery
-from celery.schedules import crontab
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -29,11 +28,9 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'haystack',
     'djcelery',
-    'django_inbound_email',
     'micro_admin',
     'pages',
     'micro_blog',
-    'employee',
     'sorl.thumbnail',
     'compressor',
     'search',
@@ -137,20 +134,6 @@ CELERY_TIMEZONE = "Asia/Calcutta"
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
 
-CELERYBEAT_SCHEDULE = {
-    # Executes every day evening at 5:00 PM GMT +5.30
-    'add-every-day-evening': {
-        'task': 'micro_blog.tasks.daily_report',
-        'schedule': crontab(hour=17, minute=00, day_of_week='mon,tue,wed,thu,fri,sat'),
-    },
-    # Executes every day evening at 9:00 PM GMT +5.30
-    'add-every-day-evening': {
-        'task': 'micro_blog.tasks.sending_mail_to_subscribers',
-        'schedule': crontab(hour=18, minute=36, day_of_week='mon,tue,wed,thu,fri,sat'),
-    },
-
-}
-
 SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
 SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
 SG_AUTHORIZATION = os.getenv('SGAUTHORIZATION') if os.getenv('SGAUTHORIZATION') else ''
@@ -232,15 +215,6 @@ LOGGING = {
 
 SITE_URL = "https://micropyramid.com"
 
-# the fully-qualified path to the provider's backend parser
-INBOUND_EMAIL_PARSER = 'django_inbound_email.backends.sendgrid.SendGridRequestParser'
-
-# if True (default=False) then log the contents of each inbound request
-INBOUND_EMAIL_LOG_REQUESTS = True
-
-# if True (default=True) then always return HTTP status of 200 (may be required by provider)
-INBOUND_EMAIL_RESPONSE_200 = True
-
 COMPRESS_ENABLED = True
 # COMPRESS_CACHE_KEY_FUNCTION = 'compressor.cache.socket_cachekey'
 # COMPRESS_OFFLINE = False
@@ -269,19 +243,6 @@ COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
-
-
-if 'TRAVIS' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.mysql',
-            'NAME':     'test',
-            'USER':     'root',
-            'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
-        }
-    }
 
 # Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {

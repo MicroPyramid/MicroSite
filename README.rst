@@ -20,7 +20,7 @@ Full featured and completely customizable django site for organizations.
 head to http://microsite.readthedocs.org/ for latest documentation
 
 This project contains the following modules.
-   * Static Pages.
+   * Dynamic Pages.
    * Configurable Menu.
    * Blog.
    * Books.

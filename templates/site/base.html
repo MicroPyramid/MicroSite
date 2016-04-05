@@ -297,7 +297,7 @@
                 </a>
               </span>
               {% get_menus as menu_list %}
-              {% recurse menu.menu_set.all|dictsort:"lvl" with menu_list as menu %}
+              {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
                   <li><a href="{{menu.url}}">{{menu.title}}</a>
@@ -308,6 +308,7 @@
               {% endrecurse %}
               <ul>
                 <li><a href="/">Home</a></li>
+                <li><a href="/careers/">Careers</a></li>
               </ul>
             </div>
             <!--/ menu -->
@@ -347,6 +348,8 @@
                       <li><a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
                       </li>
                       <li><a href="https://github.com/micropyramid" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                      </li>
+                      <li><a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank"><i class="fa fa-reddit"></i></a>
                       </li>
                     </ul>
                 </div>

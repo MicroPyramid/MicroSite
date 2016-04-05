@@ -15,7 +15,6 @@ import datetime
 import json
 from micro_admin.models import User
 from ast import literal_eval
-from employee.models import DailyReport
 from pages.forms import SimpleContactForm, ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
@@ -422,23 +421,6 @@ def view_post(request, blog_slug):
         )
     return render(request, 'admin/blog/view_post.html', {'post': blog_post})
 
-
-def report(request):
-    envelope = {}
-    envelope = request.POST.get('envelope')
-    my_dict = literal_eval(envelope)
-    user = User.objects.get(email=my_dict['from'])
-    rep = DailyReport.objects.filter(employee=user, report=request.POST.get('text')).first()
-    if not rep:
-        rep = DailyReport.objects.create(employee=user, report=request.POST.get('text'), date=datetime.datetime.now().date())
-    # if request.POST.get('attachment-info'):
-    #     my_dict1 = literal_eval(request.POST.get('attachment-info'))
-    #     for key in my_dict1.keys():
-    #         Dailyreport_files.objects.get_or_create(dailyreport=rep, attachments=my_dict1[key]['filename'])
-    rep.save()
-    return HttpResponse('Report has been created Sucessfully.')
-
-
 def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
@@ -458,7 +440,7 @@ def contact(request):
             )
         else:
             errors = {}
-            errors = dict((validate_simplecontact.errors).items() + (validate_contact.errors).items())
+            errors = dict(list((validate_simplecontact.errors).items()) + list((validate_contact.errors).items()))
             data = {'error': True, 'errinfo': errors}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
@@ -516,7 +498,6 @@ def contact(request):
 def subscribe(request):
     if request.method == 'GET':
         return render(request, 'site/pages/subscribe.html')
-    print request.POST
     validate_subscribe = SubscribeForm(request.POST)
     if validate_subscribe.is_valid():
         subscriber = Subscribers.objects.create(email=request.POST.get('email'))

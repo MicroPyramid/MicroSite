@@ -36,13 +36,6 @@
           </div>
           <div id="big_stats" class="cf">
             <div class="stat">
-              <a href="{% url 'micro_admin:reports' user.id %}">
-                <span class="posts_leaves">Reports</span>
-                <i class="fa fa-file-text-o"></i>
-                <span class="value">{{daily_reports.count|default:'0'}}</span>
-              </a>
-            </div>
-            <div class="stat">
               <a href="{% url 'micro_admin:blogposts' user.id %}">
                 <span class="posts_leaves">Blog Posts</span>
                 <i class="fa fa-pencil-square-o"></i>

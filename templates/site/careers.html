@@ -1,81 +1,243 @@
 {% extends 'site/base.html' %}
 {% block stage %}
-<!-- banner starts here-->
-<div class="row marl career-banner">
-  <div class="container">
-    <h2>We present a smart family of talented people to our aspirants</h2>
-    <div class="job-ban-content">
-      <div class="row marl">
-        <div class="job-ban-left col-lg-8 col-md-7 col-sm-8 col-xs-12">
+<!-- container wrapper -->
+<div>
+  <!-- career -->
+  <div id='careers'>
+    <!-- banner -->
+    <div class='banner'>
+      <div class="logo"><img src='/static/site/images/mp_logo_white.png'></div>
+      <div class="content_wrap">
+        <!-- text_div -->
+        <div class="text_part text-center col-md-offset-1 col-md-10 col-md-offset-1">
+          <span>Careers</span>
+          <span class="hint">Come and join For Research & Development</span>
+          <span class="para">Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce.</span>
+          <br clear="all">
+        </div>
+        <!--/ text div -->
+        <div class="text-center col-md-offset-1 col-md-10 col-md-offset-1">
           <div class="job-techs">
             <ul class="technologies list-inline">
-              <li class="grapefruit">Python</li>
-              <li class="grapefruit">MongoDB</li>
-              <li class="bittersweet">Django</li>
-              <li class="sunflower">Linux</li>
-              <li class="grass">Celery</li>
-              <li class="pinkrose">Jquery</li>
-              <li class="pinkrose">Javascript</li>
-              <li class="grapefruit-d">Html5</li>
-              <li class="bittersweet-d">Css3</li>
-              <li class="sunflower-d">Photoshop</li>
-              <li class="grass-d">Angular js</li>
-              <li class="pinkrose-d">JSON</li>
-              <li class="grapefruit">Rest</li>
-              <li class="bittersweet">Wordpress</li>
-              <li class="sunflower">Symfony</li>
-              <li class="grass">Laravel</li>
-              <li class="pinkrose">Amazon web services</li>
-              <li class="grapefruit-d">Mysql</li>
-              <li class="bittersweet-d">Android</li>
-              <li class="sunflower-d">IOS</li>
-              <li class="grapefruit">Haystack</li>
-              <li class="bittersweet"> Elastic Search</li>
+              <li><span class="logo_pic"><img src="/static/site/images/jquery.png"></span>Jquery</li>
+              <li><span class="logo_pic"><img src="/static/site/images/js.png"></span>Javascript</li>
+              <li><span class="logo_pic"><img src="/static/site/images/angular-js-tech.png"></span>Angularjs</li>
+              <li><span class="logo_pic"><img src="/static/site/images/json.png"></span>JSON</li>
+              <li><span class="logo_pic"><img src="/static/site/images/Rest-Framework.png"></span>REST</li>
+              <li><span class="logo_pic"><img src="/static/site/images/htmlcss.png"></span>Html5 & CSS3</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/gimp-logo.png"></span> GIMP</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/mongodb-logo.png"></span>MongoDB</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/django-logo-positive.png"></span>Django</li>
+              <li><span class="logo_pic"><img src="/static/site/images/aws-tech.png"></span>Amazon web services</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/MySQL.svg.png"></span>Mysql</li>
+              <li><span class="logo_pic"><img src="/static/site/images/android.png"></span>Android</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/ios-logo.png"></span>IOS</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/celery.jpg"></span>Celery</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/haystack.png"></span>Haystack</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/elastic-tech.png"> </span>Elastic Search</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/bootstrap-tech.png"></span>bootstrap</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/less.png"></span>less</li>
+              <li><span class="logo_pic"><img src="/static/site/images/sass.png"></span>scss</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/git.png"></span>GIT</li>
+              <li ><span class="logo_pic"><img src="/static/site/images/Heroku_logo.png"></span>Heroku</li>
             </ul>
-          </div><p style="color:white;margin-top:20px;font-weight:bold;font-size:20px;">At Micropyramid we empower you to explore your notions to achieve your potential.<br>
-          Apply now to start your journey with us</p>
-          
-        </div>
-        <div class="job-ban-right col-lg-4 col-md-5 col-sm-4 col-xs-12">
-          <img src="/static/site/images/join.png" alt="careers"/>
-        </div>
-      </div>
-      {# <div class="car-ban-contact"><a href="#">And now you have found it! So, what you gonna do? We suggest you click that apply button and let us contact you</a></div> #}
-    </div>
-  </div>
-</div>
-<!-- banner ends here-->
-<!-- current openings starts here -->
-<div class="row marl current-opngs">
-  <div class="container ">
-    <h4>Current Openings</h4>
-    <div class="current-openings">
-      {% for job in jobs %}
-      <!-- single job post starts here-->
-      <div class="row marl job-post">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 date-post">
-          <div class="date-details {% cycle job-blue-grn,job-violet %}">
-            <span class="cur-opng-head">Current Openings</span>
-            <span class="cur-opng-count">{{job.num_of_opening}}</span>
-            <span class="cur-opng-date">{{job.posted_on}}</span>
-            <span class="cur-opng-view"><a href="{{job.url}}">View</a></span>
           </div>
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 post-desc">
-          <div class="description">
-            <span class="description-title">{{job.title}}</span>
-            <span class="description-exp">Exp:{{job.experience}}</span>
-            <span class="description-skills">Skills:{{job.skills}} </span>
-            <span class="description-desc">
-              <p>{{job.description|safe}}</p>
+      </div>
+    </div>
+    <!--/ banner -->
+    <!-- about us -->
+    <div class="about_us">
+      <div class="daimond"><i class='fa fa-question'></i></div>
+      <!-- title -->
+      <div class="title">
+        <span>Who are</span> <span class='green'>We</span><span> ?</span>
+      </div>
+      <!--/ title -->
+      <div class="content">
+        Interactively recaptiualize <span class='red'>robust</span> core competencies through prospective web services. Continually extend competitive bandwidth with orthogonal niche markets. Conveniently coordinate superior models vis-a-vis economically sound experiences. Competently innovate proactive functionalities with low-risk high-yield manufactured products. Globally conceptualize economically sound innovation via integrated data.
+        Phosfluorescently fashion mission-critical users before user friendly initiatives. Synergistically develop integrated vortals with client-centric systems. Rapidiously revolutionize B2B platforms via performance based <span class='red'>quality vectors</span>. Energistically pursue intuitive customer service whereas sustainable sources. Monotonectally transition go forward total linkage through interactive collaboration and idea-sharing.
+        Distinctively reintermediate extensive e-markets for long-term high-impact networks. Globally supply cross-platform infrastructures through sticky intellectual capital. Conveniently simplify diverse imperatives whereas interdependent content. Objectively brand end-to-end vortals before multifunctional processes. Objectively synergize seamless methods of empowerment after state of the art outsourcing.
+        Collaboratively deliver viral markets for interdependent internal or "organic" sources. Progressively seize standards compliant data without alternative leadership. Compellingly disseminate stand-alone methodologies for orthogonal schemas. Competently formulate fully tested methods.
+      </div>
+    </div>
+    <!--/ about us -->
+    <!-- culture -->
+    <div class="our_culture">
+      <!-- title -->
+      <div class="title">
+        <span>MicroPyramid</span> <span class="green">Benifits</span>
+        <div class="jobs_wrap">
+          <!-- job_each -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="job_each">
+              <!-- icon div -->
+              <div class="icon_div">
+                <span class="icon_wrap">
+                <i class="fa fa-share-alt"></i>
+                </span>
+              </div>
+              <!--/ icon div -->
+              <!-- description -->
+              <div class="description">
+                <div class="designation">Social</div>
+                <div class="job_desc">
+                  Objectively brand end-to-end vortals before multifunctional processes. Objectively synergize seamless methods of empowerment after state of the art outsourcing. Collaboratively deliver viral markets for interdependent internal or "organic" sources. Progressively seize standards compliant data without alternative leadership. Compellingly disseminate stand-alone methodologies for orthogonal schemas. Competently formulate fully tested methods.
+                </div>
+              </div>
+              <!--/ description -->
+            </div>
+          </div>
+          <!--/ job each -->
+          <!-- job_each -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="job_each">
+              <!-- icon div -->
+              <div class="icon_div">
+                <span class="icon_wrap">
+                <i class="fa fa-suitcase"></i>
+                </span>
+              </div>
+              <!--/ icon div -->
+              <!-- description -->
+              <div class="description">
+                <div class="designation">Professional</div>
+                <div class="job_desc">
+                  Objectively brand end-to-end vortals before multifunctional processes. Objectively synergize seamless methods of empowerment after state of the art outsourcing. Collaboratively deliver viral markets for interdependent internal or "organic" sources. Progressively seize standards compliant data without alternative leadership. Compellingly disseminate stand-alone methodologies for orthogonal schemas. Competently formulate fully tested methods.
+                </div>
+              </div>
+              <!--/ description -->
+            </div>
+          </div>
+          <!--/ job each -->
+          <!-- job_each -->
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="job_each">
+              <!-- icon div -->
+              <div class="icon_div">
+                <span class="icon_wrap">
+                <i class="fa fa-male"></i>
+                </span>
+              </div>
+              <!--/ icon div -->
+              <!-- description -->
+              <div class="description">
+                <div class="designation">Personal</div>
+                <div class="job_desc">
+                  Objectively brand end-to-end vortals before multifunctional processes. Objectively synergize seamless methods of empowerment after state of the art outsourcing. Collaboratively deliver viral markets for interdependent internal or "organic" sources. Progressively seize standards compliant data without alternative leadership. Compellingly disseminate stand-alone methodologies for orthogonal schemas. Competently formulate fully tested methods.
+                </div>
+              </div>
+              <!--/ description -->
+            </div>
+          </div>
+          <!--/ job each -->
+          <br clear="all">
+        </div>
+      </div>
+      <!--/ title -->
+    </div>
+    <!--/ culture -->
+    <!-- openings -->
+    <div class="openings">
+      <!-- title -->
+      <div class="title">
+        <span>Current</span> <span class="green">Openings</span>
+        <div class="tag">
+          Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce. Proactively integrate pandemic initiatives and holistic benefits. Authoritatively negotiate premium.
+        </div>
+      </div>
+      <!--/ title -->
+      <!-- openings div -->
+      <div class="openings_wrap">
+        <!-- job_each -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="job_item text-left">
+            <span class="job_title">Junior Developer</span>
+            <span class="job_exp"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_package"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_desc"><strong>Job description :</strong> 
+            Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce.
             </span>
-            <span class="description-apply"><a href="{{job.url}}"> <i class="fa fa-paper-plane"></i> Apply Now</a></span>
+            <span class="apply_btn"><a href="#">Apply Job</a></span>
           </div>
         </div>
+        <!--/ job each -->
+        <!-- job_each -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="job_item text-left">
+            <span class="job_title">Junior Developer</span>
+            <span class="job_exp"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_package"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_desc"><strong>Job description :</strong> 
+            Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce.
+            </span>
+            <span class="apply_btn"><a href="#">Apply Job</a></span>
+          </div>
+        </div>
+        <!--/ job each -->
+        <!-- job_each -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="job_item text-left">
+            <span class="job_title">Junior Developer</span>
+            <span class="job_exp"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_package"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_desc"><strong>Job description :</strong> 
+            Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce.
+            </span>
+            <span class="apply_btn"><a href="#">Apply Job</a></span>
+          </div>
+        </div>
+        <!--/ job each -->
+        <!-- job_each -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="job_item text-left">
+            <span class="job_title">Junior Developer</span>
+            <span class="job_exp"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_package"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_desc"><strong>Job description :</strong> 
+            Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce.
+            </span>
+            <span class="apply_btn"><a href="#">Apply Job</a></span>
+          </div>
+        </div>
+        <!--/ job each -->
+        <!-- job_each -->
+        <div class="col-md-4 col-sm-4 col-xs-12">
+          <div class="job_item text-left">
+            <span class="job_title">Junior Developer</span>
+            <span class="job_exp"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_package"><strong>Job Experience :</strong> 1 year </span>
+            <span class="job_desc"><strong>Job description :</strong> 
+            Seamlessly synergize fully researched data whereas sustainable ideas. Proactively visualize excellent ideas rather than performance based innovation. Seamlessly deliver accurate networks after cost effective e-commerce.
+            </span>
+            <span class="apply_btn"><a href="#">Apply Job</a></span>
+          </div>
+        </div>
+        <!--/ job each -->
+        <div class="clearfix"></div>
       </div>
-      {% endfor %}
+      <!--/ openings div -->
     </div>
+    <!--/ openings -->
+    <!-- internships -->
+    <div class="internships">
+      <!-- title -->
+      <div class="title">
+        <span>We also train</span> <span class="green">Interns</span>
+      </div>
+      <!--/ title -->
+      <!-- content -->
+      <div class="content">
+        Interactively recaptiualize <span class="red">robust</span> core competencies through prospective web services. Continually extend competitive bandwidth with orthogonal niche markets. Conveniently coordinate superior models vis-a-vis economically sound experiences. Competently innovate proactive functionalities with low-risk high-yield manufactured products. Globally conceptualize economically sound innovation via integrated data.
+        Phosfluorescently fashion mission-critical users before user friendly initiatives. Synergistically develop integrated vortals with client-centric systems. Rapidiously revolutionize B2B platforms via performance based <span class="red">quality vectors</span>. Energistically pursue intuitive customer service whereas sustainable sources. Monotonectally transition go forward total linkage through interactive collaboration and idea-sharing.
+        Distinctively reintermediate extensive e-markets for long-term high-impact networks. Globally supply cross-platform infrastructures through sticky intellectual capital. Conveniently simplify diverse imperatives whereas interdependent content. Objectively brand end-to-end vortals before multifunctional processes. Objectively synergize seamless methods of empowerment after state of the art outsourcing.
+        Collaboratively deliver viral markets for interdependent internal or "organic" sources. Progressively seize standards compliant data without alternative leadership. Compellingly disseminate stand-alone methodologies for orthogonal schemas. Competently formulate fully tested methods.
+      </div>
+      <!--/ content -->
+    </div>
+    <!--/ internships -->
   </div>
+  <!--/ career -->
 </div>
-<!-- current opening ends here -->
+<!--/ container wrapper -->
 {% endblock %}

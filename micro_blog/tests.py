@@ -3,13 +3,10 @@ from django.test import Client
 from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
 from micro_blog.models import Category, Post, Tags, Post_Slugs, get_blog_slug
 from micro_admin.models import User
-import unittest
-from microsite.settings import BASE_DIR
-from django.core.files import File
 from django.forms.models import inlineformset_factory
 import json
 
-BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs, 
+BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs,
     can_delete=True, extra=3, fields=('slug', 'is_active'),
     formset=CustomBlogSlugInlineFormSet
 )
@@ -23,14 +20,15 @@ class micro_blog_forms_test(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='python introduction', user=self.user,
-            content='This is content', category=self.category,
-            status='D', meta_description='meta')
+            title='python introduction', user=self.user, content='This is content',
+            category=self.category, status='D', meta_description='meta')
 
     def test_blogpostform(self):
-        form = BlogpostForm(data={'title': 'python introduction',
-            'content': 'This is content', 'category': self.category.id,
-            'status': 'D', 'meta_description': 'meta'})
+        form = BlogpostForm(
+            data={
+                'title': 'python introduction', 'content': 'This is content', 'category': self.category.id,
+                'status': 'D', 'meta_description': 'meta', 'is_superuser': 'True', 'slug': 'python-introduction'
+                })
         self.assertTrue(form.is_valid())
 
     def test_BlogCategoryForm(self):
@@ -83,13 +81,28 @@ class tags_models_test(TestCase):
 # models test
 class post_models_test(TestCase):
 
-    def create_post(self, tag="simple page", category="simple page", description="simple page content", meta_description='meta_description', title="post", content="content", status="D"):
+    def create_post(
+                self,
+                tag="simple page",
+                category="simple page",
+                description="simple page content",
+                meta_description='meta_description',
+                title="post",
+                content="content",
+                status="D"
+            ):
         category = Category.objects.create(name=category, description=description)
         tag = Tags.objects.create(name=tag)
         user = User.objects.create_superuser('mp@mp.com', 'micro-test', 'mp')
-        return Post.objects.create(category=category, user=user, 
-            content=content, title=title, status=status, 
-            meta_description=meta_description)
+
+        return Post.objects.create(
+                category=category,
+                user=user,
+                content=content,
+                title=title,
+                status=status,
+                meta_description=meta_description
+            )
 
     def test_category_creation(self):
         w = self.create_post()
@@ -110,8 +123,12 @@ class micro_blog_views_test_with_employee(TestCase):
         self.django_category = Category.objects.create(
             name='django', description='category desc')
         self.blogpost = Post.objects.create(
-            title='python blog', user=self.user, 
-            content='This is content', category=self.category, status='D')
+            title='python blog',
+                user=self.user,
+                content='This is content',
+                category=self.category,
+                status='D'
+            )
         self.blog_slug = Post_Slugs.objects.create(
             blog=self.blogpost, slug='python-blog', is_active=True)
 
@@ -137,12 +154,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         response = self.client.get('/blog/delete-post/python-blog/')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Admin or Owner can delete blog post' in response.content)
-
-        # Testcase for report
-        response = self.client.post('/report/', {'envelope': [{'from': 'testuser@micropyramid.com'}], 'text': '</p>This is a report text</p>'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Report has been created Sucessfully.' in response.content)
+        self.assertTrue(str('Admin or Owner can delete blog post') in response.content.decode('utf8'))
 
         # Testcase for contact with get
         response = self.client.get('/contact-us/')
@@ -150,21 +162,65 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertTemplateUsed(response, 'site/pages/contact-us.html')
 
         # Testcase for contact with post request simple
-        response = self.client.post('/contact-us/', {'full_name': 'client name', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': 'client name',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Contact submitted successfully' in response.content)
+        self.assertTrue(str('Contact submitted successfully') in response.content.decode('utf8'))
 
         # Testcase for contact with post request advanced
-        response = self.client.post('/contact-us/', {'full_name': 'client name', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890', 'enquery_type': 'general', 'domain': 'micropyramid.com', 'domain_url': 'https://micropyramid.com', 'country': 'india'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': 'client name',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890',
+                    'enquery_type': 'general',
+                    'domain': 'micropyramid.com',
+                    'domain_url': 'https://micropyramid.com',
+                    'country': 'india'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Contact submitted successfully' in response.content)
+        self.assertTrue(str('Contact submitted successfully') in response.content.decode('utf8'))
 
         # Testcase for contact advanced wrong data
-        response = self.client.post('/contact-us/', {'full_name': '', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': '',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
 
         # Testcase for contact simple wrong data
-        response = self.client.post('/contact-us/', {'full_name': '', 'message': 'test message', 'email': 'testclient@mp.com', 'phone': '1234567890', 'enquery_type': 'general', 'domain': 'micropyramid.com', 'domain_url': 'https://micropyramid.com', 'country': 'india'})
+        response = self.client.post(
+                '/contact-us/',
+                {
+                    'full_name': '',
+                    'message': 'test message',
+                    'email': 'testclient@mp.com',
+                    'phone': '1234567890',
+                    'enquery_type': 'general',
+                    'domain': 'micropyramid.com',
+                    'domain_url': 'https://micropyramid.com',
+                    'country': 'india'
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
 
         # Testcase for subscribe with get request
@@ -177,19 +233,43 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Testcase for subscribe on site
-        response = self.client.post('/subscribe/', {'email': 'testsubscriber@mp.com', 'is_blog': 'False', 'is_category': ''})
+        response = self.client.post(
+                '/subscribe/',
+                {
+                    'email': 'testsubscriber@mp.com',
+                    'is_blog': 'False',
+                    'is_category': ''
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Your email has been successfully subscribed.' in response.content)
+        self.assertTrue(str('Your email has been successfully subscribed.') in response.content.decode('utf8'))
 
         # Testcase for subscribe on blog
-        response = self.client.post('/subscribe/', {'email': 'testsubscriber@mp.com', 'is_blog': 'True', 'is_category': ''})
+        response = self.client.post(
+                '/subscribe/',
+                {
+                    'email': 'testsubscriber@mp.com',
+                    'is_blog': 'True',
+                    'is_category': ''
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Your email has been successfully subscribed.' in response.content)
+        self.assertTrue(str('Your email has been successfully subscribed.') in response.content.decode('utf8'))
 
         # Testcase for subscribe on blog category
-        response = self.client.post('/subscribe/', {'email': 'testsubscriber@mp.com', 'is_blog': 'True', 'is_category': str(self.category.id)})
+        response = self.client.post(
+                '/subscribe/',
+                {
+                    'email': 'testsubscriber@mp.com',
+                    'is_blog': 'True',
+                    'is_category': str(self.category.id)
+                }
+            )
+
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Your email has been successfully subscribed.' in response.content)
+        self.assertTrue(str('Your email has been successfully subscribed.') in response.content.decode('utf8'))
 
 
 class micro_blogviews_get(TestCase):
@@ -200,10 +280,14 @@ class micro_blogviews_get(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='other python introduction', user=self.user,
-            content='This is content', category=self.category, status='P')
+            title='other python introduction',
+            user=self.user,
+            content='This is content',
+            category=self.category,
+            status='P'
+        )
         self.blog_slug = Post_Slugs.objects.create(
-            blog=self.blogppost, slug='other-python-introduction', is_active=True)        
+            blog=self.blogppost, slug='other-python-introduction', is_active=True)
         self.tag = Tags.objects.create(name='testtag')
         self.blogppost.tags.add(self.tag)
 
@@ -238,7 +322,10 @@ class micro_blogviews_get(TestCase):
         response = self.client.get('/blog/category/status/'+str(self.category.slug)+'/')
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.post('/blog/'+str(self.blogppost.updated_on.year)+'/'+str(self.blogppost.updated_on.month)+'/')
+        response = self.client.post(
+            '/blog/' + str(self.blogppost.updated_on.year) + '/' + str(self.blogppost.updated_on.month) + '/'
+        )
+
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/category-list/')
@@ -264,11 +351,17 @@ class micro_blogviews_get(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/article.html')
 
-        response = self.client.get('/blog/'+str(self.blogppost.updated_on.year)+'/'+str(self.blogppost.updated_on.month)+'/')
+        response = self.client.get(
+            '/blog/' + str(self.blogppost.updated_on.year) + '/' + str(self.blogppost.updated_on.month) + '/'
+        )
+
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/index.html')
 
-        response = self.client.get('/blog/'+str(self.blogppost.updated_on.year)+'/'+str(self.blogppost.updated_on.month)+'/'+'?page=1')
+        response = self.client.get(
+            '/blog/' +
+            str(self.blogppost.updated_on.year) + '/' + str(self.blogppost.updated_on.month) + '/' + '?page=1'
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/index.html')
 
@@ -295,8 +388,12 @@ class micro_blog_post_data(TestCase):
         self.category = Category.objects.create(
             name='django', description='django desc')
         self.blogppost = Post.objects.create(
-            title='django introduction', user=self.user,
-            content='This is content', category=self.category, status='D')
+            title='django introduction',
+            user=self.user,
+            content='This is content',
+            category=self.category,
+            status='D'
+        )
         self.blog_slug = Post_Slugs.objects.create(
             blog=self.blogppost, slug='django-introduction', is_active=True)
 
@@ -447,12 +544,12 @@ class micro_blog_post_data(TestCase):
         response = self.client.post(
             '/blog/new-category/', {'name': 'django form', 'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog category created' in response.content)
+        self.assertTrue(str('Blog category created') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/new-category/', {'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog category created' in response.content)
+        self.assertFalse(str('Blog category created') in response.content.decode('utf8'))
 
         response = self.client.get('/blog/edit-category/django/')
         self.assertEqual(response.status_code, 200)
@@ -460,12 +557,12 @@ class micro_blog_post_data(TestCase):
         response = self.client.post(
             '/blog/edit-category/django-form/', {'name': 'django new', 'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Blog category updated' in response.content)
+        self.assertTrue(str('Blog category updated') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/blog/edit-category/django-new/', {'description': 'django'})
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Blog category updated' in response.content)
+        self.assertFalse(str('Blog category updated') in response.content.decode('utf8'))
 
         response = self.client.get('/blog/tag/django/')
         self.assertEqual(response.status_code, 404)
