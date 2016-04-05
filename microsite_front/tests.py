@@ -15,8 +15,6 @@ class frontend_test(TestCase):
         self.contactpage = Page.objects.create(title="Contact", is_active=True)
         self.category = Category.objects.create(
             name='python', description='django desc', is_display=True)
-        self.blogppost = Post.objects.create(
-            title='other python introduction', user=self.user, content='This is content', category=self.category, status='P', slug="other-python-introduction")
 
     def test_home_page(self):
         c = Client()

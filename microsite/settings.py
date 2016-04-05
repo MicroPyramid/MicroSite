@@ -226,10 +226,11 @@ COMPRESS_OFFLINE_CONTEXT = {
     'STATIC_URL': 'STATIC_URL',
 }
 
-# if DEBUG:
-#     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
-# else:
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+if DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
@@ -281,3 +282,9 @@ CACHES = {
 # CACHE_IGNORE_REGEXPS = (
 #     r'/admin.*',
 # )
+
+try:
+    from settings_local import *  # noqa
+except ImportError:
+    pass
+
