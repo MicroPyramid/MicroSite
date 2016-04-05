@@ -216,8 +216,6 @@ LOGGING = {
 SITE_URL = "https://micropyramid.com"
 
 COMPRESS_ENABLED = True
-# COMPRESS_CACHE_KEY_FUNCTION = 'compressor.cache.socket_cachekey'
-# COMPRESS_OFFLINE = False
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
@@ -228,10 +226,6 @@ COMPRESS_OFFLINE_CONTEXT = {
     'STATIC_URL': 'STATIC_URL',
 }
 
-# COMPRESS_CACHEABLE_PRECOMPILERS = (
-#     ('text/less', 'lessc {infile} {outfile}'),
-#     ('text/x-scss', 'sass --scss {infile} {outfile}'),
-# )
 
 if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
