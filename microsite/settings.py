@@ -284,7 +284,7 @@ CACHES = {
 # )
 
 try:
-    from settings_local import *  # noqa
-except ImportError:
+    from microsite.settings_local import *  # noqa
+except ImportError as e:
     pass
 
