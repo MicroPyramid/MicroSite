@@ -181,7 +181,12 @@ def blog_article(request, slug):
 
 def blog_tag(request, slug):
     tag = get_object_or_404(Tags, slug=slug)
-    blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by('-updated_on')
+    blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by(
+        '-updated_on').select_related("user").prefetch_related(
+        Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
+            to_attr="active_slugs"
+        )
+    )
     items_per_page = 6
     if "page" in request.GET:
         if not request.GET.get('page').isdigit():
@@ -202,7 +207,12 @@ def blog_tag(request, slug):
 def blog_category(request, slug):
     slug = slug.lower()
     category = get_object_or_404(Category, slug=slug)
-    blog_posts = Post.objects.filter(category=category, status="P").order_by('-updated_on')
+    blog_posts = Post.objects.filter(category=category, status="P").order_by(
+        '-updated_on').select_related("user").prefetch_related(
+        Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
+            to_attr="active_slugs"
+        )
+    )
     items_per_page = 6
     if "page" in request.GET:
         if not request.GET.get('page').isdigit():
@@ -221,7 +231,12 @@ def blog_category(request, slug):
 
 
 def archive_posts(request, year, month):
-    blog_posts = Post.objects.filter(status="P", updated_on__year=year, updated_on__month=month).order_by('-updated_on')
+    blog_posts = Post.objects.filter(status="P", updated_on__year=year, updated_on__month=month).order_by(
+        '-updated_on').select_related("user").prefetch_related(
+        Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
+            to_attr="active_slugs"
+        )
+    )
     items_per_page = 6
     if "page" in request.GET:
         if not request.GET.get('page').isdigit():
