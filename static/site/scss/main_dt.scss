@@ -4020,6 +4020,7 @@ body{
                 max-width: 100%;
                 width: 38%;
                 height: auto;
+                margin-top: 65px;
             }
         }
         .content_wrap{
@@ -4027,6 +4028,7 @@ body{
                 text-transformh: uppercase;
                 font-size: 4em;
                 padding-top: 68px;
+                margin-top: 15px;
                 @media (min-width: $mob_min) and (max-width:$smob_max){
                     text-align: center;
                 }
