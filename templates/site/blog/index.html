@@ -122,9 +122,10 @@
           {% for s in pages %}
           <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/category/{{category.slug}}?page={{s}}"><span>{{s}}</span></a></li>
           {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
+          {% if not last_page == current_page %}
           <li><a href="/blog/category/{{category.slug}}/?page={{last_page}}"><span>last</span></a></li>
-          {% if not last_page > current_page %}
+          {% endif %}
+          {% if last_page > current_page %}
           <li><a href="/blog/category/{{category.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
           </li>
           {% endif %}
@@ -132,8 +133,9 @@
           {% for s in pages %}
           <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/tag/{{tag.slug}}/?page={{s}}"><span>{{s}}</span></a></li>
           {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
+          {% if not last_page == current_page %}
           <li><a href="/blog/tag/{{tag.slug}}/?page={{last_page}}"><span>last</span></a></li>
+          {% endif %}
           {% if not last_page > current_page %}
           <li><a href="/blog/tag/{{tag.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
           </li>
@@ -142,9 +144,10 @@
           {% for s in pages %}
           <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/{{year}}/{{month}}/?page={{s}}"><span>{{s}}</span></a></li>
           {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
+          {% if not last_page == current_page %}
           <li><a href="/blog/{{year}}/{{month}}/?page={{last_page}}"><span>last</span></a></li>
-          {% if not last_page > current_page %}
+          {% endif %}
+          {% if last_page > current_page %}
           <li><a href="/blog/{{year}}/{{month}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
           </li>
           {% endif %}
@@ -152,8 +155,9 @@
           {% for s in pages %}
           <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}"><span>{{s}}</span></a></li>
           {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
+          {% if not last_page == current_page %}
           <li><a href="/blog/?page={{last_page}}"><span>last</span></a></li>
+          {% endif %}
           {% if last_page > current_page %}
           <li><a href="/blog/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
           </li>
