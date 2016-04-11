@@ -31,11 +31,11 @@ def books(request, path):
             if request.user.is_authenticated():
                 books = [
                     book for position, book in sorted(
-                        data['documents'].iteritems())]
+                        data['documents'].items())]
             else:
                 books = [
                     book for position, book in sorted(
-                        data['documents'].iteritems()
+                        data['documents'].items()
                     ) if book.get("visibilty").lower() == "public"]
         return render(request, "site/books.html", {"books": books})
         # return render(request, 'html/index.html')

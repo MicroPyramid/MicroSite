@@ -353,6 +353,7 @@ def new_post(request):
 def edit_blog_post(request, blog_slug):
     blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
     active_slug = blog_post.slug
+    old_blog_status = blog_post.status
     if active_slug != blog_slug:
         return redirect(reverse('micro_blog:edit_blog_post',
             kwargs={'blog_slug': active_slug})
@@ -370,16 +371,20 @@ def edit_blog_post(request, blog_slug):
         if blog_form.is_valid() and blogslugs_formset.is_valid():
             blog_post = blog_form.save(commit=False)
             if blogslugs_formset.is_valid():
-                if request.POST.get('meta_description'):
-                    blog_post.meta_description = request.POST['meta_description']
+                blog_post.status = old_blog_status
+                blog_post.meta_description = request.POST.get('meta_description')
                 if request.POST.get('status') == "P":
                     if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                         blog_post.status = 'P'
                 elif request.POST.get('status') == "T":
                     if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser:
                         blog_post.status = 'T'
-                elif request.POST.get('status') == "R":
-                    blog_post.status = 'R'
+                elif (request.POST.get('status') == "R" or
+                    request.POST.get('status') == "D"
+                ):
+                    blog_post.status = request.POST.get('status')
+                else:
+                    pass
 
                 blog_post.save()
                 blogslugs_formset.save()
