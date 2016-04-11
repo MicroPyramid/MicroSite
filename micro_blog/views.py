@@ -256,13 +256,19 @@ def archive_posts(request, year, month):
 
 @login_required
 def admin_post_list(request):
+    users = User.objects.all()
     blog_posts = Post.objects.all().order_by(
         '-created_on').select_related("user", "category").prefetch_related(
         Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
             to_attr="active_slugs"
         )
     )
-    return render(request, 'admin/blog/blog-posts.html', {'blog_posts': blog_posts})
+    if request.method == "POST":
+        blog_post = get_object_or_404(Post, id=request.POST.get("blog_id"))
+        user = get_object_or_404(User, id=request.POST.get("change_author"))
+        blog_post.user = user
+        blog_post.save()
+    return render(request, 'admin/blog/blog-posts.html', {'blog_posts': blog_posts, "users": users})
 
 
 @login_required

@@ -34,7 +34,20 @@
           <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% elif post.status == 'R' %}review{% else %}danger{% endif %}">
             <td>{{post.id}}</td>
             <td><a href="/blog/view-post/{{post.active_slugs.0.slug}}" class="title">{{post.title}}</a></td>
-            <td class="txt_center">{{post.author}}</td>
+            {% if request.user.user_roles == "Admin" or request.user.is_superuser %}
+            <form method="post" id="change_user_form" action="{% url 'micro_blog:admin_post_list' %}">{% csrf_token %}
+            <input type="hidden" name="blog_id" value="{{post.id}}">
+            <td class="txt_center" id="change_user"><select name="change_author" style="background: rgba(158, 160, 160, 0.39); text-align: center; margin: 5px;">
+            {% for user in users %}
+            <option value="{{ user.id }}" {% ifequal post.user.id user.id %}selected {% endifequal %}>{{user.first_name}} {{user.last_name}}</option>
+            {% endfor %}
+            </select></td>
+            </form>
+            {% else %}
+            <td class="txt_center">
+            {{post.author}}
+            </td>
+            {% endif %}
             <td class="txt_center">{{post.category.name}}</td>
             <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}{% ifequal post.status 'R' %}Review{% endifequal %}
             </td>
@@ -82,6 +95,10 @@
     });
 
   });
+
+  $("#change_user").change(function(e){
+    $("#change_user_form").submit()
+  })
 </script>
 {% endcompress %}
 <!-- main content ends here-->
