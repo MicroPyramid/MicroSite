@@ -41,7 +41,7 @@
             {% if request.user.is_site_admin %}
             <td class="txt_center">
               <a href="{% url 'micro_blog:edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
-              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor delete_post"><i class="fa fa-trash-o"></i></a>
+              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor delete_post "><i class="fa fa-trash-o"></i></a>
             </td>
            {% endif %}
           </tr>
