@@ -35,12 +35,12 @@
             <td>{{post.id}}</td>
             <td><a href="/blog/view-post/{{post.active_slugs.0.slug}}" class="title">{{post.title}}</a></td>
             {% if request.user.user_roles == "Admin" or request.user.is_superuser %}
-            <td class="txt_center" id="change_user">
-            <form method="post" id="change_user_form" action="{% url 'micro_blog:admin_post_list' %}">{% csrf_token %}
+            <td class="txt_center change_user" id="{{post.id}}">
+            <form method="post" id="change_user_form_{{post.id}}" action="{% url 'micro_blog:admin_post_list' %}">{% csrf_token %}
             <input type="hidden" name="blog_id" value="{{post.id}}">
             <select name="change_author" style="background: rgba(158, 160, 160, 0.39); text-align: center; margin: 5px;">
             {% for user in users %}
-            <option value="{{ user.id }}" {% ifequal post.user.id user.id %}selected {% endifequal %}>{{user.first_name}} {{user.last_name}}</option>
+            <option value="{{ user.id }}" {% ifequal post.user user %}selected {% endifequal %}>{{user.first_name}} {{user.last_name}}</option>
             {% endfor %}
             </select>
             </form></td>
@@ -97,8 +97,9 @@
 
   });
 
-  $("#change_user").change(function(e){
-    $("#change_user_form").submit()
+  $(".change_user").change(function(e){
+    e.preventDefault();
+    $("#change_user_form_"+$(this).attr("id")).submit()
   })
 </script>
 {% endcompress %}
