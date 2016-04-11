@@ -264,7 +264,7 @@ def admin_post_list(request):
         )
     )
     if request.method == "POST":
-        if request.user.check_user_role:
+        if request.user.is_site_admin:
             blog_post = get_object_or_404(Post, id=request.POST.get("blog_id"))
             user = get_object_or_404(User, id=request.POST.get("change_author"))
             blog_post.user = user

@@ -68,7 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def drafted_posts(self):
         return Post.objects.filter(user=self, status="D").count()
 
-    def check_user_role(self):
+    def is_site_admin(self):
         if self.user_roles == "Admin" or self.is_superuser:
             return True
         return False
