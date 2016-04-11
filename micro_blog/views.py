@@ -264,10 +264,11 @@ def admin_post_list(request):
         )
     )
     if request.method == "POST":
-        blog_post = get_object_or_404(Post, id=request.POST.get("blog_id"))
-        user = get_object_or_404(User, id=request.POST.get("change_author"))
-        blog_post.user = user
-        blog_post.save()
+        if request.user.user_roles == "Admin" or request.user.is_superuser:
+            blog_post = get_object_or_404(Post, id=request.POST.get("blog_id"))
+            user = get_object_or_404(User, id=request.POST.get("change_author"))
+            blog_post.user = user
+            blog_post.save()
     return render(request, 'admin/blog/blog-posts.html', {'blog_posts': blog_posts, "users": users})
 
 
