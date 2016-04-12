@@ -385,7 +385,6 @@ class TestForUserModel(TestCase):
         self.assertEqual(user.get_short_name(), user.first_name)
         self.assertEqual(user.total_posts(), 0)
         self.assertEqual(user.drafted_posts(), 0)
-        self.assertEqual(str(user), user.first_name + ' (' + user.email + ')')
 
 
 class TestForcareerModel(TestCase):
@@ -396,7 +395,6 @@ class TestForcareerModel(TestCase):
                    experience=2,
                    skills="python, django",
                    description="for quick development")
-        self.assertEqual(str(c), 'career')
         c.save()
         self.assertEqual(c.slug, 'career')
         c.delete()
@@ -456,7 +454,7 @@ class TestForUserPasswordChange(UserDetails):
         expected_data = '{"response": {"newpassword": ["This field is required."],\
                          "oldpassword": ["This field is required."],\
                           "retypepassword": ["This field is required."]}, "error": true}'
-        self.assertJSONEqual(response.content, expected_data)
+        self.assertJSONEqual(str(response.content), expected_data)
 
         context = {'oldpassword': self.password,
                    'newpassword': '0000',
@@ -466,14 +464,14 @@ class TestForUserPasswordChange(UserDetails):
         expected_data = '{"response": \
                         {"newpassword": "New password and ConformPasswords did not match"},\
                          "error": true}'
-        self.assertJSONEqual(response.content, expected_data)
+        self.assertJSONEqual(str(response.content), expected_data)
         context = {'oldpassword': self.password,
                    'newpassword': '0000',
                    'retypepassword': '0000'
                    }
         response = self.client.post(url, context)
         expected_data = '{"response": "Password changed successfully", "error": false}'
-        self.assertJSONEqual(response.content, expected_data)
+        self.assertJSONEqual(str(response.content), expected_data)
 
     def tearDown(self):
         super(TestForUserPasswordChange, self).tearDown()
