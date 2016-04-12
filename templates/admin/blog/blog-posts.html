@@ -33,18 +33,32 @@
           {% for post in blog_posts %}
           <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% elif post.status == 'R' %}review{% else %}danger{% endif %}">
             <td>{{post.id}}</td>
-            <td><a href="/blog/view-post/{{post.slug}}" class="title">{{post.title}}</a></td>
-            <td class="txt_center">{{post.author}}</td>
+            <td><a href="/blog/view-post/{{post.active_slugs.0.slug}}" class="title">{{post.title}}</a></td>
+            {% if request.user.is_site_admin %}
+            <td class="txt_center change_user" id="{{post.id}}">
+            <form method="post" id="change_user_form_{{post.id}}" action="{% url 'micro_blog:admin_post_list' %}">{% csrf_token %}
+            <input type="hidden" name="blog_id" value="{{post.id}}">
+            <select name="change_author" style="background: rgba(158, 160, 160, 0.39); text-align: center; margin: 5px;">
+            {% for user in users %}
+            <option value="{{ user.id }}" {% ifequal post.user user %}selected {% endifequal %}>{{user.first_name}} {{user.last_name}}</option>
+            {% endfor %}
+            </select>
+            </form></td>
+            {% else %}
+            <td class="txt_center">
+            {{post.author}}
+            </td>
+            {% endif %}
             <td class="txt_center">{{post.category.name}}</td>
             <td class="txt_center">{% ifequal post.status 'D' %}Drafted{% endifequal %} {% ifequal post.status 'P' %}Published{% endifequal %}{% ifequal post.status 'T' %}Rejected{% endifequal %}{% ifequal post.status 'R' %}Review{% endifequal %}
             </td>
             <td class="txt_center">{{ post.created_on|date:"m/d/Y" }}</td>
             <td class="txt_center">{% if post|is_editable_by:request.user %}
-              <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.slug%}" class="edit_anchor" value="{{ post.slug }}"><i class="fa fa-pencil-square-o"></i></a>{% endif %}
+              <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.active_slugs.0.slug%}" class="edit_anchor" value="{{ post.active_slugs.0.slug }}"><i class="fa fa-pencil-square-o"></i></a>{% endif %}
               {% if post|is_deletable_by:request.user %}
-              <a href="{% url 'micro_blog:delete_post' blog_slug=post.slug %}" class="delete_post delete_anchor" value="{{ post.slug }}"><i class="fa fa-trash-o"></i></a>
+              <a href="{% url 'micro_blog:delete_post' blog_slug=post.active_slugs.0.slug %}" class="delete_post delete_anchor" value="{{ post.active_slugs.0.slug }}"><i class="fa fa-trash-o"></i></a>
               {% endif %}
-              <a href="{% url 'micro_blog:blog_article' slug=post.slug %}" target="_blank" title="View on site" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
+              <a href="{% url 'micro_blog:blog_article' slug=post.active_slugs.0.slug %}" target="_blank" title="View on site" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
             </td>
           </tr>
           {% endfor %}
@@ -82,6 +96,11 @@
     });
 
   });
+
+  $(".change_user").change(function(e){
+    e.preventDefault();
+    $("#change_user_form_"+$(this).attr("id")).submit()
+  })
 </script>
 {% endcompress %}
 <!-- main content ends here-->

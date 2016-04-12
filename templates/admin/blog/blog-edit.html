@@ -11,83 +11,121 @@
       {% csrf_token %}
       <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
-        <input type="Text" class="form-control" id="title" name="title" value="{{blog_post.title}}">
-        <input type="hidden" class="form-control" id="is_superuser" name="is_superuser" value="{{request.user.is_superuser}}">
+        <input type="Text" class="form-control" id="title" name="title" style="position:relative;" {% if blog_form.title.value %}value="{{blog_form.title.value}}"{% endif %}>
+        {% for error in blog_form.title.errors %}
+            <p class="failure">{{ error|escape }}</p>
+        {% endfor %}
       </div>
-      {% if request.user.is_superuser %}
-      <div class="form-group">
-        <label for="exampleInputPassword1">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" value="{{blog_post.slug}}">
-      </div>
-      {% endif %}
+      
       <div class="form-group">
         <label for="exampleInputPassword1">Category</label>
         <select class="form-control" id="category" name="category">
-        {% for category in categories %}
-        <option value="{{category.id}}" {% ifequal blog_post.category category %}selected{% endifequal %}>{{category.name}}</option>
-        {% endfor %}
+          {% for category in categories %}
+          <option value="{{category.id}}"{% ifequal blog_form.category.value category.id %}selected{% endifequal %}>{{category.name}}</option>
+          {% endfor %}
         </select>
+        {% for error in blog_form.category.errors %}
+            <p class="failure">{{ error|escape }}</p>
+        {% endfor %}
       </div>
       <div class="form-group">
         <label class="control-label" for="html">Blog Post Description</label>
         <div class="control-group">
           <div class="controls" id="content">
             <input type="hidden" name="content">
-            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="Blog Post Description">
-            {{blog_post.content|safe}}
-            </textarea>
+            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="Blog Post Description">{% if blog_form.content.value %}{{blog_form.content.value}}{% endif %}</textarea>
           </div>
+          {% for error in blog_form.content.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
         </div>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Meta Description</label>
         <div class="control-group">
           <div class="controls" id="content">
-            <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1170px; height: 117px;">{{ blog_post.meta_description }}</textarea>
+            <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1062px; height: 93px;">{% if blog_form.meta_description.value %}{{blog_form.meta_description.value}}{% endif %}</textarea>
           </div>
-	  <p id="Wordcount"></p>
+          {% for error in blog_form.meta_description.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
+	        <p id="Wordcount"></p>
         </div>
-	
       </div>
-      <div class="form-group">
-        <label class="control-label" for="html">Old Slugs: {{blog_post.old_slugs|get_slugs|length}}</label>
-        <div class="control-group">
-          <div class="controls" id="content">
-            <div  class="form-control" id="old_slugs" disabled name="old_slugs" style="margin: 0px; width: 1170px; height: 150px; overflow:scroll;" placeholder="Blog Post Description">{% if blog_post.old_slugs|get_slugs|length > 0 %}{% for slug in blog_post.old_slugs|get_slugs %}{{forloop.counter}}. {{slug}}{% if forloop.last %}.{% else %},{% endif %}<br>{% endfor %}{% endif %}
-            </div>
+      <div class="form-group blog_slugs">
+        <label for="exampleInputPassword1">Slugs</label>
+          <div class="slug_items" id="slugs">
+            {{ blogslugs_formset.management_form }}
+            {% for slug_form in blogslugs_formset %}
+              <div class="row slug_item">
+                <div class="slug_text col-md-6">
+                  {{ slug_form.slug }}
+                  {{ slug_form.id }}
+                  {% if slug_form.slug.errors %}
+                      {% for error in slug_form.slug.errors %}
+                          <p class="failure">{{ error|escape }}</p>
+                      {% endfor %}
+                  {% endif %}
+                </div>
+                <div class="slug_check col-md-2">
+                  {{ slug_form.is_active }} Active
+                  {% if slug_form.is_active.errors %}
+                      {% for error in slug_form.is_active.errors %}
+                          <p class="failure">{{ error|escape }}</p>
+                      {% endfor %}
+                  {% endif %}
+                </div>
+                <div class="slug_check col-md-2">
+                  {% if blogslugs_formset.can_delete %}
+                      {{ slug_form.DELETE }} Delete
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
           </div>
-        </div>
+          {% if blogslugs_formset.non_form_errors %}
+              {% for error in blogslugs_formset.non_form_errors %}
+                  <p class="failure">{{ error|escape }}</p>
+              {% endfor %}
+          {% endif %}
+        </lable>
       </div>
       <div class="tags-block">
         <p><label>Tags</label>
-          <input id="tags_1" type="text" class="tags" name="tags" value="{% for tag in blog_post.tags.all %}{{tag.name}},{% endfor %}" />
+          <input id="tags_1" type="text" class="tags" name="tags" {% if request.POST.tags %}value="{{request.POST.tags}}"{% else %}value="{% for tag in blog_post.tags.all %}{{tag.name}},{% endfor %}"{% endif %} />
+          {% for error in blog_form.tags.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
       </div>
-      <div class="tags-block">
+      <!--<div class="tags-block">
         <p>
           <label>Featured Image</label>
           <input type="file" name="featuredimage" />
         </p>
-      </div>
+      </div> -->
       <div class="draft-box">
-        <input type="radio" name="status" value="D" {% ifequal blog_post.status 'D' %}checked{% endifequal %}>
+        <input type="radio" name="status" value="D" {% ifequal blog_form.status.value 'D' %}checked{% endifequal %}>
         <label>Save as Draft</label>
       </div>
       <div class="draft-box">
-        <input type="radio" name="status" value="R" {% ifequal blog_post.status 'R' %}checked{% endifequal %}>
+        <input type="radio" name="status" value="R" {% ifequal blog_form.status.value 'R' %}checked{% endifequal %}>
         <label>Review</label>
       </div>
       {% if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser %}
       <div class="draft-box">
-        <input type="radio" name="status" value="P" {% ifequal blog_post.status 'P' %}checked{% endifequal %}>
+        <input type="radio" name="status" value="P" {% ifequal blog_form.status.value 'P' %}checked{% endifequal %}>
         <label>Publish Post</label>
       </div>
       <div class="draft-box">
-        <input type="radio" name="status" value="T" {% ifequal blog_post.status 'T' %}checked{% endifequal %}>
+        <input type="radio" name="status" value="T" {% ifequal blog_form.status.value 'T' %}checked{% endifequal %}>
         <label>Reject Post</label>
       </div>
       {% endif %}
+      {% for error in blog_form.status.errors %}
+          <p class="failure">{{ error|escape }}</p>
+      {% endfor %}
       <div class="save-btn">
-        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="save_blog_post">
       </div>
     </form>
   </div>
@@ -148,26 +186,14 @@
 </script>
 <script type="text/javascript">
   $ = jQuery;
-    $('#cancel_blog_post').click(function(e){
+  $('#cancel_blog_post').click(function(e){
     window.location = "{% url 'micro_blog:admin_post_list' %}";
   });
-    $('form#blogform').ajaxForm({
-      beforeSerialize: function() {
-        $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
-      },
-      dataType: 'json',
-      success: function(data) {
-        console.log(data);
-        if (data.error) {
-          $('p.failure').remove();
-          for (var key in data.response) {
-            $('#' + key).after('<p class="failure">' + data.response[key] + '</p>');
-          }
-        } else {
-          window.location = "{% url 'micro_blog:admin_post_list' %}";
-        }
-      }
-    });
+  $('#save_blog_post').click(function(e){
+    e.preventDefault();
+    $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+    $('form#blogform').submit();
+  });
 </script>
 {% endcompress %}
 {% endblock %}

@@ -31,11 +31,11 @@ def books(request, path):
             if request.user.is_authenticated():
                 books = [
                     book for position, book in sorted(
-                        data['documents'].iteritems())]
+                        data['documents'].items())]
             else:
                 books = [
                     book for position, book in sorted(
-                        data['documents'].iteritems()
+                        data['documents'].items()
                     ) if book.get("visibilty").lower() == "public"]
         return render(request, "site/books.html", {"books": books})
         # return render(request, 'html/index.html')
@@ -148,6 +148,8 @@ def html_sitemap(request):
         sitemap_links = object_list.page(object_list.num_pages)
     return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links})
 
+def careers(request):
+    return render(request,'site/careers.html')
 
 def handler404(request):
     return render(request, '404.html', status=404)
