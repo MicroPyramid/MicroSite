@@ -1,3 +1,4 @@
+import json
 from django.test import (TestCase,
                          Client)
 from micro_admin.forms import *
@@ -385,8 +386,6 @@ class TestForUserModel(TestCase):
         self.assertEqual(user.get_short_name(), user.first_name)
         self.assertEqual(user.total_posts(), 0)
         self.assertEqual(user.drafted_posts(), 0)
-        self.assertEqual(str(user), user.first_name + ' (' + user.email + ')')
-
 
 class TestForcareerModel(TestCase):
 
@@ -396,7 +395,7 @@ class TestForcareerModel(TestCase):
                    experience=2,
                    skills="python, django",
                    description="for quick development")
-        self.assertEqual(str(c), 'career')
+
         c.save()
         self.assertEqual(c.slug, 'career')
         c.delete()
@@ -453,27 +452,27 @@ class TestForUserPasswordChange(UserDetails):
                    'retypepassword': ''
                    }
         response = self.client.post(url, context)
-        expected_data = '{"response": {"newpassword": ["This field is required."],\
-                         "oldpassword": ["This field is required."],\
-                          "retypepassword": ["This field is required."]}, "error": true}'
-        self.assertJSONEqual(response.content, expected_data)
+        expected_data = {"response": {"newpassword": ["This field is required."],
+                         "oldpassword": ["This field is required."],
+                          "retypepassword": ["This field is required."]}, "error": True}
+        self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
 
         context = {'oldpassword': self.password,
                    'newpassword': '0000',
                    'retypepassword': '1111'
                    }
         response = self.client.post(url, context)
-        expected_data = '{"response": \
+        expected_data = {"response": 
                         {"newpassword": "New password and ConformPasswords did not match"},\
-                         "error": true}'
-        self.assertJSONEqual(response.content, expected_data)
+                         "error": True}
+        self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
         context = {'oldpassword': self.password,
                    'newpassword': '0000',
                    'retypepassword': '0000'
                    }
         response = self.client.post(url, context)
-        expected_data = '{"response": "Password changed successfully", "error": false}'
-        self.assertJSONEqual(response.content, expected_data)
+        expected_data = {"response": "Password changed successfully", "error": False}
+        self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
 
     def tearDown(self):
         super(TestForUserPasswordChange, self).tearDown()
