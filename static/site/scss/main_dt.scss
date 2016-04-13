@@ -4020,21 +4020,19 @@ body{
                 max-width: 100%;
                 width: 38%;
                 height: auto;
-                margin-top: 65px;
             }
         }
         .content_wrap{
             .text_part{
                 text-transformh: uppercase;
                 font-size: 4em;
-                padding-top: 68px;
-                margin-top: 15px;
+                padding-top: 22px;
                 @media (min-width: $mob_min) and (max-width:$smob_max){
                     text-align: center;
                 }
                 span{
                     display:block;
-                    padding:10px 0;
+                    padding:8px 0;
                     &.hint{
                         color:#fff;
                         font-size:20px;
