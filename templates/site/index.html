@@ -58,7 +58,7 @@
     <!-- push menu -->
     <div class="mp-pusher" id="mp-pusher">
       <!-- mp-menu -->
-{% if request.session.design|slugify == 'mobile'|slugify %}
+    {% if request.session.design|slugify == 'mobile'|slugify %}
 
       <nav id="mp-menu" class="mp-menu">
         {% include 'site/side-bar-menu.html' %}
