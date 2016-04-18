@@ -4207,7 +4207,7 @@ body{
             .job_each{
                 display: table;
                 width: 100%;
-                margin-bottom: 50px;
+                margin-bottom: 0px;
                 @media (min-width: $mob_min) and (max-width:$mob_max){
                     display: block;
                     margin-bottom: 15px;
@@ -4267,6 +4267,13 @@ body{
                             line-height: 22px;
                             color: #444;
                             text-align: justify;
+                            ul{
+                              margin: 0px;
+                              padding: 0px;
+                              li{
+                                list-style-position: inside;
+                              }
+                            }
                     }
                     .apply_button{
                         padding: 5px 0px;
