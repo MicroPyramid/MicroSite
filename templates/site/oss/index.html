@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+{% load static %}
+{% load compress %}
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>MicroPyramid Open Source</title>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,300' rel='stylesheet' type='text/css'>
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+      {% block extra-styles %}
+         {% compress css %}
+            <link href="/static/site/less/oss/main.less" rel="stylesheet" type="text/less">
+         {% endcompress %}
+      {% endblock %}
+
+   </head>
+   <body data-spy="scroll" data-target="#my-navbar">
+      <div class="row marl">
+         <nav class="navbar navbar-inverse navbar-fixed-top" id="my-navbar">
+            <div class="container">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">MicroPyramid
+                  <span class="small_logo">Open Source Sysytem</span>
+                  </a>
+               </div>
+               <!-- navbar-header -->
+               <div class="collapse navbar-collapse" id="navbar">
+                  <a href="" class="btn btn-warning navbar-btn navbar-right"> <i class="fa fa-download"></i>Download</i></a>
+                  <ul class="nav navbar-nav">
+                     <li class="active"><a href="#home">Home</a></li>
+                     <li><a href="#projects">Projects</a></li>
+                     <li><a href="#books">Books</a></li>
+                     <li><a href="#modules">Python Modules</a></li>
+                     <li><a href="#microscripts">Micro Scripts</a></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- end container -->
+         </nav>
+         <!-- end navbar -->
+      </div>
+      <!-- banner starts here -->
+      <div class="row marl banner">
+         <div class="container pad_lr_0">
+            <!-- banner_left starts here -->
+            <div class="col-md-6 col-sm-6 col-xs-12 banner_left">
+               <h3> Micropyramid Open source systems and some examples features</h3>
+               <p>We design & develope modern website and app for any type of business. Landing page, ecommerce, company profile, web application, mobile app, anything that you want to make great success.</p>
+               <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
+            </div>
+            <!-- banner_left ends here -->
+            <!-- banner_right starts here -->
+            <div class="col-md-offset-2 col-md-4 col-sm-6 col-xs-12 banner_right">
+               <!-- banner_item starts here -->
+               <div class="banner_item">
+                  <span class="icon"></span>
+                  <span class="block_heading">Projects</span>
+                  <span class="desc">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, senim .</span>
+                  <span class="view"><a href="#">Know More...</a></span>
+               </div>
+               <!-- banner_item ends here -->  
+               <!-- banner_item starts here -->
+               <div class="banner_item">
+                  <span class="icon"></span>
+                  <span class="block_heading">Python Modules</span>
+                  <span class="desc">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni .</span>
+                  <span class="view"><a href="#">Know More...</a></span>
+               </div>
+               <!-- banner_item ends here -->  
+               <!-- banner_item starts here -->
+               <div class="banner_item">
+                  <span class="icon"></span>
+                  <span class="block_heading">Books</span>
+                  <span class="desc">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, .</span>
+                  <span class="view"><a href="#">Know More...</a></span>
+               </div>
+               <!-- banner_item ends here -->  
+            </div>
+            <!-- banner_right ends here -->
+         </div>
+      </div>
+      <!-- banner ends here -->
+      <!-- projects starts here -->
+      <div class="row marl projects" id="projects">
+         <div class="container">
+            <span class="heading text-center">Our Open Source Projects</span>
+            <span class="hint_desc text-center">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</span>
+            <!-- projects list starts here -->
+            <div class="row projects_list">
+               <!-- project_item starts here -->
+               <div class="col-md-3 col-sm-6">
+                  <div class="project_item text-center">
+                     <span class="project_title">PieTrack</span>
+                     <span class="project_links">
+                     <a href="#"><i class="fa fa-github"></i> View in Github</a>
+                     </span>
+                     <span class="project_desc">We design & develope modern website and app for any type of business. Landing page, ecommerce, company profile, web application, mobile app</span>
+                     <span class="project_read"><a href="#">Read More...</a></span>
+                  </div>
+               </div>
+               <!-- project_item ends here -->
+               <!-- project_item starts here -->
+               <div class="col-md-3 col-sm-6">
+                  <div class="project_item text-center">
+                     <span class="project_title">RadioString</span>
+                     <span class="project_links">
+                     <a href="#"><i class="fa fa-github"></i> View in Github</a>
+                     </span>
+                     <span class="project_desc">We design & develope modern website and app for any type of business. Landing page, ecommerce, company profile, web application, mobile app</span>
+                     <span class="project_read"><a href="#">Read More...</a></span>
+                  </div>
+               </div>
+               <!-- project_item ends here -->
+               <!-- project_item starts here -->
+               <div class="col-md-3 col-sm-6">
+                  <div class="project_item text-center">
+                     <span class="project_title">Micro Track</span>
+                     <span class="project_links">
+                     <a href="#"><i class="fa fa-github"></i> View in Github</a>
+                     </span>
+                     <span class="project_desc">We design & develope modern website and app for any type of business. Landing page, ecommerce, company profile, web application, mobile app</span>
+                     <span class="project_read"><a href="#">Read More...</a></span>
+                  </div>
+               </div>
+               <!-- project_item ends here -->
+               <!-- project_item starts here -->
+               <div class="col-md-3 col-sm-6">
+                  <div class="project_item text-center">
+                     <span class="project_title">Spillpost</span>
+                     <span class="project_links">
+                     <a href="#"><i class="fa fa-github"></i> View in Github</a>
+                     </span>
+                     <span class="project_desc">We design & develope modern website and app for any type of business. Landing page, ecommerce, company profile, web application, mobile app</span>
+                     <span class="project_read"><a href="#">Read More...</a></span>
+                  </div>
+               </div>
+               <!-- project_item ends here -->
+            </div>
+            <!-- projects list ends here -->
+         </div>
+      </div>
+      <!-- projects ends here -->
+      <!-- python_modules starts here -->
+      <div class="row marl python_modules" id="modules">
+         <div class="container">
+            <span class="sub_heading">Python Modules</span>
+            <span class="hint_desc">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</span>
+            <div class="row modules_row">
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+               <!--module_item stats here -->
+               <div class="col-md-4 col-sm-6">
+                  <div class="module_item">
+                     <span class="module_title">
+                     Python Module Title
+                     </span>
+                     <span class="module_desc">
+                     We design & develope modern website and app for any type of business. Landing page, ecommerce
+                     </span>
+                     <span class="module_read">
+                     <a href="#"><i class="fa fa-cube"></i> About more..</a>
+                     </span>
+                  </div>
+               </div>
+               <!--module_item ends here -->
+            </div>
+         </div>
+      </div>
+      <!-- python_modules ends here -->
+      <!-- books starts here -->
+        <div class="row marl books" id="books">
+           <div class="container">
+              <span class="sub_heading text-center">Books</span>
+              <span class="hint_desc text-center">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</span>
+            <div class="row">
+               <div class="col-md-12 about_books">
+                  Share unlimited tasks with anyone – colleagues, family, friends – and collaborate in real-time on shared projects and goals.Your tasks are a big part of your life. Stay motivated and organized with Todoist’s intuitive and beautiful to do list.offers more useful features than any other to do service. So you can do more to customize the experience, organize your tasks and projects, and optimize your productivity.
+               </div>
+               <!-- book_item starts here -->
+               <div class="col-md-4 col-sm-6 books_item">
+                  <span class="book_title">
+                  Book Title
+                  </span>
+                  <span class="book_author"> <i class="fa fa-clock-o"></i> Last Updated On Jan 11, 2016</span>
+                  <span class="book_desc">
+                  Have fast, effective meetings by presenting your work as it evolves. No need to build slides, just one click and your notes are transformed into a beautiful screen-friendly layout. 
+                  </span>
+                  <span class="book_read">
+                  <a href="#">Continue Reading...</a>
+                  </span>
+               </div>
+               <!-- book_item ends here -->
+
+                <!-- book_item starts here -->
+               <div class="col-md-4 col-sm-6 books_item">
+                  <span class="book_title">
+                  Book Title
+                  </span>
+                  <span class="book_author"> <i class="fa fa-clock-o"></i> Last Updated On Jan 11, 2016</span>
+                  <span class="book_desc">
+                  Have fast, effective meetings by presenting your work as it evolves. No need to build slides, just one click and your notes are transformed into a beautiful screen-friendly layout. 
+                  </span>
+                  <span class="book_read">
+                  <a href="#">Continue Reading...</a>
+                  </span>
+               </div>
+               <!-- book_item ends here -->
+
+                <!-- book_item starts here -->
+               <div class="col-md-4 col-sm-6 books_item">
+                  <span class="book_title">
+                  Book Title
+                  </span>
+                  <span class="book_author"> <i class="fa fa-clock-o"></i> Last Updated On Jan 11, 2016</span>
+                  <span class="book_desc">
+                  Have fast, effective meetings by presenting your work as it evolves. No need to build slides, just one click and your notes are transformed into a beautiful screen-friendly layout. 
+                  </span>
+                  <span class="book_read">
+                  <a href="#">Continue Reading...</a>
+                  </span>
+               </div>
+               <!-- book_item ends here -->
+
+                <!-- book_item starts here -->
+               <div class="col-md-4 col-sm-6 books_item">
+                  <span class="book_title">
+                  Book Title
+                  </span>
+                  <span class="book_author"> <i class="fa fa-clock-o"></i> Last Updated On Jan 11, 2016</span>
+                  <span class="book_desc">
+                  Have fast, effective meetings by presenting your work as it evolves. No need to build slides, just one click and your notes are transformed into a beautiful screen-friendly layout. 
+                  </span>
+                  <span class="book_read">
+                  <a href="#">Continue Reading...</a>
+                  </span>
+               </div>
+               <!-- book_item ends here -->
+
+                <!-- book_item starts here -->
+               <div class="col-md-4 col-sm-6 books_item">
+                  <span class="book_title">
+                  Book Title
+                  </span>
+                  <span class="book_author"> <i class="fa fa-clock-o"></i> Last Updated On Jan 11, 2016</span>
+                  <span class="book_desc">
+                  Have fast, effective meetings by presenting your work as it evolves. No need to build slides, just one click and your notes are transformed into a beautiful screen-friendly layout. 
+                  </span>
+                  <span class="book_read">
+                  <a href="#">Continue Reading...</a>
+                  </span>
+               </div>
+               <!-- book_item ends here -->
+            </div>
+         </div>
+      </div>
+      <!-- books ends here -->
+
+      <!-- contact starts here-->
+      <div class="row marl micro_scripts" id="microscripts">
+        <div class="container">
+          <span class="sub_heading text-center">Microscripts</span>
+          <span class="hint_desc text-center">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</span>
+          <div class="row marl micro_script_block">
+           <div class="about_script">
+              Share unlimited tasks with anyone – colleagues, family, friends – and collaborate in real-time on shared projects and goals.Your tasks are a big part of your life. Stay motivated and organized with Todoist’s intuitive and beautiful to do list.offers more useful features than any other to do service. So you can do more to customize the experience, organize your tasks and projects, and optimize your productivity.
+           </div>
+           <br clear="all">
+            <ul>
+              <li><a href="#" class="script_title">We have a lot of Smart People</a> <a href="#" class="script_author">Ravikumar gadila</a> <a href="#" class="script_read pull-right"><i class="fa fa-eye"></i>View Script</a></li>
+              <li><a href="#" class="script_title">Better Solution for Better Business</a> <a href="#" class="script_author">Aswani Kumar I</a> <a href="#" class="script_read pull-right"><i class="fa fa-eye"></i>View Script</a></li>
+              <li><a href="#" class="script_title">Have an idea? We will do the rest!</a> <a href="#" class="script_author">Chaitanya Kattineni</a> <a href="#" class="script_read pull-right"><i class="fa fa-eye"></i>View Script</a></li>
+               <li><a href="#" class="script_title">We have a lot of Smart People</a> <a href="#" class="script_author">Ravikumar gadila</a> <a href="#" class="script_read pull-right"><i class="fa fa-eye"></i>View Script</a></li>
+              <li><a href="#" class="script_title">Better Solution for Better Business</a> <a href="#" class="script_author">Aswani Kumar I</a> <a href="#" class="script_read pull-right"><i class="fa fa-eye"></i>View Script</a></li>
+              <li><a href="#" class="script_title">Have an idea? We will do the rest!</a> <a href="#" class="script_author">Chaitanya Kattineni</a> <a href="#" class="script_read pull-right"><i class="fa fa-eye"></i>View Script</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- contact ends here -->
+      <!-- social_links starts here -->
+      <div class="row marl social_links">
+          <ul>
+            <li><a href="#"><i class="fa fa-bitbucket"></i>Bit Bucket</a></li>
+            <li><a href="#"><i class="fa fa-github"></i>Github</a></li>
+            <li><a href="#"><i class="fa fa-stack-overflow"></i>StackOverflow</a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i>youtube</a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i>Google Plus</a></li>
+            <li><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+          </ul>
+
+      </div>
+      <!-- social_links ends here -->
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      <script>
+      </body>
+      </html>

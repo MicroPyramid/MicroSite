@@ -4,7 +4,7 @@ from micro_blog.views import contact, subscribe
 import microsite_front
 from pages.views import site_page
 from microsite_front.xml import rss, blog_rss, sitemap
-from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books
+from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books, oss
 from search.views import autocomplete
 from django.views.static import serve
 
@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
     url(r'^contact-us/$', contact),
     url(r'^subscribe/$', subscribe),
+    url(r'^oss/$', oss),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),
