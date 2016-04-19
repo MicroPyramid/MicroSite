@@ -4364,3 +4364,144 @@ body{
     }
 }
 /* careers */
+
+/* python services starts here */
+#service_page{
+   .heading{
+    font-size: 30px;
+    font-weight: bold;
+    color:#fff;
+    margin-bottom: 20px;
+  }
+  table{
+    tr{
+      th{
+        background: white;
+        color: #77b200;
+      }
+    }
+  }
+  ul{
+    margin:0;
+    padding:0;
+    li{
+      list-style: none;
+      font-size: 12px;
+      line-height: 25px;
+      color: #54728E;
+      &:before{
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        content: "\f046";
+        display: inline-block;
+        padding-right: 10px;
+        color: #1DABDD;
+      }
+    }
+  }
+  #mp_services{
+    background: $service_mp_bg;
+    padding: 50px;
+    .mp_services_content{
+      p{
+        font-size: 14px;
+        color: #fff;
+        line-height: 30px;
+      }
+    }
+}
+#content_sections{
+  padding:65px;
+  background:$service_content_bg;
+  .content_left_section{
+    padding: 0 30px;
+    .heading{
+      font-weight: bold;
+      font-size: 20px;
+      display: block;
+      padding:10px 0;
+      color:#2F5374;
+    }
+    p{
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 22px;
+      color: #54728E;
+    }
+    ul{
+      @extend ul;
+    }
+  }
+  .content_right_section{
+    padding:15px 50px;
+    .content_block{
+      background: #77b200;
+      padding: 25px;
+      color: #fff;
+      .heading{
+        font-weight: bold;
+        line-height: 30px;
+        font-size: 20px;
+        display: block;
+        color:#fff;
+        margin-bottom: 10px;
+      }
+      p{
+        margin-top: 15px;
+      }
+    }
+  }
+}
+.services_technologies{
+    padding:25px;
+    padding-bottom: 0px;
+    .heading{
+      font-weight: bold;
+      font-size: 20px;
+      display: block;
+      padding:10px 0;
+      color:#2F5374;
+    }
+    ul{
+      margin:0px;
+      padding:0px;
+      margin-top:15px;
+      li{
+        list-style: none;
+        background:$twitter;
+        border-radius: 3px;
+        color:#fff;
+        font-size:13px;
+        display: inline-block;
+        padding:6px 10px;
+        margin:5px 0;
+      }
+    }
+    .github_link{
+      margin-top:20px;
+      color:#2F5374;
+      font-size: 14px;
+      text-align: center;
+      a{
+        background: $amazon;
+        color: #fff;
+        display: inline-block;
+        border-radius: 20px;
+        padding: 8px 20px;
+      }
+    }
+  }
+  .hire_us{
+    span{
+      display: inline-block;
+      border-radius: 20px;
+      padding:10px 30px;
+      font-size:16px;
+      font-weight:bold;
+      color:#fff;
+      background:#77b200;
+    }
+  }
+/* python services ends here */
+}
