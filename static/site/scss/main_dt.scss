@@ -4365,14 +4365,43 @@ body{
 }
 /* careers */
 
-/* python services starts here */
+/* python services */
 #service_page{
-   .heading{
-    font-size: 30px;
-    font-weight: bold;
-    color:#fff;
-    margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 26px;
+   .white{
+    color: white;
+   }
+   .dark_grey{
+    color: #54728E;
   }
+  .btn_class{
+      display: inline-block;
+      border-radius: 20px;
+      padding:10px 30px;
+      font-size:16px;
+      font-weight:bold;
+      color:#fff;
+      &.yellow_btn{
+        background:$amazon;
+      }
+      &.green_btn{
+        background: $mongo;
+      }
+  }
+    h1,h2{
+      font-size: 23px;
+      line-height: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+   p{
+     margin:10px 0;
+     a{
+        font-weight: bold;
+        font-size: 19px;
+     }
+   }
   table{
     tr{
       th{
@@ -4386,9 +4415,12 @@ body{
     padding:0;
     li{
       list-style: none;
-      font-size: 12px;
-      line-height: 25px;
+      line-height: 30px;
       color: #54728E;
+      a{
+        font-weight: bold;
+        font-size: 19px;
+      }
       &:before{
         font-family: FontAwesome;
         font-weight: normal;
@@ -4400,69 +4432,23 @@ body{
       }
     }
   }
-  #mp_services{
-    background: $service_mp_bg;
-    padding: 50px;
-    .mp_services_content{
-      p{
-        font-size: 14px;
-        color: #fff;
-        line-height: 30px;
-      }
-    }
-}
-#content_sections{
-  padding:65px;
-  background:$service_content_bg;
-  .content_left_section{
-    padding: 0 30px;
-    .heading{
-      font-weight: bold;
-      font-size: 20px;
-      display: block;
-      padding:10px 0;
-      color:#2F5374;
-    }
-    p{
-      margin-top: 10px;
-      font-size: 12px;
-      line-height: 22px;
-      color: #54728E;
-    }
-    ul{
-      @extend ul;
+  #first_row{
+  background: $service_mp_bg;
+  padding: 50px;
+  }
+  #middle_row{
+    padding:65px;
+    background:$service_content_bg;
+    .content_right_section{
+       padding:15px 50px;
+       .content_block{
+          background: #77b200;
+          padding: 25px;
+       }
     }
   }
-  .content_right_section{
-    padding:15px 50px;
-    .content_block{
-      background: #77b200;
-      padding: 25px;
-      color: #fff;
-      .heading{
-        font-weight: bold;
-        line-height: 30px;
-        font-size: 20px;
-        display: block;
-        color:#fff;
-        margin-bottom: 10px;
-      }
-      p{
-        margin-top: 15px;
-      }
-    }
-  }
-}
-.services_technologies{
-    padding:25px;
-    padding-bottom: 0px;
-    .heading{
-      font-weight: bold;
-      font-size: 20px;
-      display: block;
-      padding:10px 0;
-      color:#2F5374;
-    }
+  .footer_row{
+    padding:20px;
     ul{
       margin:0px;
       padding:0px;
@@ -4472,36 +4458,16 @@ body{
         background:$twitter;
         border-radius: 3px;
         color:#fff;
-        font-size:13px;
+        font-size:15px;
         display: inline-block;
         padding:6px 10px;
         margin:5px 0;
-      }
-    }
-    .github_link{
-      margin-top:20px;
-      color:#2F5374;
-      font-size: 14px;
-      text-align: center;
-      a{
-        background: $amazon;
-        color: #fff;
-        display: inline-block;
-        border-radius: 20px;
-        padding: 8px 20px;
+        &:before{
+          width:0;
+          padding:0;
+        }
       }
     }
   }
-  .hire_us{
-    span{
-      display: inline-block;
-      border-radius: 20px;
-      padding:10px 30px;
-      font-size:16px;
-      font-weight:bold;
-      color:#fff;
-      background:#77b200;
-    }
-  }
-/* python services ends here */
 }
+/* python services */
