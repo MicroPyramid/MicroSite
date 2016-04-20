@@ -4364,3 +4364,110 @@ body{
     }
 }
 /* careers */
+
+/* python services */
+#service_page{
+  font-size: 15px;
+  line-height: 26px;
+   .white{
+    color: white;
+   }
+   .dark_grey{
+    color: #54728E;
+  }
+  .btn_class{
+      display: inline-block;
+      border-radius: 20px;
+      padding:10px 30px;
+      font-size:16px;
+      font-weight:bold;
+      color:#fff;
+      &.yellow_btn{
+        background:$amazon;
+      }
+      &.green_btn{
+        background: $mongo;
+      }
+  }
+    h1,h2{
+      font-size: 23px;
+      line-height: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+   p{
+     margin:10px 0;
+     a{
+        font-weight: bold;
+        font-size: 19px;
+     }
+   }
+  table{
+    tr{
+      th{
+        background: white;
+        color: #77b200;
+      }
+    }
+  }
+  ul{
+    margin:0;
+    padding:0;
+    li{
+      list-style: none;
+      line-height: 30px;
+      color: #54728E;
+      a{
+        font-weight: bold;
+        font-size: 19px;
+      }
+      &:before{
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        content: "\f046";
+        display: inline-block;
+        padding-right: 10px;
+        color: #1DABDD;
+      }
+    }
+  }
+  #first_row{
+  background: $service_mp_bg;
+  padding: 50px;
+  }
+  #middle_row{
+    padding:65px;
+    background:$service_content_bg;
+    .content_right_section{
+       padding:15px 50px;
+       .content_block{
+          background: #77b200;
+          padding: 25px;
+       }
+    }
+  }
+  .footer_row{
+    padding:20px;
+    ul{
+      margin:0px;
+      padding:0px;
+      margin-top:15px;
+      li{
+        list-style: none;
+        background:$twitter;
+        border-radius: 3px;
+        color:#fff;
+        font-size:15px;
+        display: inline-block;
+        padding:6px 10px;
+        margin:5px 0;
+        &:before{
+          width:0;
+          padding:0;
+        }
+      }
+    }
+  }
+}
+/* python services */
