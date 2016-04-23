@@ -14,6 +14,7 @@ class pages_forms_test(TestCase):
                 'title': 'Page',
                 'content': 'page_content',
                 'slug' : 'slug',
+                'meta_title' : 'meta_title',
                 'meta_description': 'description',
                 'keywords': 'keywords'
             })
@@ -46,9 +47,10 @@ class pages_models_test(TestCase):
             title="simple page",
             content="simple page content",
             slug="page",
+            meta_title="meta_title",
             meta_description="description",
             keywords="keywords"):
-        return Page.objects.create(title=title, content=content, slug=slug, meta_description=meta_description, keywords=keywords)
+        return Page.objects.create(title=title, content=content, slug=slug, meta_title=meta_title, meta_description=meta_description, keywords=keywords)
 
     def test_whatever_creation(self):
         w = self.create_page()
@@ -162,6 +164,7 @@ class pages_views_test(TestCase):
                 'title': 'Page2',
                 'content': 'page_content',
                 'slug' : 'slug',
+                'meta_title' : 'meta_title',
                 'meta_description': 'meta_description',
                 'keywords': 'keywords'
             })
@@ -227,6 +230,7 @@ class pages_views_test(TestCase):
                 'title': 'Page',
                 'content': 'page_content',
                 'slug' : 'page',
+                'meta_title' : 'meta_title',
                 'meta_description': 'meta_description',
                 'keywords': 'keywords'
             })
