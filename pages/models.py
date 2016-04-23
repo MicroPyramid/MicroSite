@@ -7,22 +7,22 @@ from micro_blog.models import Category
 class Page(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
     meta_description = models.TextField()
     keywords = models.TextField()
     category = models.ManyToManyField(Category)
 
-    def save(self, *args, **kwargs):
-        tempslug = slugify(self.title)
-        if self.id:
-            existed_page = Page.objects.get(pk=self.id)
-            if existed_page.title != self.title:
-                self.slug = create_slug(tempslug)
-        else:
-            self.slug = create_slug(tempslug)
+    # def save(self, *args, **kwargs):
+    #     tempslug = slugify(self.title)
+    #     if self.id:
+    #         existed_page = Page.objects.get(pk=self.id)
+    #         if existed_page.title != self.title:
+    #             self.slug = create_slug(tempslug)
+    #     else:
+    #         self.slug = create_slug(tempslug)
 
-        super(Page, self).save(*args, **kwargs)
+    #     super(Page, self).save(*args, **kwargs)
 
     def all_categories(self):
         categories = Category.objects.all()

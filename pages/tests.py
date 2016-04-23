@@ -13,6 +13,7 @@ class pages_forms_test(TestCase):
             data={
                 'title': 'Page',
                 'content': 'page_content',
+                'slug' : 'slug',
                 'meta_description': 'description',
                 'keywords': 'keywords'
             })
@@ -44,9 +45,10 @@ class pages_models_test(TestCase):
             self,
             title="simple page",
             content="simple page content",
+            slug="page",
             meta_description="description",
             keywords="keywords"):
-        return Page.objects.create(title=title, content=content, meta_description=meta_description, keywords=keywords)
+        return Page.objects.create(title=title, content=content, slug=slug, meta_description=meta_description, keywords=keywords)
 
     def test_whatever_creation(self):
         w = self.create_page()
@@ -138,7 +140,7 @@ class pages_views_test(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser(
             'pyramid@mp.com', 'microtest', 'mp')
-        self.page = Page.objects.create(title='Page', content='page_content')
+        self.page = Page.objects.create(title='Page', content='page_content', slug='page')
         # self.menu = Menu.objects.create(title='main', url='micro.in', status='on', lvl=1)
 
     def test_views(self):
@@ -159,6 +161,7 @@ class pages_views_test(TestCase):
             {
                 'title': 'Page2',
                 'content': 'page_content',
+                'slug' : 'slug',
                 'meta_description': 'meta_description',
                 'keywords': 'keywords'
             })
@@ -218,12 +221,12 @@ class pages_views_test(TestCase):
 
         response = self.client.get('/portal/content/menu/')
         self.assertEqual(response.status_code, 200)
-
         response = self.client.post(
             '/portal/content/page/edit/'+str(self.page.id)+'/',
             {
                 'title': 'Page',
                 'content': 'page_content',
+                'slug' : 'page',
                 'meta_description': 'meta_description',
                 'keywords': 'keywords'
             })
@@ -299,6 +302,7 @@ class pages_views_test(TestCase):
 
         response = self.client.get('/'+str(self.page.slug)+'/')
         self.assertEqual(response.status_code, 200)
+        
 
         response = self.client.get(
             '/portal/content/page/delete/'+str(self.page.id)+'/')

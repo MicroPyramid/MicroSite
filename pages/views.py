@@ -8,6 +8,7 @@ from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
+from django.template.defaultfilters import slugify
 
 
 @login_required
@@ -22,7 +23,9 @@ def new_page(request):
     if request.method == 'POST':
         validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            page = validate_page.save()
+            page = validate_page.save(commit = False)
+            page.slug = slugify(request.POST.get('slug'))
+            page.save()
             page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
         else:
@@ -60,7 +63,9 @@ def edit_page(request, pk):
     if request.method == 'POST':
         validate_page = PageForm(request.POST, instance=page)
         if validate_page.is_valid():
-            page = validate_page.save()
+            page = validate_page.save(commit = False)
+            page.slug = slugify(request.POST.get('slug'))
+            page.save()
             page.category.clear()
             page.category.add(*request.POST.getlist('category'))
 
