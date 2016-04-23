@@ -5,10 +5,11 @@ from micro_blog.models import Category
 
 
 class Page(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
     content = models.TextField()
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
+    meta_title = models.TextField()
     meta_description = models.TextField()
     keywords = models.TextField()
     category = models.ManyToManyField(Category)
