@@ -9,6 +9,7 @@ class Page(models.Model):
     content = models.TextField()
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
+    meta_title = models.TextField()
     meta_description = models.TextField()
     keywords = models.TextField()
     category = models.ManyToManyField(Category)
