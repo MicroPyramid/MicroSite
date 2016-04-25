@@ -26,16 +26,7 @@
 
 {% block stage %}
 <div class="scroller" id='container_wrapper'>
-   <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
-      <ul>
-         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
-         </li>
-         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="{{request.path}}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ page.title|capfirst }}</span></a>
-         </li>
-      </ul>
-   </div>
+
 {{ page.content | safe }}
 
 {% if page.category.all %}
