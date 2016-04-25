@@ -401,11 +401,20 @@
         $(this).hover();
       });
     </script>
-    <script type="text/javascript">
-
-    </script>
 
     {% endcompress %}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+        $(window).scroll(function(e){
+        if($(window).scrollTop()  >70){
+           $('#base_menu').css({"padding-top": "0", "padding-bottom": "0","transition": "0.4s ease-in-out"});
+           }
+        else{
+            $('#base_menu').css({"padding-top": "8px", "padding-bottom": "2px","transition": "0.4s ease-in-out"});
+            }
+        })
+        });
+    </script>
     {% block extra-js %}
     {% endblock %}
 
