@@ -17,7 +17,7 @@ from pages.models import simplecontact, Menu
 
 def index(request):
     if request.user.is_authenticated():
-        return render_to_response('admin/index.html', context_instance=RequestContext(request))
+        return render(request, 'admin/index.html', {})
     if request.method == "POST":
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:
@@ -30,7 +30,7 @@ def index(request):
             data = {'error': True, 'message': "The username and password are incorrect."}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
-        return render_to_response('admin/login.html', context_instance=RequestContext(request))
+        return render(request, 'admin/login.html', {})
 
 
 def out(request):
@@ -44,7 +44,7 @@ def out(request):
 @login_required
 def contacts(request):
     if not request.user.is_superuser:
-        return render(request, 'admin/accessdenied.html')
+        return render(request, 'admin/accessdenied.html', {})
     contacts = simplecontact.objects.all()
     return render(request, 'admin/content/contacts/simplecontact.html', {'contacts': contacts})
 
@@ -57,7 +57,7 @@ def delete_contact(request, pk):
         data = {'error': False, 'response': 'contact deleted successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
-        return render(request, 'admin/accessdenied.html')
+        return render(request, 'admin/accessdenied.html' {})
 
 
 @login_required
