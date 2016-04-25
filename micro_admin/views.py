@@ -25,7 +25,7 @@ def index(request):
                 login(request, user)
                 data = {'error': False}
             else:
-                data = {'error': True, 'message': "The password is valid, but the account has been disabled!"}
+                data = {'error': True, 'message': "Your account has been disabled!"}
         else:
             data = {'error': True, 'message': "The username and password are incorrect."}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
