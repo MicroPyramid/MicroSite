@@ -69,7 +69,7 @@ class Views_test(TestCase):
 class test_portal_admin(TestCase):
 
     '''
-    setup user and "login" with user
+    setup user then "login" with the same user
     '''
 
     def setUp(self):
