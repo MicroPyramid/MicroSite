@@ -360,13 +360,21 @@ body{
     @media (min-width: $mob_min) and (max-width:$smob_max){
       font-size: 2em;
       display: inline-block;
+      margin-top: 25px;
     }
   }
   .logo{
+    @media (min-width: $mob_min) and (max-width:$smob_max){
+     float: right;
+     display: inline-block;
+    }
     img{
-      position: relative;
-      top: 8px;
-      left: 10px;
+     position: relative;
+     top: 8px;
+     left: 10px;
+     @media (min-width: $mob_min) and (max-width:$smob_max){
+       top:0;
+      }
     }
   }
   @media (min-width: $mob_min) and (max-width:$smob_max){
@@ -702,6 +710,9 @@ body{
       list-style: none;
       display: inline-block;
       padding: 0px 5px;
+      @media(min-width: $mob_min) and (max-width:$smob_max){
+       padding:0;
+      }
       a {
         font-size: 24px;
         margin: 0px 3px;
