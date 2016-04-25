@@ -1,7 +1,7 @@
 import json
 import string
 import random
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -30,7 +30,7 @@ def index(request):
             data = {'error': True, 'message': "The username and password are incorrect."}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
-        return render(request, 'admin/login.html', {})
+        return render(request, 'admin/login.html')
 
 
 def out(request):
@@ -44,7 +44,7 @@ def out(request):
 @login_required
 def contacts(request):
     if not request.user.is_superuser:
-        return render(request, 'admin/accessdenied.html', {})
+        return render(request, 'admin/accessdenied.html')
     contacts = simplecontact.objects.all()
     return render(request, 'admin/content/contacts/simplecontact.html', {'contacts': contacts})
 
@@ -57,7 +57,7 @@ def delete_contact(request, pk):
         data = {'error': False, 'response': 'contact deleted successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
-        return render(request, 'admin/accessdenied.html' {})
+        return render(request, 'admin/accessdenied.html')
 
 
 @login_required
