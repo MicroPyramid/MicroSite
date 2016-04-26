@@ -1430,9 +1430,13 @@ body{
   padding:10px 5px;
   .contact_mob{
     font-size: 27px;
-    color: $theme_green;
+    color: #fff;
     cursor: pointer;
-    padding-top:8px;
+    position: fixed;
+    top: 125px;
+    right: 0;
+    background: $theme_green;
+    padding: 5px;
   }
   .menu_navigator{
     color:#444;
@@ -1444,6 +1448,7 @@ body{
   }
   .logo{
     display: inline-block;
+    float: right;
     .image_wrap{
       padding-left:10px;
       img{
@@ -3840,7 +3845,7 @@ body{
   padding:0px 5px;
   #trigger{
     @media(min-width:$mob_min) and (max-width:$smob_max){
-      top:-17px!important;
+      top:15px!important;
     }
   }
   .logo{
