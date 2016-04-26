@@ -120,7 +120,7 @@ class test_portal_admin(TestCase):
             '/portal/', {'email': 'inactive@mp.com', 'password': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            str('"message": "The password is valid, but the account has been disabled!"') in response.content.decode('utf8'))
+            str('"message": "Your account has been disabled!"') in response.content.decode('utf8'))
 
         # Testcase for user login with correct input
         response = self.client.post(
