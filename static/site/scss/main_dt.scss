@@ -4476,6 +4476,14 @@ body{
       .content_block{
         background: #77b200;
         padding: 25px;
+        ul{
+           li{
+              color:white !important;
+              &:before{
+                color:darken(#77b200, 25%) !important;
+              }
+            }
+          }
       }
     }
   }
