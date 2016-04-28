@@ -23,7 +23,7 @@ class pages_forms_test(TestCase):
     def test_Menuform(self):
         self.client = Client()
         form = MenuForm(
-            data={'title': 'main', 'url': 'micro.in', 'status': 'on'})
+            data={'title': 'main', 'status': 'on'})
         self.assertTrue(form.is_valid())
 
     def test_SimpleContactForm(self):
@@ -259,7 +259,7 @@ class pages_views_test(TestCase):
         self.assertTrue(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/menu/edit/1/', {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on'})
+            '/portal/content/menu/edit/1/', {'title': 'main2', 'status': 'on'})
         self.assertTrue(response.status_code, 200)
         self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
@@ -294,7 +294,7 @@ class pages_views_test(TestCase):
         self.assertTrue(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/menu/edit/1/', {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 2})
+            '/portal/content/menu/edit/1/', {'title': 'main2', 'status': 'on', 'parent': 2})
         self.assertTrue(response.status_code, 200)
         self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
