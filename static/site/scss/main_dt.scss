@@ -397,12 +397,16 @@ body{
     li{
       display: inline-block;
       list-style: none;
-      padding: 0px;
+      padding: 15px;
       margin: 0px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #4c4c4c;
       position: relative;
       &:hover{
+      border-bottom: 2px solid $theme_green;
         a{
-          border-bottom: 2px solid $theme_green;
+          /*border-bottom: 2px solid $theme_green;*/
         }
         ul{
           display: block;
@@ -416,12 +420,11 @@ body{
       }
       a{
         display: inline-block;
-        padding: 15px;
         text-transform: uppercase;
         font-weight: 600;
         color: #4c4c4c;
         //color: #fff;
-        border-bottom: 2px solid transparent;
+        /*border-bottom: 2px solid transparent;*/
       }
       ul{
         position: absolute;
@@ -431,12 +434,15 @@ body{
         background: #fff;
         min-width: 210px;
         //box-shadow: $menu_shadow;
+        top:52px;
+        left:0;
         border:1px solid $stroke_color;
         li{
           display: block;
           border-bottom:1px solid $stroke_color;
           //margin-bottom: 5px;
           //box-shadow: $menu_shadow;
+          padding:0;
           a{
             display: block;
             border:none;
@@ -4511,3 +4517,4 @@ body{
   }
 }
 /* python services */
+

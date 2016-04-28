@@ -133,8 +133,8 @@ def add_menu(request):
 
             menu_count = Menu.objects.filter(parent=new_menu.parent).count()
             new_menu.lvl = menu_count + 1
-            if new_menu.url[-1] != '/':
-                new_menu.url = new_menu.url+'/'
+            if request.POST.get('url'):
+                new_menu.url = request.POST.get('url')
 
             new_menu.save()
             data = {"error": False, 'response': 'Menu created successfully'}
@@ -180,8 +180,10 @@ def edit_menu(request, pk):
                     for i in Menu.objects.filter(parent=current_parent, lvl__gt=current_lvl, lvl__lte=lvlmax):
                         i.lvl = i.lvl-1
                         i.save()
-            if updated_menu.url[-1] != '/':
-                updated_menu.url = updated_menu.url+'/'
+            if request.POST.get('url'):
+                updated_menu.url = request.POST.get('url')
+            else:
+                updated_menu.url = 'none'
 
             if request.POST.get('status', ''):
                 updated_menu.status = 'on'

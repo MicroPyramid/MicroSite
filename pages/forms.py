@@ -14,8 +14,7 @@ class MenuForm(forms.ModelForm):
 
     class Meta:
         model = Menu
-        exclude = ('lvl',)
-
+        exclude = ('lvl', 'url')
 
 class SimpleContactForm(forms.ModelForm):
     class Meta:

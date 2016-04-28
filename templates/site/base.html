@@ -302,7 +302,7 @@
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                  <li><a href="{{menu.url}}">{{menu.title}}</a>
+                  <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
                   </li>
                 {% endloop %}
@@ -323,7 +323,7 @@
                   <ul class="inner-footer-list">
                     <li><a href="/">Home</a></li>
                     {% for menu in menu_list %}
-                      <li><a href="{{menu.url}}">{{menu.title|capfirst}}</a></li>
+                      <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                     <li><a href="/contact-us/">Contact Us</a></li>
                     <li><a href="/subscribe/">Subscribe</a></li>
