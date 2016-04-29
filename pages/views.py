@@ -134,7 +134,7 @@ def add_menu(request):
             menu_count = Menu.objects.filter(parent=new_menu.parent).count()
             new_menu.lvl = menu_count + 1
             if request.POST.get('url'):
-                new_menu.url = request.POST.get('url')
+                new_menu.url = request.POST.get('url').rstrip('/')
 
             new_menu.save()
             data = {"error": False, 'response': 'Menu created successfully'}
@@ -181,7 +181,7 @@ def edit_menu(request, pk):
                         i.lvl = i.lvl-1
                         i.save()
             if request.POST.get('url'):
-                updated_menu.url = request.POST.get('url')
+                updated_menu.url = request.POST.get('url').rstrip('/')
             else:
                 updated_menu.url = 'none'
 
