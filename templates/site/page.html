@@ -2,7 +2,7 @@
 {% load recurse %}
 {% load menu %}
 {% block title %}
-  {{ page.title|capfirst }} | {{ block.super }}
+  {{ page.title|capfirst }}{{ block.super }}
 {% endblock %}
   {% block extra-js %}
     {% if page.title|slugify  == 'web-design'|slugify %}
