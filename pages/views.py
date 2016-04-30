@@ -8,6 +8,7 @@ from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
+from django.template.defaultfilters import slugify
 
 
 @login_required
@@ -22,7 +23,9 @@ def new_page(request):
     if request.method == 'POST':
         validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            page = validate_page.save()
+            page = validate_page.save(commit = False)
+            page.slug = slugify(request.POST.get('slug'))
+            page.save()
             page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
         else:
@@ -60,7 +63,9 @@ def edit_page(request, pk):
     if request.method == 'POST':
         validate_page = PageForm(request.POST, instance=page)
         if validate_page.is_valid():
-            page = validate_page.save()
+            page = validate_page.save(commit = False)
+            page.slug = slugify(request.POST.get('slug'))
+            page.save()
             page.category.clear()
             page.category.add(*request.POST.getlist('category'))
 
@@ -128,8 +133,8 @@ def add_menu(request):
 
             menu_count = Menu.objects.filter(parent=new_menu.parent).count()
             new_menu.lvl = menu_count + 1
-            if new_menu.url[-1] != '/':
-                new_menu.url = new_menu.url+'/'
+            if request.POST.get('url'):
+                new_menu.url = request.POST.get('url').rstrip('/')
 
             new_menu.save()
             data = {"error": False, 'response': 'Menu created successfully'}
@@ -175,8 +180,10 @@ def edit_menu(request, pk):
                     for i in Menu.objects.filter(parent=current_parent, lvl__gt=current_lvl, lvl__lte=lvlmax):
                         i.lvl = i.lvl-1
                         i.save()
-            if updated_menu.url[-1] != '/':
-                updated_menu.url = updated_menu.url+'/'
+            if request.POST.get('url'):
+                updated_menu.url = request.POST.get('url').rstrip('/')
+            else:
+                updated_menu.url = 'none'
 
             if request.POST.get('status', ''):
                 updated_menu.status = 'on'

@@ -14,12 +14,6 @@ def sitemap(request):
              <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
-    xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>'
-
-    pages = Page.objects.filter(is_active=True)
-    for page in pages:
-        xml = xml + '<url><loc>https://micropyramid.com/' + page.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
-
     menus = Menu.objects.filter()
     for menu in menus:
         xml = xml + '<url><loc>' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'

@@ -58,7 +58,7 @@
     <!-- push menu -->
     <div class="mp-pusher" id="mp-pusher">
       <!-- mp-menu -->
-{% if request.session.design|slugify == 'mobile'|slugify %}
+    {% if request.session.design|slugify == 'mobile'|slugify %}
 
       <nav id="mp-menu" class="mp-menu">
         {% include 'site/side-bar-menu.html' %}
@@ -185,16 +185,11 @@
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                <li><a href="{{menu.url}}">{{menu.title}}</a>
-                  {% child %}
+                <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}{% child %}
                 </li>
                 {% endloop %}
               </ul>
               {% endrecurse %}
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/careers/">Careers</a></li>
-              </ul>
               <div class="clearfix"></div>
             </div>
             <!--/ menu -->

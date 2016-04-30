@@ -5,24 +5,25 @@ from micro_blog.models import Category
 
 
 class Page(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
     content = models.TextField()
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=True)
+    meta_title = models.TextField()
     meta_description = models.TextField()
     keywords = models.TextField()
     category = models.ManyToManyField(Category)
 
-    def save(self, *args, **kwargs):
-        tempslug = slugify(self.title)
-        if self.id:
-            existed_page = Page.objects.get(pk=self.id)
-            if existed_page.title != self.title:
-                self.slug = create_slug(tempslug)
-        else:
-            self.slug = create_slug(tempslug)
+    # def save(self, *args, **kwargs):
+    #     tempslug = slugify(self.title)
+    #     if self.id:
+    #         existed_page = Page.objects.get(pk=self.id)
+    #         if existed_page.title != self.title:
+    #             self.slug = create_slug(tempslug)
+    #     else:
+    #         self.slug = create_slug(tempslug)
 
-        super(Page, self).save(*args, **kwargs)
+    #     super(Page, self).save(*args, **kwargs)
 
     def all_categories(self):
         categories = Category.objects.all()
@@ -70,7 +71,7 @@ class Contact(models.Model):
 class Menu(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True)
     title = models.CharField(max_length=255)
-    url = models.URLField(max_length=255)
+    url = models.URLField(max_length=255, blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=5, default="off", blank=True)

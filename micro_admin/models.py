@@ -68,6 +68,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def drafted_posts(self):
         return Post.objects.filter(user=self, status="D").count()
 
+    def is_site_admin(self):
+        if self.user_roles == "Admin" or self.is_superuser:
+            return True
+        return False
+
     class Meta:
         permissions = (
             ("blog_moderator", "Can enable or disable blog posts"),

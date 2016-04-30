@@ -5,6 +5,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Edit Blog Post</h3>
+      <a class="preview pull-right" title="preview" href="{% url 'micro_blog:blog_article' slug=blog_post.slug %}" target="_blank">Blog Preview</a>
   </div>
   <div class="panel-body">
     <form action="{% url 'micro_blog:edit_blog_post' blog_slug=blog_post.slug %}" method="POST" id="blogform" enctype="multipart/form-data">

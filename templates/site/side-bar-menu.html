@@ -12,7 +12,7 @@
   <ul>
     {% loop %}
     <li class="icon {% if menu.has_children %} icon-arrow-left {% endif %}">
-      <a href="{{menu.url}}">{% if menu.has_children %}<i class='fa fa-angle-left left_icon'></i>{% endif %}{{menu.title}}</a>
+      <a {% if menu.url|slugify != 'none' %} href="{{menu.url}}"{%endif%}>{% if menu.has_children %}<i class='fa fa-angle-left left_icon'></i>{% endif %}{{menu.title}}</a>
       {% child %}
     </li>
     {% endloop %}

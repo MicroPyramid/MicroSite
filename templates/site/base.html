@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>
-      {% block title %}
-      MicroPyramid | Django Web Application Development | Mobile App Development
+      {% block title %} - MicroPyramid
       {% endblock %}
     </title>
 
@@ -86,6 +85,7 @@
                   <div class='image_wrap'>
                     <!-- svg logo -->
                     <span class="logo_mp">
+                    <a href="/">
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="65px" height="50px"
                          viewBox="0 0 1047 470">
@@ -178,7 +178,8 @@
                                  682.60,29.40 682.42,20.11 693.00,15.65
                                  693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
                     </svg>
-                    <img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid - Django and Python Web Development">
+                    </a>
+                    <a href="/"><img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid - Django and Python Web Development"></a>
                     </span>
                     <!--/ svg logo -->
                   </div>
@@ -300,16 +301,12 @@
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                  <li><a href="{{menu.url}}">{{menu.title}}</a>
+                  <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
                   </li>
                 {% endloop %}
               </ul>
               {% endrecurse %}
-              <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/careers/">Careers</a></li>
-              </ul>
             </div>
             <!--/ menu -->
 
@@ -325,7 +322,7 @@
                   <ul class="inner-footer-list">
                     <li><a href="/">Home</a></li>
                     {% for menu in menu_list %}
-                      <li><a href="{{menu.url}}">{{menu.title|capfirst}}</a></li>
+                      <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                     <li><a href="/contact-us/">Contact Us</a></li>
                     <li><a href="/subscribe/">Subscribe</a></li>
@@ -405,11 +402,20 @@
         $(this).hover();
       });
     </script>
-    <script type="text/javascript">
-
-    </script>
 
     {% endcompress %}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+        $(window).scroll(function(e){
+        if($(window).scrollTop()  >70){
+           $('#base_menu').css({"padding-top": "0", "padding-bottom": "0","transition": "0.4s ease-in-out"});
+           }
+        else{
+            $('#base_menu').css({"padding-top": "8px", "padding-bottom": "2px","transition": "0.4s ease-in-out"});
+            }
+        })
+        });
+    </script>
     {% block extra-js %}
     {% endblock %}
 

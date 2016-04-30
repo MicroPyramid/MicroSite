@@ -19,7 +19,9 @@
             <th width="10%">Title (No. Of Posts)</th>
             <th width="10%">URL</th>
             <th width="10%">Status</th>
+            {% if request.user.is_site_admin %}
             <th width="8%">Actions</th>
+            {% endif %}
           </tr>
         </thead>
         <tbody>
@@ -36,10 +38,12 @@
               {% endif %}
               </a>
             </td>
+            {% if request.user.is_site_admin %}
             <td class="txt_center">
               <a href="{% url 'micro_blog:edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
-              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
+              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor delete_post "><i class="fa fa-trash-o"></i></a>
             </td>
+           {% endif %}
           </tr>
           {% endfor %}
         </tbody>
@@ -47,5 +51,17 @@
     </div>
   </div>
 </div>
+{% load compress %}
+{% compress js %}
+<script type="text/javascript">
+  $ = jQuery;
+  $(document).ready(function() {
+    $('.delete_post').click(function(e){
+      e.preventDefault();
+      if (confirm('Do you want to delete blog category?'))
+        window.location = $(this).attr("href")
+    });
+  });
+</script>
+{% endcompress %}
 {% endblock %}
-<!-- main content ends here-->
