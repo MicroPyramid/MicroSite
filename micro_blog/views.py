@@ -208,7 +208,7 @@ def blog_category(request, slug):
     slug = slug.lower()
     category = get_object_or_404(Category, slug=slug)
     blog_posts = Post.objects.filter(category=category, status="P").order_by(
-        '-updated_on').select_related("user").prefetch_related(
+        '-published_on').select_related("user").prefetch_related(
         Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
             to_attr="active_slugs"
         )

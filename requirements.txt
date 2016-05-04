@@ -1,6 +1,6 @@
 Babel==2.2.0
 Django==1.9.4
-Fabric==1.10.2
+Fabric3==1.10.2.post3
 Jinja2==2.8
 MarkupSafe==0.23
 PyYAML==3.11
