@@ -437,17 +437,6 @@ def delete_post(request, blog_slug):
         data = {"error": True, 'message': 'Admin or Owner can delete blog post'}
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
-
-@login_required
-def view_post(request, blog_slug):
-    blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
-    active_slug = blog_post.slug
-    if active_slug != blog_slug:
-        return redirect(reverse('micro_blog:view_post',
-            kwargs={'blog_slug': active_slug})
-        )
-    return render(request, 'admin/blog/view_post.html', {'post': blog_post})
-
 def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
