@@ -325,8 +325,7 @@ def new_post(request):
                 sending_msg.set_subject("New blog post has been created")
 
                 blog_url = 'https://www.micropyramid.com/blog/' + str(blog_post.slug) + '/'
-                message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category '
-                message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="' + blog_url + '">click here</a> to view the blog post in the site.</p>'
+                message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category ' + str(blog_post.category.name) + '.</p>'
 
                 sending_msg.set_html(message)
                 sending_msg.set_text('New blog post has been created')
