@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 # from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
-from pages.models import simplecontact, Contact
+from pages.models import Contact
 import math
 # from django.core.files.storage import default_storage
 from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
@@ -15,7 +15,7 @@ import datetime
 import json
 from micro_admin.models import User
 from ast import literal_eval
-from pages.forms import SimpleContactForm, ContactForm, SubscribeForm
+from pages.forms import ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
 from django.core.cache import cache
@@ -436,39 +436,21 @@ def delete_post(request, blog_slug):
         data = {"error": True, 'message': 'Admin or Owner can delete blog post'}
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
+
 def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
-    validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
     if 'enquery_type' in request.POST.keys():
-        if validate_simplecontact.is_valid() and validate_contact.is_valid():
-            contact = simplecontact.objects.create(
-                full_name=request.POST.get('full_name'), message=request.POST.get('message'),
-                email=request.POST.get('email'),
-                phone=request.POST.get('phone') if request.POST.get('phone') else False
-            )
+        if validate_contact.is_valid():
             Contact.objects.create(
-                contact_info=contact, domain=request.POST.get('domain'),
+                domain=request.POST.get('domain'),
                 domain_url=request.POST.get('domain_url'), country=request.POST.get('country'),
                 enquery_type=request.POST.get('enquery_type')
             )
         else:
             errors = {}
-            errors = dict(list((validate_simplecontact.errors).items()) + list((validate_contact.errors).items()))
-            data = {'error': True, 'errinfo': errors}
-            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-    else:
-        if validate_simplecontact.is_valid():
-            simplecontact.objects.get_or_create(
-                full_name=request.POST.get('full_name'), message=request.POST.get('message'),
-                email=request.POST.get('email'),
-                phone=request.POST.get('phone') if request.POST.get('phone') else False
-            )
-        else:
-            errors = {}
-            errors = dict((validate_simplecontact.errors).items())
-            data = {'error': True, 'errinfo': errors}
+            data = {'error': True, 'errinfo': validate_contact.errors}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "
