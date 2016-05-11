@@ -11,7 +11,7 @@ import sendgrid
 from django.core.cache import cache
 from micro_admin.models import User
 from microsite.settings import SG_USER, SG_PWD
-from pages.models import simplecontact, Menu
+from pages.models import Menu
 
 
 def index(request):
@@ -38,26 +38,6 @@ def out(request):
 
     logout(request)
     return HttpResponseRedirect('/portal/')
-
-
-@login_required
-def contacts(request):
-    if not request.user.is_superuser:
-        return render(request, 'admin/accessdenied.html')
-    contacts = simplecontact.objects.all()
-    return render(request, 'admin/content/contacts/simplecontact.html', {'contacts': contacts})
-
-
-@login_required
-def delete_contact(request, pk):
-    contact = simplecontact.objects.get(pk=pk)
-    if request.user.is_superuser:
-        contact.delete()
-        data = {'error': False, 'response': 'contact deleted successfully'}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-    else:
-        return render(request, 'admin/accessdenied.html')
-
 
 @login_required
 def clear_cache(request):
