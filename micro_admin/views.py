@@ -5,7 +5,6 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
 from django.db.models.aggregates import Max
 from django.core.exceptions import ObjectDoesNotExist
 import sendgrid
@@ -80,9 +79,9 @@ def menu_order(request, pk):
                 data = {'error': True, 'message': 'You cant move down.'}
             else:
                 try:
-                    down_link = Menu.objects.get(parent=link_parent, lvl=curr_link.lvl+1)
-                    curr_link.lvl = curr_link.lvl+1
-                    down_link.lvl = down_link.lvl-1
+                    down_link = Menu.objects.get(parent=link_parent, lvl=curr_link.lvl + 1)
+                    curr_link.lvl = curr_link.lvl + 1
+                    down_link.lvl = down_link.lvl - 1
                     curr_link.save()
                     down_link.save()
                 except ObjectDoesNotExist:
@@ -96,9 +95,9 @@ def menu_order(request, pk):
                 data = {'error': True, 'message': 'You cant move up.'}
             else:
                 try:
-                    up_link = Menu.objects.get(parent=link_parent, lvl=curr_link.lvl-1)
-                    curr_link.lvl = curr_link.lvl-1
-                    up_link.lvl = up_link.lvl+1
+                    up_link = Menu.objects.get(parent=link_parent, lvl=curr_link.lvl - 1)
+                    curr_link.lvl = curr_link.lvl - 1
+                    up_link.lvl = up_link.lvl + 1
                     curr_link.save()
                     up_link.save()
                 except ObjectDoesNotExist:

@@ -1,5 +1,4 @@
 from django.db import models
-from django.template.defaultfilters import slugify
 from django.core.exceptions import ObjectDoesNotExist
 from micro_blog.models import Category
 
