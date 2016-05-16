@@ -336,10 +336,6 @@ class micro_blogviews_get(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/blog/blog-edit.html')
 
-        response = self.client.post(
-                        '/blog/view-post/other-python-introduction/')
-        self.assertEqual(response.status_code, 200)
-
         # chnage menu status to off
         response = self.client.get(
                 '/blog/category/status/'+str(self.category.slug)+'/')

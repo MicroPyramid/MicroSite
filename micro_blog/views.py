@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 # from django.views.decorators.csrf import csrf_exempt
 from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
-from pages.models import simplecontact, Contact
+from pages.models import Contact
 import math
 # from django.core.files.storage import default_storage
 from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
@@ -15,7 +15,7 @@ import datetime
 import json
 from micro_admin.models import User
 from ast import literal_eval
-from pages.forms import SimpleContactForm, ContactForm, SubscribeForm
+from pages.forms import ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
 from django.core.cache import cache
@@ -208,7 +208,7 @@ def blog_category(request, slug):
     slug = slug.lower()
     category = get_object_or_404(Category, slug=slug)
     blog_posts = Post.objects.filter(category=category, status="P").order_by(
-        '-updated_on').select_related("user").prefetch_related(
+        '-published_on').select_related("user").prefetch_related(
         Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
             to_attr="active_slugs"
         )
@@ -325,8 +325,7 @@ def new_post(request):
                 sending_msg.set_subject("New blog post has been created")
 
                 blog_url = 'https://www.micropyramid.com/blog/' + str(blog_post.slug) + '/'
-                message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category '
-                message += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="' + blog_url + '">click here</a> to view the blog post in the site.</p>'
+                message = '<p>New blog post has been created by ' + str(request.user) + ' with the name ' + str(blog_post.title) + ' in the category ' + str(blog_post.category.name) + '.</p>'
 
                 sending_msg.set_html(message)
                 sending_msg.set_text('New blog post has been created')
@@ -438,49 +437,20 @@ def delete_post(request, blog_slug):
     return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
-@login_required
-def view_post(request, blog_slug):
-    blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
-    active_slug = blog_post.slug
-    if active_slug != blog_slug:
-        return redirect(reverse('micro_blog:view_post',
-            kwargs={'blog_slug': active_slug})
-        )
-    return render(request, 'admin/blog/view_post.html', {'post': blog_post})
-
 def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
-    validate_simplecontact = SimpleContactForm(request.POST)
     validate_contact = ContactForm(request.POST)
     if 'enquery_type' in request.POST.keys():
-        if validate_simplecontact.is_valid() and validate_contact.is_valid():
-            contact = simplecontact.objects.create(
-                full_name=request.POST.get('full_name'), message=request.POST.get('message'),
-                email=request.POST.get('email'),
-                phone=request.POST.get('phone') if request.POST.get('phone') else False
-            )
+        if validate_contact.is_valid():
             Contact.objects.create(
-                contact_info=contact, domain=request.POST.get('domain'),
+                domain=request.POST.get('domain'),
                 domain_url=request.POST.get('domain_url'), country=request.POST.get('country'),
                 enquery_type=request.POST.get('enquery_type')
             )
         else:
             errors = {}
-            errors = dict(list((validate_simplecontact.errors).items()) + list((validate_contact.errors).items()))
-            data = {'error': True, 'errinfo': errors}
-            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-    else:
-        if validate_simplecontact.is_valid():
-            simplecontact.objects.get_or_create(
-                full_name=request.POST.get('full_name'), message=request.POST.get('message'),
-                email=request.POST.get('email'),
-                phone=request.POST.get('phone') if request.POST.get('phone') else False
-            )
-        else:
-            errors = {}
-            errors = dict((validate_simplecontact.errors).items())
-            data = {'error': True, 'errinfo': errors}
+            data = {'error': True, 'errinfo': validate_contact.errors}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "

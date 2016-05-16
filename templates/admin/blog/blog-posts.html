@@ -33,7 +33,7 @@
           {% for post in blog_posts %}
           <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% elif post.status == 'R' %}review{% else %}danger{% endif %}">
             <td>{{post.id}}</td>
-            <td><a href="/blog/view-post/{{post.active_slugs.0.slug}}" class="title">{{post.title}}</a></td>
+            <td><a href="{% url 'micro_blog:blog_article' slug=post.active_slugs.0.slug %}" target="_blank" title="View on site" class="title">{{post.title}}</a></td>
             {% if request.user.is_site_admin %}
             <td class="txt_center change_user" id="{{post.id}}">
             <form method="post" id="change_user_form_{{post.id}}" action="{% url 'micro_blog:admin_post_list' %}">{% csrf_token %}

@@ -1,5 +1,5 @@
 from django import forms
-from pages.models import Page, Menu, simplecontact, Contact
+from pages.models import Page, Menu, Contact
 from micro_blog.models import Subscribers, Category
 
 
@@ -16,13 +16,11 @@ class MenuForm(forms.ModelForm):
         model = Menu
         exclude = ('lvl', 'url')
 
-class SimpleContactForm(forms.ModelForm):
-    class Meta:
-        model = simplecontact
-        fields = ('full_name', 'message', 'email', 'phone')
-
 
 class ContactForm(forms.ModelForm):
+    email = forms.EmailField()
+    full_name = forms.CharField(max_length=200)
+    message = forms.CharField(max_length=200)
     class Meta:
         model = Contact
         exclude = ('full_name', 'message', 'email', 'phone', 'contact_info')

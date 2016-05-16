@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.test import Client
-from pages.forms import PageForm, MenuForm, SimpleContactForm
+from pages.forms import PageForm, MenuForm
 from micro_admin.models import User
-from pages.models import Page, simplecontact, Contact
+from pages.models import Page, Contact
 
 
 class pages_forms_test(TestCase):
@@ -26,18 +26,6 @@ class pages_forms_test(TestCase):
             data={'title': 'main', 'status': 'on'})
         self.assertTrue(form.is_valid())
 
-    def test_SimpleContactForm(self):
-        self.client = Client()
-        form = SimpleContactForm(
-            data={'full_name': 'ashwin', 'message': 'sample', 'email': 'john@gmail.com', 'phone': '9876543210'})
-        self.assertTrue(form.is_valid())
-
-    def test_ContactForm(self):
-        self.client = Client()
-        form = SimpleContactForm(
-            data={'full_name': 'ashwin', 'message': 'sample', 'email': 'john@gmail.com', 'phone': '94'})
-        self.assertTrue(form.is_valid())
-
 
 # models test
 class pages_models_test(TestCase):
@@ -58,17 +46,6 @@ class pages_models_test(TestCase):
         self.assertEqual(w.__unicode__(), w.title)
 
 
-class simplecontact_models_test(TestCase):
-
-    def create_simplecontact(self, full_name="simple page", message="simple page content", email='contact@mp.com'):
-        return simplecontact.objects.create(full_name=full_name, message=message, email=email)
-
-    def test_simplecontact_creation(self):
-        w = self.create_simplecontact()
-        self.assertTrue(isinstance(w, simplecontact))
-        self.assertEqual(w.__unicode__(), w.full_name)
-
-
 class contact_models_test(TestCase):
 
     def create_contact(
@@ -79,20 +56,15 @@ class contact_models_test(TestCase):
             full_name="simple page",
             message="simple page content",
             email='contact@mp.com'):
-        simple_contact = simplecontact.objects.create(
-            full_name=full_name,
-            message=message, email=email)
         return Contact.objects.create(
             domain="https://micropyramid.com",
             domain_url="https://micropyramid.com",
             country="india",
-            enquery_type="feedback",
-            contact_info=simple_contact)
+            enquery_type="feedback")
 
     def test_whatever_creation(self):
         w = self.create_contact()
         self.assertTrue(isinstance(w, Contact))
-        self.assertEqual(w.__unicode__(), w.contact_info.full_name)
 
 
 class pages_views_test_with_employee(TestCase):

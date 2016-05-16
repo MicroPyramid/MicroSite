@@ -4,7 +4,6 @@ from django.test import (TestCase,
 from micro_admin.forms import *
 from django.test import Client
 from micro_admin.models import (User, career)
-from pages.models import simplecontact
 from django.core.urlresolvers import reverse
 
 
@@ -49,9 +48,6 @@ class Views_test(TestCase):
         response = self.client.get('/portal/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('/portal/contacts/')
-        self.assertEqual(response.status_code, 302)
-
         # Testcase for user logout without login
         response = self.client.get('/portal/out/')
         self.assertEqual(response.status_code, 200)
@@ -82,11 +78,6 @@ class test_portal_admin(TestCase):
         self.inactive_user.save()
         self.employee = User.objects.create_user(
             'testemployee', "test@gmail.com", 'pwd')
-        self.simplecontact = simplecontact.objects.create(
-                full_name='mp', message='test message',
-                email='testuser@mp.com',
-                phone='1234567890'
-            )
 
     def test_user_index(self):
         # Testcase for forgot password with wrong input
@@ -130,14 +121,6 @@ class test_portal_admin(TestCase):
     def test_views_user(self):
         user_login = self.client.login(username='mp@mp.com', password='mp')
         self.assertTrue(user_login)
-
-        response = self.client.get('/portal/contacts/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, 'admin/content/contacts/simplecontact.html')
-
-        resp = self.client.get('/portal/contacts/' + str(self.simplecontact.id) + '/')
-        self.assertEqual(resp.status_code, 200)
 
         resp = self.client.get('/portal/clear_cache/')
         self.assertEqual(resp.status_code, 302)
