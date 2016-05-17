@@ -3,7 +3,7 @@ from django.conf import settings
 from micro_blog.views import contact, subscribe
 import microsite_front
 from pages.views import site_page
-from microsite_front.xml import rss, blog_rss, sitemap
+from microsite_front.xml import rss, blog_rss, sitemap, facebook_rss
 from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books, oss
 from search.views import autocomplete
 from django.views.static import serve
@@ -26,11 +26,13 @@ urlpatterns = [
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^sitemap/$', html_sitemap),
     url(r'^(?P<slug>[-\w]+)/$', site_page),
+    url(r'^facebook.rss$', facebook_rss),
     url(r'^rss.xml$', rss),
     url(r'^blog.rss$', blog_rss),
     url(r'^sitemap.xml$', sitemap),
     url(r'^search/autocomplete/$', autocomplete),
 ]
+
 
 handler404 = microsite_front.views.handler404
 handler500 = microsite_front.views.handler500
