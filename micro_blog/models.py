@@ -84,6 +84,9 @@ class Post(models.Model):
     updated_on = models.DateField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
+    short_description = models.CharField(
+        max_length=250, default="",
+        help_text="This will be displayed in the site blog list pages.")
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
