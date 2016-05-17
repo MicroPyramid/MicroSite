@@ -26,6 +26,17 @@
         {% endfor %}
       </div>
       <div class="form-group">
+        <label for="exampleInputPassword1">Excerpt</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <textarea class="input-xlarge" id="excerpt" name="excerpt" style="margin: 0px; width: 96%;  height: 93px;">{% if blog_form.excerpt.value %}{{blog_form.excerpt.value}}{% endif %}</textarea>
+          </div>
+          {% for error in blog_form.excerpt.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
         <label class="control-label" for="html">Blog Post Description</label>
         <div class="control-group">
           <div class="controls" id="content">

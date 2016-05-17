@@ -1,5 +1,5 @@
 from django import template
-from micro_blog.models import Tags, Category, Post
+from micro_blog.models import Tags, Category, Post, Post_Slugs
 from pages.models import Menu
 from django.db.models import Count, Prefetch
 
@@ -22,7 +22,15 @@ def get_categories(context):
 
 @register.assignment_tag(takes_context=True)
 def get_latest_posts(context):
-    return Post.objects.filter(status='P').order_by('-published_on')[:3]
+    return Post.objects.filter(status='P').order_by(
+        '-published_on'
+    ).select_related("user").prefetch_related(
+        Prefetch(
+            "slugs",
+            queryset=Post_Slugs.objects.filter(is_active=True),
+            to_attr="active_slugs"
+        )
+    )[:3]
 
 
 @register.assignment_tag(takes_context=True)
