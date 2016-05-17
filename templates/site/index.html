@@ -650,7 +650,11 @@
                     <div class="blog_description">
                       <div class="description-detail" id="/blog/{{post.slug}}/">
                         <div itemprop="description">
-                          {{ post.get_content|truncatewords:350 }}...
+                          {% if post.excerpt %}
+                            {{ post.excerpt }}
+                          {% else %}
+                            {{ post.get_content|truncatewords:350 }}...
+                          {% endif %}
                         </div>
                       </div>
                     </div>
