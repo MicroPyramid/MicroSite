@@ -101,10 +101,10 @@
           </div>
           <div class="blog-right">
             <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
-            {% if post.short_description %}
-              <p itemprop="description">{{ post.short_description|linebreaks }}</p>
+            {% if post.excerpt %}
+              <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
             {% else %}
-              <p itemprop="description">{{ post.content|striptags|truncatewords:50|safe }}</p>
+              <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
             {% endif %}
             <ul class="post-det">
               <li itemprop="author"><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>
