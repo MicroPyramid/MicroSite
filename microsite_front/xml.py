@@ -158,7 +158,7 @@ def facebook_rss(request):
             </description>
             <language>en-us</language>
             <lastBuildDate>2016-05-17T04:44:16Z</lastBuildDate>'''
-    posts = Post.objects.filter(status='P').order_by('-published_on')[:10]
+    posts = Post.objects.filter(status='P').order_by('-published_on')[:50]
 
     for post in posts:
         if post.published_on:
@@ -172,8 +172,8 @@ def facebook_rss(request):
         xml = xml + '<guid>' + str(post.slug) + '</guid>'
         xml = xml + '<pubDate>' + published_date + '</pubDate>'
         xml = xml + '<author>' + post.user.get_full_name() + '</author>'
-        xml = xml + '<description>' + post.get_content() + '</description>'
-        xml = xml + '<content:encoded><![CDATA[<!doctype html><html lang="en" prefix="op: http://media.facebook.com/op#">'
+        xml = xml + '<description>' + post.title + '</description>'
+        xml = xml + '<content:encoded><![CDATA[<    !doctype html><html lang="en" prefix="op: http://media.facebook.com/op#">'
         xml = xml + '<head><meta charset="utf-8">'
         xml = xml + '<link rel="canonical" href="https://micropyramid.com/blog/' + post.slug + '/">'
         xml = xml + '<meta property="op:markup_version" content="v1.0">'
@@ -181,7 +181,7 @@ def facebook_rss(request):
         xml = xml + '<header>'
         xml = xml + str(post.title) + ' - Micropyramid'
         xml = xml + '</header>'
-        xml = xml + str(post.content)
+        xml = xml + post.content
         xml = xml + '</article></body></html>]]>'
         xml = xml + '</content:encoded></item>'
 
