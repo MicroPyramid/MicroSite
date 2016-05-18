@@ -173,7 +173,7 @@ def facebook_rss(request):
         xml = xml + '<pubDate>' + published_date + '</pubDate>'
         xml = xml + '<author>' + post.user.get_full_name() + '</author>'
         xml = xml + '<description>' + post.title + '</description>'
-        xml = xml + '<content:encoded><![CDATA[<    !doctype html><html lang="en" prefix="op: http://media.facebook.com/op#">'
+        xml = xml + '<content:encoded><![CDATA[<!doctype html><html lang="en" prefix="op: http://media.facebook.com/op#">'
         xml = xml + '<head><meta charset="utf-8">'
         xml = xml + '<link rel="canonical" href="https://micropyramid.com/blog/' + post.slug + '/">'
         xml = xml + '<meta property="op:markup_version" content="v1.0">'

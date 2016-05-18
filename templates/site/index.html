@@ -11,6 +11,7 @@
       {% endblock %}
     </title>
 
+    <meta property="fb:pages" content="194798730671519" />
     <meta property="og:url" content="https://micropyramid.com/" />
     <meta property="og:image" content="https://micropyramid.com/static/site/images/new/logo.png" />
 
@@ -636,7 +637,7 @@
                       </div>
                     </div>
                     <div class="blog_title">
-                      <a href="/blog/{{post.slug}}/">
+                      <a href="/blog/{{ post.active_slugs.0.slug }}/">
                       <span itemprop="headline">{{ post.title }}</span>
                       </a>
                       <div class="author">
@@ -648,9 +649,13 @@
                       </div>
                     </div>
                     <div class="blog_description">
-                      <div class="description-detail" id="/blog/{{post.slug}}/">
+                      <div class="description-detail" id="/blog/{{ post.active_slugs.0.slug }}/">
                         <div itemprop="description">
-                          {{ post.get_content|truncatewords:350 }}...
+                          {% if post.excerpt %}
+                            {{ post.excerpt }}
+                          {% else %}
+                            {{ post.get_content|truncatewords:350 }}...
+                          {% endif %}
                         </div>
                       </div>
                     </div>

@@ -7,7 +7,8 @@ import django.db.models.deletion
 
 
 def generate_blog_slugs(apps, schema_editor):
-    from micro_blog.models import Post, Post_Slugs
+    Post = apps.get_model("micro_blog", "Post")
+    Post_Slugs = apps.get_model("micro_blog", "Post_Slugs")
     post_slugs = []
     for blog in Post.objects.all():
         post_slugs.append(

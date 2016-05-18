@@ -32,7 +32,8 @@ class micro_blog_forms_test(TestCase):
             data={
                 'title': 'python introduction', 'content': 'This is content',
                 'category': self.category.id, 'status': 'D',
-                'meta_description': 'meta', 'is_superuser': 'True'
+                'meta_description': 'meta', 'is_superuser': 'True',
+                'excerpt': "Description"
                 })
         self.assertTrue(form.is_valid())
 
@@ -447,7 +448,8 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['python-introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0'],
+            'excerpt': "Description"
         })
         self.assertRedirects(response, '/blog/list/')
 
@@ -457,7 +459,8 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['introduction-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0'],
+            'excerpt': "Description"})
         self.assertRedirects(response, '/blog/list/')
 
         response = self.client.post('/blog/new-post/', {
@@ -466,7 +469,8 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['test-python'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0'],
+            'excerpt': "Description"})
         self.assertRedirects(response, '/blog/list/')
 
         response = self.client.post('/blog/new-post/', {
@@ -475,7 +479,8 @@ class micro_blog_post_data(TestCase):
             'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
             'slugs-TOTAL_FORMS': ['3'], 'slugs-MIN_NUM_FORMS': ['0'],
             'slugs-0-slug': ['django-1'], 'slugs-1-slug': [''],
-            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0']})
+            'slugs-2-slug': [''], 'slugs-INITIAL_FORMS': ['0'],
+            'excerpt': "Description"})
         self.assertRedirects(response, '/blog/list/')
 
         response = self.client.post(
@@ -489,7 +494,8 @@ class micro_blog_post_data(TestCase):
                 'slugs-1-slug': [''], 'slugs-2-slug': [''],
                 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
                 'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on'],
-                'slugs-1-id': [''], 'slugs-2-id': [''], 'slugs-3-id': ['']
+                'slugs-1-id': [''], 'slugs-2-id': [''], 'slugs-3-id': [''],
+                'excerpt': "Description"
             }
         )
         self.assertRedirects(response, '/blog/list/')
@@ -498,6 +504,7 @@ class micro_blog_post_data(TestCase):
             '/blog/edit-post/python-introduction-1/',
             {
                 'title': 'python introduction',
+                'excerpt': "Description",
                 'content': 'This is edited content',
                 'category': self.category.id, 'status': 'P',
                 'meta_description': 'meta', 'slugs-MAX_NUM_FORMS': ['1000'],
@@ -528,7 +535,8 @@ class micro_blog_post_data(TestCase):
                 'slugs-0-slug': ['python-introduction-1'],
                 'slugs-1-slug': [''], 'slugs-2-slug': [''],
                 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
-                'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on']
+                'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on'],
+                'excerpt': "Description"
             }
         )
         self.assertRedirects(response, '/blog/list/')
@@ -543,7 +551,7 @@ class micro_blog_post_data(TestCase):
                 'slugs-0-slug': ['python-introduction-1'],
                 'slugs-1-slug': [''], 'slugs-2-slug': [''],
                 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
-                'slugs-INITIAL_FORMS': ['1']
+                'slugs-INITIAL_FORMS': ['1'], 'excerpt': "Description",
             }
         )
         self.assertEqual(response.status_code, 200)
@@ -563,6 +571,7 @@ class micro_blog_post_data(TestCase):
                 'slugs-0-slug': ['python-introduction-1'],
                 'slugs-1-slug': [''], 'slugs-2-slug': [''],
                 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
+                'excerpt': "Description",
                 'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on']
             }
         )
@@ -579,7 +588,7 @@ class micro_blog_post_data(TestCase):
                 'slugs-1-slug': [''], 'slugs-2-slug': [''],
                 'slugs-3-slug': [''], 'slugs-0-id': ['2'],
                 'slugs-INITIAL_FORMS': ['1'], 'slugs-0-is_active': ['on'],
-                'slugs-1-is_active': ['on']
+                'slugs-1-is_active': ['on'], 'excerpt': "Description",
             }
         )
         self.assertEqual(response.status_code, 200)
