@@ -84,6 +84,7 @@ class Post(models.Model):
     updated_on = models.DateField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
+    excerpt = models.CharField(max_length=500, default="")
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
