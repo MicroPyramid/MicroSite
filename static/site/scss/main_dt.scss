@@ -4231,6 +4231,7 @@ body{
                 display: table;
                 width: 100%;
                 margin-bottom: 0px;
+                padding: 0px 20px 0px 20px;
                 @media (min-width: $mob_min) and (max-width:$mob_max){
                     display: block;
                     margin-bottom: 15px;
@@ -4522,10 +4523,14 @@ body{
 .testimonials_row {
       background:#333;
       padding: 30px 30px;
+       @media (min-width: 360px) and (max-width: 768px){
+        padding:15px 0;
+       }
       /* carousel */           
       #quote-carousel {
         padding: 0 10px 30px 10px;
         margin-top: 30px;
+        min-height:250px;
         .carousel-control {
           background: none;
           color: #222;
@@ -4574,11 +4579,19 @@ body{
         img {
           margin-bottom: 10px;
         }
-        p:before {
-          content: "\f10d";
-          font-family: 'Fontawesome';
-          float: left;
-          margin-right: 10px;
+        p{
+          text-align:justify;
+         @media (min-width: 360px) and (max-width: 768px){
+            font-size:13px;
+            line-height:21px;
+            margin-top:15px;
+          }
+          &:before {
+            content: "\f10d";
+            font-family: 'Fontawesome';
+            float: left;
+            margin-right: 10px;
+          }
         }
       }
       small{
@@ -4596,15 +4609,21 @@ body{
         color:orange;
         text-align:center;
         font-size:25px;
-        margin-top:12px;
+        line-height:27px;
+        margin-top:35px;
+        @media (min-width: 360px) and (max-width: 768px){
+          font-size:20px;
+          line-height:25px;
+        }
       }
       /* MEDIA QUERIES */
       /* Small devices (tablets, 768px and up) */
       
-      @media (min-width: 768px) {
+      @media (min-width: 360px) and (max-width:768px) {
         #quote-carousel {
           margin-bottom: 0;
-          padding: 0 40px 30px 40px;
+          padding: 0 10px 10px 0px;
+          min-height:450px;
         }
       }
       /* Small devices (tablets, up to 768px) */
