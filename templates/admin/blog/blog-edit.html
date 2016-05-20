@@ -17,7 +17,6 @@
             <p class="failure">{{ error|escape }}</p>
         {% endfor %}
       </div>
-      
       <div class="form-group">
         <label for="exampleInputPassword1">Category</label>
         <select class="form-control" id="category" name="category">
@@ -35,6 +34,7 @@
           <div class="controls" id="content">
             <textarea class="input-xlarge" id="excerpt" name="excerpt" style="margin: 0px; width: 96%;  height: 93px;">{% if blog_form.excerpt.value %}{{blog_form.excerpt.value}}{% endif %}</textarea>
           </div>
+          <p id="Excerptcount"></p>
           {% for error in blog_form.excerpt.errors %}
               <p class="failure">{{ error|escape }}</p>
           {% endfor %}
@@ -155,6 +155,12 @@
    counting_words()
    $('#meta_description').keyup(function(event) {
      counting_words()
+   });
+   $('#excerpt').keyup(function(event) {
+       input_text = $('#excerpt').val();
+       char_length = input_text.length
+       word_length = input_text.split(' ').filter(Boolean).length;
+       $("#Excerptcount").text('Words: ' + word_length + ', Characters: ' +  char_length);
    });
 
   function onAddTag(tag) {
