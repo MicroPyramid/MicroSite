@@ -654,7 +654,7 @@
                           {% if post.excerpt %}
                             {{ post.excerpt }}
                           {% else %}
-                            {{ post.get_content|truncatewords:350 }}...
+                            {{post.content|safe|truncatewords:50}}...
                           {% endif %}
                         </div>
                       </div>

@@ -58,8 +58,8 @@
         <div class="author">{{ post.user.get_full_name }}</div>
       </div>
       <div class="blog_description">
-        <p>
-          {{ post.get_content|truncatewords:40 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
+        <p itemprop="description">
+          {{ post.excerpt|linebreaks|truncatewords:40 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
         </p>
       </div>
     </div>

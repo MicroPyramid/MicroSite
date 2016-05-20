@@ -131,7 +131,7 @@ def blog_rss(request):
         published_date = utils.formatdate(nowtimestamp)
 
         xml = xml + '<item><title><![CDATA[' + post.title + ']]></title>'
-        xml = xml + '<description><![CDATA[' + post.get_content() + ']]></description>'
+        xml = xml + '<description><![CDATA[' + post.excerpt + ']]></description>'
         xml = xml + '<link>https://micropyramid.com/blog/' + post.slug + '/</link>'
         xml = xml + '<category domain="micropyramid.com"><![CDATA[' + post.category.name + ']]></category>'
         xml = xml + '<comments>https://micropyramid.com/blog/' + post.slug + '/</comments>'
@@ -181,7 +181,7 @@ def facebook_rss(request):
         xml = xml + '<header>'
         xml = xml + str(post.title) + ' - Micropyramid'
         xml = xml + '</header>'
-        xml = xml + post.content
+        xml = xml + '<p>' + post.excerpt + '</p>'
         xml = xml + '</article></body></html>]]>'
         xml = xml + '</content:encoded></item>'
 

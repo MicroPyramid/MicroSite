@@ -31,6 +31,7 @@
           <div class="controls" id="content">
             <textarea class="input-xlarge" id="excerpt" name="excerpt" style="margin: 0px; width: 96%;  height: 93px;">{% if blog_form.excerpt.value %}{{blog_form.excerpt.value}}{% endif %}</textarea>
           </div>
+          <p id="Excerptcount"></p>
           {% for error in blog_form.excerpt.errors %}
               <p class="failure">{{ error|escape }}</p>
           {% endfor %}
@@ -151,6 +152,13 @@ $('#meta_description').keyup(function(event) {
    word_length = input_text.split(' ').filter(Boolean).length;
    $("#Wordcount").text('Words: ' + word_length + ', Characters: ' +  char_length);
 });
+   $('#excerpt').keyup(function(event) {
+       input_text = $('#excerpt').val();
+       char_length = input_text.length
+       word_length = input_text.split(' ').filter(Boolean).length;
+       $("#Excerptcount").text('Words: ' + word_length + ', Characters: ' +  char_length);
+   });
+
 </script>
 <script type="text/javascript">
   function onAddTag(tag) {
