@@ -4618,7 +4618,7 @@ body{
       }
       /* MEDIA QUERIES */
       /* Small devices (tablets, 768px and up) */
-      
+
       @media (min-width: 360px) and (max-width:768px) {
         #quote-carousel {
           margin-bottom: 0;
@@ -4626,6 +4626,15 @@ body{
           min-height:450px;
         }
       }
+
+       @media (min-width: 767px) and (max-width:1199px) {
+        #quote-carousel {
+          margin-bottom: 0;
+          padding: 0 10px 10px 0px;
+          min-height:275px;
+        }
+      }
+           
       /* Small devices (tablets, up to 768px) */
             
       @media (max-width: 768px) {
