@@ -4231,6 +4231,7 @@ body{
                 display: table;
                 width: 100%;
                 margin-bottom: 0px;
+                padding: 0px 20px 0px 20px;
                 @media (min-width: $mob_min) and (max-width:$mob_max){
                     display: block;
                     margin-bottom: 15px;
@@ -4518,3 +4519,141 @@ body{
 }
 /* python services */
 
+/* testimonials_row starts here */
+.testimonials_row {
+      background:#333;
+      padding: 30px 30px;
+       @media (min-width: 360px) and (max-width: 768px){
+        padding:15px 0;
+       }
+      /* carousel */           
+      #quote-carousel {
+        padding: 0 10px 30px 10px;
+        margin-top: 30px;
+        min-height:250px;
+        .carousel-control {
+          background: none;
+          color: #222;
+          font-size: 2.3em;
+          text-shadow: none;
+          margin-top: 30px;
+          &.left {
+            left: -12px;
+          }
+          &.right {
+            right: -12px !important;
+          }
+        }
+        .carousel-indicators {
+          right: 50%;
+          top: auto;
+          bottom: 0px;
+          margin-right: -19px;
+          li {
+            background: #c0c0c0;
+          }
+          .active {
+            background: #333333;
+          }
+        }
+        img {
+          width: 250px;
+          height: 100px;
+        }
+      }
+      /* Control buttons  */
+      /* Previous button  */
+      /* Next button  */
+      /* Changes the position of the indicators */
+      /* Changes the color of the indicators */
+      /* End carousel */
+            
+      .item blockquote {
+        border-left: none;
+        margin: 0;
+        min-height: 180px;
+        padding: 15px 0;
+        color: #eee;
+        font-size: 16px;
+        line-height:28px;
+        img {
+          margin-bottom: 10px;
+        }
+        p{
+          text-align:justify;
+         @media (min-width: 360px) and (max-width: 768px){
+            font-size:13px;
+            line-height:21px;
+            margin-top:15px;
+          }
+          &:before {
+            content: "\f10d";
+            font-family: 'Fontawesome';
+            float: left;
+            margin-right: 10px;
+          }
+        }
+      }
+      small{
+      color:$theme_green;
+      }
+      .profile_details{
+        span{
+          color:$theme_green;
+          display:block;
+          font-size:13px;
+          line-height:18.2px;
+        }
+      }
+      .happy-clients{
+        color:orange;
+        text-align:center;
+        font-size:25px;
+        line-height:27px;
+        margin-top:35px;
+        @media (min-width: 360px) and (max-width: 768px){
+          font-size:20px;
+          line-height:25px;
+        }
+      }
+      /* MEDIA QUERIES */
+      /* Small devices (tablets, 768px and up) */
+
+      @media (min-width: 360px) and (max-width:768px) {
+        #quote-carousel {
+          margin-bottom: 0;
+          padding: 0 10px 10px 0px;
+          min-height:450px;
+        }
+      }
+
+       @media (min-width: 767px) and (max-width:1199px) {
+        #quote-carousel {
+          margin-bottom: 0;
+          padding: 0 10px 10px 0px;
+          min-height:275px;
+        }
+      }
+           
+      /* Small devices (tablets, up to 768px) */
+            
+      @media (max-width: 768px) {
+        /* Make the indicators larger for easier clicking with fingers/thumb on mobile */
+                
+        #quote-carousel .carousel-indicators {
+          bottom: -20px !important;
+          li {
+            display: inline-block;
+            margin: 0px 5px;
+            width: 15px;
+            height: 15px;
+            &.active {
+              margin: 0px 5px;
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+/* testimonials_row ends here */

@@ -10,18 +10,14 @@
        Django and Python Web Development | Application Development Services India – MicroPyramid
       {% endblock %}
     </title>
-
     <meta property="fb:pages" content="194798730671519" />
     <meta property="og:url" content="https://micropyramid.com/" />
     <meta property="og:image" content="https://micropyramid.com/static/site/images/new/logo.png" />
-
     {% block meta-description %}
     <meta property="og:title"  content="MicroPyramid | Django Web Application Development | Mobile App Development" />
     <meta property="og:description" content="MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, nodejs, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
-
     <meta name="description" content="Django and python web development company in India. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development." />
     <meta name="keywords" content="Python, Django, Mongodb, nodejs, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
-
     {% endblock %}
     <meta name="author" content="micropyramid" />
     <meta name="robots" content="index, follow">
@@ -43,7 +39,6 @@
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
-
   </head>
   <body>
     <script>
@@ -51,23 +46,21 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
+      
       ga('create', '{{request.session.google_analytics_code}}', 'auto');
       ga('send', 'pageview');
-
+      
     </script>
     <!-- push menu -->
     <div class="mp-pusher" id="mp-pusher">
       <!-- mp-menu -->
-    {% if request.session.design|slugify == 'mobile'|slugify %}
-
+      {% if request.session.design|slugify == 'mobile'|slugify %}
       <nav id="mp-menu" class="mp-menu">
         {% include 'site/side-bar-menu.html' %}
         <a href="#" class="subscribe">Subscribe</a>
       </nav>
       <!-- /mp-menu -->
-        {%endif%}
-
+      {% endif%}
       <div class="scroller">
         <!-- this is for emulating position fixed of the nav -->
         <div class="scroller-inner">
@@ -309,109 +302,109 @@
             </div>
             <!--/ banner wrap -->
             {% block stage %}
-
             <div class="overlay_subscribe"></div>
-<div class="subscribe_div_wrap">
-  <!-- close_contact -->
-  <div class="close_subscribe">x</div>
-  <!--/ close_contact -->
-  <!-- title -->
-  <div class="title_div">
-    <div class="daimond"></div>
-    <div class="daimond"></div>
-    <div class="daimond"></div>
-    <h3>Subscribe <span>With Us</span></h3>
-  </div>
-  <!--/ title -->
-  <!-- address -->
-  <div class="address_div">
-    <i class='fa fa-map-marker'></i>
-    <div class="address_wrap">
-      <div class="address">
-        <h4>Reach</h4>
-        <div class='content'>
-          <span>HIG499, Viswa sai dham apartment,</span>
-          <span>behind anupama hospital, 6th phase </span>
-          <span>KPHB, Hyderabad, India - 72</span>
-        </div>
-      </div>
-    </div>
-    <!-- call us -->
-    <div class="cal_us">
-      <i class='fa fa-phone'></i>
-      <h4>Call</h4>
-      <div class="content">040 6599 6999</div>
-    </div>
-    <!--/ call us -->
-    <!-- call us -->
-    <div class="mail_us">
-      <i class='fa fa-envelope-o'></i>
-      <h4>Mail</h4>
-      <div class="content">hello@micropyramid.com</div>
-    </div>
-    <!--/ call us -->
-  </div>
-  <!--/ address -->
-  <div class="clearfix"></div>
-  <!-- social medi -->
-  <div class="contact_social">
-    <ul>
-      <li>
-        <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank" title="MicroPyramid facebook page"><span class='social_each fb'><i class='fa fa-facebook'></i></span></a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank" title="MicroPyramid linkedin page"><span class='social_each in'><i class='fa fa-linkedin'></i></span></a>
-      </li>
-      <li>
-        <a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank" title="MicroPyramid youtube channel"><span class='social_each youtube'><i class='fa fa-youtube-play'></i></span></a>
-      </li>
-      <li>
-        <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank" title="MicroPyramid rss feed"><span class='social_each rss'><i class='fa fa-rss'></i></span></a>
-      </li>
-      <li>
-        <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank" title="MicroPyramid googleplus page"><span class='social_each gplus'><i class='fa fa-google-plus'></i></span></a>
-      </li>
-      <li>
-        <a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><span class='social_each twit' title="MicroPyramid twitter page"><i class='fa fa-twitter'></i></span></a>
-      </li>
-      <li>
-        <a href="https://github.com/micropyramid" class="github" target="_blank" title="MicroPyramid github organisation"><span class='social_each git'><i class='fa fa-github'></i></span></a>
-      </li>
-      <li>
-        <a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank" title="MicroPyramid reddit page"><span class='social_each reddit'><i class='fa fa-reddit'></i></span></a>
-      </li>
-    </ul>
-  </div>
-  <!--/ social media -->
-  <!-- form -->
-  <form id="subscribeform" name="subscribeform" method="post">
-    <div class="form_div">
-      <div class="input-group">
-        <span class="input-group-addon"><i class='fa fa-user'></i></span>
-        <input type="text" class="form-control" name="full_name" placeholder="Name" aria-describedby="basic-addon1">
-      </div>
-      <span id="full_name"></span>
-      <div class="input-group">
-        <span class="input-group-addon"><i class='fa fa-comments'></i></span>
-        <input type="text" class="form-control" name="email" placeholder="Email" aria-describedby="basic-addon1">
-      </div>
-      <span id="email"></span>
-      <div class="button_row">
-        <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send
-        </button>
-      </div>
-    </div>
-  </form>
-  <!--/ form -->
-</div>
-<div id="about-us">
-        <div class="container text-center">
-        <h1 class="content">Django &amp; Python Web Development Company</h1>
-         <p>We at MicroPyramid challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing gaining our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help python Django application development services. Our expertise lies in Python, Django, Angular Js, Elastic Search, Ansible, Docker, Amazon Web Services, PostgreSQL, MySQL, Less and Scss.</p>
-        <p>
-        We are dedicated to providing world class software to startups, small and big enterprises. We use most of the cloud technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome open source technologies. With our custom tools,  we can assure you always get the best software you need. We always tryto meet customer satisfaction with our great monitoring and support. There are many reusable python packages, docker images, ansible roles, node packages published by our experts in their free time.</p>
-        </div>
-      </div>
+            <div class="subscribe_div_wrap">
+              <!-- close_contact -->
+              <div class="close_subscribe">x</div>
+              <!--/ close_contact -->
+              <!-- title -->
+              <div class="title_div">
+                <div class="daimond"></div>
+                <div class="daimond"></div>
+                <div class="daimond"></div>
+                <h3>Subscribe <span>With Us</span></h3>
+              </div>
+              <!--/ title -->
+              <!-- address -->
+              <div class="address_div">
+                <i class='fa fa-map-marker'></i>
+                <div class="address_wrap">
+                  <div class="address">
+                    <h4>Reach</h4>
+                    <div class='content'>
+                      <span>HIG499, Viswa sai dham apartment,</span>
+                      <span>behind anupama hospital, 6th phase </span>
+                      <span>KPHB, Hyderabad, India - 72</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- call us -->
+                <div class="cal_us">
+                  <i class='fa fa-phone'></i>
+                  <h4>Call</h4>
+                  <div class="content">040 6599 6999</div>
+                </div>
+                <!--/ call us -->
+                <!-- call us -->
+                <div class="mail_us">
+                  <i class='fa fa-envelope-o'></i>
+                  <h4>Mail</h4>
+                  <div class="content">hello@micropyramid.com</div>
+                </div>
+                <!--/ call us -->
+              </div>
+              <!--/ address -->
+              <div class="clearfix"></div>
+              <!-- social medi -->
+              <div class="contact_social">
+                <ul>
+                  <li>
+                    <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank" title="MicroPyramid facebook page"><span class='social_each fb'><i class='fa fa-facebook'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank" title="MicroPyramid linkedin page"><span class='social_each in'><i class='fa fa-linkedin'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank" title="MicroPyramid youtube channel"><span class='social_each youtube'><i class='fa fa-youtube-play'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank" title="MicroPyramid rss feed"><span class='social_each rss'><i class='fa fa-rss'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank" title="MicroPyramid googleplus page"><span class='social_each gplus'><i class='fa fa-google-plus'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><span class='social_each twit' title="MicroPyramid twitter page"><i class='fa fa-twitter'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/micropyramid" class="github" target="_blank" title="MicroPyramid github organisation"><span class='social_each git'><i class='fa fa-github'></i></span></a>
+                  </li>
+                  <li>
+                    <a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank" title="MicroPyramid reddit page"><span class='social_each reddit'><i class='fa fa-reddit'></i></span></a>
+                  </li>
+                </ul>
+              </div>
+              <!--/ social media -->
+              <!-- form -->
+              <form id="subscribeform" name="subscribeform" method="post">
+                <div class="form_div">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class='fa fa-user'></i></span>
+                    <input type="text" class="form-control" name="full_name" placeholder="Name" aria-describedby="basic-addon1">
+                  </div>
+                  <span id="full_name"></span>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class='fa fa-comments'></i></span>
+                    <input type="text" class="form-control" name="email" placeholder="Email" aria-describedby="basic-addon1">
+                  </div>
+                  <span id="email"></span>
+                  <div class="button_row">
+                    <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <!--/ form -->
+            </div>
+            <div id="about-us">
+              <div class="container text-center">
+                <h1 class="content">Django &amp; Python Web Development Company</h1>
+                <p>We at MicroPyramid challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing gaining our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help python Django application development services. Our expertise lies in Python, Django, Angular Js, Elastic Search, Ansible, Docker, Amazon Web Services, PostgreSQL, MySQL, Less and Scss.</p>
+                <p>
+                  We are dedicated to providing world class software to startups, small and big enterprises. We use most of the cloud technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome open source technologies. With our custom tools,  we can assure you always get the best software you need. We always tryto meet customer satisfaction with our great monitoring and support. There are many reusable python packages, docker images, ansible roles, node packages published by our experts in their free time.
+                </p>
+              </div>
+            </div>
             <!-- our work -->
             <div id='our_work'>
               <div class="row">
@@ -575,26 +568,26 @@
                     </div>
                     <div class="daimond_work">
                       <div class="content_wrap">
-                      <div class="overlay">
-                        <div class="visit_web">
-                          <a href="https://wonderlandresorts.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                        <div class="overlay">
+                          <div class="visit_web">
+                            <a href="https://wonderlandresorts.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a>
+                          </div>
+                        </div>
+                        <div class='content_rotate'>
+                          <div class="logo">
+                            <div class="image_wrap">
+                              <span class='img'>
+                              <img src='/static/site/images/wonder-logo.png'>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="description">
+                            <p>
+                              The perfect vacation hotels, homes and rentals around the world.
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div class='content_rotate'>
-                        <div class="logo">
-                        <div class="image_wrap">
-                          <span class='img'>
-                        <img src='/static/site/images/wonder-logo.png'>
-                        </span>
-                        </div>
-                        </div>
-                        <div class="description">
-                        <p>
-                        The perfect vacation hotels, homes and rentals around the world.
-                        </p>
-                        </div>
-                      </div>
-                    </div>
                     </div>
                   </div>
                   <!--/ row three -->
@@ -603,6 +596,64 @@
               </div>
             </div>
             <!--/ our work -->
+            <!-- Testinominals start here -->
+            <div class="testimonials_row">
+              <div class='col-md-12'>
+                <p class="happy-clients">Meet A Few Of Our Happy Clients</p>
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                  <!-- Bottom Carousel Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#quote-carousel" data-slide-to="1"></li>
+                  </ol>
+                  <!-- Carousel Slides / Quotes -->
+                  <div class="carousel-inner">
+                    <!-- Quote 1 -->
+                    <div class="item active">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div>
+                            <img class="img-circle" src="/static/site/images/Diego.JPG" style="width: 100px;height:100px;">
+                            </div>
+                            <div class="profile_details">
+                              <span>Director and VFX supervisor</span>
+                              <span>Deteast</span>
+                            </div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>Micropyramid is a great place to go if you are looking for passion as an ingredient for your enterprise or project. They understand the future, and the craft of manifesting your vision. In our case they actually made one of our dreams come to life.</p>
+                            <small>Diego V Lozano</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                    <!-- Quote 2 -->
+                    <div class="item">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div>
+                            <img class="img-circle" src="https://media.licdn.com/media/p/2/005/078/2fa/04e81b3.jpg" style="width: 100px;height:100px;">
+                            </div>
+                            <div class="profile_details">
+                              <span>Director</span>
+                              <span>Creditable</span>
+                            </div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>MicroPyramid team forms a strong partnership. They are our valued development partners specifically because they have a passion for inclusive finance that cannot be matched by most development houses. They are competent with unique ideas and thorough in their process. They are honest, patient and communicate very well and hold your hand through challenges to give you reassurance.  I would recommend them to all startups.</p>
+                            <small>Sechaba</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br clear="all">
+            </div>
+            <!-- Testinominals ends here -->
             <!-- our blog starts here -->
             <!-- blog -->
             <div id='blog_list'>
@@ -652,9 +703,9 @@
                       <div class="description-detail" id="/blog/{{ post.active_slugs.0.slug }}/">
                         <div itemprop="description">
                           {% if post.excerpt %}
-                            {{ post.excerpt }}
+                          {{ post.excerpt }}
                           {% else %}
-                            {{ post.get_content|truncatewords:350 }}...
+                            {{post.content|safe|truncatewords:50}}...
                           {% endif %}
                         </div>
                       </div>
@@ -708,6 +759,63 @@
               </div>
             </div>
             <!-- our technologies ends here -->
+            <!-- Testinominals start here -->
+            <div class="testimonials_row">
+              <div class='col-md-12'>
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                  <!-- Bottom Carousel Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#quote-carousel" data-slide-to="1"></li>
+                  </ol>
+                  <!-- Carousel Slides / Quotes -->
+                  <div class="carousel-inner">
+                    <!-- Quote 1 -->
+                    <div class="item active">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div>
+                            <img class="img-circle" src="/static/site/images/Diego.JPG" style="width: 100px;height:100px;">
+                            </div>
+                            <div class="profile_details">
+                              <span>Director and VFX supervisor</span>
+                              <span>Deteast</span>
+                            </div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>Micropyramid is a great place to go if you are looking for passion as an ingredient for your enterprise or project. They understand the future, and the craft of manifesting your vision. In our case they actually made one of our dreams come to life.</p>
+                            <small>Diego V Lozano</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                    <!-- Quote 2 -->
+                    <div class="item">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div>
+                            <img class="img-circle" src="https://media.licdn.com/media/p/2/005/078/2fa/04e81b3.jpg" style="width: 100px;height:100px;">
+                            </div>
+                            <div class="profile_details">
+                              <span>Director</span>
+                              <span>Creditable</span>
+                            </div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>MicroPyramid team forms a strong partnership. They are our valued development partners specifically because they have a passion for inclusive finance that cannot be matched by most development houses. They are competent with unique ideas and thorough in their process. They are honest, patient and communicate very well and hold your hand through challenges to give you reassurance.  I would recommend them to all startups.</p>
+                            <small>Sechaba</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br clear="all">
+            </div>
+            <!-- Testinominals ends here -->
             <!--get in touch start here -->
             <div class="row" id="get-in-touch">
               <div class="heading">
@@ -832,28 +940,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
- <script type="application/ld+json">
-        {
-          "@context" : "http://schema.org",
-          "@type" : "Organization",
-          "url" : "https://micropyramid.com",
-          "logo" : "https://micropyramid.com/static/site/images/new/company_logo.png",
-          "contactPoint" : [{
-            "@type" : "ContactPoint",
-            "telephone" : "+91 40 6599 6999",
-            "contactType" : "customer service"
-          }]
-        }
+    <script type="application/ld+json">
+      {
+        "@context" : "http://schema.org",
+        "@type" : "Organization",
+        "url" : "https://micropyramid.com",
+        "logo" : "https://micropyramid.com/static/site/images/new/company_logo.png",
+        "contactPoint" : [{
+          "@type" : "ContactPoint",
+          "telephone" : "+91 40 6599 6999",
+          "contactType" : "customer service"
+        }]
+      }
     </script>
     {% compress js %}
     <script src="/static/site/js/jquery.form.js"></script>
     <script src="/static/site/js/functions.js"></script>
     <script type="text/javascript" src='/static/site/js/main_dt.js'></script>
-
-        {% if request.session.design|slugify == 'mobile'|slugify %}
-
+    {% if request.session.design|slugify == 'mobile'|slugify %}
     <script type="text/javascript" src='/static/site/js/menu.js'></script>
-{%endif%}
+    {%endif%}
     <script src="/static/site/js/map.js"></script>
     <script type="text/javascript">
       $('.daimond_work').click(function(e){
@@ -862,10 +968,17 @@
       $('.description-detail').click(function(e){
         window.location = $(this).attr('id');
       });
+      
+      // When the DOM is ready, run this function
+      $(document).ready(function() {
+        //Set the carousel options
+        $('#quote-carousel').carousel({
+          pause: true,
+          interval: 7000,
+        });
+      });
     </script>
-    <script type="text/javascript">
-    </script>
+    <script type="text/javascript"></script>
     {% endcompress %}
-
   </body>
 </html>

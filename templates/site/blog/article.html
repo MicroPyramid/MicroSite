@@ -49,7 +49,7 @@
         </div>
         <div class="author col-md-6 col-sm-6 col-xs-12 text-right">
         <ul class="blog-det">
-          <li itemprop="author">By{{ post.user.get_full_name }} |</li>
+          <li itemprop="author">By {{ post.user.get_full_name }} |</li>
           {% if post.published_on %}
           <li>Posted On <span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
           {% else %}
@@ -147,7 +147,7 @@
         <span class="blog-title">{{related_post.title}}</span>
         <span class="user-name">{{related_post.user.get_full_name}}</span>
         <!--<span class="date-comments">4th October 2015 / comments 30</span>-->
-        <p>{{related_post.content|striptags|safe|truncatewords:25}}</p>
+        <p>{{related_post.excerpt|linebreaks|truncatewords:25}}</p>
         <a href="{% url 'micro_blog:blog_article' related_post.slug %}" class="full-story">Continue Reading...</a>
       </div>
       {% endfor %}
