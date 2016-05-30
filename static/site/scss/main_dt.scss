@@ -4523,7 +4523,7 @@ body{
 .testimonials_row {
       background:#333;
       padding: 30px 30px;
-       @media (min-width: 360px) and (max-width: 768px){
+       @media (min-width: 240px) and (max-width: 768px){
         padding:15px 0;
        }
       /* carousel */           
@@ -4581,7 +4581,7 @@ body{
         }
         p{
           text-align:justify;
-         @media (min-width: 360px) and (max-width: 768px){
+         @media (min-width: 240px) and (max-width: 768px){
             font-size:13px;
             line-height:21px;
             margin-top:15px;
@@ -4611,7 +4611,7 @@ body{
         font-size:25px;
         line-height:27px;
         margin-top:35px;
-        @media (min-width: 360px) and (max-width: 768px){
+        @media (min-width: 240px) and (max-width: 768px){
           font-size:20px;
           line-height:25px;
         }
@@ -4619,7 +4619,7 @@ body{
       /* MEDIA QUERIES */
       /* Small devices (tablets, 768px and up) */
 
-      @media (min-width: 360px) and (max-width:768px) {
+      @media (min-width: 240px) and (max-width:768px) {
         #quote-carousel {
           margin-bottom: 0;
           padding: 0 10px 10px 0px;

@@ -56,7 +56,7 @@
         </li>
         {% endif %}
       </ul>
-    </div>
+    </div>test blog
     <div class=" row">
       <!-- blog categories archies starts here -->
       <div class="blog-categories-archives">
@@ -107,7 +107,7 @@
               <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
             {% endif %}
             <ul class="post-det">
-              <li itemprop="author"><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>
+              <li><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>
             </ul>
           </div>
         </div>
