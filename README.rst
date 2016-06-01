@@ -41,5 +41,7 @@ After installing/cloning this, add the following settings in the virtual env/bin
    export SENTRYDSN
    export GOOGLE_ANALYTICS_CODE
 
+For additional help you can `Contact us here`_
 
+.. _contact us here: https://micropyramid.com/contact-us/
 
