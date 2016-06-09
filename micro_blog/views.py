@@ -458,8 +458,7 @@ def contact(request):
     if 'enquery_type' in request.POST.keys():
         if validate_contact.is_valid():
             Contact.objects.create(
-                domain=request.POST.get('domain'),
-                domain_url=request.POST.get('domain_url'), country=request.POST.get('country'),
+                country=request.POST.get('country'),
                 enquery_type=request.POST.get('enquery_type')
             )
         else:
@@ -473,10 +472,6 @@ def contact(request):
 
     if request.POST.get('phone'):
         message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
-
-    if 'enquery_type' in request.POST.keys():
-        message += "<p><b>Domain Details: </b></p><p>Domain: "+request.POST.get('domain') +\
-            "</p><p>Domain URL: "+request.POST.get('domain_url')+"</p>"
 
         message += "<p><b>General Information: </b></p>"+"<p>Enquery Type: " +\
             request.POST.get('enquery_type') + \
