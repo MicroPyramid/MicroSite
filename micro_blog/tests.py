@@ -181,7 +181,7 @@ class micro_blog_views_test_with_employee(TestCase):
                     'full_name': 'client name',
                     'message': 'test message',
                     'email': 'testclient@mp.com',
-                    'phone': '1234567890'
+                    'country': 'india'
                 }
             )
 
@@ -199,8 +199,6 @@ class micro_blog_views_test_with_employee(TestCase):
                     'email': 'testclient@mp.com',
                     'phone': '1234567890',
                     'enquery_type': 'general',
-                    'domain': 'micropyramid.com',
-                    'domain_url': 'https://micropyramid.com',
                     'country': 'india'
                 }
             )
@@ -217,7 +215,7 @@ class micro_blog_views_test_with_employee(TestCase):
                     'full_name': '',
                     'message': 'test message',
                     'email': 'testclient@mp.com',
-                    'phone': '1234567890'
+                    'country': 'india'
                 }
             )
 
@@ -232,8 +230,6 @@ class micro_blog_views_test_with_employee(TestCase):
                     'email': 'testclient@mp.com',
                     'phone': '1234567890',
                     'enquery_type': 'general',
-                    'domain': 'micropyramid.com',
-                    'domain_url': 'https://micropyramid.com',
                     'country': 'india'
                 }
             )
