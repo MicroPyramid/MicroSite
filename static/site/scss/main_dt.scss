@@ -2050,7 +2050,6 @@ body{
     margin: 0px;
     li{
       list-style: none;
-      display: inline-block;
       &.active{
         span{
           background: $theme_green;

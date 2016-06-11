@@ -112,12 +112,6 @@ def change_category_status(request, category_slug):
 
 def site_blog_home(request):
     items_per_page = 10
-    if "page" in request.GET:
-        if not request.GET.get('page').isdigit():
-            raise Http404
-        page = int(request.GET.get('page', 1))
-    else:
-        page = 1
 
     posts = Post.objects.filter(status='P').order_by(
         '-published_on').select_related("user").prefetch_related(
@@ -125,8 +119,17 @@ def site_blog_home(request):
                  to_attr="active_slugs"
                  )
     )
-
     no_pages = int(math.ceil(float(posts.count()) / items_per_page))
+    try:
+        if int(request.GET.get('page')) < 0 or int(request.GET.get('page')) > (no_pages):
+            page = 1
+            return HttpResponseRedirect(reverse('micro_blog:site_blog_home'))
+        else:
+            print ("hello")
+            page = int(request.GET.get('page'))
+    except:
+        page = 1
+    print (page)
     blog_posts = posts[(page - 1) * items_per_page:page * items_per_page]
 
     c = {}
@@ -219,13 +222,18 @@ def blog_category(request, slug):
                  )
     )
     items_per_page = 6
-    if "page" in request.GET:
-        if not request.GET.get('page').isdigit():
-            raise Http404
-        page = int(request.GET.get('page'))
-    else:
-        page = 1
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+
+    try:
+        if int(request.GET.get('page')) < 0 or int(request.GET.get('page')) > (no_pages):
+            page = 1
+            return HttpResponseRedirect(reverse('micro_blog:blog_category', kwargs={'slug': slug}))
+        else:
+            print ("hello")
+            page = int(request.GET.get('page'))
+    except:
+        page = 1
+
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     if not blog_posts:
         raise Http404
@@ -243,13 +251,17 @@ def archive_posts(request, year, month):
                  )
     )
     items_per_page = 6
-    if "page" in request.GET:
-        if not request.GET.get('page').isdigit():
-            raise Http404
-        page = int(request.GET.get('page'))
-    else:
-        page = 1
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
+
+    try:
+        if int(request.GET.get('page')) < 0 or int(request.GET.get('page')) > (no_pages):
+            page = 1
+            return HttpResponseRedirect(reverse('micro_blog:archive_posts'), kwargs={'year': blog_posts[0].published_on.year, 'month': blog_posts[0].published_on.month})
+        else:
+            page = int(request.GET.get('page'))
+    except:
+        page = 1
+
     blog_posts = blog_posts[(page - 1) * items_per_page:page * items_per_page]
     if not blog_posts:
         raise Http404
