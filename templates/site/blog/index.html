@@ -120,17 +120,17 @@
             <nav>
               <ul class="pagination">
                 {% if current_page != 1 %}
-                <li class="prev"><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
-                <li class="prev"><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
-                <li><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page=1">first</a></li>
+                <li class="prev"><a href="?page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
+                <li class="prev"><a href="?page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
+                <li><a href="?page=1">first</a></li>
                 {% endif %}
                 {% for s in pages %}
-                <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page={{s}}">{{s}}</a></li>
+                <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?page={{s}}">{{s}}</a></li>
                 {% endfor %}
                 {% if current_page != last_page %}
-                <li><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page={{last_page}}">last</a></li>
-                <li><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
-                <li><a href="?{% if search_value %}search={{ search_value }}&{% endif %}page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
+                <li><a href="?page={{last_page}}">last</a></li>
+                <li><a href="?page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
+                <li><a href="?page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
                 {% endif %}
               </ul>
             </nav>
