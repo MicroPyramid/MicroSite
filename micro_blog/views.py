@@ -125,11 +125,9 @@ def site_blog_home(request):
             page = 1
             return HttpResponseRedirect(reverse('micro_blog:site_blog_home'))
         else:
-            print ("hello")
             page = int(request.GET.get('page'))
     except:
         page = 1
-    print (page)
     blog_posts = posts[(page - 1) * items_per_page:page * items_per_page]
 
     c = {}
@@ -229,7 +227,6 @@ def blog_category(request, slug):
             page = 1
             return HttpResponseRedirect(reverse('micro_blog:blog_category', kwargs={'slug': slug}))
         else:
-            print ("hello")
             page = int(request.GET.get('page'))
     except:
         page = 1
