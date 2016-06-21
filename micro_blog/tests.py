@@ -432,10 +432,10 @@ class micro_blog_post_data(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/?page=1')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/blog/?page=s')
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
 
         # with correct input
         response = self.client.post('/blog/new-post/', {

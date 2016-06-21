@@ -115,56 +115,26 @@
       </div>
       <!-- blog list ends here -->
       <!-- pagination -->
-      <div class="pagination_mp">
-        <ul>
-          {% get_page current_page last_page as pages %}
-          {% if category%}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/category/{{category.slug}}?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          {% if not last_page == current_page %}
-          <li><a href="/blog/category/{{category.slug}}/?page={{last_page}}"><span>last</span></a></li>
-          {% endif %}
-          {% if last_page > current_page %}
-          <li><a href="/blog/category/{{category.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% elif tag %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/tag/{{tag.slug}}/?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          {% if not last_page == current_page %}
-          <li><a href="/blog/tag/{{tag.slug}}/?page={{last_page}}"><span>last</span></a></li>
-          {% endif %}
-          {% if not last_page > current_page %}
-          <li><a href="/blog/tag/{{tag.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% elif year and month %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/{{year}}/{{month}}/?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          {% if not last_page == current_page %}
-          <li><a href="/blog/{{year}}/{{month}}/?page={{last_page}}"><span>last</span></a></li>
-          {% endif %}
-          {% if last_page > current_page %}
-          <li><a href="/blog/{{year}}/{{month}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% else %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          {% if not last_page == current_page %}
-          <li><a href="/blog/?page={{last_page}}"><span>last</span></a></li>
-          {% endif %}
-          {% if last_page > current_page %}
-          <li><a href="/blog/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% endif %}
-        </ul>
-      </div>
+          <div class="pagination_mp">
+            {% get_page current_page last_page as pages %}
+            <nav>
+              <ul class="pagination">
+                {% if current_page != 1 %}
+                <li class="prev"><a href="?page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
+                <li class="prev"><a href="?page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
+                <li><a href="?page=1">first</a></li>
+                {% endif %}
+                {% for s in pages %}
+                <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?page={{s}}">{{s}}</a></li>
+                {% endfor %}
+                {% if current_page != last_page %}
+                <li><a href="?page={{last_page}}">last</a></li>
+                <li><a href="?page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
+                <li><a href="?page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
       <!--/ paginantion -->
       <div class="blog-container">
           <div id="subscribe">
