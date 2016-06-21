@@ -21,9 +21,20 @@ class ContactForm(forms.ModelForm):
     email = forms.EmailField()
     full_name = forms.CharField(max_length=200)
     message = forms.CharField(max_length=200)
+    country = forms.CharField(max_length=200, required=False)
+    enquery_type = forms.CharField(max_length=200, required=False)
+
     class Meta:
         model = Contact
-        exclude = ('full_name', 'message', 'email', 'phone', 'contact_info')
+        exclude = ('full_name', 'message', 'email', 'phone', 'contact_info', 'country', 'enquery_type')
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        if 'country' in self.data.keys():
+            self.fields['country'].required = True
+
+        if 'enquery_type' in self.data.keys():
+            self.fields['enquery_type'].required = True
 
 
 class SubscribeForm(forms.ModelForm):

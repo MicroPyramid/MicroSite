@@ -106,7 +106,7 @@ $.ajax({
     if (data.error) {
       $('p.failure').remove();
       for (var key in data.errinfo) {
-        $('#' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
+        $('#contactform #' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
       }
     } else {
       alert("Your message has been successfully sent. We will get back to you very soon!");
