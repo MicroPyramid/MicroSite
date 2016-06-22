@@ -137,6 +137,9 @@ def site_blog_home(request):
 
 
 def blog_article(request, slug):
+    if request.path != request.path.lower():
+        return redirect(request.path.lower(), permanent=True)
+
     blog_post = get_object_or_404(Post, slugs__slug=slug)
     active_slug = blog_post.slug
     if active_slug != slug:
@@ -145,10 +148,7 @@ def blog_article(request, slug):
                         )
     if not blog_post.status == 'P':
         if not request.user.is_authenticated():
-            return HttpResponseRedirect('/blog/')
-
-    if request.path != request.path.lower():
-        return redirect(request.path.lower(), permanent=True)
+            raise Http404
 
     all_blog_posts = list(
         Post.objects.filter(status='P').order_by('-published_on'))
