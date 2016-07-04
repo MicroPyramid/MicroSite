@@ -3,25 +3,21 @@
 {% load blog_tags %}
 {% block title %}
 {% if category %}{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid{%else%}{{category}}
-  Blog | MicroPyramid
+  Django, Python, mongo DB, AWS Technology Blog - MicroPyramid
 {%endif%}
 {% endblock %}
 {% block meta-description %}
 {% if category %}
  <meta property="og:title"  content="{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid" />
 {%else%}
- <meta property="og:title"  content="Blog | MicroPyramid" />
+ <meta property="og:title"  content="Django, Python, mongo DB, AWS Technology Blog - MicroPyramid" />
 
 {%endif%}
-{% if category %}
-<meta name="description" content="Find latest updates and best practices of {{category.name}}. Read MicroPyramid {{category.name}} blogs and join in our discussions."/>
-<meta property="og:description" content="Find latest updates and best practices of {{category.name}}. Read MicroPyramid {{category.name}} blogs and join in our discussions." />
 
-{%else%}
-  <meta name="description" content="{% for post in posts %} {{ post.title }}{% if not forloop.last %}, {% endif %}{% endfor %} - MicroPyramid." />
-<meta property="og:description" content="{% for post in posts %} {{ post.title }}{% if not forloop.last %}, {% endif %}{% endfor %} - MicroPyramid." />
+<meta name="description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more. - MicroPyramid Blog"/>
+<meta property="og:description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more. - MicroPyramid Blog" />
 
-  {%endif%}
+
   {% if current_page|slugify == '1'|slugify %}
   {% else %}
     <link rel="prev" href="https://micropyramid.com{{ request.path }}?page={{current_page|add:"-1"}}">
@@ -60,7 +56,7 @@
     <div class=" row">
       <!-- blog categories archies starts here -->
       <div class="blog-categories-archives">
-        <h4 class="blog-cat-archives text-center">Blog Categories & Archives</h4>
+        <h4 class="blog-cat-archives text-center non-category-blog"></h4>
         <div class="categories">
           <ul class="text-center">
             <li><a href="/blog/category/django/" class="django"><img src="/static/site/images/django-b.png" height="33" width="87" alt="blog-category-djagno"></a></li>
@@ -162,4 +158,19 @@
   </div>
   <!--/ container wrapper -->
   <!-- footer links starts here -->
+  {% endblock %}
+  {% block extra-js %}
+  
+  <script type="text/javascript">
+  $(document).ready(function(e){
+    url = window.location.pathname
+    if (url.split("/")[2] && url.split("/")[2] == "category"){
+      title = url.split("/")[3]
+      $(".non-category-blog").html(title+" Blog")
+    }
+    else if (url.split("/")[1] == "blog"){
+      $(".non-category-blog").html("A blog about Django, Python, mongo DB, LINUX, Amazon Web Services")
+    }
+  });
+  </script>
 {% endblock %}

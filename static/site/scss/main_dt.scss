@@ -1862,7 +1862,7 @@ body{
 .blog-categories-archives{
   .blog-cat-archives{
     @extend .bold_upper;
-    font-size:36px;
+    font-size:30px;
     margin:0px;
     padding:0px;
     line-height:48px;
@@ -4830,6 +4830,10 @@ body{
     }
   }
 
+}
+
+p a{
+  color: #337ab7;
 }
 
 /* contact_row ends here */
