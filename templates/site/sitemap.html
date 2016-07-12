@@ -28,6 +28,18 @@
     {% endif %}
     {% endfor %}
 
+    {% if sitemap_links|get_object_list_class:"Page" %}
+      <li class="sitemap-parent">Services</li>
+    {% endif %}
+    {% for link in sitemap_links %}
+    {% if link|get_class_name == 'Page' %}
+      {% if link.slug == 'careers' %}
+        {% else %}
+          <li class="sitemap-child"><a href='https://micropyramid.com/{{link.slug}}'>{{ link.title }}</a></li>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+
     {% if sitemap_links|get_object_list_class:"Category" %}
     <li class="sitemap-parent"><a href='https://micropyramid.com/blog/'>Blog</a></li>
     {% endif %}
@@ -39,6 +51,7 @@
       {% endif %}
     {% endif %}
     {% endfor %}
+    
     {% if sitemap_links|get_object_list_class:"Category" %}
       <li class="sitemap-parent"><a href='https://micropyramid.com/blog/'>Blog Posts</a></li>
     {% endif %}
