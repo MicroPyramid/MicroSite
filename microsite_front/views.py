@@ -9,6 +9,7 @@ from boto.s3.connection import S3Connection
 import json
 from datetime import datetime, timedelta
 from micro_blog.models import Category, Post
+from pages.models import Page
 from django.views.static import serve
 import yaml
 import os
@@ -137,7 +138,8 @@ def html_sitemap(request):
     page = request.GET.get('page')
     categories = Category.objects.all()
     blog_posts = Post.objects.filter(status='P').order_by('-published_on')
-    sitemap_links = list(chain(categories, blog_posts))
+    services = Page.objects.filter(is_active='True')
+    sitemap_links = list(chain(categories, services, blog_posts))
 
     object_list = Paginator(sitemap_links, 100)
     try:
