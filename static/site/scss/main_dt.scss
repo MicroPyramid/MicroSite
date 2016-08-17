@@ -370,7 +370,7 @@ body{
     }
     img{
      position: relative;
-     top: 13px;
+     top: 11px;
      left: 5px;
      @media (min-width: $mob_min) and (max-width:$smob_max){
        top:0;
@@ -391,6 +391,7 @@ body{
     margin: 0px;
     padding: 0px;
     float: right;
+    margin-top: 5px;
     @media (min-width: $mob_min) and (max-width:$smob_max){
       display: none;
     }
@@ -3849,7 +3850,7 @@ body{
     margin-left:4px;
   }
   img{
-    width: 210px;
+    width: 238px;
     max-height: 100%;
     height: auto;
     vertical-align: top;
@@ -3857,7 +3858,9 @@ body{
     margin-top: 0px;
     @media(min-width:$mob_min) and (max-width:$smob_max){
       margin-left:0px;
-      margin-top:9px;
+      margin-top:13px;
+      width: 200px;
+      margin-right: 10px;
     }
   }
   #left_one{
