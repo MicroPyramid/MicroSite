@@ -370,8 +370,8 @@ body{
     }
     img{
      position: relative;
-     top: 8px;
-     left: 10px;
+     top: 13px;
+     left: 5px;
      @media (min-width: $mob_min) and (max-width:$smob_max){
        top:0;
       }
@@ -3841,7 +3841,6 @@ body{
 /* svg logo */
 
 .logo_mp{
-  width: 197px;
   height: 53px;
   cursor: pointer;
   display: inline-block;
@@ -3850,12 +3849,12 @@ body{
     margin-left:4px;
   }
   img{
-    width: 110px;
+    width: 210px;
     max-height: 100%;
     height: auto;
     vertical-align: top;
     margin-left: 0;
-    margin-top: 8px;
+    margin-top: 0px;
     @media(min-width:$mob_min) and (max-width:$smob_max){
       margin-left:0px;
       margin-top:9px;
