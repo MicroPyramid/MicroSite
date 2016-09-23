@@ -35,6 +35,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/site/images/apple-touch-icon-152x152-precomposed.png">
     <!-- google fonts starts here-->
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
     <!-- google fonts ends here-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -44,12 +45,14 @@
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/error_pages.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/design.scss">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less">
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
   </head>
-  <body>
+  <body data-spy="scroll">
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -402,6 +405,8 @@
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
     <script src="/static/site/js/map.js" defer></script>
+    <script src="/static/site/js/jquery.easing.min.js"></script>
+    <script src="/static/site/js/scrolling-nav.js"></script>
     {% if request.session.design|slugify == 'mobile'|slugify %}
     <script type="text/javascript" src='/static/site/js/menu.js'></script>
     {% endif %}
