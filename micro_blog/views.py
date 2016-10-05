@@ -184,7 +184,6 @@ def blog_article(request, slug):
                 request.META[
                     'HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug})
     c = {}
-    print (minified_url)
     c.update(csrf(request))
     return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
                                                       'post': blog_post, 'minified_url': minified_url, 'prev_url': prev_url, 'next_url': next_url})
