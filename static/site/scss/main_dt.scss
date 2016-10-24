@@ -3847,7 +3847,7 @@ body{
   display: inline-block;
   margin-left:8px;
   @media(min-width:$mob_min) and (max-width:$smob_max){
-    margin-left:4px;
+    padding-right: 15px;
   }
   img{
     width: 238px;

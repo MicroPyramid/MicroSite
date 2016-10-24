@@ -1,4 +1,6 @@
 {% extends 'site/base.html' %}
+{% load recurse %}
+{% load menu %}
 {% block title %}
 OSS | MicroPyramid
 {% endblock %}
@@ -11,16 +13,17 @@ OSS | MicroPyramid
   <div class="container pad_lr_0">
     <!-- banner_left starts here -->
     <div class="row marl">
-      <div class="col-md-6 col-sm-6 col-xs-12 banner_left">
+      <div class="col-md-5 col-sm-12 col-xs-12 banner_left">
         <h3> Micropyramid Open Source Softwares</h3>
         <p>Micropyramid OSS contains free open source projects, python modules and few scripts which are developed by our Tech Geeks. You can use, modify, share all our projects and modules because the source code is publicly accessible to anyone.</p>
         <p>You can copy our code from GitHub and use it in your projects. In future, Will come up with more versions with fewer enhancements.</p>
       </div>
       <!-- banner_left ends here -->
       <!-- banner_right starts here -->
-      <div class="col-md-6 banner_right">
+      <div class="col-md-7 col-sm-12 col-xs-12 banner_right">
+      <div class="row">
         <!-- banner_item starts here -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
           <div class="banner_item">
             <span class="icon"></span>
             <span class="block_heading">Projects</span>
@@ -30,13 +33,14 @@ OSS | MicroPyramid
         </div>
         <!-- banner_item ends here -->  
         <!-- banner_item starts here -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-6">
           <div class="banner_item">
             <span class="icon"></span>
             <span class="block_heading">Python Modules</span>
             <span class="desc">Take a look at our top Modules which are completely based on python programming. It will be very helpful for the beginners too to get started python programming. You can find few of our open source python modules in our <a target="_blank" href="https://github.com/MicroPyramid">GitHub Repository</a> </span>
             <span class="view"><a class="page-scroll" href="#modules">Know More...</a></span>
           </div>
+        </div>
         </div>
         <!-- banner_item ends here -->  
       </div>

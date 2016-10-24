@@ -63,11 +63,17 @@ body {
 		svg{
 			margin-top:6px;
 			float: left;
+			@media (min-width: @mob_min) and (max-width: @smob_max) {
+                margin-top: 0px;
+            }
 		}
 		.mp_logo{
 			float: left;
 	    margin-top: 15px;
 	    margin-left: 8px;
+	    @media (min-width: @mob_min) and (max-width: @smob_max) {
+                margin-top: 10px;
+            }
 		}
 		.small_logo{
 			display:block;
@@ -142,9 +148,14 @@ body {
 	background:#fff;
 	padding:30px 0px;
 	background: linear-gradient(to left, #ddd 0%,#ddd 30%,#ddd 70%,#F9F9F9 30%,#F9F9F9 30%); /* W3C */
-	@media (min-width:@tab_min) and (max-width:@tab_max){
-		padding:20px 25px;
-	}
+	@media (min-width: @tab_min) and (max-width: @tab_max) {
+        padding: 20px 5px;
+        background: #ddd;
+    }
+    @media (min-width: @mob_min) and (max-width: @smob_max) {
+        padding: 20px 5px;
+        background: #ddd;
+    }
 	/* banner_left */
 	.banner_left{
 		padding-top:40px;
@@ -171,6 +182,7 @@ body {
 		padding-bottom: 35px;
 		@media (min-width:@mob_min) and (max-width:@smob_max){
 			padding-right:15px;
+			padding: 0px;
 		}
 		.banner_item{
 			margin-top:15px;
@@ -236,8 +248,12 @@ body {
 	padding:50px 40px;
 	background:@semi_dark_text;
 	@media (min-width:@mob_min) and (max-width:@tab_max){
-		padding:50px 0px;
+		padding:50px 20px;
 	}
+	@media (min-width: @mob_min) and (max-width: @smob_max) {
+			padding: 26px 20px;
+      padding-bottom: 10px;
+    }
 	.heading{
 		.sub_heading;
 		text-transform: uppercase;
@@ -253,7 +269,7 @@ body {
 	.projects_list{
 		margin:30px -15px;
 		@media (min-width:@mob_min) and (max-width:@tab_max){
-			margin:25px -15px;
+			margin:17px -15px;
 		}
 		.project_item{
 			background:#505156;
@@ -341,6 +357,12 @@ body {
 	padding: 50px 0;
 	background: linear-gradient(to left, #fff 0%,#fff 30%,#fff 70%,#f9f9f7 30%,#f9f9f7 30%); /* W3C */
 	padding-bottom: 10px;
+	@media (min-width: @tab_min) and (max-width: @tab_max) {
+        background: #fff;
+    }
+    @media (min-width: @mob_min) and (max-width: @smob_max) {
+        background: #fff;
+    }
 	.modules_row{
 		margin-top: 0px;
 		.modules_left{
@@ -373,6 +395,12 @@ body {
 		}
 		.modules_right{
 			  padding-left: 85px;
+			  @media (min-width: @tab_min) and (max-width: @tab_max) {
+                padding-left: 15px;
+	            }
+	          @media (min-width: @mob_min) and (max-width: @smob_max) {
+	                padding-left: 15px;
+	            }
 			  .module_block{
 			  	border: 1px solid #fff;
    				background: #dddddd;
@@ -434,6 +462,12 @@ body {
 .books{
 	padding:50px 40px;
 	background:#505156;
+	@media (min-width: @tab_min) and (max-width: @tab_max) {
+        padding: 20px 10px;
+    }
+    @media (min-width: @mob_min) and (max-width: @smob_max) {
+        padding: 40px 10px;
+    }
 	.hint_desc{
 		background: #fff;
 		color: @semi_dark_text;
@@ -465,6 +499,12 @@ body {
 		padding-left: 160px;
 		position: relative;
 		background: #b0afb2;
+		@media (min-width: @tab_min) and (max-width: @tab_max) {
+            min-height: 140px;
+        }
+        @media (min-width: @mob_min) and (max-width: @smob_max) {
+            min-height: 140px;
+        }
 		span{
 			display: block;
 			&.book_title{
@@ -597,6 +637,9 @@ body {
 			    padding: 20px 10px;
 			    background: #f4f4f4;
 			    min-height: 175px;
+			    @media (min-width: @mob_min) and (max-width: @smob_max) {
+                        min-height: 120px;
+                    }
 			    .script_title{
 			    	color: #323232;
 				    font-size: 12px;
@@ -610,9 +653,14 @@ body {
 				    font-weight: 400;
 				    line-height: 23px;
 				    margin-top: 20px;
+				    @media (min-width: @mob_min) and (max-width: @smob_max) {
+                            margin-top: 10px;
+                        }
 			    }
 			    .view_script{
 			    	margin-top:20px;
+			    	@media (min-width: @mob_min) and (max-width: @smob_max) {
+
 			    	a{
 			    		background: #f44444;
 					    color: #fff;
@@ -626,13 +674,11 @@ body {
 					    letter-spacing: 0.3px;
 			    	}
 			    }
-
-				}
+			  }
 			}
 		}
-
-
 	}
+}
 }
 /* contact ends here */
 /* social_links */
