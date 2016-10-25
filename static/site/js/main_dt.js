@@ -100,7 +100,7 @@ e.preventDefault();
 $.ajax({
   type: "POST",
   dataType: 'json',
-  url: "/contact-us/",
+  url: $(this).attr("action"),
   data: $('#contactform').serialize(), // from form
   success: function(data) {
     if (data.error) {

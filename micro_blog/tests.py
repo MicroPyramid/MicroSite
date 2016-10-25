@@ -170,13 +170,13 @@ class micro_blog_views_test_with_employee(TestCase):
             ) in response.content.decode('utf8'))
 
         # Testcase for contact with get
-        response = self.client.get('/contact-us/')
+        response = self.client.get('/contact-usa/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/pages/contact-us.html')
 
         # Testcase for contact with post request simple
         response = self.client.post(
-                '/contact-us/',
+                '/contact-usa/',
                 {
                     'full_name': 'client name',
                     'message': 'test message',
@@ -192,7 +192,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         # Testcase for contact with post request advanced
         response = self.client.post(
-                '/contact-us/',
+                '/contact-usa/',
                 {
                     'full_name': 'client name',
                     'message': 'test message',
@@ -210,7 +210,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         # Testcase for contact advanced wrong data
         response = self.client.post(
-                '/contact-us/',
+                '/contact-usa/',
                 {
                     'full_name': '',
                     'message': 'test message',
@@ -223,7 +223,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         # Testcase for contact simple wrong data
         response = self.client.post(
-                '/contact-us/',
+                '/contact-usa/',
                 {
                     'full_name': '',
                     'message': 'test message',

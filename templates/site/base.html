@@ -333,7 +333,7 @@
                     {% for menu in menu_list|slice:"0:3" %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
-                    <li><a href="/contact-us/">Contact Us</a></li>
+                    <li><a href="{{request.get_full_path}}">Contact Us</a></li>
                     <li><a href="/subscribe/">Subscribe</a></li>
                   </ul>
                 </div>
@@ -346,10 +346,13 @@
                   </ul>
                 </div>
                 <div class="col-md-3 col-sm-12 col-xs-12 footer-mp">
-                  <p><b>MicroPyramid Informatics Pvt Ltd.</b></p>
+                  <p><b>MicroPyramid</b></p>
                   HIG499, Viswa sai dham apartment, behind anupama hospital, 6th phase KPHB, Hyderabad, India - 500072
-                  <p>+91 40 6599 6999</p>
+                  <p>+91 9959166266</p>
                   <p>Monday - Friday : 10:00 - 19:00</p>
+                  <p><b>MicroPyramid - USA Address</b></p>
+                  <p>280 Moon Clinton Rd,<br>STE D Moon Twp, PA 15108</p>
+                  <p>+1 5102300949</p>
                 </div>
                 <div class="col-md-5 col-sm-12 col-xs-12 footer-mp">
                   <div class="">

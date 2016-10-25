@@ -12,7 +12,7 @@ Contact Us | MicroPyramid
     <div class="row marl contact_row">
       <!-- contact_left starts here -->
       <div class="contact_left col-md-8">
-        <form id="contactform" method="post" name="contactform">
+        <form id="contactform" method="post" name="contactform" action=".">
           <div class="row">
             <h4 class="contact_heading">Talk to us</h4>
             <div class="col-md-6 form-group">
@@ -70,9 +70,14 @@ Contact Us | MicroPyramid
             </li>
           </ul>
         </div>
+        {% if request.get_full_path == "/contact-usa/" %}
+        <div class="map1" id='map1'>
+        </div>
+        {% else %}
         <div class="map contact_map" id='map'>
           <!--  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4555949677!2d78.39003300000002!3d17.485752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144f52b17db%3A0xa94f62d5a7e9c69a!2sMicroPyramid+Informatics+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1431589311241" height="350" style="width:100%;border:0"></iframe> -->
         </div>
+        {% endif %}
       </div>
       <!-- contact_row ends here -->
     </div>

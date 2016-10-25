@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^tools/$', tools, name='tools'),
     url(r'^tools/url-checker/$', url_checker_tool, name='url_checker_tool'),
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
-    url(r'^contact-us/$', contact),
+    url(r'^contact-india/$', contact),
+    url(r'^contact-usa/$', contact),
     url(r'^subscribe/$', subscribe),
     url(r'^oss/$', oss),
 

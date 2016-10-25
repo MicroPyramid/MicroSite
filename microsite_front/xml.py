@@ -54,7 +54,7 @@ def rss(request):
                 <category domain="micropyramid.com">
                 MicroPyramid | Web Development | Mobile App Development
                 </category>
-                <copyright>Copyright 2014 MicroPyramid Informatics Private Limited</copyright>
+                <copyright>Copyright 2014 MicroPyramid</copyright>
                 <language>en-us</language>
                 <image>
                 <url>https://micropyramid.com/static/site/images/logo.png</url>
@@ -106,7 +106,7 @@ def blog_rss(request):
                 <category domain="micropyramid.com">
                 MicroPyramid | Web Development | Mobile App Development
                 </category>
-                <copyright>Copyright 2014 MicroPyramid Informatics Private Limited</copyright>
+                <copyright>Copyright 2014 MicroPyramid</copyright>
                 <language>en-us</language>
                 <image>
                 <url>https://micropyramid.com/static/site/images/logo.png</url>
