@@ -1,6 +1,6 @@
 {% extends 'site/base.html' %}
 {% block title %}
-Contact Us | MicroPyramid
+{% if request.get_full_path == "/contact-usa/" %}Contact - USA{% else %}Contact - India{% endif %} | MicroPyramid
 {% endblock %}
 {% block meta-description %}
 <meta name="description" content="Contact Us - MicroPyramid." />
