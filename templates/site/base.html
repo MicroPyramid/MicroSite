@@ -330,17 +330,17 @@
                   {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
                     <li><a href="/">Home</a></li>
-                    {% for menu in menu_list|slice:"0:3" %}
+                    <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
+                    <li><a href="/subscribe/">Subscribe</a></li>
+                    {% for menu in menu_list|slice:"0:5" %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
-                    <li><a href="{{request.get_full_path}}">Contact Us</a></li>
-                    <li><a href="/subscribe/">Subscribe</a></li>
                   </ul>
                 </div>
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
                   {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
-                    {% for menu in menu_list|slice:"3:9" %}
+                    {% for menu in menu_list|slice:"5:14" %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                   </ul>
@@ -351,8 +351,7 @@
                   <p>+91 9959166266</p>
                   <p>Monday - Friday : 10:00 - 19:00</p>
                   <p><b>MicroPyramid - USA Address</b></p>
-                  <p>280 Moon Clinton Rd,<br>STE D Moon Twp, PA 15108</p>
-                  <p>+1 5102300949</p>
+                  <p>280 Moon Clinton Rd,<br>STE D Moon Twp, PA 15108, +1 5102300949</p>
                 </div>
                 <div class="col-md-5 col-sm-12 col-xs-12 footer-mp">
                   <div class="">
@@ -396,7 +395,8 @@
     <!--/ push menu -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJymWpAChcN_U_GSxfPRH1xaV3NgbUwEc"></script>
+   <!--  <script src="https://maps.googleapis.com/maps/api/js"></script> -->
     <script type="application/ld+json">
       {
         "@context" : "http://schema.org",
