@@ -14,7 +14,9 @@
       <div class="contact_left col-md-8">
         <form id="contactform" method="post" name="contactform" action=".">
           <div class="row">
-            <h4 class="contact_heading">Talk to us</h4>
+            <h1 class="contact_heading">Talk to us</h1>
+            <h3 class="contact_heading1">Got a Question? We're here to help you!</h3>
+            <h4 class="contact_heading2">Leave us your details here and we will get back to you quickly</h4>
             <div class="col-md-6 form-group">
               <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Name">
             </div>
@@ -50,6 +52,9 @@
       <!-- contact_right starts here -->
       <div class="contact_right col-md-4">
         <div class="contact_social_block">
+        {% if request.get_full_path == "/contact-india/" %}<h4 class="contact_heading3">MicroPyramid</h4>
+          <p>HIG499, 6th phase KPHB, Hyderabad,<br/> India - 500072, +91-9959166266</p>{% else %}<h4 class="contact_heading3">MicroPyramid</h4>
+          <p>280 Moon Clinton Rd, STE D Moon Twp,<br/> PA 15108, +1-5102300949</p>{% endif %}
           <h4 class="contact_heading">Connect With Social Networks</h4>
           <ul class="list-inline">
             <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -74,8 +79,7 @@
         <div class="map1" id='map1'>
         </div>
         {% else %}
-        <div class="map contact_map" id='map'>
-          <!--  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4555949677!2d78.39003300000002!3d17.485752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144f52b17db%3A0xa94f62d5a7e9c69a!2sMicroPyramid+Informatics+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1431589311241" height="350" style="width:100%;border:0"></iframe> -->
+        <div class="map" id='map'>
         </div>
         {% endif %}
       </div>

@@ -843,6 +843,35 @@ body{
 }
 /* our-contact */
 /* footer-links-mp */
+#footer-links-home{
+  background:#000;
+  color: #fff;
+  margin-top: 0px;
+  padding: 7px 15px;
+  .footer-home{
+      color: #fff;
+      font-size: 12px;
+      b{
+        color: #fff;
+      }
+      p{
+        color: #D1D1D1 !important;
+        font-size: 12px !important;
+      }
+    }
+  @media(min-width: $mob_min) and (max-width:$tab_max){
+    text-align: center!important;
+    .footer-home{
+      text-align: center!important;
+      color: #fff;
+      font-size: 12px;
+      p{
+        color: #D1D1D1 !important;
+        font-size: 12px !important;
+      }
+    }
+  }
+}
 #footer-links-mp{
   background:#4c4c4c;
   color: #fff;
@@ -1508,7 +1537,7 @@ body{
   }
 }
 #container_wrapper{
-  padding-top:60px;
+  padding-top:25px;
   padding-bottom:0px;
   min-height:350px;
 }
@@ -4703,15 +4732,29 @@ body{
   margin: 30px 0 !important;
   .contact_left{
     padding: 0;
-    padding-top:20px;
     .contact_heading{
       padding-left:15px;
       margin:0;
       margin-bottom: 15px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-size: 16px;
+      font-size: 24px;
       font-weight: bold;
+    }
+    .contact_heading1{
+      padding-left:15px;
+      margin:0;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+    .contact_heading2{
+      padding-left:15px;
+      margin:0;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+      font-size: 12px;
     }
     form{
       label{
@@ -4748,7 +4791,7 @@ body{
        height: 290px !important;
     }
     .contact_social_block{
-      padding:20px 0px;
+      padding:0px 0px;
       background: #fff;
       .contact_heading{
         margin:0;
@@ -4760,6 +4803,7 @@ body{
       }
       ul{
         margin:0;
+        margin-bottom:15px;
         li{
           padding: 0;
            a{
@@ -4832,6 +4876,14 @@ body{
     }
   }
 
+}
+
+.contact_heading3{
+  margin:0;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 p a{
