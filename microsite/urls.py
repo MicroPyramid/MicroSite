@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'^contact-india/$', contact),
     url(r'^contact-usa/$', contact),
     url(r'^subscribe/$', subscribe),
-    url(r'^oss/$', oss),
+    url(r'^open-source-softwares/$', oss),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),

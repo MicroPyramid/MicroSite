@@ -65,7 +65,7 @@ function map_dispaly1() {
     title: 'MicroPyramid'
   });
   /* marker */
-  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>280 Moon Clinton Rd,<br>STE D Moon Twp, PA 15108</b></address><a target='_blank' href='https://www.google.co.in/maps/place/280+Moon+Clinton+Rd+d,+Coraopolis,+PA+15108,+USA/@40.5133474,-80.2326973,17z/data=!3m1!4b1!4m5!3m4!1s0x88345da86a70cdd9:0xa2abcb718658d6ad!8m2!3d40.5133433!4d-80.2305086?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
+  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>280 Moon Clinton Rd,<br>STE D Moon Twp, Pittsburgh, Pennsylvania 15108</b></address><a target='_blank' href='https://www.google.co.in/maps/place/280+Moon+Clinton+Rd+d,+Coraopolis,+PA+15108,+USA/@40.5133474,-80.2326973,17z/data=!3m1!4b1!4m5!3m4!1s0x88345da86a70cdd9:0xa2abcb718658d6ad!8m2!3d40.5133433!4d-80.2305086?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
   /* directions */
   var infowindow = new google.maps.InfoWindow({
   content: string_content,
