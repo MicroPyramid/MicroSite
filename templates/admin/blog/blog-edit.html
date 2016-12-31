@@ -211,7 +211,6 @@ $.each($('form#blogform').serializeArray(), function(_, kv) {
 function save_blog_post(){
   $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
   blog_post_data["content"] = $("input[name='content']").val();
-  console.log(blog_post_data);
   $.post("", blog_post_data, function(response){
     // Do nothing
   });
