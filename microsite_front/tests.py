@@ -15,8 +15,6 @@ class frontend_test(TestCase):
         self.contactpage = Page.objects.create(title="Contact", is_active=True)
         self.category = Category.objects.create(
             name='python', description='django desc', is_display=True)
-        self.blogppost = Post.objects.create(
-            title='other python introduction', user=self.user, content='This is content', category=self.category, status='P', slug="other-python-introduction")
 
     def test_home_page(self):
         c = Client()
@@ -29,7 +27,7 @@ class frontend_test(TestCase):
         response = c.post(
             '/', {'full_name': 'ravikumar', 'message': 'how r u', 'email': 'ravi@mp.com', 'phone': '94407'})
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Thank you, For Ur Message' in response.content)
+        self.assertFalse(str('Thank you, For Ur Message') in response.content.decode('utf8'))
 
         # response = c.post('/',{'phone':'9444'})
         # self.assertEqual(response.status_code, 200)
@@ -38,23 +36,23 @@ class frontend_test(TestCase):
         client = Client()
         response = self.client.get('/rss.xml')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('xml' in response.content)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
 
         response = self.client.get('/rss.xml?category=python')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('xml' in response.content)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
 
         response = self.client.get('/blog.rss')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('xml' in response.content)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
 
         response = self.client.get('/blog.rss?category=python')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('xml' in response.content)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
 
         response = self.client.get('/sitemap.xml')
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('xml' in response.content)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
 
     def test_microsite_front_views(self):
         client = Client()

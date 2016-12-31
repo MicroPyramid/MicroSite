@@ -3,25 +3,21 @@
 {% load blog_tags %}
 {% block title %}
 {% if category %}{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid{%else%}{{category}}
-  Blog | MicroPyramid
+  Django, Python, mongo DB, AWS Technology Blog - MicroPyramid
 {%endif%}
 {% endblock %}
 {% block meta-description %}
 {% if category %}
  <meta property="og:title"  content="{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid" />
 {%else%}
- <meta property="og:title"  content="Blog | MicroPyramid" />
+ <meta property="og:title"  content="Django, Python, mongo DB, AWS Technology Blog - MicroPyramid" />
 
 {%endif%}
-{% if category %}
-<meta name="description" content="Find latest updates and best practices of {{category.name}}. Read MicroPyramid {{category.name}} blogs and join in our discussions."/>
-<meta property="og:description" content="Find latest updates and best practices of {{category.name}}. Read MicroPyramid {{category.name}} blogs and join in our discussions." />
 
-{%else%}
-  <meta name="description" content="{% for post in posts %} {{ post.title }}{% if not forloop.last %}, {% endif %}{% endfor %} - MicroPyramid." />
-<meta property="og:description" content="{% for post in posts %} {{ post.title }}{% if not forloop.last %}, {% endif %}{% endfor %} - MicroPyramid." />
+<meta name="description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more. - MicroPyramid Blog"/>
+<meta property="og:description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more. - MicroPyramid Blog" />
 
-  {%endif%}
+
   {% if current_page|slugify == '1'|slugify %}
   {% else %}
     <link rel="prev" href="https://micropyramid.com{{ request.path }}?page={{current_page|add:"-1"}}">
@@ -40,8 +36,6 @@
 {% endblock %}
 {% block blogcontent %}
   {% include 'site/contact.html' %}
-  <nav id="mp-menu" class="mp-menu">
-  </nav>
   <div id='container_wrapper'>
     <!-- blog row starts here -->
     <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -62,8 +56,7 @@
     <div class=" row">
       <!-- blog categories archies starts here -->
       <div class="blog-categories-archives">
-        {% if request.get_full_path = "/blog/" %}
-        <h4 class="blog-cat-archives text-center">Blog Categories & Archives</h4>
+        <h1 class="blog-cat-archives text-center non-category-blog"></h1>
         <div class="categories">
           <ul class="text-center">
             <li><a href="/blog/category/django/" class="django"><img src="/static/site/images/django-b.png" height="33" width="87" alt="blog-category-djagno"></a></li>
@@ -81,7 +74,6 @@
             {% endfor %}
           </ul>
         </div>
-        {% endif %}
       </div>
       <!-- blog categories archies ends here -->
       <!-- blog list starts here -->
@@ -104,10 +96,14 @@
             </div>
           </div>
           <div class="blog-right">
-            <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
-            <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
+            <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
+            {% if post.excerpt %}
+              <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
+            {% else %}
+              <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
+            {% endif %}
             <ul class="post-det">
-              <li itemprop="author"><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>
+              <li><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>
             </ul>
           </div>
         </div>
@@ -115,52 +111,26 @@
       </div>
       <!-- blog list ends here -->
       <!-- pagination -->
-      <div class="pagination_mp">
-        <ul>
-          {% get_page current_page last_page as pages %}
-          {% if category%}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/category/{{category.slug}}?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
-          <li><a href="/blog/category/{{category.slug}}/?page={{last_page}}"><span>last</span></a></li>
-          {% if not last_page > current_page %}
-          <li><a href="/blog/category/{{category.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% elif tag %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/tag/{{tag.slug}}/?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
-          <li><a href="/blog/tag/{{tag.slug}}/?page={{last_page}}"><span>last</span></a></li>
-          {% if not last_page > current_page %}
-          <li><a href="/blog/tag/{{tag.slug}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% elif year and month %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/{{year}}/{{month}}/?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
-          <li><a href="/blog/{{year}}/{{month}}/?page={{last_page}}"><span>last</span></a></li>
-          {% if not last_page > current_page %}
-          <li><a href="/blog/{{year}}/{{month}}/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% else %}
-          {% for s in pages %}
-          <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="/blog/?page={{s}}"><span>{{s}}</span></a></li>
-          {% endfor %}
-          <li class="disabled"><a href=""><span>...</span></a></li>
-          <li><a href="/blog/?page={{last_page}}"><span>last</span></a></li>
-          {% if last_page > current_page %}
-          <li><a href="/blog/?page={{current_page| add:"1"}}"><span>Next<i class="fa fa-angle-right pagination-next"></i></span></a>
-          </li>
-          {% endif %}
-          {% endif %}
-        </ul>
-      </div>
+          <div class="pagination_mp">
+            {% get_page current_page last_page as pages %}
+            <nav>
+              <ul class="pagination">
+                {% if current_page != 1 %}
+                <li class="prev"><a href="?page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
+                <li class="prev"><a href="?page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
+                <li><a href="?page=1">first</a></li>
+                {% endif %}
+                {% for s in pages %}
+                <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?page={{s}}">{{s}}</a></li>
+                {% endfor %}
+                {% if current_page != last_page %}
+                <li><a href="?page={{last_page}}">last</a></li>
+                <li><a href="?page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
+                <li><a href="?page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+          </div>
       <!--/ paginantion -->
       <div class="blog-container">
           <div id="subscribe">
@@ -168,7 +138,7 @@
             <h3>Subscribe To our <span>news letter</span></h3>
             <div class="text">
               <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
-              <div><sub style="font-size: 21px;">*</sub>We don't provide your gmail contact details to any third parties</div>
+              <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
             </div>
             <form id="subscribeform" name="subscribeform" method="post">
               <div class="form_fiv">
@@ -188,4 +158,19 @@
   </div>
   <!--/ container wrapper -->
   <!-- footer links starts here -->
+  {% endblock %}
+  {% block extra-js %}
+  
+  <script type="text/javascript">
+  $(document).ready(function(e){
+    url = window.location.pathname
+    if (url.split("/")[2] && url.split("/")[2] == "category"){
+      title = url.split("/")[3]
+      $(".non-category-blog").html(title+" Blog")
+    }
+    else if (url.split("/")[1] == "blog"){
+      $(".non-category-blog").html("A blog about Django, Python, mongo DB, LINUX, Amazon Web Services")
+    }
+  });
+  </script>
 {% endblock %}

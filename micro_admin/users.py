@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
@@ -103,7 +103,7 @@ def new_user(request):
             user_roles = USER_ROLES
             return render(request, 'admin/user/new.html', {'user_roles': user_roles, 'csrf_token': c['csrf_token']})
         else:
-            return render_to_response('admin/accessdenied.html')
+            return render(request, 'admin/accessdenied.html')
 
 
 @login_required
@@ -171,7 +171,7 @@ def edit_user(request, pk):
                     'role_list': user_roles, 'edit_user': current_user, 'csrf_token': c['csrf_token']
                 })
         else:
-            return render_to_response('admin/accessdenied.html')
+            return render(request, 'admin/accessdenied.html')
 
 
 @login_required

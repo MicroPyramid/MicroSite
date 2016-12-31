@@ -226,29 +226,17 @@ COMPRESS_OFFLINE_CONTEXT = {
     'STATIC_URL': 'STATIC_URL',
 }
 
-# if DEBUG:
-#     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
-# else:
-#     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+if DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
-
-
-if 'TRAVIS' in os.environ:
-    DATABASES = {
-        'default': {
-            'ENGINE':   'django.db.backends.mysql',
-            'NAME':     'test',
-            'USER':     'root',
-            'PASSWORD': '',
-            'HOST':     'localhost',
-            'PORT':     '',
-        }
-    }
 
 # Haystack settings for Elasticsearch
 HAYSTACK_CONNECTIONS = {
@@ -294,3 +282,9 @@ CACHES = {
 # CACHE_IGNORE_REGEXPS = (
 #     r'/admin.*',
 # )
+
+try:
+    from microsite.settings_local import *  # noqa
+except ImportError as e:
+    pass
+

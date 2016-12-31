@@ -9,7 +9,9 @@ register = template.Library()
 def get_archives(context):
     archives = []
     dates = []
-    for each_object in Post.objects.filter(status='P').order_by('updated_on').values('updated_on'):
+    for each_object in Post.objects.filter(status='P').order_by(
+        'published_on'
+    ).values('published_on'):
         for date in each_object.values():
             dates.append((date.year, date.month, 1))
 
@@ -25,19 +27,20 @@ def get_archives(context):
 
 @register.assignment_tag(takes_context=True)
 def get_page(context, page, no_pages):
-    if page <= 5:
+    if page <= 3:
         start_page = 1
     else:
-        start_page = page - 5
+        start_page = page - 3
 
-    if no_pages <= 10:
+    if no_pages <= 6:
         end_page = no_pages
     else:
-        end_page = start_page + 10
+        end_page = start_page + 6
+
     if end_page > no_pages:
         end_page = no_pages
 
-    pages = range(start_page, end_page+1)
+    pages = range(start_page, end_page + 1)
     return pages
 
 

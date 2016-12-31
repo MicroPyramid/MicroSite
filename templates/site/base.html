@@ -1,36 +1,47 @@
 {% load recurse %}
 {% load menu %}
 <!DOCTYPE html>
-<html lang="en" class="no-js" prefix="og: http://ogp.me/ns#">
+<html lang="en" class="no-js" prefix="og: http://ogp.me/ns# fb:">
   <head>
     <meta charset="utf-8">
+    <meta property="fb:pages" content="194798730671519" />
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>
-      {% block title %}
-      MicroPyramid | Django Web Application Development | Mobile App Development | Salesforce Development
+      {% block title %} - MicroPyramid
       {% endblock %}
     </title>
-
-    <meta property="og:url" content="https://micropyramid.com/" />
-    <meta property="og:image" content="https://micropyramid.com/static/site/images/new/logo.png" />
-
     {% block meta-description %}
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://micropyramid.com/" />
+    <meta property="og:image" content="https://micropyramid.com/static/mp_logo.png" />
+    <meta property="og:image:width" content="200" />
+    <meta property="og:image:height" content="200" />
+
     <meta property="og:title"  content="MicroPyramid | Django Web Application Development | Mobile App Development" />
     <meta property="og:description" content="MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
     <meta name="description" content="MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
     <meta name="keywords" content="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
-
     {% endblock %}
     <meta name="author" content="micropyramid" />
     <meta name="robots" content="index, follow">
-    <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services Development Company - Hyderabad, India &raquo; Feed" href="https://www.micropyramid.com/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services Development Company &raquo; Feed" href="https://www.micropyramid.com/rss.xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block extra-head %}
     {% endblock %}
     {% load compress %}
     <link rel="shortcut icon" href="/static/favicon.png">
+    <link rel="apple-touch-icon" href="/static/site/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/static/site/images/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/static/site/images/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/site/images/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/site/images/apple-touch-icon-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/site/images/apple-touch-icon-120x120-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/site/images/apple-touch-icon-152x152-precomposed.png">
     <!-- google fonts starts here-->
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
     <!-- google fonts ends here-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -40,22 +51,23 @@
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/error_pages.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/design.scss">
-
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less">
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
   </head>
-  <body>
+  <body data-spy="scroll">
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
+      
       ga('create', '{{request.session.google_analytics_code}}', 'auto');
       ga('send', 'pageview');
-
+      
     </script>
     <!-- push menu -->
     <div class="mp-pusher" id="mp-pusher">
@@ -74,7 +86,7 @@
           </div>
           <div class="content clearfix">
             <!-- mobile_menu wrap -->
-      {% if request.session.design|slugify == 'mobile'|slugify %}
+            {% if request.session.design|slugify == 'mobile'|slugify %}
             <div id='mob_menu'>
               <!-- row -->
               <div class="row">
@@ -86,99 +98,101 @@
                   <div class='image_wrap'>
                     <!-- svg logo -->
                     <span class="logo_mp">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         width="65px" height="50px"
-                         viewBox="0 0 1047 470">
-                         <path id="left_one"
+                      <a href="/">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                          width="45px" height="50px"
+                          viewBox="0 0 1047 470">
+                          <path id="left_one"
                             fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
                             d="M 46.00,462.00
-                               C 41.42,461.99 38.50,461.94 34.00,460.71
-                                 31.67,460.08 29.07,459.07 27.02,457.79
-                                 11.54,448.12 23.40,426.27 30.20,415.00
-                                 30.20,415.00 35.19,407.00 35.19,407.00
-                                 35.19,407.00 41.42,397.00 41.42,397.00
-                                 41.42,397.00 161.58,204.00 161.58,204.00
-                                 161.58,204.00 249.42,63.00 249.42,63.00
-                                 249.42,63.00 271.30,29.01 271.30,29.01
-                                 275.76,23.92 282.05,19.40 289.00,19.04
-                                 302.55,18.34 309.39,27.45 315.80,38.00
-                                 315.80,38.00 347.42,90.00 347.42,90.00
-                                 349.74,93.73 359.45,108.94 360.08,112.00
-                                 360.77,113.91 360.61,115.18 360.08,117.00
-                                 360.08,117.00 343.42,144.00 343.42,144.00
-                                 343.42,144.00 309.05,199.00 309.05,199.00
-                                 309.05,199.00 210.05,358.00 210.05,358.00
-                                 210.05,358.00 176.95,411.00 176.95,411.00
-                                 172.13,418.68 164.59,428.54 165.71,438.00
-                                 167.15,450.28 175.33,453.91 182.00,462.00
-                                 182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
-                                 <path id="left_2"
+                            C 41.42,461.99 38.50,461.94 34.00,460.71
+                            31.67,460.08 29.07,459.07 27.02,457.79
+                            11.54,448.12 23.40,426.27 30.20,415.00
+                            30.20,415.00 35.19,407.00 35.19,407.00
+                            35.19,407.00 41.42,397.00 41.42,397.00
+                            41.42,397.00 161.58,204.00 161.58,204.00
+                            161.58,204.00 249.42,63.00 249.42,63.00
+                            249.42,63.00 271.30,29.01 271.30,29.01
+                            275.76,23.92 282.05,19.40 289.00,19.04
+                            302.55,18.34 309.39,27.45 315.80,38.00
+                            315.80,38.00 347.42,90.00 347.42,90.00
+                            349.74,93.73 359.45,108.94 360.08,112.00
+                            360.77,113.91 360.61,115.18 360.08,117.00
+                            360.08,117.00 343.42,144.00 343.42,144.00
+                            343.42,144.00 309.05,199.00 309.05,199.00
+                            309.05,199.00 210.05,358.00 210.05,358.00
+                            210.05,358.00 176.95,411.00 176.95,411.00
+                            172.13,418.68 164.59,428.54 165.71,438.00
+                            167.15,450.28 175.33,453.91 182.00,462.00
+                            182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
+                          <path id="left_2"
                             fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
                             d="M 285.00,466.00
-                               C 272.43,465.85 260.25,460.59 261.09,446.00
-                                 261.76,434.51 268.99,423.51 274.95,414.00
-                                 274.95,414.00 300.58,373.00 300.58,373.00
-                                 300.58,373.00 403.95,207.00 403.95,207.00
-                                 403.95,207.00 491.05,67.00 491.05,67.00
-                                 491.05,67.00 502.95,48.00 502.95,48.00
-                                 509.57,37.45 517.01,24.07 531.00,23.10
-                                 541.41,22.37 549.35,29.88 554.77,38.00
-                                 554.77,38.00 568.20,60.00 568.20,60.00
-                                 568.20,60.00 589.00,94.00 589.00,94.00
-                                 589.00,94.00 599.32,111.00 599.32,111.00
-                                 601.40,114.39 603.31,116.95 601.69,121.00
-                                 601.69,121.00 585.05,148.00 585.05,148.00
-                                 585.05,148.00 552.05,201.00 552.05,201.00
-                                 552.05,201.00 452.32,361.00 452.32,361.00
-                                 452.32,361.00 418.68,415.00 418.68,415.00
-                                 413.86,422.65 406.16,432.57 407.19,442.00
-                                 408.50,453.99 416.82,458.07 423.00,466.00
-                                 423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
-                                 <path id="triangle"
+                            C 272.43,465.85 260.25,460.59 261.09,446.00
+                            261.76,434.51 268.99,423.51 274.95,414.00
+                            274.95,414.00 300.58,373.00 300.58,373.00
+                            300.58,373.00 403.95,207.00 403.95,207.00
+                            403.95,207.00 491.05,67.00 491.05,67.00
+                            491.05,67.00 502.95,48.00 502.95,48.00
+                            509.57,37.45 517.01,24.07 531.00,23.10
+                            541.41,22.37 549.35,29.88 554.77,38.00
+                            554.77,38.00 568.20,60.00 568.20,60.00
+                            568.20,60.00 589.00,94.00 589.00,94.00
+                            589.00,94.00 599.32,111.00 599.32,111.00
+                            601.40,114.39 603.31,116.95 601.69,121.00
+                            601.69,121.00 585.05,148.00 585.05,148.00
+                            585.05,148.00 552.05,201.00 552.05,201.00
+                            552.05,201.00 452.32,361.00 452.32,361.00
+                            452.32,361.00 418.68,415.00 418.68,415.00
+                            413.86,422.65 406.16,432.57 407.19,442.00
+                            408.50,453.99 416.82,458.07 423.00,466.00
+                            423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
+                          <path id="triangle"
                             fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
                             d="M 684.68,242.00
-                               C 684.68,242.00 706.42,277.00 706.42,277.00
-                                 706.42,277.00 775.68,388.00 775.68,388.00
-                                 780.83,396.17 797.28,421.68 799.91,429.00
-                                 801.71,434.02 802.11,437.71 801.99,443.00
-                                 801.60,458.99 787.16,461.98 774.00,462.00
-                                 774.00,462.00 570.00,462.00 570.00,462.00
-                                 565.69,461.99 563.18,462.10 559.00,460.61
-                                 556.57,459.75 554.16,458.50 552.09,456.95
-                                 536.31,445.10 551.82,422.90 559.19,411.00
-                                 559.19,411.00 564.80,402.00 564.80,402.00
-                                 564.80,402.00 633.42,291.00 633.42,291.00
-                                 633.42,291.00 673.00,227.00 673.00,227.00
-                                 678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
-                                 <path id="seven"
+                            C 684.68,242.00 706.42,277.00 706.42,277.00
+                            706.42,277.00 775.68,388.00 775.68,388.00
+                            780.83,396.17 797.28,421.68 799.91,429.00
+                            801.71,434.02 802.11,437.71 801.99,443.00
+                            801.60,458.99 787.16,461.98 774.00,462.00
+                            774.00,462.00 570.00,462.00 570.00,462.00
+                            565.69,461.99 563.18,462.10 559.00,460.61
+                            556.57,459.75 554.16,458.50 552.09,456.95
+                            536.31,445.10 551.82,422.90 559.19,411.00
+                            559.19,411.00 564.80,402.00 564.80,402.00
+                            564.80,402.00 633.42,291.00 633.42,291.00
+                            633.42,291.00 673.00,227.00 673.00,227.00
+                            678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
+                          <path id="seven"
                             fill="#2f5374" stroke="#2f5374" stroke-width='6'
                             d="M 729.00,15.00
-                               C 729.00,15.00 799.00,15.00 799.00,15.00
-                                 799.00,15.00 1018.00,15.00 1018.00,15.00
-                                 1031.59,15.02 1042.86,20.25 1038.51,36.00
-                                 1037.37,40.12 1031.77,49.85 1029.42,54.00
-                                 1029.42,54.00 1014.70,81.00 1014.70,81.00
-                                 1014.70,81.00 947.31,204.00 947.31,204.00
-                                 947.31,204.00 907.42,277.00 907.42,277.00
-                                 907.42,277.00 883.31,321.00 883.31,321.00
-                                 879.08,328.80 874.68,337.62 865.00,339.61
-                                 857.63,341.12 851.79,336.48 847.53,331.00
-                                 847.53,331.00 823.85,290.00 823.85,290.00
-                                 823.85,290.00 813.00,271.00 813.00,271.00
-                                 811.35,268.11 808.42,263.33 808.42,260.00
-                                 808.42,256.49 811.45,252.04 813.14,249.00
-                                 813.14,249.00 824.14,229.00 824.14,229.00
-                                 824.14,229.00 865.75,153.00 865.75,153.00
-                                 865.75,153.00 881.25,123.00 881.25,123.00
-                                 885.16,111.06 880.84,107.02 869.00,107.00
-                                 869.00,107.00 732.00,107.00 732.00,107.00
-                                 730.06,107.00 726.86,107.12 725.10,106.40
-                                 721.23,104.82 716.09,93.92 713.85,90.00
-                                 713.85,90.00 685.75,39.00 685.75,39.00
-                                 682.60,29.40 682.42,20.11 693.00,15.65
-                                 693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
-                    </svg>
-                    <img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid - Django and Python Web Development">
+                            C 729.00,15.00 799.00,15.00 799.00,15.00
+                            799.00,15.00 1018.00,15.00 1018.00,15.00
+                            1031.59,15.02 1042.86,20.25 1038.51,36.00
+                            1037.37,40.12 1031.77,49.85 1029.42,54.00
+                            1029.42,54.00 1014.70,81.00 1014.70,81.00
+                            1014.70,81.00 947.31,204.00 947.31,204.00
+                            947.31,204.00 907.42,277.00 907.42,277.00
+                            907.42,277.00 883.31,321.00 883.31,321.00
+                            879.08,328.80 874.68,337.62 865.00,339.61
+                            857.63,341.12 851.79,336.48 847.53,331.00
+                            847.53,331.00 823.85,290.00 823.85,290.00
+                            823.85,290.00 813.00,271.00 813.00,271.00
+                            811.35,268.11 808.42,263.33 808.42,260.00
+                            808.42,256.49 811.45,252.04 813.14,249.00
+                            813.14,249.00 824.14,229.00 824.14,229.00
+                            824.14,229.00 865.75,153.00 865.75,153.00
+                            865.75,153.00 881.25,123.00 881.25,123.00
+                            885.16,111.06 880.84,107.02 869.00,107.00
+                            869.00,107.00 732.00,107.00 732.00,107.00
+                            730.06,107.00 726.86,107.12 725.10,106.40
+                            721.23,104.82 716.09,93.92 713.85,90.00
+                            713.85,90.00 685.75,39.00 685.75,39.00
+                            682.60,29.40 682.42,20.11 693.00,15.65
+                            693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
+                        </svg>
+                      </a>
+                      <a href="/"><img src="/static/site/images/new/Micropyramid.png" alt="MicroPyramid - Django and Python Web Development"></a>
                     </span>
                     <!--/ svg logo -->
                   </div>
@@ -186,180 +200,185 @@
                 <!--/ logo -->
                 {% block contact %}
                 {% endblock %}
-
               </div>
               <!-- row -->
             </div>
             <!--/ mobile_menu wrap -->
-                  {% endif %}
-
+            {% endif %}
             <!-- menu -->
             <div id='base_menu' class='fixed_menu'>
               <span class="logo">
                 <a href="/">
-                    <!-- svg logo -->
-                    <span class="logo_mp">
+                  <!-- svg logo -->
+                  <span class="logo_mp">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                         width="65px" height="50px"
-                         viewBox="0 0 1047 470">
-                         <path id="left_one"
-                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
-                            d="M 46.00,462.00
-                               C 41.42,461.99 38.50,461.94 34.00,460.71
-                                 31.67,460.08 29.07,459.07 27.02,457.79
-                                 11.54,448.12 23.40,426.27 30.20,415.00
-                                 30.20,415.00 35.19,407.00 35.19,407.00
-                                 35.19,407.00 41.42,397.00 41.42,397.00
-                                 41.42,397.00 161.58,204.00 161.58,204.00
-                                 161.58,204.00 249.42,63.00 249.42,63.00
-                                 249.42,63.00 271.30,29.01 271.30,29.01
-                                 275.76,23.92 282.05,19.40 289.00,19.04
-                                 302.55,18.34 309.39,27.45 315.80,38.00
-                                 315.80,38.00 347.42,90.00 347.42,90.00
-                                 349.74,93.73 359.45,108.94 360.08,112.00
-                                 360.77,113.91 360.61,115.18 360.08,117.00
-                                 360.08,117.00 343.42,144.00 343.42,144.00
-                                 343.42,144.00 309.05,199.00 309.05,199.00
-                                 309.05,199.00 210.05,358.00 210.05,358.00
-                                 210.05,358.00 176.95,411.00 176.95,411.00
-                                 172.13,418.68 164.59,428.54 165.71,438.00
-                                 167.15,450.28 175.33,453.91 182.00,462.00
-                                 182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
-                                 <path id="left_2"
-                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
-                            d="M 285.00,466.00
-                               C 272.43,465.85 260.25,460.59 261.09,446.00
-                                 261.76,434.51 268.99,423.51 274.95,414.00
-                                 274.95,414.00 300.58,373.00 300.58,373.00
-                                 300.58,373.00 403.95,207.00 403.95,207.00
-                                 403.95,207.00 491.05,67.00 491.05,67.00
-                                 491.05,67.00 502.95,48.00 502.95,48.00
-                                 509.57,37.45 517.01,24.07 531.00,23.10
-                                 541.41,22.37 549.35,29.88 554.77,38.00
-                                 554.77,38.00 568.20,60.00 568.20,60.00
-                                 568.20,60.00 589.00,94.00 589.00,94.00
-                                 589.00,94.00 599.32,111.00 599.32,111.00
-                                 601.40,114.39 603.31,116.95 601.69,121.00
-                                 601.69,121.00 585.05,148.00 585.05,148.00
-                                 585.05,148.00 552.05,201.00 552.05,201.00
-                                 552.05,201.00 452.32,361.00 452.32,361.00
-                                 452.32,361.00 418.68,415.00 418.68,415.00
-                                 413.86,422.65 406.16,432.57 407.19,442.00
-                                 408.50,453.99 416.82,458.07 423.00,466.00
-                                 423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
-                                 <path id="triangle"
-                            fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
-                            d="M 684.68,242.00
-                               C 684.68,242.00 706.42,277.00 706.42,277.00
-                                 706.42,277.00 775.68,388.00 775.68,388.00
-                                 780.83,396.17 797.28,421.68 799.91,429.00
-                                 801.71,434.02 802.11,437.71 801.99,443.00
-                                 801.60,458.99 787.16,461.98 774.00,462.00
-                                 774.00,462.00 570.00,462.00 570.00,462.00
-                                 565.69,461.99 563.18,462.10 559.00,460.61
-                                 556.57,459.75 554.16,458.50 552.09,456.95
-                                 536.31,445.10 551.82,422.90 559.19,411.00
-                                 559.19,411.00 564.80,402.00 564.80,402.00
-                                 564.80,402.00 633.42,291.00 633.42,291.00
-                                 633.42,291.00 673.00,227.00 673.00,227.00
-                                 678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
-                                 <path id="seven"
-                            fill="#2f5374" stroke="#2f5374" stroke-width='6'
-                            d="M 729.00,15.00
-                               C 729.00,15.00 799.00,15.00 799.00,15.00
-                                 799.00,15.00 1018.00,15.00 1018.00,15.00
-                                 1031.59,15.02 1042.86,20.25 1038.51,36.00
-                                 1037.37,40.12 1031.77,49.85 1029.42,54.00
-                                 1029.42,54.00 1014.70,81.00 1014.70,81.00
-                                 1014.70,81.00 947.31,204.00 947.31,204.00
-                                 947.31,204.00 907.42,277.00 907.42,277.00
-                                 907.42,277.00 883.31,321.00 883.31,321.00
-                                 879.08,328.80 874.68,337.62 865.00,339.61
-                                 857.63,341.12 851.79,336.48 847.53,331.00
-                                 847.53,331.00 823.85,290.00 823.85,290.00
-                                 823.85,290.00 813.00,271.00 813.00,271.00
-                                 811.35,268.11 808.42,263.33 808.42,260.00
-                                 808.42,256.49 811.45,252.04 813.14,249.00
-                                 813.14,249.00 824.14,229.00 824.14,229.00
-                                 824.14,229.00 865.75,153.00 865.75,153.00
-                                 865.75,153.00 881.25,123.00 881.25,123.00
-                                 885.16,111.06 880.84,107.02 869.00,107.00
-                                 869.00,107.00 732.00,107.00 732.00,107.00
-                                 730.06,107.00 726.86,107.12 725.10,106.40
-                                 721.23,104.82 716.09,93.92 713.85,90.00
-                                 713.85,90.00 685.75,39.00 685.75,39.00
-                                 682.60,29.40 682.42,20.11 693.00,15.65
-                                 693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
+                      width="65px" height="50px"
+                      viewBox="0 0 1047 470">
+                      <path id="left_one"
+                        fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                        d="M 46.00,462.00
+                        C 41.42,461.99 38.50,461.94 34.00,460.71
+                        31.67,460.08 29.07,459.07 27.02,457.79
+                        11.54,448.12 23.40,426.27 30.20,415.00
+                        30.20,415.00 35.19,407.00 35.19,407.00
+                        35.19,407.00 41.42,397.00 41.42,397.00
+                        41.42,397.00 161.58,204.00 161.58,204.00
+                        161.58,204.00 249.42,63.00 249.42,63.00
+                        249.42,63.00 271.30,29.01 271.30,29.01
+                        275.76,23.92 282.05,19.40 289.00,19.04
+                        302.55,18.34 309.39,27.45 315.80,38.00
+                        315.80,38.00 347.42,90.00 347.42,90.00
+                        349.74,93.73 359.45,108.94 360.08,112.00
+                        360.77,113.91 360.61,115.18 360.08,117.00
+                        360.08,117.00 343.42,144.00 343.42,144.00
+                        343.42,144.00 309.05,199.00 309.05,199.00
+                        309.05,199.00 210.05,358.00 210.05,358.00
+                        210.05,358.00 176.95,411.00 176.95,411.00
+                        172.13,418.68 164.59,428.54 165.71,438.00
+                        167.15,450.28 175.33,453.91 182.00,462.00
+                        182.00,462.00 46.00,462.00 46.00,462.00 Z" ></path>
+                      <path id="left_2"
+                        fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                        d="M 285.00,466.00
+                        C 272.43,465.85 260.25,460.59 261.09,446.00
+                        261.76,434.51 268.99,423.51 274.95,414.00
+                        274.95,414.00 300.58,373.00 300.58,373.00
+                        300.58,373.00 403.95,207.00 403.95,207.00
+                        403.95,207.00 491.05,67.00 491.05,67.00
+                        491.05,67.00 502.95,48.00 502.95,48.00
+                        509.57,37.45 517.01,24.07 531.00,23.10
+                        541.41,22.37 549.35,29.88 554.77,38.00
+                        554.77,38.00 568.20,60.00 568.20,60.00
+                        568.20,60.00 589.00,94.00 589.00,94.00
+                        589.00,94.00 599.32,111.00 599.32,111.00
+                        601.40,114.39 603.31,116.95 601.69,121.00
+                        601.69,121.00 585.05,148.00 585.05,148.00
+                        585.05,148.00 552.05,201.00 552.05,201.00
+                        552.05,201.00 452.32,361.00 452.32,361.00
+                        452.32,361.00 418.68,415.00 418.68,415.00
+                        413.86,422.65 406.16,432.57 407.19,442.00
+                        408.50,453.99 416.82,458.07 423.00,466.00
+                        423.00,466.00 285.00,466.00 285.00,466.00 Z" ></path>
+                      <path id="triangle"
+                        fill="#1dabdd" stroke="#1dabdd" stroke-width='6'
+                        d="M 684.68,242.00
+                        C 684.68,242.00 706.42,277.00 706.42,277.00
+                        706.42,277.00 775.68,388.00 775.68,388.00
+                        780.83,396.17 797.28,421.68 799.91,429.00
+                        801.71,434.02 802.11,437.71 801.99,443.00
+                        801.60,458.99 787.16,461.98 774.00,462.00
+                        774.00,462.00 570.00,462.00 570.00,462.00
+                        565.69,461.99 563.18,462.10 559.00,460.61
+                        556.57,459.75 554.16,458.50 552.09,456.95
+                        536.31,445.10 551.82,422.90 559.19,411.00
+                        559.19,411.00 564.80,402.00 564.80,402.00
+                        564.80,402.00 633.42,291.00 633.42,291.00
+                        633.42,291.00 673.00,227.00 673.00,227.00
+                        678.60,229.95 681.40,236.80 684.68,242.00 Z" ></path>
+                      <path id="seven"
+                        fill="#2f5374" stroke="#2f5374" stroke-width='6'
+                        d="M 729.00,15.00
+                        C 729.00,15.00 799.00,15.00 799.00,15.00
+                        799.00,15.00 1018.00,15.00 1018.00,15.00
+                        1031.59,15.02 1042.86,20.25 1038.51,36.00
+                        1037.37,40.12 1031.77,49.85 1029.42,54.00
+                        1029.42,54.00 1014.70,81.00 1014.70,81.00
+                        1014.70,81.00 947.31,204.00 947.31,204.00
+                        947.31,204.00 907.42,277.00 907.42,277.00
+                        907.42,277.00 883.31,321.00 883.31,321.00
+                        879.08,328.80 874.68,337.62 865.00,339.61
+                        857.63,341.12 851.79,336.48 847.53,331.00
+                        847.53,331.00 823.85,290.00 823.85,290.00
+                        823.85,290.00 813.00,271.00 813.00,271.00
+                        811.35,268.11 808.42,263.33 808.42,260.00
+                        808.42,256.49 811.45,252.04 813.14,249.00
+                        813.14,249.00 824.14,229.00 824.14,229.00
+                        824.14,229.00 865.75,153.00 865.75,153.00
+                        865.75,153.00 881.25,123.00 881.25,123.00
+                        885.16,111.06 880.84,107.02 869.00,107.00
+                        869.00,107.00 732.00,107.00 732.00,107.00
+                        730.06,107.00 726.86,107.12 725.10,106.40
+                        721.23,104.82 716.09,93.92 713.85,90.00
+                        713.85,90.00 685.75,39.00 685.75,39.00
+                        682.60,29.40 682.42,20.11 693.00,15.65
+                        693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
                     </svg>
-                    <img src="/static/site/images/new/mp_logo_text.png" alt="MicroPyramid - Django and Python Web Development">
-                    </span>
-                        <!--/ svg logo -->
+                    <img src="/static/site/images/new/Micropyramid.png" alt="MicroPyramid - Django and Python Web Development">
+                  </span>
+                  <!--/ svg logo -->
                 </a>
               </span>
               {% get_menus as menu_list %}
-              {% recurse menu.menu_set.all|dictsort:"lvl" with menu_list as menu %}
+              {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                  <li><a href="{{menu.url}}">{{menu.title}}</a>
+                <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
-                  </li>
+                </li>
                 {% endloop %}
               </ul>
               {% endrecurse %}
-              <ul>
-                <li><a href="/">Home</a></li>
-              </ul>
             </div>
             <!--/ menu -->
-
             {% block stage %}
             {% endblock %}
-
             {% block footer %}
             <!-- footer links starts here -->
             <div class="row marl" id="footer-links-mp">
               <div class="container">
-                <div class="col-md-3 col-sm-3 col-sm-12 footer-links">
+                <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
                   {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
                     <li><a href="/">Home</a></li>
-                    {% for menu in menu_list %}
-                      <li><a href="{{menu.url}}">{{menu.title|capfirst}}</a></li>
-                    {% endfor %}
-                    <li><a href="/contact-us/">Contact Us</a></li>
+                    <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
                     <li><a href="/subscribe/">Subscribe</a></li>
+                    {% for menu in menu_list|slice:"0:4" %}
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    {% endfor %}
                   </ul>
                 </div>
-                <div class="col-md-6 col-sm-6 col-sm-12 footer-mp">
-                <div class="">
-                  <div class="row inner-footer-social" id="footer-social">
-                    <ul class="list-inline">
-                      <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
-                      </li>
-                      <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
-                      </li>
-                      <li><a href="https://www.youtube.com/user/TheMicropyramid" class="youtube-play" target="_blank"><i class="fa fa-youtube-play"></i></a>
-                      </li>
-                      <li><a href="https://micropyramid.com/rss.xml" class="rss" target="_blank"><i class="fa fa-rss"></i></a>
-                      </li>
-                      <li><a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank"><i class="fa fa-google-plus"></i></a>
-                      </li>
-                      <li><a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
-                      </li>
-                      <li><a href="https://github.com/micropyramid" class="github" target="_blank"><i class="fa fa-github"></i></a>
-                      </li>
-                    </ul>
+                <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
+                  {% get_child_menus as menu_list %}
+                  <ul class="inner-footer-list">
+                    {% for menu in menu_list|slice:"4:10" %}
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    {% endfor %}
+                  </ul>
                 </div>
-                <div class="text-center sitemap_rights">
-                <span class="copy-right">Copyright &copy; {% now "Y" %} MicroPyramid.</span>
-                <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
+                <div class="col-md-3 col-sm-12 col-xs-12 footer-mp">
+                  <p><b>MicroPyramid - India</b></p>
+                  <p>HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072, +91 9959166266</p>
+                  <p>Monday - Friday : 10:00 - 19:00</p>
+                  <p><b>MicroPyramid - USA</b></p>
+                  <p>280 Moon Clinton Rd,<br>STE D Moon Twp, Pittsburgh,<br> Pennsylvania 15108, +1 5102300949</p>
                 </div>
-              </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-sm-12 footer-mp">
-                  <p>MicroPyramid Informatics Pvt Ltd.</p>
-                 HIG499, Viswa sai dham apartment, behind anupama hospital, 6th phase KPHB, Hyderabad, India - 500072
-                 <p>+91 40 6599 6999</p>
+                <div class="col-md-5 col-sm-12 col-xs-12 footer-mp">
+                  <div class="">
+                    <div class="row inner-footer-social" id="footer-social">
+                      <ul class="list-inline">
+                        <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li><a href="https://www.youtube.com/c/micropyramid" class="youtube-play" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                        </li>
+                        <li><a href="https://micropyramid.com/rss.xml" class="rss" target="_blank"><i class="fa fa-rss"></i></a>
+                        </li>
+                        <li><a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                        <li><a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="https://github.com/micropyramid" class="github" target="_blank"><i class="fa fa-github"></i></a>
+                        </li>
+                        <li><a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank"><i class="fa fa-reddit"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="text-center sitemap_rights">
+                      <span class="copy-right">Copyright © 2016 MicroPyramid.</span>
+                      <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -375,24 +394,27 @@
     <!--/ push menu -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJymWpAChcN_U_GSxfPRH1xaV3NgbUwEc"></script>
+   <!--  <script src="https://maps.googleapis.com/maps/api/js"></script> -->
     <script type="application/ld+json">
-        {
-          "@context" : "http://schema.org",
-          "@type" : "Organization",
-          "url" : "https://micropyramid.com",
-          "logo" : "https://micropyramid.com/static/site/images/new/company_logo.png",
-          "contactPoint" : [{
-            "@type" : "ContactPoint",
-            "telephone" : "+91 40 6599 6999",
-            "contactType" : "customer service"
-          }]
-        }
+      {
+        "@context" : "http://schema.org",
+        "@type" : "Organization",
+        "url" : "https://micropyramid.com",
+        "logo" : "https://micropyramid.com/static/site/images/new/company_logo.png",
+        "contactPoint" : [{
+          "@type" : "ContactPoint",
+          "telephone" : "+91 40 6599 6999",
+          "contactType" : "customer service"
+        }]
+      }
     </script>
     {% compress js %}
     <script src="/static/site/js/jquery.form.js" defer></script>
     <script src="/static/site/js/functions.js" defer></script>
     <script src="/static/site/js/map.js" defer></script>
+    <script src="/static/site/js/jquery.easing.min.js"></script>
+    <script src="/static/site/js/scrolling-nav.js"></script>
     {% if request.session.design|slugify == 'mobile'|slugify %}
     <script type="text/javascript" src='/static/site/js/menu.js'></script>
     {% endif %}
@@ -402,13 +424,20 @@
         $(this).hover();
       });
     </script>
-    <script type="text/javascript">
-
-    </script>
-
     {% endcompress %}
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+      $(window).scroll(function(e){
+      if($(window).scrollTop()  >70){
+         $('#base_menu').css({"padding-top": "0", "padding-bottom": "0","transition": "0.4s ease-in-out"});
+         }
+      else{
+          $('#base_menu').css({"padding-top": "8px", "padding-bottom": "2px","transition": "0.4s ease-in-out"});
+          }
+      })
+      });
+    </script>
     {% block extra-js %}
     {% endblock %}
-
   </body>
 </html>

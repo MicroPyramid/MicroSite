@@ -477,7 +477,7 @@
 
 .no-csstransforms3d .mp-menu .mp-level,
 .no-js .mp-menu .mp-level {
-	display: none;
+	display: block;
 }
 
 .no-csstransforms3d .mp-menu > .mp-level,

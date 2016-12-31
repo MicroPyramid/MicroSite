@@ -13,9 +13,11 @@
 <ul class="sitemap_list">
     {% if sitemap_links.number == 1  %}
     <li class="sitemap-parent" ><a href='https://micropyramid.com/'>Home</a></li>
-    <li class="sitemap-parent"><a href='https://micropyramid.com/how-we-do/'>How We Do</a></li>
-    <li class="sitemap-parent"><a href='https://micropyramid.com/tools-we-use/'>Tools We Use</a></li>
-    <li class="sitemap-parent"><a href='https://micropyramid.com/contact-us/'>Contact Us</a></li>
+<!--     <li class="sitemap-parent"><a href='https://micropyramid.com/how-we-do/'>How We Do</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/tools-we-use/'>Tools We Use</a></li> -->
+    <li class="sitemap-parent"><a href='https://micropyramid.com/contact-india/'>Contact Us</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/contact-usa/'>Contact Us</a></li>
+
     {% endif %}
 
     {% if sitemap_links|get_object_list_class:"Book" %}
@@ -25,6 +27,18 @@
     {% for link in sitemap_links %}
     {% if link|get_class_name == 'Book' %}
       <li class="sitemap-child"><a href='https://micropyramid.com/books/{{link.slug}}'>{{ link.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+
+    {% if sitemap_links|get_object_list_class:"Page" %}
+      <li class="sitemap-parent">Services</li>
+    {% endif %}
+    {% for link in sitemap_links %}
+    {% if link|get_class_name == 'Page' %}
+      {% if link.slug == 'careers' %}
+        {% else %}
+          <li class="sitemap-child"><a href='https://micropyramid.com/{{link.slug}}'>{{ link.title }}</a></li>
+      {% endif %}
     {% endif %}
     {% endfor %}
 
@@ -39,6 +53,7 @@
       {% endif %}
     {% endif %}
     {% endfor %}
+    
     {% if sitemap_links|get_object_list_class:"Category" %}
       <li class="sitemap-parent"><a href='https://micropyramid.com/blog/'>Blog Posts</a></li>
     {% endif %}

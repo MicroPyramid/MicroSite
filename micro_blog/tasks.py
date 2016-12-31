@@ -51,9 +51,7 @@ def sending_mail_to_subscribers():
             message_reply = 'Hello ' + str(subscriber.email) + ',\n\n'
 
             message_reply = '<p>New blog post has been created by ' + str(blog_post.author) + \
-                ' with the name ' + str(blog_post.title) + ' in the category '
-            message_reply += str(blog_post.category.name) + '.</p>' + '<p>Please <a href="' + \
-                blog_url + '">click here</a> to view the blog post in the site.</p>'
+                ' with the name ' + str(blog_post.title) + ' in the category ' + str(blog_post.category.name) + '.</p>'
 
             message_reply = message_reply + 'Regards<br>'
             message_reply = message_reply + 'The MicroPyramid Team.<br>'

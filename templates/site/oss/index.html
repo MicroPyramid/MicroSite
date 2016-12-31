@@ -1,0 +1,154 @@
+{% extends 'site/base.html' %}
+{% load recurse %}
+{% load menu %}
+{% block title %}
+OSS | MicroPyramid
+{% endblock %}
+{% block meta-description %}
+<meta name="description" content="Open Source Softwares - MicroPyramid." />
+{% endblock %}
+{% block stage %}
+<!-- banner starts here -->
+<div class="row marl banner">
+  <div class="container pad_lr_0">
+    <!-- banner_left starts here -->
+    <div class="row marl">
+      <div class="col-md-5 col-sm-12 col-xs-12 banner_left">
+        <h3> Micropyramid Open Source Softwares</h3>
+        <p>Micropyramid OSS contains free open source projects, python modules and few scripts which are developed by our Tech Geeks. You can use, modify, share all our projects and modules because the source code is publicly accessible to anyone.</p>
+        <p>You can copy our code from GitHub and use it in your projects. In future, Will come up with more versions with fewer enhancements.</p>
+      </div>
+      <!-- banner_left ends here -->
+      <!-- banner_right starts here -->
+      <div class="col-md-7 col-sm-12 col-xs-12 banner_right">
+      <div class="row">
+        <!-- banner_item starts here -->
+        <div class="col-md-6 col-sm-6">
+          <div class="banner_item">
+            <span class="icon"></span>
+            <span class="block_heading">Projects</span>
+            <span class="desc">We have released few of our open source projects which can be used by all the users. You just have to look at our GitHub repository for accessing the project source code. Here we have listed our best projects. For more projects, visit our <a target="_blank" href="https://github.com/MicroPyramid">GitHub.</a></span>
+            <span class="view"><a class="page-scroll" href="#projects">Know More...</a></span>
+          </div>
+        </div>
+        <!-- banner_item ends here -->  
+        <!-- banner_item starts here -->
+        <div class="col-md-6 col-sm-6">
+          <div class="banner_item">
+            <span class="icon"></span>
+            <span class="block_heading">Python Modules</span>
+            <span class="desc">Take a look at our top Modules which are completely based on python programming. It will be very helpful for the beginners too to get started python programming. You can find few of our open source python modules in our <a target="_blank" href="https://github.com/MicroPyramid">GitHub Repository</a> </span>
+            <span class="view"><a class="page-scroll" href="#modules">Know More...</a></span>
+          </div>
+        </div>
+        </div>
+        <!-- banner_item ends here -->  
+      </div>
+      <!-- banner_right ends here -->
+    </div>
+  </div>
+</div>
+<!-- banner ends here -->
+<!-- projects starts here -->
+<div class="row marl projects" id="projects">
+  <div class="container">
+    <span class="heading text-center">Our Open Source Projects</span>
+    <!-- projects list starts here -->
+    <div class="row projects_list">
+      <!-- project_item starts here -->
+      <div class="col-md-3 col-sm-6">
+        <div class="project_item ">
+          <span class="project_title">Django MFA</span>
+          <span class="project_links">
+          <a target="_blank" href="https://github.com/MicroPyramid/django-mfa"><i class="fa fa-github"></i> View in GitHub</a>
+          </span>
+          <span class="project_desc">Django MFA(Multi-Factor Authentication) is a secure authentication method to verify user identity by generating random code which will be sent to your devices. Visit our <a href="https://micropyramid.com/blog/securing-django-with-multi-factor-authentication-using-django-mfa/">Django MFA Blog</a></span>
+          <!--        <span class="project_read"><a target="_blank" href="#">Read More...</a></span> -->
+        </div>
+      </div>
+      <!-- project_item ends here -->
+      <!-- project_item starts here -->
+      <div class="col-md-3 col-sm-6">
+        <div class="project_item">
+          <span class="project_title">Microfinance</span>
+          <span class="project_links">
+          <a target="_blank" href="https://github.com/MicroPyramid/micro-finance"><i class="fa fa-github"></i> View in GitHub</a>
+          </span>
+          <span class="project_desc">Microfinance is a web-based management system for any kind of organization. Here you can track all kind of financial services like branch management, members, loans, savings etc.</span>
+          <!--      <span class="project_read"><a target="_blank" href="#">Read More...</a></span> -->
+        </div>
+      </div>
+      <!-- project_item ends here -->
+      <!-- project_item starts here -->
+      <div class="col-md-3 col-sm-6">
+        <div class="project_item">
+          <span class="project_title">Django Simple Forum</span>
+          <span class="project_links">
+          <a target="_blank" href="https://github.com/MicroPyramid/django-simple-forum"><i class="fa fa-github"></i> View in GitHub</a>
+          </span>
+          <span class="project_desc">Django Forum is a discussion board which has several topics, you can start conversations as per your interests. And you can see information or opinions shared by other participants. </span>
+          <!--           <span class="project_read"><a target="_blank" href="#">Read More...</a></span> -->
+        </div>
+      </div>
+      <!-- project_item ends here -->
+      <!-- project_item starts here -->
+      <div class="col-md-3 col-sm-6">
+        <div class="project_item ">
+          <span class="project_title">Django Spanner</span>
+          <span class="project_links">
+          <a target="_blank" href="https://github.com/MicroPyramid/django-spanner"><i class="fa fa-github"></i> View in GitHub</a>
+          </span>
+          <span class="project_desc">Use Django Spanner to deploy your Django project in an easy way without an intervention of login to your server. Even you can backup the data from the server and restore your data to the server.</span>
+          <!--           <span class="project_read"><a target="_blank" href="#">Read More...</a></span> -->
+        </div>
+      </div>
+      <!-- project_item ends here -->
+    </div>
+    <!-- projects list ends here -->
+  </div>
+</div>
+<!-- projects ends here -->
+<!-- python_modules starts here -->
+<div class="row marl python_modules" id="modules">
+  <div class="container">
+    <!-- -->
+    <div class="row modules_row">
+      <div class="col-md-3 modules_left">
+        <span class="sub_heading">List of Python Modules</span>
+        <span class="hint_desc">Here are few of our python modules which are developed by our team and can be useful for python users. You just need to import these modules in your python code. For more guidance and open source modules, check out our <a target="_blank" href="https://github.com/MicroPyramid">GitHub repository.</a></span>
+      </div>
+      <div class="col-md-9 modules_right">
+        <!--module_item stats here -->
+        <div class="col-md-6 col-sm-6 module_block">
+          <div class="module_item">
+            <span class="module_title">Forex Python</span>
+            <span class="module_desc">
+            Using Forex Python you can you can get all latest currency rates and you can convert the amount to foreign exchange rates. View <a target="_blank" href="http://forex-python.readthedocs.io/en/latest/usage.html">Read the Docs</a> to know the usage of various conversions.
+            </span>
+            <span class="module_read">
+              <!--               <a target="_blank" href="#">Read more...</a> -->
+              <a target="_blank" href="https://github.com/MicroPyramid/forex-python"><i class="fa fa-github"></i> View in GitHub</a>
+            </span>
+          </div>
+        </div>
+        <!--module_item ends here -->
+        <!--module_item stats here -->
+        <div class="col-md-6 col-sm-6 module_block">
+          <div class="module_item">
+            <span class="module_title">MicroURL</span>
+            <span class="module_desc">
+            Use MicroURL to shorten your original URL. So, you can share any kind of long urls in a short format. Which can be simple to share with anyone. See the installation process and usage in our GitHub repository.
+            </span>
+            <span class="module_read">
+              <!--               <a target="_blank" href="#">Read more...</a> -->
+              <a target="_blank" href="https://github.com/MicroPyramid/microurl"><i class="fa fa-github"></i> View in GitHub</a>
+            </span>
+          </div>
+        </div>
+        <!--module_item ends here -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- python_modules ends here -->
+{% endblock stage %}

@@ -1,8 +1,10 @@
-from django.test import TestCase
+import json
+from django.test import (TestCase,
+                         Client)
 from micro_admin.forms import *
 from django.test import Client
-from micro_admin.models import User
-from pages.models import simplecontact
+from micro_admin.models import (User, career)
+from django.core.urlresolvers import reverse
 
 
 class Modelforms_test(TestCase):
@@ -46,9 +48,6 @@ class Views_test(TestCase):
         response = self.client.get('/portal/')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get('/portal/contacts/')
-        self.assertEqual(response.status_code, 302)
-
         # Testcase for user logout without login
         response = self.client.get('/portal/out/')
         self.assertEqual(response.status_code, 200)
@@ -66,7 +65,7 @@ class Views_test(TestCase):
 class test_portal_admin(TestCase):
 
     '''
-    setup user and "login" with user
+    setup user then "login" with the same user
     '''
 
     def setUp(self):
@@ -79,11 +78,6 @@ class test_portal_admin(TestCase):
         self.inactive_user.save()
         self.employee = User.objects.create_user(
             'testemployee', "test@gmail.com", 'pwd')
-        self.simplecontact = simplecontact.objects.create(
-                full_name='mp', message='test message',
-                email='testuser@mp.com',
-                phone='1234567890'
-            )
 
     def test_user_index(self):
         # Testcase for forgot password with wrong input
@@ -91,21 +85,21 @@ class test_portal_admin(TestCase):
             '/portal/forgot-password/', {'email': 'dfdfd'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            '"message": "Entered Email id is incorrect."' in response.content)
+            str('"message": "Entered Email id is incorrect."') in response.content.decode('utf8'))
 
         # Testcase for forgot password with correct input
         response = self.client.post(
             '/portal/forgot-password/', {'email': 'test@gmail.com'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            '"message": "Password has been sent to your email sucessfully."' in response.content)
+            str('"message": "Password has been sent to your email sucessfully."') in response.content.decode('utf8'))
 
         # Testcase for user login with wrong input
         response = self.client.post(
             '/portal/', {'email': 'dfdfd', 'password': 'mpdfdf'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            '"message": "The username and password are incorrect."' in response.content)
+            str('"message": "The username and password are incorrect."') in response.content.decode('utf8'))
 
         response = self.client.get('/portal/')
         self.assertEqual(response.status_code, 200)
@@ -117,7 +111,7 @@ class test_portal_admin(TestCase):
             '/portal/', {'email': 'inactive@mp.com', 'password': 'test'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(
-            '"message": "The password is valid, but the account has been disabled!"' in response.content)
+            str('"message": "Your account has been disabled!"') in response.content.decode('utf8'))
 
         # Testcase for user login with correct input
         response = self.client.post(
@@ -127,14 +121,6 @@ class test_portal_admin(TestCase):
     def test_views_user(self):
         user_login = self.client.login(username='mp@mp.com', password='mp')
         self.assertTrue(user_login)
-
-        response = self.client.get('/portal/contacts/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(
-            response, 'admin/content/contacts/simplecontact.html')
-
-        resp = self.client.get('/portal/contacts/' + str(self.simplecontact.id) + '/')
-        self.assertEqual(resp.status_code, 200)
 
         resp = self.client.get('/portal/clear_cache/')
         self.assertEqual(resp.status_code, 302)
@@ -202,7 +188,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('created successfully' in response.content)
+        self.assertTrue(str('created successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/new/',
@@ -215,7 +201,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('created successfully' in response.content)
+        self.assertTrue(str('created successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/new/',
@@ -228,7 +214,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('created successfully' in response.content)
+        self.assertTrue(str('created successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/new/',
@@ -241,7 +227,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('created successfully' in response.content)
+        self.assertTrue(str('created successfully') in response.content.decode('utf8'))
 
         response = self.client.get('/portal/users/edit/' + self.u + '/')
         self.assertEqual(response.status_code, 200)
@@ -258,7 +244,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
+        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
@@ -272,7 +258,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
+        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
@@ -286,7 +272,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
+        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
@@ -300,7 +286,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
+        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
@@ -314,7 +300,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('updated successfully' in response.content)
+        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
@@ -324,7 +310,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('updated successfully' in response.content)
+        self.assertFalse(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/user/change-password/',
@@ -333,7 +319,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Password changed' in response.content)
+        self.assertFalse(str('Password changed') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/user/change-password/',
@@ -342,7 +328,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Password changed' in response.content)
+        self.assertFalse(str('Password changed') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/user/change-password/',
@@ -351,7 +337,7 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('Password changed' in response.content)
+        self.assertTrue(str('Password changed') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/user/change-password/',
@@ -360,10 +346,116 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertFalse('Password changed' in response.content)
+        self.assertFalse(str('Password changed') in response.content.decode('utf8'))
 
         response = self.client.post('/portal/users/change-state/' + self.u + '/')
         self.assertEqual(response.status_code, 302)
 
         response = self.client.post('/portal/users/change-state/' + self.u + '/')
         self.assertEqual(response.status_code, 302)
+
+
+# TEST CASES FOR models.py
+class TestForUserModel(TestCase):
+
+    def test_user_create(self):
+        user = User(email='daniel@micropyramid.com',
+                    user_roles='Developer',
+                    date_of_birth='1980-01-01',
+                    first_name='Daniel',
+                    last_name='Janak',
+                    gender='M')
+        self.assertEqual(user.get_full_name(), 'Daniel Janak')
+        self.assertEqual(user.get_short_name(), user.first_name)
+        self.assertEqual(user.total_posts(), 0)
+        self.assertEqual(user.drafted_posts(), 0)
+
+class TestForcareerModel(TestCase):
+
+    def test_career_obj_create(self):
+        c = career(title="career",
+                   slug="career",
+                   experience=2,
+                   skills="python, django",
+                   description="for quick development")
+
+        c.save()
+        self.assertEqual(c.slug, 'career')
+        c.delete()
+
+
+# TEST CASES FOR users.py
+class UserDetails(TestCase):
+
+    def setUp(self):
+        self.client = Client(enforce_csrf_checks=False)
+        self.user = User(email='daniel@micropyramid.com',
+                         user_roles='Developer',
+                         date_of_birth='1980-01-01',
+                         first_name='Daniel',
+                         last_name='Janak',
+                         is_admin=True,
+                         gender='M')
+
+        self.user.set_password('password')
+        self.user.save()
+        self.password = 'password'
+
+
+class TestForUsers(UserDetails):
+
+    def setUp(self):
+        super(TestForUsers, self).setUp()
+
+    def test_users_view(self):
+        url = reverse('micro_admin:users')
+        self.client.login(email=self.user.email, password=self.password)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'admin/user/index.html')
+
+    def tearDown(self):
+        super(TestForUsers, self).tearDown()
+
+
+class TestForUserPasswordChange(UserDetails):
+
+    def setUp(self):
+        super(TestForUserPasswordChange, self).setUp()
+
+    def test_user_password_change(self):
+        # get
+        url = reverse('micro_admin:change_password')
+        self.client.login(email=self.user.email, password=self.password)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # post
+        context = {'oldpassword': '',
+                   'newpassword': '',
+                   'retypepassword': ''
+                   }
+        response = self.client.post(url, context)
+        expected_data = {"response": {"newpassword": ["This field is required."],
+                         "oldpassword": ["This field is required."],
+                          "retypepassword": ["This field is required."]}, "error": True}
+        self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
+
+        context = {'oldpassword': self.password,
+                   'newpassword': '0000',
+                   'retypepassword': '1111'
+                   }
+        response = self.client.post(url, context)
+        expected_data = {"response": 
+                        {"newpassword": "New password and ConformPasswords did not match"},\
+                         "error": True}
+        self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
+        context = {'oldpassword': self.password,
+                   'newpassword': '0000',
+                   'retypepassword': '0000'
+                   }
+        response = self.client.post(url, context)
+        expected_data = {"response": "Password changed successfully", "error": False}
+        self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
+
+    def tearDown(self):
+        super(TestForUserPasswordChange, self).tearDown()

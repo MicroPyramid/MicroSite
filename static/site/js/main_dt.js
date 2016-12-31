@@ -100,13 +100,13 @@ e.preventDefault();
 $.ajax({
   type: "POST",
   dataType: 'json',
-  url: "/contact-us/",
+  url: $(this).attr("action"),
   data: $('#contactform').serialize(), // from form
   success: function(data) {
     if (data.error) {
       $('p.failure').remove();
       for (var key in data.errinfo) {
-        $('#' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
+        $('#contactform #' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
       }
     } else {
       alert("Your message has been successfully sent. We will get back to you very soon!");

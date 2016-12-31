@@ -3,11 +3,20 @@
 {{ post.title }} - Micropyramid
 {% endblock %}
 {% block meta-description %}
-{%  if not post.meta_description %}
-<meta name="description" content="{{ post.title }} - MicroPyramid." />
-{% else %}
-<meta name="description" content="{{ post.meta_description }}" />
-{% endif %}
+  {%  if not post.meta_description %}
+    <meta name="description" content="{{ post.title }} - MicroPyramid." />
+  {% else %}
+    <meta name="description" content="{{ post.meta_description }}" />
+  {% endif %}
+
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://micropyramid.com/blog/{{ post.slug }}/" />
+  <meta property="og:title"  content="{{ post.title }} - Micropyramid" />
+  <meta property="og:description" content="{%  if not post.meta_description %}{{ post.title }} - MicroPyramid.{% else %}{{ post.meta_description }}{% endif %}" />
+  <meta property="og:image" content="https://micropyramid.com/static/favicon.png" />
+  <meta property="og:image:width" content="200" />
+  <meta property="og:image:height" content="200" />
+
 {% endblock %}
 {% block extra-head %}
 <link rel="canonical" href='https://micropyramid.com/blog/{{ post.slug }}/'/>
@@ -41,7 +50,7 @@
         <div class="author_social">
         <div class="social-det col-md-6 col-sm-6 col-xs-12">
         <ul class="blog-social">
-          <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ minified_url }}&t={{ post.title }}" class="facebook"><i class="fa fa-facebook"></i></a></li>
+          <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ minified_url }}&t={{ post.title }}?fbrefresh=CAN_BE_ANYTHING&scrape=true" class="facebook"><i class="fa fa-facebook"></i></a></li>
           <li><a target="_blank" href="https://plus.google.com/share?hl=en-US&url={{ minified_url }}" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
           <li><a target="_blank" href="https://twitter.com/intent/tweet?text={{ post.title }}&url={{ minified_url }}&via=MicroPyramid" class="twitter"><i class="fa fa-twitter"></i></a></li>
           <li><a target="_blank" href="https://www.linkedin.com/cws/share?url={{ minified_url }}&token=&isFramed=true" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
@@ -49,7 +58,7 @@
         </div>
         <div class="author col-md-6 col-sm-6 col-xs-12 text-right">
         <ul class="blog-det">
-          <li itemprop="author">By{{ post.user.get_full_name }} |</li>
+          <li itemprop="author">By {{ post.user.get_full_name }} |</li>
           {% if post.published_on %}
           <li>Posted On <span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
           {% else %}
@@ -92,7 +101,7 @@
             <h3>Subscribe To our <span>news letter</span></h3>
             <div class="text">
               <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
-              <div><sub style="font-size: 21px;">*</sub>We don't provide your gmail contact details to any third parties</div>
+              <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
             </div>
             <form id="subscribeform" name="subscribeform" method="post">
               <div class="form_fiv">
@@ -135,7 +144,7 @@
           <li><a href="/blog/category/amazon-web-services/" class="amazon right_category">Amazon</a></li>
           <li><a href="/blog/category/python/" class="django right_category">Django</a></li>
           <li><a href="/blog/category/mongodb/" class="mongo right_category">Mongo DB</a></li>
-          <li><a href="/blog/category/linux/" class="linux right_category">Linux</a></li>
+          <li><a href="/blog/category/server-management/" class="linux right_category">Linux</a></li>
         </ul>
       </div>
       <!-- categories ends here -->
@@ -147,7 +156,7 @@
         <span class="blog-title">{{related_post.title}}</span>
         <span class="user-name">{{related_post.user.get_full_name}}</span>
         <!--<span class="date-comments">4th October 2015 / comments 30</span>-->
-        <p>{{related_post.content|striptags|safe|truncatewords:25}}</p>
+        <p>{{related_post.excerpt|linebreaks|truncatewords:25}}</p>
         <a href="{% url 'micro_blog:blog_article' related_post.slug %}" class="full-story">Continue Reading...</a>
       </div>
       {% endfor %}

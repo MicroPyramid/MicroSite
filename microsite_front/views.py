@@ -9,6 +9,7 @@ from boto.s3.connection import S3Connection
 import json
 from datetime import datetime, timedelta
 from micro_blog.models import Category, Post
+from pages.models import Page
 from django.views.static import serve
 import yaml
 import os
@@ -31,11 +32,11 @@ def books(request, path):
             if request.user.is_authenticated():
                 books = [
                     book for position, book in sorted(
-                        data['documents'].iteritems())]
+                        data['documents'].items())]
             else:
                 books = [
                     book for position, book in sorted(
-                        data['documents'].iteritems()
+                        data['documents'].items()
                     ) if book.get("visibilty").lower() == "public"]
         return render(request, "site/books.html", {"books": books})
         # return render(request, 'html/index.html')
@@ -137,7 +138,8 @@ def html_sitemap(request):
     page = request.GET.get('page')
     categories = Category.objects.all()
     blog_posts = Post.objects.filter(status='P').order_by('-published_on')
-    sitemap_links = list(chain(categories, blog_posts))
+    services = Page.objects.filter(is_active='True')
+    sitemap_links = list(chain(categories, services, blog_posts))
 
     object_list = Paginator(sitemap_links, 100)
     try:
@@ -148,10 +150,12 @@ def html_sitemap(request):
         sitemap_links = object_list.page(object_list.num_pages)
     return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links})
 
-
 def handler404(request):
     return render(request, '404.html', status=404)
 
 
 def handler500(request):
     return render(request, '500.html', status=500)
+
+def oss(request):
+    return render(request, 'site/oss/index.html')

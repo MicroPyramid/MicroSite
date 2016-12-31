@@ -27,7 +27,7 @@
           <tr>
             <td class="txt_center">{{forloop.counter}}</td>
             <td>{%if menu.parent%}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{%endif%}{{menu.title}}</td>
-            <td class="sec-col">{{menu.url}}</td>
+            <td class="sec-col">{% if menu.url != 'None' %}{{menu.url}}{% endif %}</td>
             <td class="menu-swap txt_center">
               <div class="inner-swap-wid txt_center">
                 <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 

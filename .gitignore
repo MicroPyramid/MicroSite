@@ -11,3 +11,5 @@ static/uploads
 .coverage
 fabfile
 .sass-cache
+microsite/settings_local.py
+

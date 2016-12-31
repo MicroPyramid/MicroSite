@@ -59,6 +59,18 @@ def create_tag_slug(tempslug):
             return tempslug
 
 
+def get_blog_slug(slug):
+    slugcount = 0
+    tempslug = slug
+    while True:
+        try:
+            Post_Slugs.objects.get(slug=tempslug)
+            slugcount += 1
+            tempslug = slug + '-' + str(slugcount)
+        except ObjectDoesNotExist:
+            return tempslug
+
+
 class Post(models.Model):
     STATUS_CHOICE = (
                     ('D', 'Draft'),
@@ -68,11 +80,11 @@ class Post(models.Model):
                     )
 
     title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
+    excerpt = models.CharField(max_length=500, default="")
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
@@ -82,6 +94,30 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def create_blog_slug(self, slugs):
+        for each_slug in list(set(slugs)):
+            blog_slugs = self.slugs.filter(slug=each_slug)
+            if not blog_slugs:
+                actual_slug = get_blog_slug(each_slug)
+                Post_Slugs.objects.create(
+                    blog=self, slug=actual_slug, is_active=False
+                )
+
+    def check_and_activate_slug(self):
+        # Check whether active slug is their for blog-post or not
+        blog_slugs = self.slugs.all().order_by("id")
+        if not blog_slugs.filter(is_active=True):
+            active_slug = blog_slugs.last()
+            active_slug.is_active = True
+            active_slug.save()
+
+    @property
+    def slug(self):
+        blog_slug = self.slugs.filter(is_active=True).first()
+        if blog_slug:
+            return str(blog_slug.slug)
+        return ""
 
     @property
     def author(self):
@@ -114,6 +150,12 @@ class Post(models.Model):
             if item.text:
                 content += item.text.strip()
         return content[:350]
+
+
+class Post_Slugs(models.Model):
+    blog = models.ForeignKey(Post, related_name='slugs')
+    slug = models.SlugField(max_length=100, unique=True)
+    is_active = models.BooleanField(default=False)
 
 
 class Image_File(models.Model):

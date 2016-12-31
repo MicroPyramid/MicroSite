@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from micro_blog.views import (site_blog_home, blog_tag, admin_post_list, new_post, edit_blog_post,
-                              view_post, admin_category_list, new_blog_category, blog_category,
+                              admin_category_list, new_blog_category, blog_category,
                               blog_article, archive_posts, delete_category, delete_post, edit_category, change_category_status, )
 
 urlpatterns = [
@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'^list/$', admin_post_list, name='admin_post_list'),
     url(r'^new-post/$', new_post, name='new_post'),
     url(r'^edit-post/(?P<blog_slug>[-\w]+)/$', edit_blog_post, name='edit_blog_post'),
-    url(r'^view-post/(?P<blog_slug>[-\w]+)/$', view_post, name='view_post'),
     url(r'^category-list/$', admin_category_list, name='admin_category_list'),
     url(r'^new-category/$', new_blog_category, name='new_blog_category'),
     url(r'^category/(?P<slug>[-\w]+)/$', blog_category, name="blog_category"),
