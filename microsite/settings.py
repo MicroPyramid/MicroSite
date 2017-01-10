@@ -240,7 +240,6 @@ if SENTRY_ENABLED:
         }
         INSTALLED_APPS = INSTALLED_APPS + (
             'raven.contrib.django.raven_compat',
-            'debug_toolbar',
         )
         MIDDLEWARE_CLASSES = (
           'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
