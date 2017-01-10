@@ -12,13 +12,9 @@ TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
 ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me']
 
-if os.getenv('SENTRYDSN') is not None:
-    RAVEN_CONFIG = {
-        'dsn': os.getenv('SENTRYDSN'),
-    }
+SENTRY_ENABLED = False
 
 INSTALLED_APPS = (
-    'raven.contrib.django.raven_compat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +34,6 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
-    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
-    'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -143,7 +137,6 @@ GGL_URL_API_KEY = os.getenv('GGLAPIKEY') if os.getenv('GGLAPIKEY') else ''
 GOOGLE_ANALYTICS_CODE = os.getenv('GOOGLE_ANALYTICS_CODE') if os.getenv('GOOGLE_ANALYTICS_CODE') else ''
 
 
-'''
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -167,49 +160,7 @@ LOGGING = {
         },
     }
 }
-'''
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-        },
-    },
-    'handlers': {
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
-        }
-    },
-    'loggers': {
-        'django.db.backends': {
-            'level': 'ERROR',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'raven': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-        'sentry.errors': {
-            'level': 'DEBUG',
-            'handlers': ['console'],
-            'propagate': False,
-        },
-    },
-}
 
 # ELASTICSEARCH_DEFAULT_ANALYZER = 'synonym_analyzer'
 
@@ -282,9 +233,61 @@ CACHES = {
 # CACHE_IGNORE_REGEXPS = (
 #     r'/admin.*',
 # )
+if SENTRY_ENABLED:
+    if os.getenv('SENTRYDSN') is not None:
+        RAVEN_CONFIG = {
+            'dsn': os.getenv('SENTRYDSN'),
+        }
+        INSTALLED_APPS = INSTALLED_APPS + (
+            'raven.contrib.django.raven_compat',
+        )
+        MIDDLEWARE_CLASSES = (
+          'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+          'raven.contrib.django.raven_compat.middleware.SentryResponseErrorIdMiddleware',
+        ) + MIDDLEWARE_CLASSES
+        LOGGING = {
+            'version': 1,
+            'disable_existing_loggers': True,
+            'root': {
+                'level': 'WARNING',
+                'handlers': ['sentry'],
+            },
+            'formatters': {
+                'verbose': {
+                    'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+                },
+            },
+            'handlers': {
+                'sentry': {
+                    'level': 'ERROR',
+                    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+                },
+                'console': {
+                    'level': 'DEBUG',
+                    'class': 'logging.StreamHandler',
+                    'formatter': 'verbose'
+                }
+            },
+            'loggers': {
+                'django.db.backends': {
+                    'level': 'ERROR',
+                    'handlers': ['console'],
+                    'propagate': False,
+                },
+                'raven': {
+                    'level': 'DEBUG',
+                    'handlers': ['console'],
+                    'propagate': False,
+                },
+                'sentry.errors': {
+                    'level': 'DEBUG',
+                    'handlers': ['console'],
+                    'propagate': False,
+                },
+            },
+        }
 
 try:
     from microsite.settings_local import *  # noqa
 except ImportError as e:
     pass
-
