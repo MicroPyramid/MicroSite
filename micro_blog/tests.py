@@ -163,12 +163,6 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
-        response = self.client.get('/blog/delete-post/python-blog/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(str(
-                'Admin or Owner can delete blog post'
-            ) in response.content.decode('utf8'))
-
         # Testcase for contact with get
         response = self.client.get('/contact-usa/')
         self.assertEqual(response.status_code, 200)
@@ -394,10 +388,6 @@ class micro_blogviews_get(TestCase):
         response = self.client.get('/blog/edit-category/django/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/blog/blog-category-edit.html')
-
-        response = self.client.get(
-                    '/blog/delete-post/other-python-introduction/')
-        self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/delete-category/django/')
         self.assertEqual(response.status_code, 302)
