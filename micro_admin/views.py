@@ -12,8 +12,10 @@ from django.core.cache import cache
 from micro_admin.models import User
 from microsite.settings import SG_USER, SG_PWD
 from pages.models import Menu
+from micro_admin.helper import check_portal_user
 
 
+@check_portal_user
 def index(request):
     if request.user.is_authenticated():
         return render(request, 'admin/index.html', {})
