@@ -34,6 +34,7 @@ def index(request):
         return render(request, 'admin/login.html')
 
 
+@check_portal_user
 def out(request):
     if not request.user.is_authenticated():
         return HttpResponse('')
@@ -41,13 +42,16 @@ def out(request):
     logout(request)
     return HttpResponseRedirect('/portal/')
 
+
 @login_required
+@check_portal_user
 def clear_cache(request):
     cache._cache.flush_all()
     return HttpResponseRedirect('/portal/')
 
 
 @login_required
+@check_portal_user
 def menu_order(request, pk):
     if request.method == 'POST':
         if request.POST.get('mode') == 'down':
@@ -88,6 +92,7 @@ def menu_order(request, pk):
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
+@check_portal_user
 def forgot_password(request):
     if request.method == "POST":
         try:

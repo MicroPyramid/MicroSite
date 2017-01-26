@@ -8,14 +8,17 @@ from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
 from micro_blog.models import Post
 import datetime
+from micro_admin.helper import check_portal_user
 
 
+@check_portal_user
 @login_required
 def users(request):
     users = User.objects.all().order_by('id')
     return render(request, 'admin/user/index.html', {'users': users})
 
 
+@check_portal_user
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -45,6 +48,7 @@ def change_password(request):
     return render(request, 'admin/user/change_password.html')
 
 
+@check_portal_user
 @login_required
 def new_user(request):
     if request.method == 'POST':
@@ -106,6 +110,7 @@ def new_user(request):
             return render(request, 'admin/accessdenied.html')
 
 
+@check_portal_user
 @login_required
 def edit_user(request, pk):
     '''does the corresponding form validation and stores the edited details of administrator'''
@@ -174,6 +179,7 @@ def edit_user(request, pk):
             return render(request, 'admin/accessdenied.html')
 
 
+@check_portal_user
 @login_required
 def change_state(request, pk):
     user = User.objects.get(pk=pk)
@@ -186,6 +192,7 @@ def change_state(request, pk):
     return HttpResponseRedirect("/portal/users/")
 
 
+@check_portal_user
 @login_required
 def user_info(request, pk):
     user = User.objects.get(pk=pk)
@@ -198,6 +205,7 @@ def user_info(request, pk):
         })
 
 
+@check_portal_user
 @login_required
 def blogposts(request, pk):
     user = User.objects.get(pk=pk)

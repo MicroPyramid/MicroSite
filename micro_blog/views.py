@@ -23,6 +23,7 @@ from microurl import google_mini
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from .tasks import *
+from micro_admin.helper import check_portal_user
 
 # @csrf_exempt
 # def recent_photos(request):
@@ -38,12 +39,14 @@ from .tasks import *
 
 
 @login_required
+@check_portal_user
 def admin_category_list(request):
     blog_categories = Category.objects.all().order_by('id')
     return render(request, 'admin/blog/blog-category-list.html', {'blog_categories': blog_categories})
 
 
 @login_required
+@check_portal_user
 def new_blog_category(request):
     if request.method == 'POST':
         validate_blogcategory = BlogCategoryForm(request.POST)
@@ -65,6 +68,7 @@ def new_blog_category(request):
 
 
 @login_required
+@check_portal_user
 def edit_category(request, category_slug):
     blog_category = get_object_or_404(Category, slug=category_slug)
     if request.method == 'POST':
@@ -88,6 +92,7 @@ def edit_category(request, category_slug):
 
 
 @login_required
+@check_portal_user
 def delete_category(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     if request.user.is_superuser:
@@ -100,6 +105,7 @@ def delete_category(request, category_slug):
 
 
 @login_required
+@check_portal_user
 def change_category_status(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
     if category.is_display:
@@ -273,6 +279,7 @@ def archive_posts(request, year, month):
 
 
 @login_required
+@check_portal_user
 def admin_post_list(request):
     users = User.objects.all()
     blog_posts = Post.objects.all().order_by(
@@ -292,6 +299,7 @@ def admin_post_list(request):
 
 
 @login_required
+@check_portal_user
 def new_post(request):
     BlogSlugFormSet = inlineformset_factory(Post, Post_Slugs,
                                             can_delete=True, extra=3, fields=('slug', 'is_active'),
@@ -374,6 +382,7 @@ def new_post(request):
 
 
 @login_required
+@check_portal_user
 def edit_blog_post(request, blog_slug):
     blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
     active_slug = blog_post.slug

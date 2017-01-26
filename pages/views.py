@@ -9,15 +9,18 @@ from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
 from django.template.defaultfilters import slugify
+from micro_admin.helper import check_portal_user
 
 
 @login_required
+@check_portal_user
 def pages(request):
     pagelist = Page.objects.all().order_by('id')
     return render(request, 'admin/content/page/page-list.html', {'pages': pagelist})
 
 
 @login_required
+@check_portal_user
 def new_page(request):
     categories = Category.objects.all()
     if request.method == 'POST':
@@ -46,6 +49,7 @@ def new_page(request):
 
 
 @login_required
+@check_portal_user
 def delete_page(request, pk):
     page = get_object_or_404(Page, pk=pk)
     if request.user.is_superuser:
@@ -56,6 +60,7 @@ def delete_page(request, pk):
 
 
 @login_required
+@check_portal_user
 def edit_page(request, pk):
     page = get_object_or_404(Page, pk=pk)
     categories = Category.objects.all()
@@ -83,6 +88,7 @@ def edit_page(request, pk):
 
 
 @login_required
+@check_portal_user
 def delete_menu(request, pk):
     menu = get_object_or_404(Menu, pk=pk)
     if request.user.is_superuser:
@@ -93,6 +99,7 @@ def delete_menu(request, pk):
 
 
 @login_required
+@check_portal_user
 def change_menu_status(request, pk):
     menu = get_object_or_404(Menu, pk=pk)
     if menu.status == "on":
@@ -104,6 +111,7 @@ def change_menu_status(request, pk):
 
 
 @login_required
+@check_portal_user
 def change_page_status(request, pk):
     page = get_object_or_404(Page, pk=pk)
     if page.is_active:
@@ -115,6 +123,7 @@ def change_page_status(request, pk):
 
 
 @login_required
+@check_portal_user
 def menu(request):
     iterator = itertools.count()
     menu_list = Menu.objects.filter(parent=None).order_by('lvl')
@@ -123,6 +132,7 @@ def menu(request):
 
 
 @login_required
+@check_portal_user
 def add_menu(request):
     if request.method == 'POST':
         validate_menu = MenuForm(request.POST)
@@ -153,6 +163,7 @@ def add_menu(request):
 
 
 @login_required
+@check_portal_user
 def edit_menu(request, pk):
     if request.method == 'POST':
         menu_instance = get_object_or_404(Menu, pk=pk)

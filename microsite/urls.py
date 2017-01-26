@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^subscribe/$', subscribe),
     url(r'^open-source-softwares/$', oss),
 
-    url(r'^portal/', check_portal_user(include('micro_admin.urls', namespace='micro_admin'))),
+    url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^forum/',
         include('django_simple_forum.urls', namespace="django_simple_forum")),
     url(r'^books/(?P<path>.*)$', books),
