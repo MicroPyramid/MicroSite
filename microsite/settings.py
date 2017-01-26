@@ -29,6 +29,8 @@ INSTALLED_APPS = (
     'micro_blog',
     'sorl.thumbnail',
     'compressor',
+    'django_simple_forum',
+    'simple_pagination',
     'search',
 )
 

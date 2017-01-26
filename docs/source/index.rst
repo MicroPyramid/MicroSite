@@ -9,10 +9,10 @@ We intend to opensource our code to be used by other companies or people.
 This is completely extensible and documented.
 
 Modules used:
-	* Pillow
-	* Haystack with elasticsearch
-	* Sorl
-	* Akismet
+    * Pillow
+    * Haystack with elasticsearch
+    * Sorl
+    * Akismet
 
 
 Installation procedure
