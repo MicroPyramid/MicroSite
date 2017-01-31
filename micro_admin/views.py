@@ -12,11 +12,24 @@ from django.core.cache import cache
 from micro_admin.models import User
 from microsite.settings import SG_USER, SG_PWD
 from pages.models import Menu
-
+from micro_blog.models import Post
+from datetime import datetime
+from datetime import timedelta
 
 def index(request):
     if request.user.is_authenticated():
-        return render(request, 'admin/index.html', {})
+        if request.POST.get('timestamp', ""):
+            date = request.POST.get('timestamp').split(' - ')
+            start_date = datetime.strptime(date[0], "%Y/%m/%d").strftime("%Y-%m-%d")
+            end_date = datetime.strptime(date[1], "%Y/%m/%d").strftime("%Y-%m-%d")
+            post = Post.objects.filter(created_on__range=(start_date, end_date)).values_list('user', flat=True)
+            users = User.objects.filter(id__in=post)
+        else:
+            current_date = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d").strftime("%Y-%m-%d")
+            previous_date = datetime.strptime(str(datetime.now().date() - timedelta(days=7)), "%Y-%m-%d").strftime("%Y-%m-%d")
+            post = Post.objects.filter(created_on__range=(previous_date, current_date)).values_list('user', flat=True)
+            users = User.objects.filter(id__in=post)
+        return render(request, 'admin/index.html', {'users' : users})
     if request.method == "POST":
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:

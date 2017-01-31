@@ -12,3 +12,8 @@ def is_admin(user):
 @register.filter
 def convert_to_html(value):
     return publish_string(value, writer_name='html')
+
+
+@register.assignment_tag()
+def get_week_posts(user, value):
+    return user.get_week_posts(value)

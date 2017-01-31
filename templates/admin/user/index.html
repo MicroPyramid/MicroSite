@@ -1,7 +1,6 @@
 {% extends 'admin/base.html' %} {% block stage %}
 <!-- main content starts here-->
 <div class="panel panel-default">
-  
   <div class="panel-heading">
     <h3 class="panel-title">Users</h3>
     <span>
@@ -10,7 +9,6 @@
       {% if request.user.is_superuser %}<a href="{% url 'micro_admin:new_user' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New User </button></a>{% endif %}
     </span>
   </div>
-  
   <div class="panel-body">
     <div class="table-responsive">
       <table class="table table-bordered">
