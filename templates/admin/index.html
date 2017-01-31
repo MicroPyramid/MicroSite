@@ -1,11 +1,104 @@
 {% extends 'admin/base.html' %}
-
+{% load user_tags %}
 {% block breadcrumb %}
 <ol class="breadcrumb">
   <li class="active">Home</li>
 </ol>
 {% endblock breadcrumb %}
 {% block stage %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Users</h3>
+    <span>
+      {% if request.user.is_superuser %}<a href="{% url 'micro_admin:new_user' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New User </button></a>{% endif %}
+    </span>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <form id="search_form" name="adv-search-form" class="search-form" method="POST" action=".">
+        <div class="row">
+            <div class="col-md-offset-4 col-md-8 search_form">
+            <div class="row">
+            <div class="col-md-8">
+              <input type="hidden" name="job_type" id="job_type" value="{{ job_type }}"/>
+              <input type="hidden" name="page" id="page" value="{{ page }}"/>
+              <input type="text" class="form-control" aria-describedby="basic-addon2" id="reportrange" name="timestamp" value="{{request.POST.timestamp}}" placeholder="Select the date">
+            </div>
+            <div class="col-md-4">
+              <button type="submit" class="form-control submit">Submit</button>
+            </div>
+            </div>
+          <div class="clearfix"></div>
+          </div>
+        </div>
+      </form>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th width="5%">ID</th>
+            <th width="10%">Full Name</th>
+            <th width="10%">Email Id</th>
+            <th width="5%">Role</th>
+            <th width="5%">Published</th>
+            <th width="5%">Draft</th>
+            <th width="5%">Review</th>
+            <th width="5%">Rejected</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="{% if user.is_active %} success {% else %} danger {% endif %}">
+            <td>{{user.id}}</td>
+            <td>{{user.get_full_name}}</td>
+            <td><a href="{% url 'micro_admin:user_info' pk=user.id %}">{{user.email}}</a></td>
+            <td>{{user.user_roles}}</td>
+            {% get_week_posts user request.POST.timestamp as user_week_posts  %}
+            <td class="txt_center">
+              {{ user_week_posts.0}}</td>
+            <td class="txt_center">{{ user_week_posts.1 }}</td>
+            <td class="txt_center">{{ user_week_posts.2 }}</td>
+            <td class="txt_center">{{ user_week_posts.3 }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+        $(".knowledge-date").click(function () {
+            $("#reportrange").click();
+        });
+        $('.ui-dialog-buttonset button').attr('class', 'btn')
 
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
 
+        cb(moment().subtract(29, 'days'), moment());
+        var Ranges = {
+            'Today': [moment({hour: 0, minute: 0}), moment()],
+            'Yesterday': [moment({hour: 0, minute: 0}).subtract(1, 'days'), moment({
+                hour: 23,
+                minute: 59
+            }).subtract(1, 'days')],
+            'Last 7 Days': [moment({hour: 0, minute: 0}).subtract(6, 'days'), moment({hour: 23, minute: 59})],
+            'Last 30 Days': [moment({hour: 0, minute: 0}).subtract(29, 'days'), moment({hour: 23, minute: 59})],
+            'This Month': [moment({hour: 0, minute: 0}).startOf('month'), moment({
+                hour: 23,
+                minute: 59
+            }).endOf('month')],
+            'Last Month': [moment({hour: 0, minute: 0}).subtract(1, 'month').startOf('month'), moment({
+                hour: 23,
+                minute: 59
+            }).subtract(1, 'month').endOf('month')]
+        };
+        $('#reportrange').daterangepicker({
+            autoApply: true,
+            format: 'YYYY/MM/DD',
+            ranges: Ranges
+        }, cb);
+    });
+</script>
 {% endblock %}

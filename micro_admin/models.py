@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from micro_blog.models import Post
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from datetime import datetime
+from datetime import timedelta
 
 
 GENDER_TYPES = (
@@ -78,6 +80,17 @@ class User(AbstractBaseUser, PermissionsMixin):
             ("blog_moderator", "Can enable or disable blog posts"),
             ("blogger", "Can write blog posts"),
         )
+
+    def get_week_posts(self, value):
+        if value:
+            value = value.split('-')
+            previous_date = datetime.strptime(value[0].strip(), "%Y/%m/%d").strftime("%Y-%m-%d")
+            current_date = datetime.strptime(value[1].strip(), "%Y/%m/%d").strftime("%Y-%m-%d")
+        else:
+            current_date = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d").strftime("%Y-%m-%d")
+            previous_date = datetime.strptime(str(datetime.now().date() - timedelta(days=7)), "%Y-%m-%d").strftime("%Y-%m-%d")
+        post = Post.objects.filter(user=self, created_on__range=(previous_date, current_date))
+        return post.filter(status='P').count(), post.filter(status='D').count(), post.filter(status='R').count(), post.filter(status='T').count()
 
 
 class career(models.Model):
