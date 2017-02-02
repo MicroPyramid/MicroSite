@@ -32,9 +32,6 @@
             <td class="txt_center">
               {% if post|is_editable_by:request.user %}
               <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.slug%}" class="edit_post edit_anchor" value="{{ post.slug }}"><i class="fa fa-pencil-square-o"></i>Edit</a>{% endif %}
-              {% if post|is_deletable_by:request.user %}
-              <a href="{% url 'micro_blog:delete_post' blog_slug=post.slug %}" class="delete_post delete_anchor" value="{{ post.slug }}"><i class="fa fa-trash-o"></i>Delete</a>
-              {% endif %}
             </td>
             <p class="active"></p>
           </tr>
@@ -44,29 +41,4 @@
     </div>
   </div>
 </div>
-<script type="text/javascript">
-  $ = jQuery;
-  $(document).ready(function() {
-    $('.delete_post').click(function(e){
-      e.preventDefault();
-      if (!confirm('Do you want to delete blog post?'))
-        return;
-  
-      $.post('/blog/delete-post/'+$(this).attr('value')+'/',function(data){
-        if(data.error)
-        {
-          alert(data.message);
-        }
-        else{
-          window.location =".";
-        }
-      },"json")
-    });
-
-    $('#blog_posts').DataTable({
-      "sPaginationType": "full_numbers" 
-    });
-
-  });
-</script>>
 {% endblock %}

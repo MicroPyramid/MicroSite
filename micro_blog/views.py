@@ -447,23 +447,6 @@ def edit_blog_post(request, blog_slug):
                   )
 
 
-@login_required
-def delete_post(request, blog_slug):
-    blog_post = get_object_or_404(Post, slugs__slug=blog_slug)
-    active_slug = blog_post.slug
-    if active_slug != blog_slug:
-        raise Http404
-    if request.user == blog_post.user or request.user.is_superuser:
-        blog_post.delete()
-
-        cache._cache.flush_all()
-        data = {"error": False, 'message': 'Blog Post Deleted'}
-    else:
-        data = {
-            "error": True, 'message': 'Admin or Owner can delete blog post'}
-    return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-
-
 def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
