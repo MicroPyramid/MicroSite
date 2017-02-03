@@ -20,7 +20,9 @@ from datetime import timedelta
 def is_employee(function):
 
     def wrapper(request, *args, **kw):
-        if (not request.user.is_authenticated() or not request.user.is_employee) and not request.user.is_staff:
+        if not request.user.is_authenticated():
+            return render(request, 'admin/login.html')
+        elif not request.user.is_superuser and not request.user.is_employee:
             raise Http404
         else:
             return function(request, *args, **kw)

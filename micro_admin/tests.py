@@ -139,7 +139,7 @@ class user_test(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_superuser(
-            'micro@mp.com', 'micro', 'mp')
+            'micro@mp.com', 'micro', 'mp', is_employee=True)
         self.u = str(self.user.id)
 
     def test_views_user(self):
@@ -395,6 +395,7 @@ class UserDetails(TestCase):
                          first_name='Daniel',
                          last_name='Janak',
                          is_admin=True,
+                         is_employee=True,
                          gender='M')
 
         self.user.set_password('password')
