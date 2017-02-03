@@ -1,22 +1,27 @@
+import json
+import datetime
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
 from django.template.context_processors import csrf
-import json
+
 from micro_admin.forms import ChangePasswordForm, UserForm
 from micro_admin.models import USER_ROLES, User
 from micro_blog.models import Post
-import datetime
+from micro_admin.views import is_employee
 
 
 @login_required
+@is_employee
 def users(request):
     users = User.objects.all().order_by('id')
     return render(request, 'admin/user/index.html', {'users': users})
 
 
 @login_required
+@is_employee
 def change_password(request):
     if request.method == 'POST':
         validate_changepassword = ChangePasswordForm(request.POST)
@@ -46,6 +51,7 @@ def change_password(request):
 
 
 @login_required
+@is_employee
 def new_user(request):
     if request.method == 'POST':
         validate_user = UserForm(request.POST)
@@ -107,6 +113,7 @@ def new_user(request):
 
 
 @login_required
+@is_employee
 def edit_user(request, pk):
     '''does the corresponding form validation and stores the edited details of administrator'''
     current_user = User.objects.get(pk=pk)
@@ -175,6 +182,7 @@ def edit_user(request, pk):
 
 
 @login_required
+@is_employee
 def change_state(request, pk):
     user = User.objects.get(pk=pk)
     if user.is_active:
@@ -187,6 +195,7 @@ def change_state(request, pk):
 
 
 @login_required
+@is_employee
 def user_info(request, pk):
     user = User.objects.get(pk=pk)
     blog_posts = Post.objects.filter(user=user)
@@ -199,6 +208,7 @@ def user_info(request, pk):
 
 
 @login_required
+@is_employee
 def blogposts(request, pk):
     user = User.objects.get(pk=pk)
     blog_posts = Post.objects.filter(user=user)

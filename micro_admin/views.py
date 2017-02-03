@@ -2,7 +2,7 @@ import json
 import string
 import random
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models.aggregates import Max
@@ -16,8 +16,23 @@ from micro_blog.models import Post
 from datetime import datetime
 from datetime import timedelta
 
+
+def is_employee(function):
+
+    def wrapper(request, *args, **kw):
+        print(request.user.is_staff)
+        if (not request.user.is_authenticated() or not request.user.is_employee) and not request.user.is_staff:
+            raise Http404
+        else:
+            return function(request, *args, **kw)
+    return wrapper
+
+
+
 def index(request):
     if request.user.is_authenticated():
+        if not (request.user.is_employee or request.user.is_staff):
+            raise Http404
         if request.POST.get('timestamp', ""):
             date = request.POST.get('timestamp').split(' - ')
             start_date = datetime.strptime(date[0], "%Y/%m/%d").strftime("%Y-%m-%d")
@@ -53,12 +68,14 @@ def out(request):
     return HttpResponseRedirect('/portal/')
 
 @login_required
+@is_employee
 def clear_cache(request):
     cache._cache.flush_all()
     return HttpResponseRedirect('/portal/')
 
 
 @login_required
+@is_employee
 def menu_order(request, pk):
     if request.method == 'POST':
         if request.POST.get('mode') == 'down':
