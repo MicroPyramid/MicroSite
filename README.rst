@@ -43,8 +43,11 @@ After installing/cloning this, add the following settings in the virtual env/bin
 
 For additional help you can `Contact us here India`_ `Contact us here USA`_
 
+Visit our Django Web Development page `Here`_
+
 .. _contact us here india: https://micropyramid.com/contact-india/
    
 .. _contact us here usa: https://micropyramid.com/contact-usa/
 
+.. _Here: https://micropyramid.com/django-development-services/
 
