@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^contact-usa/$', contact),
     url(r'^subscribe/$', subscribe),
     url(r'^open-source-softwares/$', oss),
+    url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),
@@ -47,4 +48,12 @@ if settings.DEBUG:
 if settings.DEBUG is False:   # if DEBUG is True it will be served automatically
     urlpatterns += [
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+    ]
+
+if settings.DEBUG:
+    from django.views.static import serve
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
     ]

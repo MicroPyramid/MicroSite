@@ -25,6 +25,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True, db_index=True,)
     user_roles = models.CharField(choices=USER_ROLES, max_length=10)
+    is_employee = models.BooleanField(default=False)
     date_of_birth = models.DateField(default='1970-01-01')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

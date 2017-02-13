@@ -203,6 +203,23 @@
   var editor = CKEDITOR.replace('textareacontents');
 </script>
 <script type="text/javascript">
+//auto save every 60 sec//
+var blog_post_data = {};
+$.each($('form#blogform').serializeArray(), function(_, kv) {
+  blog_post_data[kv.name] = kv.value;
+});
+function save_blog_post(){
+  $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+  blog_post_data["content"] = $("input[name='content']").val();
+  $.post("", blog_post_data, function(response){
+    // Do nothing
+  });
+}
+window.setInterval(function(){
+  save_blog_post()
+}, 60000);
+// end //
+
   $ = jQuery;
   $('#cancel_blog_post').click(function(e){
     window.location = "{% url 'micro_blog:admin_post_list' %}";
