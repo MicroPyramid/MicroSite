@@ -32,8 +32,8 @@ def is_employee(function):
 
 def index(request):
     if request.user.is_authenticated():
-        if not (request.user.is_employee or request.user.is_staff):
-            raise Http404
+        # if not (request.user.is_employee or request.user.is_staff):
+        #     raise Http404
         if request.POST.get('timestamp', ""):
             date = request.POST.get('timestamp').split(' - ')
             start_date = datetime.strptime(date[0], "%Y/%m/%d").strftime("%Y-%m-%d")
