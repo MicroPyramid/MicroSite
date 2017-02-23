@@ -46,122 +46,132 @@
         </ul>
       </div>
       <!-- breadcrumb ends here -->
-      <h1 itemprop="headline">{{ post.title }}</h1>
-        <div class="author_social">
-        <div class="social-det col-md-6 col-sm-6 col-xs-12">
-        <ul class="blog-social">
-          <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ minified_url }}&t={{ post.title }}?fbrefresh=CAN_BE_ANYTHING&scrape=true" class="facebook"><i class="fa fa-facebook"></i></a></li>
-          <li><a target="_blank" href="https://plus.google.com/share?hl=en-US&url={{ minified_url }}" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
-          <li><a target="_blank" href="https://twitter.com/intent/tweet?text={{ post.title }}&url={{ minified_url }}&via=MicroPyramid" class="twitter"><i class="fa fa-twitter"></i></a></li>
-          <li><a target="_blank" href="https://www.linkedin.com/cws/share?url={{ minified_url }}&token=&isFramed=true" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-        </ul>
-        </div>
-        <div class="author col-md-6 col-sm-6 col-xs-12 text-right">
-        <ul class="blog-det">
-          <li itemprop="author">By {{ post.user.get_full_name }} |</li>
-          {% if post.published_on %}
-          <li>Posted On <span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
-          {% else %}
-          <li>Posted On <span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></li>
-          {% endif %}
-        </ul>
-        </div>
-        <br clear="all">
-        
-        </div>
+      
     </div>
     <div class="clearfix"></div>
-    <!-- left conatiner starts here -->
-    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 blog-left-container">
-      <!-- blog row starts here -->
-     
-      <div itemscope itemType="http://schema.org/BlogPosting">
-        
-        <!-- description starts here -->
-        <div class="blog-det-description" itemprop="articleBody">
-          {{ post.content|safe }}
+      <!-- left conatiner starts here -->
+      <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 blog-left-container blog_detail">
+        <h1 itemprop="headline">{{ post.title }}</h1>
+        <!-- blog row starts here -->
+        <div><h4 class="read_time">Reading Time : ~ 5 Minutes.</h4></div>
+        <div itemscope itemType="http://schema.org/BlogPosting">
+          
+          <!-- description starts here -->
+          <div class="blog-det-description" itemprop="articleBody">
+            {{ post.content|safe }}
+          </div>
+          <!-- description ends here -->
+          <!-- social icons comes here -->
+          <div class="prev_next_blog">
+          {% if prev_url %}
+            <a href="{{prev_url}}"><span class="prev">
+              <!--<i class='fa fa-angle-left'></i>-->
+              Previous post
+            </span></a>{% endif %}
+            {% if next_url %}
+            <a href="{{next_url}}"><span class="next pull-right">
+              Next post
+              <!--<i class='fa fa-angle-right'></i>-->
+            </span></a>{% endif %}
+            <div class='clearfix'></div>
+          </div>
+          <div class="author_social">
+            <div class="social-det col-md-12 col-sm-12 col-xs-12">
+              <ul class="blog-social">
+                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ minified_url }}&t={{ post.title }}?fbrefresh=CAN_BE_ANYTHING&scrape=true" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" href="https://plus.google.com/share?hl=en-US&url={{ minified_url }}" class="google-plus"><i class="fa fa-google-plus"></i></a></li>
+                <li><a target="_blank" href="https://twitter.com/intent/tweet?text={{ post.title }}&url={{ minified_url }}&via=MicroPyramid" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" href="https://www.linkedin.com/cws/share?url={{ minified_url }}&token=&isFramed=true" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+            <div class="author col-md-12 col-sm-12 col-xs-12 text-right">
+              <div class="author_details">
+                <div class="col-md-3">
+                  <div class="avatar_profile">
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <ul class="blog-det">
+                    By<li itemprop="author">{{ post.user.get_full_name }}</li>
+                    {% if post.published_on %}
+                    Posted On<li><span itemprop="datePublished">{{ post.published_on|date:"d F Y" }}</span></li>
+                    {% else %}
+                    Posted On<li><span itemprop="datePublished">{{ post.updated_on|date:"d F Y" }}</span></li>
+                    {% endif %}
+                  </ul>
+                  <div class="author_position">SENIOR DEVELOPER at <a href="/">MICROPYRAMID</a></div>
+                </div>
+              </div>
+            </div>
+            <br clear="all">
+          </div>
+          <div class="comments_section" id="comments">
+            <strong class="comments-title">Latest Comments</strong>
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+              /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+              var disqus_shortname = 'micropyramid'; // required: replace example with your forum shortname
+              /* * * DON'T EDIT BELOW THIS LINE * * */
+              (function() {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          </div>
         </div>
-        <!-- description ends here -->
-        <!-- social icons comes here -->
-        <div class="prev_next_blog">
-        {% if prev_url %}
-          <a href="{{prev_url}}"><span class="prev">
-            <!--<i class='fa fa-angle-left'></i>-->
-            Previous post
-          </span></a>{% endif %}
-          {% if next_url %}
-          <a href="{{next_url}}"><span class="next pull-right">
-            Next post
-            <!--<i class='fa fa-angle-right'></i>-->
-          </span></a>{% endif %}
-          <div class='clearfix'></div>
+      </div>
+      <!-- left container ends here -->
+      <!-- right conatiner starts here -->
+      <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 blog-right-container blog_detail">
+        <!-- categories starts here -->
+        <div class="blog_right_categories">
+          <ul class="list-inline">
+            <li><a href="/blog/category/python/" class="python right_category">Python</a></li>
+            <li><a href="/blog/category/amazon-web-services/" class="amazon right_category">Amazon</a></li>
+            <li><a href="/blog/category/python/" class="django right_category">Django</a></li>
+            <li><a href="/blog/category/mongodb/" class="mongo right_category">Mongo DB</a></li>
+            <li><a href="/blog/category/server-management/" class="linux right_category">Linux</a></li>
+          </ul>
         </div>
+        <!-- categories ends here -->
+        {% if related_posts %}
+        <strong>Related Articles</strong>
+        {% endif %}
+        {% for related_post in related_posts %}
+        <div class="related-post">
+          <span class="blog-title">{{related_post.title}}</span>
+          <span class="user-name">{{related_post.user.get_full_name}}</span>
+          <!--<span class="date-comments">4th October 2015 / comments 30</span>-->
+          <p>{{related_post.excerpt|linebreaks|truncatewords:25}}</p>
+          <a href="{% url 'micro_blog:blog_article' related_post.slug %}" class="full-story">Continue Reading...</a>
+        </div>
+        {% endfor %}
+        <!-- subscribe starts Here -->
         <div id="subscribe">
           <i class="fa fa-envelope-o subscribe_i"></i>
-            <h3>Subscribe To our <span>news letter</span></h3>
-            <div class="text">
-              <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
-              <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
-            </div>
-            <form id="subscribeform" name="subscribeform" method="post">
-              <div class="form_fiv">
-                <div class="input-group">
-                  <input type="email" class="form-control" name="email"placeholder="Email Id" aria-describedby="basic-addon2">
-                  <input type="hidden" name="is_blog" id="is_blog" value="True"/>
-                  <input type="hidden" name="is_category" id="is_category" value="{% if category %}{{category.id}}{% elif post.category %}{{post.category.id}}{%endif%}"/>
-                  <span class="input-group-addon" id="basic-addon2"><button type="submit">Subscribe !</button></span>
-                </div>
-                <span id="subscribe-email"></span>
+          <h3>Subscribe To our <span>news letter</span></h3>
+          <div class="text">
+            <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
+            <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
+          </div>
+          <form id="subscribeform" name="subscribeform" method="post">
+            <div class="form_fiv">
+              <div class="input-group">
+                <input type="email" class="form-control" name="email"placeholder="Email Id" aria-describedby="basic-addon2">
+                <input type="hidden" name="is_blog" id="is_blog" value="True"/>
+                <input type="hidden" name="is_category" id="is_category" value="{% if category %}{{category.id}}{% elif post.category %}{{post.category.id}}{%endif%}"/>
+                <button type="submit" class="input-group-addon" id="basic-addon2">Subscribe !</button>
               </div>
-            </form>
-        </div>
-        <div class="col-xs-12" id="comments">
-          <strong class="comments-title">Latest Comments</strong>
-          <div id="disqus_thread"></div>
-          <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'micropyramid'; // required: replace example with your forum shortname
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-              var dsq = document.createElement('script');
-              dsq.type = 'text/javascript';
-              dsq.async = true;
-              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-          </script>
-          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+              <span id="subscribe-email"></span>
+            </div>
+          </form>
         </div>
       </div>
-    </div>
-    <!-- left container ends here -->
-    <!-- right conatiner starts here -->
-    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 blog-right-container">
-      <!-- categories starts here -->
-      <div class="blog_right_categories">
-        <ul class="list-inline">
-          <li><a href="/blog/category/python/" class="python right_category">Python</a></li>
-          <li><a href="/blog/category/amazon-web-services/" class="amazon right_category">Amazon</a></li>
-          <li><a href="/blog/category/python/" class="django right_category">Django</a></li>
-          <li><a href="/blog/category/mongodb/" class="mongo right_category">Mongo DB</a></li>
-          <li><a href="/blog/category/server-management/" class="linux right_category">Linux</a></li>
-        </ul>
-      </div>
-      <!-- categories ends here -->
-      {% if related_posts %}
-      <strong>Related Articles</strong>
-      {% endif %}
-      {% for related_post in related_posts %}
-      <div class="related-post">
-        <span class="blog-title">{{related_post.title}}</span>
-        <span class="user-name">{{related_post.user.get_full_name}}</span>
-        <!--<span class="date-comments">4th October 2015 / comments 30</span>-->
-        <p>{{related_post.excerpt|linebreaks|truncatewords:25}}</p>
-        <a href="{% url 'micro_blog:blog_article' related_post.slug %}" class="full-story">Continue Reading...</a>
-      </div>
-      {% endfor %}
-    </div>
-    <!-- right container ends here -->
+      <!-- right container ends here -->
   </div>
   <!-- blog row ends here -->
 </div>

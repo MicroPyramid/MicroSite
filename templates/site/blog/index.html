@@ -53,10 +53,12 @@
         {% endif %}
       </ul>
     </div>
-    <div class=" row">
+    <div class="blog_banner_wrap">
+      <img src='/static/site/images/new/blog_banner.jpg' alt="MicroPyramid - Django and Python Web Development Company" class='blog_banner_bg_image'>
+      <div class="img_overlay_div"></div>
       <!-- blog categories archies starts here -->
       <div class="blog-categories-archives">
-        <h1 class="blog-cat-archives text-center non-category-blog"></h1>
+        <h1 class="blog-cat-archives text-center non-category-blog heading"></h1>
         <div class="categories">
           <ul class="text-center">
             <li><a href="/blog/category/django/" class="django"><img src="/static/site/images/django-b.png" height="33" width="87" alt="blog-category-djagno"></a></li>
@@ -66,95 +68,86 @@
             <li><a href="/blog/category/amazon-web-services/" class="amazon"><img src="/static/site/images/aws_blog_logo.png" height="33" width="87" alt="blog-categorya-ws"></a></li>
           </ul>
         </div>
-        <div class="archives">
-          <ul>
-            {% get_archives as archives %}
-            {% for archive in archives %}
-            <li><a href="/blog/{{archive|date:"Y"}}/{{archive|date:"n"}}">{{ archive|date:"F Y" }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
       </div>
-      <!-- blog categories archies ends here -->
-      <!-- blog list starts here -->
-      <div class="blog-container">
-        {% for post in posts %}
-        <div class="blog-item" itemscope itemType="http://schema.org/BlogPosting">
-          <div class="post-date">
-            <div class="date_daimond">
-              {% if post.published_on %}
-              <div class="text_wrap" itemprop="datePublished">
-                <div class="month" >{{ post.published_on|date:"M" }}</div>
-                <div class="day">{{ post.published_on|date:"d Y" }}</div>
-              </div>
-              {% else %}
-              <div class="text_wrap" itemprop="dateModified">
-                <div class="month" >{{ post.updated_on|date:"M" }}</div>
-                <div class="day">{{ post.updated_on|date:"d Y" }}</div>
-              </div>
-              {% endif%}
-            </div>
-          </div>
-          <div class="blog-right">
-            <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
-            {% if post.excerpt %}
-              <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
-            {% else %}
-              <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
-            {% endif %}
-            <ul class="post-det">
-              <li><span itemprop="publisher">By {{ post.user.get_full_name }}</span></li>
-            </ul>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-      <!-- blog list ends here -->
-      <!-- pagination -->
-          <div class="pagination_mp">
-            {% get_page current_page last_page as pages %}
-            <nav>
-              <ul class="pagination">
-                {% if current_page != 1 %}
-                <li class="prev"><a href="?page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
-                <li class="prev"><a href="?page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
-                <li><a href="?page=1">first</a></li>
-                {% endif %}
-                {% for s in pages %}
-                <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?page={{s}}">{{s}}</a></li>
-                {% endfor %}
-                {% if current_page != last_page %}
-                <li><a href="?page={{last_page}}">last</a></li>
-                <li><a href="?page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
-                <li><a href="?page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
-                {% endif %}
-              </ul>
-            </nav>
-          </div>
-      <!--/ paginantion -->
-      <div class="blog-container">
-          <div id="subscribe">
-            <i class="fa fa-envelope-o subscribe_i"></i>
-            <h3>Subscribe To our <span>news letter</span></h3>
-            <div class="text">
-              <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
-              <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
-            </div>
-            <form id="subscribeform" name="subscribeform" method="post">
-              <div class="form_fiv">
-                <div class="input-group">
-                  <input type="email" class="form-control" name="email"placeholder="Email Id" aria-describedby="basic-addon2">
-                  <input type="hidden" name="is_blog" id="is_blog" value="True"/>
-                  <input type="hidden" name="is_category" id="is_category" value="{% if category %}{{category.id}}{% elif post.category %}{{post.category.id}}{%endif%}"/>
-                  <span class="input-group-addon" id="basic-addon2"><button type="submit">Subscribe !</button></span>
+      <div class="row bloglist">
+        <!-- blog categories archies ends here -->
+        <!-- blog list starts here -->
+        <div class="blog-container">
+          {% for post in posts %}
+          <div class="blog-item" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-date">
+              <div class="date_daimond">
+                {% if post.published_on %}
+                <div class="text_wrap" itemprop="datePublished">
+                  <div class="month" >{{ post.published_on|date:"M" }}</div>
+                  <div class="day">{{ post.published_on|date:"d Y" }}</div>
                 </div>
-                <span id="subscribe-email"></span>
+                {% else %}
+                <div class="text_wrap" itemprop="dateModified">
+                  <div class="month" >{{ post.updated_on|date:"M" }}</div>
+                  <div class="day">{{ post.updated_on|date:"d Y" }}</div>
+                </div>
+                {% endif%}
               </div>
-            </form>
+            </div>
+            <div class="blog-right">
+              <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
+              {% if post.excerpt %}
+                <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
+              {% else %}
+                <p itemprop="description">{{post.content|safe|truncatewords:50}}</p>
+              {% endif %}
+            </div>
           </div>
+          <hr>
+          {% endfor %}
         </div>
-    </div>
-    <!-- blog row ends here -->
+        <!-- blog list ends here -->
+        <!-- pagination -->
+            <div class="pagination_mp">
+              {% get_page current_page last_page as pages %}
+              <nav>
+                <ul class="pagination">
+                  {% if current_page != 1 %}
+                  <li class="prev"><a href="?page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
+                  <li class="prev"><a href="?page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
+                  <li><a href="?page=1">first</a></li>
+                  {% endif %}
+                  {% for s in pages %}
+                  <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?page={{s}}">{{s}}</a></li>
+                  {% endfor %}
+                  {% if current_page != last_page %}
+                  <li><a href="?page={{last_page}}">last</a></li>
+                  <li><a href="?page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
+                  <li><a href="?page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
+                  {% endif %}
+                </ul>
+              </nav>
+            </div>
+        <!--/ paginantion -->
+        <div class="blog-container">
+            <div id="subscribe">
+              <i class="fa fa-envelope-o subscribe_i"></i>
+              <h3>Subscribe To our <span>news letter</span></h3>
+              <div class="text">
+                <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
+                <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
+              </div>
+              <form id="subscribeform" name="subscribeform" method="post">
+                <div class="form_fiv">
+                  <div class="input-group">
+                    <input type="email" class="form-control" name="email"placeholder="Email Id" aria-describedby="basic-addon2">
+                    <input type="hidden" name="is_blog" id="is_blog" value="True"/>
+                    <input type="hidden" name="is_category" id="is_category" value="{% if category %}{{category.id}}{% elif post.category %}{{post.category.id}}{%endif%}"/>
+                    <span class="input-group-addon" id="basic-addon2"><button type="submit">Subscribe !</button></span>
+                  </div>
+                  <span id="subscribe-email"></span>
+                </div>
+              </form>
+            </div>
+        </div>
+      </div>
+      <!-- blog row ends here -->
   </div>
   <!--/ container wrapper -->
   <!-- footer links starts here -->
@@ -167,9 +160,11 @@
     if (url.split("/")[2] && url.split("/")[2] == "category"){
       title = url.split("/")[3]
       $(".non-category-blog").html(title+" Blog")
+      $(".non-category-blog").css({"color": "#3f6507"})
     }
     else if (url.split("/")[1] == "blog"){
       $(".non-category-blog").html("A blog about Django, Python, mongo DB, LINUX, Amazon Web Services")
+      $(".non-category-blog").css({"color": "#3f6507"})
     }
   });
   </script>
