@@ -18,7 +18,7 @@ from ast import literal_eval
 from pages.forms import ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
-from django.core.cache import cache
+# from django.core.cache import cache
 from microurl import google_mini
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
@@ -50,7 +50,7 @@ def new_blog_category(request):
         if validate_blogcategory.is_valid():
             validate_blogcategory.save()
 
-            cache._cache.flush_all()
+            # cache._cache.flush_all()
             data = {'error': False, 'response': 'Blog category created'}
         else:
             data = {'error': True, 'response': validate_blogcategory.errors}
@@ -73,7 +73,7 @@ def edit_category(request, category_slug):
         if validate_blogcategory.is_valid():
             validate_blogcategory.save()
 
-            cache._cache.flush_all()
+            # cache._cache.flush_all()
             data = {'error': False, 'response': 'Blog category updated'}
         else:
             data = {'error': True, 'response': validate_blogcategory.errors}
@@ -93,7 +93,7 @@ def delete_category(request, category_slug):
     if request.user.is_superuser:
         category.delete()
 
-        cache._cache.flush_all()
+        # cache._cache.flush_all()
         return HttpResponseRedirect('/blog/category-list/')
     else:
         return render_to_response('admin/accessdenied.html')
@@ -358,7 +358,7 @@ def new_post(request):
                     [user.email for user in User.objects.filter(is_admin=True)])
                 sg.send(sending_msg)
 
-                cache._cache.flush_all()
+                # cache._cache.flush_all()
                 return redirect(reverse('micro_blog:admin_post_list'))
     else:
         blog_form = BlogpostForm()
@@ -432,7 +432,7 @@ def edit_blog_post(request, blog_slug):
                             blog_tag = Tags.objects.create(name=tag)
 
                         blog_post.tags.add(blog_tag)
-                cache._cache.flush_all()
+                # cache._cache.flush_all()
                 return redirect(reverse('micro_blog:admin_post_list'))
     else:
         blog_form = BlogpostForm(instance=blog_post)

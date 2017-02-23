@@ -1,12 +1,12 @@
 from django.conf.urls import url
 from micro_admin.views import (index, forgot_password,
-                               out, menu_order, clear_cache)
+                               out, menu_order)
 from micro_admin.users import (edit_user, change_state, users, new_user, blogposts,
                                user_info, change_password)
 
 urlpatterns = [
     url(r'^$', index, name='index'),
-    url(r'^clear_cache/$', clear_cache, name='clear_cache'),
+    # url(r'^clear_cache/$', clear_cache, name='clear_cache'),
     url(r'^forgot-password/$', forgot_password, name='forgot_password'),
     url(r'^users/change-state/(?P<pk>\w{0,})/$', change_state, name='change_state'),
     url(r'^users/edit/(?P<pk>\w{0,})/$', edit_user, name='edit_user'),
