@@ -43,6 +43,7 @@
     <!-- css starts here -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='//fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
     {% compress css %}
     <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
@@ -180,7 +181,7 @@
                         682.60,29.40 682.42,20.11 693.00,15.65
                         693.00,15.65 729.00,15.00 729.00,15.00 Z" ></path>
                     </svg>
-                    <img src="/static/site/images/new/Micropyramid.png" alt="MicroPyramid Text Logo">
+                    <img src="/static/site/images/logo.png" alt="MicroPyramid Text Logo">
                   </span>
                   <!--/ svg logo -->
                 </a>
@@ -408,9 +409,9 @@
             <div id="about-us">
               <div class="container text-center">
                 <h1 class="content">Django &amp; Python Web Development Company</h1>
-                <p>We at MicroPyramid challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing gaining our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help python Django application development services. Our expertise lies in <a href="https://micropyramid.com/python-development-services/">Python</a>, <a href="https://micropyramid.com/django-ecommerce-development/">Django</a>, <a href="https://micropyramid.com/angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, Docker, <a href="https://micropyramid.com/amazon-web-services-outsourcing/">Amazon Web Services</a>, PostgreSQL, MySQL, Less and Scss.</p>
+                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python & Django application development services. Our Expertise lies in <a href="https://micropyramid.com/python-development-services/">Python</a>, <a href="https://micropyramid.com/django-ecommerce-development/">Django</a>, <a href="https://micropyramid.com/angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, Docker, <a href="https://micropyramid.com/amazon-web-services-outsourcing/">Amazon Web Services</a>, PostgreSQL, MySQL, Less and Scss.</p>
                 <p>
-                  We are dedicated to providing world class software to startups, small and big enterprises. We use most of the cloud technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome open source technologies. With our custom tools,  we can assure you always get the best software you need. We always tryto meet customer satisfaction with our great monitoring and support. There are many reusable python packages, docker images, ansible roles, node packages published by our experts in their free time.
+                  We are dedicated to provide world class software to startups, small and big enterprises. We use most of the Cloud Technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome Open-Source Technologies. With our custom tools,  we can assure you always get the best software you need. We always Succeeded in meeting Our Customer Satisfaction with our great Monitoring and Support. There are many reusable Python Packages, Docker Images, Ansible Roles, Node Packages published by our experts in their free time.
                 </p>
               </div>
             </div>
@@ -419,10 +420,10 @@
               <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12 about_text">
                   <div class="heading">
-                    <span>our recent</span> <span class='green'>works</span>
+                    <span>Our Recent</span> <span class='green'>Works</span>
                   </div>
                   <p>
-                    With over 40 projects delivered for 15 clients in 8 countries we always find ways to develop secure, fast and robust web applications. We have three layer testing and two layer quality control in place to deliver awesome software. All our web applications are being monitored 24x7 using newrelic and sentry for performance and security enhancements. We develop SEO optimized web applications to boost search engine rankings easily.
+                    With over 40 projects delivered for 15 clients in 8 countries, we always find ways to develop Secure, Fast and Robust Web Applications. We have three layer testing and two layer quality control in place to deliver awesome software. All our Web Applications are being monitored 24x7 using Newrelic and Sentry for Performance and Security Enhancements. We develop SEO optimized Web Applications to boost search engine rankings easily.
                   </p>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12 daimonds_wrap">
@@ -702,7 +703,7 @@
                         <div class='month'>
                           <a href="/blog/{{post.published_on|date:"Y"}}/{{post.published_on|date:"n"}}">
                           <span itemprop="datePublished">
-                          {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} <br/> {{ post.published_on|date:"Y" }}
+                          {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} {{ post.published_on|date:"Y" }}
                           </span>
                           </a>
                         </div>
@@ -710,7 +711,7 @@
                         <div class='month'>
                           <a href="/blog/{{post.updated_on|date:"Y"}}/{{post.updated_on|date:"n"}}">
                           <span itemprop="datePublished">
-                          {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }} <br/> {{ post.updated_on|date:"Y" }}
+                          {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }}   {{ post.updated_on|date:"Y" }}
                           </span>
                           </a>
                         </div>
@@ -733,9 +734,9 @@
                       <div class="description-detail" id="/blog/{{ post.active_slugs.0.slug }}/">
                         <div itemprop="description">
                           {% if post.excerpt %}
-                          {{ post.excerpt }}
+                          {{ post.excerpt|safe|truncatewords:30 }}
                           {% else %}
-                            {{post.content|safe|truncatewords:50}}...
+                            {{post.content}}...
                           {% endif %}
                         </div>
                       </div>
@@ -749,15 +750,16 @@
             <!--/ blog -->
             <!-- our blog ends here -->
             <!-- our technologies starts here -->
+            <h1 class="mp-technologies-heading text-center">TECHNOLOGIES</h1>
             <div id='technologies_wrapper'>
               <div class="row">
-                <!-- Mp-Code starts here -->
+                <!-- Mp-Code starts here
                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 mp-code text-center">
                   <img src="/static/site/images/tech-home/mp-code.png" alt="Technologies we use" />
                 </div>
-                <!-- Mp-Code ends here -->
-                <!-- Mp-technologies starts here -->
-                <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12 mp-technologies">
+                <! Mp-Code ends here >
+                <! Mp-technologies starts here -->
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mp-technologies">
                   <div class="logo-gallery-row row">
                     <div class="col-lg-4 col-md-6 col-sm-4 col-xs-6 logo-thumb">
                       <img src="/static/site/images/tech-home/python-tech.png" class="logo" alt="python" />
@@ -789,8 +791,8 @@
               </div>
             </div>
             <!-- our technologies ends here -->
+            <h3 class="membership_heading">Membership</h3>
             <div class="without-background">
-              <h3>Membership</h3>
               <div class="row">
                 <div class="col-md-3 sponsor-logo1">
                   <img style="width:70%" src="/static/site/images/docker.jpg" alt="Docker">
