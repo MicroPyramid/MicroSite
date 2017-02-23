@@ -4958,10 +4958,18 @@ p a{
 
 /* contact_row ends here */
 
+.membership_heading{
+  text-align: center;
+  font-size: 35px;
+  margin-top: 40px;
+  color: #748907;
+}
+
 .without-background {
-    padding-top: 60px;
-    padding-bottom: 60px;
-    padding-left: 186px;
+  padding: 140px;
+  margin-right: 250px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .sponsor-logo1 {
@@ -4970,5 +4978,12 @@ p a{
 
 .sponsor-logo2 {
   align-items: center;
-  margin-top: 35px;
+  margin-top: 50px;
+  margin-left: 30px;
+}
+
+.sponsor-logo3 {
+  align-items: center;
+  margin-top: -220px;
+  margin-left: 540px;
 }
