@@ -135,8 +135,8 @@
               </div>
               <form id="subscribeform" name="subscribeform" method="post">
                 <div class="form_fiv">
-                  <div class="input-group">
-                    <input type="email" class="form-control" name="email"placeholder="Email Id" aria-describedby="basic-addon2">
+                  <div class="input-group subscribe_input">
+                    <input type="email" class="form-control subscribe_email" name="email"placeholder="Email Id" aria-describedby="basic-addon2">
                     <input type="hidden" name="is_blog" id="is_blog" value="True"/>
                     <input type="hidden" name="is_category" id="is_category" value="{% if category %}{{category.id}}{% elif post.category %}{{post.category.id}}{%endif%}"/>
                     <span class="input-group-addon" id="basic-addon2"><button type="submit">Subscribe !</button></span>
@@ -160,11 +160,11 @@
     if (url.split("/")[2] && url.split("/")[2] == "category"){
       title = url.split("/")[3]
       $(".non-category-blog").html(title+" Blog")
-      $(".non-category-blog").css({"color": "#3f6507"})
+      $(".non-category-blog").css({"color": "#ccc"})
     }
     else if (url.split("/")[1] == "blog"){
       $(".non-category-blog").html("A blog about Django, Python, mongo DB, LINUX, Amazon Web Services")
-      $(".non-category-blog").css({"color": "#3f6507"})
+      $(".non-category-blog").css({"color": "#ccc"})
     }
   });
   </script>

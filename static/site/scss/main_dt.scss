@@ -668,9 +668,7 @@ body{
   color: #748907;
   font-size: 30px;
 }
-.non-category-blog .heading{
-  color: #617b00;
-}
+
 /* technologies_wrapper */
 /* get-in-touch */
 #get-in-touch{
@@ -1574,7 +1572,7 @@ body{
       }
     h1{
       @extend .bold_upper;
-      font-size:40px;
+      font-size:35px;
       margin-top:20px;
       margin-left:50px;
       padding:0px;
@@ -1634,6 +1632,7 @@ body{
       text-align:justify;
       position: relative;
       padding: 50px;
+      padding-top: 15px;
       @media (min-width: $mob_min) and (max-width: $smob_max){
           padding:0px;
       }
@@ -1848,7 +1847,7 @@ body{
           } */
           .text_wrap{
             text-align: center;
-            line-height: 25px;
+            line-height: 20px;
             /* @media(min-width: $mob_min) and (max-width:$smob_max){
               transform:rotate(0deg);
               margin: 0px;
@@ -1927,6 +1926,7 @@ body{
       margin:10px 0px;
       line-height:32px;
     }
+
   }
   .categories{
     margin:30px 0px;
@@ -2048,7 +2048,10 @@ body{
         box-shadow: none;
         border-radius: 0;
         border:1px solid rgba(116,137,7,0.6);
-        height: 40px;
+        height: 50px;
+      }
+      .subscribe_email{
+        width:500px;
       }
       .input-group-addon{
         background: $theme_green;
@@ -2057,12 +2060,11 @@ body{
         cursor: pointer;
         font-weight: 600;
         border-radius: 0px;
-        width: 75%;
-        margin-top: 10px;
+        width: 100%;
+        margin-top: 5px;
         border:1px solid rgba(116,137,7,0.6);
         box-shadow: none;
         padding: 10px;
-        margin-left: 30px;
         button{
           padding:7px 12px;
           background:none;
@@ -2072,6 +2074,10 @@ body{
           cursor:pointer;
         }
       }
+    }
+    .subscribe_input{
+      margin-right: 120px;
+      margin-left: 100px;
     }
   }
 }
