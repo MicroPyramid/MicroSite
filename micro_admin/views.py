@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models.aggregates import Max
 from django.core.exceptions import ObjectDoesNotExist
 import sendgrid
-from django.core.cache import cache
+# from django.core.cache import cache
 from micro_admin.models import User
 from microsite.settings import SG_USER, SG_PWD
 from pages.models import Menu
@@ -68,11 +68,11 @@ def out(request):
     logout(request)
     return HttpResponseRedirect('/portal/')
 
-@login_required
-@is_employee
-def clear_cache(request):
-    cache._cache.flush_all()
-    return HttpResponseRedirect('/portal/')
+# @login_required
+# @is_employee
+# def clear_cache(request):
+#     cache._cache.flush_all()
+#     return HttpResponseRedirect('/portal/')
 
 
 @login_required
