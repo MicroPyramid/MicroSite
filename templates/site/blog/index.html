@@ -1,5 +1,5 @@
 {% extends 'site/blog/base.html' %}
-{% load cache %}
+<!-- {% load cache %} -->
 {% load blog_tags %}
 {% block title %}
 {% if category %}{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid{%else%}{{category}}
@@ -158,7 +158,7 @@
   <!-- footer links starts here -->
   {% endblock %}
   {% block extra-js %}
-  
+
   <script type="text/javascript">
   $(document).ready(function(e){
     url = window.location.pathname

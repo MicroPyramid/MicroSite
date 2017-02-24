@@ -118,12 +118,12 @@ class test_portal_admin(TestCase):
             '/portal/', {'email': 'mp@mp.com', 'password': 'mp'})
         self.assertEqual(response.status_code, 200)
 
-    def test_views_user(self):
-        user_login = self.client.login(username='mp@mp.com', password='mp')
-        self.assertTrue(user_login)
-
-        resp = self.client.get('/portal/clear_cache/')
-        self.assertEqual(resp.status_code, 302)
+    # def test_views_user(self):
+    #     user_login = self.client.login(username='mp@mp.com', password='mp')
+    #     self.assertTrue(user_login)
+    #
+    #     resp = self.client.get('/portal/clear_cache/')
+    #     self.assertEqual(resp.status_code, 302)
 
         response = self.client.post(
             '/portal/', {'email': 'mp@mp.com', 'password': 'mp'})
@@ -446,7 +446,7 @@ class TestForUserPasswordChange(UserDetails):
                    'retypepassword': '1111'
                    }
         response = self.client.post(url, context)
-        expected_data = {"response": 
+        expected_data = {"response":
                         {"newpassword": "New password and ConformPasswords did not match"},\
                          "error": True}
         self.assertEqual(json.loads(response.content.decode('utf-8')), expected_data)
