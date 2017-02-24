@@ -52,12 +52,12 @@
       <!-- left conatiner starts here -->
       <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 blog-left-container blog_detail">
         <h1 itemprop="headline">{{ post.title }}</h1>
-        <!-- blog row starts here >
-        <div><h4 class="read_time">Reading Time : ~ 5 Minutes.</h4></div -->
+        <!-- blog row starts here -->
+        <div><h4 class="read_time">Reading Time : ~ <span class="eta"></span>.</h4></div>
         <div itemscope itemType="http://schema.org/BlogPosting">
           
           <!-- description starts here -->
-          <div class="blog-det-description" itemprop="articleBody">
+          <div class="blog-det-description" itemprop="articleBody" id="blogarticle">
             {{ post.content|safe }}
           </div>
           <!-- description ends here -->
@@ -105,6 +105,11 @@
             </div>
             <br clear="all">
           </div>
+          <!-- talk shop -->
+          <div class="talkshop">
+            <h4 class="talkshop_content">Need any Help in your Project?<span class="talkshop_button"><a href="/contact-india/">Let's Talk</a></span></h4>
+          </div>
+          <!--/ talk shop --> 
           <div class="comments_section" id="comments">
             <strong class="comments-title">Latest Comments</strong>
             <div id="disqus_thread"></div>
@@ -175,4 +180,27 @@
   </div>
   <!-- blog row ends here -->
 </div>
+{% endblock %}
+{% block js %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="/js/plugins/readingTime.js"></script>
+<script type="text/javascript">
+  $(function() {
+    var $article = $('#blogarticle');
+
+    $article.readingTime({
+        readingTimeTarget: $article.find('.eta'),
+        wordsPerMinute: 200,
+        round: false,
+        lang: 'en',
+        success: function() {
+            console.log('It worked!');
+        },
+        error: function(message) {
+            console.log("Not Worked!!");
+            $article.find('.eta').remove();
+        }
+    });
+  });
+</script>
 {% endblock %}

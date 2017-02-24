@@ -654,9 +654,18 @@ body{
       .logo-thumb{
         padding: 30px 0px;
         text-align:center;
-         @media(min-width: $mob_min) and (max-width:$med_max){
+        @media(min-width: $mob_min) and (max-width:$med_max){
           padding: 15px 0px;
-         }
+        }
+        .hundredwidth{
+          width: 100px;
+        }
+        .onethirtywidth{
+          width: 130px;
+        }
+        .twohundredwidth{
+          width: 200px;
+        }
       }
     }
   }
@@ -939,7 +948,7 @@ body{
   }
   .heading{
     text-align: center;
-    font-family: 'Elizabeth Serif';
+    font-family: 'fertigo-pro';
     @media(min-width: $mob_min) and (max-width:$smob_max){
       text-align: center!important;
       font-size: 1.5em;
@@ -952,7 +961,7 @@ body{
   }
   .about_text{
     p{
-      font-family: 'Elizabeth Serif';
+      font-family: 'fertigo-pro';
       margin: 0px;
       font-size: 17px;
       line-height: 30px;
@@ -1472,14 +1481,14 @@ body{
     }
     p{
       text-align: justify;
-      font-family: 'Elizabeth Serif';
-      font-size: 18px;
+      font-family: 'fertigo-pro';
+      font-size: 19px;
       line-height: 35px;
       letter-spacing: 1px;
     }
     .content{
       text-align: center;
-      font-family: 'Elizabeth Serif';
+      font-family: 'fertigo-pro';
       font-size: 30px;
       margin-bottom: 25px;
     }
@@ -4986,4 +4995,29 @@ p a{
   align-items: center;
   margin-top: -220px;
   margin-left: 540px;
+}
+
+.talkshop{
+  background-color: #35635e;
+  height: 80px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  .talkshop_content{
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .talkshop_button{
+    color: #fff;
+    margin-left: 35px;
+    background-color: #ec5353;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
 }
