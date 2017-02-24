@@ -16,6 +16,7 @@ body{
 #banner_wrap{
   height: 340px;
   width: 100%;
+  background-color: white;
   position: relative;
   @media (min-width: $mob_min) and (max-width: $smob_max){
     min-height: 400px;
@@ -1495,6 +1496,7 @@ body{
   display: none;
   vertical-align: top !important;
   padding-top: 30px;
+  color: black;
   &.active{
     display: table-cell;
     vertical-align: top !important;
