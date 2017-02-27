@@ -658,13 +658,13 @@ body{
         @media(min-width: $mob_min) and (max-width:$med_max){
           padding: 15px 0px;
         }
-        .hundredwidth{
+        .smalltechlogo{
           width: 100px;
         }
-        .onethirtywidth{
+        .mediumtechlogo{
           width: 130px;
         }
-        .twohundredwidth{
+        .largetechlogo{
           width: 200px;
         }
       }
@@ -1482,16 +1482,18 @@ body{
     }
     p{
       text-align: justify;
-      font-family: 'fertigo-pro';
-      font-size: 19px;
+      font-family: inherit;
+      font-size: 115%;
       line-height: 35px;
       letter-spacing: 1px;
+      color: #000000; 
     }
     .content{
       text-align: center;
-      font-family: 'fertigo-pro';
-      font-size: 30px;
+      font-family: inherit;
+      font-size: 210%;
       margin-bottom: 25px;
+      color: #000000;
     }
 }
 /* about-us */
