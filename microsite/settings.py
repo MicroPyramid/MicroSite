@@ -1,12 +1,14 @@
 import os
+from django.utils.translation import ugettext_lazy as _
 import djcelery
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
@@ -37,6 +39,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'microsite.middleware.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -83,6 +86,14 @@ DATABASES = {
 
 
 LANGUAGE_CODE = 'en-us'
+
+LOCALE_PATHS = (
+    BASE_DIR + '/locale', )
+
+LANGUAGES = (
+    ('in', _('India')),
+    ('en', _('US')),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -289,7 +300,14 @@ if SENTRY_ENABLED:
             },
         }
 
+# MODELTRANSLATION_DEFAULT_LANGUAGE='en'
+
+# LOCALE_PATHS = (
+#     os.path.join(BASE_DIR, 'locale'),
+# )
+
 try:
     from microsite.settings_local import *  # noqa
 except ImportError as e:
     pass
+

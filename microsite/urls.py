@@ -7,33 +7,36 @@ from microsite_front.xml import rss, blog_rss, sitemap, facebook_rss
 from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books, oss
 from search.views import autocomplete
 from django.views.static import serve
+from django.conf.urls.i18n import i18n_patterns
+from django.utils.translation import ugettext_lazy as _
 
 
-urlpatterns = [
-    url(r'^$', index),
+urlpatterns = i18n_patterns(
+    # url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(_(r'^$'), index),
     url(r'_static/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_static/'}),
     url(r'_sources/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_sources/'}),
     url(r'^books/(?P<path>.*)$', books),
     url(r'^tools/$', tools, name='tools'),
     url(r'^tools/url-checker/$', url_checker_tool, name='url_checker_tool'),
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
-    url(r'^contact-india/$', contact),
-    url(r'^contact-usa/$', contact),
+    url(r'^contact-india/$', contact, name="contact_india"),
+    url(r'^contact-usa/$', contact, name="contact_usa"),
     url(r'^subscribe/$', subscribe),
     url(r'^open-source-softwares/$', oss),
     url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
-    url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
-    url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),
+    url(_(r'^portal/'), include('micro_admin.urls', namespace='micro_admin')),
+    url(_(r'^blog/'), include('micro_blog.urls', namespace='micro_blog')),
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^sitemap/$', html_sitemap),
-    url(r'^(?P<slug>[-\w]+)/$', site_page),
+    url(_(r'^(?P<slug>[-\w]+)/$'), site_page),
     url(r'^facebook.rss$', facebook_rss),
     url(r'^rss.xml$', rss),
     url(r'^blog.rss$', blog_rss),
     url(r'^sitemap.xml$', sitemap),
     url(r'^search/autocomplete/$', autocomplete),
-]
+)
 
 
 handler404 = microsite_front.views.handler404

@@ -218,4 +218,5 @@ def site_page(request, slug):
         if page.category.all():
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
         return render(request, 'site/page.html', {'page': page, 'posts': posts})
-    return render(request, '404.html', status=404)
+    else:
+        return render(request, '404.html', status=404)

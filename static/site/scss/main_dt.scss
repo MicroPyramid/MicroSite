@@ -4989,3 +4989,23 @@ p a{
   margin-top: -220px;
   margin-left: 540px;
 }
+#doc-languages li {
+    margin: 0 3px;
+    font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
+    color: #0C3C26;
+    font-size: 12px;
+    font-size: 1.2rem;
+    pointer-events: auto;
+    list-style: none;
+    display: inline;
+}
+#doc-languages li#language_current:hover + #doc-languages li.other {
+  display: block;
+}
+#doc-languages li.current{
+  display: inline-block;
+  background: #F1FFF7;
+  padding: 8px 15px;
+  border: 1px solid #CFE3DC;
+  border-radius: 4px
+}

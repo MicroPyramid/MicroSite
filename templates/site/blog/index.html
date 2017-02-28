@@ -91,7 +91,7 @@
               </div>
             </div>
             <div class="blog-right">
-              <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
+              <span class="blog-title" itemprop="headline"><a href="{% if request.LANGUAGE_CODE %}/{{request.LANGUAGE_CODE}}{% endif %}/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
               {% if post.excerpt %}
                 <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
               {% else %}

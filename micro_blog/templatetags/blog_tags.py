@@ -1,6 +1,9 @@
 from django import template
 import datetime
 from micro_blog.models import Post
+from django.core.urlresolvers import reverse
+import re
+from django.conf import settings
 
 register = template.Library()
 
@@ -72,3 +75,15 @@ def get_slugs(value):
     if value:
         return value.split(',')
     return ''
+
+
+@register.simple_tag
+def get_url_with_kwargs(request):
+    language_code_prefix_re = re.compile(r'^/([\w-]+)(/|$)')
+    regex_match = language_code_prefix_re.match(request.path)
+    if regex_match:
+        language_code = regex_match.group(1)
+        if language_code in dict(settings.LANGUAGES):
+            return request.path.replace('/'+language_code, '')
+    else:
+        return request.path

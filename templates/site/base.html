@@ -1,5 +1,9 @@
 {% load recurse %}
 {% load menu %}
+{% load blog_tags %}
+{% load i18n %}
+{% load l10n %}
+
 <!DOCTYPE html>
 <html lang="en" class="no-js" prefix="og: http://ogp.me/ns# fb:">
   <head>
@@ -312,7 +316,7 @@
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                <li>{% if menu.url|slugify != 'none' %}<a href="{% if request.LANGUAGE_CODE %}/{{request.LANGUAGE_CODE}}{% endif %}{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
                 </li>
                 {% endloop %}
@@ -390,6 +394,21 @@
       </div>
       <!-- /scroller -->
     </div>
+    <div id="version-switcher">
+  <ul id="doc-languages" class="language-switcher">
+{% get_available_languages as languages %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% for lang_code, lang_name in languages %}
+  <li class="other {% ifequal lang_code LANGUAGE_CODE %}current{% endifequal %}">
+        {% get_url_with_kwargs request as url_with_kwargs %}
+        <a href="/{{ lang_code }}{{url_with_kwargs}}">{{ lang_name }}</a>
+  </li>
+
+{% endfor %}
+
+  </ul>
+</div>
     <!-- /pusher -->
     <!--/ push menu -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
