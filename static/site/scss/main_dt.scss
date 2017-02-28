@@ -14,7 +14,7 @@ body{
   @extend #body;
 }
 #banner_wrap{
-  height: 340px;
+  height: 380px;
   width: 100%;
   background-color: white;
   position: relative;
@@ -104,9 +104,9 @@ body{
     }
   }
   .slider_text{
-    width: 99%;
+    width: 100%;
     padding: 40px 20px;
-    text-align: right;
+    text-align: center;
     color: #fff;
     position: relative;
     overflow: hidden;
@@ -156,7 +156,8 @@ body{
       }
     }
     .text{
-      padding-left:50%;
+      padding-left:15%;
+      padding-right: 15%;
       font-size: 16px;
       line-height: 35px;
       z-index: 1;
@@ -227,6 +228,7 @@ body{
       }
     }
     .daimond_tabs{
+      text-align: center;
       ul{
         margin: 0px;
         padding: 0px;
@@ -962,9 +964,9 @@ body{
   }
   .about_text{
     p{
-      font-family: 'fertigo-pro';
+      font-family: inherit;
       margin: 0px;
-      font-size: 17px;
+      font-size: 15px;
       line-height: 30px;
       text-align: justify;
       font-weight:500;
@@ -4015,8 +4017,6 @@ body{
 .server_blog{
     @extend .web_dev_technologies;
     @extend #blog_list ;
-    background: #f9f9f9;
-    margin-top:-21px;
     .blog_ticket_wrap{
       //padding: 30px;
       padding: 21px 60px;
@@ -4608,6 +4608,9 @@ body{
    #first_row{
     background: $service_mp_bg;
     padding: 50px;
+    .container{
+      width: 100%;
+    }
     @media (min-width: $mob_min) and (max-width: $smob_max){
       padding:30px 25px;
     }
@@ -5024,4 +5027,8 @@ p a{
     padding-top: 5px;
     padding-bottom: 5px;
   }
+}
+
+.services-left-container{
+  margin-bottom: 25px;
 }
