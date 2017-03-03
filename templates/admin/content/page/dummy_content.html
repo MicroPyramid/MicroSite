@@ -1,0 +1,234 @@
+{% extends 'admin/base.html' %} 
+{% load blog_tags %}
+{% block stage %}
+<!-- main content starts here-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Blog Post</h3>
+      <a class="preview pull-right" title="preview" href="{% url 'micro_blog:blog_article' slug=blog_post.slug %}" target="_blank">Blog Preview</a>
+  </div>
+  <div class="panel-body">
+    <form action="{% url 'micro_blog:edit_blog_post' blog_slug=blog_post.slug %}" method="POST" id="blogform" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="Text" class="form-control" id="title" name="title" style="position:relative;" {% if blog_form.title.value %}value="{{blog_form.title.value}}"{% endif %}>
+        {% for error in blog_form.title.errors %}
+            <p class="failure">{{ error|escape }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Category</label>
+        <select class="form-control" id="category" name="category">
+          {% for category in categories %}
+          <option value="{{category.id}}"{% ifequal blog_form.category.value category.id %}selected{% endifequal %}>{{category.name}}</option>
+          {% endfor %}
+        </select>
+        {% for error in blog_form.category.errors %}
+            <p class="failure">{{ error|escape }}</p>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Excerpt</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <textarea class="input-xlarge" id="excerpt" name="excerpt" style="margin: 0px; width: 96%;  height: 93px;">{% if blog_form.excerpt.value %}{{blog_form.excerpt.value}}{% endif %}</textarea>
+          </div>
+          <p id="Excerptcount"></p>
+          {% for error in blog_form.excerpt.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="html">Blog Post Description</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <input type="hidden" name="content">
+            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="Blog Post Description">{% if blog_form.content.value %}{{blog_form.content.value}}{% endif %}</textarea>
+          </div>
+          {% for error in blog_form.content.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Meta Description</label>
+        <div class="control-group">
+          <div class="controls" id="content">
+            <textarea class="input-xlarge" id="meta_description" name="meta_description" placeholder="Meta Description" style="margin: 0px; width: 1062px; height: 93px;">{% if blog_form.meta_description.value %}{{blog_form.meta_description.value}}{% endif %}</textarea>
+          </div>
+          {% for error in blog_form.meta_description.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
+	        <p id="Wordcount"></p>
+        </div>
+      </div>
+      <div class="form-group blog_slugs">
+        <label for="exampleInputPassword1">Slugs</label>
+          <div class="slug_items" id="slugs">
+            {{ blogslugs_formset.management_form }}
+            {% for slug_form in blogslugs_formset %}
+              <div class="row slug_item">
+                <div class="slug_text col-md-6">
+                  {{ slug_form.slug }}
+                  {{ slug_form.id }}
+                  {% if slug_form.slug.errors %}
+                      {% for error in slug_form.slug.errors %}
+                          <p class="failure">{{ error|escape }}</p>
+                      {% endfor %}
+                  {% endif %}
+                </div>
+                <div class="slug_check col-md-2">
+                  {{ slug_form.is_active }} Active
+                  {% if slug_form.is_active.errors %}
+                      {% for error in slug_form.is_active.errors %}
+                          <p class="failure">{{ error|escape }}</p>
+                      {% endfor %}
+                  {% endif %}
+                </div>
+                <div class="slug_check col-md-2">
+                  {% if blogslugs_formset.can_delete %}
+                      {{ slug_form.DELETE }} Delete
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          {% if blogslugs_formset.non_form_errors %}
+              {% for error in blogslugs_formset.non_form_errors %}
+                  <p class="failure">{{ error|escape }}</p>
+              {% endfor %}
+          {% endif %}
+        </lable>
+      </div>
+      <div class="tags-block">
+        <p><label>Tags</label>
+          <input id="tags_1" type="text" class="tags" name="tags" {% if request.POST.tags %}value="{{request.POST.tags}}"{% else %}value="{% for tag in blog_post.tags.all %}{{tag.name}},{% endfor %}"{% endif %} />
+          {% for error in blog_form.tags.errors %}
+              <p class="failure">{{ error|escape }}</p>
+          {% endfor %}
+      </div>
+      <!--<div class="tags-block">
+        <p>
+          <label>Featured Image</label>
+          <input type="file" name="featuredimage" />
+        </p>
+      </div> -->
+      <div class="draft-box">
+        <input type="radio" name="status" value="D" {% ifequal blog_form.status.value 'D' %}checked{% endifequal %}>
+        <label>Save as Draft</label>
+      </div>
+      <div class="draft-box">
+        <input type="radio" name="status" value="R" {% ifequal blog_form.status.value 'R' %}checked{% endifequal %}>
+        <label>Review</label>
+      </div>
+      {% if request.user.user_roles == "Admin" or request.user.is_special or request.user.is_superuser %}
+      <div class="draft-box">
+        <input type="radio" name="status" value="P" {% ifequal blog_form.status.value 'P' %}checked{% endifequal %}>
+        <label>Publish Post</label>
+      </div>
+      <div class="draft-box">
+        <input type="radio" name="status" value="T" {% ifequal blog_form.status.value 'T' %}checked{% endifequal %}>
+        <label>Reject Post</label>
+      </div>
+      {% endif %}
+      {% for error in blog_form.status.errors %}
+          <p class="failure">{{ error|escape }}</p>
+      {% endfor %}
+      <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="save_blog_post">
+      </div>
+    </form>
+  </div>
+</div>
+<!-- main content ends here-->
+{% load compress %}
+{% compress js %}
+<script type="text/javascript">
+   function counting_words(){
+       input_text = $('#meta_description').val();
+       char_length = input_text.length
+       word_length = input_text.split(' ').filter(Boolean).length;
+       $("#Wordcount").text('Words: ' + word_length + ', Characters: ' +  char_length);
+   }
+   counting_words()
+   $('#meta_description').keyup(function(event) {
+     counting_words()
+   });
+   $('#excerpt').keyup(function(event) {
+       input_text = $('#excerpt').val();
+       char_length = input_text.length
+       word_length = input_text.split(' ').filter(Boolean).length;
+       $("#Excerptcount").text('Words: ' + word_length + ', Characters: ' +  char_length);
+   });
+
+  function onAddTag(tag) {
+    alert("Added a tag: " + tag);
+  }
+  function onRemoveTag(tag) {
+    alert("Removed a tag: " + tag);
+  }
+  function onChangeTag(input,tag) {
+    alert("Changed a tag: " + tag);
+  }
+  $(function() {
+    $('#tags_1').tagsInput({width:'auto'});
+    $('#tags_2').tagsInput({
+      width: 'auto',
+      onChange: function(elem, elem_tags)
+      {
+        var languages = ['php','ruby','javascript'];
+        $('.tag', elem_tags).each(function()
+        {
+          if($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+            $(this).css('background-color', 'yellow');
+        });
+      }
+    });
+    $('#tags_3').tagsInput({
+      width: 'auto',
+      //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
+      autocomplete_url:'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
+    });
+  // Uncomment this line to see the callback functions in action
+  //      $('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
+  // Uncomment this line to see an input with no interface for adding new tags.
+  //      $('input.tags').tagsInput({interactive:false});
+  });
+</script>
+<script type="text/javascript">
+  CKEDITOR.config.allowedContent = true;
+  CKEDITOR.config.autoParagraph = false;
+  var editor = CKEDITOR.replace('textareacontents');
+</script>
+<script type="text/javascript">
+//auto save every 60 sec//
+var blog_post_data = {};
+$.each($('form#blogform').serializeArray(), function(_, kv) {
+  blog_post_data[kv.name] = kv.value;
+});
+function save_blog_post(){
+  $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+  blog_post_data["content"] = $("input[name='content']").val();
+  $.post("", blog_post_data, function(response){
+    // Do nothing
+  });
+}
+window.setInterval(function(){
+  save_blog_post()
+}, 60000);
+// end //
+
+  $ = jQuery;
+  $('#cancel_blog_post').click(function(e){
+    window.location = "{% url 'micro_blog:admin_post_list' %}";
+  });
+  $('#save_blog_post').click(function(e){
+    e.preventDefault();
+    $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+    $('form#blogform').submit();
+  });
+</script>
+{% endcompress %}
+{% endblock %}

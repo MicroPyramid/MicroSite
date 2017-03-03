@@ -5,7 +5,7 @@ import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from micro_blog.models import Country
-from pages.forms import MenuForm, PageForm
+from pages.forms import MenuForm, PageForm, PageNewForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
@@ -13,26 +13,42 @@ from micro_blog.forms import customPageCountryInlineFormSet
 from django.template.defaultfilters import slugify
 from django.forms.models import inlineformset_factory, modelformset_factory
 from django.db.models import Q
+from django.core.urlresolvers import reverse
 
 
 @login_required
 def pages(request):
-    pagelist = Page.objects.all().order_by('id')
+    pagelist = Page.objects.filter(parent=None).order_by('id')
     return render(request, 'admin/content/page/page-list.html', {'pages': pagelist})
 
 
 @login_required
 def new_page(request):
     categories = Category.objects.all()
+    countries = Country.objects.all()
     if request.method == 'POST':
-        validate_page = PageForm(request.POST)
+        validate_page = PageNewForm(request.POST)
+        print (request.POST)
         if validate_page.is_valid():
-            page = validate_page.save()
+            # page = Page.objects.create(name=request.POST['name'],
+            #                            slug=request.POST['name'],
+            #                            meta_description=request.POST['meta_description'],
+            #                            meta_title=request.POST['meta_title'],
+            #                            keywords=request.POST['keywords'],
+            #                            content=request.POST['content'], )
+            page = validate_page.save(commit=False)
             page.parent = None
             page.slug = slugify(request.POST.get('slug'))
+            page.is_default = True
             if request.POST.get('country'):
                 page.country_id = request.POST.get('country')
+            else:
+                country = Country.objects.get(name='India')
+                page.country = country
             page.save()
+            # for country in countries.exclude(name__iexact='India'):
+            #     slug = str(country.code) + '/' + slugify(request.POST.get('slug'))
+            #     Page.objects.create(title=request.POST.get('country'), country=country, parent=page, slug=slug)
             page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
         else:
@@ -42,7 +58,6 @@ def new_page(request):
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
-        countries = Country.objects.all()
         return render(
             request,
             'admin/content/page/new-page.html',
@@ -77,31 +92,45 @@ def update_dict_keys(temp, name, keys):
 def edit_page(request, pk):
     page = get_object_or_404(Page, pk=pk)
     categories = Category.objects.all()
-    countries = Country.objects.all()
-    PageCountryFormSet = modelformset_factory(Page,
-                                            exclude=('category', ),
+    countries = Country.objects.all().order_by('id')
+    PageCountryFormSet = inlineformset_factory(Page, Page,
+                                            fields=('title', 'content', 'slug', 'meta_title', 'meta_description', 'keywords', 'is_active', 'is_default'),
                                             formset=customPageCountryInlineFormSet,
-                                            max_num=len(countries),
+                                            extra=len(countries),
                                             )
     if request.method == 'POST':
-        print (request.POST)
         pagecountry_formset = PageCountryFormSet(request.POST)
+        print (len(pagecountry_formset.forms))
         if pagecountry_formset.is_valid():
             print ("hello")
+            print ("valid")
+            print (request.POST)
+            i= 0 
             for each in pagecountry_formset:
-                print (each.cleaned_data)
-                country = each.cleaned_data.get('country')
-                print (country)
-                country_obj = Country.objects.filter(name=country)
-                print (country_obj)
-                page_obj = each.save(commit=False)
-                if country_obj:
-                    page_obj.content = request.POST['textareacontents'+str(country_obj[0].id)]
-                    page_obj.country = country_obj[0]
-                    if page_obj.id != pk:
-                        page_obj.parent = page
+                if each.cleaned_data:
+                    print ("hello")
+                    print (each.cleaned_data)
+                    print (i)
+                    page_obj = each.save(commit=False)
+                    if not page_obj.country:
+                        page_obj.country = countries[i]
                     page_obj.save()
-
+                    print ("page")
+                    print (page_obj.parent)
+                    if not page_obj.parent:
+                        print ("inside parent")
+                        print (page_obj.id)
+                        if str(page_obj.id) != str(pk):
+                            print ("inside pk")
+                            page_obj.parent = page
+                    page_obj.save()
+                    i += 1
+                else:
+                    print (each.errors)
+            # new_forms = pagecountry_formset.save_new()
+            # for each in new_forms:
+            #     each.parent = page
+            #     each.save()
             # page_obj = pagecountry_formset.save()
             print ("save")
             print (page)
@@ -110,21 +139,32 @@ def edit_page(request, pk):
             # page.save()
             # page.category.clear()
             # page.category.add(*request.POST.getlist('category'))
-        # return HttpResponseRedirect('/portal/')
+            return HttpResponseRedirect(reverse('pages:pages'))
+        else:
+            pagecountry_formset = PageCountryFormSet(request.POST)
+            print ("not valid")
+            print (request.POST)
+            if pagecountry_formset.errors:
+                print (pagecountry_formset.errors)
+    else:
+        pagecountry_formset = PageCountryFormSet(request.POST)
+
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
         if page.country:
-            countries_ids = [country.id for country in Country.objects.all().exclude(id=page.country.id)]
-            country_ids = [{'country_id': country.id} for country in Country.objects.all().exclude(id=page.country.id)]
+            page_country_ids = Page.objects.filter(Q(pk=pk) | Q(parent=page)).values_list('country')
+            country_ids = [{'country_id': country.id} for country in Country.objects.exclude(id__in=page_country_ids).order_by('id')]
         else:
-            countries_ids = [country.id for country in Country.objects.all()]
-            country_ids = [{'country_id': country.id} for country in Country.objects.all()]
-        PageCountryFormSet = PageCountryFormSet(initial=country_ids, queryset=Page.objects.filter(Q(pk=pk) | Q(parent=page, country_id__in=countries_ids)))
-        print (PageCountryFormSet.forms)
+            country_ids = [{'country_id': country.id} for country in Country.objects.all().order_by('id')]
+        country_ids = [{'country_id': country.id} for country in Country.objects.all().order_by('id')]
+        if request.method == 'POST':
+            PageCountryFormSet = PageCountryFormSet(request.POST, initial=country_ids)
+        else:
+            PageCountryFormSet = PageCountryFormSet(queryset=Page.objects.filter(Q(pk=pk) | Q(parent=page)).order_by('id'), initial=country_ids)
         return render(request, 'admin/content/page/edit-page.html',
                       {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories,
-                       'countries': countries, 'pagecountry_formset': PageCountryFormSet})
+                       'countries': countries, 'pagecountry_formset': PageCountryFormSet, 'country_ids': country_ids})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -258,7 +298,10 @@ def site_page(request, slug):
     # if slug in pages_slugs:
     #     return render(request, 'site/pages/' + slug + '.html')
     # return render(request, '404.html', status=404)
-    pages = Page.objects.filter(slug=slug)
+    language_code = request.LANGUAGE_CODE
+    pages = Page.objects.filter(slug=slug, country__code=language_code)
+    if not pages:
+        pages = Page.objects.filter(slug=slug, is_default=True)
     if pages:
         page = pages[0]
         posts = []

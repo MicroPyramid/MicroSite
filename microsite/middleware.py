@@ -43,7 +43,10 @@ class LocaleMiddleware(DjangoLocaleMiddleware):
 
         if not language_code:
             language_code = translation.get_language_from_request(request)
-        translation.activate(language_code)
+        if str(language_code) == 'en':
+            translation.deactivate()
+        else:
+            translation.activate(language_code)
         request.LANGUAGE_CODE = translation.get_language()
 
     def process_response(self, request, response):

@@ -23,13 +23,15 @@
     {% csrf_token %}
     <!-- Tab panes -->
     {{ pagecountry_formset.management_form }}
+    {{ pagecountry_formset.non_form_errors }}
     {% for slug_form in pagecountry_formset %}
     <div class="tab-content">
-      <div class="tab-pane {% if slug_form.instance.country.name %}active{% endif %}" id="country_{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
+      <div class="tab-pane {% if forloop.first %}active{% endif %}" id="country_{% if slug_form.instance.country.id %}{{ slug_form.instance.country.id }}{% else %}{{ slug_form.initial.country_id }}{% endif %}">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Edit Page{{ slug_form.initial.country_id }}</h3>
+            <h3 class="panel-title">Edit Page{{ slug_form.initial.country_id }}{{ slug_form.instance.country.name }}</h3>
           </div>
+
           <div class="panel-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">Title</label>
@@ -81,15 +83,13 @@
 
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Category</label>
                 {{ slug_form.category }}
                 {% if slug_form.category.errors %}
                     {% for error in slug_form.category.errors %}
                         <p class="failure">{{ error|escape }}</p>
                     {% endfor %}
                 {% endif %}
-              <div class="form-group form_country hide" id="{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
-                <label for="exampleInputEmail1">Country</label>
+              <div class="form-group form_country" id="{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
                 {{ slug_form.country }}
               </div>
                 All Categories <input type="checkbox" name="all_categories" id="all_categories"/>
@@ -97,12 +97,10 @@
               <div class="form-group">
                 <label class="control-label" for="html">Page Content</label>
                 <div class="control-group">
-                    <textarea class="input-xlarge" id="textareacontents{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}" name="textareacontents{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}" rows="10" placeholder="HTML code of this email">
-                    {{page.content|safe}}
-                    </textarea>
                   <div class="controls" id="form_content_{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
+                    <span class="form_content" id="{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
                     {{ slug_form.content }}
-                    <input type="hidden" name="content_{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}" id="content_{{ country.id }}">
+                    </span>
                     {% if slug_form.content.errors %}
                         {% for error in slug_form.content.errors %}
                             <p class="failure">{{ error|escape }}</p>
@@ -113,9 +111,17 @@
                 </div>
               </div>
               <div class="draft-box">
-                {{ slug_form.is_active }}
+                {{ slug_form.is_active }}Active
                 {% if slug_form.is_active.errors %}
                     {% for error in slug_form.is_active.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+              </div>
+              <div class="draft-box">
+                {{ slug_form.is_default }}Default
+                {% if slug_form.is_default.errors %}
+                    {% for error in slug_form.is_default.errors %}
                         <p class="failure">{{ error|escape }}</p>
                     {% endfor %}
                 {% endif %}
@@ -138,13 +144,28 @@
 {% compress js %}
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
-  {% for country in countries %}
-    var editor_{{country.id}} = CKEDITOR.replace('textareacontents'+{{ country.id }});
-  {% endfor %}
+
+  $('.form_content').each(function(e){
+    select_country = $(this).find('textarea')
+    textarea_name = $(select_country).attr('name')
+    country_id = $(this).attr('id')
+    console.log(textarea_name)
+    editor_name = 'editor_' + country_id
+    CKEDITOR.replace(textarea_name)
+  });
 </script>
 <script type="text/javascript">
   $ = jQuery;
 
+  $(document).ready(function(e){
+    $('.form_country').each(function(e){
+      console.log($(this).find('select'))
+      country_id = $(this).attr('id')
+      select_country = $(this).find('select')
+      $(select_country).find('option[value="'+country_id+'"]').attr("selected", "selected");
+    });
+
+  })
   $('#all_categories').click(function(e){
   $("#category option").select2('');
   if(document.getElementById('all_categories').checked) {
@@ -162,31 +183,9 @@
     $('.tab-pane').removeClass('active')
     $('#country_'+country_name).addClass('active')
   });
-  var getValue = function(id) {
-    var content = CKEDITOR.instances[id].getData();
-    return content
-};
-$(document).ready(function(e){
-  $('.form_country').each(function(e){
-    console.log($(this).find('select'))
-    country_id = $(this).attr('id')
-    select_country = $(this).find('select')
-    $(select_country).find('option[value="'+country_id+'"]').attr("selected", "selected");
-  });
+$('#save_button').click(function(e){
+  $('pageform').submit();
 });
-  $('#save_button').click(function(e){
-    var allInstances=CKEDITOR.instances;
-    console.log(allInstances)
-    for ( var i in allInstances ){
-        alert(allInstances[i].name);
-    }
-    {% for country in countries %}
-    value = getValue('textareacontents'+{{ country.id }})
-    $('input[name="content_'+{{ country.id }}+'"]').val(value);
-    $('.form_content_'+{{ country.id }}).find( "input[name$='-content']" ).val(value);
-    {% endfor %}
-    $('#pageform').submit();
-  })
 </script>
 {% endcompress %}
 {% endblock %}

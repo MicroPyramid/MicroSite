@@ -40,6 +40,8 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'microsite.middleware.LocaleMiddleware',
+    # 'solid_i18n.middleware.SolidLocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -50,9 +52,13 @@ MIDDLEWARE_CLASSES = (
 
     'microsite.middleware.RequestSessionMiddleware',
     'microsite.middleware.DetectMobileBrowser',
-    # 'django.middleware.cache.FetchFromCacheMiddleware'
+    'django.middleware.cache.FetchFromCacheMiddleware'
 )
 
+# SOLID_I18N_USE_REDIRECTS = True
+# SOLID_I18N_HANDLE_DEFAULT_PREFIX = True
+# SOLID_I18N_DEFAULT_PREFIX_REDIRECT = True
+# SOLID_I18N_PREFIX_STRICT = True
 
 HTML_MINIFY = False
 
@@ -85,14 +91,14 @@ DATABASES = {
 }
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 LOCALE_PATHS = (
     BASE_DIR + '/locale', )
 
 LANGUAGES = (
-    ('in', _('India')),
-    ('en', _('US')),
+    ('en', _('India')),
+    ('us', _('US')),
 )
 
 TIME_ZONE = 'UTC'

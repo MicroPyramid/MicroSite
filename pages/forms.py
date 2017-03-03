@@ -4,8 +4,24 @@ from micro_blog.models import Subscribers, Category
 
 
 class PageForm(forms.ModelForm):
+    # parent = forms.CharField(required=False)
+    country = forms.CharField(required=False)
+
+    class Meta:
+        model = Page
+        exclude = ('category',)
+
+    def save(self, commit=True):
+        instance = super(PageForm, self).save(commit=False)
+        instance.country_id = self.cleaned_data['country']
+        if commit:
+            instance.save()
+        return instance
+
+
+class PageNewForm(forms.ModelForm):
     content = forms.CharField(required=False)
-    parent = forms.CharField(required=False)
+    # parent = forms.CharField(required=False)
 
     class Meta:
         model = Page

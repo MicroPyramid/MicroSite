@@ -316,7 +316,7 @@
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="{% if request.LANGUAGE_CODE %}/{{request.LANGUAGE_CODE}}{% endif %}{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                <li>{% if menu.url|slugify != 'none' %}<a href="/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
                 </li>
                 {% endloop %}
