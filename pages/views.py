@@ -4,11 +4,15 @@ from django.template.context_processors import csrf
 import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
+from micro_blog.models import Country
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
+from micro_blog.forms import customPageCountryInlineFormSet
 from django.template.defaultfilters import slugify
+from django.forms.models import inlineformset_factory, modelformset_factory
+from django.db.models import Q
 
 
 @login_required
@@ -23,23 +27,29 @@ def new_page(request):
     if request.method == 'POST':
         validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            page = validate_page.save(commit = False)
+            page = validate_page.save()
+            page.parent = None
             page.slug = slugify(request.POST.get('slug'))
+            if request.POST.get('country'):
+                page.country_id = request.POST.get('country')
             page.save()
             page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
         else:
+            print (validate_page.errors)
             data = {"error": True, 'response': validate_page.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
+        countries = Country.objects.all()
         return render(
             request,
             'admin/content/page/new-page.html',
             {
                 'csrf_token': c['csrf_token'],
-                'categories': categories
+                'categories': categories,
+                'countries': countries
             })
     else:
         return render_to_response('admin/accessdenied.html')
@@ -55,29 +65,66 @@ def delete_page(request, pk):
         return render_to_response('admin/accessdenied.html')
 
 
+def update_dict_keys(temp, name, keys):
+    for key in keys:
+        changed_key = name + '-' + key
+        temp[changed_key] = temp[key]
+        del temp[key]
+    return temp
+
+
 @login_required
 def edit_page(request, pk):
     page = get_object_or_404(Page, pk=pk)
     categories = Category.objects.all()
-
+    countries = Country.objects.all()
+    PageCountryFormSet = modelformset_factory(Page,
+                                            exclude=('category', ),
+                                            formset=customPageCountryInlineFormSet,
+                                            max_num=len(countries),
+                                            )
     if request.method == 'POST':
-        validate_page = PageForm(request.POST, instance=page)
-        if validate_page.is_valid():
-            page = validate_page.save(commit = False)
-            page.slug = slugify(request.POST.get('slug'))
-            page.save()
-            page.category.clear()
-            page.category.add(*request.POST.getlist('category'))
+        print (request.POST)
+        pagecountry_formset = PageCountryFormSet(request.POST)
+        if pagecountry_formset.is_valid():
+            print ("hello")
+            for each in pagecountry_formset:
+                print (each.cleaned_data)
+                country = each.cleaned_data.get('country')
+                print (country)
+                country_obj = Country.objects.filter(name=country)
+                print (country_obj)
+                page_obj = each.save(commit=False)
+                if country_obj:
+                    page_obj.content = request.POST['textareacontents'+str(country_obj[0].id)]
+                    page_obj.country = country_obj[0]
+                    if page_obj.id != pk:
+                        page_obj.parent = page
+                    page_obj.save()
 
-            data = {"error": False, 'response': 'Page updated successfully'}
-        else:
-            data = {"error": True, 'response': validate_page.errors}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+            # page_obj = pagecountry_formset.save()
+            print ("save")
+            print (page)
+            # page = validate_page.save(commit = False)
+            # page.slug = slugify(request.POST.get('slug'))
+            # page.save()
+            # page.category.clear()
+            # page.category.add(*request.POST.getlist('category'))
+        # return HttpResponseRedirect('/portal/')
     if request.user.is_superuser:
         c = {}
         c.update(csrf(request))
+        if page.country:
+            countries_ids = [country.id for country in Country.objects.all().exclude(id=page.country.id)]
+            country_ids = [{'country_id': country.id} for country in Country.objects.all().exclude(id=page.country.id)]
+        else:
+            countries_ids = [country.id for country in Country.objects.all()]
+            country_ids = [{'country_id': country.id} for country in Country.objects.all()]
+        PageCountryFormSet = PageCountryFormSet(initial=country_ids, queryset=Page.objects.filter(Q(pk=pk) | Q(parent=page, country_id__in=countries_ids)))
+        print (PageCountryFormSet.forms)
         return render(request, 'admin/content/page/edit-page.html',
-                      {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories})
+                      {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories,
+                       'countries': countries, 'pagecountry_formset': PageCountryFormSet})
     else:
         return render_to_response('admin/accessdenied.html')
 

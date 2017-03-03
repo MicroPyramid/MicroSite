@@ -1,88 +1,151 @@
-{% extends 'admin/base.html' %} 
+{% extends 'admin/base.html' %}
 {% block stage %}
+<style type="text/css">
+  .hide{
+    display: none;
+  }
+</style>
 <!-- main content starts here-->
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Edit Page</h3>
+<div  class="col-md-12">
+  <h3>Left Tabs</h3>
+  <hr/>
+  <div class="col-md-3">
+    <!-- required for floating -->
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs tabs-left">
+      {% for country in countries %}
+      <li {% if page.country.id == country.id %}class="active"{% endif %}><a href="#country_{{country.id}}" data-toggle="tab" class="country_tab">{{country.name}}</a></li>
+      {% endfor %}
+    </ul>
   </div>
-  <div class="panel-body">
+  <div class="col-md-9">
     <form action="." method="POST" id="pageform">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="exampleInputEmail1">Title</label>
-        <input type="Text" class="form-control" id="title" name="title" value="{{page.title}}">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Slug</label>
-        <input type="Text" class="form-control" id="title" name="slug" value="{{page.slug}}" >
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Meta Title</label>
-        <textarea class="form-control" id="meta_title" name="meta_title" >{{page.meta_title}}</textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Meta Description</label>
-        <textarea class="form-control" id="meta_description" name="meta_description" >{{page.meta_description}}</textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Keywords</label>
-        <textarea class="form-control" id="keywords" name="keywords">{{page.keywords}}</textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Category</label>
-        <select class="input select2" multiple placeholder="Category" name="category" id="category">
-          {% for category in categories %}
-          <option value="{{category.id}}" {%if category in page.category.all%}selected{%endif%}>{{category.name}}</option>
-          {% endfor %}
-        </select>
-        All Categories <input type="checkbox" name="all_categories" id="all_categories"/>
-      </div>
-      <div class="form-group">
-        <label class="control-label" for="html">Page Content</label>
-        <div class="control-group">
-          <div class="controls" id="content">
-            <input type="hidden" name="content">
-            <textarea class="input-xlarge" id="textareacontents" name="textareacontents" rows="10" placeholder="HTML code of this email">
-            {{page.content|safe}}
-            </textarea>
+    {% csrf_token %}
+    <!-- Tab panes -->
+    {{ pagecountry_formset.management_form }}
+    {% for slug_form in pagecountry_formset %}
+    <div class="tab-content">
+      <div class="tab-pane {% if slug_form.instance.country.name %}active{% endif %}" id="country_{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Edit Page{{ slug_form.initial.country_id }}</h3>
+          </div>
+          <div class="panel-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Title</label>
+                {{ slug_form.title }}
+                {{ slug_form.id }}
+                {% if slug_form.title.errors %}
+                    {% for error in slug_form.title.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Slug</label>
+                {{ slug_form.slug }}
+                {% if slug_form.slug.errors %}
+                    {% for error in slug_form.slug.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Meta Title</label>
+                {{ slug_form.meta_title }}
+                {% if slug_form.meta_title.errors %}
+                    {% for error in slug_form.meta_title.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Meta Description</label>
+                {{ slug_form.meta_description }}
+                {% if slug_form.meta_description.errors %}
+                    {% for error in slug_form.meta_description.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Keywords</label>
+                {{ slug_form.keywords }}
+                {% if slug_form.keywords.errors %}
+                    {% for error in slug_form.keywords.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Category</label>
+                {{ slug_form.category }}
+                {% if slug_form.category.errors %}
+                    {% for error in slug_form.category.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+              <div class="form-group form_country hide" id="{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
+                <label for="exampleInputEmail1">Country</label>
+                {{ slug_form.country }}
+              </div>
+                All Categories <input type="checkbox" name="all_categories" id="all_categories"/>
+              </div>
+              <div class="form-group">
+                <label class="control-label" for="html">Page Content</label>
+                <div class="control-group">
+                    <textarea class="input-xlarge" id="textareacontents{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}" name="textareacontents{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}" rows="10" placeholder="HTML code of this email">
+                    {{page.content|safe}}
+                    </textarea>
+                  <div class="controls" id="form_content_{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}">
+                    {{ slug_form.content }}
+                    <input type="hidden" name="content_{% if slug_form.initial.country_id %}{{ slug_form.initial.country_id }}{% else %}{{ slug_form.instance.country.id }}{% endif %}" id="content_{{ country.id }}">
+                    {% if slug_form.content.errors %}
+                        {% for error in slug_form.content.errors %}
+                            <p class="failure">{{ error|escape }}</p>
+                        {% endfor %}
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+              <div class="draft-box">
+                {{ slug_form.is_active }}
+                {% if slug_form.is_active.errors %}
+                    {% for error in slug_form.is_active.errors %}
+                        <p class="failure">{{ error|escape }}</p>
+                    {% endfor %}
+                {% endif %}
+              </div>
           </div>
         </div>
       </div>
-      <div class="draft-box">
-        <input type="checkbox" name="is_active" value="true" {% if page.is_active %} checked {% endif %}> <label>Active</label>
+    </div>
+    {% endfor %}
+    <div class="save-btn">
+        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="save_button">
       </div>
-      <div class="save-btn">
-        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
-      </div>
+
     </form>
   </div>
+  <div class="clearfix"></div>
 </div>
 <!-- main content ends here-->
 {% load compress %}
 {% compress js %}
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
-  var editor = CKEDITOR.replace('textareacontents');
+  {% for country in countries %}
+    var editor_{{country.id}} = CKEDITOR.replace('textareacontents'+{{ country.id }});
+  {% endfor %}
 </script>
 <script type="text/javascript">
   $ = jQuery;
-  $("form#pageform").submit(function(e) {
-    e.preventDefault();
-    //var htmldata = CKEDITOR.instances.Editor.document.getBody().getHtml();
-    console.log(CKEDITOR.instances.textareacontents.getData());
-    $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
-    $.post(".", $("form#pageform").serialize(), function(msg) {
-      if (msg.error) {
-        $('p.failure').remove();
-        for (var key in msg.response){
-          $('#'+key).after('<p class="failure">'+msg.response[key]+'</p>');
-        }
-      } else {
-        window.location = '/portal/content/page/';
-      }
-    }, 'json');
-  });
-$('#all_categories').click(function(e){
+
+  $('#all_categories').click(function(e){
   $("#category option").select2('');
   if(document.getElementById('all_categories').checked) {
     $("#category option").attr("selected", "selected");
@@ -92,7 +155,38 @@ $('#all_categories').click(function(e){
     $("#category").select2("val", "");
   }
   $(".select2").select2({ width: '100%' })
+  });
+
+  $('.country_tab').click(function(e){
+    country_name = $(this).text()
+    $('.tab-pane').removeClass('active')
+    $('#country_'+country_name).addClass('active')
+  });
+  var getValue = function(id) {
+    var content = CKEDITOR.instances[id].getData();
+    return content
+};
+$(document).ready(function(e){
+  $('.form_country').each(function(e){
+    console.log($(this).find('select'))
+    country_id = $(this).attr('id')
+    select_country = $(this).find('select')
+    $(select_country).find('option[value="'+country_id+'"]').attr("selected", "selected");
+  });
 });
+  $('#save_button').click(function(e){
+    var allInstances=CKEDITOR.instances;
+    console.log(allInstances)
+    for ( var i in allInstances ){
+        alert(allInstances[i].name);
+    }
+    {% for country in countries %}
+    value = getValue('textareacontents'+{{ country.id }})
+    $('input[name="content_'+{{ country.id }}+'"]').val(value);
+    $('.form_content_'+{{ country.id }}).find( "input[name$='-content']" ).val(value);
+    {% endfor %}
+    $('#pageform').submit();
+  })
 </script>
 {% endcompress %}
 {% endblock %}

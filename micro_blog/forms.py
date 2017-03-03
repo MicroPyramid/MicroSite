@@ -31,3 +31,19 @@ class CustomBlogSlugInlineFormSet(forms.BaseInlineFormSet):
                 "Only one slug can be active at a time.")
 
 
+class customPageCountryInlineFormSet(forms.BaseModelFormSet):
+    content = forms.CharField(max_length=500, required=False)
+    parent = forms.CharField(max_length=500, required=False)
+
+    def clean(self):
+        super(customPageCountryInlineFormSet, self).clean()
+        print (self.errors)
+        if any(self.errors):
+            return
+        # default_countries = 0
+        # for form in self.forms:
+        #     if form.cleaned_data.get("is_default"):
+        #         default_countries += 1
+        # if default_countries > 1:
+        #     raise forms.ValidationError(
+        #         "Only one slug can be active at a time.")

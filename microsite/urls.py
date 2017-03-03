@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.conf import settings
+from django.contrib import admin
 from micro_blog.views import contact, subscribe
 import microsite_front
 from pages.views import site_page
@@ -14,6 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 urlpatterns = i18n_patterns(
     # url(r'^i18n/', include('django.conf.urls.i18n')),
     url(_(r'^$'), index),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'_static/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_static/'}),
     url(r'_sources/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_sources/'}),
     url(r'^books/(?P<path>.*)$', books),
@@ -26,7 +28,7 @@ urlpatterns = i18n_patterns(
     url(r'^open-source-softwares/$', oss),
     url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
-    url(_(r'^portal/'), include('micro_admin.urls', namespace='micro_admin')),
+    url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(_(r'^blog/'), include('micro_blog.urls', namespace='micro_blog')),
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^sitemap/$', html_sitemap),

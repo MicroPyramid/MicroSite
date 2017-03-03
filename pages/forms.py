@@ -4,6 +4,8 @@ from micro_blog.models import Subscribers, Category
 
 
 class PageForm(forms.ModelForm):
+    content = forms.CharField(required=False)
+    parent = forms.CharField(required=False)
 
     class Meta:
         model = Page
