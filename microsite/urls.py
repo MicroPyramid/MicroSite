@@ -14,13 +14,9 @@ from solid_i18n.urls import solid_i18n_patterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-]
-
-urlpatterns += i18n_patterns(
-    url(_(r'^$'), index),
-    # url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'_static/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_static/'}),
     url(r'_sources/(?P<path>.*)$', serve, {'document_root': settings.BASE_DIR + '/books/templates/html/_sources/'}),
+    url(_(r'^$'), index),
     url(r'^books/(?P<path>.*)$', books),
     url(r'^tools/$', tools, name='tools'),
     url(r'^tools/url-checker/$', url_checker_tool, name='url_checker_tool'),
@@ -35,12 +31,17 @@ urlpatterns += i18n_patterns(
     url(_(r'^blog/'), include('micro_blog.urls', namespace='micro_blog')),
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^sitemap/$', html_sitemap),
-    url(_(r'^(?P<slug>[-\w]+)/$'), site_page),
     url(r'^facebook.rss$', facebook_rss),
     url(r'^rss.xml$', rss),
     url(r'^blog.rss$', blog_rss),
     url(r'^sitemap.xml$', sitemap),
     url(r'^search/autocomplete/$', autocomplete)
+
+]
+
+urlpatterns += i18n_patterns(
+    # url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(_(r'^(?P<slug>[-\w]+)/$'), site_page),
 )
 
 

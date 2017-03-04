@@ -299,6 +299,7 @@ def site_page(request, slug):
     #     return render(request, 'site/pages/' + slug + '.html')
     # return render(request, '404.html', status=404)
     language_code = request.LANGUAGE_CODE
+    print (language_code)
     pages = Page.objects.filter(slug=slug, country__code=language_code)
     if not pages:
         pages = Page.objects.filter(slug=slug, is_default=True)
