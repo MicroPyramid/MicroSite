@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.middleware.locale import LocaleMiddleware as DjangoLocaleMiddleware
 from django.utils import translation
 from django.utils.cache import patch_vary_headers
+from micro_blog.models import Country
 
 
 class RequestSessionMiddleware(object):
@@ -39,6 +40,16 @@ language_code_prefix_re = re.compile(r'^/([\w-]+)(/|$)')
 class LocaleMiddleware(DjangoLocaleMiddleware):
 
     def process_request(self, request):
+        countries = []
+        for each in Country.objects.all():
+            each_list = []
+            each_list.append(each.code)
+            each_list.append(each.name)
+            countries.append(tuple(each_list))
+        print (tuple(countries))
+        settings.LANGUAGES = tuple(countries)
+        request.languages = tuple(countries)
+        print (settings.LANGUAGES)
         language_code = self.get_language_from_path(request.path_info)
 
         if not language_code:

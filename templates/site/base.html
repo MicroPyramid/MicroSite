@@ -396,10 +396,9 @@
     </div>
     <div id="version-switcher">
   <ul id="doc-languages" class="language-switcher">
-{% get_available_languages as languages %}
 {% get_current_language as LANGUAGE_CODE %}
 
-{% for lang_code, lang_name in languages %}
+{% for lang_code, lang_name in request.languages %}
   <li class="other {% ifequal lang_code LANGUAGE_CODE %}current{% endifequal %}">
         {% get_url_with_kwargs request as url_with_kwargs %}
         <a href="/{{ lang_code }}{{url_with_kwargs}}">{{ lang_name }}</a>
