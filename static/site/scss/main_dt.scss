@@ -4998,6 +4998,9 @@ p a{
     pointer-events: auto;
     list-style: none;
     display: inline;
+    a{
+      color:white;
+    }
 }
 #doc-languages li#language_current:hover + #doc-languages li.other {
   display: block;
@@ -5007,5 +5010,9 @@ p a{
   background: #F1FFF7;
   padding: 8px 15px;
   border: 1px solid #CFE3DC;
-  border-radius: 4px
+  border-radius: 4px;
+  a{
+    color: black;
+  }
+  
 }

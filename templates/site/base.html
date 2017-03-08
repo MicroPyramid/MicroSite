@@ -316,7 +316,7 @@
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                <li>{% if menu.url|slugify != 'none' %}<a href="{% if request.session.country %}/{{request.session.country}}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
                 </li>
                 {% endloop %}
@@ -383,6 +383,22 @@
                       <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
                     </div>
                   </div>
+    <div id="version-switcher">
+        <p><b>Countries</b></p>
+        {% get_countries as countries %}
+          <ul id="doc-languages" class="language-switcher">
+
+        {% for country in countries %}
+          <li class="other {% if request.session.country == country.code %}current{% endif %}">
+                <a href="#" class="set_country" data-value="{{ country.code }}">{{ country.name }}</a>
+          </li>
+        {% endfor %}
+          </ul>
+          <form method="post" action="{% url 'set_country' %}" class="hide" id="country_set_form">
+              <input type="hidden" name="country" id="country_input">
+          </form>
+    </div>
+
                 </div>
               </div>
             </div>
@@ -394,20 +410,6 @@
       </div>
       <!-- /scroller -->
     </div>
-    <div id="version-switcher">
-  <ul id="doc-languages" class="language-switcher">
-{% get_current_language as LANGUAGE_CODE %}
-
-{% for lang_code, lang_name in request.languages %}
-  <li class="other {% ifequal lang_code LANGUAGE_CODE %}current{% endifequal %}">
-        {% get_url_with_kwargs request as url_with_kwargs %}
-        <a href="/{{ lang_code }}{{url_with_kwargs}}">{{ lang_name }}</a>
-  </li>
-
-{% endfor %}
-
-  </ul>
-</div>
     <!-- /pusher -->
     <!--/ push menu -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -454,6 +456,12 @@
           }
       })
       });
+      $(".set_country").click(function(e) {
+          e.preventDefault();
+          $("#country_input").val($(this).attr('data-value'));
+          $("#country_set_form").submit();
+
+      })
     </script>
     {% block extra-js %}
     {% endblock %}

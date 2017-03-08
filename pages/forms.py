@@ -4,12 +4,16 @@ from micro_blog.models import Subscribers, Category
 
 
 class PageForm(forms.ModelForm):
-    # parent = forms.CharField(required=False)
-    country = forms.CharField(required=False)
 
     class Meta:
         model = Page
         exclude = ('category',)
+
+    def __init__(self, *args, **kwargs):
+        super(PageForm, self).__init__(*args, **kwargs)
+
+    def clean_is_default(self):
+        pass
 
     def save(self, commit=True):
         instance = super(PageForm, self).save(commit=False)
@@ -20,12 +24,11 @@ class PageForm(forms.ModelForm):
 
 
 class PageNewForm(forms.ModelForm):
-    content = forms.CharField(required=False)
-    # parent = forms.CharField(required=False)
 
     class Meta:
         model = Page
         exclude = ('category',)
+
 
 
 class MenuForm(forms.ModelForm):

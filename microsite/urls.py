@@ -3,12 +3,12 @@ from django.conf import settings
 from django.contrib import admin
 from micro_blog.views import contact, subscribe
 import microsite_front
-from pages.views import site_page
+from pages.views import site_page, set_country
 from microsite_front.xml import rss, blog_rss, sitemap, facebook_rss
 from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books, oss
 from search.views import autocomplete
 from django.views.static import serve
-from django.conf.urls.i18n import i18n_patterns
+from .country_urls import country_patterns
 from django.utils.translation import ugettext_lazy as _
 from solid_i18n.urls import solid_i18n_patterns
 
@@ -25,7 +25,9 @@ urlpatterns = [
     url(r'^contact-usa/$', contact, name="contact_usa"),
     url(r'^subscribe/$', subscribe),
     url(r'^open-source-softwares/$', oss),
-    url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
+    url(r'^set_country/$', set_country, name="set_country"),
+
+    # url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(_(r'^blog/'), include('micro_blog.urls', namespace='micro_blog')),
@@ -35,13 +37,14 @@ urlpatterns = [
     url(r'^rss.xml$', rss),
     url(r'^blog.rss$', blog_rss),
     url(r'^sitemap.xml$', sitemap),
-    url(r'^search/autocomplete/$', autocomplete)
+    url(r'^search/autocomplete/$', autocomplete),
+    url(r'^(?P<slug>[-\w]+)/$', site_page),
 
 ]
 
-urlpatterns += i18n_patterns(
+urlpatterns += country_patterns(
     # url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(_(r'^(?P<slug>[-\w]+)/$'), site_page),
+    url(r'^(?P<slug>[-\w]+)/$', site_page),
 )
 
 

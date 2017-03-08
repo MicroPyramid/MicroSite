@@ -32,14 +32,14 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'compressor',
     'search',
-    'django_simple_forum',
+    # 'django_simple_forum',
     'simple_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'microsite.middleware.LocaleMiddleware',
+    'microsite.middleware.CountryMiddleware',
     # 'solid_i18n.middleware.SolidLocaleMiddleware',
     # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,6 +93,13 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en'
 
+COUNTRY_CODE = 'en'
+
+COUNTRY_COOKIE_NAME = 'django_country'
+COUNTRY_COOKIE_AGE = None
+COUNTRY_COOKIE_DOMAIN = None
+COUNTRY_COOKIE_PATH = '/'
+
 LOCALE_PATHS = (
     BASE_DIR + '/locale', )
 
@@ -106,6 +113,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_L10N = True
+
+USE_COUNTRY_URL = True
 
 USE_TZ = False
 

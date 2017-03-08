@@ -12,14 +12,7 @@
   {% endblock %}
 
 {% block meta-description %}
-  <meta property="og:title"  content="{{ page.title|capfirst }} - Micropyramid." />
-  
-  <meta property="og:description" content="{{ page.meta_description }} - MicroPyramid." />
-
-  <meta name="description" content="{{ page.meta_description }} - MicroPyramid." />
-
-  <meta name="keywords" content="{{ page.keywords }}" />
-
+  {{ page.meta_data|safe }}
 {% endblock %}
 
 {% block stage %}

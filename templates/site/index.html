@@ -476,20 +476,8 @@
         </div>
       </div>
     </div>
-        <div id="version-switcher">
-  <ul id="doc-languages" class="language-switcher">
-{% get_available_languages as languages %}
-{% get_current_language as LANGUAGE_CODE %}
-{% for lang_code, lang_name in request.languages %}
-  <li class="other {% if LANGUAGE_CODE in lang_code  %}current{% endif %}">
-        {% get_url_with_kwargs request as url_with_kwargs %}
-        <a href="/{{ lang_code }}{{url_with_kwargs}}">{{ lang_name }}</a>
-  </li>
 
-{% endfor %}
-</ul>
-</div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script> {% compress js %} <script src="/static/site/js/jquery.form.js"></script> <script src="/static/site/js/functions.js"></script> <script type="text/javascript" src='/static/site/js/main_dt.js'></script> {% if request.session.design|slugify == 'mobile'|slugify %} <script type="text/javascript" src='/static/site/js/menu.js'></script> {%endif%} <script src="/static/site/js/map.js"></script> <script type="text/javascript">$('.daimond_work').click(function(e){$(this).hover();});$('.description-detail').click(function(e){window.location=$(this).attr('id');});$(document).ready(function(){$('#quote-carousel').carousel({pause:true,interval:7000,});});</script> <script type="text/javascript"></script> {% endcompress %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script> {% compress js %} <script src="/static/site/js/jquery.form.js"></script> <script src="/static/site/js/functions.js"></script> <script type="text/javascript" src='/static/site/js/main_dt.js'></script> {% if request.session.design|slugify == 'mobile'|slugify %} <script type="text/javascript" src='/static/site/js/menu.js'></script> {%endif%} <script src="/static/site/js/map.js"></script> <script type="text/javascript">$('.daimond_work').click(function(e){$(this).hover();});$('.description-detail').click(function(e){window.location=$(this).attr('id');});$(document).ready(function(){$('#quote-carousel').carousel({pause:true,interval:7000,});});</script> <script type="text/javascript">
+    </script> {% endcompress %}
   </body>
 </html>

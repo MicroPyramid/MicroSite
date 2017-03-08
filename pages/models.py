@@ -11,9 +11,7 @@ class Page(models.Model):
     content = models.TextField()
     slug = models.SlugField()
     is_active = models.BooleanField(default=False)
-    meta_title = models.TextField()
-    meta_description = models.TextField()
-    keywords = models.TextField()
+    meta_data = models.TextField()
     category = models.ManyToManyField(Category)
 
     # def save(self, *args, **kwargs):
