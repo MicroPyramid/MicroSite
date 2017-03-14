@@ -19,12 +19,19 @@
 
   {% if current_page|slugify == '1'|slugify %}
   {% else %}
-    <link rel="prev" href="https://micropyramid.com{{ request.path }}?page={{current_page|add:"-1"}}">
+    {% if category %}
+    <link rel="prev" href="https://micropyramid.com/blog/{{slug}}/{{current_page|add:"-1"}}/">
+
+    {% else %}
+    <link rel="prev" href="https://micropyramid.com/blog/{{current_page|add:"-1"}}/">
+    {% endif %}
   {% endif %}
   {% if current_page <= last_page %}
     {% if current_page == last_page %}
+      <link rel="next" href="https://micropyramid.com/blog/{{slug}}/{{current_page| add:"1"}}/">
+
     {% else %}
-      <link rel="next" href="https://micropyramid.com{{ request.path }}?page={{current_page| add:"1"}}">
+      <link rel="next" href="https://micropyramid.com/blog/{{current_page| add:"1"}}/">
     {% endif %}
   {% endif %}
 {% endblock %}

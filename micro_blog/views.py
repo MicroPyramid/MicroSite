@@ -153,7 +153,7 @@ def site_blog_home(request, **kwargs):
     try:
         if int(page) < 0 or int(page) > (no_pages):
             page = 1
-            return HttpResponseRedirect(reverse('micro_blog:site_blog_home'))
+            return HttpResponseRedirect(reverse('site_blog_home'))
         else:
             page = int(page)
     except:
@@ -179,7 +179,7 @@ def blog_article(request, slug):
     blog_post = get_object_or_404(Post, slugs__slug=slug)
     active_slug = blog_post.slug
     if active_slug != slug:
-        return redirect(reverse('micro_blog:blog_article',
+        return redirect(reverse('blog_article',
                                 kwargs={'slug': active_slug})
                         )
     if not blog_post.status == 'P':
@@ -214,11 +214,11 @@ def blog_article(request, slug):
     if 'HTTP_HOST' in request.META.keys():
         try:
             minified_url = google_mini('https://' + request.META['HTTP_HOST'] + reverse(
-                'micro_blog:blog_article', kwargs={'slug': slug}), settings.GGL_URL_API_KEY)
+                'blog_article', kwargs={'slug': slug}), settings.GGL_URL_API_KEY)
         except:
             minified_url = 'https://' + \
                 request.META[
-                    'HTTP_HOST'] + reverse('micro_blog:blog_article', kwargs={'slug': slug})
+                    'HTTP_HOST'] + reverse('blog_article', kwargs={'slug': slug})
     c = {}
     c.update(csrf(request))
     return render(request, 'site/blog/article.html', {'csrf_token': c['csrf_token'], 'related_posts': related_posts,
@@ -308,7 +308,7 @@ def archive_posts(request, year, month):
     try:
         if int(request.GET.get('page')) < 0 or int(request.GET.get('page')) > (no_pages):
             page = 1
-            return HttpResponseRedirect(reverse('micro_blog:archive_posts'), kwargs={'year': blog_posts[0].published_on.year, 'month': blog_posts[0].published_on.month})
+            return HttpResponseRedirect(reverse('archive_posts'), kwargs={'year': blog_posts[0].published_on.year, 'month': blog_posts[0].published_on.month})
         else:
             page = int(request.GET.get('page'))
     except:
@@ -410,7 +410,7 @@ def new_post(request):
                 sg.send(sending_msg)
 
                 # cache._cache.flush_all()
-                return redirect(reverse('micro_blog:admin_post_list'))
+                return redirect(reverse('admin_post_list'))
     else:
         blog_form = BlogpostForm()
         blogslugs_formset = BlogSlugFormSet(instance=Post())
@@ -430,7 +430,7 @@ def edit_blog_post(request, blog_slug):
     active_slug = blog_post.slug
     old_blog_status = blog_post.status
     if active_slug != blog_slug:
-        return redirect(reverse('micro_blog:edit_blog_post',
+        return redirect(reverse('edit_blog_post',
                                 kwargs={'blog_slug': active_slug})
                         )
     if not blog_post.is_editable_by(request.user):
@@ -484,7 +484,7 @@ def edit_blog_post(request, blog_slug):
 
                         blog_post.tags.add(blog_tag)
                 # cache._cache.flush_all()
-                return redirect(reverse('micro_blog:admin_post_list'))
+                return redirect(reverse('admin_post_list'))
     else:
         blog_form = BlogpostForm(instance=blog_post)
         blogslugs_formset = BlogSlugFormSet(instance=blog_post)
