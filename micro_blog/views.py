@@ -134,6 +134,8 @@ def get_prev_after_pages_count(page, no_pages):
 
 def site_blog_home(request, **kwargs):
     page = 1
+    if request.GET.get('page'):
+        return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
     if 'page_num' in kwargs:
         page = int(kwargs['page_num'])
         if page == 1:
@@ -250,6 +252,9 @@ def blog_tag(request, slug):
 def blog_category(request, **kwargs):
     page = 1
     slug = kwargs['slug']
+    if request.GET.get('page'):
+        return redirect(reverse('blog_category', kwargs={'slug': slug, 'page_num': request.GET.get('page')}))
+
     if 'page_num' in kwargs:
         page = int(kwargs['page_num'])
 
