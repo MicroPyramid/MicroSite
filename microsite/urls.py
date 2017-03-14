@@ -3,7 +3,7 @@ from django.conf import settings
 from micro_blog.views import contact, subscribe, site_blog_home, blog_category
 import microsite_front
 from pages.views import site_page
-from microsite_front.xml import rss, blog_rss, sitemap, facebook_rss
+from microsite_front.xml import rss, blog_rss, sitemap_xml, facebook_rss
 from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, sitemap, books, oss
 from search.views import autocomplete
 from django.views.static import serve
@@ -35,6 +35,8 @@ urlpatterns = [
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),
 
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
+    url(r'^sitemap.xml$', sitemap_xml),
+
     url(r'^sitemap/$', sitemap),
     url(r'^sitemap-(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
 
@@ -42,7 +44,6 @@ urlpatterns = [
     url(r'^facebook.rss$', facebook_rss),
     url(r'^rss.xml$', rss),
     url(r'^blog.rss$', blog_rss),
-    url(r'^sitemap.xml$', sitemap),
 
     url(r'^search/autocomplete/$', autocomplete),
 ]
