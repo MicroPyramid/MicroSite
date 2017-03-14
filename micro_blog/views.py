@@ -110,7 +110,35 @@ def change_category_status(request, category_slug):
     return HttpResponseRedirect('/blog/category-list/')
 
 
-def site_blog_home(request):
+def get_prev_after_pages_count(page, no_pages):
+    prev_page = page - 1
+    if prev_page == 1:
+        previous_page = prev_page
+    else:
+        previous_page = prev_page - 1
+    if page == 1:
+        prev_page = page
+        previous_page = page
+
+    if page == no_pages:
+        aft_page = no_pages
+        after_page = no_pages
+    else:
+        aft_page = page + 1
+        if aft_page == no_pages:
+            after_page = no_pages
+        else:
+            after_page = aft_page + 1
+    return prev_page, previous_page, aft_page, after_page
+
+
+def site_blog_home(request, **kwargs):
+    page = 1
+    if 'page_num' in kwargs:
+        page = int(kwargs['page_num'])
+        if page == 1:
+            return redirect(reverse('site_blog_home'))
+
     items_per_page = 10
 
     posts = Post.objects.filter(status='P').order_by(
@@ -121,19 +149,25 @@ def site_blog_home(request):
     )
     no_pages = int(math.ceil(float(posts.count()) / items_per_page))
     try:
-        if int(request.GET.get('page')) < 0 or int(request.GET.get('page')) > (no_pages):
+        if int(page) < 0 or int(page) > (no_pages):
             page = 1
             return HttpResponseRedirect(reverse('micro_blog:site_blog_home'))
         else:
-            page = int(request.GET.get('page'))
+            page = int(page)
     except:
         page = 1
+
     blog_posts = posts[(page - 1) * items_per_page:page * items_per_page]
 
     c = {}
     c.update(csrf(request))
+    prev_page, previous_page, aft_page, after_page = get_prev_after_pages_count(
+    page, no_pages)
+
     return render(request, 'site/blog/index.html', {'current_page': page, 'last_page': no_pages,
-                                                    'posts': blog_posts, 'csrf_token': c['csrf_token']})
+                                                    'posts': blog_posts, 'csrf_token': c['csrf_token'],
+                                                    'prev_page': prev_page, 'previous_page': previous_page,
+                                                    'aft_page': aft_page, 'after_page': after_page})
 
 
 def blog_article(request, slug):
@@ -213,8 +247,15 @@ def blog_tag(request, slug):
     return render(request, 'site/blog/index.html', {'current_page': page, 'tag': tag,
                                                     'last_page': no_pages, 'posts': blog_posts, 'csrf_token': c['csrf_token']})
 
+def blog_category(request, **kwargs):
+    page = 1
+    slug = kwargs['slug']
+    if 'page_num' in kwargs:
+        page = int(kwargs['page_num'])
 
-def blog_category(request, slug):
+        if page == 1:
+            return redirect(reverse('blog_category', kwargs={'slug': slug}))
+
     slug = slug.lower()
     category = get_object_or_404(Category, slug=slug)
     blog_posts = Post.objects.filter(category=category, status="P").order_by(
@@ -227,11 +268,11 @@ def blog_category(request, slug):
     no_pages = int(math.ceil(float(blog_posts.count()) / items_per_page))
 
     try:
-        if int(request.GET.get('page')) < 0 or int(request.GET.get('page')) > (no_pages):
+        if int(page) < 0 or int(page) > (no_pages):
             page = 1
-            return HttpResponseRedirect(reverse('micro_blog:blog_category', kwargs={'slug': slug}))
+            return HttpResponseRedirect(reverse('blog_category', kwargs={'slug': slug}))
         else:
-            page = int(request.GET.get('page'))
+            page = int(page)
     except:
         page = 1
 
@@ -240,8 +281,13 @@ def blog_category(request, slug):
         raise Http404
     c = {}
     c.update(csrf(request))
+    prev_page, previous_page, aft_page, after_page = get_prev_after_pages_count(
+    page, no_pages)
+
     return render(request, 'site/blog/index.html', {'current_page': page, 'category': category, 'last_page': no_pages,
-                                                    'posts': blog_posts, 'csrf_token': c['csrf_token']})
+                                                    'posts': blog_posts, 'csrf_token': c['csrf_token'], 'slug': slug,
+                                                    'prev_page': prev_page, 'previous_page': previous_page,
+                                                    'aft_page': aft_page, 'after_page': after_page})
 
 
 def archive_posts(request, year, month):

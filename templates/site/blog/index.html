@@ -2,20 +2,19 @@
 <!-- {% load cache %} -->
 {% load blog_tags %}
 {% block title %}
-{% if category %}{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid{%else%}{{category}}
-  Django, Python, mongo DB, AWS Technology Blog - MicroPyramid
+{% if current_page|slugify == '1'|slugify %}{% else %} Page {{ current_page }} - {% endif %}{% if category %}{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid{%else%}Django, Python, mongo DB, AWS Technology Blog - MicroPyramid
 {%endif%}
 {% endblock %}
 {% block meta-description %}
 {% if category %}
- <meta property="og:title"  content="{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid" />
+ <meta property="og:title"  content="{% if current_page|slugify == '1'|slugify %}{% else %} Page {{ current_page }} - {% endif %}{{category.name}} Blog | Best Coding Practices | {{category.name}} Updates - MicroPyramid" />
 {%else%}
- <meta property="og:title"  content="Django, Python, mongo DB, AWS Technology Blog - MicroPyramid" />
+ <meta property="og:title"  content="{% if current_page|slugify == '1'|slugify %}{% else %} Page {{ current_page }} - {% endif %}Django, Python, mongo DB, AWS Technology Blog - MicroPyramid" />
 
 {%endif%}
 
-<meta name="description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more. - MicroPyramid Blog"/>
-<meta property="og:description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more. - MicroPyramid Blog" />
+<meta name="description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more{% if current_page|slugify == '1'|slugify %}.{% else %} from Page {{ current_page }}{% endif %} - MicroPyramid Blog"/>
+<meta property="og:description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more{% if current_page|slugify == '1'|slugify %}.{% else %} from Page {{ current_page }}{% endif %} - MicroPyramid Blog" />
 
 
   {% if current_page|slugify == '1'|slugify %}
@@ -48,7 +47,7 @@
         </li>
         {% if category %}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="{% url 'micro_blog:blog_category' category.slug %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{category.name}}</span></a>
+          <a href="/blog/category/{{ category.slug }}/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{category.name}}</span></a>
         </li>
         {% endif %}
       </ul>
@@ -107,21 +106,39 @@
             <div class="pagination_mp">
               {% get_page current_page last_page as pages %}
               <nav>
+                {% if category %}
                 <ul class="pagination">
                   {% if current_page != 1 %}
-                  <li class="prev"><a href="?page={{previous_page}}"><i class="fa fa-angle-double-left"></i></a></li>
-                  <li class="prev"><a href="?page={{prev_page}}"><i class="fa fa-angle-left"></i></a></li>
-                  <li><a href="?page=1">first</a></li>
+                  <li class="prev"><a href="{% url 'blog_category' slug=slug page_num=previous_page %}"><i class="fa fa-angle-double-left"></i></a></li>
+                  <li class="prev"><a href="{% url 'blog_category' slug=slug page_num=prev_page %}"><i class="fa fa-angle-left"></i></a></li>
+                  <li><a href="{% url 'blog_category' slug=slug page_num=1 %}">first</a></li>
                   {% endif %}
                   {% for s in pages %}
-                  <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="?page={{s}}">{{s}}</a></li>
+                  <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="{% url 'blog_category' slug=slug page_num=s %}">{{s}}</a></li>
                   {% endfor %}
                   {% if current_page != last_page %}
-                  <li><a href="?page={{last_page}}">last</a></li>
-                  <li><a href="?page={{ aft_page }}"><i class="fa fa-angle-right pagination-next"></i></a></li>
-                  <li><a href="?page={{ after_page }}"><i class="fa fa-angle-double-right"></i></a></li>
+                  <li><a href="{% url 'blog_category' slug=slug page_num=last_page %}">last</a></li>
+                  <li><a href="{% url 'blog_category' slug=slug page_num=aft_page %}"><i class="fa fa-angle-right pagination-next"></i></a></li>
+                  <li><a href="{% url 'blog_category' slug=slug page_num=after_page %}"><i class="fa fa-angle-double-right"></i></a></li>
                   {% endif %}
                 </ul>
+                {% else %}
+                <ul class="pagination">
+                  {% if current_page != 1 %}
+                  <li class="prev"><a href="{% url "site_blog_home" page_num=previous_page %}"><i class="fa fa-angle-double-left"></i></a></li>
+                  <li class="prev"><a href="{% url "site_blog_home" page_num=prev_page %}"><i class="fa fa-angle-left"></i></a></li>
+                  <li><a href="{% url "site_blog_home" page_num=1 %}">first</a></li>
+                  {% endif %}
+                  {% for s in pages %}
+                  <li {% ifequal s current_page %} class="active" {% endifequal %}><a href="{% url "site_blog_home" page_num=s %}">{{s}}</a></li>
+                  {% endfor %}
+                  {% if current_page != last_page %}
+                  <li><a href="{% url "site_blog_home" page_num=last_page %}">last</a></li>
+                  <li><a href="{% url "site_blog_home" page_num=aft_page %}"><i class="fa fa-angle-right pagination-next"></i></a></li>
+                  <li><a href="{% url "site_blog_home" page_num=after_page %}"><i class="fa fa-angle-double-right"></i></a></li>
+                  {% endif %}
+                </ul>
+                {% endif %}
               </nav>
             </div>
         <!--/ paginantion -->

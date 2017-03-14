@@ -1,10 +1,10 @@
 {% extends 'site/base.html' %}
 {% block title %}
-    Sitemap | {{ block.super }}
+    Sitemap {{sitemap_links.number}} {{ block.super }}
 {% endblock %}
 
 {% block meta-description %}
-  <meta name="description" content="Sitemap - MicroPyramid." />
+  <meta name="description" content="Micropyramid sitemap {{sitemap_links.number}} to find all the services and blog posts of python, Django, Angular Js, Django-Oscar, Aws and many more." />
 {% endblock %}
 
 {% block stage %}
@@ -67,7 +67,7 @@
 {% for page in sitemap_links.paginator.page_range %}
   {% if page == sitemap_links.number %}
   {% else %}
-    <li class="sitemap-parent"><a href="/sitemap?page={{ page }}">Site map {{ page }}</a></li>
+    <li class="sitemap-parent"><a href="/sitemap-{{ page }}/">Site map {{ page }}</a></li>
   {% endif %}
 {% endfor %}
 

@@ -1,10 +1,10 @@
 from django.conf.urls import include, url
 from django.conf import settings
-from micro_blog.views import contact, subscribe
+from micro_blog.views import contact, subscribe, site_blog_home, blog_category
 import microsite_front
 from pages.views import site_page
 from microsite_front.xml import rss, blog_rss, sitemap, facebook_rss
-from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, html_sitemap, books, oss
+from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, sitemap, books, oss
 from search.views import autocomplete
 from django.views.static import serve
 
@@ -24,14 +24,26 @@ urlpatterns = [
     url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
+
+    url(r'^blog/category/(?P<slug>[-\w]+)/$', blog_category, name="blog_category"),
+    url(r'^blog/category/(?P<slug>[-\w]+)/(?P<page_num>[-\w]+)/$', blog_category, name="blog_category"),
+
+    url(r'^blog/(?P<page_num>[-\0-9]+)/', site_blog_home, name="site_blog_home"),
+    url(r'^blog/', site_blog_home, name="site_blog_home"),
+
+
     url(r'^blog/', include('micro_blog.urls', namespace='micro_blog')),
+
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
-    url(r'^sitemap/$', html_sitemap),
+    url(r'^sitemap/$', sitemap),
+    url(r'^sitemap-(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
+
     url(r'^(?P<slug>[-\w]+)/$', site_page),
     url(r'^facebook.rss$', facebook_rss),
     url(r'^rss.xml$', rss),
     url(r'^blog.rss$', blog_rss),
     url(r'^sitemap.xml$', sitemap),
+
     url(r'^search/autocomplete/$', autocomplete),
 ]
 
