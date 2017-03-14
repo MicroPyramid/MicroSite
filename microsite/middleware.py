@@ -1,5 +1,10 @@
-from django.conf import settings
 import re
+
+from django.conf import settings
+from django.http import HttpResponseRedirect
+from .country_urls import is_country_prefix_patterns_used
+from .utils import get_country_from_path, get_country_from_request, set_country_from_thread
+from micro_blog.models import Country
 
 class RequestSessionMiddleware(object):
     def process_request(self, request):
@@ -25,3 +30,29 @@ class DetectMobileBrowser():
                     request.session['design'] = 'desktop'
         else:
             request.session['design'] = ''
+
+
+class CountryMiddleware(object):
+
+    response_redirect_class = HttpResponseRedirect
+
+    @property
+    def use_redirects(self):
+        return False
+
+    def process_request(self, request):
+        urlconf = getattr(request, 'urlconf', settings.ROOT_URLCONF)
+        country_patterns_used, prefixed_default_country = is_country_prefix_patterns_used(urlconf)
+        country = get_country_from_request(request, check_path=country_patterns_used)
+        country_from_path = get_country_from_path(request.path_info)
+        if not country_from_path and country_patterns_used and not prefixed_default_country:
+            country = settings.COUNTRY_CODE
+        set_country_from_thread(country)
+        print (country)
+        if Country.objects.filter(code=country):
+            request.COUNTRY_CODE = country
+            request.session['country'] = country
+        else:
+            request.COUNTRY_CODE = settings.COUNTRY_CODE
+            request.session['country'] = settings.COUNTRY_CODE
+        print (request.session['country'])

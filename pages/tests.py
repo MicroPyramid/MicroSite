@@ -14,9 +14,7 @@ class pages_forms_test(TestCase):
                 'title': 'Page',
                 'content': 'page_content',
                 'slug' : 'slug',
-                'meta_title' : 'meta_title',
-                'meta_description': 'description',
-                'keywords': 'keywords'
+                'meta_data' : 'meta_title',
             })
         self.assertTrue(form.is_valid())
 
@@ -35,10 +33,9 @@ class pages_models_test(TestCase):
             title="simple page",
             content="simple page content",
             slug="page",
-            meta_title="meta_title",
-            meta_description="description",
-            keywords="keywords"):
-        return Page.objects.create(title=title, content=content, slug=slug, meta_title=meta_title, meta_description=meta_description, keywords=keywords)
+            meta_data="meta_title",
+            ):
+        return Page.objects.create(title=title, content=content, slug=slug, meta_data=meta_data)
 
     def test_whatever_creation(self):
         w = self.create_page()
@@ -136,9 +133,7 @@ class pages_views_test(TestCase):
                 'title': 'Page2',
                 'content': 'page_content',
                 'slug' : 'slug',
-                'meta_title' : 'meta_title',
-                'meta_description': 'meta_description',
-                'keywords': 'keywords'
+                'meta_data' : 'meta_title',
             })
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('Page created successfully') in response.content.decode('utf8'))
@@ -147,8 +142,7 @@ class pages_views_test(TestCase):
             '/portal/content/page/new/',
             {
                 'content': 'page_content',
-                'meta_description': 'meta_description',
-                'keywords': 'keywords'
+                'meta_data': 'meta_description',
             })
         self.assertEqual(response.status_code, 200)
         self.assertFalse(str('Page created successfully') in response.content.decode('utf8'))
@@ -202,9 +196,7 @@ class pages_views_test(TestCase):
                 'title': 'Page',
                 'content': 'page_content',
                 'slug' : 'page',
-                'meta_title' : 'meta_title',
-                'meta_description': 'meta_description',
-                'keywords': 'keywords'
+                'meta_data' : 'meta_title',
             })
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('successfully') in response.content.decode('utf8'))
@@ -213,8 +205,7 @@ class pages_views_test(TestCase):
             '/portal/content/page/edit/'+str(self.page.id)+'/',
             {
                 'content': 'page_content',
-                'meta_description': 'meta_description',
-                'keywords': 'keywords'
+                'meta_data': 'meta_description',
             })
         self.assertEqual(response.status_code, 200)
         self.assertFalse(str('successfully') in response.content.decode('utf8'))
@@ -278,7 +269,6 @@ class pages_views_test(TestCase):
 
         response = self.client.get('/'+str(self.page.slug)+'/')
         self.assertEqual(response.status_code, 200)
-        
 
         response = self.client.get(
             '/portal/content/page/delete/'+str(self.page.id)+'/')

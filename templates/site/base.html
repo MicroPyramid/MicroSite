@@ -1,5 +1,9 @@
 {% load recurse %}
 {% load menu %}
+{% load blog_tags %}
+{% load i18n %}
+{% load l10n %}
+
 <!DOCTYPE html>
 <html lang="en" class="no-js" prefix="og: http://ogp.me/ns# fb:">
   <head>
@@ -7,10 +11,12 @@
     <meta property="fb:pages" content="194798730671519" />
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    {% block page_title %}
     <title>
       {% block title %} - MicroPyramid
       {% endblock %}
     </title>
+    {% endblock %}
     {% block meta-description %}
 
     <meta property="og:type" content="article" />
@@ -208,7 +214,7 @@
             <!-- menu -->
             <div id='base_menu' class='fixed_menu'>
               <span class="logo">
-                <a href="/">
+                <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">
                   <!-- svg logo -->
                   <span class="logo_mp">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -308,11 +314,24 @@
                   <!--/ svg logo -->
                 </a>
               </span>
+              {% block country_urls %}
+              <div class="col-md-1">
+
+              <form name="country_set_form" id="country_set_form" method="post" action="{% url 'set_country' %}" >
+          <select class="set_country form-control" id="set_country" name="country">
+{% get_countries as countries %}
+        {% for country in countries %}
+          <option value="{{ country.code }}" {% if request.session.country == country.code %}selected{% endif %}>{{ country.name }}</option>
+        {% endfor %}
+        </select>
+        </form>
+              </div>
+              {% endblock %}
               {% get_menus as menu_list %}
               {% recurse menu.active_children with menu_list as menu %}
               <ul>
                 {% loop %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.url == 'contact-us' or menu.url == 'contact-india' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                   {% child %}
                 </li>
                 {% endloop %}
@@ -329,11 +348,11 @@
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
                   {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
-                    <li><a href="/">Home</a></li>
+                    <li><a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
                     <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
                     <li><a href="/subscribe/">Subscribe</a></li>
                     {% for menu in menu_list|slice:"0:4" %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.url == 'contact-us' or menu.url == 'contact-india' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                   </ul>
                 </div>
@@ -341,7 +360,7 @@
                   {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
                     {% for menu in menu_list|slice:"4:10" %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.url == 'contact-us' or menu.url == 'contact-india' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                   </ul>
                 </div>
@@ -379,6 +398,13 @@
                       <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
                     </div>
                   </div>
+    <div id="version-switcher">
+          </ul>
+          <form method="post" action="{% url 'set_country' %}" class="hide" id="country_set_form">
+              <input type="hidden" name="country" id="country_input">
+          </form>
+    </div>
+
                 </div>
               </div>
             </div>
@@ -436,6 +462,12 @@
           }
       })
       });
+      $(".set_country").change(function(e) {
+          e.preventDefault();
+          $("#country_set_form").submit();
+
+      })
+
     </script>
     {% block extra-js %}
     {% endblock %}

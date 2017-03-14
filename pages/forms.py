@@ -9,6 +9,27 @@ class PageForm(forms.ModelForm):
         model = Page
         exclude = ('category',)
 
+    def __init__(self, *args, **kwargs):
+        super(PageForm, self).__init__(*args, **kwargs)
+
+    def clean_is_default(self):
+        pass
+
+    def save(self, commit=True):
+        instance = super(PageForm, self).save(commit=False)
+        instance.country_id = self.cleaned_data['country']
+        if commit:
+            instance.save()
+        return instance
+
+
+class PageNewForm(forms.ModelForm):
+
+    class Meta:
+        model = Page
+        exclude = ('category',)
+
+
 
 class MenuForm(forms.ModelForm):
 

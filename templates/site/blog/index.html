@@ -41,7 +41,7 @@
     <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
       <ul>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+          <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
         </li>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a href="/blog/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Blog</span></a>
@@ -91,7 +91,7 @@
               </div>
             </div>
             <div class="blog-right">
-              <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
+              <span class="blog-title" itemprop="headline"><a href="{% if request.LANGUAGE_CODE %}/{{request.LANGUAGE_CODE}}{% endif %}/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
               {% if post.excerpt %}
                 <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
               {% else %}

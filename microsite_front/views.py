@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from micro_admin.models import career
 import requests
@@ -15,7 +15,7 @@ import yaml
 import os
 from itertools import chain
 from django.contrib.auth.decorators import login_required
-
+from micro_blog.models import Country
 
 def index(request):
     return render(request, 'site/index.html', {

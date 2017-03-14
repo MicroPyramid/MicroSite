@@ -1,8 +1,8 @@
 {% extends 'site/base.html' %}
 {% load recurse %}
 {% load menu %}
-{% block title %}
-  {{ page.meta_title }}{{ block.super }}
+{% load blog_tags %}
+{% block page_title %}
 {% endblock %}
   {% block extra-js %}
     {% if page.title|slugify  == 'web-design'|slugify %}
@@ -12,13 +12,7 @@
   {% endblock %}
 
 {% block meta-description %}
-  <meta property="og:title"  content="{{ page.title|capfirst }} - Micropyramid." />
-  
-  <meta property="og:description" content="{{ page.meta_description }} - MicroPyramid." />
-
-  <meta name="description" content="{{ page.meta_description }} - MicroPyramid." />
-
-  <meta name="keywords" content="{{ page.keywords }}" />
+  {{ page.meta_data|safe  }}
 
 {% endblock %}
 
@@ -31,13 +25,13 @@
       <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
         <ul>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+            <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
           </li>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Services</span></a>
           </li>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'></span></a>
+            <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{page.title|capfirst}}</span></a>
           </li>
       </div>
       <!-- breadcrumb ends here -->

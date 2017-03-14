@@ -1,9 +1,12 @@
 {% extends 'site/base.html' %}
+{% block country_urls %}
+{% endblock %}
+
 {% block title %}
-{% if request.get_full_path == "/contact-usa/" %}Contact - USA{% else %}Contact - India{% endif %} | MicroPyramid
+{% if request.get_full_path == "/contact-usa/" %}Python | Django web development Company USA - Micropyramid{% else %}Python | Django web development Company India - Micropyramid{% endif %} | MicroPyramid
 {% endblock %}
 {% block meta-description %}
-<meta name="description" content="Contact Us - MicroPyramid." />
+<meta name="description" content="Python and Django web development company {% if request.get_full_path == "/contact-usa/" %}USA{% else %}India{% endif %}. You can speak with our experts for developing projects on python, Django, Angular Js, Aws, React Js, Django-oscar, Django rest framework" />
 {% endblock %}
 {% block stage %}
 <div id='container_wrapper'>

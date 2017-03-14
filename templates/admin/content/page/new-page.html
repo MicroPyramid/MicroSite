@@ -15,16 +15,18 @@
         <input type="Text" class="form-control" id="slug" name="slug" >
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">Meta Title</label>
-        <textarea class="form-control" id="meta_title" name="meta_title" ></textarea>
+        <label for="exampleInputEmail1">Meta Data</label>
+        <textarea class="form-control" id="textareametadata" name="textareametadata" rows="10"></textarea>
+        <input type="hidden" name="meta_data" id="meta_data">
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">Meta Description</label>
-        <textarea class="form-control" rows="4" id="meta_description" name="meta_description" ></textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Keywords</label>
-        <textarea class="form-control" rows="4" id="keywords" name="keywords"></textarea>
+        <label for="exampleInputEmail1">Country</label>
+        <select class="input select2" placeholder="country" name="country" id="country">
+          <option value="">Select A Country</option>
+          {% for country in countries %}
+          <option value="{{country.id}}" class="country_id">{{country.name}}</option>
+          {% endfor %}
+        </select>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Category</label>
@@ -47,6 +49,9 @@
       <div class="draft-box">
         <input type="checkbox" name="is_active" value="true"> <label>Active</label>
       </div>
+      <div class="draft-box">
+        <input type="checkbox" name="is_default" value="true"> <label>Default</label>
+      </div>
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save" class="save" id="search_lessons">
       </div>
@@ -58,6 +63,7 @@
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
   var editor = CKEDITOR.replace('textareacontents');
+  var editor1 = CKEDITOR.replace('textareametadata');
 </script>
 <script type="text/javascript">
   $ = jQuery;
@@ -66,6 +72,7 @@
     //var htmldata = CKEDITOR.instances.Editor.document.getBody().getHtml();
     console.log(CKEDITOR.instances.textareacontents.getData());
     $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+    $("input[name='meta_data']").val(CKEDITOR.instances.textareametadata.getData());
     $.post(".", $("form#pageform").serialize(), function(msg) {
       if (msg.error) {
         $('p.failure').remove();

@@ -1,12 +1,14 @@
 import os
+from django.utils.translation import ugettext_lazy as _
 import djcelery
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
@@ -30,13 +32,16 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'compressor',
     'search',
-    'django_simple_forum',
+    # 'django_simple_forum',
     'simple_pagination',
 )
 
 MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'microsite.middleware.CountryMiddleware',
+    # 'solid_i18n.middleware.SolidLocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -47,9 +52,13 @@ MIDDLEWARE_CLASSES = (
 
     'microsite.middleware.RequestSessionMiddleware',
     'microsite.middleware.DetectMobileBrowser',
-    # 'django.middleware.cache.FetchFromCacheMiddleware'
+    'django.middleware.cache.FetchFromCacheMiddleware'
 )
 
+# SOLID_I18N_USE_REDIRECTS = True
+# SOLID_I18N_HANDLE_DEFAULT_PREFIX = True
+# SOLID_I18N_DEFAULT_PREFIX_REDIRECT = True
+# SOLID_I18N_PREFIX_STRICT = True
 
 HTML_MINIFY = False
 
@@ -82,13 +91,30 @@ DATABASES = {
 }
 
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+COUNTRY_CODE = 'us'
+
+COUNTRY_COOKIE_NAME = 'django_country'
+COUNTRY_COOKIE_AGE = None
+COUNTRY_COOKIE_DOMAIN = None
+COUNTRY_COOKIE_PATH = '/'
+
+LOCALE_PATHS = (
+    BASE_DIR + '/locale', )
+
+LANGUAGES = (
+    ('en', _('India')),
+    ('us', _('US')),
+)
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
+
+USE_COUNTRY_URL = True
 
 USE_TZ = False
 
@@ -289,7 +315,14 @@ if SENTRY_ENABLED:
             },
         }
 
+# MODELTRANSLATION_DEFAULT_LANGUAGE='en'
+
+# LOCALE_PATHS = (
+#     os.path.join(BASE_DIR, 'locale'),
+# )
+
 try:
     from microsite.settings_local import *  # noqa
 except ImportError as e:
     pass
+
