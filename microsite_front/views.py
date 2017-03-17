@@ -134,8 +134,10 @@ def s3_objects_set_metadata(request):
     return render(request, 'site/tools/s3_objects_set_metadata.html')
 
 
-def html_sitemap(request):
-    page = request.GET.get('page')
+def sitemap(request, **kwargs):
+    page = 1
+    if kwargs:
+        page = int(kwargs['page_num'])
     categories = Category.objects.all()
     blog_posts = Post.objects.filter(status='P').order_by('-published_on')
     services = Page.objects.filter(is_active='True')

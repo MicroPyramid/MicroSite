@@ -5,10 +5,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Edit Blog Post</h3>
-      <a class="preview pull-right" title="preview" href="{% url 'micro_blog:blog_article' slug=blog_post.slug %}" target="_blank">Blog Preview</a>
+      <a class="preview pull-right" title="preview" href="{% url 'blog_article' slug=blog_post.slug %}" target="_blank">Blog Preview</a>
   </div>
   <div class="panel-body">
-    <form action="{% url 'micro_blog:edit_blog_post' blog_slug=blog_post.slug %}" method="POST" id="blogform" enctype="multipart/form-data">
+    <form action="{% url 'edit_blog_post' blog_slug=blog_post.slug %}" method="POST" id="blogform" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
@@ -222,7 +222,7 @@ window.setInterval(function(){
 
   $ = jQuery;
   $('#cancel_blog_post').click(function(e){
-    window.location = "{% url 'micro_blog:admin_post_list' %}";
+    window.location = "{% url 'admin_post_list' %}";
   });
   $('#save_blog_post').click(function(e){
     e.preventDefault();

@@ -453,12 +453,13 @@
             <div class="row" id="get-in-touch">
               <div class="heading"> <span>get in</span> <span class='green'>touch</span></div>
               <div class="row contact-form">
-                <form id="contactform" name="contactform" method="post">
+                <form id="contactform" name="contactform" method="post" action="{% url "contact_india" %}">
                   {% csrf_token %}
                   <div class="row marl first-input-row">
-                    <div class="col-md-4 col-sm-4 input-blk"> <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name"></div>
-                    <div class="col-md-4 col-sm-4 input-blk"> <input type="email" class="form-control" placeholder="Email" id ="email" name="email"></div>
-                    <div class="col-md-4 col-sm-4 input-blk"> <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="email" class="form-control" placeholder="Email" id ="email" name="email"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="tel" class="form-control" placeholder="Country" id="country" name="country"></div>
                   </div>
                   <div class="row marl second-input-row">
                     <div class="col-md-12 input-blk"><textarea class="form-control form-control1" rows="3" placeholder="Comments" id="message" name="message"></textarea></div>

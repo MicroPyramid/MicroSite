@@ -6,8 +6,8 @@
   <div class="panel-heading">
     <h3 class="panel-title">Blog Category Viewer</h3>
     <span>
-      <a href="{% url 'micro_blog:new_blog_category' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Category </button></a>
-      <a href="{% url 'micro_blog:new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
+      <a href="{% url 'new_blog_category' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Category </button></a>
+      <a href="{% url 'new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
     </span>
   </div>
   <div class="panel-body">
@@ -30,7 +30,7 @@
             <td class="txt_center">{{ category.id }}</td>
             <td>{{ category.name }}({{category.no_of_blog_posts}})</td>
             <td class="sec-col"><a href="/blog/category/{{category.slug}}/" target="_blank">https://micropyramid.com/blog/category/{{category.slug}}/</a></td>
-            <td class="txt_center"><a href="{% url 'micro_blog:change_category_status' category_slug=category.slug  %}" class="on_off">
+            <td class="txt_center"><a href="{% url 'change_category_status' category_slug=category.slug  %}" class="on_off">
               {% if category.is_display %}
               <i class="fa fa-toggle-on"></i> Active
               {% else %}
@@ -40,8 +40,8 @@
             </td>
             {% if request.user.is_site_admin %}
             <td class="txt_center">
-              <a href="{% url 'micro_blog:edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
-              <a href="{% url 'micro_blog:delete_blog_category' category_slug=category.slug %}" class="delete_anchor delete_post "><i class="fa fa-trash-o"></i></a>
+              <a href="{% url 'edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'delete_blog_category' category_slug=category.slug %}" class="delete_anchor delete_post "><i class="fa fa-trash-o"></i></a>
             </td>
            {% endif %}
           </tr>
