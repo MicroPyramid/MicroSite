@@ -7,8 +7,8 @@
       <span class='active_user'><i class="fa fa-square" style="color:#f8cb00;"></i>Drafted</span>
       <span class='active_user'><i class="fa fa-square"></i>Published</span>
       <span class='inactive_user'><i class="fa fa-square"></i>Rejected</span>
-      <a href="{% url 'micro_blog:new_blog_category' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Category </button></a>
-      <a href="{% url 'micro_blog:new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
+      <a href="{% url 'new_blog_category' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Category </button></a>
+      <a href="{% url 'new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
     </span>
   </div>
   <div class="panel-body">
@@ -31,7 +31,7 @@
             </td>
             <td class="txt_center">
               {% if post|is_editable_by:request.user %}
-              <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.slug%}" class="edit_post edit_anchor" value="{{ post.slug }}"><i class="fa fa-pencil-square-o"></i>Edit</a>{% endif %}
+              <a href="{% url 'edit_blog_post' blog_slug=post.slug%}" class="edit_post edit_anchor" value="{{ post.slug }}"><i class="fa fa-pencil-square-o"></i>Edit</a>{% endif %}
             </td>
             <p class="active"></p>
           </tr>

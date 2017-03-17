@@ -6,7 +6,7 @@ from micro_blog.models import Category, Post
 import math
 
 
-def sitemap(request):
+def sitemap_xml(request):
 
     # pages, blog categories, blog posts
 
@@ -14,7 +14,7 @@ def sitemap(request):
              <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
-    menus = Menu.objects.filter(status="on")
+    menus = Menu.objects.filter(status="on").exclude(title='Python Development')
     for menu in menus:
         xml = xml + '<url><loc>' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 

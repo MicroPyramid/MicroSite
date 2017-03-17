@@ -7,7 +7,7 @@
   <div class="panel-body">
     <fieldset>
       <legend>New Blog Category</legend>
-      <form action="{% url 'micro_blog:new_blog_category'%}" method="POST" id="blogcategoryform">
+      <form action="{% url 'new_blog_category'%}" method="POST" id="blogcategoryform">
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Title</label>
@@ -43,7 +43,7 @@
           $('#' + key).after('<p class="failure">' + msg.response[key] + '</p>');
         }
       } else {
-        window.location = "{% url 'micro_blog:admin_category_list' %}";
+        window.location = "{% url 'admin_category_list' %}";
       }
     }, 'json');
   });
