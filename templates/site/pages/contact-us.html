@@ -3,7 +3,7 @@
 {% endblock %}
 
 {% block title %}
-{% if request.get_full_path == "/contact-usa/" %}Python | Django web development Company USA - Micropyramid{% else %}Python | Django web development Company India - Micropyramid{% endif %} | MicroPyramid
+{% if request.get_full_path == "/contact-usa/" %}Python | Django web development Company USA - Micropyramid{% elif request.get_full_path == "/contact-uae/" %}Python | Django web development Company UAE - Micropyramid{% else %}Python | Django web development Company India - Micropyramid{% endif %} | MicroPyramid
 {% endblock %}
 {% block meta-description %}
 <meta name="description" content="Python and Django web development company {% if request.get_full_path == "/contact-usa/" %}USA{% else %}India{% endif %}. You can speak with our experts for developing projects on python, Django, Angular Js, Aws, React Js, Django-oscar, Django rest framework" />
@@ -54,7 +54,7 @@
       <div class="contact_right col-md-4">
         <div class="contact_social_block">
         {% if request.get_full_path == "/contact-india/" %}<h4 class="contact_heading3">MicroPyramid</h4>
-          <p>HIG499, 6th phase KPHB, Hyderabad,<br/> India - 500072, +91-9959166266</p>{% else %}<h4 class="contact_heading3">MicroPyramid</h4>
+          <p>HIG499, 6th phase KPHB, Hyderabad,<br/> India - 500072, +91-9959166266</p>{% elif request.get_full_path == "/contact-uae/" %}<h4 class="contact_heading3">MicroPyramid</h4><p>Khalifa Building(Near Old Nesto Super Market), Opp Fire Station, Sharjah, UAE</p>{% else %}<h4 class="contact_heading3">MicroPyramid</h4>
           <p>280 Moon Clinton Rd, STE D Moon Twp,<br/> Pittsburgh, Pennsylvania 15108, +1-5102300949</p>{% endif %}
           <h4 class="contact_heading">Connect With Social Networks</h4>
           <ul class="list-inline">
@@ -78,6 +78,9 @@
         </div>
         {% if request.get_full_path == "/contact-usa/" %}
         <div class="map1" id='map1'>
+        </div>
+        {% elif request.get_full_path == "/contact-uae/" %}
+        <div class="map_uae" id='map_uae'>
         </div>
         {% else %}
         <div class="map" id='map'>

@@ -5,7 +5,7 @@
     <h3 class="panel-title">Blog Post Creation</h3>
   </div>
   <div class="panel-body">
-    <form action="{% url 'micro_blog:new_post' %}" class="autocomplete-me" method="POST" id="blogform" enctype="multipart/form-data">
+    <form action="{% url 'new_post' %}" class="autocomplete-me" method="POST" id="blogform" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
@@ -203,7 +203,7 @@ $('#meta_description').keyup(function(event) {
 <script type="text/javascript">
   $ = jQuery;
   $('#cancel_blog_post').click(function(e){
-    window.location = "{% url 'micro_blog:admin_post_list' %}";
+    window.location = "{% url 'admin_post_list' %}";
   });
   $('#save_blog_post').click(function(e){
     e.preventDefault();

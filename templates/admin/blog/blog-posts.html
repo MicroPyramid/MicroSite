@@ -12,7 +12,7 @@
       <span class='active_user'><i class="fa fa-square" style="color:#EEEEEE;"></i>Review</span>
       <span class='active_user'><i class="fa fa-square" style="color:rgba(20, 128, 0, 0.38);"></i>Published</span>
       <span class='inactive_user'><i class="fa fa-square" style="color:rgba(255, 0, 0, 0.42);"></i>Rejected</span>
-      <a href="{% url 'micro_blog:new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
+      <a href="{% url 'new_post' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add New Blog Post </button></a>
     </span>
   </div>
   <div class="panel-body">
@@ -33,10 +33,10 @@
           {% for post in blog_posts %}
           <tr class="{% if post.status == 'D' %}warning{% elif post.status == 'P' %}success{% elif post.status == 'R' %}review{% else %}danger{% endif %}">
             <td>{{post.id}}</td>
-            <td><a href="{% url 'micro_blog:blog_article' slug=post.active_slugs.0.slug %}" target="_blank" title="View on site" class="title">{{post.title}}</a></td>
+            <td><a href="{% url 'blog_article' slug=post.active_slugs.0.slug %}" target="_blank" title="View on site" class="title">{{post.title}}</a></td>
             {% if request.user.is_site_admin %}
             <td class="txt_center change_user" id="{{post.id}}">
-            <form method="post" id="change_user_form_{{post.id}}" action="{% url 'micro_blog:admin_post_list' %}">{% csrf_token %}
+            <form method="post" id="change_user_form_{{post.id}}" action="{% url 'admin_post_list' %}">{% csrf_token %}
             <input type="hidden" name="blog_id" value="{{post.id}}">
             <select name="change_author" style="background: rgba(158, 160, 160, 0.39); text-align: center; margin: 5px;">
             {% for user in users %}
@@ -54,8 +54,8 @@
             </td>
             <td class="txt_center">{{ post.created_on|date:"m/d/Y" }}</td>
             <td class="txt_center">{% if post|is_editable_by:request.user %}
-              <a href="{% url 'micro_blog:edit_blog_post' blog_slug=post.active_slugs.0.slug%}" class="edit_anchor" value="{{ post.active_slugs.0.slug }}"><i class="fa fa-pencil-square-o"></i></a>{% endif %}
-              <a href="{% url 'micro_blog:blog_article' slug=post.active_slugs.0.slug %}" target="_blank" title="View on site" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
+              <a href="{% url 'edit_blog_post' blog_slug=post.active_slugs.0.slug%}" class="edit_anchor" value="{{ post.active_slugs.0.slug }}"><i class="fa fa-pencil-square-o"></i></a>{% endif %}
+              <a href="{% url 'blog_article' slug=post.active_slugs.0.slug %}" target="_blank" title="View on site" class="preview-btn-click edit_anchor"><i class="fa fa-eye" style="padding-right:1px;"></i></a>
             </td>
           </tr>
           {% endfor %}

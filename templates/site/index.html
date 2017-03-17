@@ -437,22 +437,25 @@
                       <img src="/static/site/images/tech-home/docker.png" class="logo smalltechlogo" alt="docker" />
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/reactnative.png" class="logo mediumtechlogo" alt="reactnative" />
+                      <img src="/static/site/images/tech-home/reactjs.png" class="logo largetechlogo" alt="reactjs" />
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/react.png" class="logo smalltechlogo" alt="react" />
+                      <img src="/static/site/images/tech-home/react.png" class="logo smalltechlogo" alt="reactnative" />
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
                       <img src="/static/site/images/tech-home/mongodb.png" class="logo smalltechlogo" alt="mongodb" />
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
                       <img src="/static/site/images/tech-home/mysql.png" class="logo mediumtechlogo" alt="mysql" />
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
                       <img src="/static/site/images/tech-home/postgresql.png" class="logo smalltechlogo" alt="postgresql" />
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/django-rest-framework.gif" class="logo mediumtechlogo" alt="django-rest-framework" />
+                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/django-rest-framework.png" class="logo mediumtechlogo" alt="django-rest-framework" />
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
+                      <img src="/static/site/images/tech-home/ansible.png" class="logo mediumtechlogo" alt="ansible" />
                     </div>
                   </div>
                 </div>
@@ -469,12 +472,13 @@
             <div class="row" id="get-in-touch">
               <div class="heading"> <span>get in</span> <span class='green'>touch</span></div>
               <div class="row contact-form">
-                <form id="contactform" name="contactform" method="post">
+                <form id="contactform" name="contactform" method="post" action="{% url "contact_india" %}">
                   {% csrf_token %}
                   <div class="row marl first-input-row">
-                    <div class="col-md-4 col-sm-4 input-blk"> <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name"></div>
-                    <div class="col-md-4 col-sm-4 input-blk"> <input type="email" class="form-control" placeholder="Email" id ="email" name="email"></div>
-                    <div class="col-md-4 col-sm-4 input-blk"> <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="email" class="form-control" placeholder="Email" id ="email" name="email"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone"></div>
+                    <div class="col-md-3 col-sm-3 input-blk"> <input type="tel" class="form-control" placeholder="Country" id="country" name="country"></div>
                   </div>
                   <div class="row marl second-input-row">
                     <div class="col-md-12 input-blk"><textarea class="form-control form-control1" rows="3" placeholder="Comments" id="message" name="message"></textarea></div>

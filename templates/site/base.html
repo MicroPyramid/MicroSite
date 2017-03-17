@@ -346,22 +346,26 @@
             <div class="row marl" id="footer-links-mp">
               <div class="container">
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
-                  {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
                     <li><a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
                     <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
                     <li><a href="/subscribe/">Subscribe</a></li>
-                    {% for menu in menu_list|slice:"0:4" %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.url == 'contact-us' or menu.url == 'contact-india' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
-                    {% endfor %}
+                    <li><a href="/open-source-softwares/">Oss</a></li>
+                    <li><a href="/careers/">Careers</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+
+                    <li><a href="/contact-india/">India</a></li>
+                    <li><a href="/contact-usa/">USA</a></li>
+                    <li><a href="/contact-uae/">UAE</a></li>
                   </ul>
                 </div>
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
                   {% get_child_menus as menu_list %}
                   <ul class="inner-footer-list">
-                    {% for menu in menu_list|slice:"4:10" %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.url == 'contact-us' or menu.url == 'contact-india' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    {% for menu in menu_list|slice:"0:10" %}
+                    <li>{% if menu.url|slugify != 'none' %}<a href="/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
+
                   </ul>
                 </div>
                 <div class="col-md-3 col-sm-12 col-xs-12 footer-mp">
@@ -372,7 +376,9 @@
                   <p>280 Moon Clinton Rd,<br>STE D Moon Twp, Pittsburgh,<br> Pennsylvania 15108, +1 5102300949</p>
                 </div>
                 <div class="col-md-5 col-sm-12 col-xs-12 footer-mp">
-                  <div class="">
+                  <p><b>MicroPyramid - UAE</b></p>
+                  <p>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah,<br> UAE 341246, +971 564482064</p>
+                <div class="" style="margin-left: -108px;">
                     <div class="row inner-footer-social" id="footer-social">
                       <ul class="list-inline">
                         <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>

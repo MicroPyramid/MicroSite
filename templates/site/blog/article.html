@@ -4,7 +4,7 @@
 {% endblock %}
 {% block meta-description %}
   {%  if not post.meta_description %}
-    <meta name="description" content="Learn in detail about {{ post.title }}" />
+    <meta name="description" content="Learn in detail about - {{ post.title }}" />
   {% else %}
     <meta name="description" content="{{ post.meta_description }}" />
   {% endif %}
@@ -38,7 +38,7 @@
             <a href="/blog/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Blog</span></a>
           </li>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="{% url 'micro_blog:blog_category' post.category.slug %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ post.category.slug }}</span></a>
+            <a href="{% url 'blog_category' post.category.slug %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ post.category.slug }}</span></a>
           </li>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <a href="{{request.path}}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ post.title }}</span></a>
@@ -152,7 +152,7 @@
           <span class="user-name">{{related_post.user.get_full_name}}</span>
           <!--<span class="date-comments">4th October 2015 / comments 30</span>-->
           <p>{{related_post.excerpt|linebreaks|truncatewords:25}}</p>
-          <a href="{% url 'micro_blog:blog_article' related_post.slug %}" class="full-story">Continue Reading...</a>
+          <a href="{% url 'blog_article' related_post.slug %}" class="full-story">Continue Reading...</a>
         </div>
         {% endfor %}
         <!-- subscribe starts Here -->
