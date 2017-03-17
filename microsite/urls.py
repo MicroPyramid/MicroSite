@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
     url(r'^contact-india/$', contact, name="contact_india"),
     url(r'^contact-usa/$', contact, name="contact_usa"),
+    url(r'^contact-uae/$', contact, name="contact_uae"),
     url(r'^subscribe/$', subscribe),
     url(r'^open-source-softwares/$', oss),
     url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
