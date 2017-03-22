@@ -51,8 +51,8 @@ class ContactForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
-        if 'country' in self.data.keys():
-            self.fields['country'].required = True
+        # if 'country' in self.data.keys():
+        #     self.fields['country'].required = True
 
         if 'enquery_type' in self.data.keys():
             self.fields['enquery_type'].required = True

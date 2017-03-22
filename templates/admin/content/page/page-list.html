@@ -47,7 +47,7 @@
             <td class="txt_center">{{chlidren.id}}</td>
             <td>{%if chlidren.parent%}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{%endif%}{{chlidren.title}}</td>
             <td class="sec-col">{{chlidren.slug}}</td>
-            <td class="sec-col"><a href="/{{chlidren.slug}}/" target="_blank">https://micropyramid.com/{{chlidren.slug}}/</a></td>
+            <td class="sec-col"><a href="/{{chlidren.slug}}/" target="_blank">https://micropyramid.com/{{chlidren.country.code}}/{{chlidren.slug}}/</a></td>
             <td>{{chlidren.country.name}}</td>
             <td class="txt_center"><a href="{% url 'pages:change_page_status' pk=chlidren.id %}" class="on_off">
               {% if chlidren.is_active %}

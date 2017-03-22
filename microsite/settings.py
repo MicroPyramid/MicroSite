@@ -82,7 +82,7 @@ BROKER_URL = 'redis://localhost:6379/0'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'microsite',
+        'NAME': 'microsite1',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
@@ -93,7 +93,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en'
 
-COUNTRY_CODE = 'us'
+COUNTRY_CODE = 'usa'
 
 COUNTRY_COOKIE_NAME = 'django_country'
 COUNTRY_COOKIE_AGE = None

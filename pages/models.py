@@ -84,6 +84,9 @@ class Menu(models.Model):
             return True
         return False
 
+    def get_active_children(self):
+        return self.menu_set.filter(status='on').order_by('lvl')
+
 
 def create_slug(tempslug):
     slugcount = 0

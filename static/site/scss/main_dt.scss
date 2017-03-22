@@ -10,12 +10,14 @@
   padding: 0px;
   overflow-x:hidden!important;
 }
+
 body{
   @extend #body;
 }
 #banner_wrap{
   height: 380px;
   width: 100%;
+  margin-top: 30px;
   background-color: white;
   position: relative;
   @media (min-width: $mob_min) and (max-width: $smob_max){
@@ -104,6 +106,7 @@ body{
     }
   }
   .slider_text{
+    margin-top: 40px;
     width: 100%;
     padding: 40px 20px;
     text-align: center;
@@ -253,7 +256,7 @@ body{
           &.active{
             .daimond_wrap{
               border:1px solid #fff;
-              z-index: 20;
+              /*z-index: 20;*/
               position: relative;
             }
           }
@@ -515,6 +518,11 @@ body{
       }
       .description-detail{
         cursor: pointer;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 30px;
+        letter-spacing: 1px;
+        color: #000000;
       }
       .date_daimond{
         font-weight: 600;
@@ -655,10 +663,17 @@ body{
     padding:20px;
     .logo-gallery-row{
       .logo-thumb{
-        padding: 30px 0px;
+        padding: 15px 0px;
         text-align:center;
+        width: 16%;
+         @media(min-width: $tab_min) and (max-width:$tab_max){
+          padding: 15px 0px;
+          width: 25%;
+        }
+
         @media(min-width: $mob_min) and (max-width:$med_max){
           padding: 15px 0px;
+          width:33.3%;
         }
         .smalltechlogo{
           width: 100px;
@@ -935,6 +950,10 @@ body{
             color:#fff;
           }
         }
+        /*&:first-child{
+          font-weight:bold;
+          padding-left:5px;
+        }*/
       }
     }
   }
@@ -951,7 +970,6 @@ body{
   }
   .heading{
     text-align: center;
-    font-family: 'fertigo-pro';
     @media(min-width: $mob_min) and (max-width:$smob_max){
       text-align: center!important;
       font-size: 1.5em;
@@ -966,11 +984,12 @@ body{
     p{
       font-family: inherit;
       margin: 0px;
-      font-size: 15px;
-      line-height: 30px;
       text-align: justify;
       font-weight:500;
+      font-size: 16px;
+      line-height: 35px;
       letter-spacing: 1px;
+      color: #000000;
       @media(min-width: $mob_min) and (max-width:$smob_max){
         font-size: 1em;
         line-height: 22px;
@@ -1374,7 +1393,7 @@ body{
             height: 120px;
           }
           .logo{
-            height: 85px;
+            height: 60px;
             position: relative;
             text-align: center;
             @media(min-width: $mob_min) and (max-width:$smob_max){
@@ -1395,7 +1414,7 @@ body{
             .image_wrap{
               display: table;
               width: 100%;
-              height: 82px;
+              height: 70px;
               @media(max-width: 455px){
                 height: 110px;
               }
@@ -1416,8 +1435,8 @@ body{
               }
               .img{
                 display: table-cell;
-                width: 100%;
-                vertical-align: bottom;
+                width: 60%;
+                vertical-align: middle;
                 margin-bottom: 5px;
                 @media(min-width: $mob_min) and (max-width:$smob_max){
                   vertical-align: middle;
@@ -1442,7 +1461,7 @@ body{
               }
             }
             img{
-              max-width: 80%;
+              max-width: 55%;
               margin: 0px auto;
               @media(min-width: $smob_min) and (max-width:1200px){
                 max-width: 50%;
@@ -1568,7 +1587,7 @@ body{
   }
 }
 #container_wrapper{
-  padding-top:17px;
+  padding-top: 100px;
   padding-bottom:0px;
   min-height:350px;
 }
@@ -2183,7 +2202,7 @@ body{
 /* conatact_us_icon */
 .conatact_us_icon{
   position: fixed;
-  width: 20px;
+  width: 28px;
   padding: 15px 0px;
   text-align: center;
   //height: 50px;
@@ -2310,6 +2329,8 @@ body{
     ul{
       margin: 10px 0px;
       padding: 0px;
+      margin-top:30px;
+      padding-left :5px;
       text-align: center;
       li{
         list-style: none;
@@ -2358,10 +2379,9 @@ body{
   .address_div{
     position: relative;
     padding-left: 0px;
-    text-align: center;
     .address_wrap{
-      float: left;
-      width: 50%;
+      padding-left:40px;
+      width: 100%;
       height: 90px;
       @media (min-width: $mob_min) and (max-width:$smob_max){
         float: none;
@@ -2399,9 +2419,9 @@ body{
   }
   .cal_us{
     position: relative;
-    float: left;
-    width: 50%;
+    width: 100%;
     height: 50px;
+    padding-left:50px;
     @media (min-width: $mob_min) and (max-width:$smob_max){
       height: 30px;
     }
@@ -2428,7 +2448,7 @@ body{
       @extend .opensans;
       //color: $theme_green;
       font-weight: 700;
-      font-size: 25px;
+      font-size: 15px;
       @media (min-width: $mob_min) and (max-width:$smob_max){
         font-size: 1.5em;
       }
@@ -2443,6 +2463,7 @@ body{
   }
   .input-group{
     margin-bottom: 5px;
+    width:100%;
   }
   .input-group-addon{
     border-radius: 0px;
@@ -2464,7 +2485,7 @@ body{
       color: #fff;
       cursor: pointer;
       padding: 8px 25px;
-      width: 60%;
+      width: 100%;
       margin: 0px auto;
       padding-left: 20px;
       font-size: 15px;
@@ -2849,7 +2870,7 @@ body{
                 width: 100%;
               }
               img{
-                max-width: 82%;
+                max-width: 65%;
                 height: auto;
                 @media (min-width: $tab_max) and (max-width: 1200px){
                   max-width: 80%;
@@ -3966,8 +3987,8 @@ body{
     max-height: 100%;
     height: auto;
     vertical-align: top;
-    margin-left: 0;
-    margin-top: 0px;
+    margin-left: 10px;
+    margin-top: 15px;
     @media(min-width:$mob_min) and (max-width:$smob_max){
       margin-left:0px;
       margin-top:13px;
@@ -4734,9 +4755,11 @@ body{
         p{
           text-align:justify;
          @media (min-width: 240px) and (max-width: 768px){
-            font-size:13px;
-            line-height:21px;
             margin-top:15px;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 35px;
+            letter-spacing: 1px;
           }
           &:before {
             content: "\f10d";
@@ -4982,14 +5005,14 @@ p a{
 }
 
 .without-background {
-  padding: 140px;
-  margin-right: 250px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding:30px;
 }
 
 .sponsor-logo1 {
-  align-items: center;
+  text-align: center;
+  img{
+    max-width: 60%;
+  }
 }
 
 .sponsor-logo2 {
@@ -5058,4 +5081,107 @@ p a{
     color: black;
   }
   
+}
+#single_level_menu{
+  margin: 0px;
+    padding: 0px;
+    float: right;
+    margin-top: 5px;
+    @media (min-width: $mob_min) and (max-width:$smob_max){
+      display: none;
+    }
+    li{
+      display: inline-block;
+      list-style: none;
+      padding: 15px;
+      margin: 0px;
+      text-transform: CAPITALIZE;
+      font-weight: 600;
+      color: #4c4c4c;
+      position: relative;
+              font-size: 15px;
+
+      &:hover{
+      border-bottom: 2px solid $theme_green;
+        a{
+          /*border-bottom: 2px solid $theme_green;*/
+        }
+        ul{
+          display: block;
+          transition:0.4s;
+          li{
+            a{
+              border:none;
+            }
+          }
+        }
+      }
+      a{
+        display: inline-block;
+        text-transform: CAPITALIZE;
+        font-weight: 500;
+        color: #4c4c4c;
+        font-size: 15px;
+        //color: #fff;
+        /*border-bottom: 2px solid transparent;*/
+      }
+      ul{
+        position: absolute;
+        z-index: 1000;
+        display: none;
+        transition:0.4s;
+        background: #fff;
+        min-width: 110px;
+        //box-shadow: $menu_shadow;
+        margin:0;
+        padding:0;
+        top:35px;
+        left:0;
+        border:1px solid $stroke_color;
+        li{
+          display: block;
+          border-bottom:1px solid $stroke_color;
+          //margin-bottom: 5px;
+          //box-shadow: $menu_shadow;
+          padding:0;
+          a{
+            display: block;
+            border:none;
+            width:110px;
+            padding: 8px 10px;
+            transition:0.4s;
+            font-weight: 500;
+            background: #fff;
+            //color: #4c4c4c;
+            &:hover{
+              background: lighten($theme_green,2%);
+              color: #fff;
+              transition:0.4s;
+            }
+          }
+        }
+      }
+    }
+}
+
+.top_select_country{
+  @media (min-width: $mob_min) and (max-width: $smob_max){
+    float: none !important;
+    margin-bottom: 10px;
+  }
+  .form-control{
+    border-radius: 0;
+    position: relative;
+    top: 5px;
+    border: none;
+    color: black;
+    border: 2px solid #dee2e5;
+  }
+}
+.work_container{
+  width: 1350px;
+  margin: 0px auto;
+  @media(min-width: $mob_min) and (max-width: $tab_max){
+    width: 100%;
+  }
 }

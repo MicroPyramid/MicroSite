@@ -322,7 +322,8 @@ def site_page(request, slug):
             return HttpResponseRedirect('/')
         return render(request, 'site/index.html', {
             'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
-
+    print ("country")
+    print (country_code)
     pages = Page.objects.filter(slug=slug, country__code=country_code, is_active=True)
     if not pages:
         pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
@@ -333,6 +334,7 @@ def site_page(request, slug):
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
         return render(request, 'site/page.html', {'page': page, 'posts': posts})
     else:
+        print ("hello")
         return render(request, '404.html', status=404)
 
 def get_country_code_from_path(path):
@@ -361,6 +363,8 @@ def set_country(request):
             path = request.META.get('HTTP_REFERER').replace(request.scheme+'://' + request.get_host(), '')
 
             country_code = get_country_code_from_path(path)
+            print ("hello")
+            print (country_code)
             if country_code:
                 path = request.META.get('HTTP_REFERER').replace(request.scheme+'://' + request.get_host(), '').replace('/'+country_code, '')
             if request.POST.get('country') == settings.COUNTRY_CODE:

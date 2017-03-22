@@ -29,8 +29,7 @@
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Meta Data</label>
-        <textarea class="form-control" id="textareametadata" name="textareametadata" rows="10">{{page.meta_data|safe}}</textarea>
-        <input type="hidden" name="meta_data">
+        <textarea class="form-control" id="meta_data" name="meta_data" rows="10">{{page.meta_data}}</textarea>
         <input type="hidden" name="country_id" id="country_id" value="{{ request.GET.country }}"/>
       </div>
       <div class="form-group">
@@ -73,7 +72,6 @@
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
   var editor = CKEDITOR.replace('textareacontents');
-  var editor1 = CKEDITOR.replace('textareametadata');
 
 </script>
 <script type="text/javascript">
@@ -83,7 +81,6 @@
     //var htmldata = CKEDITOR.instances.Editor.document.getBody().getHtml();
     console.log(CKEDITOR.instances.textareacontents.getData());
     $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
-    $("input[name='meta_data']").val(CKEDITOR.instances.textareametadata.getData());
 
     $.post(".", $("form#pageform").serialize(), function(msg) {
       if (msg.error) {

@@ -27,15 +27,18 @@ urlpatterns = [
     url(r'^tools/$', tools, name='tools'),
     url(r'^tools/url-checker/$', url_checker_tool, name='url_checker_tool'),
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
-    url(r'^contact-india/$', contact, name="contact_india"),
-    url(r'^contact-usa/$', contact, name="contact_usa"),
-    url(r'^contact-uae/$', contact, name="contact_uae"),
+
     url(r'^subscribe/$', subscribe),
     url(r'^set_country/$', set_country, name="set_country"),
 
     # url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
+    url(r'^contact-india/$', contact, name="contact_india"),
+    url(r'^contact-usa/$', contact, name="contact_usa"),
+    url(r'^contact-aus/$', contact, name="contact_usa"),
+    url(r'^contact-uk/$', contact, name="contact_usa"),
+    url(r'^contact-uae/$', contact, name="contact_uae"),
 
 
     url(r'^blog/list/$', admin_post_list, name='admin_post_list'),
@@ -68,14 +71,19 @@ urlpatterns = [
     url(r'^blog.rss$', blog_rss),
 
     url(r'^search/autocomplete/$', autocomplete),
-    url(r'^(?P<slug>[-\w]+)/$', site_page),
 
 ]
 
 urlpatterns += country_patterns(
     # url(r'^i18n/', include('django.conf.urls.i18n')),
     url(_(r'^$'), index),
+    url(r'^contact-india/$', contact, name="contact_india"),
+    url(r'^contact-usa/$', contact, name="contact_usa"),
+    url(r'^contact-aus/$', contact, name="contact_usa"),
+    url(r'^contact-uk/$', contact, name="contact_usa"),
+    url(r'^contact-uae/$', contact, name="contact_uae"),
     url(r'^(?P<slug>[-\w]+)/$', site_page),
+
 )
 
 

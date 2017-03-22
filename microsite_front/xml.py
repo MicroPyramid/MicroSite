@@ -14,9 +14,10 @@ def sitemap_xml(request):
              <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
-    menus = Menu.objects.filter(status="on").exclude(title='Python Development')
+    menus = Menu.objects.filter(status="on", url__isnull=False).exclude(title='Python Development')
     for menu in menus:
-        xml = xml + '<url><loc>' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        if str(menu.url) != 'none':
+            xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     categories = Category.objects.filter(is_display=True)
     for category in categories:

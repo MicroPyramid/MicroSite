@@ -543,13 +543,14 @@ def contact(request):
         sending_msg.set_html(message)
         sending_msg.set_text('Contact Request')
         sending_msg.set_from(request.POST.get('email'))
-        sending_msg.add_to("hello@micropyramid.com")
+        sending_msg.add_to("nikhila@micropyramid.com")
         sg.send(sending_msg)
 
         data = {'error': False, 'response': 'Contact submitted successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     else:
+        print (validate_contact.errors)
         errors = {}
         data = {'error': True, 'errinfo': validate_contact.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')

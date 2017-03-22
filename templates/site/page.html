@@ -13,10 +13,11 @@
 
 {% block meta-description %}
   {{ page.meta_data|safe  }}
-
 {% endblock %}
 
 {% block stage %}
+  {% include 'site/contact.html' %}
+
 <div id='container_wrapper'>
   <!-- Services Row Starts here -->
   <div class="row">
