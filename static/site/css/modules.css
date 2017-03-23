@@ -93,7 +93,7 @@
   .header .logo {
     margin-bottom: 0;
     position: relative;
-    top: 0px;
+    top: -4px;
     margin-right: 0px;
     float: left; }
     @media (max-width: 768px) {

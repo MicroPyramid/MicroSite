@@ -119,6 +119,7 @@ body{
       min-height: 200px;
       padding-top: 20px;
       position: static;
+      margin-top: 0;
       display: table;
       width: 100%;
       height: 370px;
@@ -168,6 +169,7 @@ body{
         line-height: 40px;
         width: 80%;
         margin:0px auto;
+        padding-right: 0;
         padding-left:0px;
       }
       @media(min-width: $mob_min) and (max-width: $smob_max){
@@ -505,10 +507,10 @@ body{
     .blog_ticket{
       border:1px solid lighten($stroke_color,10%);
       box-shadow:$blog_shadow;
-      height: 300px;
+      height: 350px;
       position: relative;
       @media(min-width: 1300px){
-        height: 300px;
+        height: 350px;
       }
       @media(min-width: $tab_min) and (max-width:$tab_max){
         height: 530px;
@@ -521,7 +523,7 @@ body{
         font-weight: 500;
         font-size: 16px;
         line-height: 30px;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         color: #000000;
       }
       .date_daimond{
@@ -548,7 +550,7 @@ body{
             line-height: 12px;
           }
           .month{
-            font-size: 18px;
+            font-size: 15px;
             @media(min-width: $mob_min) and (max-width:$tab_max){
               font-size: 10px;
             }
@@ -668,7 +670,10 @@ body{
         width: 16%;
          @media(min-width: $tab_min) and (max-width:$tab_max){
           padding: 15px 0px;
-          width: 25%;
+          width: 25% !important;
+          img{
+            max-width: 70%;
+          }
         }
 
         @media(min-width: $mob_min) and (max-width:$med_max){
@@ -691,7 +696,7 @@ body{
 .mp-technologies-heading{
   background:#fff;
   margin-top: 0px;
-  margin-bottom: 5px;
+  margin-bottom: 30px;
   color: #748907;
   font-size: 30px;
 }
@@ -968,6 +973,9 @@ body{
   @media(min-width: $mob_min) and (max-width:$smob_max){
     height: auto;
   }
+   @media (min-width: $tab_min) and (max-width:$tab_max){
+      height: 550px;
+    }
   .heading{
     text-align: center;
     @media(min-width: $mob_min) and (max-width:$smob_max){
@@ -977,10 +985,16 @@ body{
       line-height: 1.8em;
     }
     @media (min-width: $tab_min) and (max-width:$tab_max){
-      font-size: 1.8em;
+      font-size: 1.3em;
     }
   }
+
+ @media (min-width: $tab_min) and (max-width:$tab_max){
+    font-size: 1.8em;
+    height: 750px;
+  }   
   .about_text{
+    margin-bottom: 60px;
     p{
       font-family: inherit;
       margin: 0px;
@@ -988,21 +1002,22 @@ body{
       font-weight:500;
       font-size: 16px;
       line-height: 35px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       color: #000000;
       @media(min-width: $mob_min) and (max-width:$smob_max){
         font-size: 1em;
         line-height: 22px;
       }
       @media (min-width: $tab_min) and (max-width:$tab_max){
-        font-size: 1.2em;
-        line-height: 1.3em;
+        font-size: 13px;
+        line-height: 21px;
       }
     }
   }
   .daimonds_wrap{
     margin: 0px;
     position: relative;
+    margin-left: 50px;
     text-align: center;
     padding: 0px;
     right: -5%;
@@ -1037,6 +1052,9 @@ body{
     @media (min-width: 515px) and (max-width:660px){
       height: 530px!important;
     }
+    @media (min-width: $tab_min) and (max-width:$tab_max){
+      left:5%;
+    }
     .row{
       float: right;
       position: relative;
@@ -1050,6 +1068,9 @@ body{
         left: -126px;
         @media(min-width: $tab_min) and (max-width:1200px){
           left: 0px;
+        }
+         @media(min-width: $tab_min) and (max-width:$tab_max){
+          left: 100px;
         }
         @media(min-width: $mob_min) and (max-width:$smob_max){
           left: 0px;
@@ -1074,6 +1095,7 @@ body{
           left: 220px;
           top: -73px;
         }
+
         @media(min-width: $mob_min) and (max-width:$smob_max){
           left: 220px;
           top: -73px;
@@ -1081,6 +1103,10 @@ body{
         @media(min-width: $tab_min) and (max-width:1030px){
           left: 220px;
           top: -222px;
+        }
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          left: 100px;
+          top: -255px;
         }
         @media (min-width: $mob_min) and (max-width:674px){
           top:-224px;
@@ -1142,6 +1168,10 @@ body{
           left: 110px;
           top: -36px;
         }
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          left: -30px;
+          top: -36px;
+        }
         @media(min-width: $mob_min) and (max-width:$smob_max){
           left: 110px;
           top: -36px;
@@ -1180,6 +1210,7 @@ body{
               left: 332px;
               top: -263px;
             }
+            
             @media(min-width: $mob_min) and (max-width:$smob_max){
               left: -108px;
               top: 112px;
@@ -1228,6 +1259,11 @@ body{
               top: -113px;
               left: -109px;
             }
+            @media(min-width: $tab_min) and (max-width:$tab_max){
+              left: 28px;
+              top: -181px;
+              float: right;
+            }
           }
         }
       }
@@ -1247,6 +1283,11 @@ body{
         width: 150px;
         height: 150px;
         margin-right: 70px;
+      }
+      @media(min-width: 768px) and (max-width:991px){
+        width: 180px;
+        height: 180px;
+        margin-right: 80px;
       }
       @media(max-width: 455px){
         width: 130px;
@@ -1482,6 +1523,9 @@ body{
             @media(min-width: $smob_min) and (max-width:1200px){
               font-size: 12px;
             }
+             @media (min-width: $tab_min) and (max-width:$tab_max){
+              padding-top:0
+            }
           }
         }
         
@@ -1506,7 +1550,7 @@ body{
       font-family: inherit;
       font-size: 115%;
       line-height: 35px;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       color: #000000; 
     }
     .content{
@@ -5086,7 +5130,7 @@ p a{
   margin: 0px;
     padding: 0px;
     float: right;
-    margin-top: 5px;
+    margin-top: 0px;
     @media (min-width: $mob_min) and (max-width:$smob_max){
       display: none;
     }
@@ -5096,11 +5140,10 @@ p a{
       padding: 15px;
       margin: 0px;
       text-transform: CAPITALIZE;
-      font-weight: 600;
+      font-weight: 500;
       color: #4c4c4c;
       position: relative;
-              font-size: 15px;
-
+      font-size: 13px;
       &:hover{
       border-bottom: 2px solid $theme_green;
         a{
@@ -5121,7 +5164,7 @@ p a{
         text-transform: CAPITALIZE;
         font-weight: 500;
         color: #4c4c4c;
-        font-size: 15px;
+        font-size: 13px;
         //color: #fff;
         /*border-bottom: 2px solid transparent;*/
       }
@@ -5152,6 +5195,7 @@ p a{
             transition:0.4s;
             font-weight: 500;
             background: #fff;
+            font-size: 13px;
             //color: #4c4c4c;
             &:hover{
               background: lighten($theme_green,2%);
@@ -5170,12 +5214,19 @@ p a{
     margin-bottom: 10px;
   }
   .form-control{
-    border-radius: 0;
+       border-radius: 0;
     position: relative;
-    top: 5px;
-    border: none;
-    color: black;
+    top: 3px;
     border: 2px solid #dee2e5;
+    margin-left: 0;
+    margin-right: 10px;
+    background: #969696;
+    padding: 4px 6px;
+    border: none;
+    height: inherit;
+    font-size: 13px;
+    color: #fff;
+    text-transform: capitalize;
   }
 }
 .work_container{

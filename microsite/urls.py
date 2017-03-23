@@ -16,7 +16,6 @@ from search.views import autocomplete
 from django.views.static import serve
 from .country_urls import country_patterns
 from django.utils.translation import ugettext_lazy as _
-from solid_i18n.urls import solid_i18n_patterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),

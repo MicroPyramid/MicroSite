@@ -249,7 +249,7 @@ License: http://codecanyon.net/licenses
 	position: relative;
 }
 .primary-menu-menu ul.dropdown li a {
-	font-family: "Lato", sans-serif;
+	
 	font-size: 17px;
 	font-weight: 400;
 	padding: 10px 40px 10px 40px;
@@ -291,7 +291,7 @@ License: http://codecanyon.net/licenses
 }
 
 .primary-menu-menu > li.has-megamenu .megamenu ul > li a {
-	font-family: "Lato", sans-serif;
+	
 	font-size: 16px;
 	font-weight: 400;
 	padding: 10px 0;
@@ -462,6 +462,7 @@ License: http://codecanyon.net/licenses
 	min-height: 20px;
 	float: left;
 }
+
 .primary-menu-menu > li > .megamenu .megamenu-row [class*="col"]:first-child {
 	margin-left: 0;
 }
@@ -1157,4 +1158,17 @@ License: http://codecanyon.net/licenses
 }
 .primary-menu-menu>li{
 	padding:0 13px 2px;
+}
+.primary-menu-menu>li>a{
+	font-size: 13px;
+}
+.primary-menu-menu>li>.megamenu ul{
+	text-align: left;
+}
+.primary-menu-menu>li.has-megamenu .megamenu ul>li a{
+	font-size: 13px;
+	font-weight: 500;
+}
+.primary-menu-menu>li>.megamenu .megamenu-row .col3{
+	width: 25%;
 }
