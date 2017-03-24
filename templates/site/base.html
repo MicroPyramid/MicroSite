@@ -55,8 +55,8 @@
     <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/error_pages.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/design.scss">
-    <!-- <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
-    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less"> -->
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less">
        <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     {% endcompress %}
     {% block extra-styles %}
@@ -194,7 +194,7 @@
               </ul>
               <ul id="single_level_menu">
                 {% for menu in single_level_menu_list %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                 </li>
                 {% endfor %}
               </ul>
@@ -240,12 +240,10 @@
               <div class="container">
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
                   <ul class="inner-footer-list">
-                    <li><a href="{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
+                    <li><a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
                     <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
                     <li><a href="/subscribe/">Subscribe</a></li>
                     <li><a href="/open-source-softwares/">Oss</a></li>
-                     <li><a href="/careers/">second</a></li>
-                      <li><a href="/careers/">third</a></li>
                     <li><a href="/careers/">Careers</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/in/contact-india/">India</a></li>
@@ -257,7 +255,7 @@
                   <ul class="inner-footer-list">
                     {% get_child_menus as menu_list %}
                     {% for menu in menu_list|slice:"0:10" %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                   </ul>
                 </div>
@@ -267,7 +265,7 @@
 
                     {% for menu in menu_list|slice:"10:20" %}
                       {% if menu.parent.title != 'Contact Us' %}
-                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                       {% endif %}
                     {% endfor %}
                   </ul>
@@ -277,7 +275,7 @@
                   <p>HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072, +91 9959166266</p>
                   <p>Monday - Friday : 10:00 - 19:00</p>
                   <p><b>MicroPyramid - USA</b></p>
-                  <p>280 Moon Clinton Rd,<br>STE D Moon Twp, Pittsburgh,<br> Pennsylvania 15108, +1 5102300949</p>
+                  <p>3737 Mapleshade Ln,<br>Ste #103,<br>  Plano TX 75075, +1 5102300949</p>
                 </div>
                 <div class="col-md-3 col-sm-12 col-xs-12 footer-mp">
                   <p><b>MicroPyramid - UAE</b></p>
