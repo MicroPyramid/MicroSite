@@ -5419,3 +5419,18 @@ p a{
 }
 
 /* inner_content_row ends here */
+
+/* country_list starts here */
+.country_list{
+  background: #47484c;
+  padding:8px 10px;
+  select{
+    width: 60%;
+    background: none;
+    margin: 0 auto;
+    border: 1px solid #ececec;
+    color: #eee;
+    box-shadow: none;
+  }
+}
+/* country_list ends here */

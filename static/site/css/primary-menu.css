@@ -1184,10 +1184,11 @@ border:none;}
 		color: black;
 	}
 }
-
+ @media (min-width: 240px) and (max-width:767px){
 .primary-menu-responsive .primary-menu-menu>li>a{
 	color:#555;
 	text-align: left;
+}
 }
 .primary-menu-menu > li > .megamenu .megamenu-row .col3 ul{
 	margin-left:0;
