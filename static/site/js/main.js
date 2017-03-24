@@ -675,7 +675,7 @@ var CRUMINA = {};
 
 
         // Dom mofifications
-        // $('select').niceSelect();
+     
 
         // On Scroll animations.
         CRUMINA.animateSvg();

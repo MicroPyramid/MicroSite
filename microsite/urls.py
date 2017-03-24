@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib import admin
 from micro_blog.views import (contact, subscribe, site_blog_home, blog_category, blog_tag, admin_post_list, new_post, edit_blog_post,
                               admin_category_list, new_blog_category, blog_category,
-                              blog_article, archive_posts, delete_category,
+                              blog_article, archive_posts, delete_category, empty,
                               edit_category, change_category_status)
 import microsite_front
 from pages.views import site_page, set_country
@@ -62,6 +62,7 @@ urlpatterns = [
     url(r'^sitemap.xml$', sitemap_xml),
 
     url(r'^sitemap/$', sitemap),
+    url(r'^empty/$', empty),
     url(r'^sitemap-(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
 
     url(r'^(?P<slug>[-\w]+)/$', site_page),

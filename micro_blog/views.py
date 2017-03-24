@@ -36,6 +36,9 @@ from .tasks import *
 #                 'is_image': True})
 #     return render(request, 'admin/browse.html', {'files': imgs})
 
+def empty(request):
+    return render(request, 'site/empty.html')
+
 
 @login_required
 def admin_category_list(request):
