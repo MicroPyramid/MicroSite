@@ -1655,6 +1655,9 @@ body{
   padding-top: 40px;
   padding-bottom:0px;
   min-height:350px;
+   @media (min-width: $mob_min) and (max-width:$smob_max){
+    padding-top: 0px;
+  }
 }
 /* base_menu */
 /* blog row starts here */
@@ -3968,6 +3971,7 @@ body{
 /* bread_crums */
 .bread_crums{
   padding:25px 0px;
+  margin-top: 50px; 
   padding-bottom: 0px;
   @media (min-width:$mob_min)and (max-width:$smob_max){
     display:none;
@@ -5167,7 +5171,7 @@ p a{
       font-weight: 500;
       color: #4c4c4c;
       position: relative;
-      font-size: 13px;
+      font-size: 15px;
       &:hover{
       border-bottom: 2px solid $theme_green;
         a{
@@ -5188,8 +5192,7 @@ p a{
         text-transform: CAPITALIZE;
         font-weight: 500;
         color: #4c4c4c;
-        font-size: 13px;
-        //color: #fff;
+        
         /*border-bottom: 2px solid transparent;*/
       }
       ul{
@@ -5238,18 +5241,17 @@ p a{
     margin-bottom: 10px;
   }
   .form-control{
-       border-radius: 0;
+    border-radius: 0;
     position: relative;
     top: 3px;
-    border: 2px solid #dee2e5;
+    border: 2px solid #969696;
     margin-left: 0;
     margin-right: 10px;
-    background: #969696;
+    background: #fff;
     padding: 4px 6px;
-    border: none;
     height: inherit;
     font-size: 13px;
-    color: #fff;
+    color: #969696;
     text-transform: capitalize;
   }
 }
@@ -5432,6 +5434,16 @@ p a{
     border: 1px solid #ececec;
     color: #eee;
     box-shadow: none;
+  }
+  &.inner_country_list{
+    background: #4c4c4c;
+    select{
+      background: #4c4c4c;
+      color: #eee;
+      option{
+        background: #4c4c4c;
+      }
+    }
   }
 }
 /* country_list ends here */

@@ -129,31 +129,31 @@ License: http://codecanyon.net/licenses
 	margin-right: 3px;
 }
 
-.primary-menu-menu > li > a:before {
-	content: '';
-	display: block;
-	width: 80%;
-	height: 2px;
-	background-color: #4cc2c0;
-	position: absolute;
-	right: 0;
-	bottom: -10px;
-	opacity: 0;
-	transition: all .3s linear;
-}
+// .primary-menu-menu > li > a:before {
+// 	content: '';
+// 	display: block;
+// 	width: 80%;
+// 	height: 2px;
+// 	background-color: #4cc2c0;
+// 	position: absolute;
+// 	right: 0;
+// 	bottom: -10px;
+// 	opacity: 0;
+// 	transition: all .3s linear;
+// }
 
-.primary-menu-menu > li > a:after {
-	content: '';
-	display: block;
-	position: absolute;
-	width: 15%;
-	height: 2px;
-	background-color: #4cc2c0;
-	left: 0;
-	bottom: -10px;
-	opacity: 0;
-	transition: all .3s linear;
-}
+// .primary-menu-menu > li > a:after {
+// 	content: '';
+// 	display: block;
+// 	position: absolute;
+// 	width: 15%;
+// 	height: 2px;
+// 	background-color: #4cc2c0;
+// 	left: 0;
+// 	bottom: -10px;
+// 	opacity: 0;
+// 	transition: all .3s linear;
+// }
 
 .primary-menu-menu > li:hover > a:after,
 .primary-menu-menu > li:hover > a:before {
@@ -357,17 +357,17 @@ License: http://codecanyon.net/licenses
 ======================================*/
 .primary-menu-menu > li > .megamenu{
 	width: 100%;
-	padding: 30px 30px 20px;
+	padding: 15px 15px 13px;
 	left: 0;
 	position: absolute;
 	display: none;
 	z-index: 99;
 	background: #fff;
-	top: 85px;
+	top: 103px;
 	background-position: right bottom;
 	background-repeat: no-repeat;
 	box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.16);
-	border-radius: 5px;
+	border-radius: 0px;
 }
 
 // @media (max-width: 1024px) {
@@ -1158,11 +1158,12 @@ License: http://codecanyon.net/licenses
 	}
 }
 .primary-menu-menu>li{
-	padding:0 13px 2px;
+	padding:0;
 }
 .primary-menu-menu>li>a{
-	font-size: 13px;
+	font-size: 15px;
 	color: white;
+	padding:12px 10px;
 }
 .primary-menu-menu>li>.megamenu ul{
 	text-align: left;
