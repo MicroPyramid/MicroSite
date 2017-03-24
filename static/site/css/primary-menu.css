@@ -363,18 +363,18 @@ License: http://codecanyon.net/licenses
 	display: none;
 	z-index: 99;
 	background: #fff;
-	top: 88px;
+	top: 85px;
 	background-position: right bottom;
 	background-repeat: no-repeat;
 	box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.16);
 	border-radius: 5px;
 }
 
-@media (max-width: 1024px) {
-	.primary-menu-menu > li.has-megamenu > .megamenu{
-		top: 100px;
-	}
-}
+// @media (max-width: 1024px) {
+// 	.primary-menu-menu > li.has-megamenu > .megamenu{
+// 		top: 100px;
+// 	}
+// }
 
 .primary-menu-menu > li > .megamenu ul {
 	list-style: none;

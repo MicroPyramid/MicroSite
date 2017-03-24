@@ -680,6 +680,16 @@ body{
           padding: 15px 0px;
           width:33.3%;
         }
+        @media(min-width: $mob_min) and (max-width:$mob_max){
+          padding: 15px 0px;
+          width:44%;
+          margin:0 2%;
+          height: 135px;
+          img{
+            max-width: 80%;
+            margin:0px auto;
+          }
+        }
         .smalltechlogo{
           width: 100px;
         }
@@ -704,6 +714,10 @@ body{
 /* technologies_wrapper */
 /* get-in-touch */
 #get-in-touch{
+  .heading{
+    margin-top:0;
+    padding-top: 0;
+  }
   @extend #blog_list;
   .contact-form {
     margin-top: 25px;
@@ -1009,15 +1023,16 @@ body{
         line-height: 22px;
       }
       @media (min-width: $tab_min) and (max-width:$tab_max){
-        font-size: 13px;
-        line-height: 21px;
+        font-size: 15px;
+        letter-spacing:0.6px;
+        line-height: 30px;
       }
     }
   }
   .daimonds_wrap{
     margin: 0px;
     position: relative;
-    margin-left: 50px;
+   
     text-align: center;
     padding: 0px;
     right: -5%;
@@ -1027,11 +1042,7 @@ body{
     @media(max-width: 417px){
       height: 250px!important;
     }
-    @media(min-width: $mob_min) and (max-width:$smob_max){
-      position: static;
-      margin-top: 40px;
-      margin-bottom: 20px;
-    }
+   
     @media(min-width: $tab_min) and (max-width:1200px){
       position: static;
       padding-left: 15px;
@@ -1054,6 +1065,13 @@ body{
     }
     @media (min-width: $tab_min) and (max-width:$tab_max){
       left:5%;
+       margin-left: 50px;
+    }
+     @media(min-width: $mob_min) and (max-width:$smob_max){
+      position: static;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-left:8%;
     }
     .row{
       float: right;
@@ -5054,6 +5072,9 @@ p a{
 
 .sponsor-logo1 {
   text-align: center;
+  @media(min-width: $mob_min) and (max-width: $mob_max){
+    margin:20px 0;
+  }
   img{
     max-width: 60%;
   }
@@ -5236,3 +5257,163 @@ p a{
     width: 100%;
   }
 }
+
+/* inner_content_row starts here */
+.inner_content_row{
+  margin-top: 20px;
+  .left_detailer{
+    .left_heading{
+      font-size: 25px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: $page_title;
+      padding-bottom: 10px;
+      border-bottom:1px solid lighten($page_title, 65%);
+      &.inner_links_heading{
+        font-size: 20px;
+        margin-top: 20px;
+      }
+    }
+    .description{
+      margin-top: 25px;
+      p{
+        color: lighten($page_title, 10%);
+        line-height: 23px;
+        letter-spacing: 0.5px;
+        font-size: 13px;
+        margin-bottom:12px;
+      }
+      ul{
+        margin:0;
+        margin-top: 25px;
+        padding: 0;
+        li{
+          list-style:square;
+          list-style-position: inside;
+          color: lighten($page_title, 10%);
+          line-height: 20px;
+          letter-spacing: 0.5px;
+          font-size: 13px;
+          margin-bottom:12px; 
+        }
+      }
+    }
+    .child_links{
+      margin:0;
+      padding: 0;
+      margin-top: 10px;
+      li{
+        list-style: none;
+        a{
+          display: inline-block;
+          color: $linkedin;
+          font-weight: 600;
+          font-size: 12px;
+          letter-spacing: 0.6px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+
+
+
+
+
+
+  .right_detailer{
+    .right_portion{
+      margin-bottom: 35px;
+      .heading{
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        border-bottom:1px solid lighten($page_title, 65%);
+        padding-bottom: 10px;
+        color: #2f5374;
+      }
+      .contact_block{
+        form{
+          margin-top: 15px;
+          .form-group{
+            margin-bottom: 8px;
+            .form-control{
+              box-shadow: none;
+              color: lighten($page_title, 20%);
+              padding:5px ;
+              border:none;
+              font-size: 12px;
+              font-weight: 500;
+              background: lighten($page_title, 70%);
+              height: 30px;
+              &.textarea{
+                height:auto;
+              }
+            }
+          }
+          button{
+            border-radius: 1px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            background: $theme_green;
+            display: inline-block;
+            padding:5px 10px;
+          }
+        }
+      }
+      .open_source_container{
+        .item_block{
+          margin-bottom:10px;
+          padding-bottom: 3px;
+          border-bottom: 1px dashed #e0e0e0;
+          b{
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            letter-spacing: 0.6px;
+            margin-bottom: 5px;
+            color: $page_title;
+            i{
+              display: inline-block;
+              font-size: 11px;
+              width: 12px;
+              margin-right:1px;
+              height: 11px;
+              text-align: center;
+              color: $breadcrumb_blue;
+            }
+          } 
+          small{
+            display: block;
+            color: lighten($page_title, 35%);
+            text-transform: uppercase;
+            font-weight:600;
+          }
+          p{
+            color: lighten($page_title, 20%);
+          }
+        }
+      }
+      .related_articles{
+        .item_block{
+          p{
+            display: none;
+          }
+        }
+      }
+      .related_services{
+        .item_block{
+          margin-bottom: 5px;
+           b{
+            margin-bottom: 0;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* inner_content_row ends here */

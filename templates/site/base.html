@@ -42,8 +42,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/site/images/apple-touch-icon-120x120-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/site/images/apple-touch-icon-152x152-precomposed.png">
     <!-- google fonts starts here-->
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
     <!-- google fonts ends here-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -55,11 +53,11 @@
     <link rel="stylesheet" type="text/css" href="/static/site/css/primary-menu.css">
 
     <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
-    <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/error_pages.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/design.scss">
-    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
-    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less">
+    <!-- <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less"> -->
+       <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     {% endcompress %}
     {% block extra-styles %}
     {% endblock %}
@@ -81,7 +79,7 @@
       <!-- mp-menu -->
       <!-- /mp-menu -->
     <header class="header" id="site-header">
-      <div class="container-fluid">
+      <div class="container-fluid" style="padding:0;">
         <div class="header-content-wrapper">
           <div class="logo">
             <span class="logo_mp">
@@ -246,6 +244,8 @@
                     <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
                     <li><a href="/subscribe/">Subscribe</a></li>
                     <li><a href="/open-source-softwares/">Oss</a></li>
+                     <li><a href="/careers/">second</a></li>
+                      <li><a href="/careers/">third</a></li>
                     <li><a href="/careers/">Careers</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/in/contact-india/">India</a></li>
