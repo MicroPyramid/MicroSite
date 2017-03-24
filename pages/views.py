@@ -324,7 +324,14 @@ def site_page(request, slug):
             'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
     print ("country")
     print (country_code)
+    print ("slug")
+    print (slug)
     pages = Page.objects.filter(slug=slug, country__code=country_code, is_active=True)
+    print (pages)
+    pages = Page.objects.filter(slug=slug)
+    for page in pages:
+        page.country.code
+    print (pages)
     if not pages:
         pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
     if pages:

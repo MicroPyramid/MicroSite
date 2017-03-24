@@ -93,7 +93,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en'
 
-COUNTRY_CODE = 'usa'
+COUNTRY_CODE = 'us'
 
 COUNTRY_COOKIE_NAME = 'django_country'
 COUNTRY_COOKIE_AGE = None

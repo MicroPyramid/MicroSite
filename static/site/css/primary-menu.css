@@ -101,7 +101,7 @@ License: http://codecanyon.net/licenses
 .primary-menu-menu{
 	margin: 0;
 	padding: 0;
-	float: left;
+	float: none;
 	list-style: none;
 }
 /* Right alignment */
