@@ -1174,9 +1174,22 @@ License: http://codecanyon.net/licenses
 .primary-menu-menu>li>.megamenu .megamenu-row .col3{
 	width: 16.25%;
 }
+ @media (min-width: 240px) and (max-width:767px){
+		.primary-menu-menu>li>.megamenu .megamenu-row .col3{
+border:none;}
+	}
 @media all and (max-width: 768px) {
 	.primary-menu-menu>li>a{
 		font-size: 13px;
 		color: black;
 	}
+}
+
+.primary-menu-responsive .primary-menu-menu>li>a{
+	color:#555;
+	text-align: left;
+}
+.primary-menu-menu > li > .megamenu .megamenu-row .col3 ul{
+	margin-left:0;
+	padding-left:0;
 }

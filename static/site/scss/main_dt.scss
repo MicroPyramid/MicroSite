@@ -23,6 +23,9 @@ body{
   @media (min-width: $mob_min) and (max-width: $smob_max){
     min-height: 400px;
     height: auto;
+    margin-top: 0px;
+    border: none;
+    box-shadow: none;
   }
   @media (min-width: $tab_min) and (max-width:$tab_max){
     height: 400px;

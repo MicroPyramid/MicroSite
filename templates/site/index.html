@@ -155,7 +155,7 @@
             </span>
           </div>
           {% block country_urls %}
-            <div class="col-md-1 top_select_country" style="float: right;margin-top: 9px;">
+            <div class="col-md-1 hidden-xs hidden-sm top_select_country" style="float: right;margin-top: 9px;">
               <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
                 <select class="set_country form-control" id="set_country" name="country">
                 {% get_countries as countries %}
