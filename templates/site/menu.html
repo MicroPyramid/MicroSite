@@ -1,41 +1,36 @@
 {%  load blog_tags%}
+<ul class="primary-menu-menu">
 {% for menu in menu_list %}
-<ul class="primary-menu-menu sub_category_menu">
-  {% if not menu.menu_set.all %}
-  <li class="">
-    <a href="{% if menu.url != 'none' %}{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}{% endif %}">{{ menu.title }}</a>
-  </li>
-  {% elif menu.title != 'Contact Us' %}
 
-    <li class="has-megamenu menu-item-has-children">
-    <a href="{% if menu.url|slugify != 'none' %}{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}{% endif %}">{{ menu.title }}</a>
-    <div class="megamenu" style="background-image: url('img/menu-bg.png');" style="display:none!important;">
+  {% if menu.title != 'Contact Us' %}
+  <li class="has-megamenu menu-item-has-children">
+    <a href="#">{{ menu.title }}</a>
+    <div class="megamenu" style="background-image: url('img/menu-bg.png');">
       <div class="megamenu-row">
-      <div class="col3">
-        <ul id="main">
-          {% for menu in menu.get_active_children %}
-          <li>
-              <h2><a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{ menu.title }}</a></h2>
-              {% if menu.menu_set.all %}
-                  {% for children in menu.get_active_children %}
-                  <li><a href="{% if children.url == 'blog' or children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{children.url}}">{{ children.title }}</a></li>
-                  </li>
-                  <!-- {% get_counter forloop.counter forloop.parentloop.counter as counter %} -->
-                  {% endfor %}
-              {% endif %}
-          </li>
-          {% if forloop.counter|divisibleby:1 %}
+        <div class="col3">
+          <ul>
+            {% for children in menu.get_active_children %}
+
+            <li class="megamenu-item-info">
+              <h5 class="megamenu-item-info-title">{{ children.title }}</h5>
+            </li>
+            {% for each_children in children.get_active_children %}
+            <li>
+              <a href="02_abouts.html">{{each_children.title}}<i class="seoicon-right-arrow"></i></a>
+            </li>
+            {% endfor %}
+            {% if forloop.counter|divisibleby:1 %}
                   </ul>
                   </div>
                    <div class="col3">
                   <ul id="main">
                   {% endif %}
           {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
   </li>
   {% endif %}
-  {% if forloop.last %}
-  {% endif %}
-</ul>
 {% endfor %}
+</ul>

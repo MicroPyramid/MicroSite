@@ -1017,7 +1017,7 @@ body{
   .daimonds_wrap{
     margin: 0px;
     position: relative;
-    margin-left: 50px;
+    margin-left: 0px;
     text-align: center;
     padding: 0px;
     right: -5%;
@@ -1054,6 +1054,7 @@ body{
     }
     @media (min-width: $tab_min) and (max-width:$tab_max){
       left:5%;
+      margin-left: 50px;
     }
     .row{
       float: right;
@@ -1631,7 +1632,7 @@ body{
   }
 }
 #container_wrapper{
-  padding-top: 100px;
+  padding-top: 40px;
   padding-bottom:0px;
   min-height:350px;
 }

@@ -394,6 +394,7 @@ License: http://codecanyon.net/licenses
 	margin-bottom: 10px;
 	line-height: 1.2;
 	font-weight: 600;
+	color: #155d9e;
 }
 
 .primary-menu-menu > li > .megamenu .megamenu-item-info .megamenu-item-info-text,
@@ -1161,6 +1162,7 @@ License: http://codecanyon.net/licenses
 }
 .primary-menu-menu>li>a{
 	font-size: 13px;
+	color: white;
 }
 .primary-menu-menu>li>.megamenu ul{
 	text-align: left;
@@ -1170,5 +1172,11 @@ License: http://codecanyon.net/licenses
 	font-weight: 500;
 }
 .primary-menu-menu>li>.megamenu .megamenu-row .col3{
-	width: 25%;
+	width: 16.25%;
+}
+@media all and (max-width: 768px) {
+	.primary-menu-menu>li>a{
+		font-size: 13px;
+		color: black;
+	}
 }
