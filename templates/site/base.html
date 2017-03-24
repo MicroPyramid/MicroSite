@@ -237,7 +237,18 @@
             {% block footer %}
             <!-- footer links starts here -->
             <div class="row marl" id="footer-links-mp">
+
               <div class="container">
+                 <!-- country_list starts here -->
+                  <div class="country_list inner_country_list text-right hidden-lg hidden-md">
+                      <select class="form-control">
+                        <option>USA</option>
+                        <option>India</option>
+                        <option>Australia</option>
+                      </select>
+                  </div>
+                <!-- country_list ends here -->
+
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
                   <ul class="inner-footer-list">
                     <li><a href="{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
