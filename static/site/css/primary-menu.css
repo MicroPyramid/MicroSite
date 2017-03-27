@@ -388,7 +388,13 @@ License: http://codecanyon.net/licenses
 	font-size: 14px;
 	color: #acacac;
 }
+.primary-menu-menu > li > .megamenu li{
+	padding-left: 15px;
+}
+.primary-menu-menu > li > .megamenu .megamenu-item-info {
+	padding-left: 0 !important;
 
+}
 .primary-menu-menu > li > .megamenu .megamenu-item-info .megamenu-item-info-title,
 .primary-menu-menu > li > .dropdown .megamenu-item-info .megamenu-item-info-title {
 	margin-bottom: 10px;
@@ -396,7 +402,6 @@ License: http://codecanyon.net/licenses
 	font-weight: 600;
 	color: #155d9e;
 }
-
 .primary-menu-menu > li > .megamenu .megamenu-item-info .megamenu-item-info-text,
 .primary-menu-menu > li > .dropdown .megamenu-item-info .megamenu-item-info-text {
 	font-size: 14px;

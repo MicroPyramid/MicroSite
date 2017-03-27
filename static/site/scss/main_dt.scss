@@ -1024,7 +1024,9 @@ body{
       color: #000000;
       @media(min-width: $mob_min) and (max-width:$smob_max){
         font-size: 1em;
-        line-height: 22px;
+        line-height: 30px;
+        font-size: 16px;
+        letter-spacing: 0.6px;
       }
       @media (min-width: $tab_min) and (max-width:$tab_max){
         font-size: 15px;
@@ -5429,7 +5431,7 @@ p a{
   padding:8px 10px;
   select{
     width: 60%;
-    background: none;
+    background: #47484c;
     margin: 0 auto;
     border: 1px solid #ececec;
     color: #eee;
