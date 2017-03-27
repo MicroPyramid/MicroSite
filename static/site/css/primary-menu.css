@@ -388,8 +388,10 @@ License: http://codecanyon.net/licenses
 	font-size: 14px;
 	color: #acacac;
 }
-.primary-menu-menu > li > .megamenu li{
-	padding-left: 15px;
+@media (min-width:240px) and (max-width: 991px){
+	.primary-menu-menu > li > .megamenu li{
+		padding-left: 15px;
+	}
 }
 .primary-menu-menu > li > .megamenu .megamenu-item-info {
 	padding-left: 0 !important;
