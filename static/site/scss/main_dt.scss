@@ -181,6 +181,7 @@ body{
         font-size: 1.2em;
         line-height: 1.8em;
         padding-left:0px;
+        padding-right:0px;
       }
     }
   }
@@ -2156,6 +2157,12 @@ body{
       }
       .subscribe_email{
         width:500px;
+        @media(min-width: $tab_min) and (max-width: $tab_max){
+          width: 400px;
+        }
+        @media(min-width: $mob_min) and (max-width: $mob_max){
+          width: 210px;
+        }
       }
       .input-group-addon{
         background: $theme_green;
@@ -2182,6 +2189,9 @@ body{
     .subscribe_input{
       margin-right: 120px;
       margin-left: 100px;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        margin:0;
+      }
     }
   }
 }
@@ -4905,7 +4915,10 @@ body{
 /* testimonials_row ends here */
 /* contact_row starts here */
 .contact_row{
-  margin: 30px 0 !important;
+  margin: 100px 0 ;
+  @media(min-width: $mob_min) and (max-width : $mob_max){
+    margin:30px 0;
+  }
   .contact_left{
     padding: 0;
     .contact_heading{
@@ -4963,6 +4976,9 @@ body{
   }
   .contact_right{
     padding: 0;
+     @media(min-width: $mob_min) and (max-width : $mob_max){
+      padding:0 15px;
+     }
     .contact_map{
        height: 290px !important;
     }
@@ -5103,10 +5119,9 @@ p a{
 
 .talkshop{
   background-color: #35635e;
-  height: 80px;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 12px;
   margin-top: 20px;
   .talkshop_content{
     color: #fff;
@@ -5114,15 +5129,29 @@ p a{
     font-size: 20px;
     padding-top: 0px;
     padding-bottom: 0px;
+    margin:0;
   }
   .talkshop_button{
     color: #fff;
-    margin-left: 35px;
-    background-color: #ec5353;
+    margin-left: 0px;
     padding-right: 40px;
     padding-left: 40px;
     padding-top: 5px;
     padding-bottom: 5px;
+    display: inline-block;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+       display: block;
+    }
+    a{
+      padding:6px 10px;
+      margin-top: 0px;
+      background-color: #ec5353;
+      display: inline-block;
+     @media(min-width: $mob_min) and (max-width: $mob_max){
+         margin-top: 10px;
+      }
+
+    }
   }
 }
 
