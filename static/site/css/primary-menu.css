@@ -483,6 +483,10 @@ License: http://codecanyon.net/licenses
 	border-right: 2px solid #e0e0e0;
 	padding:0 10px;
 }
+.primary-menu-menu > li > .megamenu .megamenu-row .col3:last-child{
+	border:none;
+	border-right: 2px solid #fff;
+}
 
 .primary-menu-menu > li > .megamenu .megamenu-row .col3{
 	display: table-cell;
