@@ -6,7 +6,10 @@ from micro_blog.models import Category, Post
 import math
 
 
-def sitemap_xml(request):
+def sitemap_xml(request, **kwargs):
+    country = request.COUNTRY_CODE
+    if kwargs:
+        country = kwargs['country_name']
 
     # pages, blog categories, blog posts
 
@@ -14,11 +17,13 @@ def sitemap_xml(request):
              <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
-    menus = Menu.objects.filter(status="on", url__isnull=False).exclude(title='Python Development')
+    menus = Menu.objects.filter(status="on", url__isnull=False).exclude(title='Python Development').exclude(url__in=['/', 'blog'])
     for menu in menus:
-        if str(menu.url) != 'none':
-            xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
-
+        if menu.url and str(menu.url) != 'none':
+            if country == 'us':
+                xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+            else:
+                xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/' + menu.url + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
     categories = Category.objects.filter(is_display=True)
     for category in categories:
         if category.post_set.filter(status='P').exists():
