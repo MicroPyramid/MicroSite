@@ -82,7 +82,7 @@
       <div class="container-fluid" style="padding:0;">
         <div class="header-content-wrapper">
           <div class="logo">
-            <span class="logo_mp">
+            <a href="/"><span class="logo_mp">
               <svg xmlns="http://www.w3.org/2000/svg" width="65px" height="50px" viewBox="0 0 1047 470">
                 <path id="left_one" fill="#1dabdd" stroke="#1dabdd" stroke-width="6" d="M 46.00,462.00
                   C 41.42,461.99 38.50,461.94 34.00,460.71
@@ -165,11 +165,12 @@
                   682.60,29.40 682.42,20.11 693.00,15.65
                   693.00,15.65 729.00,15.00 729.00,15.00 Z"></path>
               </svg>
-              <img src="/static/site/images/logo.png" alt="MicroPyramid Text Logo" data-pin-nopin="true">
-            </span>
+              <img src="/static/site/images/logo.png" alt="Python and Django Development Company" data-pin-nopin="true">
+            </span></a>
           </div>
           {% block country_urls %}
-            <div class="col-md-1 top_select_country" style="float: right;margin-top: 9px;">
+          {% if request.session.design|slugify != 'mobile'|slugify %}
+            <div class="col-md-1 hidden-xs hidden-sm top_select_country" style="float: right;margin-top: 9px;">
               <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
                 <select class="set_country form-control" id="set_country" name="country">
                 {% get_countries as countries %}
@@ -179,6 +180,7 @@
                 </select>
               </form>
             </div>
+          {% endif %}
         {% endblock %}
           <div>
             {% get_single_level_menus as single_level_menu_list %}
@@ -186,9 +188,9 @@
                 <li>
                   contact us
                   <ul class="second_level_menu">
-                      <li><a href="/in/contact-india/">India</a></li>
-                      <li><a href="/usa/contact-usa/">USA</a></li>
-                      <li><a href="/ae/contact-uae/">UAE</a></li>
+                      <li><a href="/contact-india/">India</a></li>
+                      <li><a href="/contact-usa/">USA</a></li>
+                      <li><a href="/contact-uae/">UAE</a></li>
                   </ul>
                 </li>
               </ul>
@@ -240,13 +242,18 @@
 
               <div class="container">
                  <!-- country_list starts here -->
+                 {% if request.session.design|slugify == 'mobile'|slugify %}
                   <div class="country_list inner_country_list text-right hidden-lg hidden-md">
-                      <select class="form-control">
-                        <option>USA</option>
-                        <option>India</option>
-                        <option>Australia</option>
-                      </select>
+                      <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
+                        <select class="set_country form-control" id="set_country" name="country">
+                        {% get_countries as countries %}
+                        {% for country in countries %}
+                        <option value="{{ country.code }}" {% if request.session.country == country.code %}selected{% endif %}>{{ country.name }}</option>
+                        {% endfor %}
+                        </select>
+                      </form>
                   </div>
+                  {% endif %}
                 <!-- country_list ends here -->
 
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
@@ -257,9 +264,9 @@
                     <li><a href="/open-source-softwares/">Oss</a></li>
                     <li><a href="/careers/">Careers</a></li>
                     <li><a href="/blog/">Blog</a></li>
-                    <li><a href="/in/contact-india/">India</a></li>
-                    <li><a href="/usa/contact-usa/">USA</a></li>
-                    <li><a href="/ae/contact-uae/">UAE</a></li>
+                    <li><a href="/contact-india/">India</a></li>
+                    <li><a href="/contact-usa/">USA</a></li>
+                    <li><a href="/contact-uae/">UAE</a></li>
                   </ul>
                 </div>
                 <div class="col-md-2 col-sm-6 col-xs-12 footer-links">
@@ -385,10 +392,9 @@
       });
       $(".set_country").change(function(e) {
           e.preventDefault();
-          $("#country_set_form").submit();
-      
+          $(this).parent('form').submit();
+
       })
-      
     </script>
     {% block extra-js %}
     {% endblock %}

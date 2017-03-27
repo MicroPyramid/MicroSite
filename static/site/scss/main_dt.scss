@@ -4697,7 +4697,7 @@ body{
   }
    #first_row{
     background: $service_mp_bg;
-    padding: 50px;
+    padding: 15px 50px;
     .container{
       width: 100%;
     }
@@ -4706,7 +4706,7 @@ body{
     }
   }
   #middle_row{
-    padding:65px;
+    padding:1px 50px;
     @media (min-width: $tab_min) and (max-width: $tab_max){
       padding:65px 80px;
     }
