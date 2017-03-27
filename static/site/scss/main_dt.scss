@@ -891,9 +891,15 @@ body{
       }
       &.dark2 {
         background: #525357;
+        width: 22.5%;
       }
       &.dark3 {
+        background: rgba(82, 83, 87, 0.94);
+        width: 22.5%;
+      }
+      &.dark4 {
         background: #47484c;
+        width: 21.5%;
       }
     }
   }
@@ -4133,6 +4139,7 @@ body{
 .sitemap_list{
   padding-top: 80px;
   padding-left: 90px;
+  margin-top: 59px;
 }
 .sitemap-child {
     left: 20px;

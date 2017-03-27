@@ -91,6 +91,7 @@ def get_value(value):
 def get_counter(context, value, value1):
     return int(value)+int(value1)
 
+
 @register.filter
 def get_country_name(value):
     print ("usas")

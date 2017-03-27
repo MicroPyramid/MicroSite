@@ -62,3 +62,12 @@ def get_single_level_menus(context):
         if not menu.menu_set.filter(status='on'):
             menus.append(menu)
     return menus
+
+@register.assignment_tag(takes_context=True)
+def get_all_menus(context):
+    menu_list = Menu.objects.filter(status="on", parent=None).prefetch_related(
+        Prefetch("menu_set", queryset=Menu.objects.filter(
+            status="on").order_by('lvl'), to_attr="active_children"
+        )
+    )
+    return menu_list.order_by('lvl')

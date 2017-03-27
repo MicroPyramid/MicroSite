@@ -64,7 +64,9 @@ urlpatterns = [
 
     url(r'^sitemap/$', sitemap),
     url(r'^empty/$', empty),
-    url(r'^sitemap-(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
+    url(r'^sitemap-(?P<country_name>[-\w]+)/$', sitemap, name="sitemap"),
+    url(r'^sitemap-(?P<country_name>[-\w]+)/(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
+    url(r'^sitemap/(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
 
     url(r'^(?P<slug>[-\w]+)/$', site_page),
     url(r'^facebook.rss$', facebook_rss),
