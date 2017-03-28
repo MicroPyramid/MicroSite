@@ -1,10 +1,13 @@
 {% extends 'site/base.html' %}
+{% load blog_tags %}
 {% block title %}
     Sitemap {{sitemap_links.number}} {{ block.super }}
 {% endblock %}
+{% block country_urls %}
+{% endblock %}
 
 {% block meta-description %}
-  <meta name="description" content="Micropyramid sitemap {{sitemap_links.number}} to find all the services and blog posts of python, Django, Angular Js, Django-Oscar, Aws and many more." />
+  <meta name="description" content="Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %} sitemap {{sitemap_links.number}} to find all the services and blog posts of python, Django, Angular Js, Django-Oscar, Aws and many more." />
 {% endblock %}
 
 {% block stage %}
@@ -12,12 +15,15 @@
 <div class='container_wrapper'>
 <ul class="sitemap_list">
     {% if sitemap_links.number == 1  %}
-    <li class="sitemap-parent" ><a href='https://micropyramid.com/'>Home</a></li>
+    <li class="sitemap-parent" ><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}'>Home</a></li>
 <!--     <li class="sitemap-parent"><a href='https://micropyramid.com/how-we-do/'>How We Do</a></li>
     <li class="sitemap-parent"><a href='https://micropyramid.com/tools-we-use/'>Tools We Use</a></li> -->
-    <li class="sitemap-parent"><a href='https://micropyramid.com/contact-india/'>Contact India</a></li>
-    <li class="sitemap-parent"><a href='https://micropyramid.com/contact-usa/'>Contact USA</a></li>
-
+    <li class="sitemap-parent"><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}contact-india/'>Contact India</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}contact-usa/'>Contact USA</a></li>
+    <li class="sitemap-parent"><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}contact-uae/'>Contact UAE</a></li>
+    {% for country in countries %}
+    <li class="sitemap-parent"><a href='https://micropyramid.com/sitemap-{{ country.code }}/'>Sitemap {{country.name}}</a></li>
+    {% endfor %}
     {% endif %}
 
     {% if sitemap_links|get_object_list_class:"Book" %}
@@ -26,7 +32,7 @@
 
     {% for link in sitemap_links %}
     {% if link|get_class_name == 'Book' %}
-      <li class="sitemap-child"><a href='https://micropyramid.com/books/{{link.slug}}'>{{ link.title }}</a></li>
+      <li class="sitemap-child"><a href='https://micropyramid.com/books/{{link.slug}}/'>{{ link.title }}</a></li>
     {% endif %}
     {% endfor %}
 
@@ -37,7 +43,7 @@
     {% if link|get_class_name == 'Page' %}
       {% if link.slug == 'careers' %}
         {% else %}
-          <li class="sitemap-child"><a href='https://micropyramid.com/{{link.slug}}'>{{ link.title }}</a></li>
+          <li class="sitemap-child"><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}{{link.slug}}/'>{{ link.title }}</a></li>
       {% endif %}
     {% endif %}
     {% endfor %}
@@ -49,17 +55,16 @@
     {% for link in sitemap_links %}
     {% if link|get_class_name == 'Category' %}
       {%if link.get_blog_posts %}
-        <li class="sitemap-child"><a href='https://micropyramid.com/blog/category/{{link.slug}}'>{{ link.name }} Posts</a></li>
+        <li class="sitemap-child"><a href='https://micropyramid.com/blog/category/{{link.slug}}/'>{{ link.name }} Posts</a></li>
       {% endif %}
     {% endif %}
     {% endfor %}
-    
     {% if sitemap_links|get_object_list_class:"Category" %}
       <li class="sitemap-parent"><a href='https://micropyramid.com/blog/'>Blog Posts</a></li>
     {% endif %}
     {% for link in sitemap_links %}
     {% if link|get_class_name == 'Post' %}
-        <li class="sitemap-child"><a href='https://micropyramid.com/blog/{{link.slug}}'>{{ link.title }}</a></li>
+        <li class="sitemap-child"><a href='https://micropyramid.com/blog/{{link.slug}}/'>{{ link.title }}</a></li>
     {% endif %}
     {% endfor %}
 
@@ -67,7 +72,7 @@
 {% for page in sitemap_links.paginator.page_range %}
   {% if page == sitemap_links.number %}
   {% else %}
-    <li class="sitemap-parent"><a href="/sitemap-{{ page }}/">Site map {{ page }}</a></li>
+    <li class="sitemap-parent"><a href="/sitemap{% if country and country != "us" %}-{{ country }}{% endif %}/{{ page }}/">Site map {{ page }}</a></li>
   {% endif %}
 {% endfor %}
 

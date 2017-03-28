@@ -892,9 +892,35 @@ body{
       }
       &.dark2 {
         background: #525357;
+        width: 22.5%;
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          width: 100%;
+        }
+        @media(min-width: $mob_min) and (max-width:$smob_max){
+          width: 100%;
+        }
       }
       &.dark3 {
+        background: rgba(82, 83, 87, 0.94);
+          width: 22.5%;
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          width: 50%;
+        }
+
+        @media(min-width: $mob_min) and (max-width:$smob_max){
+          width: 100%;
+        }
+      }
+      &.dark4 {
         background: #47484c;
+          width: 21.5%;
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          width: 50%;
+        }
+
+        @media(min-width: $mob_min) and (max-width:$smob_max){
+          width: 100%;
+        }
       }
     }
   }
@@ -3983,10 +4009,15 @@ body{
 /* bread_crums */
 .bread_crums{
   padding:25px 0px;
+
   margin-top: 60px; 
+
   padding-bottom: 0px;
   @media (min-width:$mob_min)and (max-width:$smob_max){
     display:none;
+  }
+  @media (min-width:$tab_min)and (max-width:$tab_max){
+    margin-top: 0px;
   }
   ul{
     margin:0px;
@@ -4143,6 +4174,7 @@ body{
 .sitemap_list{
   padding-top: 80px;
   padding-left: 90px;
+  margin-top: 59px;
 }
 .sitemap-child {
     left: 20px;
@@ -4709,7 +4741,7 @@ body{
   }
    #first_row{
     background: $service_mp_bg;
-    padding: 50px;
+    padding: 15px 50px;
     .container{
       width: 100%;
     }
@@ -4718,7 +4750,7 @@ body{
     }
   }
   #middle_row{
-    padding:65px;
+    padding:1px 50px;
     @media (min-width: $tab_min) and (max-width: $tab_max){
       padding:65px 80px;
     }

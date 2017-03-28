@@ -59,11 +59,14 @@ urlpatterns = [
     url(r'^blog/', site_blog_home, name="site_blog_home"),
 
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
-    url(r'^sitemap.xml$', sitemap_xml),
+    url(r'^sitemap.xml$', sitemap_xml, name="sitemap_xml"),
+    url(r'^sitemap-(?P<country_name>[-\w]+).xml/$', sitemap_xml, name="sitemap_xml"),
 
     url(r'^sitemap/$', sitemap),
     url(r'^empty/$', empty),
-    url(r'^sitemap-(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
+    url(r'^sitemap-(?P<country_name>[-\w]+)/$', sitemap, name="sitemap"),
+    url(r'^sitemap-(?P<country_name>[-\w]+)/(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
+    url(r'^sitemap/(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),
 
     url(r'^(?P<slug>[-\w]+)/$', site_page),
     url(r'^facebook.rss$', facebook_rss),

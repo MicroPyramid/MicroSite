@@ -101,7 +101,7 @@ License: http://codecanyon.net/licenses
 .primary-menu-menu{
 	margin: 0;
 	padding: 0;
-	// float: left;
+	float: none;
 	list-style: none;
 }
 /* Right alignment */
@@ -291,7 +291,6 @@ License: http://codecanyon.net/licenses
 }
 
 .primary-menu-menu > li.has-megamenu .megamenu ul > li a {
-	
 	font-size: 16px;
 	font-weight: 400;
 	padding: 10px 0;
@@ -299,7 +298,7 @@ License: http://codecanyon.net/licenses
 	color: #666;
 	transition: all .4s ease-out;
 	display: block;
-	line-height: 24px;
+	line-height: 15px;
 }
 
 .primary-menu-menu > li.has-megamenu .megamenu ul > li:hover a {
@@ -402,7 +401,7 @@ License: http://codecanyon.net/licenses
 	margin-bottom: 10px;
 	line-height: 1.2;
 	font-weight: 600;
-	color: #155d9e;
+	color: #155d9e !important;
 }
 .primary-menu-menu > li > .megamenu .megamenu-item-info .megamenu-item-info-text,
 .primary-menu-menu > li > .dropdown .megamenu-item-info .megamenu-item-info-text {
@@ -1206,4 +1205,7 @@ border:none;}
 	margin-left:0;
 	padding-left:0;
 }
-
+.sub_menu{
+	color: #155d9e!important;
+	font-weight: 600;
+}

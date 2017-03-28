@@ -1,13 +1,49 @@
 {% extends 'site/base.html' %}
+{% load blog_tags %}
 
 {% block title %}
-{% if "/contact-usa/" in request.get_full_path %}Python | Django web development Company USA - Micropyramid{% elif "/contact-uae/" in request.get_full_path  %}Python | Django web development Company UAE - Micropyramid{% else %}Python | Django web development Company India - Micropyramid{% endif %} | MicroPyramid
+Python | Django web development Company - Micropyramid {% if "/contact-usa/" in request.get_full_path %}USA{% elif "/contact-uae/" in request.get_full_path  %}UAE{% else %}India{% endif %}
 {% endblock %}
 {% block meta-description %}
-<meta name="description" content="Python and Django web development company {% if request.get_full_path == "/contact-usa/" %}USA{% else %}India{% endif %}. You can speak with our experts for developing projects on python, Django, Angular Js, Aws, React Js, Django-oscar, Django rest framework" />
+<meta name="description" content="Python and Django web development company {% if "/contact-usa/" in request.get_full_path %}USA{% elif "/contact-uae/" in request.get_full_path  %}UAE{% else %}India{% endif %}. You can speak with our experts for developing projects on python, Django, Angular Js, Aws, React Js, Django-oscar, Django rest framework  - Micropyramid {% if "/contact-usa/" in request.get_full_path %}USA{% elif "/contact-uae/" in request.get_full_path  %}UAE{% else %}India{% endif %}" />
+{% if "/contact-india/" in request.get_full_path %}
+<link rel="alternate" hreflang="en-us" href="https://micropyramid.com/contact-india/" />
+<link rel="alternate" hreflang="en-in" href="https://micropyramid.com/in/contact-india/" />
+<link rel="alternate" hreflang="en-ae" href="https://micropyramid.com/ae/contact-india/" />
+<link rel="alternate" hreflang="en-uk" href="https://micropyramid.com/uk/contact-india/" />
+<link rel="alternate" hreflang="en-ca" href="https://micropyramid.com/ca/contact-india/" />
+<link rel="alternate" hreflang="en-au" href="https://micropyramid.com/au/contact-india/" />
+<link rel="alternate" hreflang="x-default" href="https://micropyramid.com/contact-india/" />
+{% elif "/contact-usa/" in request.get_full_path %}
+<link rel="alternate" hreflang="en-us" href="https://micropyramid.com/contact-usa/" />
+<link rel="alternate" hreflang="en-in" href="https://micropyramid.com/in/contact-usa/" />
+<link rel="alternate" hreflang="en-ae" href="https://micropyramid.com/ae/contact-usa/" />
+<link rel="alternate" hreflang="en-uk" href="https://micropyramid.com/uk/contact-usa/" />
+<link rel="alternate" hreflang="en-ca" href="https://micropyramid.com/ca/contact-usa/" />
+<link rel="alternate" hreflang="en-au" href="https://micropyramid.com/au/contact-usa/" />
+<link rel="alternate" hreflang="x-default" href="https://micropyramid.com/contact-usa/" />
+{% else %}
+<link rel="alternate" hreflang="en-us" href="https://micropyramid.com/contact-uae/" />
+<link rel="alternate" hreflang="en-in" href="https://micropyramid.com/in/contact-uae/" />
+<link rel="alternate" hreflang="en-ae" href="https://micropyramid.com/ae/contact-uae/" />
+<link rel="alternate" hreflang="en-uk" href="https://micropyramid.com/uk/contact-uae/" />
+<link rel="alternate" hreflang="en-ca" href="https://micropyramid.com/ca/contact-uae/" />
+<link rel="alternate" hreflang="en-au" href="https://micropyramid.com/au/contact-uae" />
+<link rel="alternate" hreflang="x-default" href="https://micropyramid.com/contact-uae/" />
+{% endif %}
 {% endblock %}
 {% block stage %}
 <div id='container_wrapper'>
+  <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <ul>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a href="." itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Contact {% if "/contact-usa/" in request.get_full_path %}USA{% elif "/contact-uae/" in request.get_full_path  %}UAE{% else %}India{% endif %}</span></a>
+        </li>
+      </ul>
+    </div>
   <!-- contact_row starts here -->
   <div class="container">
     <div class="row marl contact_row">
@@ -53,7 +89,8 @@
         <div class="contact_social_block">
         {% if "/contact-india/" in request.get_full_path %}<h4 class="contact_heading3">MicroPyramid</h4>
           <p>HIG499, 6th phase KPHB, Hyderabad,<br/> India - 500072, +91-9959166266</p>{% elif "/contact-uae/" in request.get_full_path  %}<h4 class="contact_heading3">MicroPyramid</h4><p>Khalifa Building(Near Old Nesto Super Market), Opp Fire Station, Sharjah, UAE 341246, 971 566061239</p>{% else %}<h4 class="contact_heading3">MicroPyramid</h4>
-          <p>280 Moon Clinton Rd, STE D Moon Twp,<br/> Pittsburgh, Pennsylvania 15108, +1-5102300949</p>{% endif %}
+          <p>3737 Mapleshade Ln,<br>Ste #103,<br>  Plano TX 75075, +1 5102300949</p>{% endif %}
+
           <h4 class="contact_heading">Connect With Social Networks</h4>
           <ul class="list-inline">
             <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a>

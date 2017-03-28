@@ -322,8 +322,6 @@ def site_page(request, slug):
             return HttpResponseRedirect('/')
         return render(request, 'site/index.html', {
             'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
-    print ("country")
-    print (country_code)
     pages = Page.objects.filter(slug=slug, country__code=country_code, is_active=True)
     if not pages:
         pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
