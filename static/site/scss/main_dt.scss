@@ -4009,10 +4009,13 @@ body{
 /* bread_crums */
 .bread_crums{
   padding:25px 0px;
-  margin-top: 50px; 
+  margin-top: 50px;
   padding-bottom: 0px;
   @media (min-width:$mob_min)and (max-width:$smob_max){
     display:none;
+  }
+  @media (min-width:$tab_min)and (max-width:$tab_max){
+    margin-top: 0px;
   }
   ul{
     margin:0px;
