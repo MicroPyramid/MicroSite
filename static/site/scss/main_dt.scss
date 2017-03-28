@@ -893,14 +893,34 @@ body{
       &.dark2 {
         background: #525357;
         width: 22.5%;
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          width: 100%;
+        }
+        @media(min-width: $mob_min) and (max-width:$smob_max){
+          width: 100%;
+        }
       }
       &.dark3 {
         background: rgba(82, 83, 87, 0.94);
-        width: 22.5%;
+          width: 22.5%;
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          width: 50%;
+        }
+
+        @media(min-width: $mob_min) and (max-width:$smob_max){
+          width: 100%;
+        }
       }
       &.dark4 {
         background: #47484c;
-        width: 21.5%;
+          width: 21.5%;
+        @media(min-width: $tab_min) and (max-width:$tab_max){
+          width: 50%;
+        }
+
+        @media(min-width: $mob_min) and (max-width:$smob_max){
+          width: 100%;
+        }
       }
     }
   }

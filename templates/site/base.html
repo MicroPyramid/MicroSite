@@ -83,7 +83,7 @@
         <div class="header-content-wrapper">
           <div class="logo">
             <span class="logo_mp">
-            <a href="http://www.micropyramid.com">
+            <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}">
               <svg xmlns="http://www.w3.org/2000/svg" width="65px" height="50px" viewBox="0 0 1047 470">
                 <path id="left_one" fill="#1dabdd" stroke="#1dabdd" stroke-width="6" d="M 46.00,462.00
                   C 41.42,461.99 38.50,461.94 34.00,460.71
@@ -166,7 +166,7 @@
                   682.60,29.40 682.42,20.11 693.00,15.65
                   693.00,15.65 729.00,15.00 729.00,15.00 Z"></path>
               </svg></a>
-              <a href="http://www.micropyramid.com"><img src="/static/site/images/logo.png" alt="Python and Django Development Company" data-pin-nopin="true"></a>
+              <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}"><img src="/static/site/images/logo.png" alt="Python and Django Development Company" data-pin-nopin="true"></a>
             </span>
           </div>
           {% block country_urls %}
@@ -300,7 +300,7 @@
                   <p>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah,<br> UAE 341246, +971 566061239</p>
                   <p><b>Reach Us</b></p>
                   <p>hello@micropyramid.com</p>
-                  <span class="desc"><b>India</b> +91-9959166266</span><br/> <span class="desc"><b>USA</b> +1-5102300949</span><br/>  
+                  <span class="desc"><b>India</b> +91-9959166266</span><br/> <span class="desc"><b>USA</b> +1-5102300949</span><br/>
                   <span class="desc"><b>UAE</b> +971 566061239</span>
                   <div id="version-switcher">
                     </ul>
