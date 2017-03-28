@@ -2,7 +2,7 @@ import time
 from email import utils
 from django.http.response import HttpResponse
 from pages.models import Page, Menu
-from micro_blog.models import Category, Post
+from micro_blog.models import Category, Post, Country
 import math
 
 
@@ -17,20 +17,28 @@ def sitemap_xml(request, **kwargs):
              <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
-    xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+    if country == 'us':
+        xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+    else:
+        xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+
+    if country == 'us':
+        countries = Country.objects.filter().exclude(code='us')
+        for each in countries:
+            xml = xml + '<url><loc>https://micropyramid.com/sitemap-' + str(each.code) + '.xml/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
 
     menus = Menu.objects.filter(status="on", url__isnull=False).exclude(title='Python Development').exclude(url__in=['/', 'blog'])
     for menu in menus:
         if menu.url and str(menu.url) != 'none':
             if country == 'us':
-                xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+                xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
             else:
                 xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
     categories = Category.objects.filter(is_display=True)
     for category in categories:
         if category.post_set.filter(status='P').exists():
             xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug + '/'
-            xml = xml + '/</loc><changefreq>daily</changefreq><priority>0.85</priority>/</url>'
+            xml = xml + '</loc><changefreq>daily</changefreq><priority>0.85</priority>/</url>'
 
     posts = Post.objects.filter(status="P").order_by('-published_on')
     for post in posts:
