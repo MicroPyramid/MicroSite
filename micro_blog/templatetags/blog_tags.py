@@ -79,7 +79,7 @@ def get_slugs(value):
 
 @register.simple_tag
 def get_countries():
-    return Country.objects.filter()
+    return Country.objects.filter().order_by('id')
 
 
 @register.filter

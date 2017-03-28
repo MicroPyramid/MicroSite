@@ -12,29 +12,39 @@
  <meta property="og:title"  content="{% if current_page|slugify == '1'|slugify %}{% else %} Page {{ current_page }} - {% endif %}Django, Python, mongo DB, AWS Technology Blog - MicroPyramid" />
 
 {%endif%}
-
+{% if category %}
+<meta name="description" content="Find and learn latest updates, best coding practices of {{ category.name }} {% if current_page|slugify == '1'|slugify %}{% else %}from Page {{ current_page }}{% endif %} - Micropyramid Blog"/>
+<meta property="og:description" content="Find and learn latest updates, best coding practices of {{ category.name }} {% if current_page|slugify == '1'|slugify %}{% else %}from Page {{ current_page }}{% endif %} - Micropyramid Blog" />
+{% else %}
 <meta name="description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more{% if current_page|slugify == '1'|slugify %}.{% else %} from Page {{ current_page }}{% endif %} - MicroPyramid Blog"/>
 <meta property="og:description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more{% if current_page|slugify == '1'|slugify %}.{% else %} from Page {{ current_page }}{% endif %} - MicroPyramid Blog" />
-
-
+{% endif %}
   {% if current_page|slugify == '1'|slugify %}
   {% else %}
     {% if category %}
-    <link rel="prev" href="https://micropyramid.com/blog/{{slug}}/{{current_page|add:"-1"}}/">
-
+    <link rel="prev" href="https://micropyramid.com/blog/category/{{slug}}/{{current_page|add:"-1"}}/">
     {% else %}
     <link rel="prev" href="https://micropyramid.com/blog/{{current_page|add:"-1"}}/">
     {% endif %}
   {% endif %}
+
   {% if current_page <= last_page %}
     {% if current_page == last_page %}
-      <link rel="next" href="https://micropyramid.com/blog/{{slug}}/{{current_page| add:"1"}}/">
-
+      {% if category %}
+        <link rel="next" href="https://micropyramid.com/blog/category/{{slug}}/{{current_page| add:"1"}}/">
+      {% else %}
+        <link rel="next" href="https://micropyramid.com/blog/{{current_page| add:"1"}}/">
+      {% endif %}
     {% else %}
+      {% if category %}
+      <link rel="next" href="https://micropyramid.com/blog/category/{{slug}}/{{current_page| add:"1"}}/">
+      {% else %}
       <link rel="next" href="https://micropyramid.com/blog/{{current_page| add:"1"}}/">
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endblock %}
+
 {% block contact %}
   <span class="contact_mob pull-right">
   <i class="fa fa-comments"></i>

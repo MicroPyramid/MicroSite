@@ -546,7 +546,7 @@ def contact(request):
         sending_msg.set_html(message)
         sending_msg.set_text('Contact Request')
         sending_msg.set_from(request.POST.get('email'))
-        sending_msg.add_to("nikhila@micropyramid.com")
+        sending_msg.add_to("hello@micropyramid.com")
         sg.send(sending_msg)
 
         data = {'error': False, 'response': 'Contact submitted successfully'}
