@@ -55,8 +55,8 @@
     <link rel="stylesheet" type="text/css" href="/static/site/css/menu.css">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/error_pages.scss">
     <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/design.scss">
-    <!-- <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
-    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less"> -->
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/main.less">
+    <link rel="stylesheet" type="text/less" href="/static/site/less/oss/ref.less">
        <link rel="stylesheet" type="text/x-scss" href="/static/site/scss/main_dt.scss">
     {% endcompress %}
     {% block extra-styles %}
@@ -83,8 +83,7 @@
         <div class="header-content-wrapper">
           <div class="logo">
             <span class="logo_mp">
-            <a href="http://www.micropyramid.com">
-              <svg xmlns="http://www.w3.org/2000/svg" width="65px" height="50px" viewBox="0 0 1047 470">
+             <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}"> <svg xmlns="http://www.w3.org/2000/svg" width="47px" height="47px" viewBox="0 0 1047 470">
                 <path id="left_one" fill="#1dabdd" stroke="#1dabdd" stroke-width="6" d="M 46.00,462.00
                   C 41.42,461.99 38.50,461.94 34.00,460.71
                   31.67,460.08 29.07,459.07 27.02,457.79
@@ -166,11 +165,11 @@
                   682.60,29.40 682.42,20.11 693.00,15.65
                   693.00,15.65 729.00,15.00 729.00,15.00 Z"></path>
               </svg></a>
-              <a href="http://www.micropyramid.com"><img src="/static/site/images/logo.png" alt="MicroPyramid Text Logo" data-pin-nopin="true"></a>
+             <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}"> <img src="/static/site/images/logo.png" alt="Python and Django Development Company" data-pin-nopin="true"></a>
             </span>
           </div>
           {% block country_urls %}
-            <div class="col-md-1 top_select_country" style="float: right;margin-top: 9px;">
+            <div class="col-md-1 hidden-xs hidden-sm top_select_country" style="float: right;margin-top: 9px;">
               <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
                 <select class="set_country form-control" id="set_country" name="country">
                 {% get_countries as countries %}
@@ -187,22 +186,22 @@
                 <li>
                   contact us
                   <ul class="second_level_menu">
-                      <li><a href="/in/contact-india/">India</a></li>
-                      <li><a href="/usa/contact-usa/">USA</a></li>
-                      <li><a href="/ae/contact-uae/">UAE</a></li>
+                      <li><a href="/contact-india/">India</a></li>
+                      <li><a href="/contact-usa/">USA</a></li>
+                      <li><a href="/contact-uae/">UAE</a></li>
                   </ul>
                 </li>
               </ul>
               <ul id="single_level_menu">
                 {% for menu in single_level_menu_list %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
-                </li>
+                  <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'usa' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                  </li>
                 {% endfor %}
               </ul>
-
             </div>
         </div>
-        <div class="">
+        <div class="clearfix"></div>
+        <div class"">
         <nav id="primary-menu" class="primary-menu">
             <a href='javascript:void(0)' id="menu-icon-trigger" class="menu-icon-trigger showhide">
               <span class="mob-menu--title">Menu</span>
@@ -218,6 +217,7 @@
 
             {% get_menus as menu_list %}
             {% include "site/menu.html" with  menu_list=menu_list %}
+
           </nav>
         </div>
       </div>
@@ -242,11 +242,14 @@
               <div class="container">
                  <!-- country_list starts here -->
                   <div class="country_list inner_country_list text-right hidden-lg ">
-                      <select class="form-control">
-                        <option>USA</option>
-                        <option>India</option>
-                        <option>Australia</option>
-                      </select>
+                      <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
+                  <select class="set_country form-control" id="set_country" name="country">
+                  {% get_countries as countries %}
+                  {% for country in countries %}
+                  <option value="{{ country.code }}" {% if request.session.country == country.code %}selected{% endif %}>{{ country.name }}</option>
+                  {% endfor %}
+                  </select>
+              </form>
                   </div>
                 <!-- country_list ends here -->
 
@@ -256,8 +259,6 @@
                     <!-- <li><a href="{{request.get_full_path}}">Contact Us</a></li> -->
                     <li><a href="/subscribe/">Subscribe</a></li>
                     <li><a href="/open-source-softwares/">Oss</a></li>
-                     <li><a href="/careers/">second</a></li>
-                      <li><a href="/careers/">third</a></li>
                     <li><a href="/careers/">Careers</a></li>
                     <li><a href="/blog/">Blog</a></li>
                     <li><a href="/in/contact-india/">India</a></li>
@@ -392,7 +393,7 @@
       });
       $(".set_country").change(function(e) {
           e.preventDefault();
-          $("#country_set_form").submit();
+          $(this).parent('form').submit();
       
       })
       
