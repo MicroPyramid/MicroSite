@@ -768,6 +768,9 @@ body{
   padding: 20px 0px;
   text-align: center;
   background: #ececec;
+  @media(min-width : $mob_min) and (max-width: $tab_maxi){
+    text-align:center !important;
+  }
   .list-inline{
     margin: 0px;
     padding: 0px;
@@ -964,6 +967,9 @@ body{
   .footer-mp{
       color: #D1D1D1;
       font-size: 12px;
+      @media(min-width: $mob_min) and (max-width: $tab_maxi){
+        margin-top:20px;
+      }
       b{
         color: #fff;
       }
@@ -4271,6 +4277,9 @@ body{
 /* tools_wrapper */
 .sitemap_rights{
   margin-top: 10px;
+    @media(min-width : $mob_min) and (max-width: $tab_maxi){
+    text-align:center !important;
+  }
   span{
     display: inline-block;
     font-size: 12px;
@@ -5316,6 +5325,7 @@ p a{
     font-size: 13px;
     color: #969696;
     text-transform: capitalize;
+    -webkit-appearance:none;
   }
 }
 .work_container{
@@ -5500,6 +5510,9 @@ p a{
   }
   &.inner_country_list{
     background: #4c4c4c;
+    @media(min-width: $med_min) and (max-width: $tab_maxi){
+      display:none;
+    }
     select{
       background: #4c4c4c;
       color: #eee;
