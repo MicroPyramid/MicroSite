@@ -15,6 +15,9 @@ from pages.models import Menu
 from micro_blog.models import Post
 from datetime import datetime
 from datetime import timedelta
+import requests
+from django.core.urlresolvers import reverse
+from django.conf import settings
 
 
 def is_employee(function):
@@ -145,3 +148,60 @@ def forgot_password(request):
             data = {'error': True, "message": "Entered Email id is incorrect."}
 
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+
+def google_login(request):
+    if 'code' in request.GET:
+        params = {
+            'grant_type': 'authorization_code',
+            'code': request.GET.get('code'),
+            'redirect_uri':  request.scheme + '://' + request.META['HTTP_HOST'] + reverse('micro_admin:google_login'),
+            'client_id': settings.GP_CLIENT_ID,
+            'client_secret': settings.GP_CLIENT_SECRET
+        }
+
+        info = requests.post(
+            "https://accounts.google.com/o/oauth2/token", data=params)
+        info = info.json()
+        url = 'https://www.googleapis.com/oauth2/v1/userinfo'
+        params = {'access_token': info['access_token']}
+        kw = dict(params=params, headers={}, timeout=60)
+        response = requests.request('GET', url, **kw)
+        user_document = response.json()
+        email_matches = User.objects.filter(email=user_document['email'])
+        link = "https://plus.google.com/" + user_document['id']
+
+        if email_matches:
+            user = email_matches[0]
+
+            # if not user.is_gp_connected:
+            #     Google.objects.create(
+            #         user=user,
+            #         google_url=link,
+            #         verified_email=user_document['verified_email'],
+            #         google_id=user_document['id'],
+            #         family_name=user_document['family_name'],
+            #         name=user_document['name'],
+            #         given_name=user_document['given_name'],
+            #         dob=dob,
+            #         email=user_document['email'],
+            #         gender=gender,
+            #         picture=picture,
+            #     )
+            if user.is_active and user.email.split('@')[-1] == 'micropyramid.com':
+                user.google_plus_url = link
+                user.save()
+                user = authenticate(username=user.email)
+                login(request, user)
+                return HttpResponseRedirect('/portal/')
+        return HttpResponseRedirect('/')
+    else:
+        rty = "https://accounts.google.com/o/oauth2/auth?client_id=" + \
+               settings.GP_CLIENT_ID + "&response_type=code"
+        rty += "&scope=https://www.googleapis.com/auth/userinfo.profile" + \
+            " https://www.googleapis.com/auth/userinfo.email" + \
+            " https://www.google.com/m8/feeds/contacts/&redirect_uri=" + \
+            request.scheme + '://' + \
+            request.META['HTTP_HOST'] + \
+            reverse('micro_admin:google_login') + "&state=1235dfghjkf123"
+        return HttpResponseRedirect(rty)

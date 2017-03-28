@@ -322,8 +322,13 @@ def archive_posts(request, year, month):
         raise Http404
     c = {}
     c.update(csrf(request))
+    prev_page, previous_page, aft_page, after_page = get_prev_after_pages_count(
+    page, no_pages)
+
     return render(request, 'site/blog/index.html', {'current_page': page, 'year': year, 'month': month, 'last_page': no_pages,
-                                                    'posts': blog_posts, 'csrf_token': c['csrf_token']})
+                                                    'posts': blog_posts, 'csrf_token': c['csrf_token'],
+                                                    'prev_page': prev_page, 'previous_page': previous_page,
+                                                    'aft_page': aft_page, 'after_page': after_page})
 
 
 @login_required

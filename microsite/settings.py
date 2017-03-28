@@ -90,6 +90,12 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    # ... your other backends
+    'micro_admin.auth_backend.PasswordlessAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 LANGUAGE_CODE = 'en'
 
@@ -320,6 +326,9 @@ if SENTRY_ENABLED:
 # LOCALE_PATHS = (
 #     os.path.join(BASE_DIR, 'locale'),
 # )
+
+GP_CLIENT_ID = "983386206805-0dns7vrdaqcrn2nfls914b0vjjdhnhnb.apps.googleusercontent.com"
+GP_CLIENT_SECRET = "vO4tq49ahgH6afrEzrIQSIIU"
 
 try:
     from microsite.settings_local import *  # noqa
