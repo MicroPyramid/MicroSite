@@ -558,7 +558,6 @@ def contact(request):
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     else:
-        print (validate_contact.errors)
         errors = {}
         data = {'error': True, 'errinfo': validate_contact.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')

@@ -58,11 +58,11 @@ urlpatterns = [
     url(r'^blog/category/(?P<slug>[-\w]+)/$', blog_category, name="blog_category"),
     url(r'^blog/category/(?P<slug>[-\w]+)/(?P<page_num>[-\w]+)/$', blog_category, name="blog_category"),
 
-    url(r'^blog/', site_blog_home, name="site_blog_home"),
+    url(r'^blog/$', site_blog_home, name="site_blog_home"),
 
     url(r'^portal/content/', include('pages.urls', namespace='pages')),
     url(r'^sitemap.xml$', sitemap_xml, name="sitemap_xml"),
-    url(r'^sitemap-(?P<country_name>[-\w]+).xml/$', sitemap_xml, name="sitemap_xml"),
+    # url(r'^sitemap-(?P<country_name>[-\w]+).xml/$', sitemap_xml, name="sitemap_xml"),
 
     url(r'^sitemap/$', sitemap),
     url(r'^empty/$', empty),
@@ -87,6 +87,7 @@ urlpatterns += country_patterns(
     url(r'^contact-aus/$', contact, name="contact_usa"),
     url(r'^contact-uk/$', contact, name="contact_usa"),
     url(r'^contact-uae/$', contact, name="contact_uae"),
+    url(r'^sitemap.xml$', sitemap_xml, name="sitemap_xml"),
     url(r'^(?P<slug>[-\w]+)/$', site_page),
 
 )

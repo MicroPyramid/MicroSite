@@ -18,37 +18,37 @@ def sitemap_xml(request, **kwargs):
              http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'''
 
     if country == 'us':
-        xml = xml + '<url><loc>https://micropyramid.com/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>https://micropyramid.com/</loc></url>'
     else:
-        xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/</loc></url>'
 
     if country == 'us':
         countries = Country.objects.filter().exclude(code='us')
         for each in countries:
-            xml = xml + '<url><loc>https://micropyramid.com/sitemap-' + str(each.code) + '.xml/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+            xml = xml + '<url><loc>https://micropyramid.com/' + str(each.code) + '/sitemap.xml</loc></url>'
 
     menus = Menu.objects.filter(status="on", url__isnull=False).exclude(title='Python Development').exclude(url__in=['/', 'blog'])
     for menu in menus:
         if menu.url and str(menu.url) != 'none':
             if country == 'us':
-                xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+                xml = xml + '<url><loc>https://micropyramid.com/' + menu.url + '/</loc></url>'
             else:
-                xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/' + menu.url + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+                xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/' + menu.url + '/</loc></url>'
     categories = Category.objects.filter(is_display=True)
     for category in categories:
         if category.post_set.filter(status='P').exists():
             xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug + '/'
-            xml = xml + '</loc><changefreq>daily</changefreq><priority>0.85</priority>/</url>'
+            xml = xml + '</loc>/</url>'
 
     posts = Post.objects.filter(status="P").order_by('-published_on')
     for post in posts:
-        xml = xml + '<url><loc>https://micropyramid.com/blog/' + post.slug + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>https://micropyramid.com/blog/' + post.slug + '/</loc></url>'
 
     no_pages = int(math.ceil(float(posts.count()) / 10))
     for page_num in range(1, no_pages+1):
-        xml = xml + '<url><loc>https://micropyramid.com/blog/' + str(page_num) + '/</loc><changefreq>daily</changefreq><priority>0.85</priority></url>'
+        xml = xml + '<url><loc>https://micropyramid.com/blog/' + str(page_num) + '/</loc></url>'
 
-    xml = xml + '<url><loc>https://micropyramid.com/sitemap/</loc><changefreq>daily</changefreq><priority>0.5</priority></url>'
+    xml = xml + '<url><loc>https://micropyramid.com/sitemap/</loc></url>'
     xml = xml + '</urlset>'
 
     return HttpResponse(xml, content_type="text/xml")

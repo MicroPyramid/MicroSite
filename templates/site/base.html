@@ -182,6 +182,8 @@
         {% endblock %}
           <div>
             {% get_single_level_menus as single_level_menu_list %}
+            {% if request.session.design|slugify != 'mobile'|slugify %}
+
             <ul id="single_level_menu">
                 <li>
                   contact us
@@ -192,6 +194,7 @@
                   </ul>
                 </li>
               </ul>
+              {%  endif %}
               <ul id="single_level_menu">
                 {% for menu in single_level_menu_list %}
                   <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
@@ -217,7 +220,18 @@
 
             {% get_menus as menu_list %}
             {% include "site/menu.html" with  menu_list=menu_list %}
-
+            {% if request.session.design|slugify == 'mobile'|slugify %}
+              <ul id="single_level_menu">
+                <li>
+                  contact us
+                  <ul class="second_level_menu">
+                      <li><a href="/contact-india/">India</a></li>
+                      <li><a href="/contact-usa/">USA</a></li>
+                      <li><a href="/contact-uae/">UAE</a></li>
+                  </ul>
+                </li>
+              </ul>
+            {% endif %}
           </nav>
         </div>
       </div>

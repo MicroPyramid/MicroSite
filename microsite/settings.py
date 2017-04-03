@@ -37,24 +37,24 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'microsite.middleware.CountryMiddleware',
     # 'solid_i18n.middleware.SolidLocaleMiddleware',
     # 'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
-
+    'microsite.middleware.LowerCased',
     'microsite.middleware.RequestSessionMiddleware',
     'microsite.middleware.DetectMobileBrowser',
     'django.middleware.cache.FetchFromCacheMiddleware'
 )
-
+APPEND_SLASH = True
 # SOLID_I18N_USE_REDIRECTS = True
 # SOLID_I18N_HANDLE_DEFAULT_PREFIX = True
 # SOLID_I18N_DEFAULT_PREFIX_REDIRECT = True

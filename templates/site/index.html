@@ -169,6 +169,7 @@
         {% endblock %}
           <div>
             {% get_single_level_menus as single_level_menu_list %}
+            {% if request.session.design|slugify != 'mobile'|slugify %}
             <ul id="single_level_menu">
                 <li>
                   contact us
@@ -179,6 +180,7 @@
                   </ul>
                 </li>
               </ul>
+              {%  endif %}
               <ul id="single_level_menu">
                 {% for menu in single_level_menu_list %}
                 <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
@@ -204,7 +206,6 @@
 
             {% get_menus as menu_list %}
             {% include "site/menu.html" with  menu_list=menu_list %}
-
           </nav>
         </div>
       </div>

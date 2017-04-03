@@ -31,29 +31,28 @@ class CustomBlogSlugInlineFormSet(forms.BaseInlineFormSet):
                 "Only one slug can be active at a time.")
 
 
-class customPageCountryInlineFormSet(forms.BaseModelFormSet):
-    parent = forms.CharField(max_length=500, required=False)
-    country = forms.CharField(max_length=500, required=False)
+# class customPageCountryInlineFormSet(forms.BaseModelFormSet):
+#     parent = forms.CharField(max_length=500, required=False)
+#     country = forms.CharField(max_length=500, required=False)
 
-    def __init__(self, *args, **kwargs):
-        # self.parent = kwargs.pop('parent', None)
-        super(customPageCountryInlineFormSet, self).__init__(*args, **kwargs)
+#     def __init__(self, *args, **kwargs):
+#         # self.parent = kwargs.pop('parent', None)
+#         super(customPageCountryInlineFormSet, self).__init__(*args, **kwargs)
 
-    def clean(self):
-        super(customPageCountryInlineFormSet, self).clean()
+#     def clean(self):
+#         super(customPageCountryInlineFormSet, self).clean()
 
-        if any(self.errors):
-            return
+#         if any(self.errors):
+#             return
 
-        active_slugs = 0
-        for form in self.forms:
-            if form.cleaned_data.get("is_default"):
-                active_slugs += 1
+#         active_slugs = 0
+#         for form in self.forms:
+#             if form.cleaned_data.get("is_default"):
+#                 active_slugs += 1
 
-        if active_slugs > 1:
-            print ("error form")
-            raise forms.ValidationError(
-                "Only one country data can be default at a time.")
+#         if active_slugs > 1:
+#             raise forms.ValidationError(
+#                 "Only one country data can be default at a time.")
 
     # def save_new(self, form, commit=True):
     #     print ("hello")

@@ -26,7 +26,6 @@ class CountryRegexURLResolver(RegexURLResolver):
                 regex_string = ''
             else:
                 regex_string = '^%s/' % country_code
-            print (regex_string)
             self._regex_dict[country_code] = re.compile(regex_string)
         return self._regex_dict[country_code]
 

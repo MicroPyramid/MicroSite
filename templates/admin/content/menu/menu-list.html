@@ -115,7 +115,7 @@
   $ = jQuery;
   $(document).ready(function() {
     $('.fa-caret-down').click(function(){
-        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'down'},function(data){
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order',{'mode':'down'},function(data){
           if (data.message){
             alert(data.message);
           }
@@ -123,7 +123,7 @@
         }, 'json');
     });
     $('.fa-caret-up').click(function(){
-        $.post('/portal/content/menu/'+$(this).attr('id')+'/order/',{'mode':'up'},function(data){
+        $.post('/portal/content/menu/'+$(this).attr('id')+'/order',{'mode':'up'},function(data){
           if (data.message){
             alert(data.message);
           }

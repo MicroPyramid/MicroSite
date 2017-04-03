@@ -138,7 +138,6 @@ def s3_objects_set_metadata(request):
 def sitemap(request, **kwargs):
     if request.GET.get('page'):
         url = request.path + request.GET.get('page') + '/'
-        print (url)
         return redirect(url, permanent=False)
     page = 1
     country = request.COUNTRY_CODE
