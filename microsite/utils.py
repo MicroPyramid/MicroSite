@@ -30,8 +30,6 @@ def get_country_from_request(request, check_path=False):
 
     if check_path:
         lang_code = get_country_from_path(request.path_info)
-        print ("language_code")
-        print (lang_code)
         if lang_code is not None:
             return lang_code
 
