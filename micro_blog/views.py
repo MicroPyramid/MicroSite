@@ -1,20 +1,18 @@
 from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.shortcuts import redirect
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
+from micro_blog.models import Category, Tags, Post, Subscribers, Post_Slugs
 from pages.models import Contact
 import math
 # from django.core.files.storage import default_storage
-from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
+from micro_blog.forms import BlogpostForm, BlogCategoryForm
 from django.forms.models import inlineformset_factory
 import datetime
 import json
 from micro_admin.models import User
-from ast import literal_eval
 from pages.forms import ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid

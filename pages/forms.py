@@ -12,8 +12,6 @@ class PageForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PageForm, self).__init__(*args, **kwargs)
 
-    def clean_is_default(self):
-        pass
 
     def save(self, commit=True):
         instance = super(PageForm, self).save(commit=False)
@@ -21,14 +19,6 @@ class PageForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
-
-
-class PageNewForm(forms.ModelForm):
-
-    class Meta:
-        model = Page
-        exclude = ('category',)
-
 
 
 class MenuForm(forms.ModelForm):

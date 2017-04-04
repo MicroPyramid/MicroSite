@@ -5,15 +5,11 @@ import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from micro_blog.models import Country
-from pages.forms import MenuForm, PageForm, PageNewForm
+from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
-from micro_blog.forms import customPageCountryInlineFormSet
 from django.template.defaultfilters import slugify
-from django.forms.models import inlineformset_factory, modelformset_factory
-from django.db.models import Q
-from django.core.urlresolvers import reverse
 from django.utils.http import is_safe_url
 from urllib.parse import unquote
 from django.conf import settings
@@ -31,7 +27,7 @@ def new_page(request):
     categories = Category.objects.all()
     countries = Country.objects.all()
     if request.method == 'POST':
-        validate_page = PageNewForm(request.POST)
+        validate_page = PageForm(request.POST)
         if validate_page.is_valid():
             page = validate_page.save(commit=False)
             page.parent = None
@@ -149,7 +145,7 @@ def edit_page(request, pk):
         else:
             validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            edit_page = validate_page.save(commit = False)
+            edit_page = validate_page.save(commit=False)
             edit_page.slug = slugify(request.POST.get('slug'))
 
             if request.POST.get('is_default', '') == 'true':
