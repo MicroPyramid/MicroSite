@@ -1,4 +1,6 @@
 {% load compress %}
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,15 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
 
-    {% compress css %}
-    <link type="text/less" href="/static/admin/less/style.less" rel="stylesheet">
-    <link type="text/less" href="/static/admin/less/bootstap-vertical-tabs.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/less" href="/static/admin/less/dashboard.less" />
-    <link rel="stylesheet" type="text/less" href="/static/admin/less/jquery.tagsinput.less" />
-    <link rel="stylesheet" type="text/css" href="/static/admin/less/daterangepicker.css" />
-
-    {% endcompress %}
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 
@@ -31,13 +25,8 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
-    {% compress js %}
-    <script src="/static/site/js/jquery.form.js"></script>
-    <script type="text/javascript" src="/static/admin/js/jquery.tagsinput.min.js"></script>
-    <script type="text/javascript" src="/static/admin/js/jquery.form.js"></script>
-    <script type="text/javascript" src="/static/admin/js/moment.js"></script>
-    <script type="text/javascript" src="/static/admin/js/daterangepicker.js"></script>
-    {% endcompress %}
+    {% render_bundle 'portal' 'css' %}
+
   </head>
   <body>
     <div class="navbar navbar-fixed-top">
@@ -118,7 +107,7 @@
       <!-- /main-inner -->
     </div>
     <!-- /main -->
-    {% compress js %}
+    {% render_bundle 'portal' 'js' %}
     <script type="text/javascript">
      $(".select2").select2({
         tags: true,
@@ -130,6 +119,5 @@
         $('a[href="'+window.location.pathname+'"]').parent().parent().parent().addClass("active");
       });
     </script>
-    {% endcompress %}
   </body>
 </html>

@@ -12,4 +12,4 @@ static/uploads
 fabfile
 .sass-cache
 microsite/settings_local.py
-
+node_modules/

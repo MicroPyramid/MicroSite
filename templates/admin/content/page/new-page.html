@@ -58,8 +58,6 @@
     </form>
   </div>
 </div>
-{% load compress %}
-{% compress js %}
 <script type="text/javascript">
   CKEDITOR.config.allowedContent = true;
   var editor = CKEDITOR.replace('textareacontents');
@@ -99,5 +97,4 @@ $('#all_categories').click(function(e){
 
 
 </script>
-{% endcompress %}
 {% endblock %}

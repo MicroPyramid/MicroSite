@@ -129,32 +129,6 @@ License: http://codecanyon.net/licenses
 	margin-right: 3px;
 }
 
-// .primary-menu-menu > li > a:before {
-// 	content: '';
-// 	display: block;
-// 	width: 80%;
-// 	height: 2px;
-// 	background-color: #4cc2c0;
-// 	position: absolute;
-// 	right: 0;
-// 	bottom: -10px;
-// 	opacity: 0;
-// 	transition: all .3s linear;
-// }
-
-// .primary-menu-menu > li > a:after {
-// 	content: '';
-// 	display: block;
-// 	position: absolute;
-// 	width: 15%;
-// 	height: 2px;
-// 	background-color: #4cc2c0;
-// 	left: 0;
-// 	bottom: -10px;
-// 	opacity: 0;
-// 	transition: all .3s linear;
-// }
-
 .primary-menu-menu > li:hover > a:after,
 .primary-menu-menu > li:hover > a:before {
 	opacity: 1;
@@ -368,12 +342,6 @@ License: http://codecanyon.net/licenses
 	box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.16);
 	border-radius: 0px;
 }
-
-// @media (max-width: 1024px) {
-// 	.primary-menu-menu > li.has-megamenu > .megamenu{
-// 		top: 100px;
-// 	}
-// }
 
 .primary-menu-menu > li > .megamenu ul {
 	list-style: none;

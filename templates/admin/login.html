@@ -1,3 +1,5 @@
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml">
 
@@ -10,10 +12,7 @@
   <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css" />
-  {% load compress %}
-  {% compress css %}
-  <link type="text/less" href="/static/admin/less/login-style.less" rel="stylesheet" />
-  {% endcompress %}
+  <link type="text/css" href="/static/admin/less/login-style.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>

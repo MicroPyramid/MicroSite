@@ -30,10 +30,10 @@ INSTALLED_APPS = (
     'pages',
     'micro_blog',
     'sorl.thumbnail',
-    'compressor',
     'search',
     # 'django_simple_forum',
     'simple_pagination',
+    'webpack_loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -130,7 +130,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
-COMPRESS_ROOT = BASE_DIR + '/static/'
 BLOG_IMAGES = BASE_DIR + '/static/blog/'
 TEAM_IMAGES = BASE_DIR + '/static/team/'
 CLIENT_IMAGES = BASE_DIR + '/static/client/'
@@ -148,13 +147,11 @@ TEMPLATE_LOADERS = (
     "django.template.loaders.app_directories.Loader",
 )
 
-COMPRESS_ENABLED = True
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # other finders..
-    'compressor.finders.CompressorFinder',
 )
 
 CELERY_TIMEZONE = "Asia/Calcutta"
@@ -200,26 +197,10 @@ LOGGING = {
 
 SITE_URL = "https://micropyramid.com"
 
-COMPRESS_ENABLED = True
-
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-    ('text/x-scss', 'sass --scss {infile} {outfile}'),
-)
-
-COMPRESS_OFFLINE_CONTEXT = {
-    'STATIC_URL': 'STATIC_URL',
-}
-
-
 if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
-COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
@@ -335,3 +316,22 @@ try:
 except ImportError as e:
     pass
 
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'webpack_bundles/', # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    },
+    'OSS':{
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'oss_bundles/', # must end with slash
+        'STATS_FILE': os.path.join(BASE_DIR, 'oss-webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
