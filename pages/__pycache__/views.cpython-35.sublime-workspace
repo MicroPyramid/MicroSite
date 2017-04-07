@@ -1,0 +1,961 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pink",
+				"pink_block"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"padd",
+				"padding-top"
+			],
+			[
+				"bdy",
+				"body_bg"
+			],
+			[
+				"f",
+				"font-style"
+			],
+			[
+				"ser",
+				"servicee	function"
+			],
+			[
+				"the",
+				"theme_green"
+			],
+			[
+				"in_",
+				"in_grey"
+			],
+			[
+				"margi",
+				"margin"
+			],
+			[
+				"add",
+				"padding-top"
+			],
+			[
+				"padding-t",
+				"padding-top"
+			],
+			[
+				"box-d",
+				"box-shadow"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"margin-t",
+				"margin-top"
+			],
+			[
+				"margin-",
+				"margin-top"
+			],
+			[
+				"hea",
+				"header_green"
+			],
+			[
+				"fot",
+				"font-weight"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"tab",
+				"table-column"
+			],
+			[
+				"text-",
+				"text-transform"
+			],
+			[
+				"margn",
+				"margin"
+			],
+			[
+				"c",
+				"clear	Attr"
+			],
+			[
+				"cur",
+				"current_block"
+			],
+			[
+				"skip",
+				"skip_block"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"fun",
+				"fun	Function"
+			],
+			[
+				"sky",
+				"sky_color"
+			],
+			[
+				"border",
+				"border"
+			],
+			[
+				"order",
+				"border"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"lit",
+				"list-style-position"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"gree",
+				"green"
+			],
+			[
+				"head",
+				"header_yellow"
+			],
+			[
+				"PADDING-",
+				"padding-bottom"
+			],
+			[
+				"dark",
+				"dark_bg"
+			],
+			[
+				"fonts",
+				"font-size"
+			],
+			[
+				"arg",
+				"margin-bottom"
+			],
+			[
+				"tex",
+				"text_color"
+			],
+			[
+				"blue",
+				"blue_text"
+			],
+			[
+				"iline",
+				"inline-block"
+			],
+			[
+				"fnt-",
+				"font-weight"
+			],
+			[
+				"login_form",
+				"login_form_block"
+			],
+			[
+				"ligh",
+				"light_green"
+			],
+			[
+				"light",
+				"light_text"
+			],
+			[
+				"dar",
+				"dark_text"
+			],
+			[
+				"box-",
+				"box-shadow"
+			],
+			[
+				"p",
+				"position"
+			],
+			[
+				"inner",
+				"inner_page_bg"
+			],
+			[
+				"fnt",
+				"font-size"
+			],
+			[
+				"padding",
+				"padding"
+			],
+			[
+				"on",
+				"font-weight"
+			],
+			[
+				"text-tr",
+				"text-transform"
+			],
+			[
+				"h",
+				"href	Attr"
+			],
+			[
+				"fn",
+				"font-size"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"backgroun",
+				"background-position"
+			],
+			[
+				"login",
+				"login_bg"
+			],
+			[
+				"tet",
+				"text-align"
+			],
+			[
+				"text_color",
+				"text_color2"
+			],
+			[
+				"bo",
+				"border"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"b",
+				"background"
+			],
+			[
+				"inli",
+				"inline-block"
+			],
+			[
+				"cell",
+				"cellspacing	Attr"
+			],
+			[
+				"fr",
+				"form-control"
+			],
+			[
+				"offe",
+				"offer_table"
+			],
+			[
+				"dis",
+				"discount_modal"
+			],
+			[
+				"navbar",
+				"navbar-right"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"list-sty",
+				"list-style-position"
+			],
+			[
+				"cel",
+				"cellspacing	Attr"
+			],
+			[
+				"mari",
+				"margin-bottom"
+			],
+			[
+				"ma",
+				"margin-top"
+			],
+			[
+				"padding-",
+				"padding-bottom"
+			],
+			[
+				"gr",
+				"green"
+			],
+			[
+				"da",
+				"dark_green"
+			],
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"s",
+				"src	Attr"
+			],
+			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"table",
+				"table-cell"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"ont-",
+				"font-size"
+			],
+			[
+				"tabe",
+				"table-cell"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"heade",
+				"header_red"
+			],
+			[
+				"header_",
+				"header_red"
+			],
+			[
+				"header",
+				"header_green"
+			],
+			[
+				"wid",
+				"width	Attr"
+			],
+			[
+				"re",
+				"rel	Attr"
+			],
+			[
+				"min-",
+				"min-height"
+			],
+			[
+				"reset",
+				"reset_menu"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"le",
+				"letter-spacing"
+			],
+			[
+				"st",
+				"style	Attr"
+			],
+			[
+				"im",
+				"important"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"he",
+				"header_blue"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"heda",
+				"header_red"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"th",
+				"thead	Tag"
+			],
+			[
+				"tabl",
+				"table-cell"
+			],
+			[
+				"verti",
+				"vertical-align"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "inst",
+		"selected_items":
+		[
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/santharao/Desktop/New_folders_works/microtrack_dashboard/css/main.scss",
+		"/home/santharao/Desktop/New_folders_works/microtrack_dashboard/css/main.css",
+		"/home/santharao/Desktop/New_folders_works/microtrack_dashboard/js/custom.min.js",
+		"/home/santharao/Desktop/New_folders_works/gentelella-master/build/css/custom.css",
+		"/home/santharao/Desktop/New_folders_works/gentelella-master/build/js/custom.min.js",
+		"/home/santharao/Desktop/New_folders_works/microtrack_dashboard/css/custom.css",
+		"/home/santharao/Desktop/New_folders_works/microtrack_dashboard/js/custom.js",
+		"/home/santharao/Desktop/New_folders_works/wmb/css/main.scss",
+		"/home/santharao/Desktop/New_folders_works/base_theme/production/css/custom.css",
+		"/home/santharao/Desktop/New_folders_works/microtrack_dashboard/css/custom.min.css",
+		"/home/santharao/Desktop/New_folders_works/base_theme/src/scss/custom.scss",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/templates/site/books.html",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/microsite/urls.py",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/microsite_front/views.py",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/micro_blog/views.py",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/microsite/settings.py",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/static/site/css/primary-menu.css",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/static/site/css/modules.css",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/templates/site/base.html",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/templates/site/empty.html",
+		"/home/santharao/Downloads/mac-credit-calculators/css/main.css",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/static/site/js/main.js",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/templates/site/index.html",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/static/site/css/modules1.css",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/index-12.html",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/scss/main_dt.scss",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/js/main.js",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/scss/primary-menu.css",
+		"/home/santharao/Desktop/gitprjs/microsite/microsite/static/site/scss/ref_dt.scss",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/index-1.html",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/scss/ref_dt.scss",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/js/main_dt.js",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/scss/modules.css",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/scss/main_dt.css.map",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/themeforest-17353995-seosight-seo-digital-marketing-agency-html-template/html/js/main.js",
+		"/home/santharao/Desktop/New_folders_works/mp_daimond_theme/themeforest-17353995-seosight-seo-digital-marketing-agency-html-template/html/js/theme-plugins.js",
+		"/home/santharao/Desktop/New_folders_works/pj_mobile/scss/main_mobile.css",
+		"/home/santharao/Desktop/New_folders_works/pj_mobile/scss/main_mobile.scss",
+		"/home/santharao/Desktop/New_folders_works/pj_mobile/css/ref_mobile.scss",
+		"/home/santharao/Desktop/New_folders_works/pj_mobile/css/main_mobile.scss",
+		"/home/santharao/Desktop/New_folders_works/pj_mobile/css/main_mobile.css",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/blog_detail.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/blog_list.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/icomoon/demo.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/profile_l_1_1.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/icomoon/style.css",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/index_l.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/job_alert.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/job_detail.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/companies.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/company_detail.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/index.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/job_list.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/job_result_list.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/profile.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/profile_l.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/profile_l_1.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/profile_l_1_2.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/recruiter_profile (copy).html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/recruiter_profile.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom/recruiters.html",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/css/main.scss",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/course_detail.html",
+		"/home/santharao/Desktop/projects/microsite/microsite/microsite/settings.py",
+		"/home/santharao/Desktop/New_folders_works/amp/pj/style.css",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/recruiters.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/index_l.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/index.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/profile_l_1_1.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/job_alert.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/css/ref.scss",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/css/main.scss",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/sample_course_menu.html",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/home.html",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/dashboard.html",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/settings.html",
+		"/home/santharao/Desktop/New_folders_works/refactored_new/sample_course.html",
+		"/home/santharao/Desktop/New_folders_works/rpj_2.0/scss/recruiter.scss",
+		"/home/santharao/Desktop/New_folders_works/rpj_2.0/job_detail-new.html",
+		"/home/santharao/Desktop/New_folders_works/rpj_2.0/job_detail-latest.html",
+		"/home/santharao/Desktop/New_folders_works/rpj_2.0/post_job_new-latest.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/recruiter_profile.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/company_detail.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/job_result_list.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/companies.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/job_list.html",
+		"/home/santharao/Desktop/New_folders_works/nf-calculators/borrow.html",
+		"/home/santharao/Desktop/New_folders_works/nf-calculators/pet.html",
+		"/home/santharao/Desktop/New_folders_works/nf-calculators/loan.html",
+		"/home/santharao/Desktop/New_folders_works/nf-calculators/service.html",
+		"/home/santharao/Desktop/New_folders_works/nf-calculators/styles/reference.scss",
+		"/home/santharao/Desktop/New_folders_works/nf-calculators/Login.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/profile_l_1_2.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/job_detail.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/profile.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/blog_list.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/blog_detail.html",
+		"/home/santharao/Desktop/New_folders_works/Now-Finance/Now-Finance/Broker-Portal/Home-slider.html",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/js/checkbox.js",
+		"/home/santharao/Downloads/breadcrumbs-and-multistep-indicator/breadcrumbs-and-multistep-indicator/index.html",
+		"/home/santharao/Downloads/breadcrumbs-and-multistep-indicator/breadcrumbs-and-multistep-indicator/css/reset.css",
+		"/home/santharao/Downloads/breadcrumbs-and-multistep-indicator/breadcrumbs-and-multistep-indicator/css/style.css",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/js/jquery-ui-slider-pips.js",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/css/jquery-ui-slider-pips.css",
+		"/home/santharao/Desktop/New_folders_works/Now-Finance/Now-Finance/Broker-Portal/styles/main.scss",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/js/circle-progress.js",
+		"/home/santharao/Desktop/New_folders_works/peeljobs_latest/css/main.css",
+		"/home/santharao/Desktop/New_folders_works/rpj_2.0/job_detail.html",
+		"/home/santharao/Downloads/mega-site-navigation/mega-site-navigation/index.html",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/index.html",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/css/main.less",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/blog.html",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/intro.js-2.3.0/example/hello-world/index.html",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/js/intro.js",
+		"/home/santharao/Desktop/New_folders_works/ashwin_discount/php/index.html",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/blog_detail.html",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/css/main.css",
+		"/home/santharao/Desktop/New_folders_works/pj_frontEnd/base.html",
+		"/home/santharao/Desktop/New_folders_works/ashwin_discount/php/contact-us.html",
+		"/home/santharao/Downloads/bcl_497187622.htm",
+		"/home/santharao/Desktop/New_folders_works/amp/style.css",
+		"/home/santharao/Desktop/gitprjs/peeljobs/pj/static/js/main.js",
+		"/home/santharao/Desktop/gitprjs/cinnamon-hr/templates/leaves/history.html",
+		"/home/santharao/Desktop/gitprjs/cinnamon-hr/templates/settings.html",
+		"/home/santharao/Desktop/gitprjs/cinnamon-hr/hr/forms.py",
+		"/home/santharao/Desktop/gitprjs/cinnamon-hr/templates/user_profile.html",
+		"/home/santharao/Desktop/gitprjs/cinnamon-hr/templates/base.html",
+		"/home/santharao/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"/home/santharao/Desktop/New_folders_works/peeljobs_latest_custom",
+			"/home/santharao/Desktop/New_folders_works/wonder_admin",
+			"/home/santharao/Desktop/New_folders_works/abhyudaya",
+			"/home/santharao/Desktop/gitprjs/pietrack/pietrack",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" <div class=\"col-md-2 col-sm-2 col-xs-4 screen_div\">\n                      <img src=\"https://cdn.dribbble.com/users/418188/screenshots/3410072/tubik_podcast_design_for_business_1x.png\" class=\"img-responsive screen\" />\n                    </div>",
+			"<div class=\"col-md-2 col-sm-2 col-xs-4 screen_div\">\n                      <img src=\"https://cdn.dribbble.com/users/418188/screenshots/3410072/tubik_podcast_design_for_business_1x.png\" class=\"img-responsive screen\" />\n                    </div>",
+			"col-md-1 col-sm-2 col-xs-4 screen_div",
+			"col-md-1 col-sm-2 col-xs-4",
+			"hello",
+			"cal-title",
+			"Total : ",
+			"Active: ",
+			"Active: 1",
+			"Active: ",
+			"7a868f",
+			"class=\"emp_pic\"",
+			"alt=\"Profile Image\"",
+			"ISSUEID001",
+			"#ISSUEID002",
+			"body",
+			"col-md-3",
+			"images/img.jpg",
+			"site_title",
+			"display: inline-block;\n    padding-right: 10px;\n",
+			"padding-right:10px",
+			"padding-right :10px",
+			"child_menu",
+			"border-right: 5px solid #1ABB9C;",
+			"child_menu",
+			"nav",
+			"nav-sm",
+			".navbar",
+			".site_title",
+			"width: 70px;",
+			"body",
+			"left_col",
+			"body",
+			"footer",
+			"site_tit",
+			"footer",
+			"red",
+			"body",
+			"\n$(",
+			"init_echarts",
+			"e_charts",
+			"sparklines",
+			"right_col",
+			"td style=\"",
+			"td style=",
+			"Update Profile",
+			"sitemap",
+			"site_map",
+			"head",
+			"15px",
+			"2px solid #e0e0e0;",
+			".col3",
+			".primary-menu-menu>li>.megamenu .megamenu-row .col3",
+			"footer",
+			"h5",
+			".megamenu-item-info .megamenu-item-info-title",
+			"li>a:before",
+			".primary-menu-menu>li>a:before",
+			"top: 85px;",
+			"    top: 85px;",
+			"85px;",
+			"    top: 85px;",
+			"85px",
+			"li>a:before",
+			".primary-menu-menu>li>a:before",
+			".primary-menu-menu",
+			"footer",
+			"country",
+			"footer",
+			"usa",
+			".primary-menu-responsive .primary-menu-menu>li>a",
+			"our_work",
+			"</b>",
+			"<b>",
+			"border",
+			"get-",
+			"logo-thumb",
+			"has-megamenu>.megamenu",
+			".primary-menu-menu>li.has-megamenu>.megamenu",
+			"has-megamenu>.megamenu",
+			".primary-menu-menu>li.has-megamenu>.megamenu",
+			"margin-left: 50px",
+			"550px",
+			"daimon",
+			"sponsor-logo1",
+			"slider_text",
+			"blog_list",
+			"our_work",
+			".primary-menu-menu>li>.megamenu .megamenu-row .col3",
+			".primary-menu-menu>li.has-megamenu .megamenu ul>li a",
+			"font-family: \"Lato\", sans-serif;",
+			".primary-menu-menu>li>a",
+			"solid_i18n_patterns",
+			".primary-menu-menu > li > a",
+			"969696",
+			"fixed_menu",
+			"select",
+			"nice-select",
+			"90px",
+			"logo_mp",
+			"font-family: \"Lato\", sans-serif;",
+			"82px",
+			".logo",
+			".logo img",
+			"nav-add",
+			"menu",
+			"search_main",
+			"nav-add",
+			"blog_item",
+			"web designer",
+			"webdesigner",
+			"face",
+			"subscribe",
+			"paper",
+			"facebook",
+			"icon-facebook-letter-logo",
+			" <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\" integrity=\"sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa\" crossorigin=\"anonymous\"></script>",
+			"  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">",
+			"ul",
+			"header",
+			".similar_job_posts .job_item .job_title a",
+			"job_detail",
+			"company",
+			".company",
+			"company",
+			"article.job_each .job_title a",
+			"comple",
+			"close_tour"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"<div class=\"col-md-2 col-sm-2 col-xs-4 screen_div\">\n                      <img src=\"https://cdn.dribbble.com/users/418188/screenshots/3410072/tubik_podcast_design_for_business_1x.png\" class=\"img-responsive screen\" />\n                   <span class=\"time\">9:25 AM</span> </div>",
+			"<div class=\"col-md-2 col-sm-2 col-xs-4 screen_div\"><span class=\"time\">9:25 AM</span>\n                      <img src=\"https://cdn.dribbble.com/users/418188/screenshots/3410072/tubik_podcast_design_for_business_1x.png\" class=\"img-responsive screen\" />\n                    </div>",
+			"",
+			" <script src=\"js/bootstrap.min.js\" ></script>",
+			" <link rel=\"stylesheet\" href=\"css/bootstrap.min.css\" >",
+			" <span class=\"tags\"><a href=\"#\">J2ee</a><a href=\"#\">Java</a><a href=\"#\">Oops</a><a href=\"#\">IT Training</a></span>\n                      </span>\n",
+			"",
+			"                      <div class=\"job_item col-md-12\">\n                      <span class=\"pull-right apply_btn\"><a href=\"#\">Apply</a></span>\n                      <strong class=\"title\"><a href=\"#\">Immediate Senior Java Position with Capgemini (across Locations) <span class=\"exp\">[5+ Years Exp]</span></a>  </strong>\n                      <span class=\"company\">Sriven Info consultants india private limited <span class=\"pull-right\">Posted on 31 Dec 2016</span></span>\n                      <div class=\"job_type\"><i class=\"fa fa-briefcase\"></i> IT-Software / Software Services <span><i class=\"fa fa-map-marker\"></i> Hyderabad / Secunderabad</span></div>\n                      <span class=\"description\">\n                      <span class=\"head\">Description :</span>\n                      <span class=\"content\">We have immediate Senior  positions across locations with Capgemini.   Please refer to Developer  Total Experience: 5 to 10 years  Location: Bangalore </span>\n                      </span>\n                      <div class=\"clearfix\"></div>\n                      <span class=\"description Keyskills\">\n                      <span class=\"head\">Keyskills :</span>\n                      <span class=\"tags\"><a href=\"#\">J2ee</a><a href=\"#\">Java</a><a href=\"#\">Oops</a><a href=\"#\">IT Training</a></span>\n                      </span>\n                      <div class=\"clearfix\"></div>\n                      <div class=\"btn-group social_share_group\">\n                        <button class=\"btn btn-default btn-xs disabled\">Share This Job:</button>   \n                        <a class=\"btn btn-default btn-xs\" target=\"_blank\" title=\"On Facebook\" href=\"http://www.facebook.com/sharer.php?u=http%3A%2F%2Fostr.io/code/html-social-like-share-buttons-no-javascript.html&amp;t=Social%20Buttons%20in%20HTML%20only%20using%20Twitter%20Bootstrap%203%20and%20Font%20Awesome%20Icons\">\n                        <i class=\"fa fa-facebook fa-lg fb\"></i>\n                        </a>\n                        <a class=\"btn btn-default btn-xs\" target=\"_blank\" title=\"On Twitter\" href=\"http://twitter.com/share?url=http%3A%2F%2Fostr.io/code/html-social-like-share-buttons-no-javascript.html&amp;text=Social%20Buttons%20in%20HTML%20only%20using%20Twitter%20Bootstrap%203%20and%20Font%20Awesome%20Icons\">\n                        <i class=\"fa fa-twitter fa-lg tw\"></i>\n                        </a>\n                        <a class=\"btn btn-default btn-xs\" target=\"_blank\" title=\"On Google Plus\" href=\"https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http%3A%2F%2Fostr.io/code/html-social-like-share-buttons-no-javascript.html\">\n                        <i class=\"fa fa-google-plus fa-lg google\"></i>\n                        </a>\n                        <a class=\"btn btn-default btn-xs\" target=\"_blank\" title=\"On LinkedIn\" href=\"http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fostr.io/code/html-social-like-share-buttons-no-javascript.html\">\n                        <i class=\"fa fa-linkedin fa-lg linkin\"></i>\n                        </a>\n                      </div>\n                    </div>\n",
+			"<div class=\"link\"><a href=\"#\">http://www.FajrulFitrianto.com</a></div>",
+			"<!-- company_col starts here -->\n<div class=\"col-md-4\">\n<div class=\"company_col\">\n  <div class=\"logo\"><img src=\"https://d13yacurqjgara.cloudfront.net/users/1025788/screenshots/3207905/myntra_shot_1x.png\" /></div>\n  <div class=\"details\">\n    <div class=\"title\"><a href=\"#\">Autumn Crown</a></div>\n    <div class=\"title\"><a href=\"#\">http://www.AutumnCrown.com</a></div>\n    <div class=\"title\"><a href=\"#\">12 Jobs Posted</a></div>\n  </div>\n  </div>\n</div>\n<!-- company_col ends here -->",
+			"<a href=\"#>fresher jobs</a>",
+			"",
+			"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's ",
+			"+91 99895256672 ",
+			"<!-- <i class=\"fa fa-cube\"></i> -->",
+			"Actions",
+			" <tr>\n                      <td><input type=\"checkbox\"></td>\n                      <td><a href=\"#\">Edward Stevenson</a></td>\n                      <td><a href=\"#\">http://www.shdfhasd.com</a>\n                      <td><a href=\"#\">Customer</td>\n                      <td><a href=\"#\">Australia</a></td>\n                      <td>  \n                        <div class=\"dropdown\">\n                          <button class=\"btn btn-primary dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">Actions\n                          <span class=\"caret\"></span></button>\n                          <ul class=\"dropdown-menu\">\n                            <li><a href=\"#\">HTML</a></li>\n                            <li><a href=\"#\">CSS</a></li>\n                            <li><a href=\"#\">JavaScript</a></li>\n                          </ul>\n                        </div>\n                      </td>\n                    </tr>",
+			"",
+			"<td class=\"text-center\"></td>\n                    <td class=\"text-center\"></td>",
+			" <title>Wonderland Resorts</title>",
+			"col-sm-6 control-label",
+			"col-md-3 col-sm-4 col-xs-12",
+			"<p>Pragathi Offering to sounds of earth resorts</p>",
+			"<!--  <li class=\"prev\"><a href=\"#\">❮</a></li>\n                            <li class=\"next\"><a href=\"#\">❯</a></li> -->",
+			"padding:8px 3px;",
+			"<tr><td align=\"left\" class=\"call1\" valign=\"top\"><a href=\"career.html\" style=\"color:#eb761d;\">IT JOBS</a></td></tr>\n																 \n								<tr><td align=\"left\" class=\"call1\" valign=\"top\"><a href=\"career_nonit.html\" style=\"color:#eb761d;\">NON-IT JOBS</a></td></tr>",
+			"<table width=\"250\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"  align=\"center\" style=\"padding: 2px 1px;line-height:30px;\" >\n								<tr><td height=\"2\"> </td></tr>\n								<tr><td align=\"left\" class=\"career1\" valign=\"top\"><h4>S.M.E HR Consulting</h4></td></tr>							<tr><td  style=\"border-bottom:1px solid #fff;\"></td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"sme-design.html\">&nbsp;&nbsp;&nbsp;&nbsp;HR Process Design</a></td></tr>\n								<tr><td  style=\"border-bottom:1px solid #fff;\"></td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"sme-setup.html\">&nbsp;&nbsp;&nbsp;&nbsp;HR Process Setup</a></td></tr>\n								<tr><td  style=\"border-bottom:1px solid #fff;\"></td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"sme-evaluation.html\">&nbsp;&nbsp;&nbsp;&nbsp;HR Process Evaluation</a></td></tr>\n						</table>",
+			"<table width=\"200\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\"  align=\"center\" style=\"padding: 2px 1px;line-height:30px;\" >\n								<tr><td height=\"2\"> </td></tr>\n								<tr><td align=\"left\" class=\"career1\" valign=\"top\" colspan=\"2\">About Us</td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"vision.html\">&nbsp;&nbsp;&nbsp;&nbsp;Our Vision</a></td></tr>\n								<tr><td colspan=\"2\" style=\"border-bottom:1px solid #fff;\"></td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"mission.html\" >&nbsp;&nbsp;&nbsp;&nbsp;Our Mission</a></td></tr>		\n								<tr><td colspan=\"2\" style=\"border-bottom:1px solid #FFFFFF\"></td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"core-values.html\" >&nbsp;&nbsp;&nbsp;&nbsp;Our Core Values</a></td></tr>		\n								<tr><td colspan=\"2\" style=\"border-bottom:1px solid #FFFFFF\"></td></tr>\n								<tr><td align=\"left\" bgcolor=\"#1195D3\" class=\"call4\" valign=\"top\"><a href=\"team.html\">&nbsp;&nbsp;&nbsp;&nbsp;Our Team</a></td></tr>\n						</table>",
+			"	<a href=\"clients.html\">Clients</a>   <b>|</b> \n										  	<a href=\"career.html\">Careers</a>   <b>|</b>  \n																						<a href=\"login.html\">User Login</a> | \n											 \n											<a href=\"contact.html\">Contact Us</a>",
+			"index.html",
+			"<tr>\n                            <td width=\"7%\" class=\"menu\"><a href=\"index.hytml\" class=\"current\">Home</a></td>\n                            <td width=\"7%\" class=\"menu\"><a href=\"about.html\">About Us </a></td>\n                            <td width=\"12%\" class=\"menu\"><a href=\"sme.html\">S.M.E HR Consulting</a></td>\n                            <td width=\"10%\" class=\"menu\"><a href=\"hr_consult.html\">HR Consulting</a></td>\n                            <td width=\"16%\" class=\"menu\"><a href=\"hr_function.html\">HR Function Outsourcing</a></td>\n                            <td width=\"19%\" class=\"menu\"><a href=\"training.html\">HR Training &amp; Advancement</a></td>\n                            <!--<td width=\"14%\"  class=\"menu\"><a href=\"education.php\" >Educational Projects</a></td>\n                              <td width=\"15%\"  class=\"menu\"><a href=\"immigration.php\" >Immigration Services</a></td> -->\n                          </tr>",
+			" <tr>\n                            <td width=\"7%\" class=\"menu\"><a href=\"index.hytml\" class=\"current\">Home</a></td>\n                            <td width=\"7%\" class=\"menu\"><a href=\"about.html\">About Us </a></td>\n                            <td width=\"12%\" class=\"menu\"><a href=\"sme.html\">S.M.E HR Consulting</a></td>\n                            <td width=\"10%\" class=\"menu\"><a href=\"hr_consult.html\">HR Consulting</a></td>\n                            <td width=\"16%\" class=\"menu\"><a href=\"hr_function.html\">HR Function Outsourcing</a></td>\n                            <td width=\"19%\" class=\"menu\"><a href=\"training.html\">HR Training &amp; Advancement</a></td>\n                            <!--<td width=\"14%\"  class=\"menu\"><a href=\"education.php\" >Educational Projects</a></td>\n                              <td width=\"15%\"  class=\"menu\"><a href=\"immigration.php\" >Immigration Services</a></td> -->\n                          </tr>",
+			"images",
+			"File name extension.ong",
+			"10:22 Am <br> onbon liquorice tiramisu toffee macaroo.png",
+			"\n                                  <span class=\"time text-left\">10:22 Am</span>\n                                   <span class=\"actions\">\n                                    <a href=\"#\"><i class=\"fa fa-trash\"></i></a>\n                                  </span>\n",
+			"col-md-3 col-sm-4 col-xs-6",
+			" <span class=\"actions\">\n                                    <!--<a href=\"#\"><i class=\"fa fa-edit\"></i></a>-->\n                                    <a href=\"#\"><i class=\"fa fa-trash\"></i></a>\n                                  </span>",
+			"Continue Reading",
+			"<span class=\"bg\">\n                                  <span class=\"time\">10:22 Am</span>\n                                <span class=\"actions\">\n                                    <a href=\"#\"><i class=\"fa fa-edit\"></i></a>\n                                    <a href=\"#\"><i class=\"fa fa-trash\"></i></a>\n                                  </span>\n                                  </span>",
+			"col-md-3 col-sm-3 col-xs-4 col-xs-12 widget_tally_box screenshot_widget",
+			"http://41.",
+			"<span class=\"actions\">\n                            <a href=\"#\"><i class=\"fa fa-edit\"></i></a>\n                            <a href=\"#\"><i class=\"fa fa-trash\"></i></a>\n                          </span>",
+			"col-md-3 col-sm-4 col-xs-6 col-xs-12 widget_tally_box screenshot_widget",
+			"col-md-4 col-sm-4 col-xs-6 col-xs-12 widget_tally_box screenshot_widget",
+			"row tag-list no_row_margin",
+			"<a href=\"#\">Account Manager <small>2</small></a>",
+			"<a href=\"#\">Account <small>22</small></a>",
+			"<span class=\"reply\"><a href=\"#\"><i class=\"fa fa-reply\"></i>Replies 123 </a></span>\n                    <span class=\"views\"><a href=\"#\"><i class=\"fa fa-eye\"></i> Views 123 </a></span>\n                    <span class=\"likes\"><a href=\"#\"><i class=\"fa fa-thumbs-up\" aria-hidden=\"true\"></i> Likes 23 </a></span>",
+			"<span class=\"reply\"><a href=\"#\"><i class=\"fa fa-reply\"></i>Replies 123 </a></span>\n                    <span class=\"views\"><a href=\"#\"><i class=\"fa fa-eye\"></i> Views 123 </a></span>\n                    <span class=\"likes\"><a href=\"#\"><i class=\"fa fa-thumbs-up\" aria-hidden=\"true\"></i> Views 23 </a></span>",
+			"                    <span class=\"category\"><a href=\"#\" class=\"pics\">Pics </a></span><span class=\"activity\">Updated on January 7, 2016 in</span>\n",
+			"<span class=\"category\"><a href=\"#\" class=\"videos\">Videos </a></span><span class=\"activity\">Updated on January 7, 2016 in</span>\n",
+			" <span class=\"category\"><a href=\"#\" class=\"gaming\">Gaming </a></span><span class=\"activity\">Updated on January 7, 2016 in</span>\n                   ",
+			"  <span class=\"category\"><a href=\"#\" class=\"disclosure\">Disclosure </a></span><span class=\"activity\">Updated on January 7, 2016 in</span>",
+			" <span class=\"activity\">Updated on January 7, 2016 in</span>",
+			"<span class=\"views\"><a href=\"#\"><i class=\"fa fa-eye\"></i> Views 123 </a></span>",
+			"<span class=\"reply\"><a href=\"#\"><i class=\"fa fa-reply\"></i>Replies 123 </a></span>\n                    <span class=\"views\"><i class=\"fa fa-eye\"></i><a href=\"#\">Views 123 </a></span>",
+			"<span class=\"reply\"><a href=\"#\">Replies 123 </a></span>\n                    <span class=\"views\"><a href=\"#\">Views 123 </a></span>\n                 ",
+			" </ul>\n                    </div>\n                     <br clear=\"all\">\n                  </div>\n                 ",
+			"tag_item",
+			"",
+			" <td>From 58:30 hours &nbsp; <a href=\"#\" class=\"online\">08:30</a> &nbsp; <a href=\"#\" class=\"offline\">01:30</a></td>",
+			"<td>58:30 &nbsp; <a href=\"#\" class=\"online\">08:30</a> &nbsp; <a href=\"#\" class=\"offline\">01:30</a></td>",
+			"<a href=\"#\" class=\"offline\">01:30</a>] Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ",
+			"<!-- <span class=\"actions\">\n                            <a href=\"#\"><i class=\"fa fa-edit\"></i></a>\n                            <a href=\"#\"><i class=\"fa fa-trash\"></i></a>\n                          </span>-->",
+			"class=\"img_block\"",
+			"",
+			"Radio City 98.3Fm",
+			"fadeInUp",
+			"zoomInUp",
+			"ZoomInUp",
+			"slideInDown",
+			"",
+			"$red",
+			" <td><a href=\"#\" class=\"download\">Download <i class=\"fa fa-download\"></i></a></td>\n                      <td><a href=\"#\" class=\"view\">View <i class=\"fa fa-eye\"></i></a></td>",
+			"#",
+			"<td class=\"tickets\"><a href=\"#\">25</a></td>",
+			" <td class=\"status\"><span class=\"draft-bg\">0</span>",
+			"border",
+			"pj-",
+			".pj",
+			"pj",
+			"<img src=\"images/bulletpoint.png\" />"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "views.cpython-35.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 271.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
