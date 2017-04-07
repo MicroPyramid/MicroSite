@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from micro_admin.views import (index, forgot_password,
-                               out, menu_order)
+                               out, menu_order, google_login)
 from micro_admin.users import (edit_user, change_state, users, new_user, blogposts,
                                user_info, change_password)
 
@@ -17,4 +17,5 @@ urlpatterns = [
     url(r'^users/(?P<pk>[a-zA-Z0-9_-]+)/$', user_info, name='user_info'),
     url(r'^content/menu/(?P<pk>\w{0,})/order/$', menu_order, name='order'),
     url(r'^user/change-password/$', change_password, name='change_password'),
+    url(r'^google-login/$', google_login, name='google_login'),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from micro_admin.models import career
@@ -16,6 +16,7 @@ import os
 from itertools import chain
 from django.contrib.auth.decorators import login_required
 from micro_blog.models import Country
+
 
 def index(request):
     return render(request, 'site/index.html', {
@@ -139,6 +140,9 @@ def s3_objects_set_metadata(request):
 
 
 def sitemap(request, **kwargs):
+    if request.GET.get('page'):
+        url = request.path + request.GET.get('page') + '/'
+        return redirect(url, permanent=False)
     page = 1
     country = request.COUNTRY_CODE
     if 'country_name' in kwargs.keys():

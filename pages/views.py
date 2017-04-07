@@ -5,15 +5,11 @@ import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
 from micro_blog.models import Country
-from pages.forms import MenuForm, PageForm, PageNewForm
+from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
-from micro_blog.forms import customPageCountryInlineFormSet
 from django.template.defaultfilters import slugify
-from django.forms.models import inlineformset_factory, modelformset_factory
-from django.db.models import Q
-from django.core.urlresolvers import reverse
 from django.utils.http import is_safe_url
 from urllib.parse import unquote
 from django.conf import settings
@@ -31,7 +27,7 @@ def new_page(request):
     categories = Category.objects.all()
     countries = Country.objects.all()
     if request.method == 'POST':
-        validate_page = PageNewForm(request.POST)
+        validate_page = PageForm(request.POST)
         if validate_page.is_valid():
             page = validate_page.save(commit=False)
             page.parent = None
@@ -46,7 +42,6 @@ def new_page(request):
             page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
         else:
-            print (validate_page.errors)
             data = {"error": True, 'response': validate_page.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     if request.user.is_superuser:
@@ -150,8 +145,7 @@ def edit_page(request, pk):
         else:
             validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            print (request.POST)
-            edit_page = validate_page.save(commit = False)
+            edit_page = validate_page.save(commit=False)
             edit_page.slug = slugify(request.POST.get('slug'))
 
             if request.POST.get('is_default', '') == 'true':
@@ -161,7 +155,6 @@ def edit_page(request, pk):
             country = Country.objects.filter(slug=country).first()
             edit_page.country = country
             edit_page.save()
-            print (str(edit_page.id), str(pk))
             if str(edit_page.id) != str(pk):
                 edit_page.parent_id = pk
                 edit_page.save()
@@ -332,7 +325,6 @@ def site_page(request, slug):
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
         return render(request, 'site/page.html', {'page': page, 'posts': posts})
     else:
-        print ("hello")
         return render(request, '404.html', status=404)
 
 def get_country_code_from_path(path):
@@ -361,15 +353,12 @@ def set_country(request):
             path = request.META.get('HTTP_REFERER').replace(request.scheme+'://' + request.get_host(), '')
 
             country_code = get_country_code_from_path(path)
-            print ("hello")
-            print (country_code)
             if country_code:
                 path = request.META.get('HTTP_REFERER').replace(request.scheme+'://' + request.get_host(), '').replace('/'+country_code, '')
             if request.POST.get('country') == settings.COUNTRY_CODE:
                 next = path
             else:
                 next = '/' + request.POST.get('country') + path
-    print (next)
     response = HttpResponseRedirect(next) if next else HttpResponse(status=204)
     if request.method == 'POST':
         country_code = request.POST.get('country')

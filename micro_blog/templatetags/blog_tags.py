@@ -79,7 +79,7 @@ def get_slugs(value):
 
 @register.simple_tag
 def get_countries():
-    return Country.objects.filter()
+    return Country.objects.filter().order_by('id')
 
 
 @register.filter
@@ -87,12 +87,6 @@ def get_value(value):
     return str(value)
 
 
-@register.assignment_tag(takes_context=True)
-def get_counter(context, value, value1):
-    return int(value)+int(value1)
-
-
 @register.filter
 def get_country_name(value):
-    print ("usas")
     return Country.objects.filter(code=value).first().name

@@ -37,24 +37,24 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'microsite.middleware.CountryMiddleware',
     # 'solid_i18n.middleware.SolidLocaleMiddleware',
     # 'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
-
+    'microsite.middleware.LowerCased',
     'microsite.middleware.RequestSessionMiddleware',
     'microsite.middleware.DetectMobileBrowser',
     'django.middleware.cache.FetchFromCacheMiddleware'
 )
-
+APPEND_SLASH = True
 # SOLID_I18N_USE_REDIRECTS = True
 # SOLID_I18N_HANDLE_DEFAULT_PREFIX = True
 # SOLID_I18N_DEFAULT_PREFIX_REDIRECT = True
@@ -89,6 +89,12 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    # ... your other backends
+    'micro_admin.auth_backend.PasswordlessAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 
 LANGUAGE_CODE = 'en'
@@ -320,6 +326,9 @@ if SENTRY_ENABLED:
 # LOCALE_PATHS = (
 #     os.path.join(BASE_DIR, 'locale'),
 # )
+
+GP_CLIENT_ID = "983386206805-0dns7vrdaqcrn2nfls914b0vjjdhnhnb.apps.googleusercontent.com"
+GP_CLIENT_SECRET = "vO4tq49ahgH6afrEzrIQSIIU"
 
 try:
     from microsite.settings_local import *  # noqa

@@ -1,20 +1,18 @@
 from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.shortcuts import redirect
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
+from micro_blog.models import Category, Tags, Post, Subscribers, Post_Slugs
 from pages.models import Contact
 import math
 # from django.core.files.storage import default_storage
-from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
+from micro_blog.forms import BlogpostForm, BlogCategoryForm
 from django.forms.models import inlineformset_factory
 import datetime
 import json
 from micro_admin.models import User
-from ast import literal_eval
 from pages.forms import ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
@@ -322,8 +320,13 @@ def archive_posts(request, year, month):
         raise Http404
     c = {}
     c.update(csrf(request))
+    prev_page, previous_page, aft_page, after_page = get_prev_after_pages_count(
+    page, no_pages)
+
     return render(request, 'site/blog/index.html', {'current_page': page, 'year': year, 'month': month, 'last_page': no_pages,
-                                                    'posts': blog_posts, 'csrf_token': c['csrf_token']})
+                                                    'posts': blog_posts, 'csrf_token': c['csrf_token'],
+                                                    'prev_page': prev_page, 'previous_page': previous_page,
+                                                    'aft_page': aft_page, 'after_page': after_page})
 
 
 @login_required
@@ -546,14 +549,13 @@ def contact(request):
         sending_msg.set_html(message)
         sending_msg.set_text('Contact Request')
         sending_msg.set_from(request.POST.get('email'))
-        sending_msg.add_to("nikhila@micropyramid.com")
+        sending_msg.add_to("hello@micropyramid.com")
         sg.send(sending_msg)
 
         data = {'error': False, 'response': 'Contact submitted successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     else:
-        print (validate_contact.errors)
         errors = {}
         data = {'error': True, 'errinfo': validate_contact.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')

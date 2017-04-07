@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from .country_urls import is_country_prefix_patterns_used
 from .utils import get_country_from_path, get_country_from_request, set_country_from_thread
 from micro_blog.models import Country
+from django.shortcuts import redirect
+
 
 class RequestSessionMiddleware(object):
     def process_request(self, request):
@@ -48,11 +50,18 @@ class CountryMiddleware(object):
         if not country_from_path and country_patterns_used and not prefixed_default_country:
             country = settings.COUNTRY_CODE
         set_country_from_thread(country)
-        print (country)
         if Country.objects.filter(code=country):
             request.COUNTRY_CODE = country
             request.session['country'] = country
         else:
             request.COUNTRY_CODE = settings.COUNTRY_CODE
             request.session['country'] = settings.COUNTRY_CODE
-        print (request.session['country'])
+
+
+class LowerCased(object):
+
+    def process_request(self, request):
+
+        if request.path == request.path.lower():
+            return None
+        return redirect(request.path.lower(), permanent=True)

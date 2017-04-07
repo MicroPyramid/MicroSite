@@ -16,7 +16,7 @@
 			indicatorFirstLevel: "&#xf0d7",
 			indicatorSecondLevel: "&#xf105",
 			scrollable: true,
-			scrollableMaxHeight: 460
+			scrollableMaxHeight: 524
 		}, options);
 		
 		// variables
