@@ -9,7 +9,7 @@ from micro_blog.views import (contact, subscribe, site_blog_home, blog_category,
 import microsite_front
 from pages.views import site_page, set_country
 from microsite_front.xml import rss, blog_rss, sitemap_xml, facebook_rss
-from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, sitemap, books, oss
+from microsite_front.views import index, tools, url_checker_tool, s3_objects_set_metadata, sitemap, books, oss, servicee
 
 
 from search.views import autocomplete
@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
 
     url(r'^subscribe/$', subscribe),
+    url(r'^servicee/$', servicee),
     url(r'^set_country/$', set_country, name="set_country"),
 
     # url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),

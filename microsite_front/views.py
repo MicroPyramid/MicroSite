@@ -59,6 +59,10 @@ def tools(request):
     return render(request, 'site/tools/index.html')
 
 
+def servicee(request):
+    return render(request, 'site/empty.html')
+
+
 @login_required(login_url='/')
 def url_checker_tool(request):
     if request.method == "POST":
