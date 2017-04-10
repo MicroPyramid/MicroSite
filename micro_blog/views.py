@@ -8,7 +8,7 @@ from micro_blog.models import Category, Tags, Post, Subscribers, Post_Slugs
 from pages.models import Contact
 import math
 # from django.core.files.storage import default_storage
-from micro_blog.forms import BlogpostForm, BlogCategoryForm
+from micro_blog.forms import BlogpostForm, BlogCategoryForm, CustomBlogSlugInlineFormSet
 from django.forms.models import inlineformset_factory
 import datetime
 import json

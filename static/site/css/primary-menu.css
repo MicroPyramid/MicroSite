@@ -196,12 +196,14 @@ License: http://codecanyon.net/licenses
 
 .primary-menu-menu ul.dropdown a i,
 .primary-menu-menu > li.has-megamenu .megamenu ul > li a i {
-	margin-left: 10px;
-	opacity: 0;
-	transition: all .4s ease;
-	font-size: 12px;
-	color: #e1e1e1;
-	text-align: center;
+	font-size: 16px !Important;
+    font-weight: 400 !important;
+    padding: 8px 0;
+    position: relative;
+    color: #666;
+    transition: all .4s ease-out;
+    display: block;
+    line-height: 22px;
 }
 
 .primary-menu-menu ul.dropdown a:hover > i,
@@ -267,12 +269,12 @@ License: http://codecanyon.net/licenses
 .primary-menu-menu > li.has-megamenu .megamenu ul > li a {
 	font-size: 16px;
 	font-weight: 400;
-	padding: 10px 0;
+	padding: 5px 0;
 	position: relative;
 	color: #666;
 	transition: all .4s ease-out;
 	display: block;
-	line-height: 15px;
+	line-height: 20px;
 }
 
 .primary-menu-menu > li.has-megamenu .megamenu ul > li:hover a {
@@ -330,7 +332,8 @@ License: http://codecanyon.net/licenses
 ======================================*/
 .primary-menu-menu > li > .megamenu{
 	width: 100%;
-	padding: 15px 15px 13px;
+	// padding: 15px 15px 13px;
+	padding:0;
 	left: 0;
 	position: absolute;
 	display: none;
@@ -367,7 +370,7 @@ License: http://codecanyon.net/licenses
 .primary-menu-menu > li > .megamenu .megamenu-item-info .megamenu-item-info-title,
 .primary-menu-menu > li > .dropdown .megamenu-item-info .megamenu-item-info-title {
 	margin-bottom: 10px;
-	line-height: 1.2;
+	line-height: 2.2;
 	font-weight: 600;
 	color: #155d9e !important;
 }
@@ -1176,4 +1179,7 @@ border:none;}
 .sub_menu{
 	color: #155d9e!important;
 	font-weight: 600;
+}
+#main li{
+	line-height: 10px !important;
 }

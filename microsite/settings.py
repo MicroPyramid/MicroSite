@@ -10,9 +10,8 @@ SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
 DEBUG = True
 
-TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
-ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me']
+ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com']
 
 SENTRY_ENABLED = False
 
@@ -33,7 +32,7 @@ INSTALLED_APPS = (
     'search',
     # 'django_simple_forum',
     'simple_pagination',
-    'webpack_loader',
+    'django_webpacker',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -41,14 +40,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
 
     'microsite.middleware.CountryMiddleware',
-    # 'solid_i18n.middleware.SolidLocaleMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
-    'htmlmin.middleware.MarkRequestMiddleware',
+    # 'htmlmin.middleware.HtmlMinifyMiddleware',
+    # 'htmlmin.middleware.MarkRequestMiddleware',
     'microsite.middleware.LowerCased',
     'microsite.middleware.RequestSessionMiddleware',
     'microsite.middleware.DetectMobileBrowser',
@@ -61,13 +57,6 @@ APPEND_SLASH = True
 # SOLID_I18N_PREFIX_STRICT = True
 
 HTML_MINIFY = False
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.template.context_processors.static',
-    'django.template.context_processors.request',
-    'django.template.context_processors.media',
-)
 
 
 ROOT_URLCONF = 'microsite.urls'
@@ -137,16 +126,24 @@ TRAINER_IMAGES = BASE_DIR + '/static/trainer/'
 COURSE_IMAGES = BASE_DIR + '/static/course/'
 QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
 
-TEMPLATE_DIRS = (BASE_DIR + '/templates',)
-
 MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
 
-TEMPLATE_LOADERS = (
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-)
-
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR + "/templates"],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -317,21 +314,18 @@ except ImportError as e:
     pass
 
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'webpack_bundles/', # must end with slash
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
-        'POLL_INTERVAL': 0.1,
-        'TIMEOUT': None,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+WEB_PACK_FILES = [
+    {'html_file_name': 'templates/site/base.html',
+     'webpack_js': 'index',
     },
-    'OSS':{
-        'CACHE': not DEBUG,
-        'BUNDLE_DIR_NAME': 'oss_bundles/', # must end with slash
-        'STATS_FILE': os.path.join(BASE_DIR, 'oss-webpack-stats.json'),
-        'POLL_INTERVAL': 0.1,
-        'TIMEOUT': None,
-        'IGNORE': ['.+\.hot-update.js', '.+\.map']
-    }
-}
+    {'html_file_name': 'templates/site/index.html',
+     'webpack_js': 'index',
+     },
+    {'html_file_name': 'templates/admin/base.html',
+     'webpack_js': 'portal',
+     },
+]
+
+
+ENABLE_DJANGO_WEBPACK_S3_STORAGES = False
+AWS_BUCKET_NAME = ''

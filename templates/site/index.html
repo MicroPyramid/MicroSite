@@ -3,248 +3,245 @@
 {% load blog_tags %}
 {% load recurse %}
 {% load menu %}
-{% load render_bundle from webpack_loader %}
-
- <!DOCTYPE html>
-<html lang="en" class="no-js" prefix="og: http://ogp.me/ns#">
+<!DOCTYPE html>
+<html class="no-js" lang="en" prefix="og: http://ogp.me/ns#">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <title> {% block title %}Django and Python Web Development | Application Development Services – MicroPyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}{% endblock %}</title>
-    <meta property="fb:pages" content="194798730671519" />
-    <meta property="og:url" content="https://micropyramid.com/" />
-    <meta property="og:image" content="https://micropyramid.com/static/mp_logo.png" />
-    <meta property="og:image:width" content="200" />
-    <meta property="og:image:height" content="200" />
+    <meta content="194798730671519" property="fb:pages"/>
+    <meta content="https://micropyramid.com/" property="og:url"/>
+    <meta content="https://micropyramid.com/static/mp_logo.png" property="og:image"/>
+    <meta content="200" property="og:image:width"/>
+    <meta content="200" property="og:image:height"/>
     {% block meta-description %}
-    <meta property="og:title" content="MicroPyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %} | Django Web Application Development | Mobile App Development" />
-    <meta property="og:description" content="Django and python web development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}." />
-
-    <meta name="description" content="Django and python web development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}." />
-    <meta name="keywords" content="Python, Django, Mongodb, nodejs, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" />
-    <link rel="alternate" hreflang="en-us" href="https://micropyramid.com/" />
-    <link rel="alternate" hreflang="en-in" href="https://micropyramid.com/in/" />
-    <link rel="alternate" hreflang="en-ae" href="hhttps://micropyramid.com/ae/" />
-    <link rel="alternate" hreflang="en-uk" href="https://micropyramid.com/uk/" />
-    <link rel="alternate" hreflang="en-aus" href="https://micropyramid.com/aus/" />
-    <link rel="alternate" hreflang="en-ca" href="https://micropyramid.com/ca/" />
-    <link rel="alternate" hreflang="x-default" href="https://micropyramid.com/" />
+    <meta content="MicroPyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %} | Django Web Application Development | Mobile App Development" property="og:title"/>
+    <meta content="Django and python web development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}." property="og:description"/>
+    <meta content="Django and python web development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}." name="description"/>
+    <meta content="Python, Django, Mongodb, nodejs, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" name="keywords"/>
+    <link href="https://micropyramid.com/" hreflang="en-us" rel="alternate"/>
+    <link href="https://micropyramid.com/in/" hreflang="en-in" rel="alternate"/>
+    <link href="hhttps://micropyramid.com/ae/" hreflang="en-ae" rel="alternate"/>
+    <link href="https://micropyramid.com/uk/" hreflang="en-uk" rel="alternate"/>
+    <link href="https://micropyramid.com/aus/" hreflang="en-aus" rel="alternate"/>
+    <link href="https://micropyramid.com/ca/" hreflang="en-ca" rel="alternate"/>
+    <link href="https://micropyramid.com/" hreflang="x-default" rel="alternate"/>
     {% endblock %}
-    <meta name="author" content="micropyramid" />
-    <meta name="robots" content="index, follow">
-    <link rel="alternate" type="application/rss+xml" title="Python, Django, nodejs, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services Development Company&raquo; Feed" href="https://www.micropyramid.com/rss.xml" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="micropyramid" name="author"/>
+    <meta content="index, follow" name="robots">
+    <link href="https://www.micropyramid.com/rss.xml" rel="alternate" title="Python, Django, nodejs, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services Development Company» Feed" type="application/rss+xml"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     {% block extra-head %} {% endblock %}
-    <link rel="shortcut icon" href="/static/favicon.png">
-    <link rel="apple-touch-icon" href="/static/site/images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/static/site/images/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/static/site/images/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/static/site/images/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon-precomposed" href="/static/site/images/apple-touch-icon-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/site/images/apple-touch-icon-120x120-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/static/site/images/apple-touch-icon-152x152-precomposed.png">
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href='//fonts.googleapis.com/css?family=Alegreya Sans' rel='stylesheet'>
-    {% render_bundle 'site' 'css' %}
-    {% render_bundle 'menu' 'css' %}
-
- {% block extra-styles %} {% endblock %}
+    <link href="/static/favicon.png" rel="shortcut icon"/>
+    <link href="/static/site/images/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link href="/static/site/images/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76"/>
+    <link href="/static/site/images/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"/>
+    <link href="/static/site/images/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"/>
+    <link href="/static/site/images/apple-touch-icon-precomposed.png" rel="apple-touch-icon-precomposed"/>
+    <link href="/static/site/images/apple-touch-icon-120x120-precomposed.png" rel="apple-touch-icon-precomposed" sizes="120x120"/>
+    <link href="/static/site/images/apple-touch-icon-152x152-precomposed.png" rel="apple-touch-icon-precomposed" sizes="152x152"/>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-da07b2ddc9daeb0962ea.css" id="packer_css"/>
+    {% block extra-styles %} {% endblock %}
+    </meta></meta>
   </head>
   <body>
-    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','{{request.session.google_analytics_code}}','auto');ga('send','pageview');</script> 
+    <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','{{request.session.google_analytics_code}}','auto');ga('send','pageview');</script>
     <div class="mp-pusher" id="mp-pusher">
       {% if request.session.design|slugify == 'mobile'|slugify %} 
-      <nav id="mp-menu" class="mp-menu"> {% include 'site/side-bar-menu.html' %} <a href="#" class="subscribe">Subscribe</a> </nav>
+      <nav class="mp-menu" id="mp-menu"> {% include 'site/side-bar-menu.html' %} <a class="subscribe" href="#">Subscribe</a> </nav>
       {% endif%}
       <div class="scroller">
         <div class="scroller-inner">
           <div class="codrops-top clearfix"></div>
           <div class="content clearfix">
             {% block banner %}
-    <header class="header" id="site-header">
-      <div class="container-fluid" style="padding:0;">
-        <div class="header-content-wrapper">
-          <div class="logo">
-            <span class="logo_mp">
-             <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% else %}/{% endif %}"> <svg xmlns="http://www.w3.org/2000/svg" width="47px" height="47px" viewBox="0 0 1047 470">
-                <path id="left_one" fill="#1dabdd" stroke="#1dabdd" stroke-width="6" d="M 46.00,462.00
-                  C 41.42,461.99 38.50,461.94 34.00,460.71
-                  31.67,460.08 29.07,459.07 27.02,457.79
-                  11.54,448.12 23.40,426.27 30.20,415.00
-                  30.20,415.00 35.19,407.00 35.19,407.00
-                  35.19,407.00 41.42,397.00 41.42,397.00
-                  41.42,397.00 161.58,204.00 161.58,204.00
-                  161.58,204.00 249.42,63.00 249.42,63.00
-                  249.42,63.00 271.30,29.01 271.30,29.01
-                  275.76,23.92 282.05,19.40 289.00,19.04
-                  302.55,18.34 309.39,27.45 315.80,38.00
-                  315.80,38.00 347.42,90.00 347.42,90.00
-                  349.74,93.73 359.45,108.94 360.08,112.00
-                  360.77,113.91 360.61,115.18 360.08,117.00
-                  360.08,117.00 343.42,144.00 343.42,144.00
-                  343.42,144.00 309.05,199.00 309.05,199.00
-                  309.05,199.00 210.05,358.00 210.05,358.00
-                  210.05,358.00 176.95,411.00 176.95,411.00
-                  172.13,418.68 164.59,428.54 165.71,438.00
-                  167.15,450.28 175.33,453.91 182.00,462.00
-                  182.00,462.00 46.00,462.00 46.00,462.00 Z"></path>
-                <path id="left_2" fill="#1dabdd" stroke="#1dabdd" stroke-width="6" d="M 285.00,466.00
-                  C 272.43,465.85 260.25,460.59 261.09,446.00
-                  261.76,434.51 268.99,423.51 274.95,414.00
-                  274.95,414.00 300.58,373.00 300.58,373.00
-                  300.58,373.00 403.95,207.00 403.95,207.00
-                  403.95,207.00 491.05,67.00 491.05,67.00
-                  491.05,67.00 502.95,48.00 502.95,48.00
-                  509.57,37.45 517.01,24.07 531.00,23.10
-                  541.41,22.37 549.35,29.88 554.77,38.00
-                  554.77,38.00 568.20,60.00 568.20,60.00
-                  568.20,60.00 589.00,94.00 589.00,94.00
-                  589.00,94.00 599.32,111.00 599.32,111.00
-                  601.40,114.39 603.31,116.95 601.69,121.00
-                  601.69,121.00 585.05,148.00 585.05,148.00
-                  585.05,148.00 552.05,201.00 552.05,201.00
-                  552.05,201.00 452.32,361.00 452.32,361.00
-                  452.32,361.00 418.68,415.00 418.68,415.00
-                  413.86,422.65 406.16,432.57 407.19,442.00
-                  408.50,453.99 416.82,458.07 423.00,466.00
-                  423.00,466.00 285.00,466.00 285.00,466.00 Z"></path>
-                <path id="triangle" fill="#1dabdd" stroke="#1dabdd" stroke-width="6" d="M 684.68,242.00
-                  C 684.68,242.00 706.42,277.00 706.42,277.00
-                  706.42,277.00 775.68,388.00 775.68,388.00
-                  780.83,396.17 797.28,421.68 799.91,429.00
-                  801.71,434.02 802.11,437.71 801.99,443.00
-                  801.60,458.99 787.16,461.98 774.00,462.00
-                  774.00,462.00 570.00,462.00 570.00,462.00
-                  565.69,461.99 563.18,462.10 559.00,460.61
-                  556.57,459.75 554.16,458.50 552.09,456.95
-                  536.31,445.10 551.82,422.90 559.19,411.00
-                  559.19,411.00 564.80,402.00 564.80,402.00
-                  564.80,402.00 633.42,291.00 633.42,291.00
-                  633.42,291.00 673.00,227.00 673.00,227.00
-                  678.60,229.95 681.40,236.80 684.68,242.00 Z"></path>
-                <path id="seven" fill="#2f5374" stroke="#2f5374" stroke-width="6" d="M 729.00,15.00
-                  C 729.00,15.00 799.00,15.00 799.00,15.00
-                  799.00,15.00 1018.00,15.00 1018.00,15.00
-                  1031.59,15.02 1042.86,20.25 1038.51,36.00
-                  1037.37,40.12 1031.77,49.85 1029.42,54.00
-                  1029.42,54.00 1014.70,81.00 1014.70,81.00
-                  1014.70,81.00 947.31,204.00 947.31,204.00
-                  947.31,204.00 907.42,277.00 907.42,277.00
-                  907.42,277.00 883.31,321.00 883.31,321.00
-                  879.08,328.80 874.68,337.62 865.00,339.61
-                  857.63,341.12 851.79,336.48 847.53,331.00
-                  847.53,331.00 823.85,290.00 823.85,290.00
-                  823.85,290.00 813.00,271.00 813.00,271.00
-                  811.35,268.11 808.42,263.33 808.42,260.00
-                  808.42,256.49 811.45,252.04 813.14,249.00
-                  813.14,249.00 824.14,229.00 824.14,229.00
-                  824.14,229.00 865.75,153.00 865.75,153.00
-                  865.75,153.00 881.25,123.00 881.25,123.00
-                  885.16,111.06 880.84,107.02 869.00,107.00
-                  869.00,107.00 732.00,107.00 732.00,107.00
-                  730.06,107.00 726.86,107.12 725.10,106.40
-                  721.23,104.82 716.09,93.92 713.85,90.00
-                  713.85,90.00 685.75,39.00 685.75,39.00
-                  682.60,29.40 682.42,20.11 693.00,15.65
-                  693.00,15.65 729.00,15.00 729.00,15.00 Z"></path>
-              </svg></a>
-             <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}"> <img src="/static/site/images/logo.png" alt="Python and Django Development Company" data-pin-nopin="true"></a>
-            </span>
-          </div>
-          {% block country_urls %}
-            <div class="col-md-1 hidden-xs hidden-sm top_select_country" style="float: right;margin-top: 9px;">
-              <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
-                <select class="set_country form-control" id="set_country" name="country">
-                {% get_countries as countries %}
-                {% for country in countries %}
-                <option value="{{ country.code }}" {% if request.session.country == country.code %}selected{% endif %}>{{ country.name }}</option>
-                {% endfor %}
-                </select>
-              </form>
-            </div>
-        {% endblock %}
-          <div>
-            {% get_single_level_menus as single_level_menu_list %}
-            {% if request.session.design|slugify != 'mobile'|slugify %}
-            <ul id="single_level_menu">
-                <li>
-                  contact us
-                  <ul class="second_level_menu">
-                      <li><a href="/contact-india/">India</a></li>
-                      <li><a href="/contact-usa/">USA</a></li>
-                      <li><a href="/contact-uae/">UAE</a></li>
-                  </ul>
-                </li>
-              </ul>
-              {%  endif %}
-              <ul id="single_level_menu">
-                {% for menu in single_level_menu_list %}
-                <li>{% if menu.url|slugify != 'none' %}<a href="{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class"">
-        <nav id="primary-menu" class="primary-menu">
-            <a href='javascript:void(0)' id="menu-icon-trigger" class="menu-icon-trigger showhide">
-              <span class="mob-menu--title">Menu</span>
-              <span id="menu-icon-wrapper" class="menu-icon-wrapper" style="visibility: hidden">
-                <svg width="1000px" height="1000px">
-                  <path id="pathD" d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800"></path>
-                  <path id="pathE" d="M 300 500 L 700 500"></path>
-                  <path id="pathF" d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200"></path>
-                </svg>
-              </span>
-            </a>
-            <!-- menu-icon-wrapper -->
-
-            {% get_menus as menu_list %}
-            {% include "site/menu.html" with  menu_list=menu_list %}
-          </nav>
-        </div>
-      </div>
-    </header>
-            {% endblock %}
-            <div id="banner_wrap">
-              {# <img src='/static/site/images/new/PlainBanner.jpg' alt="MicroPyramid - Django and Python Web Development Company" class='banner_bg_image'> #}
-              <div class="img_overlay_div"></div>
-              <div class="row">
-              <div class="work_container">
-                <div class="slider_text">
-                  <div class='tab_text_wrap active'>
-                    {# <i class='fa fa-desktop tab_image'></i> #}
-                    <div class="title"> Design - HTML5, CSS3, LESS and SCSS</div>
-                    <div class="text"> We develop Creative website designs / UX designs using latest technologies like SCSS, HTML5, CSS3. Also our team master at banner designs which helps in campaigning. "Visual Ideas to web template".</div>
+            <header class="header" id="site-header">
+              <div class="container-fluid" style="padding:0;">
+                <div class="header-content-wrapper">
+                  <div class="logo">
+                    <span class="logo_mp">
+                      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{/% else %} /{{request.session.country}}{% endif %}{% else %}/{% endif %}">
+                        <svg height="47px" viewbox="0 0 1047 470" width="47px" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M 46.00,462.00
+                            C 41.42,461.99 38.50,461.94 34.00,460.71
+                            31.67,460.08 29.07,459.07 27.02,457.79
+                            11.54,448.12 23.40,426.27 30.20,415.00
+                            30.20,415.00 35.19,407.00 35.19,407.00
+                            35.19,407.00 41.42,397.00 41.42,397.00
+                            41.42,397.00 161.58,204.00 161.58,204.00
+                            161.58,204.00 249.42,63.00 249.42,63.00
+                            249.42,63.00 271.30,29.01 271.30,29.01
+                            275.76,23.92 282.05,19.40 289.00,19.04
+                            302.55,18.34 309.39,27.45 315.80,38.00
+                            315.80,38.00 347.42,90.00 347.42,90.00
+                            349.74,93.73 359.45,108.94 360.08,112.00
+                            360.77,113.91 360.61,115.18 360.08,117.00
+                            360.08,117.00 343.42,144.00 343.42,144.00
+                            343.42,144.00 309.05,199.00 309.05,199.00
+                            309.05,199.00 210.05,358.00 210.05,358.00
+                            210.05,358.00 176.95,411.00 176.95,411.00
+                            172.13,418.68 164.59,428.54 165.71,438.00
+                            167.15,450.28 175.33,453.91 182.00,462.00
+                            182.00,462.00 46.00,462.00 46.00,462.00 Z" fill="#1dabdd" id="left_one" stroke="#1dabdd" stroke-width="6"></path>
+                          <path d="M 285.00,466.00
+                            C 272.43,465.85 260.25,460.59 261.09,446.00
+                            261.76,434.51 268.99,423.51 274.95,414.00
+                            274.95,414.00 300.58,373.00 300.58,373.00
+                            300.58,373.00 403.95,207.00 403.95,207.00
+                            403.95,207.00 491.05,67.00 491.05,67.00
+                            491.05,67.00 502.95,48.00 502.95,48.00
+                            509.57,37.45 517.01,24.07 531.00,23.10
+                            541.41,22.37 549.35,29.88 554.77,38.00
+                            554.77,38.00 568.20,60.00 568.20,60.00
+                            568.20,60.00 589.00,94.00 589.00,94.00
+                            589.00,94.00 599.32,111.00 599.32,111.00
+                            601.40,114.39 603.31,116.95 601.69,121.00
+                            601.69,121.00 585.05,148.00 585.05,148.00
+                            585.05,148.00 552.05,201.00 552.05,201.00
+                            552.05,201.00 452.32,361.00 452.32,361.00
+                            452.32,361.00 418.68,415.00 418.68,415.00
+                            413.86,422.65 406.16,432.57 407.19,442.00
+                            408.50,453.99 416.82,458.07 423.00,466.00
+                            423.00,466.00 285.00,466.00 285.00,466.00 Z" fill="#1dabdd" id="left_2" stroke="#1dabdd" stroke-width="6"></path>
+                          <path d="M 684.68,242.00
+                            C 684.68,242.00 706.42,277.00 706.42,277.00
+                            706.42,277.00 775.68,388.00 775.68,388.00
+                            780.83,396.17 797.28,421.68 799.91,429.00
+                            801.71,434.02 802.11,437.71 801.99,443.00
+                            801.60,458.99 787.16,461.98 774.00,462.00
+                            774.00,462.00 570.00,462.00 570.00,462.00
+                            565.69,461.99 563.18,462.10 559.00,460.61
+                            556.57,459.75 554.16,458.50 552.09,456.95
+                            536.31,445.10 551.82,422.90 559.19,411.00
+                            559.19,411.00 564.80,402.00 564.80,402.00
+                            564.80,402.00 633.42,291.00 633.42,291.00
+                            633.42,291.00 673.00,227.00 673.00,227.00
+                            678.60,229.95 681.40,236.80 684.68,242.00 Z" fill="#1dabdd" id="triangle" stroke="#1dabdd" stroke-width="6"></path>
+                          <path d="M 729.00,15.00
+                            C 729.00,15.00 799.00,15.00 799.00,15.00
+                            799.00,15.00 1018.00,15.00 1018.00,15.00
+                            1031.59,15.02 1042.86,20.25 1038.51,36.00
+                            1037.37,40.12 1031.77,49.85 1029.42,54.00
+                            1029.42,54.00 1014.70,81.00 1014.70,81.00
+                            1014.70,81.00 947.31,204.00 947.31,204.00
+                            947.31,204.00 907.42,277.00 907.42,277.00
+                            907.42,277.00 883.31,321.00 883.31,321.00
+                            879.08,328.80 874.68,337.62 865.00,339.61
+                            857.63,341.12 851.79,336.48 847.53,331.00
+                            847.53,331.00 823.85,290.00 823.85,290.00
+                            823.85,290.00 813.00,271.00 813.00,271.00
+                            811.35,268.11 808.42,263.33 808.42,260.00
+                            808.42,256.49 811.45,252.04 813.14,249.00
+                            813.14,249.00 824.14,229.00 824.14,229.00
+                            824.14,229.00 865.75,153.00 865.75,153.00
+                            865.75,153.00 881.25,123.00 881.25,123.00
+                            885.16,111.06 880.84,107.02 869.00,107.00
+                            869.00,107.00 732.00,107.00 732.00,107.00
+                            730.06,107.00 726.86,107.12 725.10,106.40
+                            721.23,104.82 716.09,93.92 713.85,90.00
+                            713.85,90.00 685.75,39.00 685.75,39.00
+                            682.60,29.40 682.42,20.11 693.00,15.65
+                            693.00,15.65 729.00,15.00 729.00,15.00 Z" fill="#2f5374" id="seven" stroke="#2f5374" stroke-width="6"></path>
+                        </svg>
+                      </a>
+                      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}"> <img alt="Python and Django Development Company" data-pin-nopin="true" src="/static/site/images/logo.png"/></a>
+                    </span>
                   </div>
-                  <div class='tab_text_wrap'>
-                    {# <i class='fa fa-file-code-o tab_image'></i> #}
-                    <div class="title"> Django Web Application Development</div>
-                    <div class="text"> Django web development is one of our core strengths to do rapid prototypes and application development. Python is being used in our daily development activities such as development, testing and deployment.</div>
+                  {% block country_urls %}
+                  <div class="col-md-1 hidden-xs hidden-sm top_select_country" style="float: right;margin-top: 9px;">
+                    <form action="{% url 'set_country' %}" id="country_set_form" method="post" name="country_set_form ">
+                      <select class="set_country form-control" id="set_country" name="country">
+                      {% get_countries as countries %}
+                      {% for country in countries %}
+                      <option {% if request.session.country == country.code %} selected{% endif %} value="{{ country.code }}">{{ country.name }}</option>
+                      {% endfor %}
+                      </select>
+                    </form>
                   </div>
-                  <div class='tab_text_wrap'>
-                    {# <i class='fa fa-cloud tab_image'></i> #}
-                    <div class="title"> Cloud Hosting, Performance and Security</div>
-                    <div class="text"> Being Amazon Consulting Partner we master all Amazon Web Services to give Amazon Consulting Services to Security and Performance critical web sites. We have offered our services to 8 countries with successful implementations including large corporations.</div>
-                  </div>
-                  <div class='tab_text_wrap'>
-                    {# <i class='fa fa-shopping-cart tab_image'></i> #}
-                    <div class="title"> Seamless ecommerce Integrations</div>
-                    <div class="text"> We have experience in integrating 10 payment gateways and development of python API to integrate into django apps. Most notably we work with django-oscar to develop and maintain eCommerce web applications.</div>
+                  {% endblock %}
+                  <div>
+                    {% get_single_level_menus as single_level_menu_list %}
+                    {% if request.session.design|slugify != 'mobile'|slugify %}
+                    <ul id="single_level_menu">
+                      <li>
+                        contact us
+                        <ul class="second_level_menu">
+                          <li><a href="/contact-india/">India</a></li>
+                          <li><a href="/contact-usa/">USA</a></li>
+                          <li><a href="/contact-uae/">UAE</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    {%  endif %}
+                    <ul id="single_level_menu">
+                      {% for menu in single_level_menu_list %}
+                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                      </li>
+                      {% endfor %}
+                    </ul>
                   </div>
                 </div>
-              </div>  
+                <div class="clearfix"></div>
+                <div class""="">
+                  <nav class="primary-menu" id="primary-menu">
+                    <a class="menu-icon-trigger showhide" href="javascript:void(0)" id="menu-icon-trigger">
+                      <span class="mob-menu--title">Menu</span>
+                      <span class="menu-icon-wrapper" id="menu-icon-wrapper" style="visibility: hidden">
+                        <svg height="1000px" width="1000px">
+                          <path d="M 300 400 L 700 400 C 900 400 900 750 600 850 A 400 400 0 0 1 200 200 L 800 800" id="pathD"></path>
+                          <path d="M 300 500 L 700 500" id="pathE"></path>
+                          <path d="M 700 600 L 300 600 C 100 600 100 200 400 150 A 400 380 0 1 1 200 800 L 800 200" id="pathF"></path>
+                        </svg>
+                      </span>
+                    </a>
+                    <!-- menu-icon-wrapper -->
+                    {% get_menus as menu_list %}
+                    {% include "site/menu.html" with  menu_list=menu_list %}
+                  </nav>
+                </div>
+              </div>
+            </header>
+            {% endblock %}
+            <div id="banner_wrap">
+              {# <img alt="MicroPyramid - Django and Python Web Development Company" class="banner_bg_image" src="/static/site/images/new/PlainBanner.jpg"> #}
+              <div class="img_overlay_div"></div>
+              <div class="row">
+                <div class="work_container">
+                  <div class="slider_text">
+                    <div class="tab_text_wrap active">
+                      {# <i class="fa fa-desktop tab_image"></i> #}
+                      <div class="title"> Design - HTML5, CSS3, LESS and SCSS</div>
+                      <div class="text"> We develop Creative website designs / UX designs using latest technologies like SCSS, HTML5, CSS3. Also our team master at banner designs which helps in campaigning. "Visual Ideas to web template".</div>
+                    </div>
+                    <div class="tab_text_wrap">
+                      {# <i class="fa fa-file-code-o tab_image"></i> #}
+                      <div class="title"> Django Web Application Development</div>
+                      <div class="text"> Django web development is one of our core strengths to do rapid prototypes and application development. Python is being used in our daily development activities such as development, testing and deployment.</div>
+                    </div>
+                    <div class="tab_text_wrap">
+                      {# <i class="fa fa-cloud tab_image"></i> #}
+                      <div class="title"> Cloud Hosting, Performance and Security</div>
+                      <div class="text"> Being Amazon Consulting Partner we master all Amazon Web Services to give Amazon Consulting Services to Security and Performance critical web sites. We have offered our services to 8 countries with successful implementations including large corporations.</div>
+                    </div>
+                    <div class="tab_text_wrap">
+                      {# <i class="fa fa-shopping-cart tab_image"></i> #}
+                      <div class="title"> Seamless ecommerce Integrations</div>
+                      <div class="text"> We have experience in integrating 10 payment gateways and development of python API to integrate into django apps. Most notably we work with django-oscar to develop and maintain eCommerce web applications.</div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="row slider_footer">
                 <div class="col-md-12 daimond_tabs">
                   <ul>
-                    <li class='active'> <span class='daimond_wrap'> <span class='daimond'> <i class='fa fa-desktop icon_tab'></i> <span class='heading'>Design</span> </span> </span></li>
-                    <li> <span class='daimond_wrap'> <span class='daimond'> <i class='fa fa-file-code-o icon_tab'></i> <span class='heading'>Development</span> </span> </span></li>
-                    <li> <span class='daimond_wrap'> <span class='daimond'> <i class='fa fa-cloud icon_tab'></i> <span class='heading'>Cloud</span> </span> </span></li>
-                    <li> <span class='daimond_wrap'> <span class='daimond'> <i class='fa fa-shopping-cart icon_tab'></i> <span class='heading'>eCommerce</span> </span> </span></li>
+                    <li class="active"> <span class="daimond_wrap"> <span class="daimond"> <i class="fa fa-desktop icon_tab"></i> <span class="heading">Design</span> </span> </span></li>
+                    <li> <span class="daimond_wrap"> <span class="daimond"> <i class="fa fa-file-code-o icon_tab"></i> <span class="heading">Development</span> </span> </span></li>
+                    <li> <span class="daimond_wrap"> <span class="daimond"> <i class="fa fa-cloud icon_tab"></i> <span class="heading">Cloud</span> </span> </span></li>
+                    <li> <span class="daimond_wrap"> <span class="daimond"> <i class="fa fa-shopping-cart icon_tab"></i> <span class="heading">eCommerce</span> </span> </span></li>
                   </ul>
                 </div>
                 <!-- <div class="col-md-3 dots_wrap">
@@ -254,8 +251,9 @@
                     <li> <span class='dot_each'></span></li>
                     <li> <span class='dot_each'></span></li>
                   </ul>
-                </div> -->
+                  </div> -->
               </div>
+              </img>
             </div>
             {% block stage %}
             <div class="overlay_subscribe"></div>
@@ -268,20 +266,20 @@
                 <h3>Subscribe <span>With Us</span></h3>
               </div>
               <div class="address_div">
-                <i class='fa fa-map-marker'></i>
+                <i class="fa fa-map-marker"></i>
                 <div class="address_wrap">
                   <div class="address">
                     <h4>Reach</h4>
-                    <div class='content'> <span>HIG499, 6th phase KPHB</span> <span>Hyderabad, India - 500072</span></div>
+                    <div class="content"> <span>HIG499, 6th phase KPHB</span> <span>Hyderabad, India - 500072</span></div>
                   </div>
                 </div>
                 <div class="cal_us">
-                  <i class='fa fa-phone'></i>
+                  <i class="fa fa-phone"></i>
                   <h4>Call</h4>
                   <div class="content">+91-9959166266</div>
                 </div>
                 <div class="mail_us">
-                  <i class='fa fa-envelope-o'></i>
+                  <i class="fa fa-envelope-o"></i>
                   <h4>Mail</h4>
                   <div class="content">hello@micropyramid.com</div>
                 </div>
@@ -289,171 +287,175 @@
               <div class="clearfix"></div>
               <div class="contact_social">
                 <ul>
-                  <li> <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank" title="MicroPyramid facebook page"><span class='social_each fb'><i class='fa fa-facebook'></i></span></a></li>
-                  <li> <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank" title="MicroPyramid linkedin page"><span class='social_each in'><i class='fa fa-linkedin'></i></span></a></li>
-                  <li> <a href="https://www.youtube.com/c/micropyramid" class="youtube-play" target="_blank" title="MicroPyramid youtube channel"><span class='social_each youtube'><i class='fa fa-youtube-play'></i></span></a></li>
-                  <li> <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank" title="MicroPyramid rss feed"><span class='social_each rss'><i class='fa fa-rss'></i></span></a></li>
-                  <li> <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank" title="MicroPyramid googleplus page"><span class='social_each gplus'><i class='fa fa-google-plus'></i></span></a></li>
-                  <li> <a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><span class='social_each twit' title="MicroPyramid twitter page"><i class='fa fa-twitter'></i></span></a></li>
-                  <li> <a href="https://github.com/micropyramid" class="github" target="_blank" title="MicroPyramid github organisation"><span class='social_each git'><i class='fa fa-github'></i></span></a></li>
-                  <li> <a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank" title="MicroPyramid reddit page"><span class='social_each reddit'><i class='fa fa-reddit'></i></span></a></li>
+                  <li> <a class="facebook" href="https://www.facebook.com/MicroPyramid" target="_blank" title="MicroPyramid facebook page"><span class="social_each fb"><i class="fa fa-facebook"></i></span></a></li>
+                  <li> <a class="linkedin" href="https://www.linkedin.com/company/micropyramid" target="_blank" title="MicroPyramid linkedin page"><span class="social_each in"><i class="fa fa-linkedin"></i></span></a></li>
+                  <li> <a class="youtube-play" href="https://www.youtube.com/c/micropyramid" target="_blank" title="MicroPyramid youtube channel"><span class="social_each youtube"><i class="fa fa-youtube-play"></i></span></a></li>
+                  <li> <a class="rss" href="https://micropyramid.com/rss.xml" target="_blank" title="MicroPyramid rss feed"><span class="social_each rss"><i class="fa fa-rss"></i></span></a></li>
+                  <li> <a class="google-plus" href="http://google.com/+Micropyramid/" target="_blank" title="MicroPyramid googleplus page"><span class="social_each gplus"><i class="fa fa-google-plus"></i></span></a></li>
+                  <li> <a class="twitter" href="https://twitter.com/micropyramid" target="_blank"><span class="social_each twit" title="MicroPyramid twitter page"><i class="fa fa-twitter"></i></span></a></li>
+                  <li> <a class="github" href="https://github.com/micropyramid" target="_blank" title="MicroPyramid github organisation"><span class="social_each git"><i class="fa fa-github"></i></span></a></li>
+                  <li> <a class="reddit" href="https://www.reddit.com/r/MicroPyramid/" target="_blank" title="MicroPyramid reddit page"><span class="social_each reddit"><i class="fa fa-reddit"></i></span></a></li>
                 </ul>
               </div>
-              <form id="subscribeform" name="subscribeform" method="post">
+              <form id="subscribeform" method="post" name="subscribeform">
                 <div class="form_div">
-                  <div class="input-group"> <span class="input-group-addon"><i class='fa fa-user'></i></span> <input type="text" class="form-control" name="full_name" placeholder="Name" aria-describedby="basic-addon1"></div>
+                  <div class="input-group"> <span class="input-group-addon"><i class="fa fa-user"></i></span> <input aria-describedby="basic-addon1" class="form-control" name="full_name" placeholder="Name" type="text"/></div>
                   <span id="full_name"></span>
-                  <div class="input-group"> <span class="input-group-addon"><i class='fa fa-comments'></i></span> <input type="text" class="form-control" name="email" placeholder="Email" aria-describedby="basic-addon1"></div>
+                  <div class="input-group"> <span class="input-group-addon"><i class="fa fa-comments"></i></span> <input aria-describedby="basic-addon1" class="form-control" name="email" placeholder="Email" type="text"/></div>
                   <span id="email"></span>
-                  <div class="button_row"> <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send </button></div>
+                  <div class="button_row"> <button class="submit_contact" type="submit"><i class="fa fa-paper-plane-o"></i> Send </button></div>
                 </div>
               </form>
             </div>
             <div id="about-us">
               <div class="container text-center">
                 <h1 class="content">Django &amp; Python Web Development Company</h1>
-                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python & Django application development services. Our Expertise lies in <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/">Python</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/">Django</a>, <a href="https://micropyramid.com{% if request.session.country %}/{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, Docker, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/">Amazon Web Services</a>, PostgreSQL, MySQL, Less and Scss.</p>
+                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python &amp; Django application development services. Our Expertise lies in <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/">Python</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/">Django</a>, <a href="https://micropyramid.com{% if request.session.country %}/{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, Docker, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/">Amazon Web Services</a>, PostgreSQL, MySQL, Less and Scss.</p>
                 <p> We are dedicated to provide world class software to startups, small and big enterprises. We use most of the Cloud Technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome Open-Source Technologies. With our custom tools, we can assure you always get the best software you need. We always Succeeded in meeting Our Customer Satisfaction with our great Monitoring and Support. There are many reusable Python Packages, Docker Images, Ansible Roles, Node Packages published by our experts in their free time.</p>
               </div>
             </div>
-            <div id='our_work'>
+            <div id="our_work">
               <div class="work_container">
-              <div class="row">
-               <div class="col-md-4 col-sm-12 col-xs-12 about_text">
-                  <div class="heading"> <span>Our Recent</span> <span class='green'>Works</span></div>
-                  <p> With over 40 projects delivered for 15 clients in 8 countries, we always find ways to develop Secure, Fast and Robust Web Applications. We have three layer testing and two layer quality control in place to deliver awesome software. All our Web Applications are being monitored 24x7 using Newrelic and Sentry for Performance and Security Enhancements. We develop SEO optimized Web Applications to boost search engine rankings easily.</p>
+                <div class="row">
+                  <div class="col-md-4 col-sm-12 col-xs-12 about_text">
+                    <div class="heading"> <span>Our Recent</span> <span class="green">Works</span></div>
+                    <p> With over 40 projects delivered for 15 clients in 8 countries, we always find ways to develop Secure, Fast and Robust Web Applications. We have three layer testing and two layer quality control in place to deliver awesome software. All our Web Applications are being monitored 24x7 using Newrelic and Sentry for Performance and Security Enhancements. We develop SEO optimized Web Applications to boost search engine rankings easily.</p>
+                  </div>
+                  <div class="col-md-8 col-sm-12 col-xs-12 daimonds_wrap">
+                    <div class="row">
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="http://www.haciendabaru.com/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap"> <span class="img"> <img alt="haciendabaru" src="/static/site/images/haciendabaru.png" style="max-width:21%;"> </img></span></div>
+                            </div>
+                            <div class="description">
+                              <p> National Wildlife Refuge and Lodge.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="http://www.boughdigital.com/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap"> <span class="img"> <img alt="bough-digital" src="/static/site/images/bough.png"> </img></span></div>
+                            </div>
+                            <div class="description">
+                              <p> Online SEO Digital Marketing and Reporting Tool.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="https://peeljobs.com/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap">
+                                <span class="img">
+                                  <img alt="peeljobs" src="/static/site/images/peeljobs.png"><!--  <span class='title'>Peel Jobs</span> --> </img>
+                                </span>
+                              </div>
+                            </div>
+                            <div class="description">
+                              <p> Online service job portal to find the best career opportunity.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="https://hellocoupons.in/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap"> <span class="img"> <img alt="helloCoupons" src="/static/site/images/hellocoupons.png"> </img></span></div>
+                            </div>
+                            <div class="description">
+                              <p> India's Best Coupons Portal. Find Latest Coupons, Discount codes and Best saving offers.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="http://giftingnation.com/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap"> <span class="img"> <img alt="giftingnation" src="/static/site/images/giftingnation.png"> </img></span></div>
+                            </div>
+                            <div class="description">
+                              <p> You can Gift anyone anytime.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="http://creditable.co/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap"> <span class="img"> <img alt="creditable" src="/static/site/images/crditable.png"> </img></span></div>
+                            </div>
+                            <div class="description">
+                              <p> Easily manage savings, loans and enabling financial wellness for all employees at work.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="daimond_work">
+                        <div class="content_wrap">
+                          <div class="overlay">
+                            <div class="visit_web"> <a href="https://wonderlandresorts.com/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                          </div>
+                          <div class="content_rotate">
+                            <div class="logo">
+                              <div class="image_wrap"> <span class="img"> <img src="/static/site/images/wonder-logo.png"> </img></span></div>
+                            </div>
+                            <div class="description">
+                              <p> The perfect vacation hotels, homes and rentals around the world.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-8 col-sm-12 col-xs-12 daimonds_wrap">
-                  <div class="row">
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="http://www.haciendabaru.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/haciendabaru.png' alt="haciendabaru" style="max-width:21%;"> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> National Wildlife Refuge and Lodge.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="http://www.boughdigital.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/bough.png' alt="bough-digital"> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> Online SEO Digital Marketing and Reporting Tool.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="https://peeljobs.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/peeljobs.png' alt="peeljobs"><!--  <span class='title'>Peel Jobs</span> --> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> Online service job portal to find the best career opportunity.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="https://hellocoupons.in/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/hellocoupons.png' alt="helloCoupons"> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> India's Best Coupons Portal. Find Latest Coupons, Discount codes and Best saving offers.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="http://giftingnation.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/giftingnation.png' alt="giftingnation"> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> You can Gift anyone anytime.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="http://creditable.co/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/crditable.png' alt="creditable"> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> Easily manage savings, loans and enabling financial wellness for all employees at work.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="daimond_work">
-                      <div class="content_wrap">
-                        <div class="overlay">
-                          <div class="visit_web"> <a href="https://wonderlandresorts.com/" target="_blank"><span class='visit_btn'>Visit Website</span></a></div>
-                        </div>
-                        <div class='content_rotate'>
-                          <div class="logo">
-                            <div class="image_wrap"> <span class='img'> <img src='/static/site/images/wonder-logo.png'> </span></div>
-                          </div>
-                          <div class="description">
-                            <p> The perfect vacation hotels, homes and rentals around the world.</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               </div>
             </div>
             <div class="testimonials_row">
-              <div class='col-md-12'>
+              <div class="col-md-12">
                 <p class="happy-clients">Our Happy Clients</p>
                 <div class="carousel slide" data-ride="carousel" id="quote-carousel">
                   <ol class="carousel-indicators">
-                    <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#quote-carousel" data-slide-to="1"></li>
-                    <li data-target="#quote-carousel" data-slide-to="2"></li>
+                    <li class="active" data-slide-to="0" data-target="#quote-carousel"></li>
+                    <li data-slide-to="1" data-target="#quote-carousel"></li>
+                    <li data-slide-to="2" data-target="#quote-carousel"></li>
                   </ol>
                   <div class="carousel-inner">
                     <div class="item active">
                       <blockquote>
                         <div class="row">
                           <div class="col-sm-3 text-center">
-                            <div> <img class="img-circle" src="/static/site/images/Diego.JPG" style="width: 100px;height:100px;"></div>
+                            <div> <img class="img-circle" src="/static/site/images/Diego.JPG" style="width: 100px;height:100px;"/></div>
                             <div class="profile_details"> <span>Director and VFX supervisor</span> <span>Deteast</span></div>
                           </div>
                           <div class="col-sm-9">
@@ -467,7 +469,7 @@
                       <blockquote>
                         <div class="row">
                           <div class="col-sm-3 text-center">
-                            <div> <img class="img-circle" src="https://media.licdn.com/media/p/2/005/078/2fa/04e81b3.jpg" style="width: 100px;height:100px;"></div>
+                            <div> <img class="img-circle" src="https://media.licdn.com/media/p/2/005/078/2fa/04e81b3.jpg" style="width: 100px;height:100px;"/></div>
                             <div class="profile_details"> <span>Director</span> <span>Creditable</span></div>
                           </div>
                           <div class="col-sm-9">
@@ -481,7 +483,7 @@
                       <blockquote>
                         <div class="row">
                           <div class="col-sm-3 text-center">
-                            <div> <img class="img-circle" src="/static/site/images/Brian.JPG" style="width: 100px;height:100px;"></div>
+                            <div> <img class="img-circle" src="/static/site/images/Brian.JPG" style="width: 100px;height:100px;"/></div>
                             <div class="profile_details"> <span>Director</span> <span>JDB Technology Solutions</span></div>
                           </div>
                           <div class="col-sm-9">
@@ -495,25 +497,93 @@
                 </div>
               </div>
               <br clear="all">
+              </br>
             </div>
-            <div id='blog_list'>
-              <div class="heading"> <span>latest from our </span> <span class='green'>blog</span></div>
+            <h1 class="mp-technologies-heading text-center">TECHNOLOGIES</h1>
+            <div id="technologies_wrapper">
+              <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mp-technologies">
+                  <div class="logo-gallery-row row">
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/"><img alt="python" class="logo" src="/static/site/images/tech-home/python-tech.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/"><img alt="django" class="logo" src="/static/site/images/tech-home/django-tech.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="elastic search" class="logo largetechlogo" src="/static/site/images/tech-home/elasticsearch.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/"><img alt="amazon web services" class="logo" src="/static/site/images/tech-home/aws-tech.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-ecommerce-development/"><img alt="djagno oscar" class="logo" src="/static/site/images/tech-home/oscar-tech.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/"><img alt="angular_js" class="logo" src="/static/site/images/tech-home/angular-js-tech.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="boostrap" class="logo" src="/static/site/images/tech-home/bootstrap-tech.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="git" class="logo" src="/static/site/images/tech-home/git-tech.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="docker" class="logo smalltechlogo" src="/static/site/images/tech-home/docker.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="reactjs" class="logo largetechlogo" src="/static/site/images/tech-home/reactjs.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}mongodb-development-services/"><img alt="mongodb" class="logo smalltechlogo" src="/static/site/images/tech-home/mongodb.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="reactnative" class="logo smalltechlogo" src="/static/site/images/tech-home/react.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="mysql" class="logo mediumtechlogo" src="/static/site/images/tech-home/mysql.png"/>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}postgresql-administration-and-management/"><img alt="postgresql" class="logo smalltechlogo" src="/static/site/images/tech-home/postgresql.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-rest-framework-development-services/"><img alt="django-rest-framework" class="logo mediumtechlogo" src="/static/site/images/tech-home/django-rest-framework.png"/></a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
+                      <img alt="ansible" class="logo mediumtechlogo" src="/static/site/images/tech-home/ansible.png"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3 class="membership_heading">Membership</h3>
+            <div class="without-background">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-4 col-sm-4 sponsor-logo1"><img alt="Docker" src="/static/site/images/new/docker.png"/></div>
+                  <div class="col-md-4 col-sm-4 sponsor-logo1"><a href="https://www.djangoproject.com/foundation/corporate-members" target="_blank" title="Django Software Foundation"> <img alt="Django leader" src="/static/site/images/new/dsf-leader.png"/></a></div>
+                  <div class="col-md-4 col-sm-4 sponsor-logo1"> <img alt="Nasscom" src="/static/site/images/new/nasscomMember.png"/></div>
+                </div>
+              </div>
+            </div>
+            <div id="blog_list">
+              <div class="heading"> <span>latest from our </span> <span class="green">blog</span></div>
               <div class="row">
                 {% get_latest_posts as latest_posts %} {% for post in latest_posts %}
                 <div class="col-md-4 col-sm-4 col-xs-12 blog_ticket_wrap">
-                  <div class="blog_ticket" itemscope itemType="http://schema.org/BlogPosting">
+                  <div class="blog_ticket" itemscope="" itemtype="http://schema.org/BlogPosting">
                     <div class="date_daimond">
                       <div class="text_wrap">
                         {% if post.published_on %}
-                        <div class='month'> <a href="/blog/{{post.published_on|date:"Y"}}/{{post.published_on|date:"n"}}"> <span itemprop="datePublished"> {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} {{ post.published_on|date:"Y" }} </span> </a></div>
+                        <div class="month"> <a href="/blog/{{post.published_on|date:" y"}}="" {{post.published_on|date:"n"}}"=""> <span itemprop="datePublished"> {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} {{ post.published_on|date:"Y" }} </span> </a></div>
                         {% else %}
-                        <div class='month'> <a href="/blog/{{post.updated_on|date:"Y"}}/{{post.updated_on|date:"n"}}"> <span itemprop="datePublished"> {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }} {{ post.updated_on|date:"Y" }} </span> </a></div>
+                        <div class="month"> <a href="/blog/{{post.updated_on|date:" y"}}="" {{post.updated_on|date:"n"}}"=""> <span itemprop="datePublished"> {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }} {{ post.updated_on|date:"Y" }} </span> </a></div>
                         {% endif %}
                       </div>
                     </div>
                     <div class="blog_title">
                       <a href="/blog/{{ post.active_slugs.0.slug }}/"> <span itemprop="headline">{{ post.title }}</span> </a>
-                      <div class="author"> <span> <span itemscope itemtype="http://schema.org/Person"> <span itemprop="name">{{ post.user.get_full_name }}</span> </span> </span></div>
+                      <div class="author"> <span> <span itemscope="" itemtype="http://schema.org/Person"> <span itemprop="name">{{ post.user.get_full_name }}</span> </span> </span></div>
                     </div>
                     <div class="blog_description">
                       <div class="description-detail" id="/blog/{{ post.active_slugs.0.slug }}/">
@@ -525,88 +595,21 @@
                 {% endfor %}
               </div>
             </div>
-            <h1 class="mp-technologies-heading text-center">TECHNOLOGIES</h1>
-            <div id='technologies_wrapper'>
-              <div class="row">
-                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 mp-technologies">
-                  <div class="logo-gallery-row row">
-                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/"><img src="/static/site/images/tech-home/python-tech.png" class="logo" alt="python" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/"><img src="/static/site/images/tech-home/django-tech.png" class="logo" alt="django" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/elasticsearch.png" class="logo largetechlogo" alt="elastic search" />
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/"><img src="/static/site/images/tech-home/aws-tech.png" class="logo" alt="amazon web services" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-ecommerce-development/"><img src="/static/site/images/tech-home/oscar-tech.png" class="logo" alt="djagno oscar" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/"><img src="/static/site/images/tech-home/angular-js-tech.png" class="logo" alt="angular_js" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/bootstrap-tech.png" class="logo" alt="boostrap" />
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/git-tech.png" class="logo" alt="git" />
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/docker.png" class="logo smalltechlogo" alt="docker" />
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/reactjs.png" class="logo largetechlogo" alt="reactjs" />
-                    </div>
-                         <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}mongodb-development-services/"><img src="/static/site/images/tech-home/mongodb.png" class="logo smalltechlogo" alt="mongodb" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/react.png" class="logo smalltechlogo" alt="reactnative" />
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/mysql.png" class="logo mediumtechlogo" alt="mysql" />
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}postgresql-administration-and-management/"><img src="/static/site/images/tech-home/postgresql.png" class="logo smalltechlogo" alt="postgresql" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-rest-framework-development-services/"><img src="/static/site/images/tech-home/django-rest-framework.png" class="logo mediumtechlogo" alt="django-rest-framework" /></a>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-4  col-xs-6  logo-thumb">
-                      <img src="/static/site/images/tech-home/ansible.png" class="logo mediumtechlogo" alt="ansible" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <h3 class="membership_heading">Membership</h3>
-            <div class="without-background">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-4 col-sm-4 sponsor-logo1"> <img src="/static/site/images/docker.jpg" alt="Docker"></div>
-                <div class="col-md-4 col-sm-4 sponsor-logo1"> <img src="/static/site/images/dsf-leader.png" alt="Django leader"></div>
-                <div class="col-md-4 col-sm-4 sponsor-logo1"> <img src="/static/site/images/nasscomMember.png" alt="Nasscom"></div>
-              </div>
-            </div>  
-            </div>
             <div class="row" id="get-in-touch">
-              <div class="heading"> <span>get in</span> <span class='green'>touch</span></div>
+              <div class="heading"> <span>get in</span> <span class="green">touch</span></div>
               <div class="row contact-form">
-                <form id="contactform" name="contactform" method="post" action="{% url "contact_india" %}">
-                  {% csrf_token %}
-                  <div class="row marl first-input-row">
-                    <div class="col-md-3 col-sm-3 input-blk"> <input type="text" class="form-control" placeholder="Full Name" id="full_name" name="full_name"></div>
-                    <div class="col-md-3 col-sm-3 input-blk"> <input type="email" class="form-control" placeholder="Email" id ="email" name="email"></div>
-                    <div class="col-md-3 col-sm-3 input-blk"> <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone"></div>
-                    <div class="col-md-3 col-sm-3 input-blk"> <input type="tel" class="form-control" placeholder="Country" id="country" name="country"></div>
-                  </div>
-                  <div class="row marl second-input-row">
-                    <div class="col-md-12 input-blk"><textarea class="form-control form-control1" rows="3" placeholder="Comments" id="message" name="message"></textarea></div>
-                  </div>
-                  <div class="btn_div"> <button class="btn btn-default" type="submit">Submit Now</button></div>
+                <form action="{% url "contact_india" %}" id="contactform" method="post" name="contactform">
+                {% csrf_token %}
+                <div class="row marl first-input-row">
+                  <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="full_name" name="full_name" placeholder="Full Name" type="text"/></div>
+                  <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="email" name="email" placeholder="Email" type="email"/></div>
+                  <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="phone" name="phone" placeholder="Phone" type="tel"/></div>
+                  <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="country" name="country" placeholder="Country" type="tel"/></div>
+                </div>
+                <div class="row marl second-input-row">
+                  <div class="col-md-12 input-blk"><textarea class="form-control form-control1" id="message" name="message" placeholder="Comments" rows="3"></textarea></div>
+                </div>
+                <div class="btn_div"> <button class="btn btn-default" type="submit">Submit Now</button></div>
                 </form>
               </div>
             </div>
@@ -614,40 +617,36 @@
             <footer>
               <div class="row" id="footer-social">
                 <ul class="list-inline">
-                  <li><a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                  <li><a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                  <li><a href="https://www.youtube.com/c/micropyramid" class="youtube-play" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
-                  <li><a href="https://micropyramid.com/rss.xml" class="rss" target="_blank"><i class="fa fa-rss"></i></a></li>
-                  <li><a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-                  <li><a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                  <li><a href="https://github.com/micropyramid" class="github" target="_blank"><i class="fa fa-github"></i></a></li>
-                  <li><a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank"><i class="fa fa-reddit"></i></a></li>
+                  <li><a class="facebook" href="https://www.facebook.com/MicroPyramid" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li><a class="linkedin" href="https://www.linkedin.com/company/micropyramid" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                  <li><a class="youtube-play" href="https://www.youtube.com/c/micropyramid" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+                  <li><a class="rss" href="https://micropyramid.com/rss.xml" target="_blank"><i class="fa fa-rss"></i></a></li>
+                  <li><a class="google-plus" href="http://google.com/+Micropyramid/" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                  <li><a class="twitter" href="https://twitter.com/micropyramid" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a class="github" href="https://github.com/micropyramid" target="_blank"><i class="fa fa-github"></i></a></li>
+                  <li><a class="reddit" href="https://www.reddit.com/r/MicroPyramid/" target="_blank"><i class="fa fa-reddit"></i></a></li>
                 </ul>
               </div>
             </footer>
             <!-- country_list starts here -->
-              <div class="country_list text-right hidden-lg hidden-md">
-                 <form name="country_set_form " id="country_set_form" method="post" action="{% url 'set_country' %}" >
-                  <select class="set_country form-control" id="set_country" name="country">
-                  {% get_countries as countries %}
-                  {% for country in countries %}
-                  <option value="{{ country.code }}" {% if request.session.country == country.code %}selected{% endif %}>{{ country.name }}</option>
-                  {% endfor %}
-                  </select>
+            <div class="country_list text-right hidden-lg hidden-md">
+              <form action="{% url 'set_country' %}" id="country_set_form" method="post" name="country_set_form ">
+                <select class="set_country form-control" id="set_country" name="country">
+                {% get_countries as countries %}
+                {% for country in countries %}
+                <option %}="" %}selected{%="" endif="" if="" request.session.country="country.code" value="{{ country.code }}" {%="">{{ country.name }}</option>
+                {% endfor %}
+                </select>
               </form>
-              </div>
+            </div>
             <!-- country_list ends here -->
             <div class="row" id="our-contact">
               <div class="row contact-detail">
-                <div class="col-md-2 col-sm-6 col-xs-12 contact-block dark">
-                  <div class="icon"><i class="fa fa-phone"></i></div>
-                  <div class="text"><span class="head">Call Us</span> <span class="desc">India +91-9959166266</span><br/> <span class="desc">USA +1-5102300949</span></div>
-                </div>
-                <div class="col-md-2 col-sm-6 col-xs-12 contact-block dark1">
+                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark1">
                   <div class="icon"><i class="fa fa-envelope-o"></i></div>
                   <div class="text"><span class="head">E-Mail Address</span> <span class="desc">hello@micropyramid.com</span></div>
                 </div>
-                <div class="col-md-2 col-sm-6 col-xs-12 contact-block dark2">
+                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark2">
                   <div class="icon"><i class="fa fa-map-marker"></i></div>
                   <div class="text"><span class="head">Reach US - India</span> <span class="desc"> HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072<br/> +91-9959166266</span></div>
                 </div>
@@ -664,21 +663,17 @@
           </div>
           <div class="row marl" id="footer-links-home">
             <div class="container">
-              <div class="col-md-6 col-sm-12 col-xs-12 footer-home text-right"> Copyright &copy; {% now "Y" %} MicroPyramid.</div>
-              <a href="/sitemap{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}-{{request.session.country}}/{% endif %}{% endif %}"><Strong>Site Map</Strong></a>
+              <div class="col-md-6 col-sm-12 col-xs-12 footer-home text-right"> Copyright © {% now "Y" %} MicroPyramid.</div>
+              <a href="/sitemap{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}-{{request.session.country}}/{% endif %}{% endif %}"><strong>Site Map</strong></a>
             </div>
           </div>
-
           {% endblock %}
         </div>
       </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js">
-
-    </script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script>
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    {% render_bundle 'site' 'js' %}
+    <script id="packer_js" src="/static/webpack_bundles/index-da07b2ddc9daeb0962ea.js" type="text/javascript"></script>
   </body>
 </html>

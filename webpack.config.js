@@ -7,9 +7,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   context: __dirname,
    entry: {
-    site: './webpack_js/index',
+    index: './webpack_js/index',
     portal: './webpack_js/portal',
-    menu: './webpack_js/menu',
     oss: './webpack_js/oss'
   },
   output: {
