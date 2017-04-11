@@ -26,7 +26,7 @@
       <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
         <ul>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+            <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
           </li>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
             <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Services</span></a>

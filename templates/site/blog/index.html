@@ -51,11 +51,23 @@
   </span>
 {% endblock %}
 {% block blogcontent %}
+<style type="text/css">
+  
+</style>
   {% include 'site/contact.html' %}
   <div id='container_wrapper'>
-    <!-- blog row starts here -->
-    <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <!--<div class="breadcrumb">
       <ul>
+        <li style=""><a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
+        <li style=""><a href="/blog/">Blog</a></li>
+        {% if category %}
+        <li style=""><a href="/blog/the-point/keys-strong-mobile-payment-strategy-blog.aspx">{{category.name}}</a></li>
+        {% endif %}
+      </ul>
+    </div>-->
+    <!-- blog row starts here -->
+   <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+       <ul>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
         </li>
