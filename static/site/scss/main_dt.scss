@@ -1,4 +1,9 @@
 @import 'ref_dt.scss';
+html{font-size: 16px;
+  @media (min-width: 1400px) and (max-width:2000px){
+    font-size:18px;
+  }
+}
 
 #body{
   font-family: 'Raleway', sans-serif;
@@ -5679,10 +5684,10 @@ p a{
   color: #333;
   text-shadow: none;
 }
-.bread_crums ul  li a{
+.bread_crums ul  li a, .bread_crums ul  li .a{
     display:inline-block;
   }
-  .bread_crums ul  li a span.name{
+  .bread_crums ul  li a span.name, .bread_crums ul  li .a span.name{
     height:16px;
     padding:5px 15px;
     color:#4c4c4c;
@@ -5691,7 +5696,7 @@ p a{
     padding-left:0px;
     font-weight: 600;
   }
-  .bread_crums ul  li a span.name:after{
+  .bread_crums ul  li a span.name:after, .bread_crums ul  li .a span.name:after{
     content: "\00BB";
     position:absolute;
     right:0px;
@@ -5703,3 +5708,1079 @@ p a{
    .bread_crums ul  li:last-child a span.name:after{
       display: none;
    }
+/* service_banner starts here */
+.service_banner{
+  margin-top:65px;
+  font-family: 'Quicksand', sans-serif;
+  @media(min-width: $mob_min) and (max-width: $tab_max){
+    margin-top:0;
+  }
+  p{
+    font-size: 34px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 50px;
+    padding-top: 0px;
+    color: #444;
+     @media(min-width: $tab_min) and (max-width: $tab_max){
+        padding-top:20px;
+     }
+  }
+  .content{
+     margin-top: 0px;
+    p{   
+      font-size: 16px;
+      font-weight: 400;
+      text-align: center;
+      line-height: 26px;
+      padding-top: 5px;
+      color: #444;
+     }
+  }
+  &.python_service_banner{
+    background: #fff;
+    padding:50px 0;
+     @media(min-width: $tab_min) and (max-width: $tab_max){
+        padding:0px;
+     }
+     @media(min-width: $mob_min) and (max-width: $mob_max){
+        padding-bottom:0px;
+     }
+    .left_content{
+      p{      
+        text-align: left;
+        font-weight: 500;
+        line-height: 2em;
+        font-size: 1.5em;
+        color: #4d5a6f;
+      }
+    }
+    .right_content{
+      p{
+        text-align: left;
+        font-size: 1.1em;
+        line-height: 1.7em;
+        color: #4d5a6f;
+        font-weight: 500;
+      }
+    }
+  }
+}
+/* service_banner ends here */
+/* service_qualities starts here */
+.service_qualities{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 50px;
+  @media(min-width: $mob_min) and (max-width: $mob_max){
+    margin-top:20px;
+  }
+  .service_quality{
+    padding:25px;
+    min-height: 290px;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      padding:15px;
+    }
+    .icon{
+      text-align:center;
+      i{
+        font-weight: 300;
+        font-size: 40px;
+        color: #2f5374;
+      }
+    }
+    strong{
+      font-size: 1.8rem;
+      color: #444;
+      font-weight: 400;
+      padding:16px 0;
+      padding-bottom: 20px;
+      display: block;
+      position: relative;
+          text-align: center;
+
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+        font-size:18px;
+      }
+      &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+      }
+    p{
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      margin-top: 15px;
+      color: #333;
+    }
+  }
+  &.python_service_qualities{
+    .service_quality{
+      strong{
+        &:after{
+          left:45%;
+        }
+      }
+    }
+  }
+  &.testing_service_quality{
+    margin-top: 25px;
+    .service_quality{
+      display: table;
+      .icon{
+        width: 60px;
+        display: table-cell;
+        vertical-align: top;
+      }
+      .content{
+        vertical-align: top;
+        display: table-cell;
+        strong{
+          padding-top: 0;
+          font-size: 1.2rem;
+          font-weight: 500;
+          padding-bottom: 7px;
+          &:after{
+            background:none;
+          }
+        }
+        p{
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+/* service_qualities ends here */
+/* need_testing_container starts here */
+.need_testing_container{
+  /*background: url(/static/site/images/ques_pattern_1.png) repeat #e9f3f7;*/
+  background: #e9f3f7;
+  padding:60px 0;
+  margin:25px 0;
+  .need_testing_block{
+    .testing_left{
+      .heading{
+      display: block;
+       span{
+          font-weight: 400;
+          font-size: 24px;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:18px;
+            font-weight: 500;
+          }
+           &:after{
+            content:"";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+      }
+      ul{
+        margin:0;
+        padding:0;
+        width: 45%;
+        float: left;
+        li{
+          margin-top: 1.5rem;
+          list-style: none;
+          line-height: 1.2rem;
+          font-size: 1rem;
+          @media(min-width: 1400px) and (max-width: 2000px){
+            font-size:1rem;
+            font-weight: 500;
+            line-height: 1.1rem;
+          }
+          &:before{
+            content: "\f124"; /* FontAwesome Unicode */
+            font-family: FontAwesome;
+            display: inline-block;
+            width: 1.6rem; /* same as padding-left set on li */
+            color: #325677;
+          }
+        }
+      }
+    }
+    .testing_right{
+      img{
+        max-width: 97%;
+      }
+    }
+  }
+}
+/* need_testing_container ends here */
+/* service_advantages starts here */
+.service_advantages{
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 70px;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      margin-top:20px;
+    }
+    .heading{
+      display: block;
+      text-align: center; 
+      span{
+        font-weight: 400;
+        font-size: 24px;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 20px;
+        @media(min-width: $mob_min) and (max-width: $mob_max){
+          font-size:18px;
+          font-weight: 500;
+        }
+         &:after{
+          content:"";
+          position: absolute;
+          width: 60px;
+          height: 2px;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+    .technologies_grid{
+      padding:35px 0;
+      text-align: center;
+      img{
+        max-width: 100%;
+      }
+       [class*='col-']{
+        display: inline-block;
+        vertical-align: top;
+        letter-spacing: 0;
+        float: none;
+        @media(min-width: $mob_min) and (max-width: $tab_max){
+          float:left;
+        }
+      }
+      .skill{
+        margin-bottom:8px;
+      }
+    }
+}
+/* service_advantages ends here */
+/* how_we_do_container starts here */
+.how_we_do_container{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 70px;
+  @media(min-width: $mob_min) and (max-width: $mob_max){
+    margin-top:20px;
+  }
+  .testing_process_image{
+    margin:20px 0;
+    text-align: center;
+  }
+  .heading{
+    display: block;
+    text-align: center; 
+    span{
+      font-weight: 400;
+      font-size: 24px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        font-size:18px;
+        font-weight: 500;
+      }
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+  .how_we_do_col{
+    margin-top: 10px;
+    text-align: center;
+    .we_do_block{
+      padding:30px 20px;
+      border-radius: 2px;
+      transition: 0.5s ease-in-out all;
+      .icon{
+        i{
+          display: inline-block;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          padding-top: 23px;
+          text-align: center;
+          color: #fff;
+          background: #2f5374;
+          font-size: 3.4rem;
+          transition: 0.5s ease-in-out all;
+          &:hover{
+            background : darken(#25afe0, 10%);
+            color: #fff;
+          }
+        }
+      }
+      p{
+        font-size: 1rem;
+        line-height: 1.8rem;
+        font-weight: 400;
+        margin-top:10px;
+      }
+      strong{
+        margin-top:20px;
+        display: inline-block;
+        font-size: 1.4rem;
+        color: #2f5374;
+        font-weight: 500;
+      }
+      &:hover{
+        .icon{
+          i{
+            background : darken(#25afe0, 10%);
+            color: #fff;
+          }
+        }
+      }
+    }
+  } 
+}
+/* how_we_do_container ends here */
+/* projects_container starts here */
+.projects_container{
+  margin: 0px 0 30px 0;
+  padding:35px 0;
+  .heading{
+    display: block;
+    text-align: center; 
+    span{
+      font-weight: 400;
+      font-size: 24px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        font-size:18px;
+        font-weight: 500;
+      }
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+  ul{
+    margin:0;
+    padding: 0;
+    margin-top: 25px;
+    li{
+      list-style:none;
+      padding: 0 20px;
+      display: inline-block;
+      img{
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+        &:hover{
+          -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+          filter: grayscale(0%);
+        }
+      }
+    }
+  }
+}
+/* projects_container ends here */
+/* other_qa_services starts here */
+.other_qa_services{
+  margin: 0px 0 30px 0;
+  background: #f6f6ff;
+  padding:35px 0;
+  .heading{
+    display: block;
+    text-align: center; 
+    span{
+      font-weight: 400;
+      font-size: 24px;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        font-size:18px;
+        font-weight: 500;
+      }
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+  ul{
+      margin:0;
+      width: 48%;
+      margin-right: 1%;
+      float: left;
+      padding:0;
+      margin-top:20px;
+      li{
+        margin-top: 0.8rem;
+        list-style: none;
+        line-height: 1.8rem;
+        font-size: 0.9rem;
+        @media(min-width: 1400px) and (max-width: 2000px){
+          font-size:1rem;
+          font-weight: 500;
+          line-height: 1.1rem;
+        }
+        &:before{
+          content: "\f124";
+          font-family: FontAwesome;
+          display: inline-block;
+          width: 27px;
+          height: 27px;
+          color: #ffffff;
+          border-radius: 50%;
+          line-height: 26px;
+          text-align: center;
+          background: #2f5374;
+          margin-right: 10px;
+        }
+      }
+    }
+}
+/* other_qa_services ends here */
+/* our_proud_work starts here */
+.our_proud_work{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 30px;
+      .hint_text{
+        display: block;
+        font-size: 16px;
+        margin-top: 15px;
+        text-transform: uppercase;
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:14px;
+          }
+        b{
+          font-size: 30px;
+           @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:20px;
+          }
+        }
+      }
+     .heading{
+      display: block;
+      text-align: center; 
+       span{
+          font-weight: 400;
+          font-size: 24px;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+           @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:18px;
+            font-weight: 500;
+          }
+           &:after{
+            content:"";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+     }
+     .logo_grid{
+      padding:35px 0;
+      .logo_grid_row{
+        width: 100%;
+        display: table;
+        .skill{
+          display: table-cell;
+          height: 200px;
+          text-align: center;
+          vertical-align: middle;
+          border: 1px solid #eee;
+          float: none;
+          width: 25%;
+          transition: background-color 2s ease;
+          position: relative;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            width:100%;
+            display: block;
+            float: left;
+            position: relative;
+            padding-top: 17%;
+          }
+          img{
+            max-width: 100%;
+            transition:1s all ease;
+          }
+          .content{
+           transition: background-color 2s ease;
+            display: none;
+          }
+          &:hover{
+             background: #333;
+             img{
+              opacity: 0;
+             }
+            .content{
+              position: absolute;
+              height: 200px;
+              width: 100%;
+              top:0;
+              left: 0;
+              padding:30px;
+              color: #fff;
+              font-size: 15px;
+              font-weight: 300;
+              line-height: 27px;
+              text-align: left;
+              display: block;
+               @media(min-width: $tab_min) and (max-width: $tab_max){
+                  font-size:12px;
+                  font-weight:400;
+                  line-height: 21px;
+               }
+            }
+          }
+        }
+       }
+     }
+}
+/* our_proud_work ends here */
+/* our_proud_work starts here */
+.helping_block{
+  margin-top: 40px;
+  font-family: 'Quicksand', sans-serif;
+     .heading{
+      display: block;
+      text-align: center; 
+       span{
+          font-weight: 400;
+          font-size: 1.6rem;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+           @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:18px;
+            font-weight: 500;
+          }
+           &:after{
+            content:"";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+     }
+     .helping_container{
+      padding: 35px 0;
+      margin-left: -15px;
+      margin-right: -15px;
+      .helping_item{
+        background: #333;
+        padding:15px;
+        color: #fff;
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+        font-weight: 500;
+        &.second{
+          background: #e0393e;
+        }
+        &.third{
+          background: #f79420;
+        }
+      }
+     }
+}
+/* our_proud_work ends here */
+/* contact_container starts here */
+.contact_container{
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-family: 'Quicksand', sans-serif;
+  .contact_block{
+      padding: 30px;
+      background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
+     
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      background-position-y: 30px;
+    }
+     .contact_details{
+      padding-left: 175px;
+      color: #fff;
+      padding-top: 20px;
+      font-size: 20px;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        padding-left:30px;
+        padding-top:0;  
+      }
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+        padding-left: 70px;
+        padding-top:0;
+      }
+      a{
+        display: inline-block;
+        background: #d8344a;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 8px 30px;
+        margin-top: 18px;
+        color: #fff;
+      }
+      strong{
+        display: block;
+        margin-bottom: 20px;
+      }
+      .detail{
+        margin-top: 10px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        i{
+          background: #1dabdd;
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          color: #fff;
+          font-size: 13px;
+          border-radius: 50%;
+          text-align: center;
+          padding-top: 9px;
+          margin-right: 10px;
+        }
+      }
+     }
+    .contact_content{
+      text-align: right;
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+        text-align:left;
+        margin-top: 30px;
+      }
+       @media(min-width: $tab_min) and (max-width: $tab_max){
+        padding-left: 70px;
+      }
+      strong{
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+        font-weight: 500;
+        display: block;
+        margin:15px 0;
+        color: #fff;   
+      }
+      p{
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+        font-weight: 400;
+        color: #fff;
+      }
+    }
+  }
+}
+/* contact_container ends here */
+/* open_source_projects starts here */
+.open_source_projects{
+  font-family: 'Quicksand', sans-serif;
+  margin:35px 0;
+  text-align: center;
+  .heading{
+      display: block;
+      text-align: center; 
+     span{
+      font-weight: 400;
+      font-size: 1.6rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+
+.open_source{
+  padding:0;
+  .each_open_source{
+    margin-left: -25px;
+    margin-right: -25px;
+    .open_source_item{
+      margin-top:25px;
+      padding:0 0px;
+      text-align: left;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        margin-top: 5px;
+      }
+      strong{
+        font-weight: 500;
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 12px;
+      }
+      p{
+        font-size: 0.9rem;
+        line-height: 1.9rem;
+        font-weight: 400;
+        margin-top: 15px;
+        color: #333;
+      }
+    }
+  }
+}
+ 
+  [class*='col-md-3']{
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: 0;
+    float: none;
+    width:24%;
+    padding-left: 10px;    
+    padding-right: 10px; 
+     @media(min-width: $mob_min) and (max-width: $mob_max){
+       float:left;
+       width: 100%;
+       padding:10px 25px;
+       border-bottom: 1px solid #eee;
+       text-align:center;
+      }
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+        width:50%;
+        padding:10px 30px;
+        border-bottom: 1px solid #eee;
+        float: left;
+      }
+  }
+}
+/* open_source_projects ends here */
+/* recent_blogs starts here */
+.recent_blogs{
+  margin-bottom: 30px;
+  font-family: 'Quicksand', sans-serif;
+  .heading{
+    display: block;
+    text-align: center; 
+     span{
+      font-weight: 400;
+      font-size: 1.6rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+   .recent_blog{
+      margin-top: 20px;
+      strong{
+        font-size: 1rem;
+      }
+      p{
+        font-size: 1rem; 
+        margin-top: 15px;
+      }
+   }
+}
+/* recent_blogs ends here */
+
+
+.carousel-inner{
+  margin-top: 25px;
+  .item{
+    .carousel-content {
+      color:black;
+      .blog_item{
+        border-right:1px solid #ddd;
+        @media(min-width: $mob_min) and (max-width: $tab_max){
+          border:none;
+          padding:12px 0;
+          border-bottom:1px solid #ddd;
+        }
+        @media(min-width: $tab_min) and (max-width: $tab_max){
+          padding:12px 25px;
+        }
+         p{
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 24px;
+        }
+        &:last-child{
+          border:none;
+        }
+      }
+    }
+  }
+}
+.carousel-control.left{
+  background: none;
+  @media(min-width: $mob_min) and (max-width: $tab_max){
+      left:-30px;
+    }
+    @media(min-width: $tab_min) and (max-width: $tab_max){
+        left:-45px;
+    }
+}
+.carousel-control.right{
+  background: none;
+    @media(min-width: $mob_min) and (max-width: $tab_max){
+      right:-20px;
+    }
+}
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    margin-right: -100px;
+    background: #4c4c4c;
+    font-size: 15px;
+    padding-top: 8px;
+    @media(min-width: $mob_min) and (max-width: $tab_max){
+      margin-right:0;
+          padding-top: 6px;
+    width: 20px;
+    height: 25px;
+
+    }
+}
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev{
+   margin-left: -100px;
+    background: #4c4c4c;
+    font-size: 15px;
+    padding-top: 8px;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+      margin-left:0;
+          padding-top: 6px;
+    width: 20px;
+    height: 25px;
+
+    }
+}
+.blog_title{    
+  color: black;   
+}
+
+
+/* python_strength_automation starts here */
+.python_strength_automation{
+  margin:50px 0;
+  font-size: 16px;
+  font-family: 'Quicksand', sans-serif;
+  @media(min-width: $mob_min) and (max-width: $tab_max){
+     margin:15px 0;
+   }
+  .p_s_a_table{
+    width: 100%;
+    display: table;
+    @media(min-width: $mob_min) and (max-width: $tab_max){
+      display:block;
+    }
+    .our_strength{
+      width:30%;
+      display: table-cell;
+      vertical-align: middle;
+      float: none;
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+        display:block;
+        width: 100%;
+        float: left;
+      }
+      strong{
+        font-size: 1.7em;
+        color: #444;
+        font-weight: 400;
+        padding:16px 0;
+        padding-bottom: 20px;
+        display: block;
+        position: relative;
+        @media(min-width: $mob_min) and (max-width: $tab_max){
+          font-size:18px;
+        }
+        &:after{
+          content:"";
+          position: absolute;
+          width: 60px;
+          height: 2px;
+          left: 0;
+          bottom: 0;
+        }
+      }
+      .count_block{
+        margin-top:25px;
+        .count_item{
+          margin:15px 0;
+          display: block;
+          @media(min-width: $tab_min) and (max-width: $tab_max){
+              width:48%;
+              float: left;
+            }
+          .count{
+            display: inline-block;
+            background: #2f5374;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 15px;
+            padding-top: 8px;
+            box-shadow: 0px 3px 10px rgba(0,0,0, 0.1)
+          }
+          .icon{
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            padding-top: 6px;
+            box-shadow: 0px 3px 10px rgba(0,0,0, 0.1);
+            i{
+              position: relative;
+              top: 3px;
+            }
+          }
+          .name{
+            display: inline-block;
+            margin-left: 15px;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #4d5a6f;
+          }
+        }
+      }
+    }
+    .automation_container{
+      width:70%;
+      display: table-cell;
+      float: none;
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+        display:block;
+        width: 100%;
+        float: left;
+        margin-top: 20px;
+      }
+      .process_container{
+        height: 450px;
+        position: relative;
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+           height:500px;
+         }
+        .img_rel{
+          position: absolute;
+          top:34%;
+          @media(min-width: $tab_min) and (max-width: $tab_max){
+            left:41%;
+          }
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            left: 0;
+            height: auto;
+            width:110px;
+          }
+        }
+        .block{
+          position: absolute;
+          width:300px;
+          @media (min-width: 1400px) and (max-width:2000px){
+            padding:0 !important;
+          }
+          @media(min-width: $tab_min) and (max-width: $tab_max){
+            width:300px !important;
+          }
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+             width:300px !important;
+             text-align:left;
+             margin:0;
+          }
+          strong{
+            font-size: 1.1rem;
+            color: #444;
+            font-weight: 500;
+            display: block;
+          }
+          p{
+            font-size: 0.8rem;
+            line-height: 22px;
+            font-weight: 400;
+            margin-top: 7px;
+            color: #333;
+            @media (min-width: 1400px) and (max-width:2000px){
+              line-height:1.5rem;
+              font-size: 0.9rem;
+            }
+            @media(min-width: $mob_min) and (max-width: $mob_max){
+              padding-left:0;
+            }
+          }
+          &.first{
+            top:0px;
+            left: 40%;
+            @media(min-width: $tab_min) and (max-width: $tab_max){
+              left:30%;
+            }
+            @media(min-width: $mob_min) and (max-width: $mob_max){
+              left:30%;
+            }
+          }
+          &.second{
+            left:40%;
+            bottom: 0;
+            @media(min-width: $tab_min) and (max-width: $tab_max){
+              left:30%;
+            }
+            @media(min-width: $mob_min) and (max-width: $mob_max){
+              left:30%;
+              top:120px;
+            }
+          }
+          &.third{
+            left:15%;
+            top:35%;
+            @media(min-width: $tab_min) and (max-width: $tab_max){
+              left:0;
+            }
+            @media(min-width: $mob_min) and (max-width: $mob_max){
+              left:30%;
+              top:240px;
+            }
+          }
+          &.four{
+            right: -5%;
+            top:35%;
+            @media(min-width: $tab_min) and (max-width: $tab_max){
+              right:-2%;
+            }
+            @media(min-width: $mob_min) and (max-width: $mob_max){
+              left:30%;
+              top:360px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* python_strength_automation ends here */

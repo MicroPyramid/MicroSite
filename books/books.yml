@@ -1,1 +1,65 @@
--documents:
+documents:
+  a:
+    description: Git simple tutorial to learn all features and use cases of Git in
+      general implementations explained with examples for local and remote repositories.
+    folder_name: git
+    name: Git
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: public
+  b:
+    description: Docker novice to advanced tutorial is designed encourage developers
+      to learn all features and use cases of Docker in general implementations explained with
+      examples for local and remote repositories. You can explore
+      virtualization possiblities after reading this book.
+    folder_name: docker
+    name: Docker
+    updated_date: 2016-04-14 17:49:00.145102
+    visibilty: public
+  c:
+    description: This django tutorial will help to learn django with real world challenges
+      and coding practices.
+    folder_name: django-the-complete-tutorial
+    name: Django - The Complete Tutorial
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private
+  d:
+    description: Django packages will list and explain usage of popular packages with
+      use cases. This will help you build awesome django apps.
+    folder_name: django-packages
+    name: Django Packages
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private
+  e:
+    description: One simple yet powerful tutorial to create and extend E-commerce
+      web sites with django oscar.
+    folder_name: django-oscar
+    name: Django Oscar
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private
+  f:
+    description: Server admin and programmer handbook for managing and working with
+      PostgreSQL.
+    folder_name: postgresql
+    name: PostgreSQL
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private
+  g:
+    description: Django test driven development with unit testing, functional testing
+      and behavioral testing.
+    folder_name: django-test-driven-development
+    name: Django Test Driven Development
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private
+  h:
+    description: This is our practices learned from years of coding and tuning.
+    folder_name: django-best-practices
+    name: Django Best Practices
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private
+  i:
+    description: This is our regular bits of info accumulated over the years by burning
+      lots of nights.
+    folder_name: micro-bits
+    name: Micro Bits
+    updated_date: 2016-01-11 06:48:58.145102
+    visibilty: private

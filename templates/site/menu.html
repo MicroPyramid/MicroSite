@@ -72,7 +72,8 @@
   {% for menu in menu_list %}
   {% if menu.title != 'Contact Us' %}
   <li class="has-megamenu menu-item-has-children">
-    <a href="{% if menu.url != 'none' %}{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}{% endif %}" >{{ menu.title }}</a>
+    <!-- <a href="{% if menu.url != 'none' and menu.url != '' %}{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}{% endif %}" >{{ menu.title }}</a> -->
+    <span class="a">{{menu.title}}</span>
     <div class="megamenu" style="background-image: url('img/menu-bg.png');">
       <div class="megamenu-row">
         <div class="col3">

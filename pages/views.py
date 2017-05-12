@@ -322,7 +322,7 @@ def site_page(request, slug):
         page = pages[0]
         posts = []
         if page.category.all():
-            posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
+            posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')
         return render(request, 'site/page.html', {'page': page, 'posts': posts})
     else:
         return render(request, '404.html', status=404)

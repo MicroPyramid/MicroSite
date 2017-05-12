@@ -4,100 +4,117 @@
 {% load blog_tags %}
 {% block page_title %}
 {% endblock %}
-  {% block extra-js %}
-    {% if page.title|slugify  == 'web-design'|slugify %}
-      <script type="text/javascript" src='/static/site/js/design.js'></script>
-    {% else %}
-    {% endif %}
-  {% endblock %}
-
-{% block meta-description %}
-  {{ page.meta_data|safe  }}
+{% block extra-js %}
+{% if page.title|slugify  == 'web-design'|slugify %}
+<script type="text/javascript" src='/static/site/js/design.js'></script>
+{% else %}
+{% endif %}
 {% endblock %}
-
+{% block meta-description %}
+{{ page.meta_data|safe  }}
+{% endblock %}
 {% block stage %}
-  {% include 'site/contact.html' %}
-
+{% include 'site/contact.html' %}
+<style type="text/css">
+  .blog_title{
+  color: black;
+  }
+</style>
 <div id='container_wrapper'>
-  <!-- Services Row Starts here -->
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 breadcrumb_services services-left-container">
-      <!-- breadcrumb starts here -->
-      <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
-        <ul>
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
-          </li>
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Services</span></a>
-          </li>
-          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{page.title|capfirst}}</span></a>
-          </li>
-      </div>
-      <!-- breadcrumb ends here -->
+<!-- Services Row Starts here -->
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 breadcrumb_services services-left-container">
+  <!-- breadcrumb starts here -->
+  <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <ul>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Services</span></a>
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a class="a"><span itemprop="name" class='name'>{{page.title|capfirst}}</span></a>
+    </li>
+  </div>
+  <!-- breadcrumb ends here -->
+</div>
+<div class="clearfix"></div>
+<!-- Left Container Starts -->
+{{page.content|safe}}
+<!-- contact_container ends here -->
+{% if page.category.all and posts %}
+<div class="recent_blogs row">
+  <div class="col-md-offset-1 col-md-10 col-md-offset-1 server_blog">
+    <div class="heading">
+      <span>Related Blog Posts</span>
     </div>
-    <div class="clearfix"></div>
-    <!-- Left Container Starts -->
-
-    {{ page.content | safe }}
-
-    <!-- Left Container Ends -->
-
-    <!-- Right Container Starts -->
-    {% if page.category.all %}
-    <!-- related blog -->
-    <div class='server_blog'>
-      <!--title-->
-      <div class="heading">
-        <span>related</span> <span class="green">blog posts</span>
-      </div>
-      <!--/ title -->
-      {% for post in posts|slice:":3" %}
-      <div class="col-md-4 col-sm-4 col-xs-12 blog_ticket_wrap">
-        <div class="blog_ticket">
-          <div class="date_daimond">
-            {% if post.published_on %}
-            <div class="text_wrap">
-              <div class="month">{{ post.published_on|date:"b"|title }}</div>
-              <div class="day">{{ post.published_on|date:"d" }}, {{ post.published_on|date:"Y" }}</div>
+    <div id="carousel-example" class="carousel slide" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="carousel-inner">
+            <div class="item active">
+              <div class="carousel-content">
+                {% for post in posts %}
+                <div class="col-md-4 blog_item blog_item">
+                  <p><a href="/blog/{{post.slug}}/" class="blog_title">{{ post.title }}</a></p>
+                </div>
+                {% if forloop.counter|divisibleby:'3' %}
+              </div>
             </div>
-            {% else %}
-            <div class="text_wrap">
-              <div class="month">{{ post.updated_on|date:"b"|title }}</div>
-              <div class="day">{{ post.updated_on|date:"d" }}, {{ post.updated_on|date:"Y" }}</div>
+            {% if post %}
+            <div class="item ">
+              <div class="carousel-content">
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </div>
             </div>
-            {% endif %}
           </div>
-          <div class="blog_title">
-            <a href="/blog/{{post.slug}}/">{{ post.title }}</a>
-            <div class="author">{{ post.user.get_full_name }}</div>
-          </div>
-          <div class="blog_description">
-            <p itemprop="description">
-              {{ post.excerpt|linebreaks|truncatewords:30 }}<a href="/blog/{{post.slug}}/"><span class="view_more">Read More. . .</span></a>
-            </p>
-          </div>
+          <!-- Controls --> <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
         </div>
       </div>
-      {% endfor %}
-        <br clear="all">
-      </div>
     </div>
-    <!--/ related blog -->
     {% endif %}
-    <!-- Right Container Ends -->
+    <!-- Left Container Ends -->
   </div>
   <!-- Services Row Ends here -->
 </div>
 {% endblock %}
-
 {% block map %}
-  {% ifequal page.title "contact-us" %}
-    <div class="map">
-      <div class='embed-container'>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4555949677!2d78.39003300000002!3d17.485752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144f52b17db%3A0xa94f62d5a7e9c69a!2sMicroPyramid+Informatics+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1431589311241" width="100%" height="350" frameborder="0" style="border:0"></iframe>
-      </div>
-    </div>
-  {% endifequal %}
+{% ifequal page.title "contact-us" %}
+<div class="map">
+  <div class='embed-container'>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4555949677!2d78.39003300000002!3d17.485752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9144f52b17db%3A0xa94f62d5a7e9c69a!2sMicroPyramid+Informatics+Pvt+Ltd!5e0!3m2!1sen!2sin!4v1431589311241" width="100%" height="350" frameborder="0" style="border:0"></iframe>
+  </div>
+</div>
+{% endifequal %}
+<script>
+  setCarouselHeight('#carousel-example');
+  
+  function setCarouselHeight(id)
+  {
+     var slideHeight = [];
+     $(id+' .item').each(function()
+     {
+         // add all slide heights to an array
+         slideHeight.push($(this).height());
+     });
+  
+     // find the tallest item
+     max = Math.max.apply(null, slideHeight);
+  
+     // set the slide's height
+     $(id+' .carousel-content').each(function()
+     {
+         $(this).css('height',max+'px');
+     });
+  }
+</script>
 {% endblock %}

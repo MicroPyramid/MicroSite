@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^servicee/$', servicee),
     url(r'^set_country/$', set_country, name="set_country"),
 
-    # url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
+    url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^contact-india/$', contact, name="contact_india"),

@@ -40,7 +40,7 @@ Python | Django web development Company - Micropyramid {% if "/contact-usa/" in 
           <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
         </li>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="." itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Contact {% if "/contact-usa/" in request.get_full_path %}USA{% elif "/contact-uae/" in request.get_full_path  %}UAE{% else %}India{% endif %}</span></a>
+          <a class="a"><span itemprop="name" class='name'>Contact {% if "/contact-usa/" in request.get_full_path %}USA{% elif "/contact-uae/" in request.get_full_path  %}UAE{% else %}India{% endif %}</span></a>
         </li>
       </ul>
     </div>
@@ -51,7 +51,7 @@ Python | Django web development Company - Micropyramid {% if "/contact-usa/" in 
       <div class="contact_left col-md-8">
         <form id="contactform" method="post" name="contactform" action=".">
           <div class="row">
-            <h1 class="contact_heading">Contact Us</h1>
+            <h1 class="contact_heading">Need to talk to us?</h1>
             <div class="col-md-6 form-group">
               <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Name">
             </div>
@@ -73,6 +73,8 @@ Python | Django web development Company - Micropyramid {% if "/contact-usa/" in 
             </div>
             <div class="col-md-6 form-group">
               <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                            <input type="hidden" class="form-control" id="path" name="path" placeholder="Country" value="{{ request.path }}">
+
             </div>
             <div class="col-md-12 form-group">
               <textarea class="form-control" rows="10" id="message" name="message" placeholder="Your Message"></textarea>

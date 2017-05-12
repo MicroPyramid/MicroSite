@@ -1,5 +1,4 @@
 {% extends 'site/base.html' %}
-{% load compress %}
 {% load user_tags %}
 
 {% block title %} Books | MicroPyramid {% endblock %}
@@ -8,12 +7,15 @@
 {% endblock %}
 
 {% block extra-styles %}
-  {% compress css %}
-    <link href="/static/site/less/books.less" rel="stylesheet" type="text/less">
-  {% endcompress %}
+    <link href="/static/site/less/books.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block stage %}
+<style type="text/css">
+  #container_wrapper{
+    padding-top: 95px !important;
+  }
+</style>
 <div class="scroller" id='container_wrapper'>
     <!-- Books starts here -->
     <div class="row marl books-row">

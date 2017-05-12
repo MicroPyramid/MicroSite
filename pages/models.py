@@ -32,6 +32,11 @@ class Page(models.Model):
         else:
             return False
 
+    def related_pages(self):
+        menu = Menu.objects.filter(url=self.slug)
+        menus = Menu.objects.filter(parent=menu[0].parent, status='on')
+        return menus
+
     def __unicode__(self):
         return self.title
 

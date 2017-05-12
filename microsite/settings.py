@@ -11,7 +11,7 @@ SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 DEBUG = True
 
 DEBUG404 = True
-ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com']
+ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com', '*']
 
 SENTRY_ENABLED = False
 
@@ -30,7 +30,8 @@ INSTALLED_APPS = (
     'micro_blog',
     'sorl.thumbnail',
     'search',
-    # 'django_simple_forum',
+    'compressor',
+    'django_simple_forum',
     'simple_pagination',
     'django_webpacker',
 )

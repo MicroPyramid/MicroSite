@@ -135,8 +135,11 @@ def get_prev_after_pages_count(page, no_pages):
 
 def site_blog_home(request, **kwargs):
     page = 1
-    if request.GET.get('page'):
-        return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
+    if 'page' in request.GET.keys():
+        if request.GET.get('page'):
+            return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
+        else:
+            return redirect(reverse('site_blog_home'))
     if 'page_num' in kwargs:
         page = int(kwargs['page_num'])
         if page == 1:
@@ -253,8 +256,12 @@ def blog_tag(request, slug):
 def blog_category(request, **kwargs):
     page = 1
     slug = kwargs['slug']
-    if request.GET.get('page'):
-        return redirect(reverse('blog_category', kwargs={'slug': slug, 'page_num': request.GET.get('page')}))
+
+    if 'page' in request.GET.keys():
+        if request.GET.get('page'):
+            return redirect(reverse('blog_category', kwargs={'slug': slug, 'page_num': request.GET.get('page')}))
+        else:
+            return redirect(reverse('blog_category', kwargs={'slug': slug}))
 
     if 'page_num' in kwargs:
         page = int(kwargs['page_num'])
@@ -508,6 +515,7 @@ def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
     validate_contact = ContactForm(request.POST)
+
     if validate_contact.is_valid():
 
         if 'enquery_type' in request.POST.keys():
@@ -515,19 +523,23 @@ def contact(request):
                     country=request.POST.get('country'),
                     enquery_type=request.POST.get('enquery_type')
                 )
-        message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "
-        message += request.POST.get('email') + \
-            "</p><p>Message: "+request.POST.get('message')+"</p>"
-
+        message = "<p>From: "+request.POST.get('full_name') + "</p><p>Email Id: "
+        message += request.POST.get('email') + "</p>"
         if request.POST.get('phone'):
             message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
 
-        if request.POST.get('enquery_type'):
-            message += "<p><b>General Information: </b></p>"+"<p>Enquery Type: " +\
-                request.POST.get('enquery_type')+"</p>"
-
         if request.POST.get('country'):
             message += "<p>Country: "+request.POST.get('country')+"</p>"
+
+        if request.POST.get('message'):
+            message += "<p>Message: "+request.POST.get('message')+"</p>"
+
+        if request.POST.get('enquery_type'):
+            message += "<p><b>General Information:</b></p>"
+            message += "<p>Enquery Type: "+request.POST.get('enquery_type')+"</p>"
+
+        message += '<p>This request is from <a href="'+ request.META['HTTP_REFERER'] +'">' + request.META['HTTP_REFERER'] +'</a></p>'
+
 
         sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
@@ -545,11 +557,19 @@ def contact(request):
         sg.send(contact_msg)
 
         sending_msg = sendgrid.Mail()
-        sending_msg.set_subject("Contact Request")
+        sending_msg.set_subject("Service Request - Micropyramid")
         sending_msg.set_html(message)
-        sending_msg.set_text('Contact Request')
+        sending_msg.set_text('Service Request')
         sending_msg.set_from(request.POST.get('email'))
         sending_msg.add_to("hello@micropyramid.com")
+        sg.send(sending_msg)
+
+        sending_msg = sendgrid.Mail()
+        sending_msg.set_subject("Service Request - Micropyramid")
+        sending_msg.set_html(message)
+        sending_msg.set_text('Service Request')
+        sending_msg.set_from(request.POST.get('email'))
+        sending_msg.add_to("bobby@micropyramid.com")
         sg.send(sending_msg)
 
         data = {'error': False, 'response': 'Contact submitted successfully'}

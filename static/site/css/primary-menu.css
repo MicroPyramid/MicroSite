@@ -120,7 +120,7 @@ License: http://codecanyon.net/licenses
 		padding: 0 10px 35px;
 	}
 }
-.primary-menu-menu > li > a{
+.primary-menu-menu > li > a, .primary-menu-menu > li > .a{
 	position: relative;
 	font-size: 15px;
 	text-transform: capitalize;
@@ -1141,10 +1141,11 @@ License: http://codecanyon.net/licenses
 .primary-menu-menu>li{
 	padding:0;
 }
-.primary-menu-menu>li>a{
+.primary-menu-menu>li>a, .primary-menu-menu>li>.a{
 	font-size: 15px;
 	color: white;
 	padding:12px 10px;
+	cursor: pointer;
 }
 .primary-menu-menu>li>.megamenu ul{
 	text-align: left;

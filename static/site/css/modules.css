@@ -179,7 +179,7 @@
     transition: all .3s ease;
     box-shadow: 9px 9px 9px 0 rgba(47, 44, 44, 0.2); }
     .header.headroom--not-top .primary-menu-menu > li {
-      padding: 0 13px 2px; }
+       }
     .header.headroom--not-top .user-menu {
       transform: scale(0);
       transition: all .3s ease; }

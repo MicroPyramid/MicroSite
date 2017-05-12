@@ -71,12 +71,17 @@
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
         </li>
+        
+        {% if category %}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a href="/blog/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Blog</span></a>
         </li>
-        {% if category %}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/blog/category/{{ category.slug }}/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{category.name}}</span></a>
+          <a class="a"><span itemprop="name" class='name'>{{category.name}}</span></a>
+        </li>
+        {% else %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a class="a"><span itemprop="name" class='name'>Blog</span></a>
         </li>
         {% endif %}
       </ul>

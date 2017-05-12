@@ -199,8 +199,7 @@ def google_login(request):
         rty = "https://accounts.google.com/o/oauth2/auth?client_id=" + \
                settings.GP_CLIENT_ID + "&response_type=code"
         rty += "&scope=https://www.googleapis.com/auth/userinfo.profile" + \
-            " https://www.googleapis.com/auth/userinfo.email" + \
-            " https://www.google.com/m8/feeds/contacts/&redirect_uri=" + \
+            " https://www.googleapis.com/auth/userinfo.email&redirect_uri=" + \
             request.scheme + '://' + \
             request.META['HTTP_HOST'] + \
             reverse('micro_admin:google_login') + "&state=1235dfghjkf123"
