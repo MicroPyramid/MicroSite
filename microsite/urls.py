@@ -13,9 +13,10 @@ from microsite_front.views import index, tools, url_checker_tool, s3_objects_set
 
 
 from search.views import autocomplete
-from django.views.static import serve, static
+from django.views.static import serve
 from .country_urls import country_patterns
 from django.utils.translation import ugettext_lazy as _
+from django.conf.urls.static import static
 
 
 urlpatterns = [
