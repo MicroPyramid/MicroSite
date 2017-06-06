@@ -320,7 +320,7 @@ def site_page(request, slug):
         pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
     if pages:
         page = pages[0]
-        posts = []
+        posts = Post.objects.filter(status='P').order_by('-published_on')
         if page.category.all():
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')
         return render(request, 'site/page.html', {'page': page, 'posts': posts})

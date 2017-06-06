@@ -572,6 +572,7 @@ def contact(request):
         sending_msg.add_to("bobby@micropyramid.com")
         sg.send(sending_msg)
 
+        request.session['thankyou'] = True
         data = {'error': False, 'response': 'Contact submitted successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
@@ -579,6 +580,12 @@ def contact(request):
         errors = {}
         data = {'error': True, 'errinfo': validate_contact.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+
+def thankyou_page(request):
+    if 'thankyou' in request.session.keys() and request.session['thankyou'] == True:
+        return render(request, 'site/pages/thanks.html')
+    return HttpResponseRedirect('/')
 
 
 def subscribe(request):

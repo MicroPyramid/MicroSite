@@ -109,8 +109,7 @@ $.ajax({
         $('#contactform #' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
       }
     } else {
-      alert("Your message has been successfully sent. We will get back to you very soon!");
-      window.location = "/";
+      window.location = "/thank-you/";
     }
   }
 });

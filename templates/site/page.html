@@ -23,6 +23,10 @@
 <div id='container_wrapper'>
 <!-- Services Row Starts here -->
 <div class="row">
+{% if 'pycon-2017' in request.path %}
+.
+{% else %}
+
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 breadcrumb_services services-left-container">
   <!-- breadcrumb starts here -->
   <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
@@ -39,10 +43,9 @@
   </div>
   <!-- breadcrumb ends here -->
 </div>
+{% endif %}
 <div class="clearfix"></div>
-<!-- Left Container Starts -->
 {{page.content|safe}}
-<!-- contact_container ends here -->
 {% if page.category.all and posts %}
 <div class="recent_blogs row">
   <div class="col-md-offset-1 col-md-10 col-md-offset-1 server_blog">
@@ -81,12 +84,14 @@
         </div>
       </div>
     </div>
-    {% endif %}
     <!-- Left Container Ends -->
   </div>
   <!-- Services Row Ends here -->
 </div>
+{% endif %}
+
 {% endblock %}
+
 {% block map %}
 {% ifequal page.title "contact-us" %}
 <div class="map">
@@ -116,5 +121,6 @@
          $(this).css('height',max+'px');
      });
   }
+
 </script>
 {% endblock %}

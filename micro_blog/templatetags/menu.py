@@ -50,8 +50,12 @@ def get_menus(context):
 
 @register.assignment_tag(takes_context=True)
 def get_child_menus(context):
-    menu_list = Menu.objects.filter(status="on", url__isnull=False).exclude(parent=None).exclude(parent__title='Contact Us')
-    return menu_list.order_by('lvl')
+    menus = []
+    menu_list = Menu.objects.filter(status="on", parent__isnull=False).exclude(parent__title='Contact Us').order_by('lvl')
+    for menu in menu_list:
+        if not menu.menu_set.filter(status='on'):
+            menus.append(menu)
+    return menus
 
 
 @register.assignment_tag(takes_context=True)

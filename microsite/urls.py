@@ -5,7 +5,7 @@ from django.contrib import admin
 from micro_blog.views import (contact, subscribe, site_blog_home, blog_category, blog_tag, admin_post_list, new_post, edit_blog_post,
                               admin_category_list, new_blog_category, blog_category,
                               blog_article, archive_posts, delete_category, empty,
-                              edit_category, change_category_status)
+                              edit_category, change_category_status, thankyou_page)
 import microsite_front
 from pages.views import site_page, set_country
 from microsite_front.xml import rss, blog_rss, sitemap_xml, facebook_rss
@@ -28,13 +28,17 @@ urlpatterns = [
     url(r'^tools/set-meta-data-for-S3-objects/$', s3_objects_set_metadata, name='s3_objects_set_metadata'),
 
     url(r'^subscribe/$', subscribe),
-    url(r'^servicee/$', servicee),
+    # url(r'^servicee/$', servicee),
+
     url(r'^set_country/$', set_country, name="set_country"),
 
     url(r'^forum/', include('django_simple_forum.urls', namespace="django_simple_forum")),
 
     url(r'^portal/', include('micro_admin.urls', namespace='micro_admin')),
     url(r'^contact-india/$', contact, name="contact_india"),
+
+    url(r'^thank-you/$', thankyou_page, name="thankyou_page"),
+
     url(r'^contact-usa/$', contact, name="contact_usa"),
     url(r'^contact-aus/$', contact, name="contact_usa"),
     url(r'^contact-uk/$', contact, name="contact_usa"),

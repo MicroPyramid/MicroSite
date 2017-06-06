@@ -69,8 +69,11 @@
 <!-- main content ends here-->
 <script type="text/javascript">
 
-  CKEDITOR.config.allowedContent = true;
-  var editor = CKEDITOR.replace('textareacontents');
+CKEDITOR.config.allowedContent = true;
+CKEDITOR.dtd.$removeEmpty['i'] = false
+CKEDITOR.dtd.$removeEmpty.i = 0;
+CKEDITOR.dtd.$removeEmpty['span'] = false;
+CKEDITOR.config.contentsCss = ['//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css','//cdn.jsdelivr.net/bootswatch/3.3.6/readable/bootstrap.css'];  var editor = CKEDITOR.replace('textareacontents');
 
 </script>
 <script type="text/javascript">

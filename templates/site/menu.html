@@ -14,7 +14,7 @@
   {% for menu in menu_list %}
   {% if menu.title != 'Contact Us' %}
   <li class="{% if menu.get_active_children %}has-megamenu menu-item-has-children{% endif %}">
-    <a href="{% if menu.url != 'none' %}{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}{% endif %}" class="sub_menu">{{ menu.title }}</a>
+    <a href="{% if menu.url != 'none' %}{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/{% endif %}" class="sub_menu">{{ menu.title }}</a>
     {% if menu.get_active_children %}
     <div class="megamenu" style="background-image: url('img/menu-bg.png');">
       <div class="megamenu-row">
@@ -22,11 +22,11 @@
           <ul>
             {% for children in menu.get_active_children %}
             <li class="megamenu-item-info">
-              <h5 class="megamenu-item-info-title">{% if not children.url %}<span class="sub_menu">{{ children.title }}</span>{% else %}<a href="{% if children.url != 'none' %}{% if children.url == 'blog' or children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{children.url}}{% endif %}" class="sub_menu">{{ children.title }}</a>{% endif %}</h5>
+              <h5 class="megamenu-item-info-title">{% if not children.url %}<span class="sub_menu">{{ children.title }}</span>{% else %}<a href="{% if children.url != 'none' %}{% if children.url == 'blog' or children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{children.url}}/{% endif %}" class="sub_menu">{{ children.title }}</a>{% endif %}</h5>
             </li>
             {% for each_children in children.get_active_children %}
             <li>
-              <a href="{% if each_children.url != 'none' %}{% if each_children.url == 'blog' or each_children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{each_children.url}}{% endif %}">{{each_children.title}}</a>
+              <a href="{% if each_children.url != 'none' %}{% if each_children.url == 'blog' or each_children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{each_children.url}}/{% endif %}">{{each_children.title}}</a>
             </li>
             {% endfor %}
             {% if forloop.counter|divisibleby:1 %}
@@ -80,11 +80,11 @@
           <ul>
             {% for children in menu.get_active_children %}
             <li class="megamenu-item-info">
-              <h5 class="megamenu-item-info-title">{% if not children.url %}<span class="sub_menu">{{ children.title }}</span>{% else %}<a href="{% if children.url != 'none' %}{% if children.url == 'blog' or children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{children.url}}{% endif %}" class="sub_menu">{{ children.title }}</a>{% endif %}</h5>
+              <h5 class="megamenu-item-info-title">{% if not children.url %}<span class="sub_menu">{{ children.title }}</span>{% else %}<a href="{% if children.url != 'none' %}{% if children.url == 'blog' or children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{children.url}}/{% endif %}" class="sub_menu">{{ children.title }}</a>{% endif %}</h5>
             </li>
             {% for each_children in children.get_active_children %}
             <li>
-              <a class="children_menu" href="{% if each_children.url != 'none' %}{% if each_children.url == 'blog' or each_children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{each_children.url}}{% endif %}">{{each_children.title}}</a>
+              <a class="children_menu" href="{% if each_children.url != 'none' %}{% if each_children.url == 'blog' or each_children.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{each_children.url}}/{% endif %}">{{each_children.title}}</a>
             </li>
             {% endfor %}
             {% if forloop.counter|divisibleby:1 %}

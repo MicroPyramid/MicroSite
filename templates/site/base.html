@@ -15,12 +15,13 @@
       {% endblock %}
     </title>
     {% endblock %}
-    {% block meta-description %}
     <meta content="article" property="og:type"/>
     <meta content="https://micropyramid.com/" property="og:url"/>
-    <meta content="https://micropyramid.com/static/mp_logo.png" property="og:image"/>
+    <meta content="https://micropyramid.com/static/mplogo.png" property="og:image"/>
     <meta content="200" property="og:image:width"/>
     <meta content="200" property="og:image:height"/>
+
+    {% block meta-description %}
     <meta content="MicroPyramid | Django Web Application Development | Mobile App Development" property="og:title"/>
     <meta content="MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" property="og:description"/>
     <meta content="MicroPyramid python development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design &amp; development. We work on Python, Django, Mongodb, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" name="description"/>
@@ -45,7 +46,7 @@
     <!-- google fonts ends here-->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-1a98bb2acca8a857168e.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-61825e2516f158ee4b64.css" id="packer_css"/>
     {% block extra-styles %}
     {% endblock %}
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
@@ -74,7 +75,7 @@
             <div class="logo">
               <span class="logo_mp">
                 <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% else %}/{% endif %}">
-                  <svg height="47px" viewbox="0 0 1047 470" width="47px" xmlns="http://www.w3.org/2000/svg">
+                  <svg height="55px" viewbox="0 0 1047 470" width="55px" xmlns="http://www.w3.org/2000/svg">
                     <path d="M 46.00,462.00
                       C 41.42,461.99 38.50,461.94 34.00,460.71
                       31.67,460.08 29.07,459.07 27.02,457.79
@@ -157,7 +158,7 @@
                       693.00,15.65 729.00,15.00 729.00,15.00 Z" fill="#2f5374" id="seven" stroke="#2f5374" stroke-width="6"></path>
                   </svg>
                 </a>
-                <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %}/{{request.session.country}}{% endif %}{% else %}/{% endif %}"> <img alt="Python and Django Development Company" data-pin-nopin="true" src="/static/site/images/logo.png"/></a>
+                <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %}/{{request.session.country}}{% endif %}{% else %}/{% endif %}"> <img alt="Python and Django Development Company" data-pin-nopin="true" src="/static/site/images/mp.png"/></a>
               </span>
             </div>
             {% block country_urls %}
@@ -270,7 +271,7 @@
                   <ul class="inner-footer-list">
                     {% get_child_menus as menu_list %}
                     {% for menu in menu_list|slice:"0:10" %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
                   </ul>
                 </div>
@@ -279,7 +280,7 @@
                     {% get_child_menus as menu_list %}
                     {% for menu in menu_list|slice:"10:20" %}
                     {% if menu.parent.title != 'Contact Us' %}
-                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
+                    <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endif %}
                     {% endfor %}
                   </ul>
@@ -299,7 +300,6 @@
                     <p>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah,<br> UAE 341246, +971 566061239</br></br></p>
                     <div id="version-switcher"></div>
                   </div>
-                </div>
                 <form action="{% url 'set_country' %}" class="hide" id="country_set_form" method="post">
                   <input id="country_input" name="country" type="hidden">
                   </input>
@@ -319,8 +319,9 @@
                     <div class="text-left sitemap_rights">
                       <span class="copy-right">Copyright © {% now "Y" %} MicroPyramid.</span>
                       <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
-                    </div>
                   </div>
+                </div>
+</div>
                 </div>
                 <!-- footer links ends here -->
                 {% endblock %}
@@ -336,7 +337,7 @@
                 <script src="/static/site/js/crum-mega-menu.js"></script>
                 <script src="/static/site/js/theme-plugins.js"></script>
                 <script async defer src="https://buttons.github.io/buttons.js"></script>
-                <script id="packer_js" src="/static/webpack_bundles/index-1a98bb2acca8a857168e.js" type="text/javascript"></script>
+                <script id="packer_js" src="/static/webpack_bundles/index-61825e2516f158ee4b64.js" type="text/javascript"></script>
                 <script type="application/ld+json">
                   {
                     "@context" : "http://schema.org",
@@ -349,6 +350,25 @@
                       "contactType" : "customer service"
                     }]
                   }
+                </script>
+                <script type="text/javascript">
+                  $(document).ready(function(e) {
+                    country = $('#set_country').val()
+                    if (country == 'us'){
+
+                      $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +1 5102300949</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>3737 Mapleshade Ln, Ste #103, Plano TX 75075</div><a href="/'+ country +'/contact-usa/">Contact Us</a>')
+
+                    }
+                    else if (country == 'in'){
+                      $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +91 9959166266</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>HIG499, 6th phase KPHB, Hyderabad, India - 500072</div><a href="/'+ country +'/contact-india/">Contact Us</a>')
+                    }
+                    else if (country == 'ae'){
+                      $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +971 566061239</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>Khalifa Building(Near Old Nesto Super Market), Opp Fire Station, Sharjah, UAE 341246</div><a href="/'+ country +'/contact-uae/">Contact Us</a>')
+                    }
+                    else{
+                      $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +1 5102300949</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>3737 Mapleshade Ln, Ste #103, Plano TX 75075</div><a href="/'+ country +'/contact-usa/">Contact Us</a>')
+                    }
+                  });
                 </script>
                 {% block extra-js %}
                 {% endblock %}

@@ -4,7 +4,12 @@ html{font-size: 16px;
     font-size:18px;
   }
 }
-
+.container{
+  width: 1230px;
+   @media (min-width: $mob_min) and (max-width:$med_max){
+      width:100%;
+   }
+}
 #body{
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
@@ -22,7 +27,6 @@ body{
 #banner_wrap{
   height: 380px;
   width: 100%;
-  margin-top: 30px;
   background-color: white;
   position: relative;
   @media (min-width: $mob_min) and (max-width: $smob_max){
@@ -835,6 +839,7 @@ body{
 .inner-footer-social{
   background: none !important;
   padding:0px !important;
+  padding-left:10px !important;
   ul{
     li{
       padding:1px !important;
@@ -859,6 +864,7 @@ body{
 #our-contact{
   .contact-detail {
     margin-top: 0;
+    font-family: 'Quicksand', sans-serif;
     .contact-block {
       display: table-row;
       padding: 0;
@@ -1630,6 +1636,9 @@ body{
       font-size: 210%;
       margin-bottom: 25px;
       color: #000000;
+      .pycon{
+          color: #31a3dd;
+      }
     }
 }
 /* about-us */
@@ -1702,7 +1711,6 @@ body{
   }
 }
 #container_wrapper{
-  padding-top: 40px;
   padding-bottom:0px;
   min-height:350px;
    @media (min-width: $mob_min) and (max-width:$smob_max){
@@ -4034,7 +4042,7 @@ body{
 .bread_crums{
   padding:25px 0px;
 
-  margin-top: 60px; 
+  margin-top: 75px; 
 
   padding-bottom: 0px;
   @media (min-width:$mob_min)and (max-width:$smob_max){
@@ -4098,7 +4106,6 @@ body{
     padding-right: 15px;
   }
   img{
-    width: 238px;
     max-height: 100%;
     height: auto;
     vertical-align: top;
@@ -4283,6 +4290,7 @@ body{
     &.copy-right{
       color: #d1d1d1;
       margin-right:10px;
+      margin-left: 10px;
     }
     &.sitemap{
       a{
@@ -5196,6 +5204,8 @@ p a{
 
 .services-left-container{
   margin-bottom: 0px;
+  margin-top: 15px;
+
 }
 #doc-languages li {
     margin: 0 3px;
@@ -5708,6 +5718,9 @@ p a{
    .bread_crums ul  li:last-child a span.name:after{
       display: none;
    }
+   .bread_crums ul  li .a{
+      cursor: default;
+   }
 /* service_banner starts here */
 .service_banner{
   margin-top:65px;
@@ -5740,6 +5753,7 @@ p a{
   &.python_service_banner{
     background: #fff;
     padding:50px 0;
+    font-size: 13px;
      @media(min-width: $tab_min) and (max-width: $tab_max){
         padding:0px;
      }
@@ -5765,6 +5779,45 @@ p a{
       }
     }
   }
+  &.thanks_banner{
+    margin-top: 130px;
+  }
+  &.aws_service_banner{
+    .right_content{
+      text-align: left;
+      font-weight: 400;
+      strong{
+        font-weight: 500;
+        font-size: 1.2rem;
+        display: block;
+         line-height: 1.8rem;
+        margin-bottom: 12px;
+      }
+      p{
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.8rem;
+        font-weight: 400;
+        margin-top: 15px;
+        color: #333;
+      }
+    }
+    .left_content{
+      img{
+        max-width: 100%;
+      }
+    }
+  }
+  &.django_service_banner{
+    .content{
+      p{
+        text-align: left;
+      }
+    }
+  }
+  &.sales_force_banner_content{
+    margin-top: 30px;
+  }
 }
 /* service_banner ends here */
 /* service_qualities starts here */
@@ -5775,17 +5828,41 @@ p a{
     margin-top:20px;
   }
   .service_quality{
-    padding:25px;
+    padding:0 5px;
     min-height: 290px;
     @media(min-width: $mob_min) and (max-width: $mob_max){
       padding:15px;
     }
     .icon{
-      text-align:center;
       i{
         font-weight: 300;
         font-size: 40px;
         color: #2f5374;
+      }
+    }
+    ul{
+      margin:0;
+      padding:0;
+      margin-top: 15px;
+      li{
+        list-style: none;
+        font-size: 1rem;
+        line-height: 2rem;
+        font-weight: 400;
+        margin: 15px 0;
+         &:before{
+          content: "\f124";
+          font-family: FontAwesome;
+          display: inline-block;
+          width: 27px;
+          height: 27px;
+          color: #ffffff;
+          border-radius: 50%;
+          line-height: 26px;
+          text-align: center;
+          background: #2f5374;
+          margin-right: 10px;
+        }
       }
     }
     strong{
@@ -5796,8 +5873,7 @@ p a{
       padding-bottom: 20px;
       display: block;
       position: relative;
-          text-align: center;
-
+      line-height: 1.9rem;
       @media(min-width: $mob_min) and (max-width: $tab_max){
         font-size:18px;
       }
@@ -5817,6 +5893,9 @@ p a{
       margin-top: 15px;
       color: #333;
     }
+    &.python_service_quality{
+      min-height: auto;
+    }
   }
   &.python_service_qualities{
     .service_quality{
@@ -5831,6 +5910,14 @@ p a{
     margin-top: 25px;
     .service_quality{
       display: table;
+       @media(min-width: $tab_min) and (max-width: $tab_max){
+         min-height:250px;
+       }
+        @media(min-width: $mob_min) and (max-width: $smob_max){
+          padding:0;
+          min-height: initial;
+          margin-bottom: 15px;
+        }
       .icon{
         width: 60px;
         display: table-cell;
@@ -5854,10 +5941,305 @@ p a{
       }
     }
   }
+  &.mongo_service_quality{
+     .heading{
+      display: block;
+      margin-bottom: 20PX;
+       span{
+          font-weight: 400;
+          font-size: 24px;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:18px;
+            font-weight: 500;
+          }
+           &:after{
+            content:"";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+      }
+    .service_quality{
+      min-height: 300px;
+      padding:20px;
+      border: 7px solid #f1f1f1;
+      margin-bottom: 20px;
+       @media(min-width: 1400px) and (max-width: 2000px){
+        min-height:350px;
+      }
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+        min-height:350px;
+      }
+       @media(min-width: $mob_min) and (max-width: $smob_max){
+          min-height:auto;
+          height:auto;
+       }
+      .content{
+        .icon{
+          margin-bottom: 10px;
+          display: block;
+          img{
+            width:45px;
+          }
+        }
+      }
+    }
+  }
+  &.react_tools_quality{
+  .service_quality{
+    text-align: center;
+    min-height: 240px;
+    @media(min-width: $mob_min) and (max-width: $tab_max){
+      min-height:auto;
+      margin-bottom: 50px;
+    }
+    position: relative;
+    .content{
+      .icon{
+        margin-bottom: 10px;
+        display: inline-block;
+        position: absolute;
+        top: -41px;
+        left: 42%;
+        width: 70px;
+        background: #fff;
+        height: 70px;
+        text-align: center;
+        border-radius: 50%;
+        border: 4px solid #f1f1f1;
+        padding-top: 6px;
+        @media(min-width: $tab_min) and (max-width: $tab_max){
+          left:45%;
+        }
+        img{
+        }
+      }
+      strong{
+      padding-bottom: 5px;
+       @media(min-width: $mob_min) and (max-width: $tab_max){
+          font-weight:500;
+       }
+        &:after{
+          background:none;
+        }
+      }
+    }
+  }
+  }
+  &.django_rest_quality{    
+      .service_quality{   
+        min-height: 350px;    
+      }   
+    }
+  &.why_to_choose{
+    background: #fafafa;
+    padding:40px 0;
+    margin-top: 0;
+    &.aws_why_to_choose{
+      background: none;
+    }
+    .heading{
+      display: block;
+      margin-bottom: 20PX;
+       span{
+          font-weight: 400;
+          font-size: 24px;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:18px;
+            font-weight: 500;
+          }
+           &:after{
+            content:"";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+      }
+      .desc{
+        p{
+          font-size: 1rem;
+          line-height: 1.8rem;
+          font-weight: 400;
+          margin-top: 15px;
+          color: #333;
+        }
+      }
+  }
+
+  &.mp_seo{
+    .heading{
+      display: block;
+      margin-bottom: 20PX;
+       span{
+          font-weight: 400;
+          font-size: 24px;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:18px;
+            font-weight: 500;
+          }
+           &:after{
+            content:"";
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+          }
+        }
+      }
+      .desc{
+        p{
+          font-size: 1rem;
+          line-height: 1.8rem;
+          font-weight: 400;
+          margin-top: 15px;
+          color: #333;
+        }
+      }
+      .image{
+        margin-top:25px;
+        img{
+          max-width: 100%;
+        }
+      }
+    }
 }
 /* service_qualities ends here */
+.seo_banner{
+  margin-top: 65px;
+  .image{
+    img{
+      max-width: 100%;
+    }
+  }
+  h1{
+    text-align: center;
+  }
+  &.react_js_banner{
+    margin-top: 0px !important;
+    background: #344555;
+    padding:30px 0;
+    .content{
+      color: #fff;
+      font-size: 2.6rem;
+      padding-top: 65px;
+      font-weight: 500;
+       @media(min-width: $mob_min) and (max-width: $tab_max){
+        padding-top: 10px;
+        text-align: center;
+        font-size: 1.7rem;
+       }
+    }
+  }
+  &.sales_force_banner{
+    font-family: 'Quicksand', sans-serif;
+    .banner_container{
+      background: url(/static/site/images/sales_banner.png) no-repeat ;
+      height:350px;
+      .banner_left{
+        padding-left: 30px;
+        padding-top: 125px;
+          @media(min-width: $mob_min) and (max-width: $tab_max){
+            padding-top:25px;
+            padding-left: 20px;
+            strong{
+              font-size: 1.5rem !important;
+              font-weight: 500 !important;
+              line-height: 1.6rem;
+            }
+          }
+           @media(min-width: $tab_min) and (max-width: $tab_max){
+             padding-top: 70px;
+           }
+        strong{
+          font-weight: 400;
+          font-size: 2.5rem;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+          color: #fff; 
+        }
+        p{
+          font-size: 1.3rem;
+          line-height: 1.8rem;
+          font-weight: 400;
+          margin-top: 7px;
+          color: #fff;  
+        }
+      }
+      .banner_right{
+        padding-top: 125px;
+        padding-left: 60px;
+         @media(min-width: $mob_min) and (max-width: $tab_max){
+            padding-top:10px;
+            padding-left: 20px;
+            strong{
+              font-size: 1.2rem !important;
+              font-weight: 500 !important;
+              line-height: 1.4rem;
+             
+            }
+          }
+        strong{
+          font-weight: 400;
+          font-size: 1.3rem;
+          line-height: 2rem;
+          display: inline-block;
+          position: relative;
+          padding-bottom: 20px;
+          color: #fff; 
+          &.strong{
+                font-weight: 600 !important;
+                text-align: center;
+                display: block;
+                font-size: 1.7rem !important;
+              }
+        }
+        p{
+          font-size: 1.2rem;
+          line-height: 1.8rem;
+          font-weight: 400;
+          margin-top: 2px;
+          color: #fff;  
+          text-align: center;
+        }
+        .btn_contact{
+          text-align: center;
+          a{
+            display: inline-block;
+            padding: 6px 15px;
+            background: #10536e;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            padding-bottom: 8px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-top: 6px;
+        }
+        }
+      }
+    }
+  }
+}
 /* need_testing_container starts here */
 .need_testing_container{
+  font-family: 'Quicksand', sans-serif;
   /*background: url(/static/site/images/ques_pattern_1.png) repeat #e9f3f7;*/
   background: #e9f3f7;
   padding:60px 0;
@@ -5891,6 +6273,9 @@ p a{
         padding:0;
         width: 45%;
         float: left;
+        @media(min-width: $mob_min) and (max-width: $tab_max){
+          width:100%;
+        }
         li{
           margin-top: 1.5rem;
           list-style: none;
@@ -5917,6 +6302,28 @@ p a{
       }
     }
   }
+  &.django_ecommerce_list{
+    padding-top:20px;
+    .need_testing_block{
+      .testing_left{
+         ul{
+          width: 45%;
+          margin-right: 3%;
+            @media(min-width: $mob_min) and (max-width: $tab_max){
+             width:100%;
+            }
+          li{
+            margin-top: 1.5rem;
+            list-style: none;
+            line-height: 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
 }
 /* need_testing_container ends here */
 /* service_advantages starts here */
@@ -5946,6 +6353,32 @@ p a{
           height: 2px;
           left: 0;
           bottom: 0;
+        }
+      }
+    }
+    .django_expert{
+      .heading{
+        text-align: left;
+      }
+      ul{
+        margin:0;
+        margin-top: 20px;
+        padding: 0;
+        li{
+          list-style: none;
+          font-size: 1rem;
+          line-height: 1.8rem;
+          font-weight: 400;
+          color: #333;
+          &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f192";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+          }
         }
       }
     }
@@ -5980,6 +6413,11 @@ p a{
   .testing_process_image{
     margin:20px 0;
     text-align: center;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+        img{
+          max-width:100%;
+        }
+     }
   }
   .heading{
     display: block;
@@ -6003,10 +6441,22 @@ p a{
         bottom: 0;
       }
     }
+
   }
+  p{
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 26px;
+    padding-top: 5px;
+    color: #444;
+    }
   .how_we_do_col{
     margin-top: 10px;
     text-align: center;
+    .each_row{
+      width: 20%;
+    }
     .we_do_block{
       padding:30px 20px;
       border-radius: 2px;
@@ -6052,12 +6502,135 @@ p a{
       }
     }
   } 
+  &.mongo_business_col{
+      background: #f7f7f7;
+      padding: 40px 0;
+    .how_we_do_col{
+      .we_do_block{
+        strong{
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  &.seo_benifits_block{
+    background: #1a8fb8;
+    .how_we_do_col{
+      .we_do_block{
+        position: relative;
+        color: #fff;
+        strong{
+          font-size: 1rem;
+          color: #fff;
+        }
+        .icon{
+          i{
+            background: #fff;
+            color: #1a8fb8;
+          }
+        }
+        p{
+          font-size: 0.8rem;
+          line-height: 1.2rem;
+          color: #eee;
+        }
+        &::after{
+          position: absolute;
+          content: "\f105";
+          font-family: FontAwesome;
+          display: inline-block;
+          top: 100px;
+          left: 280px;
+          font-size: 100px;
+          color: #68c3e2;
+          @media(min-width: $mob_min) and (max-width: $smob_max){
+            display:none;
+          }
+           @media(min-width: $tab_min) and (max-width: $tab_max){
+            left:170px;
+          }
+        }
+        &.last{
+          &::after{
+            display:none;
+          }
+        }
+      }
+    }
+  }
+  &.aws_benifits_block{
+    margin-top: 0;
+    .heading{
+      margin-top: 20px;
+      span{
+        color: #fff;
+        &:after{
+          content:"";
+          position: absolute;
+          width: 60px;
+          height: 2px;
+          background: #fff;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+    .how_we_do_col{
+    .we_do_block{
+      .icon{
+      i{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        padding-top: 23px;
+        text-align: center;
+        color: #fb9700;
+        background: #fff;
+        font-size: 3.4rem;
+        transition: 0.5s ease-in-out all;
+        &:hover{
+          background : darken(#fb9700, 10%);
+          color: #fff;
+        }
+      }
+    }
+      &::after{
+        display:none;
+      }
+    }
+  }
+  }
+
+&.sales_how_we_do{
+  margin-top:30px;
+  .how_we_do_col{
+    .we_do_block{
+      padding-top:10px;
+      .icon{
+        i{
+          background: #2f5374;
+        }
+      }
+      &:hover{
+        .icon{
+          i{
+            background: darken(#2f5374, 10%);
+          }
+        }
+      }
+    }
+  }
+}
 }
 /* how_we_do_container ends here */
 /* projects_container starts here */
 .projects_container{
   margin: 0px 0 30px 0;
   padding:35px 0;
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+     padding:0;
+   }
   .heading{
     display: block;
     text-align: center; 
@@ -6089,6 +6662,9 @@ p a{
       list-style:none;
       padding: 0 20px;
       display: inline-block;
+       @media(min-width: $mob_min) and (max-width: $tab_max){
+          margin:10px 0;
+       }
       img{
         -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
         filter: grayscale(100%);
@@ -6129,13 +6705,21 @@ p a{
       }
     }
   }
-  ul{
+  .need_testing_block{
+    padding:0 15px;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+       padding:0 15px;
+     }
+      ul{
       margin:0;
       width: 48%;
       margin-right: 1%;
       float: left;
       padding:0;
       margin-top:20px;
+       @media(min-width: $mob_min) and (max-width: $tab_max){
+          width:100%;
+       }
       li{
         margin-top: 0.8rem;
         list-style: none;
@@ -6161,6 +6745,26 @@ p a{
         }
       }
     }
+  }
+   &.pycon_services{
+    margin-top: 40px;
+     ul{
+      width: 32%;
+      @media(min-width: $mob_min) and (max-width: $smob_max){
+        width:100%;
+      }
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+        width: 48%;
+      }
+      li{
+        &:before{
+          background:none;
+          color: #2f5374;
+          content: "\f00c";
+        }
+      }
+     }
+   }
 }
 /* other_qa_services ends here */
 /* our_proud_work starts here */
@@ -6294,8 +6898,6 @@ p a{
      }
      .helping_container{
       padding: 35px 0;
-      margin-left: -15px;
-      margin-right: -15px;
       .helping_item{
         background: #333;
         padding:15px;
@@ -6321,9 +6923,10 @@ p a{
   .contact_block{
       padding: 30px;
       background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
-     
     @media(min-width: $mob_min) and (max-width: $mob_max){
       background-position-y: 30px;
+      background-image: none;
+      background: #2f5374;
     }
      .contact_details{
       padding-left: 175px;
@@ -6331,11 +6934,11 @@ p a{
       padding-top: 20px;
       font-size: 20px;
       @media(min-width: $mob_min) and (max-width: $mob_max){
-        padding-left:30px;
+        padding-left:0px;
         padding-top:0;  
       }
       @media(min-width: $tab_min) and (max-width: $tab_max){
-        padding-left: 70px;
+        padding-left: 100px;
         padding-top:0;
       }
       a{
@@ -6376,7 +6979,7 @@ p a{
         margin-top: 30px;
       }
        @media(min-width: $tab_min) and (max-width: $tab_max){
-        padding-left: 70px;
+        padding-left: 100px;
       }
       strong{
         font-size: 1.5rem;
@@ -6385,6 +6988,12 @@ p a{
         display: block;
         margin:15px 0;
         color: #fff;   
+      }
+      h1{
+        color: #fff;
+        font-size: 1.1rem;
+        text-align: left;
+        font-weight: 800;
       }
       p{
         font-size: 0.9rem;
@@ -6424,8 +7033,9 @@ p a{
 .open_source{
   padding:0;
   .each_open_source{
-    margin-left: -25px;
-    margin-right: -25px;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      margin:0;
+    }
     .open_source_item{
       margin-top:25px;
       padding:0 0px;
@@ -6456,20 +7066,22 @@ p a{
     letter-spacing: 0;
     float: none;
     width:24%;
-    padding-left: 10px;    
-    padding-right: 10px; 
+    padding-left: 0px;    
+    padding-right: 15px; 
      @media(min-width: $mob_min) and (max-width: $mob_max){
        float:left;
        width: 100%;
-       padding:10px 25px;
+       padding:10px 15px;
        border-bottom: 1px solid #eee;
        text-align:center;
       }
       @media(min-width: $tab_min) and (max-width: $tab_max){
-        width:50%;
-        padding:10px 30px;
+        width: 48%;
+        padding: 10px 15px;
         border-bottom: 1px solid #eee;
         float: left;
+        min-height: 300px;
+        margin: 0 1%;
       }
   }
 }
@@ -6540,6 +7152,8 @@ p a{
 }
 .carousel-control.left{
   background: none;
+  left:20px;
+  top: 20px;
   @media(min-width: $mob_min) and (max-width: $tab_max){
       left:-30px;
     }
@@ -6549,6 +7163,8 @@ p a{
 }
 .carousel-control.right{
   background: none;
+  right:20px;
+  top: 20px;
     @media(min-width: $mob_min) and (max-width: $tab_max){
       right:-20px;
     }
@@ -6651,6 +7267,7 @@ p a{
           }
           .icon{
             display: inline-block;
+            background: #1dabdd;
             width: 40px;
             height: 40px;
             text-align: center;
@@ -6703,7 +7320,7 @@ p a{
         }
         .block{
           position: absolute;
-          width:300px;
+          width:325px;
           @media (min-width: 1400px) and (max-width:2000px){
             padding:0 !important;
           }
@@ -6757,7 +7374,7 @@ p a{
             }
           }
           &.third{
-            left:15%;
+            left:10%;
             top:35%;
             @media(min-width: $tab_min) and (max-width: $tab_max){
               left:0;
@@ -6768,7 +7385,7 @@ p a{
             }
           }
           &.four{
-            right: -5%;
+            right: -11%;
             top:35%;
             @media(min-width: $tab_min) and (max-width: $tab_max){
               right:-2%;
@@ -6784,3 +7401,841 @@ p a{
   }
 }
 /* python_strength_automation ends here */
+/* django_rest_banner starts here */
+.django_rest_banner{
+
+   font-family: 'Quicksand', sans-serif;
+  background: url(/static/site/images/djnago_banner.jpg) no-repeat ;
+  height: 25rem;
+  margin-top: 4rem;
+  strong{
+    font-size: 5rem;
+    color: #fff;
+    padding-top: 12rem;
+    display: block;
+    text-shadow: 2px 2px 23px rgba(0,0,0,0.5);
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+      line-height: 5rem;
+      padding-top: 8rem;
+    }
+  }
+}
+/* django_rest_banner ends here */
+
+/* expertise_container starts here */
+.expertise_container{
+   font-family: 'Quicksand', sans-serif;
+  margin:30px 0;
+  padding:30px 0;
+   @media(min-width: $mob_min) and (max-width: $tab_max){
+      margin:0;
+      padding: 0;
+    }
+  .expertise_circles{
+    font-weight: 400;
+    padding-top: 40px;
+    height: 450px;
+      @media(min-width: $mob_min) and (max-width: $smob_max){
+        height:675px;
+      }
+     @media(min-width: $tab_min) and (max-width: $tab_max){
+        padding-left:5%;
+      }
+    .cicrles{
+      position: relative;
+       @media(min-width: $mob_min) and (max-width: 410px){
+        left:-2.6%;
+       }
+       @media(min-width: 411px) and (max-width: $smob_max){
+        left:5%;
+      }
+      
+      .circle{
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        text-align: center;
+        padding-top: 75px;
+         @media(min-width: $mob_min) and (max-width: $smob_max){
+           position:static;
+         }
+        strong{
+          font-size: 1rem;
+          font-weight: 500;
+        }
+        ul{
+          margin:0;
+          padding:0;
+          margin-top:20px;
+          li{
+            list-style: none;
+            font-size: 0.9rem;
+            line-height: 1.8rem;
+          }
+        }
+        &.circle_1{
+          background: #dbf2f9;
+        }
+         &.circle_2{
+          background: #c1c1c1;
+          left: 300px;
+           @media(min-width: $mob_min) and (max-width: $smob_max){
+             margin-top:-100px;
+           }
+        }
+      }
+    }
+  }
+  .expertise_content{
+    b{
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    strong{
+      margin-top: 15px;
+      display: block;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      font-weight: 500;
+    }
+    p{
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 26px;
+      padding-top: 5px;
+      color: #444;
+      margin-top: 10px;
+    }
+    ul{
+      margin:0;
+      padding:0;
+      margin-top: 15px;
+      li{
+        list-style: none;
+        font-size: 1rem;
+        line-height: 2rem;
+        font-weight: 400;
+        margin: 15px 0;
+         &:before{
+          content: "\f124";
+          font-family: FontAwesome;
+          display: inline-block;
+          width: 27px;
+          height: 27px;
+          color: #ffffff;
+          border-radius: 50%;
+          line-height: 26px;
+          text-align: center;
+          background: #2f5374;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
+/* expertise_container ends here */
+/* seo_final_content starts here */
+.seo_final_content{
+  font-family: 'Quicksand', sans-serif;
+  margin:40px 0;
+  p{
+    font-size: 1rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+    margin-top: 15px;
+    color: #333;
+  }
+}
+/* seo_final_content ends here */
+
+/* pycon_banner starts here */
+.pycon_banner{
+  background: url(/static/site/images/pycon-cityscape.png?dc2cd59f4c94) center #525252 no-repeat;
+  text-align: center;
+  height: 368px;
+  margin-top: 93px;
+  background-size: 100%;
+  filter: grayscale(100%);
+  font-family: 'Quicksand', sans-serif;
+  .desc{
+    margin-top: 75px;
+    color: #fff;
+    line-height: 2.5rem;
+    font-weight: 400;
+    font-size: 30px;
+    a{
+      &:hover{
+        color: #fff;
+      }
+    }
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+      margin-top: 40px;
+    }
+  }
+  p{
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+    &.strong{
+      font-size: 2.5rem;
+      line-height: 4rem;
+       @media(min-width: $mob_min) and (max-width: $smob_max){
+         font-size:2rem;
+         line-height: 2.5rem;
+       }
+    }
+    &.mail{
+      font-size: 1.5rem;
+    }
+  }
+}
+/* pycon_banner ends here */
+
+/* about_mp starts here */
+.about_mp{
+  margin-top: 30px;
+  font-family: 'Quicksand', sans-serif;
+  .content{
+    font-size: 1rem;
+    line-height: 1.9rem;
+    font-weight: 400;
+    margin-top: 15px;
+    color: #333;
+    text-align: justify;
+    .heading{
+    display: block;
+    margin-bottom: 20px;
+     span{
+      font-weight: 400;
+      font-size: 1.6rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+  }
+  .logo{
+    padding-top:45px;
+    span{
+      width: 175px;
+      height: 175px;
+      background: #e1dada;
+      display: inline-block;
+      border-radius: 50%;
+      text-align: center;
+      padding-top: 60px;
+      img{
+        max-width: 70%;
+      }
+    }
+  }
+  &.pycon{
+    .content{
+      ul{
+        margin:0;
+        margin-top: 20px;
+        padding: 0;
+        li{
+          list-style: none;
+          &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f192";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+          }
+        }
+      }
+    }
+    .logo{
+      display: block;
+      text-align: right;
+       @media(min-width: $mob_min) and (max-width: $tab_max){
+         text-align:center;
+       }
+      span{
+        background: #b4d3c6;
+        padding-top: 45px;
+        img{
+          max-width: 85%;
+        }
+      }
+    }
+  }
+}
+/* about_mp ends here */
+/* react_about_row starts here */
+.react_about_row{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 80px;
+  .heading{
+    display: block;
+    margin-bottom: 20px;
+     span{
+      font-weight: 400;
+      font-size: 1.6rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        background: #1dabdd;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+   .tb_block{
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+      text-align:center;
+    }
+    img{
+      max-width: 100%;
+    }
+   }
+  .desc{
+    padding-top: 5px;
+    font-size: 1.0rem;
+    line-height: 29px;
+    @media(min-width: $tab_min) and (max-width: $tab_max){
+      padding-top: 0;   
+      text-align: left;
+    }
+     @media(min-width: $mob_min) and (max-width: $smob_max){
+        text-align: center;
+     }
+    strong{
+      font-weight: 400;
+      font-size: 1.5rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      line-height: 2.3rem;
+    }
+    p{
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #333;
+    }
+        ul{
+        margin:0;
+        margin-bottom: 20px;
+        padding: 0;
+        li{
+          list-style: none;
+          &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f192";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+
+          }
+        }
+      }
+
+  }
+  .react_row{
+    margin-top: 30px;
+
+    .left{
+      text-align: left;
+       @media(min-width: $mob_min) and (max-width: $smob_max){
+        text-align: center;
+     }
+     @media(min-width: $tab_min) and (max-width: $tab_max){
+       text-align:left;
+     }
+      &.tb_img{
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+       text-align:center;
+     }
+     }
+    }
+    .right{
+      text-align: right;
+       @media(min-width: $mob_min) and (max-width: $smob_max){
+        text-align: center;
+     }
+     @media(min-width: $tab_min) and (max-width: $tab_max){
+       text-align:left;
+     }
+     &.tb_img{
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+       text-align:center;
+     }
+     }
+    }
+
+  }
+ &.react_process{
+  margin-top:40px;
+  .heading{
+    margin-bottom: 0;
+  }
+ }
+}
+/* react_about_row ends here */
+
+/* our_react_works starts here */
+  .our_react_works{
+    font-family: 'Quicksand', sans-serif;
+    margin-top:30px;
+     .heading{
+    display: block;
+    margin-bottom: 20px;
+     span{
+      font-weight: 400;
+      font-size: 1.6rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+       &:after{
+        content:"";
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        background: #1dabdd;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+  .technologies_block{
+    margin-top:35px;
+    strong{
+      font-weight: 400;
+      font-size: 1.4rem;
+      text-align: center;
+      display: block;
+      padding-bottom: 20px;
+    }
+    .techs{
+      margin-top: 10px;
+      text-align: center;
+      span{
+        font-size: 1rem;
+        font-weight: 400;
+        background: #eee;
+        border-radius: 20px;
+        padding:8px 20px;
+        margin:5px 5px;
+      }
+    }
+  }
+  .works_container{
+    .image{
+      display: block;
+      text-align: center;
+    }
+    strong{
+      font-weight: 400;
+      font-size: 1.5rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      line-height: 2.3rem;
+    }
+    p{
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #333;
+    }
+  }
+  }
+/* our_react_works ends here */
+
+/* docker_conatiner starts here */
+.docker_container{
+  margin-top: 80px;
+  font-family: 'Quicksand', sans-serif;
+  background: url(/static/site/images/waves.png) no-repeat bottom right;
+  background-size: 100%;
+  min-height: 600px;
+  padding-bottom: 175px;
+   @media(min-width: $tab_min) and (max-width: $tab_max){
+    background: url(/static/site/images/waves.png) no-repeat bottom right;
+    background-size: 100%;
+    padding-bottom: 100px;
+   }
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+    background: url(/static/site/images/waves.png) no-repeat bottom right;
+    background-size: 100%;
+    padding-bottom: 50px;
+   }
+  .docker_conatiner_block{
+    .content{
+      strong{
+      font-weight: 400;
+      font-size: 1.5rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      line-height: 2.3rem;
+      }
+      p{
+        font-size: 1rem;
+        line-height: 1.8rem;
+        font-weight: 400;
+        color: #333;
+      }
+      ul{
+        margin:0;
+        padding:0;
+        li{
+          list-style:none;
+          font-size: 1rem;
+          line-height: 1.8rem;
+          font-weight: 400;
+          color: #333;
+          margin-bottom: 7px;
+           &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f192";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+          }
+        }
+      }
+    }
+  }
+}
+/* docker_conatiner ens here */
+/* ansible_container starts here */
+.ansible_container{
+  margin-top: 80px;
+  font-family: 'Quicksand', sans-serif;
+  .ansible_conatiner_block{
+    background: url(/static/site/images/d-hand.png) no-repeat top left;
+    background-size: 100%;
+    padding-top: 330px;
+      @media(min-width: $tab_min) and (max-width: $tab_max){
+        padding-top: 200px;
+      }
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+        padding-top: 120px;
+      }
+    strong{
+      font-weight: 400;
+      font-size: 1.5rem;
+      display: inline-block;
+      position: relative;
+      padding-bottom: 20px;
+      line-height: 2.3rem;
+    }
+    p{
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #333;
+    }
+    ul{
+      margin:0;
+      padding:0;
+      li{
+        font-size: 1rem;
+        line-height: 1.8rem;
+        font-weight: 400;
+        color: #333;
+        list-style: none;
+        &:before{
+          font-family: FontAwesome;
+          font-weight: normal;
+          font-style: normal;
+          content: "\f192";
+          display: inline-block;
+          padding-right: 10px;
+          color: #1DABDD;
+        }
+      }
+    }
+  }
+}
+/* ansible_container ends heer */
+/* django_features starts here */
+.django_features{
+ font-family: 'Quicksand', sans-serif;
+    margin-top:50px;
+     .heading{
+      display: block;
+      margin-bottom: 20px;
+      text-align: center;
+       span{
+        font-weight: 400;
+        font-size: 1.6rem;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 20px;
+         &:after{
+          content:"";
+          position: absolute;
+          width: 60px;
+          height: 2px;
+          background: #1dabdd;
+          left: 0;
+          bottom: 0;
+      }
+    }
+  }
+  .feature_block{
+    margin-bottom: 30px;
+    .feature_content_image{
+      background: #e9ecf1;
+      position: relative;
+      text-align: center;
+      padding:10px;
+      .feature_image{
+
+      }
+      .desc_position{
+        display: none;
+        position: absolute;
+        top: 0;
+        left:0;
+        font-size: 1rem;
+        line-height: 1.6rem;
+        height: 100%;
+        text-align: left;
+        padding:20px;
+        font-weight: 400;
+      }
+      &:hover{
+        .desc_position{
+          display: block;
+          /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d4d4db+0,e9ecf1+100 */
+background: rgb(212,212,219); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(212,212,219,0.8) 0%, rgba(233,236,241,0.8) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(212,212,219,0.8) 0%,rgba(233,236,241,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(212,212,219,0.8) 0%,rgba(233,236,241,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', endColorstr='#e9ecf1',GradientType=0 ); /* IE6-9 */
+        }
+      }
+    }
+  }
+  .feature_title{
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.5px;
+    margin-top:5px;
+  }
+} 
+/* django_features ends here */
+
+/* aws_services starts here */
+.aws_services{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 40px;
+  .aws_row{
+    .aws_item{
+      font-size: 0.9rem;
+      .logo{
+        float: left;
+        display: inline-block;
+        margin-right: 10px;
+        img{
+          width: 50px;
+        }
+      }
+      .desc{
+        p{
+          font-weight: 400;
+          margin-top: 6px;
+        }
+      }
+    }
+    &.row_2{
+      margin-top:35px;
+    }
+  }
+}
+/* aws_services ends here */
+/* react_c_qualities */
+.react_c_qualities{
+  .service_quality{
+    padding:10px 0;
+    min-height: 265px !important;
+    .content{
+      text-align: left;
+      strong{
+        text-align: left;
+        font-weight: 500;
+        padding:0px 0;
+      }
+      p{
+        text-align: left;
+      }
+    }
+  }
+}
+.react_points_heading{
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 50px;
+    padding-top: 0px;
+    color: #444;
+}
+
+/* sales_tabs_row starts here */
+.sales_tabs_row{
+  margin-top: 30px;
+  background: #019edb;
+  padding-bottom: 40px;
+  font-family: 'Quicksand', sans-serif;
+  .sales_tabs{
+    ul{
+      text-align: center;
+      padding-bottom: 1px ;
+      border:none;
+      li{
+        display: inline-block;
+        float: none;
+        a{
+          border:none;
+          outline:none;
+          background: #4ec8f8;
+          font-size: 0.8rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: #fff;
+          border-radius: 0;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            font-size:0.6rem;
+          }
+          &:hover{
+            background:darken(#019edb, 10%);
+          }
+        }
+        &.active{
+          a{
+            background:darken(#019edb, 10%);
+            color: #fff;
+            outline:none;
+            border:none;
+          }
+        }
+      }
+    }
+    .tab-content{
+      margin-top: 20px;
+      p{
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        line-height: 26px;
+        padding-top: 5px;
+        color: #fff;
+      }
+    }
+  }
+}
+/* sales_tabs_row ends here */
+.seo_tag{
+  color: #337ab7;
+}
+
+/* about_mp starts here */
+.about_mp{
+  font-family: 'Quicksand', sans-serif;
+  strong{
+    font-weight: 400;
+    font-size: 1.6rem;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 20px;
+    &::after{
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 2px;
+      background: #1dabdd;
+      left: 0;
+      bottom: 0;
+    }
+  }
+  p{
+    font-size: 1rem;
+    line-height: 1.9rem;
+    font-weight: 400;
+    margin-top: 15px;
+    color: #333;
+  }
+}
+/* about_mp ends here */
+.contact_blocks{
+  font-family: 'Quicksand', sans-serif;
+  margin-top:40px;
+   .heading{
+      text-align: center;
+      margin-bottom: 20px;
+      span{
+        font-weight: 400;
+        font-size: 1.6rem;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 20px;
+        &::after{
+          content: "";
+          position: absolute;
+          width: 60px;
+          height: 2px;
+          background: #1dabdd;
+          left: 0;
+          bottom: 0;
+        }
+      }
+    } 
+  .contact_block{
+    padding: 20px;
+    border: 7px solid #f1f1f1;
+      min-height: 220px;
+
+    strong{
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    position: relative;
+    }
+    p{
+      font-size: 0.9rem;
+      line-height: 1.9rem;
+      font-weight: 400;
+      margin-top: 15px;
+      color: #333;
+    }
+  }
+}
+.back_to_home{
+  font-family: 'Quicksand', sans-serif;
+  margin:35PX 0;
+  a{
+    background: #1dabdd;
+    display: inline-block;
+    color: #fff;
+    padding:10px 25px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 20px;
+  }
+}

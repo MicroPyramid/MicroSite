@@ -129,6 +129,7 @@ QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
 
 MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, "templates"),)
 
 TEMPLATES = [
     {
@@ -330,3 +331,4 @@ WEB_PACK_FILES = [
 
 ENABLE_DJANGO_WEBPACK_S3_STORAGES = False
 AWS_BUCKET_NAME = ''
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -11,7 +11,7 @@
     <title> {% block title %}Django and Python Web Development | Application Development Services – MicroPyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}{% endblock %}</title>
     <meta content="194798730671519" property="fb:pages"/>
     <meta content="https://micropyramid.com/" property="og:url"/>
-    <meta content="https://micropyramid.com/static/mp_logo.png" property="og:image"/>
+    <meta content="https://micropyramid.com/static/mplogo.png" property="og:image"/>
     <meta content="200" property="og:image:width"/>
     <meta content="200" property="og:image:height"/>
     {% block meta-description %}
@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-1a98bb2acca8a857168e.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-61825e2516f158ee4b64.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -67,7 +67,7 @@
                   <div class="logo">
                     <span class="logo_mp">
                       <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{/% else %} /{{request.session.country}}{% endif %}{% else %}/{% endif %}">
-                        <svg height="47px" viewbox="0 0 1047 470" width="47px" xmlns="http://www.w3.org/2000/svg">
+                        <svg height="55px" viewbox="0 0 1047 470" width="55px" xmlns="http://www.w3.org/2000/svg">
                           <path d="M 46.00,462.00
                             C 41.42,461.99 38.50,461.94 34.00,460.71
                             31.67,460.08 29.07,459.07 27.02,457.79
@@ -150,7 +150,7 @@
                             693.00,15.65 729.00,15.00 729.00,15.00 Z" fill="#2f5374" id="seven" stroke="#2f5374" stroke-width="6"></path>
                         </svg>
                       </a>
-                      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}"> <img alt="Python and Django Development Company" data-pin-nopin="true" src="/static/site/images/logo.png"/></a>
+                      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}"> <img alt="Python and Django Development Company" data-pin-nopin="true" src="/static/site/images/mp.png"/></a>
                     </span>
                   </div>
                   {% block country_urls %}
@@ -181,7 +181,7 @@
                     {%  endif %}
                     <ul id="single_level_menu">
                       {% for menu in single_level_menu_list %}
-                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                       </li>
                       {% endfor %}
                     </ul>
@@ -209,8 +209,23 @@
             </header>
 
             {% endblock %}
+            <div class="pycon_banner blur grayscale" style="margin-top: 112px;">
+              <div class="row marl">
+              <div class="container">
+              <div class="desc">
+              <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}/pycon-2017/" target="_blank" class="pycon">
+              <p class="strong">Happy to sponsor Pycon 2017, Portland</p>
+
+              <p>We are waiting for you at booth no:150, Pycon 2017.</p>
+              </a>
+              <p class="mail">or email us at hello@micropyramid.com</p>
+              </div>
+              </div>
+              </div>
+              </div>
             <div id="banner_wrap">
               {# <img alt="MicroPyramid - Django and Python Web Development Company" class="banner_bg_image" src="/static/site/images/new/PlainBanner.jpg"> #}
+
               <div class="img_overlay_div"></div>
               <div class="row">
                 <div class="work_container">
@@ -313,7 +328,7 @@
             <div id="about-us">
               <div class="container text-center">
                 <h1 class="content">Django &amp; Python Web Development Company</h1>
-                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python &amp; Django application development services. Our Expertise lies in <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/">Python</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/">Django</a>, <a href="https://micropyramid.com{% if request.session.country %}/{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, Docker, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/">Amazon Web Services</a>, PostgreSQL, MySQL, Less and Scss.</p>
+                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python &amp; Django application development services. Our Expertise lies in <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/">Python</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/">Django</a>, <a href="https://micropyramid.com{% if request.session.country %}/{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}docker-services/">Docker</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/">Amazon Web Services</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}postgresql-administration-and-management/">PostgreSQL</a>, MySQL, Less and Scss.</p>
                 <p> We are dedicated to provide world class software to startups, small and big enterprises. We use most of the Cloud Technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome Open-Source Technologies. With our custom tools, we can assure you always get the best software you need. We always Succeeded in meeting Our Customer Satisfaction with our great Monitoring and Support. There are many reusable Python Packages, Docker Images, Ansible Roles, Node Packages published by our experts in their free time.</p>
               </div>
             </div>
@@ -526,22 +541,22 @@
                       <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/"><img alt="angular_js" class="logo" src="/static/site/images/tech-home/angular-js-tech.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <img alt="boostrap" class="logo" src="/static/site/images/tech-home/bootstrap-tech.png"/>
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}bootstrap-web-development/"><img alt="boostrap" class="logo" src="/static/site/images/tech-home/bootstrap-tech.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
                       <img alt="git" class="logo" src="/static/site/images/tech-home/git-tech.png"/>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <img alt="docker" class="logo smalltechlogo" src="/static/site/images/tech-home/docker.png"/>
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}docker-services/"><img alt="docker" class="logo smalltechlogo" src="/static/site/images/tech-home/docker.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <img alt="reactjs" class="logo largetechlogo" src="/static/site/images/tech-home/reactjs.png"/>
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}react-native-development-services/"><img alt="reactjs" class="logo largetechlogo" src="/static/site/images/tech-home/reactjs.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
                       <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}mongodb-development-services/"><img alt="mongodb" class="logo smalltechlogo" src="/static/site/images/tech-home/mongodb.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <img alt="reactnative" class="logo smalltechlogo" src="/static/site/images/tech-home/react.png"/>
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}reactjs-development-services/"><img alt="reactnative" class="logo smalltechlogo" src="/static/site/images/tech-home/react.png"/>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
                       <img alt="mysql" class="logo mediumtechlogo" src="/static/site/images/tech-home/mysql.png"/>
@@ -645,21 +660,20 @@
             <!-- country_list ends here -->
             <div class="row" id="our-contact">
               <div class="row contact-detail">
-                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark1">
-                  <div class="icon"><i class="fa fa-envelope-o"></i></div>
-                  <div class="text"><span class="head">E-Mail Address</span> <span class="desc">hello@micropyramid.com</span></div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark2">
+                <div class="col-md-4 col-sm-6 col-xs-12 contact-block dark2">
                   <div class="icon"><i class="fa fa-map-marker"></i></div>
-                  <div class="text"><span class="head">Reach US - India</span> <span class="desc"> HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072<br/> +91-9959166266</span></div>
+                  <div class="text"><span class="head">Reach US - India</span> <span class="desc"> HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072<br/> +91-9959166266</span><br>
+                  <i class="fa fa-envelope-o"></i> hello@micropyramid.com</div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark3">
+                <div class="col-md-4 col-sm-6 col-xs-12 contact-block dark3">
                   <div class="icon"><i class="fa fa-map-marker"></i></div>
-                  <div class="text"><span class="head">Reach US - USA</span> <span class="desc"> 3737 Mapleshade Ln, <br/>Ste #103, Plano TX 75075, +1-5102300949</span></div>
+                  <div class="text"><span class="head">Reach US - USA</span> <span class="desc"> 3737 Mapleshade Ln, <br/>Ste #103, Plano TX 75075, +1-5102300949</span><br>
+                  <i class="fa fa-envelope-o"></i> hello@micropyramid.com</div>
                 </div>
-                <div class="col-md-3 col-sm-6 col-xs-12 contact-block dark4">
+                <div class="col-md-4 col-sm-6 col-xs-12 contact-block dark4">
                   <div class="icon"><i class="fa fa-map-marker"></i></div>
-                  <div class="text"><span class="head">Reach US - UAE</span> <span class="desc"> 3 Khalifa Building(Near Old Nesto Super Market),<br/>Opp Fire Station, Sharjah, UAE 341246, +971 566061239</span></div>
+                  <div class="text"><span class="head">Reach US - UAE</span> <span class="desc"> 3 Khalifa Building(Near Old Nesto Super Market),<br/>Opp Fire Station, Sharjah, UAE 341246, +971 566061239</span><br>
+                  <i class="fa fa-envelope-o"></i> hello@micropyramid.com</div>
                 </div>
               </div>
             </div>
@@ -678,6 +692,6 @@
     <script src="https://use.fontawesome.com/4e8f47ae49.js"></script>
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-1a98bb2acca8a857168e.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-61825e2516f158ee4b64.js" type="text/javascript"></script>
   </body>
 </html>
