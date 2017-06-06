@@ -234,8 +234,6 @@ def blog_article(request, slug):
 
 def blog_tag(request, slug):
     tag = get_object_or_404(Tags, slug=slug)
-    print ("hello..................123............")
-    print (tag)
     blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by(
         '-published_on').select_related("user").prefetch_related(
         Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),

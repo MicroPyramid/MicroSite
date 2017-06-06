@@ -310,7 +310,6 @@ class users_edit_soctest(TestCase):
                 'ln_profile': 'www.linkedln.com', 'google_plus_url': '', 'mobile': 123456,
                 'phones': 123456, 'pincode': 502286
             })
-        print (response)
         self.assertEqual(response.status_code, 302)
 
         response = self.client.post(
@@ -340,7 +339,6 @@ class users_password_test(TestCase):
             {
                 'oldpassword': 'micro12', 'newpassword': 'pwd', 'retypepassword': 'pwd'
             })
-        print (response)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(str('Password changed') in response.content.decode('utf8'))
 
@@ -360,8 +358,6 @@ class users_password_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        print ("content")
-        print (response.content)
         self.assertTrue(str('Invalid old password') in response.content.decode('utf8'))
 
         response = self.client.post(

@@ -160,8 +160,6 @@ def edit_user(request, pk):
 
                 data = {'error': False, 'message': 'updated successfully'}
             else:
-                print ("hello.................")
-                print (validate_user.errors)
                 data = {'error': True, 'message': validate_user.errors}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
         else:
