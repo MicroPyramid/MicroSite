@@ -13,9 +13,10 @@ from microsite_front.views import index, tools, url_checker_tool, s3_objects_set
 
 
 from search.views import autocomplete
-from django.views.static import serve
+from django.views.static import serve, static
 from .country_urls import country_patterns
 from django.utils.translation import ugettext_lazy as _
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -108,9 +109,8 @@ if settings.DEBUG:
     ]
 
 if settings.DEBUG is False:   # if DEBUG is True it will be served automatically
-    urlpatterns += [
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    ]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if settings.DEBUG:
     from django.views.static import serve
