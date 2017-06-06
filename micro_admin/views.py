@@ -23,11 +23,16 @@ from django.conf import settings
 def is_employee(function):
 
     def wrapper(request, *args, **kw):
+        print ("hello")
         if not request.user.is_authenticated():
+            print ("not authenticated")
             return render(request, 'admin/login.html')
         elif not request.user.is_superuser and not request.user.is_employee:
+            print ("not superuser")
             raise Http404
         else:
+            print ("employee user")
+            print (request.user)
             return function(request, *args, **kw)
     return wrapper
 

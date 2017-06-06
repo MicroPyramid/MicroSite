@@ -1,5 +1,5 @@
 Babel==2.3.4
-Django==1.11
+Django==1.11.2
 Fabric3==1.11.1.post1
 Jinja2==2.8
 MarkupSafe==0.23

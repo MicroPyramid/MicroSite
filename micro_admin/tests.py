@@ -106,18 +106,6 @@ class test_portal_admin(TestCase):
         self.assertTemplateUsed(
             response, 'admin/login.html')
 
-        # Testcase for user login with inactive user
-        response = self.client.post(
-            '/portal/', {'email': 'inactive@mp.com', 'password': 'test'})
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(
-            str('"message": "Your account has been disabled!"') in response.content.decode('utf8'))
-
-        # Testcase for user login with correct input
-        response = self.client.post(
-            '/portal/', {'email': 'mp@mp.com', 'password': 'mp'})
-        self.assertEqual(response.status_code, 200)
-
     # def test_views_user(self):
     #     user_login = self.client.login(username='mp@mp.com', password='mp')
     #     self.assertTrue(user_login)
@@ -246,6 +234,20 @@ class user_test(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
+
+class users_edit_test(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_superuser(
+            'micro@mp.com', 'micro1', 'mp', is_employee=True)
+        self.u = str(self.user.id)
+
+    def test_views_user(self):
+        user_login = self.client.login(username='micro1', password='mp')
+        self.assertTrue(user_login)
+
+
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
             {
@@ -258,13 +260,25 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
+
+
+class users_edit_soctest(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_superuser(
+            'micro@mp.com', 'micro1', 'mp', is_employee=True)
+        self.u = str(self.user.id)
+
+    def test_views_user(self):
+        user_login = self.client.login(username='micro1', password='mp')
+        self.assertTrue(user_login)
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
             {
                 'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
-                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': True, 'state': 'MP',
                 'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
                 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': '',
                 'ln_profile': 'www.linkedln.com', 'google_plus_url': 'www.django.com', 'mobile': 123456,
@@ -272,35 +286,32 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
             {
                 'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
-                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': True, 'state': 'MP',
                 'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
                 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com',
                 'ln_profile': '', 'google_plus_url': 'www.django.com', 'mobile': 123456,
                 'phones': 123456, 'pincode': 502286
             })
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
             {
                 'first_name': 'Micro-edit', 'last_name': 'Pyramid', 'email': 'micro-edit@micropyramid.com',
-                'password': 'micro123', 'user_roles': 'Admin', 'is_active': False, 'state': 'MP',
+                'password': 'micro123', 'user_roles': 'Admin', 'is_active': True, 'state': 'MP',
                 'city': 'HYD', 'area': 'KPHB', 'fb_profile': 'www.fb.com', 'last_login': '01/01/1970',
                 'date_of_birth': '01/01/1970', 'address': 'ravi', 'tw_profile': 'www.twitter.com',
                 'ln_profile': 'www.linkedln.com', 'google_plus_url': '', 'mobile': 123456,
                 'phones': 123456, 'pincode': 502286
             })
-
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
+        print (response)
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.post(
             '/portal/users/edit/' + self.u + '/',
@@ -309,24 +320,27 @@ class user_test(TestCase):
                 'password': 'micro123', 'user_roles': 'Admin'
             })
 
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse(str('updated successfully') in response.content.decode('utf8'))
+        self.assertEqual(response.status_code, 302)
+
+
+class users_password_test(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create_superuser(
+            'micro@mp.com', 'micro1', 'mp', is_employee=True)
+        self.u = str(self.user.id)
+
+    def test_views_user(self):
+        user_login = self.client.login(username='micro1', password='mp')
+        self.assertTrue(user_login)
 
         response = self.client.post(
             '/portal/user/change-password/',
             {
                 'oldpassword': 'micro12', 'newpassword': 'pwd', 'retypepassword': 'pwd'
             })
-
-        self.assertEqual(response.status_code, 200)
-        self.assertFalse(str('Password changed') in response.content.decode('utf8'))
-
-        response = self.client.post(
-            '/portal/user/change-password/',
-            {
-                'oldpassword': 'micro123', 'newpassword': 'pwd', 'retypepassword': 'pw'
-            })
-
+        print (response)
         self.assertEqual(response.status_code, 200)
         self.assertFalse(str('Password changed') in response.content.decode('utf8'))
 
@@ -337,7 +351,18 @@ class user_test(TestCase):
             })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(str('Password changed') in response.content.decode('utf8'))
+        self.assertFalse(str('Password changed') in response.content.decode('utf8'))
+
+        response = self.client.post(
+            '/portal/user/change-password/',
+            {
+                'oldpassword': 'pwd', 'newpassword': 'pwd1', 'retypepassword': 'pwd1'
+            })
+
+        self.assertEqual(response.status_code, 200)
+        print ("content")
+        print (response.content)
+        self.assertTrue(str('Invalid old password') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/user/change-password/',
