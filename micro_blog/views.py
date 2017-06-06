@@ -136,15 +136,18 @@ def get_prev_after_pages_count(page, no_pages):
 def site_blog_home(request, **kwargs):
     page = 1
     if 'page' in request.GET.keys():
-        if request.GET.get('page'):
-            return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
-        else:
+        try:
+            if request.GET.get('page') and int(request.GET.get('page')):
+                return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
+        except:
             return redirect(reverse('site_blog_home'))
     if 'page_num' in kwargs:
-        page = int(kwargs['page_num'])
-        if page == 1:
+        try:
+            page = int(kwargs['page_num'])
+            if page == 1:
+                return redirect(reverse('site_blog_home'))
+        except:
             return redirect(reverse('site_blog_home'))
-
     items_per_page = 10
 
     posts = Post.objects.filter(status='P').order_by(
@@ -231,6 +234,8 @@ def blog_article(request, slug):
 
 def blog_tag(request, slug):
     tag = get_object_or_404(Tags, slug=slug)
+    print ("hello..................123............")
+    print (tag)
     blog_posts = Post.objects.filter(tags__in=[tag], status="P").order_by(
         '-published_on').select_related("user").prefetch_related(
         Prefetch("slugs", queryset=Post_Slugs.objects.filter(is_active=True),
@@ -537,9 +542,10 @@ def contact(request):
         if request.POST.get('enquery_type'):
             message += "<p><b>General Information:</b></p>"
             message += "<p>Enquery Type: "+request.POST.get('enquery_type')+"</p>"
-
-        message += '<p>This request is from <a href="'+ request.META['HTTP_REFERER'] +'">' + request.META['HTTP_REFERER'] +'</a></p>'
-
+        try:
+            message += '<p>This request is from <a href="'+ request.META['HTTP_REFERER'] +'">' + request.META['HTTP_REFERER'] +'</a></p>'
+        except:
+            pass
 
         sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 

@@ -3,6 +3,7 @@ from django.test import Client
 from pages.forms import PageForm, MenuForm
 from micro_admin.models import User
 from pages.models import Page, Contact
+from micro_blog.models import Country
 
 
 class pages_forms_test(TestCase):
@@ -81,8 +82,8 @@ class pages_views_test_with_employee(TestCase):
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
         response = self.client.get('/portal/content/page/edit/1/')
-        self.assertEqual(response.status_code, 404)
-        self.assertTemplateUsed(response, '404.html')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
         response = self.client.get('/portal/content/page/delete/1/')
         self.assertEqual(response.status_code, 404)
@@ -111,7 +112,8 @@ class pages_views_test(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser(
             'pyramid@mp.com', 'microtest', 'mp')
-        self.page = Page.objects.create(title='Page', content='page_content', slug='page')
+        self.country = Country.objects.create(name='US', code='us', slug='us')
+        self.page = Page.objects.create(title='Page', content='page_content', slug='page', country=self.country, is_active=True, is_default=True)
         # self.menu = Menu.objects.create(title='main', url='micro.in', status='on', lvl=1)
 
     def test_views(self):
@@ -119,7 +121,7 @@ class pages_views_test(TestCase):
         self.assertTrue(user_login)
 
         response = self.client.get('/blog/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/portal/content/page/')
         self.assertEqual(response.status_code, 200)
@@ -263,9 +265,6 @@ class pages_views_test(TestCase):
 
         response = self.client.get('/portal/content/menu/delete_menu/1/')
         self.assertTrue(response.status_code, 200)
-
-        response = self.client.get('/page/')
-        self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/'+str(self.page.slug)+'/')
         self.assertEqual(response.status_code, 200)
