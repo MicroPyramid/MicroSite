@@ -1,0 +1,75 @@
+
+{% extends 'site/base.html' %}
+{% load blog_tags %}
+{% load i18n %}
+
+{% block title %}
+ {% trans 'Thank you - Micropyramid' %}
+{% endblock %}
+
+{% block stage %}
+<div id="container_wrapper">
+	<!-- service_banner starts here -->
+	<div class="service_banner thanks_banner row marl">
+		<div class="container">
+			<p>Thank You For Contacting Us. <br>Your Submission Is Received And We Will Get Back To You Soon</p>
+	</div>
+	</div>	
+	<!-- service_banner ends here -->
+
+	<!-- about_mp starts here -->
+	<div class="about_mp">
+		<div class="container">
+			<div class="col-md-12 text-center">
+				<strong>About Micropyramid</strong>
+				<p>Micropyramid is a software development company specialized in providing High-Quality software to Clients. We are focused on Developing Apps that are agile, secure, scalable and has high performance. We develop applications using Python, Django, node.js, angular js, React framework, Django rest framework, Docker, Amazon Web services etc.</p>
+			</div>
+		</div>	
+	</div>
+	<!-- about_mp ends here -->
+	
+  <!-- contact_blocks starts here -->
+	<!-- 	<div class="contact_blocks">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="heading"><span>Contact Us</span></div>
+
+						<div class="col-md-4">
+							<div class="contact_block">
+								<strong>MicroPyramid - India</strong>
+								<p>HIG499, 6th phase KPHB, <br>Hyderabad, India - 500072, +91 9959166266</p>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="contact_block">
+								<strong>MicroPyramid - USA</strong>
+								<p>3737 Mapleshade Ln,<br>Ste #103,<br>  Plano TX 75075, +1 5102300949</p>
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="contact_block">
+								<strong>MicroPyramid - Dubai</strong>
+								<p>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah,<br> UAE 341246, +971 566061239<br><br></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+  <!-- contact_blocks ends here -->	
+
+  <div class="back_to_home text-center">
+		<a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}"><i class="fa fa-home"></i> Back to Home</a>
+  </div>
+
+
+
+
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</div>
+{% endblock %}

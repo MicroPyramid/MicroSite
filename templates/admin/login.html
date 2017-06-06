@@ -10,10 +10,7 @@
   <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css" />
-  {% load compress %}
-  {% compress css %}
-  <link type="text/less" href="/static/admin/less/login-style.less" rel="stylesheet" />
-  {% endcompress %}
+  <link type="text/css" href="/static/admin/less/login-style.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
@@ -31,42 +28,53 @@
         <div class="logo">Micro
           <span>Pyramid</span>
         </div>
-        <div class="form-heading">Company Employee Login</div>
+        <div class="form-heading">Company Employee Login<br/><br/><br/>
+        <a href="{% url "micro_admin:google_login" %}" class="google_login"><i class="fa fa-google-plus" aria-hidden="true"></i>
+ Login with Google</a>
+        </div>
         <div id="error">
         </div>
 
         <!-- Login Form Starts Here -->
         <div class="panel panel-default login-form">
           <div class="panel-body">
-            <div class="login_div active_login">
-            <form id="loginform" role="form" action="/portal/">{% csrf_token %}
-              <div class="form-group">
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+          <div class="col-md-12 col-xs-12 login-right">
+        <!-- Login right blocks starts Here -->
+        <div id="login-r8-blocks">
+          <div class="panel panel-default login-r8-block">
+            <div class="panel-body">
+              <div class="login-r8-head-desc">
+                <h4>Blog Posts</h4>
+                <p>A complete blog system with comments. Admins can review authors blog posts, can publish blog posts</p>
               </div>
-              <div class="form-group">
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-              </div>
-              <div class="forgot-submit">
-                <span class="forgot"><a class="forgot_tag">Forgot Password?</a></span>
-                <span class="submit"><input type="submit" value="Login"  class="save" id="search_lessons"></span>
-              </div>
-            </form>
             </div>
-            <div class="forgot_div">
-            <form id="forgotpasswordform" role="form">{% csrf_token %}
-              <div class="form-group">
-                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" required="True">
+          </div>
+
+
+          <div class="panel panel-default login-r8-block">
+            <div class="panel-body">
+              <div class="login-r8-head-desc">
+                <h4>Configurable Menu with country url structure</h4>
+                <p>Multilevel Menu for desktop and mobile, url structure for menu in respective countries</p>
               </div>
-              
-              <div class="forgot-submit">
-                <span class="forgot"><a class="login_tag">Login Here</a></span>
-                <span class="submit"><input type="submit" value="Submit" class="save" id="search_lessons"></span>
-              </div>
-            </form>
             </div>
+          </div>
+          <div class="panel panel-default login-r8-block">
+            <div class="panel-body">
+              <div class="login-r8-head-desc">
+                <h4>Dynamic Pages With Seo Friendly</h4>
+                <p>Admin can create dynamic pages for respective country, can update seo data for each page</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Login right blocks ends Here -->
+      </div>
 
           </div>
         </div>
+
         <!-- Login Form ends Here -->
       </div>
       <!-- Login left ends Here -->
@@ -74,45 +82,4 @@
     <!-- Login Row Starts Here -->
   </div>
   <!-- Body Ends Here -->
-{% load compress %}
-{% compress js %}
-  <script type="text/javascript">
-  $(document).ready(function() {
-    $(".forgot_tag").click(function(){
-      $(".login-form .panel-body").children('div').removeClass("active_login");
-      $(".forgot_div").addClass("active_login");
-    });
-    $(".login_tag").click(function(){
-      $(".login-form .panel-body").children('div').removeClass("active_login");
-      $(".login_div").addClass("active_login");
-    });
-
-
-    $("#loginform").submit(function(e) {
-      e.preventDefault();
-      $.post("/portal/", $("form#loginform").serialize(), function(data) {
-        if (data.error) {
-          $("p.error").remove();
-          $("#error").prepend("<p class='error'>" + data.message + "</p>");
-        } else {
-          window.location = '.';
-        }
-      }, 'json');
-    });
-
-    $("#forgotpasswordform").submit(function(e) {
-      e.preventDefault();
-      $.post("{% url 'micro_admin:forgot_password' %}", $("form#forgotpasswordform").serialize(), function(data) {
-        if (data.error) {
-          $("p.error").remove();
-          $("#error").prepend("<p class='error'>" + data.message + "</p>");
-        } else {
-          alert(data.message);
-          window.location = '.';
-        }
-      }, 'json');
-    });
-  });
-  </script>
-{% endcompress %}
 </body>

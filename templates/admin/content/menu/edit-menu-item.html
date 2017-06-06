@@ -41,8 +41,6 @@
   </div>
 </div>
 <!-- main content ends here-->
-{% load compress %}
-{% compress js %}
 <script type="text/javascript">
   $ = jQuery;
   $("form#menuform").submit(function(e) {
@@ -59,5 +57,4 @@
     }, 'json');
   });
 </script>
-{% endcompress %}
 {% endblock %}

@@ -1,11 +1,10 @@
 from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.shortcuts import redirect
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.db.models import Prefetch
 # from django.views.decorators.csrf import csrf_exempt
-from micro_blog.models import Category, Tags, Post, Subscribers, create_slug, Post_Slugs
+from micro_blog.models import Category, Tags, Post, Subscribers, Post_Slugs
 from pages.models import Contact
 import math
 # from django.core.files.storage import default_storage
@@ -14,7 +13,6 @@ from django.forms.models import inlineformset_factory
 import datetime
 import json
 from micro_admin.models import User
-from ast import literal_eval
 from pages.forms import ContactForm, SubscribeForm
 from django.conf import settings
 import sendgrid
@@ -35,6 +33,9 @@ from .tasks import *
 #         imgs.append({'src': uploaded_url, 'thumb': thumburl,
 #                 'is_image': True})
 #     return render(request, 'admin/browse.html', {'files': imgs})
+
+def empty(request):
+    return render(request, 'site/empty.html')
 
 
 @login_required
@@ -134,13 +135,19 @@ def get_prev_after_pages_count(page, no_pages):
 
 def site_blog_home(request, **kwargs):
     page = 1
-    if request.GET.get('page'):
-        return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
-    if 'page_num' in kwargs:
-        page = int(kwargs['page_num'])
-        if page == 1:
+    if 'page' in request.GET.keys():
+        try:
+            if request.GET.get('page') and int(request.GET.get('page')):
+                return redirect(reverse('site_blog_home', kwargs={'page_num': request.GET.get('page')}))
+        except:
             return redirect(reverse('site_blog_home'))
-
+    if 'page_num' in kwargs:
+        try:
+            page = int(kwargs['page_num'])
+            if page == 1:
+                return redirect(reverse('site_blog_home'))
+        except:
+            return redirect(reverse('site_blog_home'))
     items_per_page = 10
 
     posts = Post.objects.filter(status='P').order_by(
@@ -252,8 +259,12 @@ def blog_tag(request, slug):
 def blog_category(request, **kwargs):
     page = 1
     slug = kwargs['slug']
-    if request.GET.get('page'):
-        return redirect(reverse('blog_category', kwargs={'slug': slug, 'page_num': request.GET.get('page')}))
+
+    if 'page' in request.GET.keys():
+        if request.GET.get('page'):
+            return redirect(reverse('blog_category', kwargs={'slug': slug, 'page_num': request.GET.get('page')}))
+        else:
+            return redirect(reverse('blog_category', kwargs={'slug': slug}))
 
     if 'page_num' in kwargs:
         page = int(kwargs['page_num'])
@@ -319,8 +330,13 @@ def archive_posts(request, year, month):
         raise Http404
     c = {}
     c.update(csrf(request))
+    prev_page, previous_page, aft_page, after_page = get_prev_after_pages_count(
+    page, no_pages)
+
     return render(request, 'site/blog/index.html', {'current_page': page, 'year': year, 'month': month, 'last_page': no_pages,
-                                                    'posts': blog_posts, 'csrf_token': c['csrf_token']})
+                                                    'posts': blog_posts, 'csrf_token': c['csrf_token'],
+                                                    'prev_page': prev_page, 'previous_page': previous_page,
+                                                    'aft_page': aft_page, 'after_page': after_page})
 
 
 @login_required
@@ -502,6 +518,7 @@ def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
     validate_contact = ContactForm(request.POST)
+
     if validate_contact.is_valid():
 
         if 'enquery_type' in request.POST.keys():
@@ -509,19 +526,24 @@ def contact(request):
                     country=request.POST.get('country'),
                     enquery_type=request.POST.get('enquery_type')
                 )
-        message = "<p>From: "+request.POST.get('full_name')+"</p><p>Email Id: "
-        message += request.POST.get('email') + \
-            "</p><p>Message: "+request.POST.get('message')+"</p>"
-
+        message = "<p>From: "+request.POST.get('full_name') + "</p><p>Email Id: "
+        message += request.POST.get('email') + "</p>"
         if request.POST.get('phone'):
             message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
 
-        if request.POST.get('enquery_type'):
-            message += "<p><b>General Information: </b></p>"+"<p>Enquery Type: " +\
-                request.POST.get('enquery_type')+"</p>"
-
         if request.POST.get('country'):
             message += "<p>Country: "+request.POST.get('country')+"</p>"
+
+        if request.POST.get('message'):
+            message += "<p>Message: "+request.POST.get('message')+"</p>"
+
+        if request.POST.get('enquery_type'):
+            message += "<p><b>General Information:</b></p>"
+            message += "<p>Enquery Type: "+request.POST.get('enquery_type')+"</p>"
+        try:
+            message += '<p>This request is from <a href="'+ request.META['HTTP_REFERER'] +'">' + request.META['HTTP_REFERER'] +'</a></p>'
+        except:
+            pass
 
         sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
@@ -539,13 +561,22 @@ def contact(request):
         sg.send(contact_msg)
 
         sending_msg = sendgrid.Mail()
-        sending_msg.set_subject("Contact Request")
+        sending_msg.set_subject("Service Request - Micropyramid")
         sending_msg.set_html(message)
-        sending_msg.set_text('Contact Request')
+        sending_msg.set_text('Service Request')
         sending_msg.set_from(request.POST.get('email'))
         sending_msg.add_to("hello@micropyramid.com")
         sg.send(sending_msg)
 
+        sending_msg = sendgrid.Mail()
+        sending_msg.set_subject("Service Request - Micropyramid")
+        sending_msg.set_html(message)
+        sending_msg.set_text('Service Request')
+        sending_msg.set_from(request.POST.get('email'))
+        sending_msg.add_to("bobby@micropyramid.com")
+        sg.send(sending_msg)
+
+        request.session['thankyou'] = True
         data = {'error': False, 'response': 'Contact submitted successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
@@ -553,6 +584,12 @@ def contact(request):
         errors = {}
         data = {'error': True, 'errinfo': validate_contact.errors}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+
+def thankyou_page(request):
+    if 'thankyou' in request.session.keys() and request.session['thankyou'] == True:
+        return render(request, 'site/pages/thanks.html')
+    return HttpResponseRedirect('/')
 
 
 def subscribe(request):

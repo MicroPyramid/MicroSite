@@ -6,7 +6,18 @@
     <h3 class="panel-title">Edit Page</h3>
   </div>
   <div class="panel-body">
-    <form action="." method="POST" id="pageform">
+    <div class="col-xs-3"> <!-- required for floating -->
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+      {% for country in countries %}
+        <li {% if country.slug == request.GET.country %}class="active"{% endif %}><a href="?country={{ country.slug }}">{{ country.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-xs-9">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <form action="." method="POST" id="pageform">
       {% csrf_token %}
       <div class="form-group">
         <label for="exampleInputEmail1">Title</label>
@@ -14,19 +25,12 @@
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Slug</label>
-        <input type="Text" class="form-control" id="title" name="slug" value="{{page.slug}}" >
+        <input type="Text" class="form-control" id="slug" name="slug" value="{{page.slug}}" >
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">Meta Title</label>
-        <textarea class="form-control" id="meta_title" name="meta_title" >{{page.meta_title}}</textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Meta Description</label>
-        <textarea class="form-control" id="meta_description" name="meta_description" >{{page.meta_description}}</textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Keywords</label>
-        <textarea class="form-control" id="keywords" name="keywords">{{page.keywords}}</textarea>
+        <label for="exampleInputEmail1">Meta Data</label>
+        <textarea class="form-control" id="meta_data" name="meta_data" rows="10">{{page.meta_data}}</textarea>
+        <input type="hidden" name="country_id" id="country_id" value="{{ request.GET.country }}"/>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Category</label>
@@ -51,18 +55,26 @@
       <div class="draft-box">
         <input type="checkbox" name="is_active" value="true" {% if page.is_active %} checked {% endif %}> <label>Active</label>
       </div>
+      <div class="draft-box">
+        <input type="checkbox" name="is_default" value="true" {% if page.is_default %} checked {% endif %}> <label>Default</label>
+      </div>
       <div class="save-btn">
         <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
       </div>
     </form>
+        </div>
+    </div>
   </div>
 </div>
 <!-- main content ends here-->
-{% load compress %}
-{% compress js %}
 <script type="text/javascript">
-  CKEDITOR.config.allowedContent = true;
-  var editor = CKEDITOR.replace('textareacontents');
+
+CKEDITOR.config.allowedContent = true;
+CKEDITOR.dtd.$removeEmpty['i'] = false
+CKEDITOR.dtd.$removeEmpty.i = 0;
+CKEDITOR.dtd.$removeEmpty['span'] = false;
+CKEDITOR.config.contentsCss = ['//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css','//cdn.jsdelivr.net/bootswatch/3.3.6/readable/bootstrap.css'];  var editor = CKEDITOR.replace('textareacontents');
+
 </script>
 <script type="text/javascript">
   $ = jQuery;
@@ -71,6 +83,7 @@
     //var htmldata = CKEDITOR.instances.Editor.document.getBody().getHtml();
     console.log(CKEDITOR.instances.textareacontents.getData());
     $("input[name='content']").val(CKEDITOR.instances.textareacontents.getData());
+
     $.post(".", $("form#pageform").serialize(), function(msg) {
       if (msg.error) {
         $('p.failure').remove();
@@ -86,7 +99,6 @@ $('#all_categories').click(function(e){
   $("#category option").select2('');
   if(document.getElementById('all_categories').checked) {
     $("#category option").attr("selected", "selected");
-
   }
   else{
     $("#category").select2("val", "");
@@ -94,5 +106,4 @@ $('#all_categories').click(function(e){
   $(".select2").select2({ width: '100%' })
 });
 </script>
-{% endcompress %}
 {% endblock %}

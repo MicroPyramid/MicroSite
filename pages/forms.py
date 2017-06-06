@@ -9,6 +9,17 @@ class PageForm(forms.ModelForm):
         model = Page
         exclude = ('category',)
 
+    def __init__(self, *args, **kwargs):
+        super(PageForm, self).__init__(*args, **kwargs)
+
+
+    def save(self, commit=True):
+        instance = super(PageForm, self).save(commit=False)
+        instance.country_id = self.cleaned_data['country']
+        if commit:
+            instance.save()
+        return instance
+
 
 class MenuForm(forms.ModelForm):
 
@@ -30,8 +41,8 @@ class ContactForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)
-        if 'country' in self.data.keys():
-            self.fields['country'].required = True
+        # if 'country' in self.data.keys():
+        #     self.fields['country'].required = True
 
         if 'enquery_type' in self.data.keys():
             self.fields['enquery_type'].required = True

@@ -1,6 +1,10 @@
 {% extends 'site/base.html' %}
 {% load recurse %}
 {% load menu %}
+  {% block extra-styles %}
+    {% render_bundle 'oss' 'css' %}
+  {% endblock %}
+
 {% block title %}
 Django Collaborative Open Source Projects - Python Modules - Micropyramid
 {% endblock %}

@@ -49,15 +49,15 @@ infowindow.open(map);
 function map_dispaly1() {
   var mapCanvas = document.getElementById('map1');
   var mapOptions = {
-    center: new google.maps.LatLng(40.513343, -80.230509),
+    center: new google.maps.LatLng(33.0038360, -96.7628019),
     zoom: 15,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     
   }
   var map = new google.maps.Map(mapCanvas, mapOptions)
   /* marker */
-  var lat_lang={lat:40.513343, lng:-80.230509}
-  var lat_lang_info={lat:40.514943, lng:-80.230509}
+  var lat_lang={lat:33.0038360, lng:-96.7628019}
+  var lat_lang_info={lat:33.0038360, lng:-96.7628019}
   var marker = new google.maps.Marker({
     position: lat_lang,
     map: map,
@@ -65,7 +65,7 @@ function map_dispaly1() {
     title: 'MicroPyramid'
   });
   /* marker */
-  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>280 Moon Clinton Rd,<br>STE D Moon Twp, Pittsburgh, Pennsylvania 15108</b></address><a target='_blank' href='https://www.google.co.in/maps/place/280+Moon+Clinton+Rd+d,+Coraopolis,+PA+15108,+USA/@40.5133474,-80.2326973,17z/data=!3m1!4b1!4m5!3m4!1s0x88345da86a70cdd9:0xa2abcb718658d6ad!8m2!3d40.5133433!4d-80.2305086?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
+  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>3737 Mapleshade Ln, <br>Ste #103, Plano TX 75075, +1 5102300949</b></address><a target='_blank' href='https://www.google.co.in/maps/place/3737+Mapleshade+Ln+%23103,+Plano,+TX+75075,+USA/@33.003836,-96.7649906,17z/data=!3m1!4b1!4m5!3m4!1s0x864c2213cb53d0c7:0x9dc1659b19dd01c9!8m2!3d33.003836!4d-96.7628019?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
   /* directions */
   var infowindow = new google.maps.InfoWindow({
   content: string_content,
@@ -95,7 +95,7 @@ function map_dispaly_uae() {
     title: 'MicroPyramid'
   });
   /* marker */
-  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah, UAE 341246</b></address><a target='_blank' href='https://www.google.co.in/maps/place/280+Moon+Clinton+Rd+d,+Coraopolis,+PA+15108,+USA/@40.5133474,-80.2326973,17z/data=!3m1!4b1!4m5!3m4!1s0x88345da86a70cdd9:0xa2abcb718658d6ad!8m2!3d40.5133433!4d-80.2305086?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
+  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah, UAE 341246</b></address><a target='_blank' href='https://www.google.co.in/maps/place/Burj+Khalifa/@25.197197,55.2721877,17z/data=!3m1!4b1!4m5!3m4!1s0x3e5f43348a67e24b:0xff45e502e1ceb7e2!8m2!3d25.197197!4d55.2743764?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
   /* directions */
   var infowindow = new google.maps.InfoWindow({
   content: string_content,

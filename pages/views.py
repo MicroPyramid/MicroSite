@@ -4,27 +4,40 @@ from django.template.context_processors import csrf
 import json
 from django.contrib.auth.decorators import login_required
 from pages.models import Page, Menu
+from micro_blog.models import Country
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
 import itertools
 from micro_blog.models import Category, Post
 from django.template.defaultfilters import slugify
+from django.utils.http import is_safe_url
+from urllib.parse import unquote
+from django.conf import settings
+from microsite.utils import *
 
 
 @login_required
 def pages(request):
-    pagelist = Page.objects.all().order_by('id')
+    pagelist = Page.objects.filter(parent=None).order_by('id')
     return render(request, 'admin/content/page/page-list.html', {'pages': pagelist})
 
 
 @login_required
 def new_page(request):
     categories = Category.objects.all()
+    countries = Country.objects.all()
     if request.method == 'POST':
         validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            page = validate_page.save(commit = False)
+            page = validate_page.save(commit=False)
+            page.parent = None
             page.slug = slugify(request.POST.get('slug'))
+            page.is_default = True
+            if request.POST.get('country'):
+                page.country_id = request.POST.get('country')
+            else:
+                country = Country.objects.get(name__iexact='US')
+                page.country = country
             page.save()
             page.category.add(*request.POST.getlist('category'))
             data = {"error": False, 'response': 'Page created successfully'}
@@ -39,7 +52,8 @@ def new_page(request):
             'admin/content/page/new-page.html',
             {
                 'csrf_token': c['csrf_token'],
-                'categories': categories
+                'categories': categories,
+                'countries': countries
             })
     else:
         return render_to_response('admin/accessdenied.html')
@@ -55,19 +69,98 @@ def delete_page(request, pk):
         return render_to_response('admin/accessdenied.html')
 
 
+def update_dict_keys(temp, name, keys):
+    for key in keys:
+        changed_key = name + '-' + key
+        temp[changed_key] = temp[key]
+        del temp[key]
+    return temp
+
+
+# @login_required
+# def edit_page(request, pk):
+#     page = get_object_or_404(Page, pk=pk)
+#     categories = Category.objects.all()
+#     countries = Country.objects.all().order_by('id')
+#     PageCountryFormSet = inlineformset_factory(Page, Page,
+#                                             form=PageForm,
+#                                             formset=customPageCountryInlineFormSet,
+#                                             extra=len(countries),
+#                                             max_num=len(countries),
+#                                             )
+#     if request.method == 'POST':
+#         pagecountry_formset = PageCountryFormSet(request.POST)
+#         if pagecountry_formset.is_valid():
+#             i= 1
+#             for each in pagecountry_formset:
+#                 print (each.prefix)
+#                 form_id = each.prefix.replace('form-','')
+#                 if each.cleaned_data:
+#                     page_obj = each.save(commit=False)
+#                     page_obj.country_id = each.data['id_country_'+str(form_id)]
+#                     page_obj.save()
+#                     if not page_obj.parent:
+#                         if str(page_obj.id) != str(pk):
+#                             page_obj.parent = page
+#                     page_obj.save()
+#                     i += 1
+#                 else:
+#                     pass
+#                 print (i)
+#             return HttpResponseRedirect(reverse('pages:pages'))
+#         else:
+#             pagecountry_formset = PageCountryFormSet(request.POST)
+#             if pagecountry_formset.errors:
+#                 pass
+#     else:
+#         pagecountry_formset = PageCountryFormSet(request.POST)
+
+#     if request.user.is_superuser:
+#         c = {}
+#         c.update(csrf(request))
+#         country_ids = [{'country_id': country.id} for country in Country.objects.all().order_by('id')]
+#         if request.method == 'POST':
+#             PageCountryFormSet = PageCountryFormSet(request.POST, initial=country_ids)
+#         else:
+#             PageCountryFormSet = PageCountryFormSet(queryset=Page.objects.filter(Q(pk=pk) | Q(parent=page)).order_by('country_id'), initial=country_ids)
+#         return render(request, 'admin/content/page/edit-page.html',
+#                       {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories,
+#                        'countries': countries, 'pagecountry_formset': PageCountryFormSet, 'country_ids': country_ids})
+#     else:
+#         return render_to_response('admin/accessdenied.html')
+
 @login_required
 def edit_page(request, pk):
-    page = get_object_or_404(Page, pk=pk)
+    country = request.GET.get('country') if request.GET.get('country') else request.POST.get('country_id')
+    page = Page.objects.filter(pk=pk, country__slug=country).first()
+    if not page:
+        page = Page.objects.filter(parent_id=pk, country__slug=country).first()
+    if not page:
+        page = ''
     categories = Category.objects.all()
-
+    countries = Country.objects.all()
     if request.method == 'POST':
-        validate_page = PageForm(request.POST, instance=page)
+        if page:
+            validate_page = PageForm(request.POST, instance=page)
+        else:
+            validate_page = PageForm(request.POST)
         if validate_page.is_valid():
-            page = validate_page.save(commit = False)
-            page.slug = slugify(request.POST.get('slug'))
-            page.save()
-            page.category.clear()
-            page.category.add(*request.POST.getlist('category'))
+            edit_page = validate_page.save(commit=False)
+            edit_page.slug = slugify(request.POST.get('slug'))
+
+            if request.POST.get('is_default', '') == 'true':
+                edit_page.is_default = True
+            else:
+                edit_page.is_default = False
+            country = Country.objects.filter(slug=country).first()
+            edit_page.country = country
+            edit_page.save()
+            if str(edit_page.id) != str(pk):
+                edit_page.parent_id = pk
+                edit_page.save()
+
+            edit_page.category.clear()
+            edit_page.category.add(*request.POST.getlist('category'))
 
             data = {"error": False, 'response': 'Page updated successfully'}
         else:
@@ -77,7 +170,8 @@ def edit_page(request, pk):
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/content/page/edit-page.html',
-                      {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories})
+                      {'page': page, 'csrf_token': c['csrf_token'], 'categories': categories,
+                       'countries': countries})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -211,11 +305,72 @@ def site_page(request, slug):
     # if slug in pages_slugs:
     #     return render(request, 'site/pages/' + slug + '.html')
     # return render(request, '404.html', status=404)
-    pages = Page.objects.filter(slug=slug)
+    if 'country' in request.session.keys() and request.session['country']:
+        country_code = request.session['country']
+    else:
+        country_code = request.COUNTRY_CODE
+    country = Country.objects.filter(code=slug)
+    if country:
+        if country[0].code == settings.COUNTRY_CODE:
+            return HttpResponseRedirect('/')
+        return render(request, 'site/index.html', {
+            'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
+    pages = Page.objects.filter(slug=slug, country__code=country_code, is_active=True)
+    if not pages:
+        pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
     if pages:
         page = pages[0]
-        posts = []
+        posts = Post.objects.filter(status='P').order_by('-published_on')
         if page.category.all():
-            posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')[:3]
+            posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')
         return render(request, 'site/page.html', {'page': page, 'posts': posts})
-    return render(request, '404.html', status=404)
+    else:
+        return render(request, '404.html', status=404)
+
+def get_country_code_from_path(path):
+    country_code_prefix_re = re.compile(r'^/([\w-]+)(/|$)')
+    regex_match = country_code_prefix_re.match(path)
+
+    if regex_match:
+        country_code = regex_match.group(1)
+        if Country.objects.filter(code=country_code):
+            return country_code
+    return None
+
+
+
+def set_country(request):
+
+    next = request.POST.get('next', request.GET.get('next'))
+    if ((next or not request.is_ajax()) and
+            not is_safe_url(next, request.get_host())):
+        next = request.META.get('HTTP_REFERER')
+        if next:
+            next = unquote(next)  # HTTP_REFERER may be encoded.
+        if not is_safe_url(next, request.get_host()):
+            next = '/'
+        if request.POST.get('country'):
+            path = request.META.get('HTTP_REFERER').replace(request.scheme+'://' + request.get_host(), '')
+
+            country_code = get_country_code_from_path(path)
+            if country_code:
+                path = request.META.get('HTTP_REFERER').replace(request.scheme+'://' + request.get_host(), '').replace('/'+country_code, '')
+            if request.POST.get('country') == settings.COUNTRY_CODE:
+                next = path
+            else:
+                next = '/' + request.POST.get('country') + path
+    response = HttpResponseRedirect(next) if next else HttpResponse(status=204)
+    if request.method == 'POST':
+        country_code = request.POST.get('country')
+        if country_code:
+            request.session['country'] = country_code
+            if hasattr(request, 'session'):
+                request.session['_country'] = country_code
+            else:
+                response.set_cookie(
+                    settings.COUNTRY_COOKIE_NAME, country_code,
+                    max_age=settings.COUNTRY_COOKIE_AGE,
+                    path=settings.COUNTRY_COOKIE_PATH,
+                    domain=settings.COUNTRY_COOKIE_DOMAIN,
+                )
+    return response

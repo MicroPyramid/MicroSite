@@ -343,7 +343,7 @@ class micro_blogviews_get(TestCase):
             ) + '/' + str(self.blogppost.updated_on.month) + '/'
         )
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/blog/category-list/')
         self.assertEqual(response.status_code, 200)
@@ -358,11 +358,10 @@ class micro_blogviews_get(TestCase):
         self.assertTemplateUsed(response, 'site/blog/index.html')
 
         response = self.client.get('/blog/tag/'+str(self.tag.slug)+'/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get('/blog/category/django/?page=1')
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'site/blog/index.html')
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/blog/' + self.blogppost.slug + '/')
         self.assertEqual(response.status_code, 200)
@@ -374,16 +373,14 @@ class micro_blogviews_get(TestCase):
             ) + '/' + str(self.blogppost.updated_on.month) + '/'
         )
 
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'site/blog/index.html')
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get(
             '/blog/' +
             str(self.blogppost.updated_on.year) + '/' + str(
                 self.blogppost.updated_on.month) + '/' + '?page=1'
         )
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'site/blog/index.html')
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/blog/edit-category/django/')
         self.assertEqual(response.status_code, 200)
@@ -419,13 +416,13 @@ class micro_blog_post_data(TestCase):
         self.assertTrue(user_login)
 
         response = self.client.get('/blog/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/blog/?page=1')
         self.assertEqual(response.status_code, 302)
 
         response = self.client.get('/blog/?page=s')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
         # with correct input
         response = self.client.post('/blog/new-post/', {

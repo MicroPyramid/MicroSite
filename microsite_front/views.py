@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http.response import HttpResponse
+from django.shortcuts import render, redirect
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from micro_admin.models import career
 import requests
@@ -15,6 +15,7 @@ import yaml
 import os
 from itertools import chain
 from django.contrib.auth.decorators import login_required
+from micro_blog.models import Country
 
 
 def index(request):
@@ -56,6 +57,10 @@ def books(request, path):
 @login_required(login_url='/')
 def tools(request):
     return render(request, 'site/tools/index.html')
+
+
+def servicee(request):
+    return render(request, 'site/empty.html')
 
 
 @login_required(login_url='/')
@@ -135,12 +140,23 @@ def s3_objects_set_metadata(request):
 
 
 def sitemap(request, **kwargs):
+    if request.GET.get('page'):
+        url = request.path + request.GET.get('page') + '/'
+        return redirect(url, permanent=False)
     page = 1
-    if kwargs:
+    country = request.COUNTRY_CODE
+    if 'country_name' in kwargs.keys():
+        country = kwargs['country_name']
+        request.session['country'] = country
+        if hasattr(request, 'session'):
+            request.session['_country'] = country
+
+    if 'page_num' in kwargs.keys():
         page = int(kwargs['page_num'])
     categories = Category.objects.all()
     blog_posts = Post.objects.filter(status='P').order_by('-published_on')
-    services = Page.objects.filter(is_active='True')
+    countries = Country.objects.filter()
+    services = Page.objects.filter(is_active='True', country__code=country).order_by('id')
     sitemap_links = list(chain(categories, services, blog_posts))
 
     object_list = Paginator(sitemap_links, 100)
@@ -150,7 +166,7 @@ def sitemap(request, **kwargs):
         sitemap_links = object_list.page(1)
     except EmptyPage:
         sitemap_links = object_list.page(object_list.num_pages)
-    return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links})
+    return render(request, 'site/sitemap.html',  {'sitemap_links': sitemap_links, 'country': country, 'countries': countries})
 
 def handler404(request):
     return render(request, '404.html', status=404)

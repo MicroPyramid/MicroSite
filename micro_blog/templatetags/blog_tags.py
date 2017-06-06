@@ -1,6 +1,9 @@
 from django import template
 import datetime
-from micro_blog.models import Post
+from micro_blog.models import Post, Country
+from django.core.urlresolvers import reverse
+import re
+from django.conf import settings
 
 register = template.Library()
 
@@ -72,3 +75,18 @@ def get_slugs(value):
     if value:
         return value.split(',')
     return ''
+
+
+@register.simple_tag
+def get_countries():
+    return Country.objects.filter().order_by('id')
+
+
+@register.filter
+def get_value(value):
+    return str(value)
+
+
+@register.filter
+def get_country_name(value):
+    return Country.objects.filter(code=value).first().name

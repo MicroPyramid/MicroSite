@@ -64,8 +64,6 @@
     </div>
   </div>
 </div>
-{% load compress %}
-{% compress js %}
 <script type="text/javascript">
   $ = jQuery;
   $(document).ready(function() {
@@ -82,6 +80,5 @@
     $("#change_user_form_"+$(this).attr("id")).submit()
   })
 </script>
-{% endcompress %}
 <!-- main content ends here-->
 {% endblock %}

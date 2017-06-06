@@ -24,6 +24,15 @@
 {% endblock %}
 {% block blogcontent %}
 <div id='container_wrapper'>
+<style type="text/css">
+  
+.bread_crums {
+    padding: 25px 0px;
+    margin-top: 90px;
+    padding-bottom: 0px;
+}  
+
+</style>
   <!-- blog row starts here -->
 
   <div class="blog-row row">
@@ -41,7 +50,7 @@
             <a href="{% url 'blog_category' post.category.slug %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ post.category.slug }}</span></a>
           </li>
           <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <a href="{{request.path}}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{ post.title }}</span></a>
+            <a class="a"><span itemprop="name" class='name'>{{ post.title }}</span></a>
           </li>
         </ul>
       </div>

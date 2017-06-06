@@ -19,6 +19,9 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
     @property
     def get_url(self):
         return settings.SITE_BLOG_URL + "category/" + self.slug
@@ -187,3 +190,12 @@ class Subscribers(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    code = models.CharField(max_length=50)
+    slug = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name

@@ -7,6 +7,7 @@
     <span>A</span>
     <span>C</span>
     <span>T</span>
+
     </span>
     <div class="overlay_contact"></div>
     <div class="contact_div_wrap">
@@ -18,91 +19,49 @@
         <div class="daimond"></div>
         <div class="daimond"></div>
         <div class="daimond"></div>
-        <h3>Contact <span>Us</span></h3>
+        <h3>Need to talk to <span>Us?</span></h3>
       </div>
       <!--/ title -->
       <!-- address -->
-      <div class="address_div">
-        <i class='fa fa-map-marker'></i>
-        <div class="address_wrap">
-          <div class="address">
-            <h4>Reach</h4>
-            <div class='content'>
-            <span>HIG499, 6th phase KPHB</span>
-            <span>Hyderabad, India - 500072</span>
-            </div>
-          </div>
-        </div>
-        <!-- call us -->
-        <div class="cal_us">
-          <i class='fa fa-phone'></i>
-          <h4>Call</h4>
-          <div class="content">+91-9959166266</div>
-        </div>
-        <!--/ call us -->
-        <!-- call us -->
-        <div class="mail_us">
-          <i class='fa fa-envelope-o'></i>
-          <h4>Mail</h4>
-          <div class="content">hello@micropyramid.com</div>
-        </div>
-        <!--/ call us -->
-      </div>
-      <!--/ address -->
-      <div class="clearfix"></div>
-      <!-- social medi -->
-      <div class="contact_social">
-        <ul>
-          <li>
-            <a href="https://www.facebook.com/MicroPyramid" class="facebook" target="_blank" title="MicroPyramid facebook page"><span class='social_each fb'><i class='fa fa-facebook'></i></span></a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/company/micropyramid" class="linkedin" target="_blank" title="MicroPyramid linkedin page"><span class='social_each in'><i class='fa fa-linkedin'></i></span></a>
-          </li>
-          <li>
-            <a href="https://www.youtube.com/c/micropyramid" class="youtube-play" target="_blank" title="MicroPyramid youtube channel"><span class='social_each youtube'><i class='fa fa-youtube-play'></i></span></a>
-          </li>
-          <li>
-            <a href="https://micropyramid.com/rss.xml" class="rss" target="_blank" title="MicroPyramid rss feed"><span class='social_each rss'><i class='fa fa-rss'></i></span></a>
-          </li>
-          <li>
-            <a href="http://google.com/+Micropyramid/" class="google-plus" target="_blank" title="MicroPyramid googleplus page"><span class='social_each gplus'><i class='fa fa-google-plus'></i></span></a>
-          </li>
-          <li>
-            <a href="https://twitter.com/micropyramid" class="twitter" target="_blank"><span class='social_each twit' title="MicroPyramid twitter page"><i class='fa fa-twitter'></i></span></a>
-          </li>
-          <li>
-            <a href="https://github.com/micropyramid" class="github" target="_blank" title="MicroPyramid github organisation"><span class='social_each git'><i class='fa fa-github'></i></span></a>
-          </li>
-          <li>
-            <a href="https://www.reddit.com/r/MicroPyramid/" class="reddit" target="_blank" title="MicroPyramid reddit page"><span class='social_each reddit'><i class='fa fa-reddit'></i></span></a>
-          </li>
-        </ul>
-      </div>
-      <!--/ social media -->
-      <!-- form -->
-      <form id="contactform" name="contactform" method="post">
+
+      <div class="col-md-12">
+      <!--<p class="form-hint">For any enquiries, please leave us a message and we’ll reply to you quickly.</p>-->
+           <!-- form -->
+      <form id="contactform" name="contactform" method="post" action="/contact-india/">
         <div class="form_div">
-          <div class="input-group">
-            <span class="input-group-addon"><i class='fa fa-user'></i></span>
-            <input type="text" class="form-control" class='full_name' name="full_name" placeholder="Name" aria-describedby="basic-addon1">
-          </div>
-          <span id="full_name"></span>
-          <div class="input-group">
-            <span class="input-group-addon"><i class='fa fa-comments'></i></span>
-            <input type="text" class="form-control" class="email" name="email" placeholder="Email" aria-describedby="basic-addon1">
-          </div>
-          <span id="email"></span>
-          <div class="input-group">
-            <span class="input-group-addon"><i class='fa fa-envelope'></i></span>
-            <textarea type="text" class="form-control" class="message" name="message" placeholder="Message" aria-describedby="basic-addon1"></textarea>
-          </div>
-          <span id="message"></span>
+            <div class="col-md-6 form-group">
+              <input type="text" class="form-control" id="full_name" name="full_name" placeholder="Name">
+            </div>
+            <div class="col-md-6 form-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="form-group col-md-6">
+              <select class="form-control" name="enquery_type">
+                <option value="general">Request For Services</option>
+                <option value="partnership">Partnership Queries</option>
+                <option value="media">Media Queries</option>
+                <option value="general queries">General Queries</option>
+                <option value="feedback">Website Feedback</option>
+                <option value="others">Others</option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+            </div>
+            <div class="col-md-6 form-group">
+              <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+            </div>
+            <div class="col-md-12 form-group">
+              <textarea class="form-control" rows="10" id="message" name="message" placeholder="Your Message"></textarea>
+            </div>
           <div class="button_row">
           <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send
           </button></div>
         </div>
       </form>
       <!--/ form -->
+      </div>
+
+      <div class="clearfix"></div>
     </div>
     <!--/ contact us -->

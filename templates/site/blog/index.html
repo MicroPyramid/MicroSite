@@ -12,49 +12,82 @@
  <meta property="og:title"  content="{% if current_page|slugify == '1'|slugify %}{% else %} Page {{ current_page }} - {% endif %}Django, Python, mongo DB, AWS Technology Blog - MicroPyramid" />
 
 {%endif%}
-
+{% if category %}
+<meta name="description" content="Find and learn latest updates, best coding practices of {{ category.name }} {% if current_page|slugify == '1'|slugify %}{% else %}from Page {{ current_page }}{% endif %} - Micropyramid Blog"/>
+<meta property="og:description" content="Find and learn latest updates, best coding practices of {{ category.name }} {% if current_page|slugify == '1'|slugify %}{% else %}from Page {{ current_page }}{% endif %} - Micropyramid Blog" />
+{% else %}
 <meta name="description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more{% if current_page|slugify == '1'|slugify %}.{% else %} from Page {{ current_page }}{% endif %} - MicroPyramid Blog"/>
 <meta property="og:description" content="Find and learn latest updates, best coding practices of Django, Python, mongo DB, LINUX, Amazon Web Services and more{% if current_page|slugify == '1'|slugify %}.{% else %} from Page {{ current_page }}{% endif %} - MicroPyramid Blog" />
-
-
+{% endif %}
   {% if current_page|slugify == '1'|slugify %}
   {% else %}
     {% if category %}
-    <link rel="prev" href="https://micropyramid.com/blog/{{slug}}/{{current_page|add:"-1"}}/">
-
+    <link rel="prev" href="https://micropyramid.com/blog/category/{{slug}}/{{current_page|add:"-1"}}/">
     {% else %}
     <link rel="prev" href="https://micropyramid.com/blog/{{current_page|add:"-1"}}/">
     {% endif %}
   {% endif %}
+
   {% if current_page <= last_page %}
     {% if current_page == last_page %}
-      <link rel="next" href="https://micropyramid.com/blog/{{slug}}/{{current_page| add:"1"}}/">
-
+      {% if category %}
+        <link rel="next" href="https://micropyramid.com/blog/category/{{slug}}/{{current_page| add:"1"}}/">
+      {% else %}
+        <link rel="next" href="https://micropyramid.com/blog/{{current_page| add:"1"}}/">
+      {% endif %}
     {% else %}
+      {% if category %}
+      <link rel="next" href="https://micropyramid.com/blog/category/{{slug}}/{{current_page| add:"1"}}/">
+      {% else %}
       <link rel="next" href="https://micropyramid.com/blog/{{current_page| add:"1"}}/">
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endblock %}
+
 {% block contact %}
   <span class="contact_mob pull-right">
   <i class="fa fa-comments"></i>
   </span>
 {% endblock %}
 {% block blogcontent %}
+<style type="text/css">
+  
+.bread_crums {
+    padding: 25px 0px;
+    margin-top: 90px;
+    padding-bottom: 0px;
+}  
+
+</style>
   {% include 'site/contact.html' %}
   <div id='container_wrapper'>
-    <!-- blog row starts here -->
-    <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <!--<div class="breadcrumb">
       <ul>
+        <li style=""><a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}">Home</a></li>
+        <li style=""><a href="/blog/">Blog</a></li>
+        {% if category %}
+        <li style=""><a href="/blog/the-point/keys-strong-mobile-payment-strategy-blog.aspx">{{category.name}}</a></li>
+        {% endif %}
+      </ul>
+    </div>-->
+    <!-- blog row starts here -->
+   <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+       <ul>
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+          <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
         </li>
+        
+        {% if category %}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a href="/blog/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Blog</span></a>
         </li>
-        {% if category %}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-          <a href="/blog/category/{{ category.slug }}/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>{{category.name}}</span></a>
+          <a class="a"><span itemprop="name" class='name'>{{category.name}}</span></a>
+        </li>
+        {% else %}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a class="a"><span itemprop="name" class='name'>Blog</span></a>
         </li>
         {% endif %}
       </ul>
@@ -97,7 +130,7 @@
               </div>
             </div>
             <div class="blog-right">
-              <span class="blog-title" itemprop="headline"><a href="https://micropyramid.com/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
+              <span class="blog-title" itemprop="headline"><a href="{% if request.LANGUAGE_CODE %}/{{request.LANGUAGE_CODE}}{% endif %}/blog/{{post.active_slugs.0.slug}}/" itemprop="mainEntityOfPage">{{ post.title }}</a></span>
               {% if post.excerpt %}
                 <p itemprop="description">{{ post.excerpt|linebreaks }}</p>
               {% else %}
@@ -162,7 +195,7 @@
                 <div>Subscribe to our news letter to receive latest blog posts into your inbox. Please fill your email address in the below form.</div>
                 <div><sub style="font-size: 21px;">*</sub>We don't provide your email contact details to any third parties</div>
               </div>
-              <form id="subscribeform" name="subscribeform" method="post">
+              <form id="subscribeform" name="subscribeform" method="post" action="/subscribe/">
                 <div class="form_fiv">
                   <div class="input-group subscribe_input">
                     <input type="email" class="form-control subscribe_email" name="email"placeholder="Email Id" aria-describedby="basic-addon2">

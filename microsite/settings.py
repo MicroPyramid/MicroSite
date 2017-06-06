@@ -1,16 +1,17 @@
 import os
+from django.utils.translation import ugettext_lazy as _
 import djcelery
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = DEBUG
 DEBUG404 = True
-ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me']
+ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com', '*']
 
 SENTRY_ENABLED = False
 
@@ -28,37 +29,35 @@ INSTALLED_APPS = (
     'pages',
     'micro_blog',
     'sorl.thumbnail',
-    'compressor',
     'search',
+    'compressor',
     'django_simple_forum',
     'simple_pagination',
+    'django_webpacker',
 )
 
 MIDDLEWARE_CLASSES = (
-    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    'microsite.middleware.CountryMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
-    'htmlmin.middleware.MarkRequestMiddleware',
-
+    # 'htmlmin.middleware.HtmlMinifyMiddleware',
+    # 'htmlmin.middleware.MarkRequestMiddleware',
+    'microsite.middleware.LowerCased',
     'microsite.middleware.RequestSessionMiddleware',
     'microsite.middleware.DetectMobileBrowser',
-    # 'django.middleware.cache.FetchFromCacheMiddleware'
+    'django.middleware.cache.FetchFromCacheMiddleware'
 )
-
+APPEND_SLASH = True
+# SOLID_I18N_USE_REDIRECTS = True
+# SOLID_I18N_HANDLE_DEFAULT_PREFIX = True
+# SOLID_I18N_DEFAULT_PREFIX_REDIRECT = True
+# SOLID_I18N_PREFIX_STRICT = True
 
 HTML_MINIFY = False
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.template.context_processors.static',
-    'django.template.context_processors.request',
-    'django.template.context_processors.media',
-)
 
 
 ROOT_URLCONF = 'microsite.urls'
@@ -81,14 +80,37 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    # ... your other backends
+    'micro_admin.auth_backend.PasswordlessAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
-LANGUAGE_CODE = 'en-us'
+
+LANGUAGE_CODE = 'en'
+
+COUNTRY_CODE = 'us'
+
+COUNTRY_COOKIE_NAME = 'django_country'
+COUNTRY_COOKIE_AGE = None
+COUNTRY_COOKIE_DOMAIN = None
+COUNTRY_COOKIE_PATH = '/'
+
+LOCALE_PATHS = (
+    BASE_DIR + '/locale', )
+
+LANGUAGES = (
+    ('en', _('India')),
+    ('us', _('US')),
+)
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_L10N = True
+
+USE_COUNTRY_URL = True
 
 USE_TZ = False
 
@@ -98,7 +120,6 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
 
-COMPRESS_ROOT = BASE_DIR + '/static/'
 BLOG_IMAGES = BASE_DIR + '/static/blog/'
 TEAM_IMAGES = BASE_DIR + '/static/team/'
 CLIENT_IMAGES = BASE_DIR + '/static/client/'
@@ -106,23 +127,30 @@ TRAINER_IMAGES = BASE_DIR + '/static/trainer/'
 COURSE_IMAGES = BASE_DIR + '/static/course/'
 QACAT_IMAGES = BASE_DIR + '/static/qacategory/'
 
-TEMPLATE_DIRS = (BASE_DIR + '/templates',)
-
 MEDIA_ROOT = BASE_DIR
 SITE_BLOG_URL = "/blog/"
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, "templates"),)
 
-TEMPLATE_LOADERS = (
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-)
-
-COMPRESS_ENABLED = True
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [BASE_DIR + "/templates"],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # other finders..
-    'compressor.finders.CompressorFinder',
 )
 
 CELERY_TIMEZONE = "Asia/Calcutta"
@@ -168,26 +196,10 @@ LOGGING = {
 
 SITE_URL = "https://micropyramid.com"
 
-COMPRESS_ENABLED = True
-
-COMPRESS_PRECOMPILERS = (
-    ('text/less', 'lessc {infile} {outfile}'),
-    ('text/x-scss', 'sass --scss {infile} {outfile}'),
-)
-
-COMPRESS_OFFLINE_CONTEXT = {
-    'STATIC_URL': 'STATIC_URL',
-}
-
-
 if DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
-COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
-COMPRESS_REBUILD_TIMEOUT = 5400
 
 query_cache_type = 0
 
@@ -289,7 +301,34 @@ if SENTRY_ENABLED:
             },
         }
 
+# MODELTRANSLATION_DEFAULT_LANGUAGE='en'
+
+# LOCALE_PATHS = (
+#     os.path.join(BASE_DIR, 'locale'),
+# )
+
+GP_CLIENT_ID = "983386206805-0dns7vrdaqcrn2nfls914b0vjjdhnhnb.apps.googleusercontent.com"
+GP_CLIENT_SECRET = "vO4tq49ahgH6afrEzrIQSIIU"
+
 try:
     from microsite.settings_local import *  # noqa
 except ImportError as e:
     pass
+
+
+WEB_PACK_FILES = [
+    {'html_file_name': 'templates/site/base.html',
+     'webpack_js': 'index',
+    },
+    {'html_file_name': 'templates/site/index.html',
+     'webpack_js': 'index',
+     },
+    {'html_file_name': 'templates/admin/base.html',
+     'webpack_js': 'portal',
+     },
+]
+
+
+ENABLE_DJANGO_WEBPACK_S3_STORAGES = False
+AWS_BUCKET_NAME = ''
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

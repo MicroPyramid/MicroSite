@@ -109,8 +109,7 @@ $.ajax({
         $('#contactform #' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
       }
     } else {
-      alert("Your message has been successfully sent. We will get back to you very soon!");
-      window.location = "/";
+      window.location = "/thank-you/";
     }
   }
 });
@@ -140,7 +139,18 @@ $('.tech_daimond_wrap a').click(function(e){
 	}
 });
 
- /* web development technologies tabs */
-$(document).ready(function(n){
-	//$('.map').addClass('logo');
+$('.daimond_work').click(function(e){$(this).hover();});$('.description-detail').click(function(e){window.location=$(this).attr('id');});$(document).ready(function(){$('#quote-carousel').carousel({pause:true,interval:7000,});});
+$(".set_country").change(function(e) {
+  e.preventDefault();
+  $(this).parent('form').submit();
 })
+jQuery(document).ready(function($) {
+	$(window).scroll(function(e){
+		if($(window).scrollTop()  >70){
+		 $('#base_menu').css({"padding-top": "0", "padding-bottom": "0","transition": "0.4s ease-in-out"});
+		}
+		else{
+		  $('#base_menu').css({"padding-top": "8px", "padding-bottom": "2px","transition": "0.4s ease-in-out"});
+		}
+	})
+});

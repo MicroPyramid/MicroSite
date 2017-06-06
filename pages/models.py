@@ -1,16 +1,17 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
-from micro_blog.models import Category
+from micro_blog.models import Category, Country
 
 
 class Page(models.Model):
     title = models.CharField(max_length=500)
+    country = models.ForeignKey(Country, blank=True, null=True)
+    is_default = models.BooleanField(default=False)
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='children')
     content = models.TextField()
-    slug = models.SlugField(unique=True)
-    is_active = models.BooleanField(default=True)
-    meta_title = models.TextField()
-    meta_description = models.TextField()
-    keywords = models.TextField()
+    slug = models.SlugField()
+    is_active = models.BooleanField(default=False)
+    meta_data = models.TextField()
     category = models.ManyToManyField(Category)
 
     # def save(self, *args, **kwargs):
@@ -30,6 +31,11 @@ class Page(models.Model):
             return True
         else:
             return False
+
+    def related_pages(self):
+        menu = Menu.objects.filter(url=self.slug)
+        menus = Menu.objects.filter(parent=menu[0].parent, status='on')
+        return menus
 
     def __unicode__(self):
         return self.title
@@ -82,6 +88,9 @@ class Menu(models.Model):
         if self.parent:
             return True
         return False
+
+    def get_active_children(self):
+        return self.menu_set.filter(status='on').order_by('lvl')
 
 
 def create_slug(tempslug):

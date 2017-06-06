@@ -1,6 +1,5 @@
 from django import forms
 from micro_blog.models import Post, Category
-from django.db.models import Q
 
 
 class BlogpostForm(forms.ModelForm):
@@ -29,5 +28,3 @@ class CustomBlogSlugInlineFormSet(forms.BaseInlineFormSet):
         if active_slugs > 1:
             raise forms.ValidationError(
                 "Only one slug can be active at a time.")
-
-

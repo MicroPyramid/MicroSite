@@ -1,0 +1,340 @@
+body {
+  background: #fff;
+  font-size: 1.6em;
+  color: #555;
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: normal;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none;
+}
+.books-row,
+.isotope-row {
+  background: #043d51;
+}
+.search-row {
+  margin: 15px 5px;
+}
+.book-block {
+  padding: 5px;
+}
+.book-block .book-item {
+  height: 500px;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 15px;
+  position: relative;
+}
+.book-block .book-item .book-title {
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  padding: 6px 8px;
+  text-transform: capitalize;
+  position: relative;
+}
+.book-block .book-item .book-title .book-privacy-flap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #2bbcb7;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  padding: 1px 10px;
+  text-transform: uppercase;
+}
+.book-block .book-item .book-title a {
+  color: #fff;
+  z-index: 10000;
+  position: relative;
+  line-height: 27px;
+  margin-top: 20px;
+  display: block;
+  font-size: 22px;
+}
+.book-block .book-item .book-title.sky-green {
+  background-color: #2bbcb7;
+}
+.book-block .book-item .book-title.yellow {
+  background-color: #f4ae48;
+}
+.book-block .book-item .book-title.pink-red {
+  background-color: #e2435a;
+}
+.book-block .book-item .book-title.light-green {
+  background-color: #abdf73;
+}
+.book-block .book-item .book-description {
+  text-align: left;
+  padding: 20px 15px;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 25px;
+}
+.book-block .book-item .book-description .small-title {
+  display: block;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #93b4c0;
+}
+.book-block .book-item .date-time {
+  color: #555;
+  font-weight: bold;
+  font-size: 0.7em;
+  position: absolute;
+  bottom: 10px;
+  padding: 5px 15px;
+  text-transform: capitalize;
+}
+.isotope-row a {
+  color: #fcb248;
+  border: 2px solid #fcb248;
+  font-weight: bold;
+  padding: 7px 10px;
+}
+.isotope-row a:hover {
+  background: #fcb248;
+  border: 2px solid #fcb248;
+  color: #fff;
+}
+.portfolioFilter {
+  display: block;
+  margin: 20px 0px;
+}
+.portfolioFilter a {
+  text-decoration: none;
+}
+.portfolioFilter a.active {
+  background: #fcb248;
+  border: 2px solid #fcb248;
+  color: #fff;
+}
+.portfolioFilter a.current {
+  font-weight: bold;
+}
+.isotope-item {
+  z-index: 2;
+}
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+}
+.isotope {
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  transition-property: height, width;
+}
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  transition-property: transform, opacity;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.full-width {
+  width: 100%;
+}
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+.docs-main-nav {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.left-side-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  overflow: hidden;
+  min-height: 100%;
+  background: #043d51;
+  z-index: 200;
+  color: #93b4c0;
+}
+.mobile-nav-top {
+  display: none;
+  background: #2bbcb7;
+  color: #fff;
+  padding: 0.4045em 0.809em;
+  position: relative;
+  line-height: 50px;
+  text-align: center;
+  font-size: 100%;
+  *zoom: 1;
+}
+.mobile-nav-top:after {
+  clear: both;
+}
+.mobile-nav-top a {
+  color: #fff;
+  font-weight: bold;
+}
+.mobile-nav-top img {
+  margin-right: 12px;
+  height: 45px;
+  width: 45px;
+  background-color: #2980B9;
+  padding: 5px;
+  border-radius: 100%;
+}
+.mobile-nav-top i {
+  font-size: 30px;
+  float: left;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.mobile-nav-top:before,
+.mobile-nav-top:after {
+  display: table;
+  content: "";
+}
+.docs-content {
+  margin-left: 300px;
+  background: #fcfcfc;
+  min-height: 100%;
+}
+.right-doc-content {
+  padding: 1.618em 3.236em;
+  font-size: 1.2em;
+  max-width: 100%;
+  line-height: 26px;
+  margin: auto;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.right-doc-content a {
+  color: #2b929c;
+  text-decoration: none;
+}
+.right-doc-content ul {
+  margin: 0px;
+  padding: 0px;
+  margin-left: 30px;
+}
+.right-doc-content ul li {
+  list-style: square;
+  line-height: 35px;
+  list-style-position: inside;
+}
+pre {
+  background: #000;
+  /* color: #fff; */
+  border-radius: 10px;
+  padding: 20px;
+}
+nav.stickynav {
+  position: fixed;
+  top: 0;
+}
+.left-search-title {
+  text-align: center;
+}
+.left-search-title .title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1em;
+  background-color: #2bbcb7;
+  padding: 15px;
+}
+.left-search-title .title a {
+  color: #fff;
+  text-decoration: none;
+}
+.left-search-title .search-bar {
+  background-color: #218791;
+  padding: 15px 10px;
+}
+.left-search-title .search-bar .form-control {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: none;
+  height: 25px;
+  border: none;
+  width: 92%;
+  padding: 5px;
+  padding-left: 15px;
+}
+.left-search-title .date {
+  color: #fff;
+  font-size: 0.9em;
+  background-color: #6FDDD9;
+  padding: 10px;
+  font-weight: 600;
+}
+@media screen and (max-width: 768px) {
+  .docs-body {
+    background: #fcfcfc;
+  }
+  .mobile-nav-top {
+    display: block;
+  }
+  .left-side-nav {
+    left: -300px;
+  }
+  .left-side-nav.shift {
+    width: 85%;
+    left: 0;
+  }
+  .docs-content {
+    margin-left: 0;
+  }
+  .docs-content .right-doc-content {
+    padding: 1.618em;
+  }
+  .docs-content.shift {
+    position: fixed;
+    min-width: 100%;
+    left: 85%;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+@media screen and (min-width: 1400px) {
+  .docs-content {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  .right-doc-content {
+    margin: 0;
+    background: #fcfcfc;
+  }
+}
+@media print {
+  .rst-versions,
+  footer,
+  .left-side-nav {
+    display: none;
+  }
+  .docs-content {
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .tablet-hide {
+    display: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .mobile-hide {
+    display: none;
+  }
+}

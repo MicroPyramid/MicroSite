@@ -143,8 +143,6 @@
   </div>
 </div>
 <!-- main content ends here-->
-{% load compress %}
-{% compress js %}
 <script type="text/javascript">
    function counting_words(){
        input_text = $('#meta_description').val();
@@ -230,5 +228,4 @@ window.setInterval(function(){
     $('form#blogform').submit();
   });
 </script>
-{% endcompress %}
 {% endblock %}

@@ -143,8 +143,6 @@
   </div>
 </div>
 <!-- main content ends here-->
-{% load compress %}
-{% compress js %}
 <script>
 $('#meta_description').keyup(function(event) {
    input_text = $('#meta_description').val();
@@ -284,5 +282,4 @@ $(document).ready(function() {
   window.autocomplete.setup()
 })
 </script>
-{% endcompress %}
 {% endblock %}

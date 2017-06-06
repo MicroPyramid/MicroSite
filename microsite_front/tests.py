@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 from micro_admin.models import User
-from micro_blog.models import Category, Post
+from micro_blog.models import Category, Post, Country
 from pages.models import Page
 
 
@@ -15,6 +15,7 @@ class frontend_test(TestCase):
         self.contactpage = Page.objects.create(title="Contact", is_active=True)
         self.category = Category.objects.create(
             name='python', description='django desc', is_display=True)
+        self.country = Country.objects.create(name='us', code='us', slug='us')
 
     def test_home_page(self):
         c = Client()
@@ -91,7 +92,7 @@ class micro_front_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/tools/set-meta-data-for-S3-objects/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 301)
 
         response = self.client.post('/tools/set-meta-data-for-S3-objects/', {'max_age': 'dfdf', 'expiry_time': 'dfdf', 'bucket_name': 'dffd', 'access_key': 'dfdsf', 'secret_key': 'dfd'})
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 301)

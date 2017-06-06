@@ -1,7 +1,10 @@
 {% extends 'site/base.html' %}
 {%load menu%}
 {% load blog_tags%}
-
+{% block country_urls %}
+{% endblock %}
+{% block base_country_urls %}
+{% endblock %}
 {% block stage %}
 <div id="blog">
   <div class="row marl">
@@ -27,8 +30,6 @@
 
 {% block js %}
   {{ block.super }}
-  {% load compress %}
-  {% compress js %}
   <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'micropyramid'; // required: replace example with your forum shortname
@@ -41,5 +42,4 @@
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
   </script>
-  {% endcompress %}
 {% endblock %}

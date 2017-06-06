@@ -75,6 +75,33 @@
               <a href="{% url 'pages:delete_menu' pk=chlidren.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
+          {%for chlidren in chlidren.menu_set.all|dictsort:'lvl' %}
+          <tr>
+            <td class="txt_center"></td>
+            <td>{%if chlidren.parent%}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{%endif%}{{chlidren.title}}</td>
+            <td class="sec-col">{{chlidren.url}}</td>
+            <td class="menu-swap txt_center">
+              <div class="inner-swap-wid txt_center">
+                <span class="caret-wid"><a href="#"><i class="fa fa-caret-down" 
+                  id="{{chlidren.id}}"></i></a></span>
+                <span class="caret-wid"><a href="#"><i class="fa fa-caret-up" 
+                  id="{{chlidren.id}}"></i></a></span>
+              </div>
+            </td>
+            <td class="txt_center"><a href="{% url 'pages:change_menu_status' pk=chlidren.id %}" class="on_off">
+              {% ifequal chlidren.status 'on' %}
+              <i class="fa fa-toggle-on"></i> ON
+              {% else %}
+              <i class="fa fa-toggle-off"></i> OFF
+              {% endifequal %}
+              </a>
+            </td>
+            <td class="txt_center">
+              <a href="{% url 'pages:edit_menu' pk=chlidren.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'pages:delete_menu' pk=chlidren.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
           {% endfor %}
           {% endfor %}
         </tbody>
@@ -82,8 +109,6 @@
     </div>
   </div>
 </div>
-{% load compress %}
-{% compress js %}
 <script type="text/javascript">
   $ = jQuery;
   $(document).ready(function() {
@@ -105,6 +130,5 @@
     });
   });
 </script>
-{% endcompress %}
 <!-- main content ends here-->
 {% endblock %}
