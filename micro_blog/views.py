@@ -600,7 +600,6 @@ def contact(request):
             data = {'error': False, 'response': 'Contact submitted successfully'}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
         else:
-            print ("hello")
             data = {'error': True, 'captcha_response': 'Please Choose Correct Captcha'}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:

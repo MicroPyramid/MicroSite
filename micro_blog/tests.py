@@ -181,7 +181,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
-                'Contact submitted successfully'
+                'Please Choose Correct Captcha'
             ) in response.content.decode('utf8'))
 
         # Testcase for contact with post request advanced
@@ -199,7 +199,7 @@ class micro_blog_views_test_with_employee(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
-                'Contact submitted successfully'
+                'Please Choose Correct Captcha'
             ) in response.content.decode('utf8'))
 
         # Testcase for contact advanced wrong data
