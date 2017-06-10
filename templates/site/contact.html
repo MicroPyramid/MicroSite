@@ -54,6 +54,13 @@
             <div class="col-md-12 form-group">
               <textarea class="form-control" rows="10" id="message" name="message" placeholder="Your Message"></textarea>
             </div>
+            <div  class="form-group col-xs-12 form-field wow fadeInUp animated captcha" style="margin-bottom: 26px;">
+              <label>&nbsp;</label>
+              <div class="button_div">
+                <div class="g-recaptcha" data-sitekey="{{request.session.google_captcha_key}}"></div>
+              </div>
+            </div>
+
           <div class="button_row">
           <button class='submit_contact' type="submit"><i class='fa fa-paper-plane-o'></i> Send
           </button></div>
@@ -65,3 +72,4 @@
       <div class="clearfix"></div>
     </div>
     <!--/ contact us -->
+  <script src='https://www.google.com/recaptcha/api.js'%}></script>

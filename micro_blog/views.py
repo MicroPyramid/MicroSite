@@ -514,72 +514,95 @@ def edit_blog_post(request, blog_slug):
                   )
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
 def contact(request):
     if request.method == 'GET':
         return render(request, 'site/pages/contact-us.html')
     validate_contact = ContactForm(request.POST)
 
     if validate_contact.is_valid():
+        payload = {'secret': settings.CAPTCHA_SECRET_KEY, 'response':
+                   request.POST.get('g-recaptcha-response'), 'remoteip':  request.META.get('REMOTE_ADDR')}
+        r = requests.get(
+            'https://www.google.com/recaptcha/api/siteverify', params=payload)
+        if json.loads(r.text)['success']:
 
-        if 'enquery_type' in request.POST.keys():
-                Contact.objects.create(
-                    country=request.POST.get('country'),
-                    enquery_type=request.POST.get('enquery_type')
-                )
-        message = "<p>From: "+request.POST.get('full_name') + "</p><p>Email Id: "
-        message += request.POST.get('email') + "</p>"
-        if request.POST.get('phone'):
-            message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
+            if 'enquery_type' in request.POST.keys():
+                    Contact.objects.create(
+                        country=request.POST.get('country'),
+                        enquery_type=request.POST.get('enquery_type')
+                    )
+            message = "<p>From: "+request.POST.get('full_name') + "</p><p>Email Id: "
+            message += request.POST.get('email') + "</p>"
+            if request.POST.get('phone'):
+                message += "<p>Contact Number: "+request.POST.get('phone')+"</p>"
 
-        if request.POST.get('country'):
-            message += "<p>Country: "+request.POST.get('country')+"</p>"
+            if request.POST.get('country'):
+                message += "<p>Country: "+request.POST.get('country')+"</p>"
 
-        if request.POST.get('message'):
-            message += "<p>Message: "+request.POST.get('message')+"</p>"
+            if request.POST.get('message'):
+                message += "<p>Message: "+request.POST.get('message')+"</p>"
 
-        if request.POST.get('enquery_type'):
-            message += "<p><b>General Information:</b></p>"
-            message += "<p>Enquery Type: "+request.POST.get('enquery_type')+"</p>"
-        try:
-            message += '<p>This request is from <a href="'+ request.META['HTTP_REFERER'] +'">' + request.META['HTTP_REFERER'] +'</a></p>'
-        except:
-            pass
+            if request.POST.get('enquery_type'):
+                message += "<p><b>General Information:</b></p>"
+                message += "<p>Enquery Type: "+request.POST.get('enquery_type')+"</p>"
 
-        sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
+            try:
+                message += '<p>Ip Address: '+ str(get_client_ip(request)) + '</p>'
+            except:
+                pass
 
-        contact_msg = sendgrid.Mail()
-        contact_msg.set_subject("We received your message | MicroPyramid")
-        message_reply = 'Hello ' + request.POST.get('full_name') + ',\n\n'
-        message_reply = message_reply + 'Thank you for writing in.\n'
-        message_reply = message_reply + \
-            'We appreciate that you have taken the time to share your feedback with us! We will get back to you soon.\n\n'
-        message_reply = message_reply + 'Regards\n'
-        message_reply = message_reply + 'The MicroPyramid Team.'
-        contact_msg.set_text(message_reply)
-        contact_msg.set_from("hello@micropyramid.com")
-        contact_msg.add_to(request.POST.get('email'))
-        sg.send(contact_msg)
+            try:
+                message += '<p>This request is from <a href="'+ request.META['HTTP_REFERER'] +'">' + request.META['HTTP_REFERER'] +'</a></p>'
+            except:
+                pass
 
-        sending_msg = sendgrid.Mail()
-        sending_msg.set_subject("Service Request - Micropyramid")
-        sending_msg.set_html(message)
-        sending_msg.set_text('Service Request')
-        sending_msg.set_from(request.POST.get('email'))
-        sending_msg.add_to("hello@micropyramid.com")
-        sg.send(sending_msg)
+            sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
 
-        sending_msg = sendgrid.Mail()
-        sending_msg.set_subject("Service Request - Micropyramid")
-        sending_msg.set_html(message)
-        sending_msg.set_text('Service Request')
-        sending_msg.set_from(request.POST.get('email'))
-        sending_msg.add_to("bobby@micropyramid.com")
-        sg.send(sending_msg)
+            contact_msg = sendgrid.Mail()
+            contact_msg.set_subject("We received your message | MicroPyramid")
+            message_reply = 'Hello ' + request.POST.get('full_name') + ',\n\n'
+            message_reply = message_reply + 'Thank you for writing in.\n'
+            message_reply = message_reply + \
+                'We appreciate that you have taken the time to share your feedback with us! We will get back to you soon.\n\n'
+            message_reply = message_reply + 'Regards\n'
+            message_reply = message_reply + 'The MicroPyramid Team.'
+            contact_msg.set_text(message_reply)
+            contact_msg.set_from("hello@micropyramid.com")
+            contact_msg.add_to(request.POST.get('email'))
+            sg.send(contact_msg)
 
-        request.session['thankyou'] = True
-        data = {'error': False, 'response': 'Contact submitted successfully'}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+            sending_msg = sendgrid.Mail()
+            sending_msg.set_subject("Service Request - Micropyramid")
+            sending_msg.set_html(message)
+            sending_msg.set_text('Service Request')
+            sending_msg.set_from(request.POST.get('email'))
+            sending_msg.add_to("hello@micropyramid.com")
+            sg.send(sending_msg)
 
+            sending_msg = sendgrid.Mail()
+            sending_msg.set_subject("Service Request - Micropyramid")
+            sending_msg.set_html(message)
+            sending_msg.set_text('Service Request')
+            sending_msg.set_from(request.POST.get('email'))
+            sending_msg.add_to("bobby@micropyramid.com")
+            sg.send(sending_msg)
+
+            request.session['thankyou'] = True
+            data = {'error': False, 'response': 'Contact submitted successfully'}
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+        else:
+            print ("hello")
+            data = {'error': True, 'captcha_response': 'Please Choose Correct Captcha'}
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
     else:
         errors = {}
         data = {'error': True, 'errinfo': validate_contact.errors}

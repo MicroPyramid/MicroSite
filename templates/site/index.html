@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-61825e2516f158ee4b64.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-bc0ee7e7ed246b2a2a29.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -625,8 +625,15 @@
                   <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="country" name="country" placeholder="Country" type="tel"/></div>
                 </div>
                 <div class="row marl second-input-row">
-                  <div class="col-md-12 input-blk"><textarea class="form-control form-control1" id="message" name="message" placeholder="Comments" rows="3"></textarea></div>
+                  <div class="col-md-6 input-blk"><textarea class="form-control form-control1" id="message" name="message" placeholder="Comments" rows="3"></textarea></div>
+                            <div  class="form-group col-xs-6 form-field wow fadeInUp animated captcha">
+              <label>&nbsp;</label>
+              <div class="button_div">
+                <div class="g-recaptcha" data-sitekey="{{request.session.google_captcha_key}}"></div>
+              </div>
+            </div>
                 </div>
+
                 <div class="btn_div"> <button class="btn btn-default" type="submit">Submit Now</button></div>
                 </form>
               </div>
@@ -690,8 +697,10 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script>
     <script src="https://use.fontawesome.com/4e8f47ae49.js"></script>
+      <script src='https://www.google.com/recaptcha/api.js'%}></script>
+
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-61825e2516f158ee4b64.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-bc0ee7e7ed246b2a2a29.js" type="text/javascript"></script>
   </body>
 </html>

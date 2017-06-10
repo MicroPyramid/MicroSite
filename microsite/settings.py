@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = True
+DEBUG = False
 
 DEBUG404 = True
 ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com', '*']
@@ -332,3 +332,6 @@ WEB_PACK_FILES = [
 ENABLE_DJANGO_WEBPACK_S3_STORAGES = False
 AWS_BUCKET_NAME = ''
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CAPTCHA_SECRET_KEY = os.getenv('CAPTCHASECRETKEY')
+CAPTCHA_KEY = os.getenv('CAPTCHAKEY')

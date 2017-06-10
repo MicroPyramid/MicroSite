@@ -79,6 +79,12 @@ Python | Django web development Company - Micropyramid {% if "/contact-usa/" in 
             <div class="col-md-12 form-group">
               <textarea class="form-control" rows="10" id="message" name="message" placeholder="Your Message"></textarea>
             </div>
+            <div  class="form-group col-xs-12 form-field wow fadeInUp animated captcha">
+              <label>&nbsp;</label>
+              <div class="button_div">
+                <div class="g-recaptcha" data-sitekey="{{request.session.google_captcha_key}}"></div>
+              </div>
+            </div>
             <div class="col-md-12 form-group">
               <button class="btn btn-default" type="submit">Submit</button>
             </div>
@@ -129,4 +135,6 @@ Python | Django web development Company - Micropyramid {% if "/contact-usa/" in 
   </div>
   <!-- contact_row ends here -->
 </div>
+  <script src='https://www.google.com/recaptcha/api.js'%}></script>
+
 {% endblock stage %}
