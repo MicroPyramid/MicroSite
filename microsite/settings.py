@@ -36,6 +36,21 @@ INSTALLED_APPS = (
     'django_webpacker',
 )
 
+COMPRESS_ENABLED = True
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc {infile} {outfile}'),
+    ('text/x-scss', 'sass --scss {infile} {outfile}'),
+)
+
+COMPRESS_OFFLINE_CONTEXT = {
+    'STATIC_URL': 'STATIC_URL',
+}
+
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
+COMPRESS_REBUILD_TIMEOUT = 5400
+
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -119,6 +134,7 @@ LOGIN_URL = '/portal/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (BASE_DIR + '/static',)
+COMPRESS_ROOT = BASE_DIR + '/static/'
 
 BLOG_IMAGES = BASE_DIR + '/static/blog/'
 TEAM_IMAGES = BASE_DIR + '/static/team/'
@@ -150,6 +166,7 @@ TEMPLATES = [
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
     # other finders..
 )
 

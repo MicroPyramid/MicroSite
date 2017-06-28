@@ -11,7 +11,7 @@ html{font-size: 16px;
    }
 }
 #body{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #4c4c4c;
@@ -541,12 +541,14 @@ body{
       }
       .date_daimond{
         font-weight: 600;
-        border-bottom: solid 4px #47b475;
+        background: #47b475;
+        color:#fff;
         position: initial;
         left: 15px;
         min-width: 100px;
-        padding: 4px 0 8px;
+        padding: 5px;
         text-align: left;
+        text-transform: uppercase;
         margin-top: 10px;
         @media(min-width: $mob_min) and (max-width:$tab_max){
           width: 35px;
@@ -1736,13 +1738,14 @@ body{
     h1{
       @extend .bold_upper;
       font-size:35px;
-      margin-top:20px;
-      margin-left:50px;
+      margin-top:0px;
+      margin-left:10px;
       padding:0px;
       line-height:48px;
       color: black;
       @media (min-width: $mob_min) and (max-width: $tab_max){
         font-size:24px;
+        margin-left: 0;
         line-height:32px;
       }
     }
@@ -1760,7 +1763,7 @@ body{
         font-weight: 600;
         //background: #f2f2f2;
         @extend .opensans;
-        font-size:20px;
+        font-size:17px;
         padding:4px 0px;
         margin-left: 10px;
         margin-right: 10px;
@@ -1782,9 +1785,11 @@ body{
       }
     }
     .author_position{
-      font-size: 14px;
+      font-size: 12px;
       margin-left: 10px;
-      margin-top: 15px;
+      color: #fff;
+      margin-top: 0;
+      font-weight: 600;
       letter-spacing: 0.2px;
     }
     /* blog description starts here */
@@ -1794,7 +1799,7 @@ body{
       line-height:28px;
       text-align:justify;
       position: relative;
-      padding: 50px;
+      padding: 0 10px;
       padding-top: 15px;
       @media (min-width: $mob_min) and (max-width: $smob_max){
           padding:0px;
@@ -1808,14 +1813,18 @@ body{
       }
     }
     /* blog description ends here */
-    .blog-social{
+   .blog-social{
       margin:0px;
       padding:0px;
-      margin-left:70px;
+      margin-left:10px;
+      margin-top: 15px;
       text-align:left;
       left:0px;
       z-index: 99999;
       padding-bottom:20px;
+      @media (min-width: $mob_min) and (max-width: $smob_max){
+        margin-left:0;
+      }
       li{
         list-style:none;
         padding:0px;
@@ -1827,6 +1836,8 @@ body{
           padding:8px 0px;
           transition: 0.4s all ease-in-out;
           text-align:center;
+          font-size: 1rem;
+          border-radius: 3px;
           display:block;
           &.rss{
             background:$rss;
@@ -1868,7 +1879,7 @@ body{
       padding-left: 15px;
     }
     .blog_right_categories{
-      margin-top:20px;
+      margin-top:0px;
       margin-bottom:20px;
       ul{
         li{
@@ -1908,22 +1919,27 @@ body{
       }
     }
     .related-post{
-      margin-bottom:40px;
+      margin-bottom: 0;
+      margin-top:20px;
       font-size:14px;
-      text-align:justify;
+      text-align:left;
       padding:10px;
       border:1px solid $stroke_color;
       background: #fafafa;
       span{
         display:block;
         &.user-name{
-          color:$twitter;
-          //font-weight:bold;
-          display: block;
-          padding-right: 3px;
-          border-bottom: 1px solid $stroke_color;
-          padding-bottom: 10px;
+          background-color: #4c4c4c;
+          display: inline-block;
+          /* padding-right: 3px; */
+          border-bottom: 1px solid #E1E1E1;
+          /* padding-bottom: 10px; */
           font-size: 13px;
+          color: #fff;
+          padding: 0;
+          border-radius: 2px;
+          padding: 3px 6px;
+          /* float: left; */
           &:before{
             content:'-';
             padding-right: 3px;
@@ -1934,6 +1950,7 @@ body{
           font-weight:600;
           padding-bottom: 10px;
           font-size:16px;
+          line-height: 24px;
         }
         &.date-comments{
           color:#9a9494;
@@ -1961,7 +1978,7 @@ body{
   .read_time{
     margin-top: 20px;
     font-size: 15px;
-    margin-left: 50px;
+    margin-left: 10px;
   }
 }
 /* blog row ends here */
@@ -1992,12 +2009,15 @@ body{
         }
         .date_daimond{
           font-weight: 600;
-          border-bottom: solid 4px #47b475;
-          position: initial;
-          left: 15px;
-          min-width: 100px;
-          padding: 4px 0 8px;
-          text-align: left;
+        background: #47b475;
+        position: initial;
+        left: 15px;
+        min-width: 100px;
+        padding: 5px;
+        text-align: left;
+        text-transform: uppercase;
+        margin-top: 0px;
+        color: #fff;
           /* @media(min-width: $mob_min) and (max-width:$smob_max){
             width: auto;
             height: auto;
@@ -2037,16 +2057,19 @@ body{
         vertical-align:top;
         @media(min-width: $mob_min) and (max-width:$smob_max){
           display: block;
-          padding-top: 10px;
+          padding-top: 0px;
         }
         span{
           display:block;
           &.blog-title{
             font-weight:bold;
             margin-bottom:10px;
+            line-height: 26px;
             font-size:18px;
+            text-align: left;
             @media(min-width: $mob_min) and (max-width:$smob_max){
               color: $theme_green!important;
+              font-size: 15px;
             }
           }
         }
@@ -2054,6 +2077,11 @@ body{
           line-height:26px;
           font-size:15px;
           margin-bottom:10px;
+           @media(min-width: $mob_min) and (max-width:$smob_max){
+              font-size:13px;
+              text-align: left;
+              line-height: 24px;
+           }
         }
         ul.post-det{
           margin:0px;
@@ -2075,8 +2103,6 @@ body{
 /*  blog list ends here */
 /* blog-categories-archives starts here */
 .blog-categories-archives{
-  margin-top: -300px;
-  margin-botom: 130px;
   .blog-cat-archives{
     @extend .bold_upper;
     font-size:30px;
@@ -2163,7 +2189,7 @@ body{
     }
 }
 .row .bloglist{
-  margin-top: 100px;
+  margin-top: 10px;
 }
 /* blog-categories-archives ends here */
 /* subscribe */
@@ -2219,7 +2245,8 @@ body{
           width: 400px;
         }
         @media(min-width: $mob_min) and (max-width: $mob_max){
-          width: 210px;
+          width: 100%;
+          display: block;
         }
       }
       .input-group-addon{
@@ -2234,6 +2261,10 @@ body{
         border:1px solid rgba(116,137,7,0.6);
         box-shadow: none;
         padding: 10px;
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+          display: block;
+          clear: both;
+        }
         button{
           padding:7px 12px;
           background:none;
@@ -2241,6 +2272,12 @@ body{
           box-shadow:none;
           outline:none;
           cursor:pointer;
+           @media(min-width: $mob_min) and (max-width: $mob_max){
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding:4px 0;
+          }
         }
       }
     }
@@ -2249,6 +2286,7 @@ body{
       margin-left: 100px;
       @media(min-width: $mob_min) and (max-width: $mob_max){
         margin:0;
+        width:100%;
       }
     }
   }
@@ -2256,29 +2294,35 @@ body{
 /* subscribe */
 /* author */
 .author_details{
-  padding: 15px 20px;
-  background-color: #d4d4d4;
-  width: 80%;
-  height: 200px;
-  margin-left: 50px;
+  padding: 10px 0;
+  background-color: #2f5374;
+  width: 100%;
   text-align: left;
-  margin-bottom: 25px;
-  border-radius: 20px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  border-radius: 10px;
+  height: auto;
+  @media (min-width: $mob_min) and (max-width: $smob_max){
+    margin-left:0;
+  }
 }
 .avatar_profile{
-    background-image: url('http://knowledge-commons.com/static/assets/images/avatar.png');
-    width: 150px;
-    height: 150px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
+  background-image: url(http://knowledge-commons.com/static/assets/images/avatar.png);
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+   @media (min-width: $mob_min) and (max-width: $smob_max){
+     text-align:center;
+   }
 }
 /* author */
 /* prev_next_blog */
 .prev_next_blog{
   padding: 10px 0px;
-  margin-right: 80px;
-  margin-left: 50px;
+  margin-right:0px;
+  margin-left: 0px;
   //border-top: 1px solid $stroke_color;
   //border-bottom: 1px solid $stroke_color;
   .prev{
@@ -2331,6 +2375,23 @@ body{
           background: lighten($theme_green,10%);
           color: #fff;
           transition:0.4s;
+        }
+      }
+    }
+  }
+  .pagination{
+    margin:0;
+    padding:0;
+    li{
+      a{
+        padding: 4px 9px;
+        font-size: 12px;
+        color: #333;
+      }
+      &.active{
+        a{
+          color: #fff;
+          background: $linkedin;
         }
       }
     }
@@ -2649,11 +2710,14 @@ body{
 }
 /* conatact_us_icon */
 .comments_section{
-  margin-left: 50px;
-  width: 80%;
+  margin-left: 10px;
+  width: 100%;
   float: left;
   border-top: 2px solid #e5e5e5;
-  
+  @media (min-width: $mob_min) and (max-width:$smob_max){
+    margin-left:0;
+    margin-top: 20px;
+  }
   .comments_title{
     font-size: 10px;
   }
@@ -4041,9 +4105,7 @@ body{
 /* bread_crums */
 .bread_crums{
   padding:25px 0px;
-
-  margin-top: 75px; 
-
+  margin-top: 100px; 
   padding-bottom: 0px;
   @media (min-width:$mob_min)and (max-width:$smob_max){
     display:none;
@@ -4306,7 +4368,9 @@ body{
   .author{
     padding:0;
     .blog-det{
-      margin-top: 10px;
+      margin-top: 0px;
+      color: #fff;
+      margin-bottom: 0;
     }
   }
   
@@ -5169,11 +5233,15 @@ p a{
   width: 100%;
   padding-top: 10px;
   padding-bottom: 12px;
-  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  @media(min-width: $mob_min) and (max-width: $mob_max){
+    margin:0px 0;
+  }
   .talkshop_content{
     color: #fff;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     padding-top: 0px;
     padding-bottom: 0px;
     margin:0;
@@ -5723,7 +5791,7 @@ p a{
    }
 /* service_banner starts here */
 .service_banner{
-  margin-top:65px;
+  margin-top:15px;
   font-family: 'Quicksand', sans-serif;
   @media(min-width: $mob_min) and (max-width: $tab_max){
     margin-top:0;
@@ -5829,7 +5897,7 @@ p a{
   }
   .service_quality{
     padding:0 5px;
-    min-height: 290px;
+    min-height: 250px;
     @media(min-width: $mob_min) and (max-width: $mob_max){
       padding:15px;
     }
@@ -5942,6 +6010,7 @@ p a{
     }
   }
   &.mongo_service_quality{
+    margin-top: 10px;
      .heading{
       display: block;
       margin-bottom: 20PX;
@@ -5995,6 +6064,7 @@ p a{
   .service_quality{
     text-align: center;
     min-height: 240px;
+    margin-bottom: 50px;
     @media(min-width: $mob_min) and (max-width: $tab_max){
       min-height:auto;
       margin-bottom: 50px;
@@ -6081,7 +6151,7 @@ p a{
   &.mp_seo{
     .heading{
       display: block;
-      margin-bottom: 20PX;
+      margin-bottom: 0PX;
        span{
           font-weight: 400;
           font-size: 24px;
@@ -6112,7 +6182,7 @@ p a{
         }
       }
       .image{
-        margin-top:25px;
+        margin-top:5px;
         img{
           max-width: 100%;
         }
@@ -6121,7 +6191,7 @@ p a{
 }
 /* service_qualities ends here */
 .seo_banner{
-  margin-top: 65px;
+  margin-top: 15px;
   .image{
     img{
       max-width: 100%;
@@ -6142,7 +6212,7 @@ p a{
        @media(min-width: $mob_min) and (max-width: $tab_max){
         padding-top: 10px;
         text-align: center;
-        font-size: 1.7rem;
+        font-size: 1.4rem;
        }
     }
   }
@@ -6304,6 +6374,10 @@ p a{
   }
   &.django_ecommerce_list{
     padding-top:20px;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+        padding-top: 5px;
+        margin-top: 0;
+     }
     .need_testing_block{
       .testing_left{
          ul{
@@ -6454,11 +6528,12 @@ p a{
   .how_we_do_col{
     margin-top: 10px;
     text-align: center;
+    padding:30px 0;
     .each_row{
       width: 20%;
     }
     .we_do_block{
-      padding:30px 20px;
+      padding:0px 20px;
       border-radius: 2px;
       transition: 0.5s ease-in-out all;
       .icon{
@@ -6486,7 +6561,7 @@ p a{
         margin-top:10px;
       }
       strong{
-        margin-top:20px;
+        margin-top:0px;
         display: inline-block;
         font-size: 1.4rem;
         color: #2f5374;
@@ -6514,6 +6589,7 @@ p a{
     }
   }
   &.seo_benifits_block{
+    margin-top: 15px;
     background: #1a8fb8;
     .how_we_do_col{
       .we_do_block{
@@ -6522,6 +6598,7 @@ p a{
         strong{
           font-size: 1rem;
           color: #fff;
+          margin-top: 10px;
         }
         .icon{
           i{
@@ -6539,7 +6616,7 @@ p a{
           content: "\f105";
           font-family: FontAwesome;
           display: inline-block;
-          top: 100px;
+          top: 70px;
           left: 280px;
           font-size: 100px;
           color: #68c3e2;
@@ -6905,11 +6982,23 @@ p a{
         font-size: 1.5rem;
         line-height: 1.9rem;
         font-weight: 500;
+        @media(min-width: $mob_min) and (max-width: $mob_max){
+          font-size:1.1rem;
+        }
+        img{
+          width: 12%;
+        }
         &.second{
           background: #e0393e;
+           img{
+            width: 12%;
+          }
         }
         &.third{
           background: #f79420;
+           img{
+           width: 45%;
+          }
         }
       }
      }
@@ -6927,6 +7016,7 @@ p a{
       background-position-y: 30px;
       background-image: none;
       background: #2f5374;
+      padding:20px 0;
     }
      .contact_details{
       padding-left: 175px;
@@ -6994,11 +7084,13 @@ p a{
         font-size: 1.1rem;
         text-align: left;
         font-weight: 800;
+        line-height: 25px;
       }
       p{
         font-size: 0.9rem;
         line-height: 1.8rem;
         font-weight: 400;
+        text-align:left;
         color: #fff;
       }
     }
@@ -7833,6 +7925,7 @@ p a{
         font-size: 1rem;
         font-weight: 400;
         background: #eee;
+        display: inline-block;
         border-radius: 20px;
         padding:8px 20px;
         margin:5px 5px;
@@ -7975,7 +8068,7 @@ p a{
 /* django_features starts here */
 .django_features{
  font-family: 'Quicksand', sans-serif;
-    margin-top:50px;
+    margin-top:0px;
      .heading{
       display: block;
       margin-bottom: 20px;
@@ -7986,6 +8079,7 @@ p a{
         display: inline-block;
         position: relative;
         padding-bottom: 20px;
+        line-height: 30px;
          &:after{
           content:"";
           position: absolute;
@@ -7994,6 +8088,9 @@ p a{
           background: #1dabdd;
           left: 0;
           bottom: 0;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            left:40%;
+          }
       }
     }
   }
@@ -8005,7 +8102,9 @@ p a{
       text-align: center;
       padding:10px;
       .feature_image{
-
+        img{
+          max-width: 100%;
+        }
       }
       .desc_position{
         display: none;
@@ -8095,6 +8194,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
     line-height: 50px;
     padding-top: 0px;
     color: #444;
+    padding-left: 15px;
+    display: block;
 }
 
 /* sales_tabs_row starts here */
@@ -8153,6 +8254,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
 /* sales_tabs_row ends here */
 .seo_tag{
   color: #337ab7;
+  font-weight: 500;
 }
 
 /* about_mp starts here */
@@ -8238,4 +8340,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
     font-weight: 500;
     font-size: 20px;
   }
+}
+.blog_banner_wrap{
+  background:url(/static/site/images/new/blog_banner.jpg) no-repeat;
+  height: 360px;
+  padding-top: 20px;
+}
+pre.prettyprint{
+  width: 100%;
 }

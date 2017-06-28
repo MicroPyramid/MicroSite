@@ -53,11 +53,6 @@
 {% block blogcontent %}
 <style type="text/css">
   
-.bread_crums {
-    padding: 25px 0px;
-    margin-top: 90px;
-    padding-bottom: 0px;
-}  
 
 </style>
   {% include 'site/contact.html' %}
@@ -89,13 +84,14 @@
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
           <a class="a"><span itemprop="name" class='name'>Blog</span></a>
         </li>
+        <br clear="all">
         {% endif %}
       </ul>
     </div>
-    <div class="blog_banner_wrap">
-      <img src='/static/site/images/new/blog_banner.jpg' alt="MicroPyramid - Django and Python Web Development Company" class='blog_banner_bg_image'>
-      <div class="img_overlay_div"></div>
-      <!-- blog categories archies starts here -->
+   <div class="blog_banner_wrap">
+     <!--  <img src='/static/site/images/new/blog_banner.jpg' alt="MicroPyramid - Django and Python Web Development Company" class='blog_banner_bg_image'> -->
+<!--       <div class="img_overlay_div"></div>
+ -->      <!-- blog categories archies starts here -->
       <div class="blog-categories-archives">
         <h1 class="blog-cat-archives text-center non-category-blog heading"></h1>
         <div class="categories">
@@ -107,6 +103,8 @@
             <li><a href="/blog/category/amazon-web-services/" class="amazon"><img src="/static/site/images/aws_blog_logo.png" height="33" width="87" alt="blog-categorya-ws"></a></li>
           </ul>
         </div>
+      </div>
+        <br clear="all">
       </div>
       <div class="row bloglist">
         <!-- blog categories archies ends here -->
