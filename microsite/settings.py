@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = False
+DEBUG = True
 
 DEBUG404 = True
 ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com', '*']
