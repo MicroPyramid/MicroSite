@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8">
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-    <title> {% block title %}Django and Python Web Development | Application Development Services – MicroPyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}{% endblock %}</title>
+    <title> {% block title %}Django and Python Web Development Company | Application development Services - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}{% endblock %}</title>
     <meta content="194798730671519" property="fb:pages"/>
     <meta content="https://micropyramid.com/" property="og:url"/>
     <meta content="https://micropyramid.com/static/mplogo.png" property="og:image"/>
@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,900,800" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-61825e2516f158ee4b64.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-b401f633124706ea8328.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -209,20 +209,7 @@
             </header>
 
             {% endblock %}
-            <div class="pycon_banner blur grayscale" style="margin-top: 112px;">
-              <div class="row marl">
-              <div class="container">
-              <div class="desc">
-              <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}/pycon-2017/" target="_blank" class="pycon">
-              <p class="strong">Happy to sponsor Pycon 2017, Portland</p>
 
-              <p>We are waiting for you at booth no:150, Pycon 2017.</p>
-              </a>
-              <p class="mail">or email us at hello@micropyramid.com</p>
-              </div>
-              </div>
-              </div>
-              </div>
             <div id="banner_wrap">
               {# <img alt="MicroPyramid - Django and Python Web Development Company" class="banner_bg_image" src="/static/site/images/new/PlainBanner.jpg"> #}
 
@@ -625,8 +612,15 @@
                   <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="country" name="country" placeholder="Country" type="tel"/></div>
                 </div>
                 <div class="row marl second-input-row">
-                  <div class="col-md-12 input-blk"><textarea class="form-control form-control1" id="message" name="message" placeholder="Comments" rows="3"></textarea></div>
+                  <div class="col-md-6 input-blk"><textarea class="form-control form-control1" id="message" name="message" placeholder="Comments" rows="3"></textarea></div>
+                            <div  class="form-group col-xs-6 form-field wow fadeInUp animated captcha">
+              <label>&nbsp;</label>
+              <div class="button_div">
+                <div class="g-recaptcha" data-sitekey="{{request.session.google_captcha_key}}"></div>
+              </div>
+            </div>
                 </div>
+
                 <div class="btn_div"> <button class="btn btn-default" type="submit">Submit Now</button></div>
                 </form>
               </div>
@@ -690,8 +684,10 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script>
     <script src="https://use.fontawesome.com/4e8f47ae49.js"></script>
+      <script src='https://www.google.com/recaptcha/api.js'%}></script>
+
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-61825e2516f158ee4b64.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-b401f633124706ea8328.js" type="text/javascript"></script>
   </body>
 </html>

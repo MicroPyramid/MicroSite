@@ -29,6 +29,7 @@ body{
   width: 100%;
   background-color: white;
   position: relative;
+  margin-top: 52px;
   @media (min-width: $mob_min) and (max-width: $smob_max){
     min-height: 400px;
     height: auto;
@@ -1782,9 +1783,11 @@ body{
       }
     }
     .author_position{
-      font-size: 14px;
+      font-size: 12px;
       margin-left: 10px;
-      margin-top: 15px;
+      color: #fff;
+      margin-top: 0;
+      font-weight: 600;
       letter-spacing: 0.2px;
     }
     /* blog description starts here */
@@ -1811,7 +1814,8 @@ body{
     .blog-social{
       margin:0px;
       padding:0px;
-      margin-left:70px;
+      margin-left:0px;
+      margin-top: 15px;
       text-align:left;
       left:0px;
       z-index: 99999;
@@ -1827,6 +1831,8 @@ body{
           padding:8px 0px;
           transition: 0.4s all ease-in-out;
           text-align:center;
+          font-size: 1rem;
+          border-radius: 3px;
           display:block;
           &.rss{
             background:$rss;
@@ -1910,6 +1916,7 @@ body{
     .related-post{
       margin-bottom:40px;
       font-size:14px;
+      margin-top: 20px;
       text-align:justify;
       padding:10px;
       border:1px solid $stroke_color;
@@ -2256,19 +2263,17 @@ body{
 /* subscribe */
 /* author */
 .author_details{
-  padding: 15px 20px;
-  background-color: #d4d4d4;
-  width: 80%;
-  height: 200px;
-  margin-left: 50px;
+  padding: 10px 0;
+  background-color: #4c4c4c;
+  width: 100%;
   text-align: left;
   margin-bottom: 25px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .avatar_profile{
     background-image: url('http://knowledge-commons.com/static/assets/images/avatar.png');
-    width: 150px;
-    height: 150px;
+    width: 60px;
+    height: 60px;
     background-size: cover;
     background-position: center;
     border-radius: 50%;
@@ -2277,8 +2282,6 @@ body{
 /* prev_next_blog */
 .prev_next_blog{
   padding: 10px 0px;
-  margin-right: 80px;
-  margin-left: 50px;
   //border-top: 1px solid $stroke_color;
   //border-bottom: 1px solid $stroke_color;
   .prev{
@@ -4305,8 +4308,11 @@ body{
   padding-bottom:10px;
   .author{
     padding:0;
+    font-family: 'Quicksand', sans-serif;
     .blog-det{
-      margin-top: 10px;
+      margin-top: 0px;
+      color: #fff;
+      margin-bottom: 0;
     }
   }
   
@@ -5718,9 +5724,6 @@ p a{
    .bread_crums ul  li:last-child a span.name:after{
       display: none;
    }
-   .bread_crums ul  li .a{
-      cursor: default;
-   }
 /* service_banner starts here */
 .service_banner{
   margin-top:65px;
@@ -5831,7 +5834,7 @@ p a{
     padding:0 5px;
     min-height: 290px;
     @media(min-width: $mob_min) and (max-width: $mob_max){
-      padding:15px;
+      padding:0px 15px 5px 15px;
     }
     .icon{
       i{
@@ -5875,7 +5878,10 @@ p a{
       position: relative;
       line-height: 1.9rem;
       @media(min-width: $mob_min) and (max-width: $tab_max){
-        font-size:18px;
+        font-size:16px;
+        padding-bottom: 0px;
+        padding-top: 0;
+        font-weight: 500;
       }
       &:after{
         content:"";
@@ -5966,7 +5972,8 @@ p a{
         }
       }
     .service_quality{
-      min-height: 300px;
+      min-height: 36
+      0px;
       padding:20px;
       border: 7px solid #f1f1f1;
       margin-bottom: 20px;
@@ -6122,6 +6129,9 @@ p a{
 /* service_qualities ends here */
 .seo_banner{
   margin-top: 65px;
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+      margin-top: 0;
+   }
   .image{
     img{
       max-width: 100%;
@@ -6148,6 +6158,9 @@ p a{
   }
   &.sales_force_banner{
     font-family: 'Quicksand', sans-serif;
+     @media(min-width: $mob_min) and (max-width: $smob_max){
+        margin-top: 0;
+     }
     .banner_container{
       background: url(/static/site/images/sales_banner.png) no-repeat ;
       height:350px;
@@ -6873,6 +6886,9 @@ p a{
 .helping_block{
   margin-top: 40px;
   font-family: 'Quicksand', sans-serif;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      margin-top: 0px;
+    }
      .heading{
       display: block;
       text-align: center; 
@@ -6898,6 +6914,9 @@ p a{
      }
      .helping_container{
       padding: 35px 0;
+       @media(min-width: $mob_min) and (max-width: $smob_max){
+          padding-top: 0;
+       }
       .helping_item{
         background: #333;
         padding:15px;
@@ -6920,6 +6939,9 @@ p a{
   margin-top: 30px;
   margin-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
+   @media(min-width: $mob_min) and (max-width: $mob_max){
+              margin-top:0;
+   }
   .contact_block{
       padding: 30px;
       background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
@@ -6927,6 +6949,7 @@ p a{
       background-position-y: 30px;
       background-image: none;
       background: #2f5374;
+      padding:15px;
     }
      .contact_details{
       padding-left: 175px;
@@ -7009,6 +7032,10 @@ p a{
 .open_source_projects{
   font-family: 'Quicksand', sans-serif;
   margin:35px 0;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      margin-top:20px;
+      margin-bottom: 20px;
+    }
   text-align: center;
   .heading{
       display: block;
@@ -7019,6 +7046,10 @@ p a{
       display: inline-block;
       position: relative;
       padding-bottom: 20px;
+      @media(min-width: $mob_min) and (max-width: $smob_max){
+      font-size: 18px;
+    font-weight: 500;
+  }
        &:after{
         content:"";
         position: absolute;
@@ -7125,6 +7156,9 @@ p a{
 
 .carousel-inner{
   margin-top: 25px;
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+      margin-top: 0;
+   }
   .item{
     .carousel-content {
       color:black;
@@ -7154,8 +7188,8 @@ p a{
   background: none;
   left:20px;
   top: 20px;
-  @media(min-width: $mob_min) and (max-width: $tab_max){
-      left:-30px;
+  @media(min-width: $mob_min) and (max-width: $smob_max){
+      left:-20px;
     }
     @media(min-width: $tab_min) and (max-width: $tab_max){
         left:-45px;
@@ -7304,7 +7338,7 @@ p a{
         height: 450px;
         position: relative;
          @media(min-width: $mob_min) and (max-width: $mob_max){
-           height:500px;
+           height:auto;
          }
         .img_rel{
           position: absolute;
@@ -7316,6 +7350,7 @@ p a{
             left: 0;
             height: auto;
             width:110px;
+            top: 43%;
           }
         }
         .block{
@@ -7328,9 +7363,11 @@ p a{
             width:300px !important;
           }
           @media(min-width: $mob_min) and (max-width: $mob_max){
-             width:300px !important;
+             width:280px !important;
              text-align:left;
+             position: static !important;
              margin:0;
+             margin-left: 100px;
           }
           strong{
             font-size: 1.1rem;
@@ -7678,6 +7715,9 @@ p a{
 .react_about_row{
   font-family: 'Quicksand', sans-serif;
   margin-top: 80px;
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+        margin-top: 10px;
+   }
   .heading{
     display: block;
     margin-bottom: 20px;
@@ -7790,9 +7830,156 @@ p a{
     margin-bottom: 0;
   }
  }
+ &.lambda_top_row{
+  margin-top:20px;
+  .tb_row{
+    .tb_block{
+      img{
+        max-width: 75%;
+      }
+    }
+  }
+ }
 }
 /* react_about_row ends here */
-
+/* lambda_container starts here */
+.lambda_container{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 30px;
+  .lambda_content_left{
+    .code_icon{
+      display: table;
+      padding: 5px;
+      background: #1dabdd;
+      .i_icon{
+        width: 100px;
+        display: table-cell;
+        vertical-align: middle;
+        i{
+          background: darken(#1dabdd, 20%);
+          display: inline-block;
+          text-align: center;
+          border-radius: 2px;
+          font-size: 40px;
+          color: #fff;
+          padding:25px;
+        }
+      }
+      .icon_content{
+        display: table-cell;
+        vertical-align: top;
+        color: white;
+      }
+    }
+    .content{
+      text-align: justify;
+      strong{
+        font-size: 18px;
+        margin:15px 0;
+        display: block;
+        font-weight: 500;
+      }
+      ul{
+        margin:0;
+        padding:0;
+        li{
+          list-style: none;
+          font-size: 15px;
+          font-weight:400;
+          margin-bottom:15px;
+          line-height: 23px;
+        }
+      }
+      p{
+        font-size: 15px;
+        font-weight:400;
+        margin-top:10px;
+        line-height: 23px;
+      }
+    }
+  }
+  .lambda_content_center{
+    font-size: 80px;
+    padding-top: 10px;
+    text-align: center;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+        padding:15px ;
+     }
+     i{
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+       transform: rotate(90deg);
+      }
+     }
+  }
+  .lambda_content_right{
+    background:#d5dbe7;
+    padding:15px;
+    .icons_block{
+      ul{
+        margin:0;
+        padding: 0;
+        li{
+          list-style: none;
+          text-align: center;
+          display: inline-block;
+          margin:2px;
+          .block{
+            float: left;
+            background: #fff;
+            border-radius: 2px;
+            padding:15px 20px;
+            i{
+              font-size: 25px;
+            }
+            .name{
+              display: block;
+              font-size: 13px;
+              font-weight: 600;
+              margin-top: 10px;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+    .content{
+      text-align: justify;
+      strong{
+        font-size: 18px;
+        margin:15px 0;
+        display: block;
+        font-weight: 500;
+      }
+      ul{
+        margin:0;
+        padding:0;
+        li{
+          list-style: none;
+          font-size: 15px;
+          font-weight:400;
+          margin-bottom:15px;
+          line-height: 23px;
+           &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f192";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+          }
+        }
+      }
+      p{
+        font-size: 15px;
+        font-weight:400;
+        margin-top:10px;
+        line-height: 23px;
+      }
+    }
+  }
+}
+/* lambda_container ends here */
 /* our_react_works starts here */
   .our_react_works{
     font-family: 'Quicksand', sans-serif;
@@ -7834,6 +8021,7 @@ p a{
         font-weight: 400;
         background: #eee;
         border-radius: 20px;
+        display: inline-block;
         padding:8px 20px;
         margin:5px 5px;
       }
@@ -7879,6 +8067,7 @@ p a{
     background: url(/static/site/images/waves.png) no-repeat bottom right;
     background-size: 100%;
     padding-bottom: 50px;
+    margin-top: 15px;
    }
   .docker_conatiner_block{
     .content{
@@ -8048,8 +8237,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
   font-family: 'Quicksand', sans-serif;
   margin-top: 40px;
   .aws_row{
+    position: relative;
+    height: 280px;
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+        position:static;
+      }
     .aws_item{
       font-size: 0.9rem;
+      padding:15px;
       .logo{
         float: left;
         display: inline-block;
@@ -8062,12 +8257,89 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
         p{
           font-weight: 400;
           margin-top: 6px;
+          font-size: 13px;
+        }
+      }
+      &.aws_icon{
+        background: none !important;
+        padding:0;
+        img{
+          max-width: 100%;
+        }
+      }
+      &.aws_pos{
+        position: absolute;
+        left: 0;
+        width: 230px;
+        height: 230px;
+        background:#eee;
+        border-radius: 50%;
+        text-align: center;
+        padding-top: 30px;
+         @media(min-width: $mob_min) and (max-width: $tab_max){
+          position:static;
+          width:auto;
+          height:auto;
+          background: none;
+          padding:0;
+          margin-bottom: 25px;
+        }
+        .aws_img{
+          max-width: 100%;
+        }
+        .logo{
+          display: block;
+          float: none;
+          text-align: center;
+        }
+        &.two{
+          top:30px;
+          left:40px;
+        }
+        &.three{
+          left: 80px;
+          top: 50px;
+        }
+        &.four{
+          left: 115px;                     
+        }
+        &.five{
+          left: 155px;
+          top:30px;
         }
       }
     }
     &.row_2{
       margin-top:35px;
     }
+  
+  &.aws_row_2{
+    .aws_item{
+      &.five{
+        left: 50px;
+        top: -15px;
+      }
+      &.three{
+        top:20px;
+      }
+      &.two{
+        top: -10px;
+      }
+    }
+  }
+   &.aws_row_3{
+    .aws_item{
+      &.one{
+        top: -50px;
+      }
+      &.three{
+        top:-50px;
+      }
+      &.two{
+        top: -75px;
+      }
+    }
+  }
   }
 }
 /* aws_services ends here */
@@ -8095,6 +8367,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
     line-height: 50px;
     padding-top: 0px;
     color: #444;
+  span{
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+      padding-left:15px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
 }
 
 /* sales_tabs_row starts here */
@@ -8103,6 +8382,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
   background: #019edb;
   padding-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+      margin-bottom:20px;
+   }
   .sales_tabs{
     ul{
       text-align: center;
@@ -8120,8 +8402,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
           letter-spacing: 0.5px;
           color: #fff;
           border-radius: 0;
-          @media(min-width: $mob_min) and (max-width: $mob_max){
+          @media(min-width: $mob_min) and (max-width: $smob_max){
             font-size:0.6rem;
+            padding:10px;
           }
           &:hover{
             background:darken(#019edb, 10%);

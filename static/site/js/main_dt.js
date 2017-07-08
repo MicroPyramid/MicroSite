@@ -108,7 +108,11 @@ $.ajax({
       for (var key in data.errinfo) {
         $('#contactform #' + key).after('<p class="failure" style="color:red;">' + data.errinfo[key] + '</p>');
       }
-    } else {
+      if (data.captcha_response){
+      	$('#g-recaptcha-response').after('<p class="failure" style="color:red;">' + data.captcha_response + '</p>');
+      }
+    }
+    else {
       window.location = "/thank-you/";
     }
   }
