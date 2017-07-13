@@ -95,7 +95,7 @@ function map_dispaly_uae() {
     title: 'MicroPyramid'
   });
   /* marker */
-  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah, UAE 341246</b></address><a target='_blank' href='https://www.google.co.in/maps/place/Burj+Khalifa/@25.197197,55.2721877,17z/data=!3m1!4b1!4m5!3m4!1s0x3e5f43348a67e24b:0xff45e502e1ceb7e2!8m2!3d25.197197!4d55.2743764?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
+  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>Sharjah, UAE 341246</b></address><a target='_blank' href='https://www.google.co.in/maps/place/Burj+Khalifa/@25.197197,55.2721877,17z/data=!3m1!4b1!4m5!3m4!1s0x3e5f43348a67e24b:0xff45e502e1ceb7e2!8m2!3d25.197197!4d55.2743764?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
   /* directions */
   var infowindow = new google.maps.InfoWindow({
   content: string_content,

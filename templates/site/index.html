@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-5a3c39623a4f09297ad2.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-99a477453cc6ad29b747.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -181,7 +181,7 @@
                     {%  endif %}
                     <ul id="single_level_menu">
                       {% for menu in single_level_menu_list %}
-                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
+                      <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}">{{menu.title}}</a>{%else%}{{menu.title}}{%endif%}
                       </li>
                       {% endfor %}
                     </ul>
@@ -667,7 +667,7 @@
                 </div>
                 <div class="col-md-4 col-sm-6 col-xs-12 contact-block dark4">
                   <div class="icon"><i class="fa fa-map-marker"></i></div>
-                  <div class="text"><span class="head">Reach US - UAE</span> <span class="desc"> 3 Khalifa Building(Near Old Nesto Super Market),<br/>Opp Fire Station, Sharjah, UAE 341246</span><br>
+                  <div class="text"><span class="head">Reach US - UAE</span> <span class="desc">Sharjah, UAE 341246</span><br>
                   <i class="fa fa-envelope-o"></i> hello@micropyramid.com</div>
                 </div>
               </div>
@@ -689,6 +689,6 @@
 
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-5a3c39623a4f09297ad2.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-99a477453cc6ad29b747.js" type="text/javascript"></script>
   </body>
 </html>
