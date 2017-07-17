@@ -1,0 +1,347 @@
+{% extends 'site/base.html' %}
+{% load blog_tags %}
+{% block title %}
+{% endblock %}
+{% block country_urls %}
+{% endblock %}
+
+{% block meta-description %}
+  <meta name="description" content="Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %} sitemap {{sitemap_links.number}} to find all the services and blog posts of python, Django, Angular Js, Django-Oscar, Aws and many more." />
+{% endblock %}
+
+{% block stage %}
+{% load blog_tags %}
+<div id="container_wrapper">
+<div class="bread_crums" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+    <ul>
+    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+      <a href="/" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class="name">Home</span></a>
+    </li>
+    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+      <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class="name">Services</span></a>
+    </li>
+    <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+      <a class="a"><span itemprop="name" class="name">Python Development</span></a>
+    </li>
+  </ul></div>
+
+<div class="service_banner aws_service_banner row marl">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-8 right_content">
+        <strong>Amazon s3 Web Services </strong>
+        <p>We’ve have experience in building awesome application using all aws services. We’ve certified developers to develop and design high performance, secure, scalable applications. Decide your needs, we provide you best AWS solutions to make your application as awesome.</p>
+      </div>
+      <div class="col-md-4 col-sm-4 left_content"><img alt="Amazon Web Services" src="/static/site/images/aws_web_services.png"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- why_to_choose_s3 starts here -->
+<div class="why_to_choose_s3 row marl">
+  <div class="container">
+  <div class="heading"><span>Why to choose s3?</span></div>
+    <div class="row aws_why_row">
+      <div class="col-md-6">
+        <div class="aws_why_left">
+          <ul>
+            <li>RESTFull API development with <a href="https://micropyramid.com/django-rest-framework-development-services/" style="color: #337ab7">Django Rest Framework</a>.</li>
+            <li>e-commerce application development using <a href="https://micropyramid.com/django-oscar-ecommerce-development-services/" style="color: #337ab7">django-oscar</a>.</li>
+            <li>Payment gateway integrations PayPal, Stripe, PayU.</li>
+            <li>Social Authentications: Facebook, google, Twitter, Github.</li>
+            <li>3rd party API integrations.</li>
+            <li>Search implementation using elasticsearch, solr.</li>
+            <li>scheduled tasks using celery.</li>
+            <li>Django Unit tests.</li>
+            <li>Databases: <a href="https://micropyramid.com/postgresql-administration-and-management/" style="color: #337ab7">PostgreSQL</a>, <a href="https://micropyramid.com/mongodb-development-services/" style="color: #337ab7">MongoDB</a>, Mysql, MariaDB.</li>
+            <li>Functional tests using python-selenium.</li>
+            <li>CI &amp; CD using Travis, Jenkins, circle-ci, GitLab-CI.</li>
+            <li>Performance tuning.</li>
+            <li>Load testing with JMeter, Locust.</li>
+            <li>Hosting and maintaining django project.</li>
+            <li><a href="https://micropyramid.com/search-engine-optimization/" style="color: #337ab7">SEO</a> to increase site ranking.</li>
+            <li>And your dream ideas.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="aws_why_right">
+          <ul>
+            <li>RESTFull API development with <a href="https://micropyramid.com/django-rest-framework-development-services/" style="color: #337ab7">Django Rest Framework</a>.</li>
+            <li>e-commerce application development using <a href="https://micropyramid.com/django-oscar-ecommerce-development-services/" style="color: #337ab7">django-oscar</a>.</li>
+            <li>Payment gateway integrations PayPal, Stripe, PayU.</li>
+            <li>Social Authentications: Facebook, google, Twitter, Github.</li>
+            <li>3rd party API integrations.</li>
+            <li>Search implementation using elasticsearch, solr.</li>
+            <li>scheduled tasks using celery.</li>
+            <li>Django Unit tests.</li>
+            <li>Databases: <a href="https://micropyramid.com/postgresql-administration-and-management/" style="color: #337ab7">PostgreSQL</a>, <a href="https://micropyramid.com/mongodb-development-services/" style="color: #337ab7">MongoDB</a>, Mysql, MariaDB.</li>
+            <li>Functional tests using python-selenium.</li>
+            <li>CI &amp; CD using Travis, Jenkins, circle-ci, GitLab-CI.</li>
+            <li>Performance tuning.</li>
+            <li>Load testing with JMeter, Locust.</li>
+            <li>Hosting and maintaining django project.</li>
+            <li><a href="https://micropyramid.com/search-engine-optimization/" style="color: #337ab7">SEO</a> to increase site ranking.</li>
+            <li>And your dream ideas.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- why_to_choose_s3 ends here -->
+
+<!-- aws_s3_mp_quality starts here -->
+<div class="service_qualities aws_s3_mp_quality mongo_service_quality row">
+  <div class="container">
+    <div class="row text-center"><span class="heading"><span>Why do we Choose Micropyramid?</span></span></div>
+    <!-- service_quality starts here -->
+    <div class="col-md-4 col-sm-12">
+      <div class="service_quality">
+        <div class="content">
+          <strong>Simplicity</strong>
+          <p>REST API is designed to reduce complexity by separating each unit of functionality, So we can easily understand. Each service has its own unique capabilities that are made accessible through an interface.</p>
+        </div>
+      </div>
+    </div>
+    <!-- service_quality ends here --><!-- service_quality starts here -->
+    <div class="col-md-4 col-sm-12">
+      <div class="service_quality">
+        <div class="content">
+          <strong>Flexibility</strong>
+          <p>REST framework provides flexible per-request authentication, that gives you the ability to use different authentication policies for different parts of your API.</p>
+        </div>
+      </div>
+    </div>
+    <!-- service_quality ends here --><!-- service_quality starts here -->
+    <div class="col-md-4 col-sm-12">
+      <div class="service_quality">
+        <div class="content">
+          <strong>Quality</strong>
+          <p>High performance web apis and quality design, to support Web and mobile applications and also maintaining and debugging applications is easier.</p>
+        </div>
+      </div>
+    </div>
+    <!-- service_quality ends here -->
+
+  </div>
+</div>
+<!-- aws_s3_mp_quality ends here -->
+
+<!-- aws_s3_counts_block starts here -->
+<div class="row marl aws_s3_counts_block">
+  <div class="container">
+    <div class="col-md-12 col-xs-12">
+      <div class="row aws_s3_counts">
+        <div class="col-md-3 col-xs-6 col-sm-3">
+          <div class="s3_count years text-center">
+            5+ 
+            <span>Years</span>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-3">
+          <div class="s3_count projects text-center">
+            50+
+            <span>Projects</span>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-3">
+          <div class="s3_count customers text-center">
+            76+
+            <span>Customer</span>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-xs-6 col-sm-3">
+          <div class="s3_count source text-center">
+            25+
+            <span>Open Source</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- aws_s3_counts_block ends here -->
+<div class="row-posts">
+  <div class="container">
+   <div class="col-md-4">
+   <h1>Our work flow </h1>
+   </div>
+   <div class="col-md-8">
+   <div class="workprogress">
+    <div class="col-md-2 progress red">
+    <i class="fa fa-address-book-o" aria-hidden="true"></i>
+    <p>Post your enquiry</p>
+    </div>
+     <div class="col-md-2 progress green">
+    <i class="fa fa-user-circle" aria-hidden="true"></i>
+    <p>Analyst discussion</p>
+    </div>
+     <div class="col-md-2 progress yellow">
+     <i class="fa fa-handshake-o" aria-hidden="true"></i>
+     <p>Terms & conditions</p>
+    </div>
+     <div class="col-md-2 progress pink"> 
+    <i class="fa fa-check" aria-hidden="true"></i>
+      <p>Get started</p>
+    </div>
+    </div>
+   </div>
+  </div> 
+</div>
+
+ <div class="aws">
+ <div class="testimonials_row">
+    <div class="container">
+              <div class="col-md-12">
+                <p class="happy-clients">Our Happy Clients</p>
+                <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                  <ol class="carousel-indicators">
+                    <li class="active" data-slide-to="0" data-target="#quote-carousel"></li>
+                    <li data-slide-to="1" data-target="#quote-carousel"></li>
+                    <li data-slide-to="2" data-target="#quote-carousel"></li>
+                  </ol>
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div> <img class="img-circle" src="/static/site/images/Diego.JPG" style="width: 100px;height:100px;"/></div>
+                            <div class="profile_details"> <span>Director and VFX supervisor</span> <span>Deteast</span></div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>Micropyramid is a great place to go if you are looking for passion as an ingredient for your enterprise or project. They understand the future, and the craft of manifesting your vision. In our case they actually made one of our dreams come to life.</p>
+                            <small>Diego V Lozano</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                    <div class="item">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div> <img class="img-circle" src="https://media.licdn.com/media/p/2/005/078/2fa/04e81b3.jpg" style="width: 100px;height:100px;"/></div>
+                            <div class="profile_details"> <span>Director</span> <span>Creditable</span></div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>MicroPyramid team forms a strong partnership. They are our valued development partners specifically because they have a passion for inclusive finance that cannot be matched by most development houses. They are competent with unique ideas and thorough in their process. They are honest, patient and communicate very well and hold your hand through challenges to give you reassurance. I would recommend them to all startups.</p>
+                            <small>Sechaba</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                    <div class="item">
+                      <blockquote>
+                        <div class="row">
+                          <div class="col-sm-3 text-center">
+                            <div> <img class="img-circle" src="/static/site/images/Brian.JPG" style="width: 100px;height:100px;"/></div>
+                            <div class="profile_details"> <span>Director</span> <span>JDB Technology Solutions</span></div>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>Micropyramid have consistently and professionally delivered to my ever-changing specifications. Project changes are met cheerfulness and enthusiasm. They are quick to deliver. They have an in-depth knowledge of the industry and what it takes to professionally build and manage code intensive websites.</p>
+                            <small>Brian Berry</small>
+                          </div>
+                        </div>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br clear="all">
+              </br>
+            </div>
+            </div>
+         </div>
+
+
+<div class="open_source_projects row marl">
+  <div class="heading"><span>Open Source Contributions</span></div>
+  <!-- open_source_item starts here -->
+  <div class="container">
+  <div class="logo_grid">
+    <div class="col-md-12 open_source">
+      <div class="row each_open_source">
+        <div class="col-md-3 col-sm-6 skill">
+          <div class="open_source_item">
+            <strong>Forex-python</strong> <a aria-label="Star MicroPyramid/forex-python on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/forex-python#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/forex-python/stargazers" data-style="mega" href="https://github.com/MicroPyramid/forex-python" target="_blank">Star</a>
+            <p>Free Foreign exchange rates, Bitcoin price index and currency conversion with python and currency symbols, names.</p>
+            <!-- Place this tag where you want the button to render. -->
+          </div>
+        </div>
+        <!-- open_source_item ends here --><!-- open_source_item starts here -->
+        <div class="col-md-3 col-sm-6 skill">
+          <div class="open_source_item">
+            <strong>Microurl</strong><a aria-label="Star MicroPyramid/microurl on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/microurl#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/microurl/stargazers" data-style="mega" href="https://github.com/MicroPyramid/microurl" target="_blank">Star</a>
+            <p>Use MicroURL to shorten your original URL. So, you can share any kind of long urls in a short format. Which can be simple to share with anyone. See the installation process and usage in our GitHub repository.</p>
+            <!-- Place this tag where you want the button to render. -->
+          </div>
+        </div>
+        <!-- open_source_item ends here --><!-- open_source_item starts here -->
+        <div class="col-md-3 col-sm-6 skill">
+          <div class="open_source_item">
+            <strong>Django Simple pagination</strong> <a aria-label="Star MicroPyramid/django-simple-pagination on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/django-simple-pagination#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/django-simple-pagination/stargazers" data-style="mega" href="https://github.com/MicroPyramid/django-simple-pagination" target="_blank">Star</a>
+            <p>A simple django application provides simple Digg-style pagination. It is devoted to implementing web pagination in very few steps..</p>
+            <!-- Place this tag where you want the button to render. -->
+          </div>
+        </div>
+        <!-- open_source_item ends here --><!-- open_source_item starts here -->
+        <div class="col-md-3 col-sm-6 skill">
+          <div class="open_source_item">
+            <strong>Django PayU</strong> <a aria-label="Star MicroPyramid/django-payu on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/django-payu#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/django-payu/stargazers" data-style="mega" href="https://github.com/MicroPyramid/django-payu" target="_blank">Star</a>
+            <p>A simple payu payment gateway application in every few steps</p>
+            <!-- Place this tag where you want the button to render. -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- open_source_item ends here -->
+</div>
+<div class="helping_block row marl">
+<div class="container">
+  <span class="heading"><span>We are Helping Others to do same</span></span>
+  <div class="col-md-12">
+    <div class="row helping_container">
+      <div class="col-md-4">
+        <div class="helping_item text-center"><a alt="Micropyramid Github" href="https://github.com/MicroPyramid/" target="_blank"><img src="/static/site/images/github.png" width="43" /> &nbsp; Github</a></div>
+      </div>
+      <div class="col-md-4">
+        <div class="helping_item second text-center"><a alt="Meetup" href="https://www.meetup.com/hyderabad-python-and-django-meetup-group/" target="_blank"><img src="/static/site/images/meetup.png" /> Meetups</a></div>
+      </div>
+      <div class="col-md-4">
+        <div class="helping_item third text-center"><a alt="Django Girls" href="https://djangogirls.org/hyderabad/" target="_blank"><img src="/static/site/images/dj_g.png" /> Hyderabad</a></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<div class="contact_container row marl">
+  <div class="container">
+  <div class="col-md-12">
+    <div class="contact_block ">
+      <div class="col-md-7 col-xs-12">
+        <div class="contact_details">
+          <div class="detail">040 6599 6999</div>
+          <div class="detail">hello@micropyramid.com</div>
+          <div class="detail">HIG499, 6th phase KPHB, Hyderabad, India - 500072</div>
+          <a href="/contact-india/">Contact Us</a>
+        </div>
+      </div>
+      <div class="col-md-5 col-xs-12 col-sm-12">
+        <div class="contact_content">
+          <strong>Python Web Development</strong>
+          <p>MicroPyramid offers python development services by the versatile developer team. We offer services ranging from simple scripts to complete enterprise web application and not to mention server/infrastructure orchestration using ansible. Our main goal is to provide high-class python development and maintenance services by ever learning and contributing to open source communities.</p>
+        </div>
+      </div>
+      <br clear="all">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

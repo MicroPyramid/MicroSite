@@ -1,160 +1,259 @@
-<div class="service_banner row marl">
-  <div class="col-md-offset-2 col-md-8 col-md-offset-2">
-    <p>Python?don&#39;t worry we tamed it to do awesome</p>
-    <div class="content">
-      <p>From scraping to developing web application we use Python at core level. Our Major python skill includes Django which we delivered 40+ projects. We are passionate to share our python knowledge to open source community from <a href="https://github.com/MicroPyramid" target="_blank" title="Github">GitHub</a> and <a href="https://www.meetup.com/hyderabad-python-and-django-meetup-group/" target="_blank" title="Meetups">Meetups</a>. We love to add our python skills to your idea.</p>
+{% extends 'site/base.html' %}
+{% load recurse %}
+{% load menu %}
+{% load blog_tags %}
+{% block page_title %}
+{% endblock %}
+{% block extra-js %}
+{% if page.title|slugify  == 'web-design'|slugify %}
+<script type="text/javascript" src='/static/site/js/design.js'></script>
+{% else %}
+{% endif %}
+{% endblock %}
+{% block meta-description %}
+{{ page.meta_data|safe  }}
+{% endblock %}
+{% block stage %}
+{% include 'site/contact.html' %}
+<style type="text/css">
+  .blog_title{
+  color: black;
+  }
+</style>
+<div id='container_wrapper'>
+<!-- Services Row Starts here -->
+<div class="row">
+{% if 'pycon-2017' in request.path %}
+.
+{% else %}
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 breadcrumb_services services-left-container">
+    <!-- breadcrumb starts here -->
+    <div class="bread_crums" itemscope itemtype="https://schema.org/BreadcrumbList">
+      <ul>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Home</span></a>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="" itemprop="item" rel="v:url" property="v:title"><span itemprop="name" class='name'>Services</span></a>
+      </li>
+      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a class="a"><span itemprop="name" class='name'>{{page.title|capfirst}}</span></a>
+      </li>
+      </ul>
     </div>
+    <!-- breadcrumb ends here -->
   </div>
-</div>
-<div class="python_strength_automation row marl">
-  <div class="container">
-    <div class="p_s_a_table">
-      <div class="col-md-4 col-sm-12 our_strength">
-        <strong>Our Python Strengths</strong>
-        <div class="count_block">
-          <div class="count_item"><span class="icon"><i class="fa fa-tasks"></i></span><span class="count">40+</span> <span class="name">Live Projects</span></div>
-          <div class="count_item"><span class="icon"><i aria-hidden="true" class="fa fa-meetup"></i></span><span class="count">15+</span> <span class="name">Python meetups</span></div>
-          <div class="count_item"><span class="icon"><i class="fa fa-coffee"></i></span><span class="count">8</span> <span class="name">Pip packages</span></div>
-        </div>
-      </div>
-      <div class="col-md-8 col-sm-12 automation_container">
-        <div class="process_container text-center">
-          <img class="img_rel" src="/static/site/images/python_s.png" />
-          <div class="block first">
-            <strong>Web Development</strong>
-            <p>We build powerful web applications using Django for financial services, E-commerce, Travel, information &amp; education industries.</p>
-          </div>
-          <div class="block second">
-            <strong>Data science</strong>
-            <p>To make data-driven business decisions we help you to analyze your data using python tools scipy, numpy, pandas.</p>
-          </div>
-          <div class="block third">
-            <strong>Raspberry PI</strong>
-            <p>We use a&nbsp;raspberry pi as a streaming device, Raspberry pi with an external microphone can stream your voice with our App &quot;Radio String&quot; to all over the internet.</p>
-          </div>
-          <div class="block four">
-            <strong>Testing</strong>
-            <p>In every project, we write unit tests and functional tests using selenium. Most of our code is tested automatically on GitLab-Ci, Travis, Jenkins-CI making it bug-free for every tiny change.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="service_qualities python_service_qualities row">
+{% endif %}
+<div class="clearfix"></div>
+  <!--banner  start here-->
+  <div class="row-banner">
     <div class="container">
-    <!-- service_quality starts here -->
-    <div class="col-md-6 col-sm-6">
-      <div class="service_quality python_service_quality text-center">
-        <strong>Python Web Development</strong>
-        <p>You don’t learn everything in life by reading a manual. So, if you have questions about Salesforce products, services, implementation, getting started 2008 using geometric shapes as a core foundation. It is designed </p>
+      <div class="content">
+        <h1>E-Learning Management System Services</h1>
+        <P>Do you need a Hosted Learning Management System? <a href=”our contact us page>Contact Us</P>
       </div>
-    </div>
-    <!-- service_quality ends here -->
-      <!-- service_quality starts here -->
-    <div class="col-md-6 col-sm-6">
-      <div class="service_quality python_service_quality text-center">
-        <strong>Why to choose Micropyramid for Python Development?</strong>
-        <p>Average of 3+ years of experience in python.</p>
-        <p> Successfully Delivered 40 + projects and number of automated scripts with python.</p>
-        <p>Active in python open source contribution.</p>
-        <p>In our free time we share our knowledge in meetups. </p>
-      </div>
-    </div>
-    <!-- service_quality ends here -->
     </div>
   </div>
-  <!-- service_qualities ends here -->  
+  <!--banner end here-->
+  <!--bannertext start here-->
+  <div class="row-bannertext">
+    <div class="container">
+      <div class="text">
+          <p> We develop the platforms to support time-based online assessment, ranking system which allows the trainers to CREATE, MANAGE and SELL their online training courses. We develop custom training e-commerce platforms with capabilities including shopping carts, payment gateway / payment processor integrations.</p>
+      </div>
+    </div>
+  </div>
+<!--bannertext end here-->
+ <div class="key-features-head">
+  <h1>key features</h1>
+ </div>
+<!--features start here-->
+ <div class="row-features">
+   <div class="container">
+ <!--keyfeatures start here-->
+     <div class="keyfeatures">
+       <div class="col-md-3 ">
+         <div class="keys orange">
+           <div class="col-md-2 icon">
+           <i class="fa fa-user-secret" aria-hidden="true"></i>
+           </div>
+           <div class="col-md-10 icontext">
+             <h1>Multiple device access </h1>
+             <p>Delivery of course content over web-based interfaces such as desktops, phones or tablets.</p>
+          </div>
+    </div>
+</div>
+  <div class="col-md-3 ">
+   <div class="keys ">
+    <div class="col-md-2 icon">     
+    <i class="fa fa-graduation-cap red" aria-hidden="true"></i>
+    </div>
+    <div class="col-md-10 icontext">
+       <h1>Assemble Courses by Categories </h1>
+        <p>Able to arrange the courses by topics, subjects, authors, or curriculum order to help learners
+         </p>
+   </div>
+</div>
+</div>
+ <div class="col-md-3 ">
+   <div class="keys blue">
+     <div class="col-md-2 icon">
+      <i class="fa fa-calendar pink" aria-hidden="true"></i>
+     </div>
+     <div class="col-md-10 icontext">
+       <h1>Course calenders</h1>
+       <p> Creation and publication of course schedules, deadlines and tests.</p>
+    </div>
+  </div>
+</div>
+   <div class="col-md-3 ">
+     <div class="keys ">
+       <div class="col-md-2 icon">
+       <i class="fa fa-book blue" aria-hidden="true"></i>
+       </div>
+       <div class="col-md-10 icontext">
+         <h1>Multilingual Training  </h1>
+         <p>Provide multilingual training with the language switchable interface, with almost all international languages in-built.</p>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--keyfeatures end here-->
+ </div>
+</div>
+<!--features end here-->
+<!--features start here-->
+<div class="row-features">
+ <div class="container">
 
-<div class="projects_container row marl">
-<div class="container"><span class="heading"><span>We helped for their success:</span></span>
+ <!--keyfeatures start here-->
 
-<div class="row text-center">
-<ul>
-  <li><img src="/static/site/images/bough_test.png"></li>
-  <li><img src="/static/site/images/pmt_test.png"></li>
-  <li><img src="/static/site/images/giftingnation_test.png"></li>
-  <li><img src="/static/site/images/parent_orbit_test.png"></li>
-  <li><img src="/static/site/images/hello_coupons_test.png"></li>
-</ul>
+ <div class="keyfeatures">
+    <div class="col-md-4 ">
+     <div class="keys red">
+      <div class="col-md-2 icon">
+       <i class="fa fa-dropbox" aria-hidden="true"></i>
+      </div>
+      <div class="col-md-10 device">
+         <h1>Easy and Fast Course Creation  </h1> 
+         <p> We provide options to the tutors to add their content more learner friendly by adding graphics, audio and corresponding content through our platform.</p>
+      </div>
+   </div>
+</div>
+ <div class="col-md-4 ">
+   <div class="keys blue">
+    <div class="col-md-2 icon ">
+       <i class="fa fa-language green" aria-hidden="true"></i>
+    </div>
+      <div class="col-md-10 device">
+         <h1>+Centralized learning</h1>
+         <p> The training material, reports, audios or videos are available to individuals 24/7     andlearning management software allows multiple user access from any location.</p>
+     </div>
+  </div>
+</div>
+  <div class="col-md-4 ">
+   <div class="keys green">
+    <div class="col-md-2 icon">
+      <i class="fa fa-joomla black" aria-hidden="true"></i>
+     </div>
+     <div class="col-md-10 device">
+       <h1>Reduce administration </h1>
+       <p>Use Enable to access all of your training and reporting from one centralised LMS dashboard available across multiple devices</p>
+    </div>
+  </div>
+ </div>
+</div>
+<!--keyfeatures end here-->
+</div>
+ </div>
+<!--features end here-->
+  <div class="framework">
+   <div class="container">
+     <p>Apart from e-learning development we also provide m-learning development, so that your courses run  not only on PC’s, iPad and Android tablets but also on various smart-phones. Using our existing tools and technologies we can either create a mobile friendly version of your existing e-learning course or develop a new one for you, from scratch. These mobile friendly courses are built in HTML5  using responsive design framework. We also build app based courses using phonegap technology.</p>
 </div>
 </div>
+<!--row-blogs start here-->
+<div class="row-blogs">
+  <div class="container">
+  <div  class="row">
+   <div class="col-md-4 ">
+   <div class="assessments-and-quizzes">
+    <i class="fa fa-question-circle" aria-hidden="true"></i>
+    <h1>Assessments and Quizzes</h1>
+    <div class="services">
+    <p>Assess learners performance or competency before, during, or after the course program
+Review performance and gain insight into training impact with reports and dashboards, or create custom reports delivered via email.</p>
+    </div>
+    </div>
+   </div>
+  <div class="col-md-4 ">
+   <div class="assessments-and-quizzes">
+  <i class="fa fa-line-chart" aria-hidden="true"></i>
+    <h1>Tracking & Reporting </h1>
+    <div class="services">
+    <p>Generate course-wise and learner-wise training reports. Get customized reports on demand. Create customisable reports that can be run, shared, and exported to a variety of formats including Excel, CSV and PDF.</p>
+    </div>
+   </div>
+   </div>
+    <div class="col-md-4 ">
+   <div class="assessments-and-quizzes">
+   <i class="fa fa-list-ul" aria-hidden="true"></i>
+    <h1>Leaderboards</h1>
+    <div class="services">
+    <p>Engage and motivate learners with achievements, points, and percentage, all based on their performance(rank) in assessments.</p>
+    </div>
+    </div>
+   </div>
+  </div>
+ </div>
 </div>
-<div class="open_source_projects row marl">
-  <div class="heading"><span>Open Source Contributions</span></div>
-  <!-- open_source_item starts here -->
-  <div class="logo_grid">
-    <div class="col-md-offset-1 col-md-10 col-md-offset-1 open_source">
-      <div class="row each_open_source">
-        <div class="col-md-3 col-sm-6 skill">
-          <div class="open_source_item">
-            <strong>Forex-python</strong> <a aria-label="Star MicroPyramid/forex-python on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/forex-python#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/forex-python/stargazers" data-style="mega" href="https://github.com/MicroPyramid/forex-python" target="_blank">Star</a>
-            <p>Free Foreign exchange rates, Bitcoin price index and currency conversion with python and currency symbols, names.</p>
-            <!-- Place this tag where you want the button to render. -->
-          </div>
+<!--row-blogs end here-->
+<!--lmstext start here-->
+
+    <div class="lmstext">
+       <p>Another feature of our custom e-learning management and system development is that we develop and customize learning management systems (LMS) to administer, document, track, report and deliver e-learning courses and training programmes efficiently. Our learning management systems range from systems for managing training and educational records to software’s for distributing online courses over the Internet with features for online collaboration. We also cater to the corporate sector by designing corporate online training programmes with added features of employee registration etc. A wide array of industries ranging from Education, Healthcare, Pharma, to Marketing and Advertising make use of the services provided by us.</p>
+     </div>
+<!--lmstext end here-->
+
+<!--lms-advantages start here-->
+<div class="row-lms-advantages">
+  <div class="container">
+   <div class="listitem">
+    <div class="col-md-6 col-sm-6">
+      <div class="advantages">
+      <div class="lmshead">
+      <div class="container">
+        <span>Advantages of LMS</span>>
         </div>
-        <!-- open_source_item ends here --><!-- open_source_item starts here -->
-        <div class="col-md-3 col-sm-6 skill">
-          <div class="open_source_item">
-            <strong>Microurl</strong><a aria-label="Star MicroPyramid/microurl on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/microurl#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/microurl/stargazers" data-style="mega" href="https://github.com/MicroPyramid/microurl" target="_blank">Star</a>
-            <p>Use MicroURL to shorten your original URL. So, you can share any kind of long urls in a short format. Which can be simple to share with anyone. See the installation process and usage in our GitHub repository.</p>
-            <!-- Place this tag where you want the button to render. -->
-          </div>
         </div>
-        <!-- open_source_item ends here --><!-- open_source_item starts here -->
-        <div class="col-md-3 col-sm-6 skill">
-          <div class="open_source_item">
-            <strong>Django Simple pagination</strong> <a aria-label="Star MicroPyramid/django-simple-pagination on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/django-simple-pagination#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/django-simple-pagination/stargazers" data-style="mega" href="https://github.com/MicroPyramid/django-simple-pagination" target="_blank">Star</a>
-            <p>A simple django application provides simple Digg-style pagination. It is devoted to implementing web pagination in very few steps..</p>
-            <!-- Place this tag where you want the button to render. -->
-          </div>
+         <ul>
+           <li>Centralized learning</li>
+           <li>Training and reporting</li>
+           <li>Simplified learning</li>
+           <li>Easy access</li>
+           <li>Easy upgrades</li>
+          </ul>
         </div>
-        <!-- open_source_item ends here --><!-- open_source_item starts here -->
-        <div class="col-md-3 col-sm-6 skill">
-          <div class="open_source_item">
-            <strong>Django PayU</strong> <a aria-label="Star MicroPyramid/django-payu on GitHub" class="github-button" data-count-api="/repos/MicroPyramid/django-payu#stargazers_count" data-count-aria-label="# stargazers on GitHub" data-count-href="/MicroPyramid/django-payu/stargazers" data-style="mega" href="https://github.com/MicroPyramid/django-payu" target="_blank">Star</a>
-            <p>A simple payu payment gateway application in every few steps</p>
-            <!-- Place this tag where you want the button to render. -->
-          </div>
+     </div>
+      <div class="col-md-6 col-sm-6">
+        <div class="advantages pad">
+         <ul>
+           <li>Streamlined training process</li>
+           <li>Scalability and wider reach</li>
+           <li>Easy & secure exchange of data</li>
+           <li>Multiple learning channels</li>
+          <li>Multiple media formats</li>
+         </ul>
         </div>
       </div>
     </div>
   </div>
-  <!-- open_source_item ends here -->
-</div>
-<div class="helping_block row marl">
-  <span class="heading"><span>We are Helping Others to do same</span></span>
-  <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-    <div class="row helping_container">
-      <div class="col-md-4">
-        <div class="helping_item text-center"><a alt="Micropyramid Github" href="https://github.com/MicroPyramid/" target="_blank"><img src="/static/site/images/github.png" width="43" /> &nbsp; Github</a></div>
-      </div>
-      <div class="col-md-4">
-        <div class="helping_item second text-center"><a alt="Meetup" href="https://www.meetup.com/hyderabad-python-and-django-meetup-group/" target="_blank"><img src="/static/site/images/meetup.png" /> Meetups</a></div>
-      </div>
-      <div class="col-md-4">
-        <div class="helping_item third text-center"><a alt="Django Girls" href="https://djangogirls.org/hyderabad/" target="_blank"><img src="/static/site/images/dj_g.png" /> Hyderabad</a></div>
-      </div>
-    </div>
+ </div>
+<!--megamanu end here-->
   </div>
 </div>
-<div class="contact_container row marl">
-  <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-    <div class="contact_block row marl">
-      <div class="col-md-7 col-xs-12">
-        <div class="contact_details">
-          <div class="detail">040 6599 6999</div>
-          <div class="detail">hello@micropyramid.com</div>
-          <div class="detail">HIG499, 6th phase KPHB, Hyderabad, India - 500072</div>
-          <a href="/contact-india/">Contact Us</a>
-        </div>
-      </div>
-      <div class="col-md-5 col-xs-12 col-sm-12">
-        <div class="contact_content">
-          <strong>Python Web Development</strong>
-          <p>MicroPyramid offers python development services by the versatile developer team. We offer services ranging from simple scripts to complete enterprise web application and not to mention server/infrastructure orchestration using ansible. Our main goal is to provide high-class python development and maintenance services by ever learning and contributing to open source communities.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+{% endblock %}    

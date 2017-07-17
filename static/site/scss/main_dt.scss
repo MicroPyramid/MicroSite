@@ -29,6 +29,7 @@ body{
   width: 100%;
   background-color: white;
   position: relative;
+  margin-top: 52px;
   @media (min-width: $mob_min) and (max-width: $smob_max){
     min-height: 400px;
     height: auto;
@@ -2232,6 +2233,7 @@ body{
     margin-top: 15px;
 
     .input-group{
+      width: 100%;
       .form-control{
         outline: none;
         box-shadow: none;
@@ -4367,6 +4369,7 @@ body{
   padding-bottom:10px;
   .author{
     padding:0;
+   font-family: 'Quicksand', sans-serif;
     .blog-det{
       margin-top: 0px;
       color: #fff;
@@ -5901,6 +5904,7 @@ p a{
     @media(min-width: $mob_min) and (max-width: $mob_max){
       padding:15px;
     }
+   
     .icon{
       i{
         font-weight: 300;
@@ -5944,6 +5948,9 @@ p a{
       line-height: 1.9rem;
       @media(min-width: $mob_min) and (max-width: $tab_max){
         font-size:18px;
+        padding-bottom: 0px;
+        padding-top: 0;
+        font-weight: 500;
       }
       &:after{
         content:"";
@@ -6020,6 +6027,7 @@ p a{
           display: inline-block;
           position: relative;
           padding-bottom: 20px;
+          line-height: 35px;
           @media(min-width: $mob_min) and (max-width: $mob_max){
             font-size:18px;
             font-weight: 500;
@@ -6056,6 +6064,24 @@ p a{
           img{
             width:45px;
           }
+        }
+      }
+    }
+  }
+  &.aws_s3_mp_quality{
+    .service_quality{
+      min-height: 250px;
+      padding:15px;
+       @media(min-width: $tab_min) and (max-width: $tab_max){
+        min-height: 150px;
+        text-align: center;
+       }
+      .content{
+        strong{
+          padding-top:0;
+        }
+        p{
+          margin-top: 0;
         }
       }
     }
@@ -6125,7 +6151,7 @@ p a{
           padding-bottom: 20px;
           @media(min-width: $mob_min) and (max-width: $mob_max){
             font-size:18px;
-            font-weight: 500;
+            font-weight: 400;
           }
            &:after{
             content:"";
@@ -6145,6 +6171,9 @@ p a{
           margin-top: 15px;
           color: #333;
         }
+         @media(min-width: $mob_min) and (max-width: $smob_max){
+          padding:0 15px;
+         }  
       }
   }
 
@@ -6152,6 +6181,7 @@ p a{
     .heading{
       display: block;
       margin-bottom: 0PX;
+     line-height: 35px;
        span{
           font-weight: 400;
           font-size: 24px;
@@ -6218,6 +6248,9 @@ p a{
   }
   &.sales_force_banner{
     font-family: 'Quicksand', sans-serif;
+        @media(min-width: $mob_min) and (max-width: $smob_max){
+        margin-top: 0;
+     }
     .banner_container{
       background: url(/static/site/images/sales_banner.png) no-repeat ;
       height:350px;
@@ -6950,6 +6983,9 @@ p a{
 .helping_block{
   margin-top: 40px;
   font-family: 'Quicksand', sans-serif;
+      @media(min-width: $mob_min) and (max-width: $mob_max){
+      margin-top: 0px;
+    }
      .heading{
       display: block;
       text-align: center; 
@@ -6975,6 +7011,9 @@ p a{
      }
      .helping_container{
       padding: 35px 0;
+            @media(min-width: $mob_min) and (max-width: $smob_max){
+          padding-top: 0;
+       }
       .helping_item{
         background: #333;
         padding:15px;
@@ -7009,6 +7048,9 @@ p a{
   margin-top: 30px;
   margin-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+              margin-top:0;
+   }
   .contact_block{
       padding: 30px;
       background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
@@ -7101,6 +7143,10 @@ p a{
 .open_source_projects{
   font-family: 'Quicksand', sans-serif;
   margin:35px 0;
+    @media(min-width: $mob_min) and (max-width: $mob_max){
+      margin-top:20px;
+      margin-bottom: 20px;
+    }
   text-align: center;
   .heading{
       display: block;
@@ -7111,6 +7157,10 @@ p a{
       display: inline-block;
       position: relative;
       padding-bottom: 20px;
+        @media(min-width: $mob_min) and (max-width: $smob_max){
+      font-size: 18px;
+    font-weight: 500;
+  }
        &:after{
         content:"";
         position: absolute;
@@ -7159,7 +7209,7 @@ p a{
     float: none;
     width:24%;
     padding-left: 0px;    
-    padding-right: 15px; 
+    padding-right: 15px;
      @media(min-width: $mob_min) and (max-width: $mob_max){
        float:left;
        width: 100%;
@@ -7217,6 +7267,9 @@ p a{
 
 .carousel-inner{
   margin-top: 25px;
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+      margin-top: 0;
+   }
   .item{
     .carousel-content {
       color:black;
@@ -7246,8 +7299,8 @@ p a{
   background: none;
   left:20px;
   top: 20px;
-  @media(min-width: $mob_min) and (max-width: $tab_max){
-      left:-30px;
+  @media(min-width: $mob_min) and (max-width: $mob_max){
+      left:-20px;
     }
     @media(min-width: $tab_min) and (max-width: $tab_max){
         left:-45px;
@@ -7396,7 +7449,7 @@ p a{
         height: 450px;
         position: relative;
          @media(min-width: $mob_min) and (max-width: $mob_max){
-           height:500px;
+           height:auto;
          }
         .img_rel{
           position: absolute;
@@ -7408,6 +7461,7 @@ p a{
             left: 0;
             height: auto;
             width:110px;
+             top: 43%;
           }
         }
         .block{
@@ -7420,9 +7474,11 @@ p a{
             width:300px !important;
           }
           @media(min-width: $mob_min) and (max-width: $mob_max){
-             width:300px !important;
+             width:280px !important;
              text-align:left;
+                 position: static !important;
              margin:0;
+                margin-left: 100px;
           }
           strong{
             font-size: 1.1rem;
@@ -7770,6 +7826,9 @@ p a{
 .react_about_row{
   font-family: 'Quicksand', sans-serif;
   margin-top: 80px;
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+        margin-top: 10px;
+   }
   .heading{
     display: block;
     margin-bottom: 20px;
@@ -7882,9 +7941,156 @@ p a{
     margin-bottom: 0;
   }
  }
+  &.lambda_top_row{
+  margin-top:20px;
+  .tb_row{
+    .tb_block{
+      img{
+        max-width: 75%;
+      }
+    }
+  }
+ }
 }
 /* react_about_row ends here */
-
+/* lambda_container starts here */
+.lambda_container{
+  font-family: 'Quicksand', sans-serif;
+  margin-top: 30px;
+  .lambda_content_left{
+    .code_icon{
+      display: table;
+      padding: 5px;
+      background: #1dabdd;
+      .i_icon{
+        width: 100px;
+        display: table-cell;
+        vertical-align: middle;
+        i{
+          background: darken(#1dabdd, 20%);
+          display: inline-block;
+          text-align: center;
+          border-radius: 2px;
+          font-size: 40px;
+          color: #fff;
+          padding:25px;
+        }
+      }
+      .icon_content{
+        display: table-cell;
+        vertical-align: top;
+        color: white;
+      }
+    }
+    .content{
+      text-align: justify;
+      strong{
+        font-size: 18px;
+        margin:15px 0;
+        display: block;
+        font-weight: 500;
+      }
+      ul{
+        margin:0;
+        padding:0;
+        li{
+          list-style: none;
+          font-size: 15px;
+          font-weight:400;
+          margin-bottom:15px;
+          line-height: 23px;
+        }
+      }
+      p{
+        font-size: 15px;
+        font-weight:400;
+        margin-top:10px;
+        line-height: 23px;
+      }
+    }
+  }
+  .lambda_content_center{
+    font-size: 80px;
+    padding-top: 10px;
+    text-align: center;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+        padding:15px ;
+     }
+     i{
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+       transform: rotate(90deg);
+      }
+     }
+  }
+  .lambda_content_right{
+    background:#d5dbe7;
+    padding:15px;
+    .icons_block{
+      ul{
+        margin:0;
+        padding: 0;
+        li{
+          list-style: none;
+          text-align: center;
+          display: inline-block;
+          margin:2px;
+          .block{
+            float: left;
+            background: #fff;
+            border-radius: 2px;
+            padding:15px 20px;
+            i{
+              font-size: 25px;
+            }
+            .name{
+              display: block;
+              font-size: 13px;
+              font-weight: 600;
+              margin-top: 10px;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+    .content{
+      text-align: justify;
+      strong{
+        font-size: 18px;
+        margin:15px 0;
+        display: block;
+        font-weight: 500;
+      }
+      ul{
+        margin:0;
+        padding:0;
+        li{
+          list-style: none;
+          font-size: 15px;
+          font-weight:400;
+          margin-bottom:15px;
+          line-height: 23px;
+           &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f192";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+          }
+        }
+      }
+      p{
+        font-size: 15px;
+        font-weight:400;
+        margin-top:10px;
+        line-height: 23px;
+      }
+    }
+  }
+}
+/* lambda_container ends here */
 /* our_react_works starts here */
   .our_react_works{
     font-family: 'Quicksand', sans-serif;
@@ -7925,8 +8131,8 @@ p a{
         font-size: 1rem;
         font-weight: 400;
         background: #eee;
-        display: inline-block;
         border-radius: 20px;
+        display: inline-block;
         padding:8px 20px;
         margin:5px 5px;
       }
@@ -7972,6 +8178,7 @@ p a{
     background: url(/static/site/images/waves.png) no-repeat bottom right;
     background-size: 100%;
     padding-bottom: 50px;
+    margin-top: 15px;
    }
   .docker_conatiner_block{
     .content{
@@ -8147,8 +8354,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
   font-family: 'Quicksand', sans-serif;
   margin-top: 40px;
   .aws_row{
+     position: relative;
+    height: 280px;
+      @media(min-width: $mob_min) and (max-width: $tab_max){
+        position:static;
+      }
     .aws_item{
       font-size: 0.9rem;
+            padding:15px;
       .logo{
         float: left;
         display: inline-block;
@@ -8161,12 +8374,89 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
         p{
           font-weight: 400;
           margin-top: 6px;
+                font-size: 13px;
+        }
+      }
+      &.aws_icon{
+        background: none !important;
+        padding:0;
+        img{
+          max-width: 100%;
+        }
+      }
+      &.aws_pos{
+        position: absolute;
+        left: 0;
+        width: 230px;
+        height: 230px;
+        background:#eee;
+        border-radius: 50%;
+        text-align: center;
+        padding-top: 30px;
+         @media(min-width: $mob_min) and (max-width: $tab_max){
+          position:static;
+          width:auto;
+          height:auto;
+          background: none;
+          padding:0;
+          margin-bottom: 25px;
+        }
+        .aws_img{
+          max-width: 100%;
+        }
+        .logo{
+          display: block;
+          float: none;
+          text-align: center;
+        }
+        &.two{
+          top:30px;
+          left:40px;
+        }
+        &.three{
+          left: 80px;
+          top: 50px;
+        }
+        &.four{
+          left: 115px;                     
+        }
+        &.five{
+          left: 155px;
+          top:30px;
         }
       }
     }
     &.row_2{
       margin-top:35px;
     }
+
+  &.aws_row_2{
+    .aws_item{
+      &.five{
+        left: 50px;
+        top: -15px;
+      }
+      &.three{
+        top:20px;
+      }
+      &.two{
+        top: -10px;
+      }
+    }
+  }
+   &.aws_row_3{
+    .aws_item{
+      &.one{
+        top: -50px;
+      }
+      &.three{
+        top:-50px;
+      }
+      &.two{
+        top: -75px;
+      }
+    }
+  }
   }
 }
 /* aws_services ends here */
@@ -8196,6 +8486,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
     color: #444;
     padding-left: 15px;
     display: block;
+     span{
+    @media(min-width: $mob_min) and (max-width: $smob_max){
+      padding-left:15px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
 }
 
 /* sales_tabs_row starts here */
@@ -8204,6 +8501,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
   background: #019edb;
   padding-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
+   @media(min-width: $mob_min) and (max-width: $smob_max){
+      margin-bottom:20px;
+   }
   .sales_tabs{
     ul{
       text-align: center;
@@ -8223,6 +8523,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
           border-radius: 0;
           @media(min-width: $mob_min) and (max-width: $mob_max){
             font-size:0.6rem;
+            padding:10px;
           }
           &:hover{
             background:darken(#019edb, 10%);
@@ -8348,4 +8649,486 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
 }
 pre.prettyprint{
   width: 100%;
+}
+
+/* why_to_choose_s3 starts here */
+.why_to_choose_s3{
+  margin:30px 0;
+  .heading{
+    text-align: center;
+    font-size: 1.6rem;
+    span{
+      font-weight: 400;
+    }
+    @media(min-width: $mob_min) and (max-width:$smob_max){
+      text-align: center!important;
+      font-size: 1.5em;
+      padding: 10px;
+      line-height: 1.8em;
+    }
+    @media (min-width: $tab_min) and (max-width:$tab_max){
+      font-size: 1.3em;
+    }
+  }
+  .aws_why_row{
+    margin-top: 30px;
+    .aws_why_left{
+      background-color: #f1f1f1;
+      padding:20px;
+      border-radius: 3px;
+      ul{
+        margin:0;
+        margin-top: 20px;
+        padding: 0;
+        li{
+          list-style: none;
+          font-size: 1rem;
+          line-height: 2.2rem;
+          font-weight: 400;
+          color: #333;
+          border-bottom: 1px dashed #787878;
+          &:before{
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            content: "\f00c";
+            display: inline-block;
+            padding-right: 10px;
+            color: #1DABDD;
+          }
+        }
+      }
+    }
+    .aws_why_right{
+      @extend .aws_why_left;
+    }
+  }
+}
+/* why_to_choose_s3 ends here */
+/* aws_s3_counts_block starts here */
+.aws_s3_counts_block{
+  margin:30px 0;
+   @media(min-width: $mob_min) and (max-width:$smob_max){
+    margin-bottom: 0px;
+   }
+  .s3_count{
+    width:150px;
+    height: 150px;
+    border-radius: 5px;
+    font-size:1.6rem;
+    font-weight: 500;
+    color: #fff;
+    background: #1a8fb8;
+    padding-top:40px;
+    position: relative;
+    z-index: 9;
+    margin-left: 50px;
+    @media (min-width: $tab_min) and (max-width:$tab_max){
+      margin-left: 0px;
+    }
+     @media(min-width: $mob_min) and (max-width:$smob_max){
+      margin-left: 0px;
+      margin-bottom: 10px;
+     }
+
+    &:before {
+      position: absolute;
+      content: "\f157";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      font-size:90px;
+      color:#0f7ca2;
+      z-index: -1;
+      padding-top: 25px;
+      margin-left: -20px;
+      @media(min-width: $mob_min) and (max-width:$smob_max){
+        font-size: 40px;
+        margin-left:0px;
+        padding-top: 10px;
+      }
+    }
+    span{
+      font-size: 1.3rem;
+      margin-top: 15px;
+      display: block;
+      z-index: 9999999;
+      position: relative;
+       @media(min-width: $mob_min) and (max-width:$smob_max){
+        font-size: 0.8rem;
+        margin-top: 0px;
+       }
+    }
+    &.projects{
+      &:before{
+      content:"\f0c5";
+      }
+    }
+     &.customers{
+      &:before{
+         content:"\f234";
+        }
+        }
+     &.source{
+      &:before{
+         content:"\f073";
+      }
+    }
+  } 
+}
+/* aws_s3_counts_block ends here */
+.row-posts{
+    padding: 30px;
+    h1{ 
+      padding-top: 50px;
+      font-weight: 400;
+      font-size: 40px;
+      margin-left:50px;
+       @media(min-width: $mob_min) and (max-width:$smob_max){
+       margin: 0px;
+       padding-bottom: 20px;
+       text-align: center;
+       }
+        @media (min-width: $tab_min) and (max-width:$tab_max){
+          text-align: center;
+          padding-top: 0px;
+        }
+    }
+  .workprogress{
+     position: relative;
+     @media(min-width: $mob_min) and (max-width:$smob_max){
+      height: 600px;
+      margin-left: 60px;
+     }
+@media (min-width: $tab_min) and (max-width:$tab_max){
+  height: 200px;
+  margin-left: 30px;
+}
+    .progress{
+       height: 175px;
+       width: 175px;
+       padding-top: 35px;
+       padding-left: 30px;
+       border-radius: 50%;
+       i{font-size: 50px;
+         color:white;}
+       p{font-size: 22px;
+        font-weight: 400;
+        color:white;}
+     &.red{
+     background-color:rgba(255, 87, 34, 0.81);
+     position: relative;
+     top: 0;
+     left:0px;
+ @media(min-width: $mob_min) and (max-width:$smob_max){
+
+     }
+     @media (min-width: $tab_min) and (max-width:$tab_max){
+       left:0px;
+     position:absolute;
+     }
+  }
+  &.green{
+     background-color:rgba(103, 58, 183, 0.83);
+     position: absolute;
+     left: 300px; 
+   @media(min-width: $mob_min) and (max-width:$smob_max){
+    left: 0px;
+    position: relative;
+    top: -60px;
+   }
+    @media (min-width: $tab_min) and (max-width:$tab_max){
+       left:300px;
+     position:absolute;}
+  }
+  &.yellow{
+     background-color:#09aee8;
+     position: absolute;
+     left: 150px;
+   @media(min-width: $mob_min) and (max-width:$smob_max){
+      left: 0px;
+      top: 270px;
+   }
+    @media (min-width: $tab_min) and (max-width:$tab_max){
+       left:150px;
+       position: absolute;}
+  }
+  &.pink{
+     background-color:#40bd40;
+     position: absolute;
+     left: 450px;
+     @media(min-width: $mob_min) and (max-width:$smob_max){
+      left: 0px;
+      top: 400px;
+ }
+      @media (min-width: $tab_min) and (max-width:$tab_max){
+       left:450px;
+     position: absolute;}
+  }
+    }
+   }
+  }
+
+
+.aws{
+  .testimonials_row {
+    background-color: #2f5374;
+  }
+  .testimonials_row .happy-clients {
+    color: #2196F3;
+  }
+  .testimonials_row .profile_details span {
+    color:#2196F3;
+  }
+  .testimonials_row small{
+    color: #2196F3;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+.row-banner{
+  height: 300px;
+  background-image:url('http://hdwallpaperbackgrounds.net/wp-content/uploads/2015/08/Business_concept_design_hd_wallpapers.jpg');
+  background-position: 9% 47%;
+
+ .container{
+
+ }
+.content{
+  text-align: center;
+  padding-top: 120px;
+   @media(min-width: $mob_min) and (max-width: $mob_max){
+      padding-top: 60px;}
+} 
+        h1{
+          color:white;
+          font-size:2.2rem;
+          font-weight:400;
+        }
+        p{
+          color: white;
+          font-size:1rem;
+          font-weight: 400;
+          a{
+            color:black;
+          }
+        }
+      }  
+
+   .row-bannertext{
+      .text{
+          text-align: center;
+          padding:30px;
+           @media(min-width: $tab_min) and (max-width: $tab_max){
+          padding: 5px;
+           }
+           @media(min-width: $mob_min) and (max-width: $mob_max){
+          padding-bottom:0px;}
+     
+        
+        p{         
+          font-size:1rem;
+          line-height: 30px;
+          font-weight: 400;
+        }
+      }
+   }
+    .key-features-head{
+          h1{
+            margin: 0px;
+            font-size: 2.2rem;
+            text-align: center;
+            font-weight: 300;
+            line-height: 50px; 
+          }     
+      }
+.row-features{
+   .container{
+   .keyfeatures{
+    margin-top: 20px;
+        @media(min-width: $tab_min) and (max-width: $tab_max){
+          text-align: center;}
+    .keys{
+           height: 200px;
+         @media(min-width: $tab_min) and (max-width: $tab_max){
+           height: 150px;}
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+           height: 225px;
+           text-align:center;}
+    .icon{
+     
+    i{          
+      font-size: 25px;
+      background: #08b3ef;
+      color: white;
+      border-radius: 50px;
+      text-align: center;
+      width: 50px;
+      height: 50px;
+      padding-top: 12px;
+      &.red{ background-color: red }
+      &.blue{background-color: #5c96ec;}
+      &.green{background-color: rgba(121, 85, 72, 0.69);}
+      &.pink{background-color:#009688;}
+      &.orange{background-color: rgba(121, 85, 72, 0.9);}
+      &.black{background-color:#eaa60c;}
+  }
+}
+
+.icontext{
+     padding-left: 25px;
+           h1{
+            font-size:1.2rem;
+            margin-top:0px;
+            margin-left:10px;
+            font-weight: 500;
+          }
+          p{
+           font-size: 1rem;
+           line-height:1.8rem;
+           font-weight: 400;
+               color: #333;
+               margin-left: 10px
+            }
+        }
+    .device{
+           h1{
+            font-size:1.2rem;
+            margin-top:0px;
+            margin-left: 8px;
+            font-weight: 500;
+          }
+          p{
+           font-size: 1rem;
+           line-height:1.8rem;
+           font-weight: 400;
+               color: #333;
+               margin-left: 10px
+            }
+         }
+       }
+    }
+ }
+} 
+  
+     .framework{
+      padding:20px;
+      p{
+        font-size:1rem;
+        font-weight: 400;
+        text-align: center;
+        line-height:30px ;
+      }
+     }
+.row-blogs{
+  .assessments-and-quizzes{
+        text-align: center;
+        border: 7px solid #f1f1f1;
+        padding: 20px;
+        height:290px;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+              height:325px;}
+        @media(min-width: $tab_min) and (max-width: $tab_max){
+           height: 230px;}
+         
+     
+         
+         
+        i{ font-size: 25px;
+            background:#2f5374;
+            color: white;
+            text-align: center;
+            width: 50px;
+            height: 50px;
+            padding-top: 12px;}
+      h1{font-size:1.4rem;
+        font-weight:400;
+        }
+      p{font-size:1rem;
+         font-weight:300;
+         line-height:1.8rem;}
+  
+ }
+}
+ 
+   .lmstext{
+       padding:  30px;
+      p{
+        font-weight: 300;
+        font-size:1rem;
+        line-height: 30px;
+        text-align: center;
+      }
+    }
+ .fogdog {
+    width: 100%;
+    height: 70px;
+    background-color: #fo6d06;
+}
+
+.badass {
+    width: 100%;
+    height: 100px;
+    background-color: #bada55;
+}
+.row-lms-advantages{
+      background-color: #e9f3f7;
+.container{
+    .listitem{
+      span{
+        font-size: 30px;
+        font-weight: 400;
+          }
+   .advantages{ 
+          padding:20px;
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+          padding: 0px; 
+          padding-top:15px;}
+             
+      &.pad{
+          padding-top: 45px;
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+          padding-top: 0px;
+        }
+         
+      }
+
+         ul{
+            width: 60%;
+            font-weight: 400;
+            padding:0px;
+          @media(min-width: $tab_min) and (max-width: $tab_max){
+            width: 100%;
+          }
+
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+                 margin:none;
+                 width:100%;}         
+             }
+
+        li{
+           margin-top: 15px;
+           list-style: none;
+           line-height: 1.2rem;
+           font-size: 1rem;
+
+   &:before{
+            content: "\f"; /* FontAwesome Unicode */
+            font-family: FontAwesome;
+            display: inline-block;
+            width: 1.6rem; /* same as padding-left set on li */
+            color: #325677;
+          }
+        }
+      }
+    }
+  }
 }
