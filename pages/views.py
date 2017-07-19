@@ -7,7 +7,6 @@ from pages.models import Page, Menu
 from micro_blog.models import Country
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
-import itertools
 from micro_blog.models import Category, Post
 from django.template.defaultfilters import slugify
 from django.utils.http import is_safe_url
@@ -210,10 +209,11 @@ def change_page_status(request, pk):
 
 @login_required
 def menu(request):
-    iterator = itertools.count()
-    menu_list = Menu.objects.filter(parent=None).order_by('lvl')
+    countries = Country.objects.all()
+    country_slug = request.POST.get('country') if request.POST.get('country') else 'usa'
+    menu_list = Menu.objects.filter(parent=None, country__slug=country_slug).order_by('lvl')
     return render(request, 'admin/content/menu/menu-list.html',
-                  {'menu_list': menu_list, 'iterator': iterator})
+                  {'menu_list': menu_list, 'countries': countries, 'country_slug': country_slug})
 
 
 @login_required
@@ -240,20 +240,29 @@ def add_menu(request):
         c = {}
         c.update(csrf(request))
         parent = Menu.objects.filter(parent=None).order_by('lvl')
+        countries = Country.objects.all()
         return render(request, 'admin/content/menu/new-menu-item.html',
-                      {'parent': parent, 'csrf_token': c['csrf_token']})
+                      {'parent': parent, 'csrf_token': c['csrf_token'],
+                       'countries': countries})
     else:
         return render_to_response('admin/accessdenied.html')
 
 
 @login_required
 def edit_menu(request, pk):
+    country = request.GET.get('country') if request.GET.get('country') else request.POST.get('country_id')
+    menu_instance = Menu.objects.filter(pk=pk, country__slug=country).first()
+    if not menu_instance:
+        each = Menu.objects.filter(pk=pk).first()
+        if each:
+            menu_instance = Menu.objects.filter(title=each.title, country__slug=country).first()
     if request.method == 'POST':
-        menu_instance = get_object_or_404(Menu, pk=pk)
         current_parent = menu_instance.parent
         current_lvl = menu_instance.lvl
-        validate_menu = MenuForm(request.POST, instance=menu_instance)
-
+        if menu_instance:
+            validate_menu = MenuForm(request.POST, instance=menu_instance)
+        else:
+            validate_menu = MenuForm(request.POST)
         if validate_menu.is_valid():
             updated_menu = validate_menu.save(commit=False)
             if updated_menu.parent != current_parent:
@@ -290,12 +299,13 @@ def edit_menu(request, pk):
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
     if request.user.is_superuser:
-        parent = Menu.objects.filter(parent=None).order_by('lvl')
-        current_menu = get_object_or_404(Menu, pk=pk)
+        parent = Menu.objects.filter(parent=None, country__slug=country).order_by('lvl')
+        countries = Country.objects.all()
         c = {}
         c.update(csrf(request))
         return render(request, 'admin/content/menu/edit-menu-item.html',
-                      {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
+                      {'csrf_token': c['csrf_token'], 'current_menu': menu_instance,
+                       'parent': parent, 'countries': countries})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -315,11 +325,16 @@ def site_page(request, slug):
             return HttpResponseRedirect('/')
         return render(request, 'site/index.html', {
             'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
-    pages = Page.objects.filter(slug=slug, country__code=country_code, is_active=True)
-    if not pages:
-        pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
-    if pages:
-        page = pages[0]
+
+    page = Page.objects.filter(slug=slug, country__code=country_code, is_active=True).first()
+    if not page:
+        page = Page.objects.filter(slug=slug).first()
+        if page:
+            page = Page.objects.filter(title__iexact=page.title, country__code=country_code, is_active=True).first()
+            return HttpResponseRedirect('/' + page.country.code + '/' + page.slug +'/')
+    if not page:
+        page = Page.objects.filter(slug=slug, is_default=True, is_active=True)
+    if page:
         posts = Post.objects.filter(status='P').order_by('-published_on')
         if page.category.all():
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')

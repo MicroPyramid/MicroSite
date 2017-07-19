@@ -34,14 +34,14 @@ def get_latest_posts(context):
 
 
 @register.assignment_tag(takes_context=True)
-def get_menus(context):
+def get_menus(context, country_code):
     # menu_list = Menu.objects.filter(status="on").prefetch_related(
     #     Prefetch("menu_set", queryset=Menu.objects.filter(
     #         status="on").order_by('lvl'), to_attr="active_children"
     #     )
     # )
     menus = []
-    menu_list = Menu.objects.filter(parent=None, status='on').order_by('lvl')
+    menu_list = Menu.objects.filter(parent=None, status='on', country__code=country_code).order_by('lvl')
     for menu in menu_list:
         if menu.menu_set.filter(status='on'):
             menus.append(menu)
@@ -49,9 +49,9 @@ def get_menus(context):
 
 
 @register.assignment_tag(takes_context=True)
-def get_child_menus(context):
+def get_child_menus(context, country_code):
     menus = []
-    menu_list = Menu.objects.filter(status="on", parent__isnull=False).exclude(parent__title='Contact Us').order_by('lvl')
+    menu_list = Menu.objects.filter(status="on", parent__isnull=False, country__code=country_code).exclude(parent__title='Contact Us').order_by('lvl')
     for menu in menu_list:
         if not menu.menu_set.filter(status='on'):
             menus.append(menu)
@@ -59,17 +59,17 @@ def get_child_menus(context):
 
 
 @register.assignment_tag(takes_context=True)
-def get_single_level_menus(context):
+def get_single_level_menus(context, country_code):
     menus = []
-    menu_list = Menu.objects.filter(parent=None, status='on').order_by('lvl')
+    menu_list = Menu.objects.filter(parent=None, status='on', country__code=country_code).order_by('lvl')
     for menu in menu_list:
         if not menu.menu_set.filter(status='on'):
             menus.append(menu)
     return menus
 
 @register.assignment_tag(takes_context=True)
-def get_all_menus(context):
-    menu_list = Menu.objects.filter(status="on", parent=None).prefetch_related(
+def get_all_menus(context, country_code):
+    menu_list = Menu.objects.filter(status="on", parent=None, country__code=country_code).prefetch_related(
         Prefetch("menu_set", queryset=Menu.objects.filter(
             status="on").order_by('lvl'), to_attr="active_children"
         )

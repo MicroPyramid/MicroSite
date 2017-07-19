@@ -57,10 +57,8 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
       ga('create', '{{request.session.google_analytics_code}}', 'auto');
       ga('send', 'pageview');
-      
     </script>
      <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1768307.js"></script>
@@ -174,7 +172,7 @@
             </div>
             {% endblock %}
             <div>
-              {% get_single_level_menus as single_level_menu_list %}
+              {% get_single_level_menus request.session.country as single_level_menu_list %}
               {% if request.session.design|slugify != 'mobile'|slugify %}
               <ul id="single_level_menu">
                 <li>
@@ -209,7 +207,7 @@
                 </span>
               </a>
               <!-- menu-icon-wrapper -->
-              {% get_menus as menu_list %}
+              {% get_menus request.session.country as menu_list %}
               {% include "site/menu.html" with  menu_list=menu_list %}
               {% if request.session.design|slugify == 'mobile'|slugify %}
               <ul id="single_level_menu">
@@ -269,7 +267,7 @@
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-12 footer-links">
                   <ul class="inner-footer-list">
-                    {% get_child_menus as menu_list %}
+                    {% get_child_menus request.session.country as menu_list %}
                     {% for menu in menu_list|slice:"0:10" %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
@@ -277,7 +275,7 @@
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-12 footer-links">
                   <ul class="inner-footer-list">
-                    {% get_child_menus as menu_list %}
+                    {% get_child_menus request.session.country as menu_list %}
                     {% for menu in menu_list|slice:"10:20" %}
                     {% if menu.parent.title != 'Contact Us' %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>

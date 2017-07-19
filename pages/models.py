@@ -64,6 +64,7 @@ class Contact(models.Model):
 class Menu(models.Model):
     parent = models.ForeignKey('self', blank=True, null=True)
     title = models.CharField(max_length=255)
+    country = models.ForeignKey(Country, blank=True, null=True)
     url = models.URLField(max_length=255, blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now=True)

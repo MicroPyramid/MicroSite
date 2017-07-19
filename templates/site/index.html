@@ -166,7 +166,7 @@
                   </div>
                   {% endblock %}
                   <div>
-                    {% get_single_level_menus as single_level_menu_list %}
+                    {% get_single_level_menus request.session.country as single_level_menu_list %}
                     {% if request.session.design|slugify != 'mobile'|slugify %}
                     <ul id="single_level_menu">
                       <li>
@@ -201,7 +201,7 @@
                       </span>
                     </a>
                     <!-- menu-icon-wrapper -->
-                    {% get_menus as menu_list %}
+                    {% get_menus request.session.country as menu_list %}
                     {% include "site/menu.html" with  menu_list=menu_list %}
                   </nav>
                 </div>
@@ -439,14 +439,14 @@
                       <div class="daimond_work">
                         <div class="content_wrap">
                           <div class="overlay">
-                            <div class="visit_web"> <a href="https://hellocoupons.in/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                            <div class="visit_web"> <a href="https://refactored.ai/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
                           </div>
                           <div class="content_rotate">
                             <div class="logo">
-                              <div class="image_wrap"> <span class="img"> <img alt="helloCoupons" src="/static/site/images/hellocoupons.png"> </img></span></div>
+                              <div class="image_wrap"> <span class="img"> <img alt="Refactored" src="/static/site/images/refactored.png"> </img></span></div>
                             </div>
                             <div class="description">
-                              <p> India's Best Coupons Portal. Find Latest Coupons, Discount codes and Best saving offers.</p>
+                              <p>A Learning management system where students learn python tutorials, practice assessments.</p>
                             </div>
                           </div>
                         </div>
@@ -454,14 +454,14 @@
                       <div class="daimond_work">
                         <div class="content_wrap">
                           <div class="overlay">
-                            <div class="visit_web"> <a href="https://refactored.ai/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
+                            <div class="visit_web"> <a href="http://giftingnation.com/" target="_blank"><span class="visit_btn">Visit Website</span></a></div>
                           </div>
                           <div class="content_rotate">
                             <div class="logo">
-                              <div class="image_wrap"> <span class="img"> <img alt="refactored" src="/static/site/images/refactored.png"> </img></span></div>
+                              <div class="image_wrap"> <span class="img"> <img alt="giftingnation" src="/static/site/images/giftingnation.png"> </img></span></div>
                             </div>
                             <div class="description">
-                              <p>A Learning management system where students learn python tutorials, practice assessments.</p>
+                              <p> You can Gift anyone anytime.</p>
                             </div>
                           </div>
                         </div>

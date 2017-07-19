@@ -8,6 +8,13 @@
       <span class='inactive_user'><i class="fa fa-square"></i>OFF</span>-->
       <a href="{% url 'pages:add_menu' %}"><button class="btn btn-warning"><i class='fa fa-plus'></i> Add Menu </button></a>
     </span>
+    <form name="countryform" id="countryform" method="POST" action='.'>
+      <select class="selectpicker" id="country" name="country">
+        {% for country in countries %}
+          <option value="{{ country.slug }}" {% ifequal country.slug|slugify country_slug|slugify %}selected{% endifequal %}>{{ country.name }}</option>
+        {% endfor %}
+      </select>
+    </form>
   </div>
   <div class="panel-body">
     <div class="table-responsive">
@@ -45,7 +52,7 @@
               </a>
             </td>
             <td class="txt_center">
-              <a href="{% url 'pages:edit_menu' pk=menu.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'pages:edit_menu' pk=menu.id %}?country={{country_slug}}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
               <a href="{% url 'pages:delete_menu' pk=menu.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
@@ -71,7 +78,7 @@
               </a>
             </td>
             <td class="txt_center">
-              <a href="{% url 'pages:edit_menu' pk=chlidren.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'pages:edit_menu' pk=chlidren.id %}?country={{country_slug}}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
               <a href="{% url 'pages:delete_menu' pk=chlidren.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
@@ -97,7 +104,7 @@
               </a>
             </td>
             <td class="txt_center">
-              <a href="{% url 'pages:edit_menu' pk=chlidren.id %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
+              <a href="{% url 'pages:edit_menu' pk=chlidren.id %}?country={{country_slug}}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>
               <a href="{% url 'pages:delete_menu' pk=chlidren.id %}" class="delete_anchor"><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
@@ -128,6 +135,9 @@
           window.location = '/portal/content/menu/';
         }, 'json');
     });
+  });
+  $('#country').change(function(e){
+    $('#countryform').submit();
   });
 </script>
 <!-- main content ends here-->
