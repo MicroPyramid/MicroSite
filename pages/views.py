@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render, get_object_or_404
+from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template.context_processors import csrf
 import json
@@ -265,6 +265,9 @@ def edit_menu(request, pk):
             validate_menu = MenuForm(request.POST)
         if validate_menu.is_valid():
             updated_menu = validate_menu.save(commit=False)
+            country = Country.objects.get(slug=country)
+            if country:
+                updated_menu.country = country
             if updated_menu.parent != current_parent:
                 try:
                     if updated_menu.parent.id == updated_menu.id:
@@ -319,6 +322,9 @@ def site_page(request, slug):
         country_code = request.session['country']
     else:
         country_code = request.COUNTRY_CODE
+    if '/us/' in request.path and country_code =='us':
+        return HttpResponseRedirect('/'+request.path.split('/us/')[-1])
+
     country = Country.objects.filter(code=slug)
     if country:
         if country[0].code == settings.COUNTRY_CODE:
@@ -331,7 +337,10 @@ def site_page(request, slug):
         page = Page.objects.filter(slug=slug).first()
         if page:
             page = Page.objects.filter(title__iexact=page.title, country__code=country_code, is_active=True).first()
-            return HttpResponseRedirect('/' + page.country.code + '/' + page.slug +'/')
+            if page.country.code == 'us':
+                return HttpResponseRedirect('/' + page.slug +'/')
+            else:
+                return HttpResponseRedirect('/' + page.country.code + '/' + page.slug +'/')
     if not page:
         page = Page.objects.filter(slug=slug, is_default=True, is_active=True)
     if page:
