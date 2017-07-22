@@ -604,7 +604,7 @@
             <div class="row" id="get-in-touch">
               <div class="heading"> <span>get in</span> <span class="green">touch</span></div>
               <div class="row contact-form">
-                <form action="{% url "contact_india" %}" id="contactform" method="post" name="contactform">
+                <form action="/contact-india/" id="contactform" method="post" name="contactform">
                 {% csrf_token %}
                 <div class="row marl first-input-row">
                   <div class="col-md-3 col-sm-3 input-blk"> <input class="form-control" id="full_name" name="full_name" placeholder="Full Name" type="text"/></div>
