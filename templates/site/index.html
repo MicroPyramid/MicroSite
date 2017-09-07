@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-99a477453cc6ad29b747.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-52e62c606816abfa5587.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -337,7 +337,7 @@
                       <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/"><img alt="amazon web services" class="logo" src="/static/site/images/tech-home/aws-tech.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-ecommerce-development/"><img alt="djagno oscar" class="logo" src="/static/site/images/tech-home/oscar-tech.png"/></a>
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-oscar-ecommerce-development-services/"><img alt="djagno oscar" class="logo" src="/static/site/images/tech-home/oscar-tech.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
                       <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/"><img alt="angular_js" class="logo" src="/static/site/images/tech-home/angular-js-tech.png"/></a>
@@ -581,9 +581,9 @@
                     <div class="date_daimond">
                       <div class="text_wrap">
                         {% if post.published_on %}
-                        <div class="month"> <a href="/blog/{{post.published_on|date:" y"}}="" {{post.published_on|date:"n"}}"=""> <span itemprop="datePublished"> {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} {{ post.published_on|date:"Y" }} </span> </a></div>
+                        <div class="month"> <a href="/blog/{{ post.active_slugs.0.slug }}/"> <span itemprop="datePublished"> {{ post.published_on|date:"d" }} {{ post.published_on|date:"b"|title }} {{ post.published_on|date:"Y" }} </span> </a></div>
                         {% else %}
-                        <div class="month"> <a href="/blog/{{post.updated_on|date:" y"}}="" {{post.updated_on|date:"n"}}"=""> <span itemprop="datePublished"> {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }} {{ post.updated_on|date:"Y" }} </span> </a></div>
+                        <div class="month"> <a href="/blog/{{ post.active_slugs.0.slug }}/"> <span itemprop="datePublished"> {{ post.updated_on|date:"d" }} {{ post.updated_on|date:"b"|title }} {{ post.updated_on|date:"Y" }} </span> </a></div>
                         {% endif %}
                       </div>
                     </div>
@@ -665,6 +665,7 @@
                   <div class="text"><span class="head">Reach US - USA</span> <span class="desc"> 3737 Mapleshade Ln, <br/>Ste #103, Plano TX 75075, +1-5102300949</span><br>
                   <i class="fa fa-envelope-o"></i> hello@micropyramid.com</div>
                 </div>
+
                 <div class="col-md-4 col-sm-6 col-xs-12 contact-block dark4">
                   <div class="icon"><i class="fa fa-map-marker"></i></div>
                   <div class="text"><span class="head">Reach US - UAE</span> <span class="desc">Sharjah, UAE 341246</span><br>
@@ -675,7 +676,7 @@
           </div>
           <div class="row marl" id="footer-links-home">
             <div class="container">
-              <div class="col-md-6 col-sm-12 col-xs-12 footer-home text-right"> Copyright © {% now "Y" %} MicroPyramid.</div>
+              <div class="col-md-6 col-sm-12 col-xs-12 footer-home text-right"> Copyright © {% now "Y" %} MicroPyramid Inc.</div>
               <a href="/sitemap{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}-{{request.session.country}}/{% endif %}{% endif %}"><strong>Site Map</strong></a>
             </div>
           </div>
@@ -689,6 +690,6 @@
 
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-99a477453cc6ad29b747.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-52e62c606816abfa5587.js" type="text/javascript"></script>
   </body>
 </html>

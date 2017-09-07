@@ -2,8 +2,9 @@ from django.test import TestCase
 from django.test import Client
 from pages.forms import PageForm, MenuForm
 from micro_admin.models import User
-from pages.models import Page, Contact
+from pages.models import Page, Contact, Menu
 from micro_blog.models import Country
+from django.core.urlresolvers import reverse
 
 
 class pages_forms_test(TestCase):
@@ -93,7 +94,7 @@ class pages_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
-        response = self.client.get('/portal/content/menu/edit/1/')
+        response = self.client.get('/portal/content/menu/edit/3/')
         self.assertTrue(response.status_code, 404)
         self.assertTemplateUsed(response, 'admin/accessdenied.html')
 
@@ -114,7 +115,7 @@ class pages_views_test(TestCase):
             'pyramid@mp.com', 'microtest', 'mp')
         self.country = Country.objects.create(name='US', code='us', slug='us')
         self.page = Page.objects.create(title='Page', content='page_content', slug='page', country=self.country, is_active=True, is_default=True)
-        # self.menu = Menu.objects.create(title='main', url='micro.in', status='on', lvl=1)
+        self.menu = Menu.objects.create(title='django', url='micro.in', status='on', lvl=1, country=self.country)
 
     def test_views(self):
         user_login = self.client.login(username='microtest', password='mp')
@@ -157,7 +158,7 @@ class pages_views_test(TestCase):
 
         # With right input
         response = self.client.post(
-            '/portal/content/menu/new/', {'title': 'main', 'url': 'micro.in/m', 'status': 'on'})
+            '/portal/content/menu/new/', {'title': 'main', 'url': 'micro.in/m', 'status': 'on', 'parent': self.menu.id, 'country': self.country.id})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('Menu created successfully') in response.content.decode('utf8'))
 
@@ -165,16 +166,16 @@ class pages_views_test(TestCase):
         response = self.client.post(
             '/portal/content/menu/1/order/', {'mode': 'down'})
         self.assertTrue(response.status_code, 200)
-        self.assertTrue(str('You cant move down') in response.content.decode('utf8'))
+        self.assertTrue(str('Menu order updated successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
             '/portal/content/menu/1/order/', {'mode': 'up'})
         self.assertTrue(response.status_code, 200)
-        self.assertTrue(str('You cant move up') in response.content.decode('utf8'))
+        self.assertTrue(str('You cant move up.') in response.content.decode('utf8'))
 
         # with wrong input
         response = self.client.post(
-            '/portal/content/menu/new/', {'url': 'micro.in/m', 'status': 'on'})
+            '/portal/content/menu/new/', {'url': 'micro.in/m', 'status': 'on', 'parent': Menu.objects.all().last().id})
         self.assertEqual(response.status_code, 200)
         self.assertFalse(str('successfully') in response.content.decode('utf8'))
 
@@ -220,32 +221,35 @@ class pages_views_test(TestCase):
         response = self.client.get('/portal/content/menu/status/1/')
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.get('/portal/content/menu/edit/1/')
+        response = self.client.get('/portal/content/menu/edit/3/')
         self.assertTrue(response.status_code, 200)
 
         response = self.client.post(
-            '/portal/content/menu/edit/1/', {'title': 'main2', 'status': 'on'})
+            '/portal/content/menu/new/', {'title': 'main menu', 'url': 'micro.in/m', 'status': 'on', 'parent': Menu.objects.all().last().id, 'country': self.country.id})
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(str('Menu created successfully') in response.content.decode('utf8'))
+
+        response = self.client.post(
+            '/portal/content/menu/edit/3/', {'title': 'main2', 'status': 'on', 'country_id': self.country.slug})
         self.assertTrue(response.status_code, 200)
         self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 
-        response = self.client.post(
-            '/portal/content/menu/edit/1/', {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 1})
+        url = reverse('pages:edit_menu', kwargs={'pk': '3'})
+        response = self.client.post(url, {'id': '3', 'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 1, 'country_id': self.country.slug})
         self.assertTrue(response.status_code, 200)
         self.assertTrue(
-            str('can not choose the same as parent') in response.content.decode('utf8'))
+            str('updated successfully') in response.content.decode('utf8'))
 
-        response = self.client.post(
-            '/portal/content/menu/edit/1/', {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 2})
+        response = self.client.post(url, {'title': 'main2', 'url': 'micro.in/menu', 'status': 'on', 'parent': 2, 'country_id': self.country.slug})
         self.assertTrue(response.status_code, 200)
         # self.assertTrue('can not choose the same as parent' in response.content)
 
-        response = self.client.post(
-            '/portal/content/menu/edit/1/', {'url': 'micro.in', 'status': 'on'})
+        response = self.client.post(url, {'url': 'micro.in', 'status': 'on', 'country_id': self.country.slug, 'parent': Menu.objects.all().last().id})
         self.assertTrue(response.status_code, 200)
         self.assertFalse(str('successfully') in response.content.decode('utf8'))
 
         response = self.client.post(
-            '/portal/content/menu/new/', {'title': 'menu2', 'url': 'http://micro.com/menu2', 'status': 'on'})
+            '/portal/content/menu/new/', {'title': 'menu2', 'url': 'http://micro.com/menu2', 'status': 'on', 'country_id': self.country.id, 'parent': Menu.objects.all().last().id})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('Menu created successfully') in response.content.decode('utf8'))
 
@@ -258,8 +262,7 @@ class pages_views_test(TestCase):
             '/portal/content/menu/1/order/', {'mode': 'up'})
         self.assertTrue(response.status_code, 200)
 
-        response = self.client.post(
-            '/portal/content/menu/edit/1/', {'title': 'main2', 'status': 'on', 'parent': 2})
+        response = self.client.post(url, {'title': 'main2', 'status': 'on', 'parent': 2, 'country_id': self.country.slug, 'parent': Menu.objects.all().last().id})
         self.assertTrue(response.status_code, 200)
         self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
 

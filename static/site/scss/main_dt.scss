@@ -5021,6 +5021,9 @@ body{
       letter-spacing: 1px;
       font-size: 24px;
       font-weight: bold;
+      &.email{
+        text-transform: none;
+      }
     }
     .contact_heading1{
       padding-left:15px;

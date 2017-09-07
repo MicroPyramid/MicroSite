@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<style type="text/css">
+  .display{
+    display: none;
+  }
+</style>
+<!-- main content starts here-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Plagiarism Checker</h3>
+  </div>
+  <div class="panel-body">
+    <fieldset>
+      <form action="{% url 'micro_admin:plagiarism_checker' %}" method="POST" id="plagiarismform">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail">Content</label>
+          <textarea class="form-control" id="description" name="description" rows="10" placeholder="Category Description"></textarea>
+        </div>
+        <div class="save-btn">
+          <i class="fa fa-floppy-o"></i>
+          <input type="submit" value="Save" class="save" id="search_lessons">
+        </div>
+      </form>
+      <div class="all_urls display">
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+<script type="text/javascript">
+  $ = jQuery;
+  $("form#plagiarismform").submit(function(e) {
+    e.preventDefault();
+    $.post(".", $("form#plagiarismform").serialize(), function(msg) {
+      $('p.failure').remove();
+      $('.all_urls').hide()
+      if (msg.error) {
+        for (var key in msg.response) {
+          $('#' + key).after('<p class="failure">' + msg.response[key] + '</p>');
+        }
+      } else {
+        $('.all_urls').show().empty()
+        if(msg.response){
+          for (each in msg.response){
+            $('.all_urls').append('<p>'+ msg.response[each] +'</p>')
+          }
+        }else{
+          $('.all_urls').append('<p>No Results! Go Ahead</p>')
+        }
+
+      }
+    }, 'json');
+  });
+</script>
+{% endblock %}
