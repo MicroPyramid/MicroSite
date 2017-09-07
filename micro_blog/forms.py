@@ -28,3 +28,7 @@ class CustomBlogSlugInlineFormSet(forms.BaseInlineFormSet):
         if active_slugs > 1:
             raise forms.ValidationError(
                 "Only one slug can be active at a time.")
+
+
+class PlagiarismForm(forms.Form):
+    description = forms.CharField(max_length=50000)

@@ -11,7 +11,7 @@ html{font-size: 16px;
    }
 }
 #body{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-weight: 500;
   font-size: 13px;
   color: #4c4c4c;
@@ -27,9 +27,9 @@ body{
 #banner_wrap{
   height: 380px;
   width: 100%;
+  margin-top: 52px;
   background-color: white;
   position: relative;
-  margin-top: 52px;
   @media (min-width: $mob_min) and (max-width: $smob_max){
     min-height: 400px;
     height: auto;
@@ -1723,6 +1723,7 @@ body{
 }
 /* base_menu */
 /* blog row starts here */
+/* blog row starts here */
 .blog-row{
   padding:20px 30px;
   @media (min-width: $mob_min) and (max-width: $tab_max){
@@ -2082,7 +2083,6 @@ body{
 /*  blog list ends here */
 /* blog-categories-archives starts here */
 .blog-categories-archives{
-  margin-top: -300px;
   margin-botom: 130px;
   .blog-cat-archives{
     @extend .bold_upper;
@@ -2226,7 +2226,8 @@ body{
           width: 400px;
         }
         @media(min-width: $mob_min) and (max-width: $mob_max){
-          width: 210px;
+          width: 100%;
+          display: block;
         }
       }
       .input-group-addon{
@@ -2241,6 +2242,10 @@ body{
         border:1px solid rgba(116,137,7,0.6);
         box-shadow: none;
         padding: 10px;
+         @media(min-width: $mob_min) and (max-width: $mob_max){
+          display: block;
+          clear: both;
+        }
         button{
           padding:7px 12px;
           background:none;
@@ -2248,6 +2253,12 @@ body{
           box-shadow:none;
           outline:none;
           cursor:pointer;
+           @media(min-width: $mob_min) and (max-width: $mob_max){
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding:4px 0;
+          }
         }
       }
     }
@@ -2256,6 +2267,7 @@ body{
       margin-left: 100px;
       @media(min-width: $mob_min) and (max-width: $mob_max){
         margin:0;
+        width:100%;
       }
     }
   }
@@ -2264,24 +2276,34 @@ body{
 /* author */
 .author_details{
   padding: 10px 0;
-  background-color: #4c4c4c;
+  background-color: #2f5374;
   width: 100%;
   text-align: left;
-  margin-bottom: 25px;
+  margin-bottom: 0px;
+  margin-left: 10px;
   border-radius: 10px;
+  height: auto;
+  @media (min-width: $mob_min) and (max-width: $smob_max){
+    margin-left:0;
+  }
 }
 .avatar_profile{
-    background-image: url('http://knowledge-commons.com/static/assets/images/avatar.png');
-    width: 60px;
-    height: 60px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
+  background-image: url(http://knowledge-commons.com/static/assets/images/avatar.png);
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+   @media (min-width: $mob_min) and (max-width: $smob_max){
+     text-align:center;
+   }
 }
 /* author */
 /* prev_next_blog */
 .prev_next_blog{
   padding: 10px 0px;
+  margin-right:0px;
+  margin-left: 0px;
   //border-top: 1px solid $stroke_color;
   //border-bottom: 1px solid $stroke_color;
   .prev{
@@ -2334,6 +2356,23 @@ body{
           background: lighten($theme_green,10%);
           color: #fff;
           transition:0.4s;
+        }
+      }
+    }
+  }
+  .pagination{
+    margin:0;
+    padding:0;
+    li{
+      a{
+        padding: 4px 9px;
+        font-size: 12px;
+        color: #333;
+      }
+      &.active{
+        a{
+          color: #fff;
+          background: $linkedin;
         }
       }
     }
@@ -2652,11 +2691,14 @@ body{
 }
 /* conatact_us_icon */
 .comments_section{
-  margin-left: 50px;
-  width: 80%;
+  margin-left: 10px;
+  width: 100%;
   float: left;
   border-top: 2px solid #e5e5e5;
-  
+  @media (min-width: $mob_min) and (max-width:$smob_max){
+    margin-left:0;
+    margin-top: 20px;
+  }
   .comments_title{
     font-size: 10px;
   }
@@ -4044,9 +4086,7 @@ body{
 /* bread_crums */
 .bread_crums{
   padding:25px 0px;
-
-  margin-top: 75px; 
-
+  margin-top: 100px; 
   padding-bottom: 0px;
   @media (min-width:$mob_min)and (max-width:$smob_max){
     display:none;
@@ -4308,7 +4348,6 @@ body{
   padding-bottom:10px;
   .author{
     padding:0;
-    font-family: 'Quicksand', sans-serif;
     .blog-det{
       margin-top: 0px;
       color: #fff;
@@ -4982,6 +5021,9 @@ body{
       letter-spacing: 1px;
       font-size: 24px;
       font-weight: bold;
+      &.email{
+        text-transform: none;
+      }
     }
     .contact_heading1{
       padding-left:15px;
@@ -5175,11 +5217,15 @@ p a{
   width: 100%;
   padding-top: 10px;
   padding-bottom: 12px;
-  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  @media(min-width: $mob_min) and (max-width: $mob_max){
+    margin:0px 0;
+  }
   .talkshop_content{
     color: #fff;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     padding-top: 0px;
     padding-bottom: 0px;
     margin:0;
@@ -5724,9 +5770,12 @@ p a{
    .bread_crums ul  li:last-child a span.name:after{
       display: none;
    }
+   .bread_crums ul  li .a{
+      cursor: default;
+   }
 /* service_banner starts here */
 .service_banner{
-  margin-top:65px;
+  margin-top:15px;
   font-family: 'Quicksand', sans-serif;
   @media(min-width: $mob_min) and (max-width: $tab_max){
     margin-top:0;
@@ -5832,9 +5881,9 @@ p a{
   }
   .service_quality{
     padding:0 5px;
-    min-height: 290px;
+    min-height: 250px;
     @media(min-width: $mob_min) and (max-width: $mob_max){
-      padding:0px 15px 5px 15px;
+      padding:15px;
     }
     .icon{
       i{
@@ -5878,10 +5927,7 @@ p a{
       position: relative;
       line-height: 1.9rem;
       @media(min-width: $mob_min) and (max-width: $tab_max){
-        font-size:16px;
-        padding-bottom: 0px;
-        padding-top: 0;
-        font-weight: 500;
+        font-size:18px;
       }
       &:after{
         content:"";
@@ -5948,6 +5994,7 @@ p a{
     }
   }
   &.mongo_service_quality{
+    margin-top: 10px;
      .heading{
       display: block;
       margin-bottom: 20PX;
@@ -5972,8 +6019,7 @@ p a{
         }
       }
     .service_quality{
-      min-height: 36
-      0px;
+      min-height: 300px;
       padding:20px;
       border: 7px solid #f1f1f1;
       margin-bottom: 20px;
@@ -6002,6 +6048,7 @@ p a{
   .service_quality{
     text-align: center;
     min-height: 240px;
+    margin-bottom: 50px;
     @media(min-width: $mob_min) and (max-width: $tab_max){
       min-height:auto;
       margin-bottom: 50px;
@@ -6088,7 +6135,7 @@ p a{
   &.mp_seo{
     .heading{
       display: block;
-      margin-bottom: 20PX;
+      margin-bottom: 0PX;
        span{
           font-weight: 400;
           font-size: 24px;
@@ -6119,7 +6166,7 @@ p a{
         }
       }
       .image{
-        margin-top:25px;
+        margin-top:5px;
         img{
           max-width: 100%;
         }
@@ -6128,10 +6175,7 @@ p a{
 }
 /* service_qualities ends here */
 .seo_banner{
-  margin-top: 65px;
-   @media(min-width: $mob_min) and (max-width: $smob_max){
-      margin-top: 0;
-   }
+  margin-top: 15px;
   .image{
     img{
       max-width: 100%;
@@ -6152,15 +6196,12 @@ p a{
        @media(min-width: $mob_min) and (max-width: $tab_max){
         padding-top: 10px;
         text-align: center;
-        font-size: 1.7rem;
+        font-size: 1.4rem;
        }
     }
   }
   &.sales_force_banner{
     font-family: 'Quicksand', sans-serif;
-     @media(min-width: $mob_min) and (max-width: $smob_max){
-        margin-top: 0;
-     }
     .banner_container{
       background: url(/static/site/images/sales_banner.png) no-repeat ;
       height:350px;
@@ -6317,6 +6358,10 @@ p a{
   }
   &.django_ecommerce_list{
     padding-top:20px;
+     @media(min-width: $mob_min) and (max-width: $tab_max){
+        padding-top: 5px;
+        margin-top: 0;
+     }
     .need_testing_block{
       .testing_left{
          ul{
@@ -6467,11 +6512,12 @@ p a{
   .how_we_do_col{
     margin-top: 10px;
     text-align: center;
+    padding:30px 0;
     .each_row{
       width: 20%;
     }
     .we_do_block{
-      padding:30px 20px;
+      padding:0px 20px;
       border-radius: 2px;
       transition: 0.5s ease-in-out all;
       .icon{
@@ -6499,7 +6545,7 @@ p a{
         margin-top:10px;
       }
       strong{
-        margin-top:20px;
+        margin-top:0px;
         display: inline-block;
         font-size: 1.4rem;
         color: #2f5374;
@@ -6527,6 +6573,7 @@ p a{
     }
   }
   &.seo_benifits_block{
+    margin-top: 15px;
     background: #1a8fb8;
     .how_we_do_col{
       .we_do_block{
@@ -6535,6 +6582,7 @@ p a{
         strong{
           font-size: 1rem;
           color: #fff;
+          margin-top: 10px;
         }
         .icon{
           i{
@@ -6552,7 +6600,7 @@ p a{
           content: "\f105";
           font-family: FontAwesome;
           display: inline-block;
-          top: 100px;
+          top: 70px;
           left: 280px;
           font-size: 100px;
           color: #68c3e2;
@@ -6886,9 +6934,6 @@ p a{
 .helping_block{
   margin-top: 40px;
   font-family: 'Quicksand', sans-serif;
-    @media(min-width: $mob_min) and (max-width: $mob_max){
-      margin-top: 0px;
-    }
      .heading{
       display: block;
       text-align: center; 
@@ -6914,9 +6959,6 @@ p a{
      }
      .helping_container{
       padding: 35px 0;
-       @media(min-width: $mob_min) and (max-width: $smob_max){
-          padding-top: 0;
-       }
       .helping_item{
         background: #333;
         padding:15px;
@@ -6924,11 +6966,23 @@ p a{
         font-size: 1.5rem;
         line-height: 1.9rem;
         font-weight: 500;
+        @media(min-width: $mob_min) and (max-width: $mob_max){
+          font-size:1.1rem;
+        }
+        img{
+          width: 12%;
+        }
         &.second{
           background: #e0393e;
+           img{
+            width: 12%;
+          }
         }
         &.third{
           background: #f79420;
+           img{
+           width: 45%;
+          }
         }
       }
      }
@@ -6939,9 +6993,6 @@ p a{
   margin-top: 30px;
   margin-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
-   @media(min-width: $mob_min) and (max-width: $mob_max){
-              margin-top:0;
-   }
   .contact_block{
       padding: 30px;
       background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
@@ -6949,7 +7000,7 @@ p a{
       background-position-y: 30px;
       background-image: none;
       background: #2f5374;
-      padding:15px;
+      padding:20px 0;
     }
      .contact_details{
       padding-left: 175px;
@@ -7017,11 +7068,13 @@ p a{
         font-size: 1.1rem;
         text-align: left;
         font-weight: 800;
+        line-height: 25px;
       }
       p{
         font-size: 0.9rem;
         line-height: 1.8rem;
         font-weight: 400;
+        text-align:left;
         color: #fff;
       }
     }
@@ -7032,10 +7085,6 @@ p a{
 .open_source_projects{
   font-family: 'Quicksand', sans-serif;
   margin:35px 0;
-    @media(min-width: $mob_min) and (max-width: $mob_max){
-      margin-top:20px;
-      margin-bottom: 20px;
-    }
   text-align: center;
   .heading{
       display: block;
@@ -7046,10 +7095,6 @@ p a{
       display: inline-block;
       position: relative;
       padding-bottom: 20px;
-      @media(min-width: $mob_min) and (max-width: $smob_max){
-      font-size: 18px;
-    font-weight: 500;
-  }
        &:after{
         content:"";
         position: absolute;
@@ -7156,9 +7201,6 @@ p a{
 
 .carousel-inner{
   margin-top: 25px;
-   @media(min-width: $mob_min) and (max-width: $smob_max){
-      margin-top: 0;
-   }
   .item{
     .carousel-content {
       color:black;
@@ -7188,8 +7230,8 @@ p a{
   background: none;
   left:20px;
   top: 20px;
-  @media(min-width: $mob_min) and (max-width: $smob_max){
-      left:-20px;
+  @media(min-width: $mob_min) and (max-width: $tab_max){
+      left:-30px;
     }
     @media(min-width: $tab_min) and (max-width: $tab_max){
         left:-45px;
@@ -7338,7 +7380,7 @@ p a{
         height: 450px;
         position: relative;
          @media(min-width: $mob_min) and (max-width: $mob_max){
-           height:auto;
+           height:500px;
          }
         .img_rel{
           position: absolute;
@@ -7350,7 +7392,6 @@ p a{
             left: 0;
             height: auto;
             width:110px;
-            top: 43%;
           }
         }
         .block{
@@ -7363,11 +7404,9 @@ p a{
             width:300px !important;
           }
           @media(min-width: $mob_min) and (max-width: $mob_max){
-             width:280px !important;
+             width:300px !important;
              text-align:left;
-             position: static !important;
              margin:0;
-             margin-left: 100px;
           }
           strong{
             font-size: 1.1rem;
@@ -7715,9 +7754,6 @@ p a{
 .react_about_row{
   font-family: 'Quicksand', sans-serif;
   margin-top: 80px;
-   @media(min-width: $mob_min) and (max-width: $smob_max){
-        margin-top: 10px;
-   }
   .heading{
     display: block;
     margin-bottom: 20px;
@@ -7980,6 +8016,7 @@ p a{
   }
 }
 /* lambda_container ends here */
+
 /* our_react_works starts here */
   .our_react_works{
     font-family: 'Quicksand', sans-serif;
@@ -8020,8 +8057,8 @@ p a{
         font-size: 1rem;
         font-weight: 400;
         background: #eee;
-        border-radius: 20px;
         display: inline-block;
+        border-radius: 20px;
         padding:8px 20px;
         margin:5px 5px;
       }
@@ -8067,7 +8104,6 @@ p a{
     background: url(/static/site/images/waves.png) no-repeat bottom right;
     background-size: 100%;
     padding-bottom: 50px;
-    margin-top: 15px;
    }
   .docker_conatiner_block{
     .content{
@@ -8164,7 +8200,7 @@ p a{
 /* django_features starts here */
 .django_features{
  font-family: 'Quicksand', sans-serif;
-    margin-top:50px;
+    margin-top:0px;
      .heading{
       display: block;
       margin-bottom: 20px;
@@ -8175,6 +8211,7 @@ p a{
         display: inline-block;
         position: relative;
         padding-bottom: 20px;
+        line-height: 30px;
          &:after{
           content:"";
           position: absolute;
@@ -8183,6 +8220,9 @@ p a{
           background: #1dabdd;
           left: 0;
           bottom: 0;
+          @media(min-width: $mob_min) and (max-width: $mob_max){
+            left:40%;
+          }
       }
     }
   }
@@ -8194,7 +8234,9 @@ p a{
       text-align: center;
       padding:10px;
       .feature_image{
-
+        img{
+          max-width: 100%;
+        }
       }
       .desc_position{
         display: none;
@@ -8237,14 +8279,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
   font-family: 'Quicksand', sans-serif;
   margin-top: 40px;
   .aws_row{
-    position: relative;
-    height: 280px;
-      @media(min-width: $mob_min) and (max-width: $tab_max){
-        position:static;
-      }
     .aws_item{
       font-size: 0.9rem;
-      padding:15px;
       .logo{
         float: left;
         display: inline-block;
@@ -8257,89 +8293,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
         p{
           font-weight: 400;
           margin-top: 6px;
-          font-size: 13px;
-        }
-      }
-      &.aws_icon{
-        background: none !important;
-        padding:0;
-        img{
-          max-width: 100%;
-        }
-      }
-      &.aws_pos{
-        position: absolute;
-        left: 0;
-        width: 230px;
-        height: 230px;
-        background:#eee;
-        border-radius: 50%;
-        text-align: center;
-        padding-top: 30px;
-         @media(min-width: $mob_min) and (max-width: $tab_max){
-          position:static;
-          width:auto;
-          height:auto;
-          background: none;
-          padding:0;
-          margin-bottom: 25px;
-        }
-        .aws_img{
-          max-width: 100%;
-        }
-        .logo{
-          display: block;
-          float: none;
-          text-align: center;
-        }
-        &.two{
-          top:30px;
-          left:40px;
-        }
-        &.three{
-          left: 80px;
-          top: 50px;
-        }
-        &.four{
-          left: 115px;                     
-        }
-        &.five{
-          left: 155px;
-          top:30px;
         }
       }
     }
     &.row_2{
       margin-top:35px;
     }
-  
-  &.aws_row_2{
-    .aws_item{
-      &.five{
-        left: 50px;
-        top: -15px;
-      }
-      &.three{
-        top:20px;
-      }
-      &.two{
-        top: -10px;
-      }
-    }
-  }
-   &.aws_row_3{
-    .aws_item{
-      &.one{
-        top: -50px;
-      }
-      &.three{
-        top:-50px;
-      }
-      &.two{
-        top: -75px;
-      }
-    }
-  }
   }
 }
 /* aws_services ends here */
@@ -8367,13 +8326,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
     line-height: 50px;
     padding-top: 0px;
     color: #444;
-  span{
-    @media(min-width: $mob_min) and (max-width: $smob_max){
-      padding-left:15px;
-      font-size: 20px;
-      font-weight: 500;
-    }
-  }
+    padding-left: 15px;
+    display: block;
 }
 
 /* sales_tabs_row starts here */
@@ -8382,9 +8336,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
   background: #019edb;
   padding-bottom: 40px;
   font-family: 'Quicksand', sans-serif;
-   @media(min-width: $mob_min) and (max-width: $smob_max){
-      margin-bottom:20px;
-   }
   .sales_tabs{
     ul{
       text-align: center;
@@ -8402,9 +8353,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
           letter-spacing: 0.5px;
           color: #fff;
           border-radius: 0;
-          @media(min-width: $mob_min) and (max-width: $smob_max){
+          @media(min-width: $mob_min) and (max-width: $mob_max){
             font-size:0.6rem;
-            padding:10px;
           }
           &:hover{
             background:darken(#019edb, 10%);
@@ -8436,6 +8386,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
 /* sales_tabs_row ends here */
 .seo_tag{
   color: #337ab7;
+  font-weight: 500;
 }
 
 /* about_mp starts here */
@@ -8521,4 +8472,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
     font-weight: 500;
     font-size: 20px;
   }
+}
+.blog_banner_wrap{
+  background:url(/static/site/images/new/blog_banner.jpg) no-repeat;
+  height: 360px;
+  padding-top: 20px;
+}
+pre.prettyprint{
+  width: 100%;
 }

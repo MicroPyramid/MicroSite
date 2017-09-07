@@ -1,7 +1,7 @@
 {% extends 'site/base.html' %}
 {% load blog_tags %}
 {% block title %}
-    Sitemap {{sitemap_links.number}} {{ block.super }}
+    Sitemap {{sitemap_links.number}} -  Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}
 {% endblock %}
 {% block country_urls %}
 {% endblock %}
@@ -22,7 +22,10 @@
     <li class="sitemap-parent"><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}contact-usa/'>Contact USA</a></li>
     <li class="sitemap-parent"><a href='https://micropyramid.com/{% if country and country != "us" %}{{ country }}/{% endif %}contact-uae/'>Contact UAE</a></li>
     {% for country in countries %}
+    {% if request.session.country == country.code %}
+    {% else %}
     <li class="sitemap-parent"><a href='https://micropyramid.com/sitemap-{{ country.code }}/'>Sitemap {{country.name}}</a></li>
+    {% endif %}
     {% endfor %}
     {% endif %}
 

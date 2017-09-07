@@ -12,12 +12,14 @@ import sendgrid
 from micro_admin.models import User
 from microsite.settings import SG_USER, SG_PWD
 from pages.models import Menu
+from micro_blog.forms import PlagiarismForm
 from micro_blog.models import Post
 from datetime import datetime
 from datetime import timedelta
 import requests
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from google import search
 
 
 def is_employee(function):
@@ -100,7 +102,7 @@ def menu_order(request, pk):
                     down_link.save()
                 except ObjectDoesNotExist:
                     pass
-                data = {'error': False}
+                data = {'error': False, 'message': 'Menu order updated successfully'}
         else:
             link_parent = Menu.objects.get(pk=pk).parent
             curr_link = Menu.objects.get(pk=pk)
@@ -116,7 +118,7 @@ def menu_order(request, pk):
                     up_link.save()
                 except ObjectDoesNotExist:
                     pass
-                data = {'error': False}
+                data = {'error': False, 'message': 'Menu order updated successfully'}
         return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
 
 
@@ -204,3 +206,18 @@ def google_login(request):
             request.META['HTTP_HOST'] + \
             reverse('micro_admin:google_login') + "&state=1235dfghjkf123"
         return HttpResponseRedirect(rty)
+
+
+def plagiarism_checker(request):
+    if request.method == 'POST':
+        validate_plagiarism = PlagiarismForm(request.POST)
+        if validate_plagiarism.is_valid():
+            all_urls = []
+            for each in search(request.POST['description'], tld="co.in", num=10, stop=1, pause=2):
+                all_urls.append(each)
+            data = {'error': False, 'response': all_urls}
+        else:
+            data = {'error': True, 'response': validate_plagiarism.errors}
+        return HttpResponse(json.dumps(data))
+
+    return render(request, 'admin/plagiarism.html')

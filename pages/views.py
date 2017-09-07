@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render, get_object_or_404
+from django.shortcuts import render_to_response, render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template.context_processors import csrf
 import json
@@ -7,7 +7,6 @@ from pages.models import Page, Menu
 from micro_blog.models import Country
 from pages.forms import MenuForm, PageForm
 from django.db.models.aggregates import Max
-import itertools
 from micro_blog.models import Category, Post
 from django.template.defaultfilters import slugify
 from django.utils.http import is_safe_url
@@ -210,10 +209,11 @@ def change_page_status(request, pk):
 
 @login_required
 def menu(request):
-    iterator = itertools.count()
-    menu_list = Menu.objects.filter(parent=None).order_by('lvl')
+    countries = Country.objects.all()
+    country_slug = request.POST.get('country') if request.POST.get('country') else 'usa'
+    menu_list = Menu.objects.filter(parent=None, country__slug=country_slug).order_by('lvl')
     return render(request, 'admin/content/menu/menu-list.html',
-                  {'menu_list': menu_list, 'iterator': iterator})
+                  {'menu_list': menu_list, 'countries': countries, 'country_slug': country_slug})
 
 
 @login_required
@@ -240,62 +240,76 @@ def add_menu(request):
         c = {}
         c.update(csrf(request))
         parent = Menu.objects.filter(parent=None).order_by('lvl')
+        countries = Country.objects.all()
         return render(request, 'admin/content/menu/new-menu-item.html',
-                      {'parent': parent, 'csrf_token': c['csrf_token']})
+                      {'parent': parent, 'csrf_token': c['csrf_token'],
+                       'countries': countries})
     else:
         return render_to_response('admin/accessdenied.html')
 
 
 @login_required
 def edit_menu(request, pk):
-    if request.method == 'POST':
-        menu_instance = get_object_or_404(Menu, pk=pk)
-        current_parent = menu_instance.parent
-        current_lvl = menu_instance.lvl
-        validate_menu = MenuForm(request.POST, instance=menu_instance)
-
-        if validate_menu.is_valid():
-            updated_menu = validate_menu.save(commit=False)
-            if updated_menu.parent != current_parent:
-                try:
-                    if updated_menu.parent.id == updated_menu.id:
-                        data = {'error': True, 'response': {
-                            'parent': 'you can not choose the same as parent'}}
-                        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
-                except Exception:
-                    pass
-
-                lnk_count = Menu.objects.filter(
-                    parent=updated_menu.parent).count()
-                updated_menu.lvl = lnk_count + 1
-                lvlmax = Menu.objects.filter(
-                    parent=current_parent).aggregate(Max('lvl'))['lvl__max']
-                if lvlmax != 1:
-                    for i in Menu.objects.filter(parent=current_parent, lvl__gt=current_lvl, lvl__lte=lvlmax):
-                        i.lvl = i.lvl-1
-                        i.save()
-            if request.POST.get('url'):
-                updated_menu.url = request.POST.get('url').rstrip('/')
+    country = request.GET.get('country') if request.GET.get('country') else request.POST.get('country_id')
+    menu_instance = Menu.objects.filter(pk=pk, country__slug=country).first()
+    if not menu_instance:
+        each = Menu.objects.filter(pk=pk).first()
+        if each:
+            menu_instance = Menu.objects.filter(title=each.title, country__slug=country).first()
+    if menu_instance:
+        if request.method == 'POST':
+            current_parent = menu_instance.parent
+            current_lvl = menu_instance.lvl
+            if menu_instance:
+                validate_menu = MenuForm(request.POST, instance=menu_instance)
             else:
-                updated_menu.url = 'none'
+                validate_menu = MenuForm(request.POST)
+            if validate_menu.is_valid():
+                updated_menu = validate_menu.save(commit=False)
+                country = Country.objects.get(slug=country)
+                if country:
+                    updated_menu.country = country
+                if updated_menu.parent != current_parent:
+                    try:
+                        if updated_menu.parent.id == updated_menu.id:
+                            data = {'error': True, 'response': {
+                                'parent': 'you can not choose the same as parent'}}
+                            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+                    except Exception:
+                        pass
 
-            if request.POST.get('status', ''):
-                updated_menu.status = 'on'
+                    lnk_count = Menu.objects.filter(
+                        parent=updated_menu.parent).count()
+                    updated_menu.lvl = lnk_count + 1
+                    lvlmax = Menu.objects.filter(
+                        parent=current_parent).aggregate(Max('lvl'))['lvl__max']
+                    if lvlmax != 1:
+                        for i in Menu.objects.filter(parent=current_parent, lvl__gt=current_lvl, lvl__lte=lvlmax):
+                            i.lvl = i.lvl-1
+                            i.save()
+                if request.POST.get('url'):
+                    updated_menu.url = request.POST.get('url').rstrip('/')
+                else:
+                    updated_menu.url = 'none'
 
-            updated_menu.save()
+                if request.POST.get('status', ''):
+                    updated_menu.status = 'on'
 
-            data = {'error': False, 'response': 'updated successfully'}
-        else:
-            data = {'error': True, 'response': validate_menu.errors}
-        return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+                updated_menu.save()
 
-    if request.user.is_superuser:
-        parent = Menu.objects.filter(parent=None).order_by('lvl')
-        current_menu = get_object_or_404(Menu, pk=pk)
-        c = {}
-        c.update(csrf(request))
-        return render(request, 'admin/content/menu/edit-menu-item.html',
-                      {'csrf_token': c['csrf_token'], 'current_menu': current_menu, 'parent': parent})
+                data = {'error': False, 'response': 'updated successfully'}
+            else:
+                data = {'error': True, 'response': validate_menu.errors}
+            return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')
+
+        if request.user.is_superuser:
+            parent = Menu.objects.filter(parent=None, country__slug=country).order_by('lvl')
+            countries = Country.objects.all()
+            c = {}
+            c.update(csrf(request))
+            return render(request, 'admin/content/menu/edit-menu-item.html',
+                          {'csrf_token': c['csrf_token'], 'current_menu': menu_instance,
+                           'parent': parent, 'countries': countries})
     else:
         return render_to_response('admin/accessdenied.html')
 
@@ -309,17 +323,28 @@ def site_page(request, slug):
         country_code = request.session['country']
     else:
         country_code = request.COUNTRY_CODE
+    if '/us/' in request.path and country_code =='us':
+        return HttpResponseRedirect('/'+request.path.split('/us/')[-1])
+
     country = Country.objects.filter(code=slug)
     if country:
         if country[0].code == settings.COUNTRY_CODE:
             return HttpResponseRedirect('/')
         return render(request, 'site/index.html', {
             'google_analytics_code': settings.GOOGLE_ANALYTICS_CODE})
-    pages = Page.objects.filter(slug=slug, country__code=country_code, is_active=True)
-    if not pages:
-        pages = Page.objects.filter(slug=slug, is_default=True, is_active=True)
-    if pages:
-        page = pages[0]
+
+    page = Page.objects.filter(slug=slug, country__code=country_code, is_active=True).first()
+    if not page:
+        page = Page.objects.filter(slug=slug).first()
+        if page:
+            page = Page.objects.filter(title__iexact=page.title, country__code=country_code, is_active=True).first()
+            if page.country.code == 'us':
+                return HttpResponseRedirect('/' + page.slug +'/')
+            else:
+                return HttpResponseRedirect('/' + page.country.code + '/' + page.slug +'/')
+    if not page:
+        page = Page.objects.filter(slug=slug, is_default=True, is_active=True)
+    if page:
         posts = Post.objects.filter(status='P').order_by('-published_on')
         if page.category.all():
             posts = Post.objects.filter(category__in=page.category.all(), status='P').order_by('-published_on')

@@ -46,7 +46,7 @@
     <!-- google fonts ends here-->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-b401f633124706ea8328.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-52e62c606816abfa5587.css" id="packer_css"/>
     {% block extra-styles %}
     {% endblock %}
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css"></script>
@@ -57,10 +57,8 @@
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
       ga('create', '{{request.session.google_analytics_code}}', 'auto');
       ga('send', 'pageview');
-      
     </script>
      <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1768307.js"></script>
@@ -174,7 +172,7 @@
             </div>
             {% endblock %}
             <div>
-              {% get_single_level_menus as single_level_menu_list %}
+              {% get_single_level_menus request.session.country as single_level_menu_list %}
               {% if request.session.design|slugify != 'mobile'|slugify %}
               <ul id="single_level_menu">
                 <li>
@@ -209,7 +207,7 @@
                 </span>
               </a>
               <!-- menu-icon-wrapper -->
-              {% get_menus as menu_list %}
+              {% get_menus request.session.country as menu_list %}
               {% include "site/menu.html" with  menu_list=menu_list %}
               {% if request.session.design|slugify == 'mobile'|slugify %}
               <ul id="single_level_menu">
@@ -269,7 +267,7 @@
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-12 footer-links">
                   <ul class="inner-footer-list">
-                    {% get_child_menus as menu_list %}
+                    {% get_child_menus request.session.country as menu_list %}
                     {% for menu in menu_list|slice:"0:10" %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
                     {% endfor %}
@@ -277,7 +275,7 @@
                 </div>
                 <div class="col-md-2 col-sm-4 col-xs-12 footer-links">
                   <ul class="inner-footer-list">
-                    {% get_child_menus as menu_list %}
+                    {% get_child_menus request.session.country as menu_list %}
                     {% for menu in menu_list|slice:"10:20" %}
                     {% if menu.parent.title != 'Contact Us' %}
                     <li>{% if menu.url|slugify != 'none' %}<a href="{% if menu.url == 'blog' or menu.parent.title == 'Contact Us' %}{% else %}{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %} /{{request.session.country}}{% endif %}{% endif %}{% endif %}/{{menu.url}}/">{{menu.title|capfirst}}</a>{%else%}{{menu.title}}{%endif%}</li>
@@ -288,16 +286,16 @@
                 <div class="col-md-6 col-sm-12" style="padding:0;">
                   <div class="col-md-4 col-sm-4 col-xs-12 footer-mp">
                     <p><b>MicroPyramid - India</b></p>
-                    <p>HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072, +91 9959166266</p>
+                    <p>HIG499, 6th phase KPHB, <br/>Hyderabad, India - 500072, <br/>+91 9959166266</p>
                     <p>Monday - Friday : 10:00 - 19:00</p>
                   </div>
                   <div class="col-md-4 col-sm-4 col-xs-12 footer-mp">
-                    <p><b>MicroPyramid - USA</b></p>
-                    <p>3737 Mapleshade Ln,<br>Ste #103,<br>  Plano TX 75075, +1 5102300949</p>
-                  </div>
+                      <p><b>MicroPyramid - USA</b></p>
+                      <p>3737 Mapleshade Ln,<br>Ste #103, Plano TX 75075, <br>+1 5102300949</p>
+                   </div>
                   <div class="col-md-4 col-sm-4 col-xs-12 footer-mp">
                     <p><b>MicroPyramid - UAE</b></p>
-                    <p>Khalifa Building(Near Old Nesto Super Market),<br>Opp Fire Station, Sharjah,<br> UAE 341246, +971 566061239</br></br></p>
+                    <p>Sharjah,<br> UAE 341246</br></br></p>
                     <div id="version-switcher"></div>
                   </div>
                 <form action="{% url 'set_country' %}" class="hide" id="country_set_form" method="post">
@@ -317,7 +315,7 @@
                       <li><a class="reddit" href="https://www.reddit.com/r/MicroPyramid/" target="_blank"><i class="fa fa-reddit"></i></a></li>
                     </ul>
                     <div class="text-left sitemap_rights">
-                      <span class="copy-right">Copyright © {% now "Y" %} MicroPyramid.</span>
+                      <span class="copy-right">Copyright © {% now "Y" %} MicroPyramid Inc.</span>
                       <span class="sitemap"><a href="/sitemap/">Site Map</a></span>
                   </div>
                 </div>
@@ -337,7 +335,7 @@
                 <script src="/static/site/js/crum-mega-menu.js"></script>
                 <script src="/static/site/js/theme-plugins.js"></script>
                 <script async defer src="https://buttons.github.io/buttons.js"></script>
-                <script id="packer_js" src="/static/webpack_bundles/index-b401f633124706ea8328.js" type="text/javascript"></script>
+                <script id="packer_js" src="/static/webpack_bundles/index-52e62c606816abfa5587.js" type="text/javascript"></script>
                 <script type="application/ld+json">
                   {
                     "@context" : "http://schema.org",
@@ -355,15 +353,13 @@
                   $(document).ready(function(e) {
                     country = $('#set_country').val()
                     if (country == 'us'){
-
                       $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +1 5102300949</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>3737 Mapleshade Ln, Ste #103, Plano TX 75075</div><a href="/'+ country +'/contact-usa/">Contact Us</a>')
-
                     }
                     else if (country == 'in'){
                       $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +91 9959166266</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>HIG499, 6th phase KPHB, Hyderabad, India - 500072</div><a href="/'+ country +'/contact-india/">Contact Us</a>')
                     }
                     else if (country == 'ae'){
-                      $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +971 566061239</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>Khalifa Building(Near Old Nesto Super Market), Opp Fire Station, Sharjah, UAE 341246</div><a href="/'+ country +'/contact-uae/">Contact Us</a>')
+                      $('.contact_details').html('<div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>Sharjah, UAE 341246</div><a href="/'+ country +'/contact-uae/">Contact Us</a>')
                     }
                     else{
                       $('.contact_details').html('<div class="detail"><i class="fa fa-phone"></i> +1 5102300949</div><div class="detail"><i class="fa fa-envelope"></i> hello@micropyramid.com</div><div class="detail"><i class="fa fa-map-marker"></i>3737 Mapleshade Ln, Ste #103, Plano TX 75075</div><a href="/'+ country +'/contact-usa/">Contact Us</a>')

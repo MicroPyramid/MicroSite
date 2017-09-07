@@ -588,14 +588,6 @@ def contact(request):
             sending_msg.add_to("hello@micropyramid.com")
             sg.send(sending_msg)
 
-            sending_msg = sendgrid.Mail()
-            sending_msg.set_subject("Service Request - Micropyramid")
-            sending_msg.set_html(message)
-            sending_msg.set_text('Service Request')
-            sending_msg.set_from(request.POST.get('email'))
-            sending_msg.add_to("bobby@micropyramid.com")
-            sg.send(sending_msg)
-
             request.session['thankyou'] = True
             data = {'error': False, 'response': 'Contact submitted successfully'}
             return HttpResponse(json.dumps(data), content_type='application/json; charset=utf-8')

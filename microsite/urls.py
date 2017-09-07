@@ -87,7 +87,6 @@ urlpatterns = [
 ]
 
 urlpatterns += country_patterns(
-    # url(r'^i18n/', include('django.conf.urls.i18n')),
     url(_(r'^$'), index),
     url(r'^contact-india/$', contact, name="contact_india"),
     url(r'^contact-usa/$', contact, name="contact_usa"),

@@ -8,36 +8,50 @@
     <h3 class="panel-title">Edit Menu</h3>
   </div>
   <div class="panel-body">
-    <form action="." method="POST" id="menuform">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="exampleInputEmail1">Title</label>
-        <input type="Text" class="form-control" id="title" name="title" value="{{current_menu.title}}">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Parent</label>
-        <select class="form-control" id="parent" name="parent">
-          <option value="">Top Level</option>
-          {% recurse menu.menu_set.all|dictsort:"lvl"  with parent as menu %}
-          {% loop %}
-          <option value="{{ menu.id }}" {% if current_menu.parent.id == menu.id %} selected="selected" {% endif %}>
-          {% for i in level|add:"-1"|get_range %}----{% endfor %}{{menu.title}}</option>
-          {% child %}
-          {% endloop %}
-          {% endrecurse %}
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">URL</label>
-        <input type="text" class="form-control" id="url" name="url" value="{{current_menu.url}}">
-      </div>
-      <div class="draft-box">
-        <input type="checkbox" name="status" value="on" {% if current_menu.status == 'on' %} checked {% endif %}> <label>Active</label>
-      </div>
-      <div class="save-btn">
-        <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
-      </div>
-    </form>
+    <div class="col-xs-3"> <!-- required for floating -->
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+      {% for country in countries %}
+        <li {% if country.slug == request.GET.country %}class="active"{% endif %}><a href="?country={{ country.slug }}">{{ country.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-xs-9">
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <form action="." method="POST" id="menuform">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="exampleInputEmail1">Title</label>
+              <input type="Text" class="form-control" id="title" name="title" value="{{current_menu.title}}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Parent</label>
+              <select class="form-control" id="parent" name="parent">
+                <option value="">Top Level</option>
+                {% recurse menu.menu_set.all|dictsort:"lvl"  with parent as menu %}
+                {% loop %}
+                <option value="{{ menu.id }}" {% if current_menu.parent.id == menu.id %} selected="selected" {% endif %}>
+                {% for i in level|add:"-1"|get_range %}----{% endfor %}{{menu.title}}</option>
+                {% child %}
+                {% endloop %}
+                {% endrecurse %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">URL</label>
+              <input type="text" class="form-control" id="url" name="url" value="{{current_menu.url}}">
+              <input type="hidden" name="country_id" id="country_id" value="{{ request.GET.country }}"/>
+            </div>
+            <div class="draft-box">
+              <input type="checkbox" name="status" value="on" {% if current_menu.status == 'on' %} checked {% endif %}> <label>Active</label>
+            </div>
+            <div class="save-btn">
+              <i class="fa fa-floppy-o"></i><input type="submit" value="Save"  class="save" id="search_lessons">
+            </div>
+          </form>
+        </div>
+    </div>
   </div>
 </div>
 <!-- main content ends here-->

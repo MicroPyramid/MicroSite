@@ -27,6 +27,15 @@
         </select>
       </div>
       <div class="form-group">
+        <label for="exampleInputEmail1">Country</label>
+        <select class="input select2" placeholder="country" name="country" id="country">
+          <option value="">Select A Country</option>
+          {% for country in countries %}
+          <option value="{{country.id}}" class="country_id">{{country.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
         <label for="exampleInputPassword1">URL</label>
         <input type="text" class="form-control" id="url" name="url" value="https://">
       </div>

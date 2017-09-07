@@ -307,8 +307,8 @@ if SENTRY_ENABLED:
 #     os.path.join(BASE_DIR, 'locale'),
 # )
 
-GP_CLIENT_ID = "983386206805-0dns7vrdaqcrn2nfls914b0vjjdhnhnb.apps.googleusercontent.com"
-GP_CLIENT_SECRET = "vO4tq49ahgH6afrEzrIQSIIU"
+GP_CLIENT_ID = os.getenv('GPCLIENTID')
+GP_CLIENT_SECRET = os.getenv('GPCLIENTSECRET')
 
 try:
     from microsite.settings_local import *  # noqa
