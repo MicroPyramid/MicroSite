@@ -36,7 +36,7 @@ def sitemap_xml(request, **kwargs):
                 xml = xml + '<url><loc>https://micropyramid.com/' + str(country) + '/' + menu.url + '/</loc></url>'
     categories = Category.objects.filter(is_display=True)
     for category in categories:
-        if category.post_set.filter(status='P').exists():
+        if category.blog_posts.filter(status='P').exists():
             xml = xml + '<url><loc>https://micropyramid.com/blog/category/' + category.slug + '/'
             xml = xml + '</loc>/</url>'
 

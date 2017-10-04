@@ -15,6 +15,15 @@ class BlogCategoryForm(forms.ModelForm):
         model = Category
         exclude = ('slug',)
 
+    def __init__(self, *args, **kwargs):
+        super(BlogCategoryForm, self).__init__(*args, **kwargs)
+
+    def clean_max_published_blogs(self):
+        if self.cleaned_data['max_published_blogs'] >= self.cleaned_data['min_published_blogs']:
+            return self.cleaned_data['max_published_blogs']
+        else:
+            raise forms.ValidationError('Maximum No of blogposts should be greater than minimum')
+
 
 class CustomBlogSlugInlineFormSet(forms.BaseInlineFormSet):
     def clean(self):

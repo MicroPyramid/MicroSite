@@ -22,7 +22,9 @@ class UserForm(forms.ModelForm):
                 'fb_profile',
                 'tw_profile',
                 'ln_profile',
-                'google_plus_url'
+                'google_plus_url',
+                "max_published_blogs",
+                "min_published_blogs",
             ]
 
 

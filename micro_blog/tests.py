@@ -21,7 +21,7 @@ class micro_blog_forms_test(TestCase):
         self.user = User.objects.create_superuser(
             'mp@mp.com', 'micro-test', 'mp')
         self.category = Category.objects.create(
-            name='django', description='django desc')
+            name='django', description='django desc', max_published_blogs=5, min_published_blogs=2)
         self.blogppost = Post.objects.create(
             title='python introduction', user=self.user,
             content='This is content', category=self.category,
@@ -39,7 +39,7 @@ class micro_blog_forms_test(TestCase):
 
     def test_BlogCategoryForm(self):
         form = BlogCategoryForm(
-            data={'name': 'django form', 'description': 'django'})
+            data={'name': 'django form', 'description': 'django', 'max_published_blogs': 5, 'min_published_blogs': 2})
         self.assertTrue(form.is_valid())
 
     def test_invalid_BlogSlugFormSetForm(self):
@@ -66,7 +66,7 @@ class category_models_test(TestCase):
     def create_category(
         self, name="simple page", description="simple page content"
     ):
-        return Category.objects.create(name=name, description=description)
+        return Category.objects.create(name=name, description=description, max_published_blogs=5, min_published_blogs=2)
 
     def test_category_creation(self):
         w = self.create_category()
@@ -102,7 +102,7 @@ class post_models_test(TestCase):
                 status="D"
             ):
         category = Category.objects.create(
-            name=category, description=description)
+            name=category, description=description, max_published_blogs=5, min_published_blogs=2)
         tag = Tags.objects.create(name=tag)
         user = User.objects.create_superuser('mp@mp.com', 'micro-test', 'mp')
 
@@ -130,9 +130,9 @@ class micro_blog_views_test_with_employee(TestCase):
         self.user = User.objects.create_user(
             'testuser', "testuser@micropyramid.com", 'userpws')
         self.category = Category.objects.create(
-            name='category', description='category desc')
+            name='category', description='category desc', max_published_blogs=5, min_published_blogs=2)
         self.django_category = Category.objects.create(
-            name='django', description='category desc')
+            name='django', description='category desc', max_published_blogs=5, min_published_blogs=2)
         self.blogpost = Post.objects.create(
             title='python blog',
             user=self.user,
@@ -292,7 +292,7 @@ class micro_blogviews_get(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
         self.category = Category.objects.create(
-            name='django', description='django desc')
+            name='django', description='django desc', max_published_blogs=5, min_published_blogs=2)
         self.blogppost = Post.objects.create(
             title='other python introduction',
             user=self.user,
@@ -400,7 +400,7 @@ class micro_blog_post_data(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
         self.category = Category.objects.create(
-            name='django', description='django desc')
+            name='django', description='django desc', max_published_blogs=5, min_published_blogs=2)
         self.blogppost = Post.objects.create(
             title='django introduction',
             user=self.user,
@@ -597,7 +597,7 @@ class micro_blog_post_data(TestCase):
 
         response = self.client.post(
             '/blog/new-category/',
-            {'name': 'django form', 'description': 'django'})
+            {'name': 'django form', 'description': 'django', 'max_published_blogs': 5, 'min_published_blogs': 2})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
             'Blog category created') in response.content.decode('utf8'))
@@ -613,7 +613,7 @@ class micro_blog_post_data(TestCase):
 
         response = self.client.post(
             '/blog/edit-category/django-form/',
-            {'name': 'django new', 'description': 'django'})
+            {'name': 'django new', 'description': 'django', 'max_published_blogs': 5, 'min_published_blogs': 2})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
             'Blog category updated') in response.content.decode('utf8'))
@@ -669,7 +669,7 @@ class micro_user_test(TestCase):
         self.user = User.objects.create_user(
             'test@micropyramid.com', 'testuser', 'test')
         self.category = Category.objects.create(
-            name='django', description='django desc')
+            name='django', description='django desc', max_published_blogs=5, min_published_blogs=2)
         self.blogppost = Post.objects.create(
             title='new python introduction', user=self.user,
             content='This is content', category=self.category,

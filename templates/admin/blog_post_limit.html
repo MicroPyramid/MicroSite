@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %} {% block stage %}
+<style type="text/css">
+  .display{
+    display: none;
+  }
+</style>
+<!-- main content starts here-->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">BlogPost Limit</h3>
+  </div>
+  <div class="panel-body">
+    <fieldset>
+      <form method="POST" id="blogpostlimitform">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail">Min Blogposts</label>
+          <input type="number" class="form-control" id="min_published_blogs" name="min_published_blogs" min='0' value="{{ users.0.min_published_blogs }}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail">Max Blogposts</label>
+          <input type="number" class="form-control" id="max_published_blogs" name="max_published_blogs" min='0' value="{{ users.0.max_published_blogs }}">
+        </div>
+        <div class="save-btn">
+          <i class="fa fa-floppy-o"></i>
+          <input type="submit" value="Save" class="save" id="search_lessons">
+        </div>
+      </form>
+      <div class="all_urls display">
+      </div>
+    </fieldset>
+  </div>
+</div>
+<!-- main content ends here-->
+<script type="text/javascript">
+  $ = jQuery;
+  $("form#blogpostlimitform").submit(function(e) {
+    e.preventDefault();
+    $.post(".", $("form#blogpostlimitform").serialize(), function(msg) {
+      console.log(msg)
+      $('p.failure').remove();
+      $('.all_urls').hide()
+      if (msg.error) {
+          $('#max_published_blogs').after('<p class="failure">' + msg.response + '</p>');
+      } else {
+        alert(msg.response)
+        window.location = "/portal/"
+
+      }
+    }, 'json');
+  });
+</script>
+{% endblock %}

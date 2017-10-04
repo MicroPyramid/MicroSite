@@ -1,6 +1,7 @@
 import os
 from django.utils.translation import ugettext_lazy as _
 import djcelery
+from celery.schedules import crontab
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -8,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = ')c#(=l$5n+6xc7irx%7u(0)^%h##tj2d=v*_5#62m=o&zc_g7p'
 
-DEBUG = False
+DEBUG = os.getenv('DEBUG', False)
 
 DEBUG404 = True
 ALLOWED_HOSTS = ['.micropyramid.com', 'localhost', '127.0.0.1', '.localtunnel.me', 'test.microsite.com', '*']
@@ -157,10 +158,18 @@ CELERY_TIMEZONE = "Asia/Calcutta"
 
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler"
 
+CELERYBEAT_SCHEDULE = {
+    # Executes every day evening at 5:00 PM GMT +5.30
+    'run-every-sat-morning': {
+        'task': 'micro_blog.tasks.report_on_blog_post_published_limit',
+        'schedule': crontab(hour='10', minute='00', day_of_week='sat'),
+    },
+}
 
 SG_USER = os.getenv('SGUSER') if os.getenv('SGUSER') else ''
 SG_PWD = os.getenv('SGPWD') if os.getenv('SGPWD') else ''
 SG_AUTHORIZATION = os.getenv('SGAUTHORIZATION') if os.getenv('SGAUTHORIZATION') else ''
+
 
 GGL_URL_API_KEY = os.getenv('GGLAPIKEY') if os.getenv('GGLAPIKEY') else ''
 
@@ -309,11 +318,6 @@ if SENTRY_ENABLED:
 
 GP_CLIENT_ID = os.getenv('GPCLIENTID')
 GP_CLIENT_SECRET = os.getenv('GPCLIENTSECRET')
-
-try:
-    from microsite.settings_local import *  # noqa
-except ImportError as e:
-    pass
 
 
 WEB_PACK_FILES = [

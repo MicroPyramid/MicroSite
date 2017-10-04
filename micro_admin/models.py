@@ -48,6 +48,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     website = models.URLField(default='', null=True)
     phones = models.TextField(max_length=100, default='', null=True)
     pincode = models.TextField(max_length=50, default='', null=True)
+    min_published_blogs = models.IntegerField(default=0)
+    max_published_blogs = models.IntegerField(default=0)
 
     objects = UserManager()
 
