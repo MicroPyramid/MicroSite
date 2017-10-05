@@ -227,13 +227,10 @@ def plagiarism_checker(request):
 def update_blog_post_limit(request):
     users = User.objects.filter(user_roles='Admin')
     if request.method == 'POST':
-        print (request.POST, request.POST.get('max_published_blogs'), request.POST.get('min_published_blogs'))
         if int(request.POST.get('max_published_blogs')) >= int(request.POST.get('min_published_blogs')):
-            print ("hello")
             users.update(max_published_blogs=request.POST.get('max_published_blogs'), min_published_blogs=request.POST.get('min_published_blogs'))
             data = {'error': False, 'response': 'Updated Successfully'}
         else:
-            print ("hai")
             data = {'error': True, 'response': 'Maximum No of blogposts should be greater than minimum'}
         return HttpResponse(json.dumps(data))
 

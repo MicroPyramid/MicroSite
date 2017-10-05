@@ -82,7 +82,7 @@ def report_on_blog_post_published_limit():
         str(end_week), "%Y-%m-%d").strftime("%d-%m-%Y")
     min_blogposts = 0
     for user in users:
-        sg = sendgrid.SendGridClient('peeljobs', '73etywgeugwqey56')
+        sg = sendgrid.SendGridClient(settings.SG_USER, settings.SG_PWD)
         contact_msg = sendgrid.Mail()
         temp = loader.get_template('admin/blogposts_report.html')
         rendered = temp.render({'posts': posts, 'blog_posts': blog_posts, 'start_week': start_week, 'end_week': end_week, 'user': user, 'complete_categories': complete_categories, 'incomplete_categories': incomplete_categories})
