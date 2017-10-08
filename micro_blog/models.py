@@ -11,6 +11,8 @@ class Category(models.Model):
     slug = models.CharField(max_length=50, unique=True)
     description = models.CharField(max_length=500)
     is_display = models.BooleanField(default=False)
+    min_published_blogs = models.IntegerField()
+    max_published_blogs = models.IntegerField()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -88,7 +90,7 @@ class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     content = models.TextField()
     excerpt = models.CharField(max_length=500, default="")
-    category = models.ForeignKey(Category)
+    category = models.ForeignKey(Category, related_name='blog_posts')
     tags = models.ManyToManyField(Tags, related_name='rel_posts', blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, blank=True)
     published_on = models.DateField(blank=True, null=True)

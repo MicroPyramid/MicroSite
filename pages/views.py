@@ -324,7 +324,7 @@ def site_page(request, slug):
     else:
         country_code = request.COUNTRY_CODE
     if '/us/' in request.path and country_code =='us':
-        return HttpResponseRedirect('/'+request.path.split('/us/')[-1])
+        return redirect('/'+request.path.split('/us/')[-1], permanent=True)
 
     country = Country.objects.filter(code=slug)
     if country:
@@ -339,9 +339,9 @@ def site_page(request, slug):
         if page:
             page = Page.objects.filter(title__iexact=page.title, country__code=country_code, is_active=True).first()
             if page.country.code == 'us':
-                return HttpResponseRedirect('/' + page.slug +'/')
+                return redirect('/' + page.slug +'/', permanent=True)
             else:
-                return HttpResponseRedirect('/' + page.country.code + '/' + page.slug +'/')
+                return redirect('/' + page.country.code + '/' + page.slug +'/', permanent=True)
     if not page:
         page = Page.objects.filter(slug=slug, is_default=True, is_active=True)
     if page:

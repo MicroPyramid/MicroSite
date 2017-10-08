@@ -6,6 +6,15 @@
 </ol>
 {% endblock breadcrumb %}
 {% block stage %}
+<style type="text/css">
+  .min_posts{
+    font-size: 18px;
+  }
+</style>
+<div>
+    <label class="min_posts">Min Blogposts: {{ admin_users.0.min_published_blogs }}</label>
+    <label class="min_posts">Max Blogposts: {{ admin_users.0.max_published_blogs }}</label>
+  </div>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Users</h3>

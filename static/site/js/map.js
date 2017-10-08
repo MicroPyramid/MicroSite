@@ -33,7 +33,7 @@ function map_dispaly() {
     title: 'MicroPyramid'
   });
   /* marker */
-  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>Hig 499, 6th phase KPHB,<br/> Hyderabad, India - 500072</b></address><a target='_blank' href='https://www.google.co.in/maps/place/MicroPyramid+Informatics+Pvt+Ltd/@17.4857894,78.387813,17z/data=!3m1!4b1!4m2!3m1!1s0x3bcb9144f52b17db:0xa94f62d5a7e9c69a?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
+  var string_content="<div class='map_address'><br><img src='/static/site/images/new/company_logo.gif'><br><br><address>Krishe Sapphire, 6th Floor, Madhapur<br/> Hyderabad, India - 500081</b></address><a target='_blank' href='https://www.google.co.in/maps/place/Krishe+Sapphire/@17.4424702,78.3871102,21z/data=!4m8!1m2!2m1!1sKrishe+Sapphire+6th+Floor,+Madhapur!3m4!1s0x0:0xe73625a226ee0c02!8m2!3d17.442418!4d78.3871291?hl=en'><img src='/static/site/images/new/dirextions_link.png'></a></div>"
   /* directions */
   var infowindow = new google.maps.InfoWindow({
   content: string_content,

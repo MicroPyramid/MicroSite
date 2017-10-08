@@ -9,6 +9,7 @@ static/site/images/*
 static/admin/images/*
 static/uploads
 .coverage
+manage_local.py
 fabfile
 .sass-cache
 microsite/settings_local.py

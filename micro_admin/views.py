@@ -13,7 +13,7 @@ from micro_admin.models import User
 from microsite.settings import SG_USER, SG_PWD
 from pages.models import Menu
 from micro_blog.forms import PlagiarismForm
-from micro_blog.models import Post
+from micro_blog.models import Post, Subscribers
 from datetime import datetime
 from datetime import timedelta
 import requests
@@ -50,7 +50,8 @@ def index(request):
             previous_date = datetime.strptime(str(datetime.now().date() - timedelta(days=7)), "%Y-%m-%d").strftime("%Y-%m-%d")
             post = Post.objects.filter(created_on__range=(previous_date, current_date)).values_list('user', flat=True)
             users = User.objects.filter(id__in=post)
-        return render(request, 'admin/index.html', {'users' : users})
+        admin_users = User.objects.filter(user_roles='Admin')
+        return render(request, 'admin/index.html', {'users' : users, "admin_users": admin_users})
     if request.method == "POST":
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:
@@ -221,3 +222,21 @@ def plagiarism_checker(request):
         return HttpResponse(json.dumps(data))
 
     return render(request, 'admin/plagiarism.html')
+
+
+def update_blog_post_limit(request):
+    users = User.objects.filter(user_roles='Admin')
+    if request.method == 'POST':
+        if int(request.POST.get('max_published_blogs')) >= int(request.POST.get('min_published_blogs')):
+            users.update(max_published_blogs=request.POST.get('max_published_blogs'), min_published_blogs=request.POST.get('min_published_blogs'))
+            data = {'error': False, 'response': 'Updated Successfully'}
+        else:
+            data = {'error': True, 'response': 'Maximum No of blogposts should be greater than minimum'}
+        return HttpResponse(json.dumps(data))
+
+    return render(request, 'admin/blog_post_limit.html', {'users': users})
+
+
+def subscribers(request):
+    subscribers = Subscribers.objects.filter()
+    return render(request, 'admin/subscribers.html', {'subscribers': subscribers})

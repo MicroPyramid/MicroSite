@@ -11,10 +11,10 @@ class frontend_test(TestCase):
         self.client = Client()
         self.user = User.objects.create_superuser('mp@mp.com', 'micro', 'mp')
         self.c = Category.objects.create(
-            name='Django', description='django desc')
+            name='Django', description='django desc', max_published_blogs=5, min_published_blogs=2)
         self.contactpage = Page.objects.create(title="Contact", is_active=True)
         self.category = Category.objects.create(
-            name='python', description='django desc', is_display=True)
+            name='python', description='django desc', is_display=True, max_published_blogs=5, min_published_blogs=2)
         self.country = Country.objects.create(name='us', code='us', slug='us')
 
     def test_home_page(self):

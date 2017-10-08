@@ -4,6 +4,8 @@ from micro_blog.models import Post, Country
 from django.core.urlresolvers import reverse
 import re
 from django.conf import settings
+import datetime
+
 
 register = template.Library()
 
@@ -90,3 +92,16 @@ def get_value(value):
 @register.filter
 def get_country_name(value):
     return Country.objects.filter(code=value).first().name
+
+
+@register.filter
+def get_blogposts(each, status):
+    date = datetime.date.today()
+    start_week = date - datetime.timedelta(date.weekday()) - datetime.timedelta(1)
+    end_week = start_week + datetime.timedelta(6)
+    return each.blog_posts.filter(status=status, created_on__range=(start_week, end_week)).count()
+
+
+@register.filter
+def get_blogposts_count(each, status):
+    return each.filter(status=status).count()

@@ -19,6 +19,7 @@
             <th width="10%">Title (No. Of Posts)</th>
             <th width="10%">URL</th>
             <th width="10%">Status</th>
+            <th width="10%">Min - Max</th>
             {% if request.user.is_site_admin %}
             <th width="8%">Actions</th>
             {% endif %}
@@ -38,6 +39,7 @@
               {% endif %}
               </a>
             </td>
+            <td class="txt_center">{{ category.min_published_blogs }} - {{ category.max_published_blogs }}</td>
             {% if request.user.is_site_admin %}
             <td class="txt_center">
               <a href="{% url 'edit_blog_category' category_slug=category.slug %}" class="edit_anchor"><i class="fa fa-pencil-square-o"></i></a>

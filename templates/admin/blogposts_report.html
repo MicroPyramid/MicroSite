@@ -1,0 +1,129 @@
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Microsite Blog</title>
+    <link href='https://fonts.googleapis.com/css?family=Karla:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  </head>
+  <body style="width:100% !important; margin:0 !important; padding:0 !important; -webkit-text-size-adjust:none; -ms-text-size-adjust:none;font-size:13px; font-family: 'Karla', sans-serif;color: #73879C;">
+    <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable" style="height:auto !important; margin:0; padding:0; width:100% !important; font-family: 'Karla', sans-serif;color: #73879C; ">
+      <tbody>
+        <tr>
+          <td>
+            <table id="contenttable" width="800" align="center" cellpadding="0" cellspacing="0" border="0" style="font-family: 'Karla', sans-serif;color: #73879C; background: #fff; text-align:center !important; margin-top:0 !important; margin-right: auto !important; margin-bottom:0 !important; margin-left: auto !important; border:none; width: 100% !important; max-width:800px !important;border: 1px solid #ddd !important;">
+              <tbody>
+                <tr>
+                  <td>
+                    <table style="width:800px;background:#fff;padding:0;" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td style="text-transform: uppercase;font-weight: bold;letter-spacing: 1px;color: #fff !important;text-decoration: none;background: #f43d53;padding: 8px 10px;">
+                            Hello {{ user.get_full_name }} !!!
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:5px 15px;text-align:left;">
+                            <label style="font-size: 15px;font-weight: bold;margin-bottom: 10px;">Categories didnt meet criteria</label>
+                            <table style="border: 1px solid #ddd; width:100%;" cellpadding="0" cellspacing="0">
+                              <thead>
+                                <tr>
+                                  <th style="word-break:all;background-color: #7a868f;font-size: 11px;color: #fff;font-weight: bold;text-transform: capitalize;padding:8px 3px;    border-right: 1px solid #ddd;">
+                                    Category
+                                  </th>
+                                  <th style="word-break:all;background-color: #7a868f;font-size: 11px;color: #fff;font-weight: bold;text-transform: capitalize;padding:8px 3px;    border-right: 1px solid #ddd;">
+                                    Min No Of Blogposts Published
+                                  </th>
+                                  <th style="background-color: #7a868f;font-size: 11px;color: #fff;font-weight: bold;text-transform: capitalize;padding:8px 3px;    border-right: 1px solid #ddd;">
+                                    No Of Blogposts Published/Review/Drafted
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {%  for each in incomplete_categories %}
+                                <tr>
+                                  <td style="word-break:all;border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{ each.name }}
+                                  </td>
+                                  <td style="border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{each.min_published_blogs}}
+                                  </td>
+                                  <td style="border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{each.total_blog_posts}}/{{each|get_blogposts:'R'}}/{{each|get_blogposts:'D'}}
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding:5px 15px;text-align:left;">
+                            <label style="font-size: 15px;font-weight: bold;margin-bottom: 10px;">Categories meet criteria</label>
+                            <table style="border: 1px solid #ddd; width:100%;" cellpadding="0" cellspacing="0">
+                              <thead>
+                                <tr>
+                                  <th style="word-break:all;background-color: #7a868f;font-size: 11px;color: #fff;font-weight: bold;text-transform: capitalize;padding:8px 3px;    border-right: 1px solid #ddd;">
+                                    Category
+                                  </th>
+                                  <th style="word-break:all;background-color: #7a868f;font-size: 11px;color: #fff;font-weight: bold;text-transform: capitalize;padding:8px 3px;    border-right: 1px solid #ddd;">
+                                    Min No Of Blogposts Published
+                                  </th>
+                                  <th style="background-color: #7a868f;font-size: 11px;color: #fff;font-weight: bold;text-transform: capitalize;padding:8px 3px;    border-right: 1px solid #ddd;">
+                                    No Of Blogposts Published/Review/Drafted
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {%  for each in complete_categories %}
+                                <tr>
+                                  <td style="word-break:all;border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{ each.name }}
+                                  </td>
+                                  <td style="border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{each.min_published_blogs}}
+                                  </td>
+                                  <td style="border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{each.total_blog_posts}}/{{each|get_blogposts:'R'}}/{{each|get_blogposts:'D'}}
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                  <th style="word-break:all;background: #f7f7f7;border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;" colspan="2">
+                                    Total No Of Published Blog Posts
+                                  </th>
+                                  <th style="background: #f7f7f7;border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
+                                    {{ posts|length }}
+                                  </th>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left;padding-top:20px;padding-left:20px;color: #131e26;font-weight: bold;font-size: 17px;">
+                            <strong style="margin-bottom:0px;display:block;">
+                              No Of Blogposts Published/Review/Drafted: {{ posts|length }}/{{ blog_posts|get_blogposts_count:'R' }}/{{ blog_posts|get_blogposts_count:'D' }}<br><br></strong>
+                            <strong style="margin-bottom:0px;display:block;">
+                              Minimum No Of BlogPosts Published: {{ user.min_published_blogs }}
+                            </strong>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

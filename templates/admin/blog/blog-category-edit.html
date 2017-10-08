@@ -17,6 +17,16 @@
           <label for="exampleInputEmail">Description</label>
           <textarea class="form-control" id="description" name="description" rows="10" placeholder="Category Description">{{blog_category.description}}</textarea>
         </div>
+         <div class="form-group">
+          <div class="col-md-6">
+            <label for="exampleInputEmail">Min Blogposts</label>
+            <input type="number" class="form-control" id="min_published_blogs" name="min_published_blogs" min='0' value="{{ blog_category.min_published_blogs }}">
+          </div>
+          <div class="col-md-6">
+            <label for="exampleInputEmail">Max Blogposts</label>
+            <input type="number" class="form-control" id="max_published_blogs" name="max_published_blogs" min='0' value="{{ blog_category.max_published_blogs }}">
+          </div>
+        </div>
         <div class="draft-box">
           <input type="checkbox" name="is_display" value="true" {% if blog_category.is_display %}checked{% endif %}>
           <label>Display</label>
