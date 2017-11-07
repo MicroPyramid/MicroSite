@@ -19,7 +19,7 @@
           {% recurse menu.menu_set.all|dictsort:"lvl"  with parent as menu %}
           {% loop %}
           <option value="{{ menu.id }}">
-            {% for i in level|add:"-1"|get_range %}----{% endfor %}{{menu.title}}
+            {% for i in level|add:"-1"|get_range %}----{% endfor %}{{menu.title}} -- {{menu.country.name}}
           </option>
           {% child %}
           {% endloop %}

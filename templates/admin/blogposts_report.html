@@ -47,13 +47,13 @@
                                 {%  for each in incomplete_categories %}
                                 <tr>
                                   <td style="word-break:all;border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
-                                    {{ each.name }}
+                                    {{ each.category.name }}
                                   </td>
                                   <td style="border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
-                                    {{each.min_published_blogs}}
+                                    {{each.category.min_published_blogs}}
                                   </td>
                                   <td style="border-top: 1px solid #ddd;border-right: 1px solid #ddd;color: #73879C;padding: 8px 3px;line-height: 1.42857143;vertical-align: top;font-size: 13px;font-weight: 400;">
-                                    {{each.total_blog_posts}}/{{each|get_blogposts:'R'}}/{{each|get_blogposts:'D'}}
+                                    {{each.total_blog_posts}}/{{each.category|get_blogposts:'R'}}/{{each.category|get_blogposts:'D'}}
                                   </td>
                                 </tr>
                                 {% endfor %}

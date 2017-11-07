@@ -3,6 +3,7 @@ from django.test import Client
 from micro_admin.models import User
 from micro_blog.models import Category, Post, Country
 from pages.models import Page
+from django.core.urlresolvers import reverse
 
 
 class frontend_test(TestCase):
@@ -16,6 +17,10 @@ class frontend_test(TestCase):
         self.category = Category.objects.create(
             name='python', description='django desc', is_display=True, max_published_blogs=5, min_published_blogs=2)
         self.country = Country.objects.create(name='us', code='us', slug='us')
+        self.blogppost = Post.objects.create(
+            title='python introduction', user=self.user,
+            content='This is content', category=self.category,
+            meta_description='meta', status='P')
 
     def test_home_page(self):
         c = Client()
@@ -34,7 +39,7 @@ class frontend_test(TestCase):
         # self.assertEqual(response.status_code, 200)
 
     def test_xml(self):
-        client = Client()
+        # client = Client()
         response = self.client.get('/rss.xml')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('xml') in response.content.decode('utf8'))
@@ -43,7 +48,15 @@ class frontend_test(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('xml') in response.content.decode('utf8'))
 
+        response = self.client.get('/blog.rss?category=python')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
+
         response = self.client.get('/blog.rss')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(str('xml') in response.content.decode('utf8'))
+
+        response = self.client.get('/facebook.rss')
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('xml') in response.content.decode('utf8'))
 
@@ -51,7 +64,8 @@ class frontend_test(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('xml') in response.content.decode('utf8'))
 
-        response = self.client.get('/sitemap.xml')
+        kwargs = {'country_name': 'india', 'page_number': 1, 'page': 1}
+        response = self.client.get('/sitemap.xml', kwargs)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('xml') in response.content.decode('utf8'))
 
@@ -60,12 +74,44 @@ class frontend_test(TestCase):
 
         # response = client.get('/books/git/index.html')
         # self.assertEqual(response.status_code, 200)
-
         response = client.get('/books/')
         self.assertEqual(response.status_code, 200)
 
-        response = client.get('/sitemap/')
+        url = reverse('sitemap')
+
+        response = client.get(url)
         self.assertEqual(response.status_code, 200)
+
+        response = client.get(url, {'country_name': 'US'})
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get(url, {'country_name': 'US', 'page_num': 1})
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get(url, {'country_name': 'US', 'page_num': 'a'})
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get(url, {'page_num': 1})
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get(url, {'page_num': ''})
+        self.assertEqual(response.status_code, 200)
+
+        url = reverse('tools')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 302)
+
+        url = reverse('s3_objects_set_metadata')
+        user_login = self.client.login(username='micro', password='mp')
+        self.assertTrue(user_login)
+
+        response = self.client.get(url)
+        self.assertTrue(response.status_code, 200)
+        self.assertTemplateUsed('site/tools/s3_objects_set_metadata.html')
+
+        response = self.client.post(url, {
+            'expiry_time': 200, 'max_age': 48, 'bucket_name': 'new'})
+        self.assertEqual(response.status_code, 301)
 
 
 class micro_front_views_test_with_employee(TestCase):
@@ -78,9 +124,6 @@ class micro_front_views_test_with_employee(TestCase):
         user_login = self.client.login(username='micro', password='mp')
         self.assertTrue(user_login)
 
-        response = self.client.get('/tools/')
-        self.assertEqual(response.status_code, 200)
-
         response = self.client.get('/books/')
         self.assertEqual(response.status_code, 200)
 
@@ -90,9 +133,3 @@ class micro_front_views_test_with_employee(TestCase):
         response = self.client.post('/tools/url-checker/', {'urls': 'https://www.google.com/\nhttps://www.facebook.com/pages\
                         \nhttp://dsgfdg\ndsgfdg\nhttp:dsgfdg'})
         self.assertEqual(response.status_code, 200)
-
-        response = self.client.get('/tools/set-meta-data-for-S3-objects/')
-        self.assertEqual(response.status_code, 301)
-
-        response = self.client.post('/tools/set-meta-data-for-S3-objects/', {'max_age': 'dfdf', 'expiry_time': 'dfdf', 'bucket_name': 'dffd', 'access_key': 'dfdsf', 'secret_key': 'dfd'})
-        self.assertEqual(response.status_code, 301)

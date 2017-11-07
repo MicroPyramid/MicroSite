@@ -74,8 +74,18 @@ def report_on_blog_post_published_limit():
     blog_posts = Post.objects.filter(created_on__range=(start_week, end_week))
     from django.db.models import Sum, Count, Q, F
     incomplete_categories = Category.objects.filter(blog_posts__published_on__range=(start_week, end_week)).annotate(total_blog_posts=Count('blog_posts')).filter(total_blog_posts__lt=F('min_published_blogs'))
+    categories = Category.objects.filter()
+    incomplete_categories = []
+    for each in categories:
+        blog_posts = each.blog_posts.filter(published_on__range=(start_week, end_week))
+        each_dict = {}
+        if blog_posts.count() < each.min_published_blogs:
+            each_dict['category'] = each
+            each_dict['total_blog_posts'] = blog_posts.count()
+            incomplete_categories.append(each_dict)
+
     complete_categories = Category.objects.filter(blog_posts__published_on__range=(start_week, end_week)).annotate(total_blog_posts=Count('blog_posts')).filter(total_blog_posts__gte=F('min_published_blogs'))
-    users = User.objects.filter(user_roles='Admin', email='nikhila@micropyramid.com')
+    users = User.objects.filter(is_admin=True)
     formatted_start_week = datetime.datetime.strptime(
         str(start_week), "%Y-%m-%d").strftime("%d-%m-%Y")
     formatted_end_week = datetime.datetime.strptime(

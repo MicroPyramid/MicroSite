@@ -7282,6 +7282,9 @@ p a{
   margin:50px 0;
   font-size: 16px;
   font-family: 'Quicksand', sans-serif;
+  .container{
+    width: 1370px;
+  }
   @media(min-width: $mob_min) and (max-width: $tab_max){
      margin:15px 0;
    }
@@ -7461,7 +7464,7 @@ p a{
             }
           }
           &.four{
-            right: -11%;
+            right: -3%;
             top:35%;
             @media(min-width: $tab_min) and (max-width: $tab_max){
               right:-2%;
@@ -8480,4 +8483,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4d4db', end
 }
 pre.prettyprint{
   width: 100%;
+}
+.hire-text{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 8px 0px;
+  background: #dfdfdf;
+  color: #333;
+  text-align: center;
+  width: 100%;
+  a{
+    background: #1dabdd;
+    font-size: 13px;
+    color: white;
+    padding: 5px 10px;
+  }
+}
+.inner-pages-body{
+  padding-bottom: 35px;
 }

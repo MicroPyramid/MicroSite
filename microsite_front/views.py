@@ -153,6 +153,9 @@ def sitemap(request, **kwargs):
 
     if 'page_num' in kwargs.keys():
         page = int(kwargs['page_num'])
+        if page == 1:
+            return redirect('/sitemap/')
+
     categories = Category.objects.all()
     blog_posts = Post.objects.filter(status='P').order_by('-published_on')
     countries = Country.objects.filter()

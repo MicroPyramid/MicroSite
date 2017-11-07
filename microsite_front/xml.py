@@ -27,7 +27,7 @@ def sitemap_xml(request, **kwargs):
         for each in countries:
             xml = xml + '<url><loc>https://micropyramid.com/' + str(each.code) + '/sitemap.xml</loc></url>'
 
-    menus = Menu.objects.filter(status="on", url__isnull=False).exclude(url__in=['/', 'blog'])
+    menus = Menu.objects.filter(status="on", url__isnull=False, country__code=country).exclude(url__in=['/', 'blog'])
     for menu in menus:
         if menu.url and str(menu.url) != 'none':
             if country == 'us':

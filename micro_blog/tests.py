@@ -6,6 +6,7 @@ from micro_blog.models import Category, Post, Tags, Post_Slugs
 from micro_admin.models import User
 from django.forms.models import inlineformset_factory
 import json
+from django.core.urlresolvers import reverse
 
 BlogSlugFormSet = inlineformset_factory(
     Post, Post_Slugs,
@@ -34,7 +35,7 @@ class micro_blog_forms_test(TestCase):
                 'category': self.category.id, 'status': 'D',
                 'meta_description': 'meta', 'is_superuser': 'True',
                 'excerpt': "Description"
-                })
+            })
         self.assertTrue(form.is_valid())
 
     def test_BlogCategoryForm(self):
@@ -56,7 +57,7 @@ class micro_blog_forms_test(TestCase):
             'slugs-0-is_active': '', 'slugs-1-is_active': '',
             'slugs-2-is_active': '', 'slugs-0-blog': '',
             'slugs-1-blog': '', 'slugs-2-blog': ''
-            }, instance=Post())
+        }, instance=Post())
         self.assertTrue(form.is_valid())
 
 
@@ -168,66 +169,98 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/pages/contact-us.html')
 
+        response = self.client.get('/contact-uae/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'site/pages/contact-us.html')
+
+        response = self.client.get('/contact-aus/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'site/pages/contact-us.html')
+
+        response = self.client.get('/contact-uk/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'site/pages/contact-us.html')
+
         # Testcase for contact with post request simple
-        response = self.client.post(
-                '/contact-usa/',
-                {
-                    'full_name': 'client name',
-                    'message': 'test message',
-                    'email': 'testclient@mp.com',
-                    'country': 'india'
-                }
-            )
+        response = self.client.post('/contact-usa/', {
+            'full_name': 'client name',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'country': 'india'
+        })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(str(
-                'Please Choose Correct Captcha'
-            ) in response.content.decode('utf8'))
+        self.assertTrue(str('Please Choose Correct Captcha') in response.content.decode('utf8'))
 
         # Testcase for contact with post request advanced
-        response = self.client.post(
-                '/contact-usa/',
-                {
-                    'full_name': 'client name',
-                    'message': 'test message',
-                    'email': 'testclient@mp.com',
-                    'phone': '1234567890',
-                    'enquery_type': 'general',
-                    'country': 'india'
-                }
-            )
+        response = self.client.post('/contact-usa/', {
+            'full_name': 'client name',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'phone': '1234567890',
+            'enquery_type': 'general',
+            'country': 'india'
+        })
 
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(str(
-                'Please Choose Correct Captcha'
-            ) in response.content.decode('utf8'))
+        self.assertTrue(str('Please Choose Correct Captcha') in response.content.decode('utf8'))
 
         # Testcase for contact advanced wrong data
-        response = self.client.post(
-                '/contact-usa/',
-                {
-                    'full_name': '',
-                    'message': 'test message',
-                    'email': 'testclient@mp.com',
-                    'country': 'india'
-                }
-            )
-
+        response = self.client.post('/contact-uae/', {
+            'full_name': 'xyz',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'country': 'india'
+        })
         self.assertEqual(response.status_code, 200)
 
         # Testcase for contact simple wrong data
-        response = self.client.post(
-                '/contact-usa/',
-                {
-                    'full_name': '',
-                    'message': 'test message',
-                    'email': 'testclient@mp.com',
-                    'phone': '1234567890',
-                    'enquery_type': 'general',
-                    'country': 'india'
-                }
-            )
+        response = self.client.post('/contact-uae/', {
+            'full_name': 'ffg',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'phone': '1234567890',
+            'enquery_type': 'general',
+            'country': 'india'
+        })
+        self.assertEqual(response.status_code, 200)
 
+        response = self.client.post('/contact-aus/', {
+            'full_name': 'sdddg',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'country': 'india'
+        })
+        self.assertEqual(response.status_code, 200)
+
+        # Testcase for contact simple wrong data
+        response = self.client.post('/contact-aus/', {
+            'full_name': 'abcd',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'phone': '1234567890',
+            'enquery_type': 'general',
+            'country': 'india'
+        })
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post('/contact-uk/', {
+            'full_name': 'abcd2',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'country': 'india'
+        })
+        self.assertEqual(response.status_code, 200)
+
+        # Testcase for contact simple wrong data
+        response = self.client.post('/contact-uk/', {
+            'full_name': 'sadfgh',
+            'message': 'test message',
+            'email': 'testclient@mp.com',
+            'phone': '1234567890',
+            'enquery_type': 'general',
+            'country': 'india'
+        })
         self.assertEqual(response.status_code, 200)
 
         # Testcase for subscribe with get request
@@ -241,49 +274,40 @@ class micro_blog_views_test_with_employee(TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Testcase for subscribe on site
-        response = self.client.post(
-                '/subscribe/',
-                {
-                    'email': 'testsubscriber@mp.com',
-                    'is_blog': 'False',
-                    'is_category': ''
-                }
-            )
+        response = self.client.post('/subscribe/', {
+            'email': 'testsubscriber@mp.com',
+            'is_blog': 'False',
+            'is_category': ''
+        })
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
-                'Your email has been successfully subscribed.'
-            ) in response.content.decode('utf8'))
+            'Your email has been successfully subscribed.'
+        ) in response.content.decode('utf8'))
 
         # Testcase for subscribe on blog
-        response = self.client.post(
-                '/subscribe/',
-                {
-                    'email': 'testsubscriber@mp.com',
-                    'is_blog': 'True',
-                    'is_category': ''
-                }
-            )
+        response = self.client.post('/subscribe/', {
+            'email': 'testsubscriber@mp.com',
+            'is_blog': 'True',
+            'is_category': ''
+        })
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
-                'Your email has been successfully subscribed.'
-            ) in response.content.decode('utf8'))
+            'Your email has been successfully subscribed.'
+        ) in response.content.decode('utf8'))
 
         # Testcase for subscribe on blog category
-        response = self.client.post(
-                '/subscribe/',
-                {
-                    'email': 'testsubscriber@mp.com',
-                    'is_blog': 'True',
-                    'is_category': str(self.category.id)
-                }
-            )
+        response = self.client.post('/subscribe/', {
+            'email': 'testsubscriber@mp.com',
+            'is_blog': 'True',
+            'is_category': str(self.category.id)
+        })
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str(
-                'Your email has been successfully subscribed.'
-            ) in response.content.decode('utf8'))
+            'Your email has been successfully subscribed.'
+        ) in response.content.decode('utf8'))
 
 
 class micro_blogviews_get(TestCase):
@@ -322,8 +346,7 @@ class micro_blogviews_get(TestCase):
         self.assertTemplateUsed(response, 'admin/blog/blog-new.html')
         self.assertEqual(response.status_code, 200)
 
-        response = self.client.get(
-                        '/blog/edit-post/other-python-introduction/')
+        response = self.client.get('/blog/edit-post/other-python-introduction/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'admin/blog/blog-edit.html')
 
@@ -343,7 +366,7 @@ class micro_blogviews_get(TestCase):
             ) + '/' + str(self.blogppost.updated_on.month) + '/'
         )
 
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get('/blog/category-list/')
         self.assertEqual(response.status_code, 200)
@@ -357,8 +380,15 @@ class micro_blogviews_get(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'site/blog/index.html')
 
-        response = self.client.get('/blog/tag/'+str(self.tag.slug)+'/')
-        self.assertEqual(response.status_code, 404)
+        # url = reverse('blog:blog_tag', kwargs={'slug': str(self.tag.slug)})
+        # url = 'tag/' + str(self.tag.slug)
+        # response = self.client.get(url)
+        # self.assertEqual(response.status_code, 200)
+
+        # url = reverse('archive_posts')
+        # url = 'blog/2010/3/'
+        # response = self.client.get(url)
+        # self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/category/django/?page=1')
         self.assertEqual(response.status_code, 302)
@@ -373,14 +403,14 @@ class micro_blogviews_get(TestCase):
             ) + '/' + str(self.blogppost.updated_on.month) + '/'
         )
 
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get(
             '/blog/' +
             str(self.blogppost.updated_on.year) + '/' + str(
                 self.blogppost.updated_on.month) + '/' + '?page=1'
         )
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 404)
 
         response = self.client.get('/blog/edit-category/django/')
         self.assertEqual(response.status_code, 200)
@@ -412,8 +442,13 @@ class micro_blog_post_data(TestCase):
             blog=self.blogppost, slug='django-introduction', is_active=True)
 
     def test_blog_post(self):
-        user_login = self.client.login(username='micro', password='mp')
+        user_login = self.client.login(username='micro', password='mp', user_roles='Admin')
         self.assertTrue(user_login)
+
+        url = reverse('admin_post_list')
+        response = self.client.post(url, {
+            'blog_id': self.blogppost.id, 'change_author': self.user.id})
+        self.assertEqual(response.status_code, 200)
 
         response = self.client.get('/blog/')
         self.assertEqual(response.status_code, 302)
