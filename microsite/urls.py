@@ -53,7 +53,7 @@ urlpatterns = [
     url(r'^blog/category-list/$', admin_category_list, name='admin_category_list'),
     url(r'^blog/new-category/$', new_blog_category, name='new_blog_category'),
 
-    url(r'^blog/(?P<page_num>[-\0-9]+)/', site_blog_home, name="site_blog_home"),
+    url(r'^blog/(?P<page_num>[0-9]+)/$', site_blog_home, name="site_blog_home"),
 
     url(r'^blog/(?P<slug>[-\w]+)/$', blog_article, name='blog_article'),
     url(r'^blog/(?P<year>\w{0,})/(?P<month>w{0,})/$', archive_posts),
@@ -71,7 +71,7 @@ urlpatterns = [
     url(r'^sitemap.xml$', sitemap_xml, name="sitemap_xml"),
     # url(r'^sitemap-(?P<country_name>[-\w]+).xml/$', sitemap_xml, name="sitemap_xml"),
 
-    url(r'^sitemap/$', sitemap),
+    url(r'^sitemap/$', sitemap, name="sitemap"),
     url(r'^empty/$', empty),
     url(r'^sitemap-(?P<country_name>[-\w]+)/$', sitemap, name="sitemap"),
     url(r'^sitemap-(?P<country_name>[-\w]+)/(?P<page_num>[-\w]+)/$', sitemap, name="sitemap"),

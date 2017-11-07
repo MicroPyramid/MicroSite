@@ -135,8 +135,8 @@ class pages_views_test(TestCase):
             {
                 'title': 'Page2',
                 'content': 'page_content',
-                'slug' : 'slug',
-                'meta_data' : 'meta_title',
+                'slug': 'slug',
+                'meta_data': 'meta_title',
             })
         self.assertEqual(response.status_code, 200)
         self.assertTrue(str('Page created successfully') in response.content.decode('utf8'))

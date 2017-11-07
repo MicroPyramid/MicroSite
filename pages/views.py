@@ -32,6 +32,9 @@ def new_page(request):
             page.parent = None
             page.slug = slugify(request.POST.get('slug'))
             page.is_default = True
+            if request.POST.get('contact_info'):
+                page.contact_info = json.loads(request.POST.get('contact_info'))
+
             if request.POST.get('country'):
                 page.country_id = request.POST.get('country')
             else:
@@ -139,14 +142,17 @@ def edit_page(request, pk):
     categories = Category.objects.all()
     countries = Country.objects.all()
     if request.method == 'POST':
+        print (request.POST)
         if page:
+            print("hello")
             validate_page = PageForm(request.POST, instance=page)
         else:
             validate_page = PageForm(request.POST)
         if validate_page.is_valid():
             edit_page = validate_page.save(commit=False)
             edit_page.slug = slugify(request.POST.get('slug'))
-
+            if request.POST.get('contact_info'):
+                edit_page.contact_info = json.loads(request.POST.get('contact_info'))
             if request.POST.get('is_default', '') == 'true':
                 edit_page.is_default = True
             else:

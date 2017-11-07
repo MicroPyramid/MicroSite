@@ -2,9 +2,10 @@ import json
 from django.test import (TestCase,
                          Client)
 from micro_admin.forms import *
-from django.test import Client
 from micro_admin.models import (User, career)
+from micro_blog.models import Subscribers, Post
 from django.core.urlresolvers import reverse
+from datetime import datetime, timedelta
 
 
 class Modelforms_test(TestCase):
@@ -71,7 +72,7 @@ class test_portal_admin(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create_superuser(
-            'microtest', 'mp@mp.com', 'mp')
+            'microtest', 'mp@mp.com', 'mp', is_employee=True)
         self.inactive_user = User.objects.create(
             username='inactive', email='inactive@mp.com', user_roles='Admin', is_active=False)
         self.inactive_user.set_password('test')
@@ -79,8 +80,35 @@ class test_portal_admin(TestCase):
         self.employee = User.objects.create_user(
             'testemployee', "test@gmail.com", 'pwd')
 
+    def test_index(self):
+        user_login = self.client.login(username='mp@mp.com', password='mp')
+        self.assertTrue(user_login)
+        url = reverse('micro_admin:index')
+        if user_login:
+            timestamp = '2017/03/12 - 2017/08/09'
+            response = self.client.post(url, {'timestamp': timestamp})
+            date = timestamp.split(' - ')
+            start_date = datetime.strptime(date[0], "%Y/%m/%d").strftime("%Y-%m-%d")
+            end_date = datetime.strptime(date[1], "%Y/%m/%d").strftime("%Y-%m-%d")
+            post = Post.objects.filter(created_on__range=(start_date, end_date)).values_list('user', flat=True)
+            users = User.objects.filter(id__in=post)
+            self.assertTrue(response.status_code, 200)
+            self.assertEqual(len(response.context['users']), len(users))
+
+            response = self.client.post(url)
+            current_date = datetime.strptime(str(datetime.now().date()), "%Y-%m-%d").strftime("%Y-%m-%d")
+            previous_date = datetime.strptime(str(datetime.now().date() - timedelta(days=7)), "%Y-%m-%d").strftime("%Y-%m-%d")
+            post = Post.objects.filter(created_on__range=(previous_date, current_date)).values_list('user', flat=True)
+            users = User.objects.filter(id__in=post)
+            self.assertTrue(response.status_code, 200)
+            self.assertEqual(len(response.context['users']), len(users))
+
+        def tearDown(self):
+            super(TestForUsers, self).tearDown()
+
     def test_user_index(self):
         # Testcase for forgot password with wrong input
+
         response = self.client.post(
             '/portal/forgot-password/', {'email': 'dfdfd'})
         self.assertEqual(response.status_code, 200)
@@ -376,6 +404,40 @@ class users_password_test(TestCase):
         self.assertEqual(response.status_code, 302)
 
 
+class Testplagiarism(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_plagiarism_checker(self):
+        description = "abcd"
+        url = reverse('micro_admin:plagiarism_checker')
+        response = self.client.post(url, {'description': description})
+        self.assertEqual(response.status_code, 200)
+        # self.assertTemplateUsed(response, 'admin/plagiarism.html')
+
+
+class TestUpdateBlog(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_update_blog_post_limit(self):
+        url = reverse('micro_admin:update_blog_post_limit')
+        response = self.client.post(
+            url, {'max_published_blogs': 5, 'min_published_blogs': 2}
+        )
+        self.assertEqual(response.status_code, 200)
+        # self.assertTemplateUsed(response, 'admin/blog_post_limit.html')
+        # self.assertTrue(str('updated successfully') in response.content.decode('utf8'))
+
+    def test_subscribers(self):
+        url = reverse("micro_admin:subscribers")
+        response = self.client.post(url)
+        subscribers = Subscribers.objects.filter()
+        self.assertTrue(response.context, subscribers)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'admin/subscribers.html')
+
+
 # TEST CASES FOR models.py
 class TestForUserModel(TestCase):
 
@@ -390,6 +452,7 @@ class TestForUserModel(TestCase):
         self.assertEqual(user.get_short_name(), user.first_name)
         self.assertEqual(user.total_posts(), 0)
         self.assertEqual(user.drafted_posts(), 0)
+
 
 class TestForcareerModel(TestCase):
 

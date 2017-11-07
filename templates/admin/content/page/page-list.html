@@ -27,7 +27,7 @@
             <td class="txt_center">{{page.id}}</td>
             <td>{%if menu.parent%}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{%endif%}{{page.title}}</td>
             <td class="sec-col">{{page.slug}}</td>
-            <td class="sec-col"><a href="/{{page.slug}}/" target="_blank">https://micropyramid.com/{{page.slug}}/</a></td>
+            <td class="sec-col"><a href="/{{page.slug}}/" target="_blank">https://micropyramid.com/{% if page.country.code == 'us' %}{% else %}{{page.country.code}}{% endif %}/{{page.slug}}/</a></td>
             <td>{{page.country.name}}</td>
             <td class="txt_center"><a href="{% url 'pages:change_page_status' pk=page.id %}" class="on_off">
               {% if page.is_active %}

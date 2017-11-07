@@ -43,7 +43,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-429536a40f0eb1828fdc.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-c8fec38681592c07c891.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -66,7 +66,7 @@
                 <div class="header-content-wrapper">
                   <div class="logo">
                     <span class="logo_mp">
-                      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{/% else %} /{{request.session.country}}{% endif %}{% else %}/{% endif %}">
+                      <a href="{% if request.session.country %}{% if request.session.country|get_value == 'us' %}/{% else %} /{{request.session.country}}{% endif %}{% endif %}">
                         <svg height="55px" viewbox="0 0 1047 470" width="55px" xmlns="http://www.w3.org/2000/svg">
                           <path d="M 46.00,462.00
                             C 41.42,461.99 38.50,461.94 34.00,460.71
@@ -315,7 +315,7 @@
             <div id="about-us">
               <div class="container text-center">
                 <h1 class="content">Django &amp; Python Web Development Company</h1>
-                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python &amp; Django application development services. Our Expertise lies in <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/">Python</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/">Django</a>, <a href="https://micropyramid.com{% if request.session.country %}/{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}docker-services/">Docker</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/">Amazon Web Services</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}postgresql-administration-and-management/">PostgreSQL</a>, MySQL, Less and Scss.</p>
+                <p>We at MicroPyramid, challenge ourselves by breaking our own records in Django web development. We work primarily on python development projects that range single user to SaaS applications. Our services are focused towards agile, secure, performance and scalable development best practices. Web development outsourcing projects are our primary focus and we deliver in time with excellent support post deployment. we are sharing our knowledge in python Django web development outsourcing by open sourcing our code that is accessible to everyone to enhance their outsourcing applications. Our team share knowledge and engage in several open source software modules to help Python &amp; Django application development services. Our Expertise lies in <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}python-development-services/">Python</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-development-services/">Django</a>, <a href="https://micropyramid.com{% if request.session.country %}/{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}angularjs-development-services/">Angular Js</a>, Elastic Search, Ansible, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}docker-services/">Docker</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}aws-consulting-services/">Amazon Web Services</a>, <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}postgresql-administration-and-management/">PostgreSQL</a>, MySQL, Less and Scss.</p>
                 <p> We are dedicated to provide world class software to startups, small and big enterprises. We use most of the Cloud Technologies to build better high-performance software. Our goal is to make better internet applications by leveraging awesome Open-Source Technologies. With our custom tools, we can assure you always get the best software you need. We always Succeeded in meeting Our Customer Satisfaction with our great Monitoring and Support. There are many reusable Python Packages, Docker Images, Ansible Roles, Node Packages published by our experts in their free time.</p>
               </div>
             </div>
@@ -334,7 +334,7 @@
                       <img alt="elastic search" class="logo largetechlogo" src="/static/site/images/tech-home/elasticsearch.png"/>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
-                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}amazon-web-services-outsourcing/"><img alt="amazon web services" class="logo" src="/static/site/images/tech-home/aws-tech.png"/></a>
+                      <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}aws-consulting-services/"><img alt="amazon web services" class="logo" src="/static/site/images/tech-home/aws-tech.png"/></a>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-4 col-xs-6 logo-thumb">
                       <a href="https://micropyramid.com/{% if request.session.country %}{% if request.session.country|get_value == 'us' %}{% else %}{{request.session.country}}/{% endif %}{% endif %}django-oscar-ecommerce-development-services/"><img alt="djagno oscar" class="logo" src="/static/site/images/tech-home/oscar-tech.png"/></a>
@@ -684,12 +684,13 @@
         </div>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service"}]}</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization",
+    "name":"MicroPyramid", "Description": "Software Company", "url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service", "sameAs": ["https://www.facebook.com/MicroPyramid/", "https://twitter.com/MicroPyramid", "https://plus.google.com/u/0/+Micropyramid", "https://github.com/micropyramid"]}]}</script>
     <script src="https://use.fontawesome.com/4e8f47ae49.js"></script>
       <script src='https://www.google.com/recaptcha/api.js'%}></script>
 
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-429536a40f0eb1828fdc.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-c8fec38681592c07c891.js" type="text/javascript"></script>
   </body>
 </html>

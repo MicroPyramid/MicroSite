@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from micro_blog.models import Category, Country
+from django.contrib.postgres.fields import ArrayField, JSONField
+import json
 
 
 class Page(models.Model):
@@ -13,6 +15,7 @@ class Page(models.Model):
     is_active = models.BooleanField(default=False)
     meta_data = models.TextField()
     category = models.ManyToManyField(Category)
+    contact_info = JSONField(default={})
 
     # def save(self, *args, **kwargs):
     #     tempslug = slugify(self.title)
@@ -24,6 +27,11 @@ class Page(models.Model):
     #         self.slug = create_slug(tempslug)
 
     #     super(Page, self).save(*args, **kwargs)
+    def get_contact_info(self):
+        if self.contact_info:
+            return json.dumps(self.contact_info)
+        else:
+            return ''
 
     def all_categories(self):
         categories = Category.objects.all()

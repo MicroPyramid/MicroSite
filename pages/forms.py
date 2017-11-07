@@ -1,17 +1,33 @@
 from django import forms
 from pages.models import Page, Menu, Contact
 from micro_blog.models import Subscribers, Category
+import json
 
 
 class PageForm(forms.ModelForm):
+    contact_info = forms.CharField(max_length=5000, required=False)
 
     class Meta:
         model = Page
-        exclude = ('category',)
+        exclude = ('category', 'contact_info')
 
     def __init__(self, *args, **kwargs):
         super(PageForm, self).__init__(*args, **kwargs)
 
+
+    def clean_contact_info(self):
+        if self.cleaned_data['contact_info']:
+            valid = False
+            print (json.loads(str(self.cleaned_data['contact_info'])))
+            try:
+                if json.loads(str(self.cleaned_data['contact_info'])):
+                    valid = True
+            except:
+                valid = False
+            if valid:
+                return self.cleaned_data['contact_info']
+            else:
+                raise forms.ValidationError('Enter A Valid Json')
 
     def save(self, commit=True):
         instance = super(PageForm, self).save(commit=False)
