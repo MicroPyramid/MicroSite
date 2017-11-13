@@ -4,10 +4,9 @@
 {% load recurse %}
 {% load menu %}
 <!DOCTYPE html>
-<html class="no-js" lang="en" prefix="og: http://ogp.me/ns#">
+<html class="no-js" lang="en" prefix="http://ogp.me/ns#">
   <head>
     <meta charset="utf-8">
-    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <title> {% block title %}Django and Python Web Development Company | Application development Services - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}{% endblock %}</title>
     <meta content="194798730671519" property="fb:pages"/>
     <meta content="https://micropyramid.com/" property="og:url"/>
@@ -19,13 +18,13 @@
     <meta content="Django and python web development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}." property="og:description"/>
     <meta content="Django and python web development company. Our ambit of service encompasses and is as vivid as e-commerce, web applications, news portals, community and job portals design and development - Micropyramid {% if request.session.country %}{{request.session.country|get_country_name}}{% endif %}." name="description"/>
     <meta content="Python, Django, Mongodb, nodejs, Responsive web design, CSS3, JavaScript, Jquery, Angularjs, Amazon web services" name="keywords"/>
-    <link href="https://micropyramid.com/" hreflang="en-us" rel="alternate"/>
-    <link href="https://micropyramid.com/in/" hreflang="en-in" rel="alternate"/>
-    <link href="hhttps://micropyramid.com/ae/" hreflang="en-ae" rel="alternate"/>
-    <link href="https://micropyramid.com/uk/" hreflang="en-uk" rel="alternate"/>
-    <link href="https://micropyramid.com/aus/" hreflang="en-aus" rel="alternate"/>
-    <link href="https://micropyramid.com/ca/" hreflang="en-ca" rel="alternate"/>
-    <link href="https://micropyramid.com/" hreflang="x-default" rel="alternate"/>
+    <link href="https://micropyramid.com/" lang="en-us" rel="alternate"/>
+    <link href="https://micropyramid.com/in/" lang="en-in" rel="alternate"/>
+    <link href="hhttps://micropyramid.com/ae/" lang="en-ae" rel="alternate"/>
+    <link href="https://micropyramid.com/uk/" lang="en-uk" rel="alternate"/>
+    <link href="https://micropyramid.com/aus/" lang="en-aus" rel="alternate"/>
+    <link href="https://micropyramid.com/ca/" lang="en-ca" rel="alternate"/>
+    <link href="https://micropyramid.com/" lang="x-default" rel="alternate"/>
     {% endblock %}
     <meta content="micropyramid" name="author"/>
     <meta content="index, follow" name="robots">
@@ -38,12 +37,12 @@
     <link href="/static/site/images/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120"/>
     <link href="/static/site/images/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152"/>
     <link href="/static/site/images/apple-touch-icon-precomposed.png" rel="apple-touch-icon-precomposed"/>
-    <link href="/static/site/images/apple-touch-icon-120x120-precomposed.png" rel="apple-touch-icon-precomposed" sizes="120x120"/>
-    <link href="/static/site/images/apple-touch-icon-152x152-precomposed.png" rel="apple-touch-icon-precomposed" sizes="152x152"/>
+    <link href="/static/site/images/apple-touch-icon-120x120-precomposed.png" rel="apple-touch-icon" sizes="120x120"/>
+    <link href="/static/site/images/apple-touch-icon-152x152-precomposed.png" rel="apple-touch-icon" sizes="152x152"/>
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet" type="text/css"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="//fonts.googleapis.com/css?family=Alegreya Sans" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-c8fec38681592c07c891.css" id="packer_css"/>
+    <link rel="stylesheet" type="text/css" href="/static/webpack_bundles/index-5b1f96425de232be4ab8.css" id="packer_css"/>
     {% block extra-styles %} {% endblock %}
     </meta></meta>
   </head>
@@ -188,7 +187,7 @@
                   </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class""="">
+                <div class="">
                   <nav class="primary-menu" id="primary-menu">
                     <a class="menu-icon-trigger showhide" href="javascript:void(0)" id="menu-icon-trigger">
                       <span class="mob-menu--title">Menu</span>
@@ -643,11 +642,11 @@
             </footer>
             <!-- country_list starts here -->
             <div class="country_list text-right hidden-lg hidden-md">
-              <form action="{% url 'set_country' %}" id="country_set_form" method="post" name="country_set_form ">
-                <select class="set_country form-control" id="set_country" name="country">
+              <form action="{% url 'set_country' %}" id="country_set_forms" method="post" name="country_set_form ">
+                <select class="set_country form-control" id="set_countrys" name="country">
                 {% get_countries as countries %}
                 {% for country in countries %}
-                <option %}="" %}selected{%="" endif="" if="" request.session.country="country.code" value="{{ country.code }}" {%="">{{ country.name }}</option>
+                <option selected="" endif="" if="" request.session.country="country.code" value="{{ country.code }}" >{{ country.name }}</option>
                 {% endfor %}
                 </select>
               </form>
@@ -687,10 +686,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> <script src="https://maps.googleapis.com/maps/api/js"></script> <script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization",
     "name":"MicroPyramid", "Description": "Software Company", "url":"https://micropyramid.com","logo":"https://micropyramid.com/static/site/images/new/company_logo.png","contactPoint":[{"@type":"ContactPoint","telephone":"+91 40 6599 6999","contactType":"customer service", "sameAs": ["https://www.facebook.com/MicroPyramid/", "https://twitter.com/MicroPyramid", "https://plus.google.com/u/0/+Micropyramid", "https://github.com/micropyramid"]}]}</script>
     <script src="https://use.fontawesome.com/4e8f47ae49.js"></script>
-      <script src='https://www.google.com/recaptcha/api.js'%}></script>
+      <script src='https://www.google.com/recaptcha/api.js'}></script>
 
     <script src="/static/site/js/crum-mega-menu.js"></script>
     <script src="/static/site/js/theme-plugins.js"></script>
-    <script id="packer_js" src="/static/webpack_bundles/index-c8fec38681592c07c891.js" type="text/javascript"></script>
+    <script id="packer_js" src="/static/webpack_bundles/index-5b1f96425de232be4ab8.js" type="text/javascript"></script>
   </body>
 </html>
