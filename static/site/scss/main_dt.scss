@@ -2822,8 +2822,8 @@ body{
         top:-218%;
       }
       .right_wrapper{
-        transform:rotate(325deg);
         background: url(../images/banners_web_dev/develop-right-pattern.png) $web_dev_pink;
+        transform:rotate(325deg);
         width: 700px;
         height: 700px;
         position: relative;
@@ -3770,11 +3770,11 @@ body{
     color: #fff;
     text-align: center;
     font-size: 35px;
+    background: url(../images/contact_us/map.png) center repeat;
     font-weight: 600;
     text-transform: uppercase;
     position: relative;
     .map_bg_div{
-      background: url(../images/contact_us/map.png) center repeat;
       z-index: 0;
       position: absolute;
       left: 0;
@@ -4071,10 +4071,10 @@ body{
       position:absolute;
       top:85px;
       left:266px;
-      background:url(../images/favicon.png) no-repeat;
       opacity:0.9;
       z-index:9999999999;
       display:block;
+      background:url(../images/favicon.png) no-repeat;
       width:250px;
       height:250px;
     }
@@ -5294,6 +5294,16 @@ p a{
     @media (min-width: $mob_min) and (max-width:$smob_max){
       display: none;
     }
+
+#single_level_menus{
+  margin: 0px;
+    padding: 0px;
+    float: right;
+    margin-top: 0px;
+    @media (min-width: $mob_min) and (max-width:$smob_max){
+      display: none;
+    }
+    }
     li{
       display: inline-block;
       list-style: none;
@@ -5683,7 +5693,7 @@ p a{
   }
 }
 /* country_list ends here */
-#main li{
+.main li{
   line-height: 10px !important;
 }
 @media only screen and (max-width: 1024px) {
@@ -6203,7 +6213,7 @@ p a{
   &.sales_force_banner{
     font-family: 'Quicksand', sans-serif;
     .banner_container{
-      background: url(/static/site/images/sales_banner.png) no-repeat ;
+    background: url(/static/site/images/sales_banner.png) no-repeat ;
       height:350px;
       .banner_left{
         padding-left: 30px;
@@ -6294,8 +6304,8 @@ p a{
 /* need_testing_container starts here */
 .need_testing_container{
   font-family: 'Quicksand', sans-serif;
-  /*background: url(/static/site/images/ques_pattern_1.png) repeat #e9f3f7;*/
   background: #e9f3f7;
+   /*background: url(/static/site/images/ques_pattern_1.png) repeat #e9f3f7;*/
   padding:60px 0;
   margin:25px 0;
   .need_testing_block{
@@ -6995,7 +7005,7 @@ p a{
   font-family: 'Quicksand', sans-serif;
   .contact_block{
       padding: 30px;
-      background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
+     background: url(/static/site/images/contact_person_1.png?eb824a871214) no-repeat top left #2f5374;
     @media(min-width: $mob_min) and (max-width: $mob_max){
       background-position-y: 30px;
       background-image: none;
@@ -8094,12 +8104,12 @@ p a{
 .docker_container{
   margin-top: 80px;
   font-family: 'Quicksand', sans-serif;
-  background: url(/static/site/images/waves.png) no-repeat bottom right;
+   background: url(/static/site/images/waves.png) no-repeat bottom right;
   background-size: 100%;
   min-height: 600px;
   padding-bottom: 175px;
    @media(min-width: $tab_min) and (max-width: $tab_max){
-    background: url(/static/site/images/waves.png) no-repeat bottom right;
+   background: url(/static/site/images/waves.png) no-repeat bottom right;
     background-size: 100%;
     padding-bottom: 100px;
    }
@@ -8154,7 +8164,7 @@ p a{
   margin-top: 80px;
   font-family: 'Quicksand', sans-serif;
   .ansible_conatiner_block{
-    background: url(/static/site/images/d-hand.png) no-repeat top left;
+      background: url(/static/site/images/d-hand.png) no-repeat top left;
     background-size: 100%;
     padding-top: 330px;
       @media(min-width: $tab_min) and (max-width: $tab_max){
@@ -8503,3 +8513,12 @@ pre.prettyprint{
 .inner-pages-body{
   padding-bottom: 35px;
 }
+  .sub_menu{
+    font-size: 15px !important;
+  }
+  .children_menu{
+    font-size: 14px !important;
+  }
+    .blog_title{
+  color: black;
+  }
