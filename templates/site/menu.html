@@ -1,13 +1,5 @@
 {%  load blog_tags%}
 {%  load menu %}
-<style type="text/css">
-  .sub_menu{
-    font-size: 15px !important;
-  }
-  .children_menu{
-    font-size: 14px !important;
-  }
-</style>
 <ul class="primary-menu-menu">
   {% if request.session.design|slugify == 'mobile'|slugify %}
   {% get_all_menus request.session.country as menu_list %}
@@ -33,7 +25,7 @@
           </ul>
         </div>
         <div class="col3">
-          <ul id="main">
+          <ul class="main">
             {% endif %}
             {% endfor %}
           </ul>
@@ -91,7 +83,7 @@
           </ul>
         </div>
         <div class="col3">
-          <ul id="main">
+          <ul class="main">
             {% endif %}
             {% endfor %}
           </ul>
