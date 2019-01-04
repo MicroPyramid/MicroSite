@@ -1,5 +1,5 @@
 Babel==2.3.4
-Django==1.11.2
+Django==1.11.15
 Fabric3==1.11.1.post1
 Jinja2==2.8
 MarkupSafe==0.23
@@ -40,7 +40,7 @@ kombu==3.0.35
 linecache2==1.0.0
 lxml==3.6.0
 microurl==0.1
-paramiko==2.0.0
+paramiko==2.0.9
 path.py==8.2.1
 pexpect==4.1.0
 pickleshare==0.7.2
@@ -48,7 +48,6 @@ psycopg2==2.6.1
 ptyprocess==0.5.1
 pyasn1==0.1.9
 pycparser==2.14
-pycrypto==2.6.1
 python-coveralls==2.7.0
 python-http-client==1.2.3
 python-ptrace==0.9
@@ -57,7 +56,7 @@ pytz==2016.4
 raven==5.20.0
 rcssmin==1.0.6
 redis==2.10.5
-requests==2.10.0
+requests==2.20.0
 rjsmin==1.0.12
 sendgrid==2.2.1
 sendgrid-django==2.0.0
@@ -71,5 +70,5 @@ sorl-thumbnail==12.3
 sqlparse==0.1.19
 traceback2==1.4.0
 traitlets==4.2.1
-urllib3==1.15.1
+urllib3==1.23
 vine==1.1.0
